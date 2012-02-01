@@ -6,13 +6,25 @@ package org.springframework.nanotrader.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.nanotrader.domain.Account;
+import org.springframework.nanotrader.domain.Holding;
 import org.springframework.nanotrader.domain.Order;
 
 privileged aspect Order_Roo_DbManaged {
+    
+    @ManyToOne
+    @JoinColumn(name = "account_accountid", referencedColumnName = "accountid")
+    private Account Order.accountAccountid;
+    
+    @ManyToOne
+    @JoinColumn(name = "holding_holdingid", referencedColumnName = "holdingid")
+    private Holding Order.holdingHoldingid;
     
     @Column(name = "orderfee", precision = 14, scale = 2)
     private BigDecimal Order.orderfee;
@@ -40,14 +52,24 @@ privileged aspect Order_Roo_DbManaged {
     @DateTimeFormat(style = "M-")
     private Date Order.opendate;
     
-    @Column(name = "account_accountid")
-    private Integer Order.accountAccountid;
-    
     @Column(name = "quote_symbol", length = 250)
     private String Order.quoteSymbol;
     
-    @Column(name = "holding_holdingid")
-    private Integer Order.holdingHoldingid;
+    public Account Order.getAccountAccountid() {
+        return accountAccountid;
+    }
+    
+    public void Order.setAccountAccountid(Account accountAccountid) {
+        this.accountAccountid = accountAccountid;
+    }
+    
+    public Holding Order.getHoldingHoldingid() {
+        return holdingHoldingid;
+    }
+    
+    public void Order.setHoldingHoldingid(Holding holdingHoldingid) {
+        this.holdingHoldingid = holdingHoldingid;
+    }
     
     public BigDecimal Order.getOrderfee() {
         return orderfee;
@@ -105,28 +127,12 @@ privileged aspect Order_Roo_DbManaged {
         this.opendate = opendate;
     }
     
-    public Integer Order.getAccountAccountid() {
-        return accountAccountid;
-    }
-    
-    public void Order.setAccountAccountid(Integer accountAccountid) {
-        this.accountAccountid = accountAccountid;
-    }
-    
     public String Order.getQuoteSymbol() {
         return quoteSymbol;
     }
     
     public void Order.setQuoteSymbol(String quoteSymbol) {
         this.quoteSymbol = quoteSymbol;
-    }
-    
-    public Integer Order.getHoldingHoldingid() {
-        return holdingHoldingid;
-    }
-    
-    public void Order.setHoldingHoldingid(Integer holdingHoldingid) {
-        this.holdingHoldingid = holdingHoldingid;
     }
     
 }

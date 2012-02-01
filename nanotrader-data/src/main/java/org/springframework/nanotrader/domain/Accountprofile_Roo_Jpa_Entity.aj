@@ -19,15 +19,15 @@ privileged aspect Accountprofile_Roo_Jpa_Entity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "userid", length = 250)
-    private String Accountprofile.userid;
+    @Column(name = "profileid")
+    private Integer Accountprofile.profileid;
     
-    public String Accountprofile.getUserid() {
-        return this.userid;
+    public Integer Accountprofile.getProfileid() {
+        return this.profileid;
     }
     
-    public void Accountprofile.setUserid(String id) {
-        this.userid = id;
+    public void Accountprofile.setProfileid(Integer id) {
+        this.profileid = id;
     }
     
 }
