@@ -5,14 +5,27 @@ package org.springframework.nanotrader.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.nanotrader.domain.Account;
+import org.springframework.nanotrader.domain.Accountprofile;
+import org.springframework.nanotrader.domain.Order;
 
 privileged aspect Account_Roo_DbManaged {
+    
+    @OneToMany(mappedBy = "accountAccountid")
+    private Set<Order> Account.orders;
+    
+    @ManyToOne
+    @JoinColumn(name = "profile_profileid", referencedColumnName = "profileid")
+    private Accountprofile Account.profileProfileid;
     
     @Column(name = "creationdate")
     @Temporal(TemporalType.DATE)
@@ -38,8 +51,21 @@ privileged aspect Account_Roo_DbManaged {
     @NotNull
     private Integer Account.logincount;
     
-    @Column(name = "profile_userid", length = 250)
-    private String Account.profileUserid;
+    public Set<Order> Account.getOrders() {
+        return orders;
+    }
+    
+    public void Account.setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+    
+    public Accountprofile Account.getProfileProfileid() {
+        return profileProfileid;
+    }
+    
+    public void Account.setProfileProfileid(Accountprofile profileProfileid) {
+        this.profileProfileid = profileProfileid;
+    }
     
     public Date Account.getCreationdate() {
         return creationdate;
@@ -87,14 +113,6 @@ privileged aspect Account_Roo_DbManaged {
     
     public void Account.setLogincount(Integer logincount) {
         this.logincount = logincount;
-    }
-    
-    public String Account.getProfileUserid() {
-        return profileUserid;
-    }
-    
-    public void Account.setProfileUserid(String profileUserid) {
-        this.profileUserid = profileUserid;
     }
     
 }

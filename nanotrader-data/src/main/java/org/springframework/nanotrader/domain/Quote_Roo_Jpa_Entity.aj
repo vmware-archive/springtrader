@@ -19,15 +19,15 @@ privileged aspect Quote_Roo_Jpa_Entity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "symbol", length = 250)
-    private String Quote.symbol;
+    @Column(name = "quoteid")
+    private Integer Quote.quoteid;
     
-    public String Quote.getSymbol() {
-        return this.symbol;
+    public Integer Quote.getQuoteid() {
+        return this.quoteid;
     }
     
-    public void Quote.setSymbol(String id) {
-        this.symbol = id;
+    public void Quote.setQuoteid(Integer id) {
+        this.quoteid = id;
     }
     
 }

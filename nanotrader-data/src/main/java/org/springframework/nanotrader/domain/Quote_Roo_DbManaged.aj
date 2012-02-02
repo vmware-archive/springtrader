@@ -29,6 +29,10 @@ privileged aspect Quote_Roo_DbManaged {
     @Column(name = "companyname", length = 250)
     private String Quote.companyname;
     
+    @Column(name = "symbol", length = 250, unique = true)
+    @NotNull
+    private String Quote.symbol;
+    
     @Column(name = "change1")
     @NotNull
     private BigDecimal Quote.change1;
@@ -79,6 +83,14 @@ privileged aspect Quote_Roo_DbManaged {
     
     public void Quote.setCompanyname(String companyname) {
         this.companyname = companyname;
+    }
+    
+    public String Quote.getSymbol() {
+        return symbol;
+    }
+    
+    public void Quote.setSymbol(String symbol) {
+        this.symbol = symbol;
     }
     
     public BigDecimal Quote.getChange1() {

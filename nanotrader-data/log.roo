@@ -21,3 +21,17 @@ database introspect --schema nanotrader
 database introspect --schema public 
 database reverse engineer --schema public --testAutomatically yes --package ~.domain --activeRecord false
 // Spring Roo 1.2.0.RELEASE [rev 39eb957] log closed at 2012-02-01 17:22:00
+// Spring Roo 1.2.0.RELEASE [rev 39eb957] log opened at 2012-02-01 18:23:06
+database reverse engineer --schema public 
+database reverse engineer --schema public 
+// Spring Roo 1.2.0.RELEASE [rev 39eb957] log opened at 2012-02-02 09:14:56
+database reverse engineer --schema public 
+database reverse engineer --schema public --activeRecord false
+repository jpa --interface ~.repository.AccountRepository --entity ~.domain.Account
+repository jpa --interface ~.repository.AccountProfileRepository --entity ~.domain.Accountprofile
+repository jpa --interface ~.repository.HoldingRepository --entity ~.domain.Holding
+repository jpa --interface ~.repository.OrderRepository --entity ~.domain.Order
+repository jpa --interface ~.repository.QuoteRepository --entity ~.domain.Quote
+service --interface ~.service.AccountService --entity ~.domain.Account
+service --interface ~.service.OrderService --entity ~.domain.Order
+service --interface ~.service.QuoteService --entity ~.domain.Quote

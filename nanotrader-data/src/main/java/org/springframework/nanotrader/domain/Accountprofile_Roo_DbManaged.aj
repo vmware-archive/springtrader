@@ -3,16 +3,27 @@
 
 package org.springframework.nanotrader.domain;
 
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 
 privileged aspect Accountprofile_Roo_DbManaged {
+    
+    @OneToMany(mappedBy = "profileProfileid")
+    private Set<Account> Accountprofile.accounts;
     
     @Column(name = "address", length = 250)
     private String Accountprofile.address;
     
     @Column(name = "passwd", length = 250)
     private String Accountprofile.passwd;
+    
+    @Column(name = "userid", length = 250, unique = true)
+    @NotNull
+    private String Accountprofile.userid;
     
     @Column(name = "email", length = 250)
     private String Accountprofile.email;
@@ -22,6 +33,14 @@ privileged aspect Accountprofile_Roo_DbManaged {
     
     @Column(name = "fullname", length = 250)
     private String Accountprofile.fullname;
+    
+    public Set<Account> Accountprofile.getAccounts() {
+        return accounts;
+    }
+    
+    public void Accountprofile.setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
     
     public String Accountprofile.getAddress() {
         return address;
@@ -37,6 +56,14 @@ privileged aspect Accountprofile_Roo_DbManaged {
     
     public void Accountprofile.setPasswd(String passwd) {
         this.passwd = passwd;
+    }
+    
+    public String Accountprofile.getUserid() {
+        return userid;
+    }
+    
+    public void Accountprofile.setUserid(String userid) {
+        this.userid = userid;
     }
     
     public String Accountprofile.getEmail() {

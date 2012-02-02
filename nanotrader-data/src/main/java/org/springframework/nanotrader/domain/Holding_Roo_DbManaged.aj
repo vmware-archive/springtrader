@@ -5,14 +5,20 @@ package org.springframework.nanotrader.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.Order;
 
 privileged aspect Holding_Roo_DbManaged {
+    
+    @OneToMany(mappedBy = "holdingHoldingid")
+    private Set<Order> Holding.orders;
     
     @Column(name = "purchaseprice", precision = 14, scale = 2)
     private BigDecimal Holding.purchaseprice;
@@ -31,6 +37,14 @@ privileged aspect Holding_Roo_DbManaged {
     
     @Column(name = "quote_symbol", length = 250)
     private String Holding.quoteSymbol;
+    
+    public Set<Order> Holding.getOrders() {
+        return orders;
+    }
+    
+    public void Holding.setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
     
     public BigDecimal Holding.getPurchaseprice() {
         return purchaseprice;
