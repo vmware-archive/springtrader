@@ -1,8 +1,10 @@
 package org.springframework.nanotrader.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.nanotrader.domain.Accountprofile;
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RooJpaRepository(domainType = Accountprofile.class)
-public interface AccountProfileRepository {
+@Repository
+public interface AccountProfileRepository extends JpaSpecificationExecutor<Accountprofile>, JpaRepository<Accountprofile, Integer> {
 }

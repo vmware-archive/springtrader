@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="spring-integration-reference"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+  <bookinfo>
+    <title>Spring Nanotrader Reference Manual</title>
+    <titleabbrev>Spring Nanotrader ${version}</titleabbrev>
+    <productname>Spring Nanotrader</productname>
+    <releaseinfo>${version}</releaseinfo>
+
+    <!-- TODO: this isn't showing up. -->
+    <mediaobject>
+      <imageobject role="fo">
+        <imagedata fileref="images/logo.png"
+          format="PNG" align="center"/>
+      </imageobject>
+      <imageobject role="html">
+        <imagedata fileref="images/logo.png" format="PNG" align="center"/>
+      </imageobject>
+    </mediaobject>
+    <!-- END TODO -->
+
+    <authorgroup>
+      <author>
+        <firstname>Brian</firstname>
+        <surname>Dussault</surname>
+      </author>
+      <author>
+        <firstname>Gary</firstname>
+        <surname>Russell</surname>
+      </author>
+    </authorgroup>
+
+    <legalnotice><para>© SpringSource Inc., 2012</para></legalnotice>
+  </bookinfo>
+
+  <toc></toc>
+
+  <part id="spring-nanotrader-introduction">
+    <title>Overview of Spring Nanotrader</title>
+    <partintro id="spring-integration-intro">
+		<para>
+		  	Spring Nanotrader provides ...
+		</para>
+    </partintro>
+  </part>
+</book>
