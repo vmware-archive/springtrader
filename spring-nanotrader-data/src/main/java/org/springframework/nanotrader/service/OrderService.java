@@ -1,7 +1,28 @@
 package org.springframework.nanotrader.service;
 
-import org.springframework.roo.addon.layers.service.RooService;
+import java.util.List;
+import org.springframework.nanotrader.domain.Order;
 
-@RooService(domainTypes = { org.springframework.nanotrader.domain.Order.class })
 public interface OrderService {
+
+	public abstract long countAllOrders();
+
+
+	public abstract void deleteOrder(Order order);
+
+
+	public abstract Order findOrder(Integer id);
+
+
+	public abstract List<Order> findAllOrders();
+
+
+	public abstract List<Order> findOrderEntries(int firstResult, int maxResults);
+
+
+	public abstract void saveOrder(Order order);
+
+
+	public abstract Order updateOrder(Order order);
+
 }

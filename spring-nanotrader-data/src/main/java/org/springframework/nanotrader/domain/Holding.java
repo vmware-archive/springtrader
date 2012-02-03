@@ -1,13 +1,109 @@
 package org.springframework.nanotrader.domain;
 
-import org.springframework.roo.addon.dbre.RooDbManaged;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.tostring.RooToString;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.format.annotation.DateTimeFormat;
 
-@RooJavaBean
-@RooToString
-@RooJpaEntity(versionField = "", table = "holding", schema = "public")
-@RooDbManaged(automaticallyDelete = true)
+@Entity
+@Table(schema = "public",name = "holding")
 public class Holding {
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "holdingid")
+    private Integer holdingid;
+
+	public Integer getHoldingid() {
+        return this.holdingid;
+    }
+
+	public void setHoldingid(Integer id) {
+        this.holdingid = id;
+    }
+
+	@OneToMany(mappedBy = "holdingHoldingid")
+    private Set<Order> orders;
+
+	@Column(name = "purchaseprice", precision = 14, scale = 2)
+    private BigDecimal purchaseprice;
+
+	@Column(name = "quantity")
+    @NotNull
+    private BigDecimal quantity;
+
+	@Column(name = "purchasedate")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "M-")
+    private Date purchasedate;
+
+	@Column(name = "account_accountid")
+    private Integer accountAccountid;
+
+	@Column(name = "quote_symbol", length = 250)
+    private String quoteSymbol;
+
+	public Set<Order> getOrders() {
+        return orders;
+    }
+
+	public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+	public BigDecimal getPurchaseprice() {
+        return purchaseprice;
+    }
+
+	public void setPurchaseprice(BigDecimal purchaseprice) {
+        this.purchaseprice = purchaseprice;
+    }
+
+	public BigDecimal getQuantity() {
+        return quantity;
+    }
+
+	public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
+    }
+
+	public Date getPurchasedate() {
+        return purchasedate;
+    }
+
+	public void setPurchasedate(Date purchasedate) {
+        this.purchasedate = purchasedate;
+    }
+
+	public Integer getAccountAccountid() {
+        return accountAccountid;
+    }
+
+	public void setAccountAccountid(Integer accountAccountid) {
+        this.accountAccountid = accountAccountid;
+    }
+
+	public String getQuoteSymbol() {
+        return quoteSymbol;
+    }
+
+	public void setQuoteSymbol(String quoteSymbol) {
+        this.quoteSymbol = quoteSymbol;
+    }
+
+	public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

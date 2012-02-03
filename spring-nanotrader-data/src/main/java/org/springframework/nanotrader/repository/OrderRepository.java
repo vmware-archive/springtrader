@@ -1,8 +1,10 @@
 package org.springframework.nanotrader.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.nanotrader.domain.Order;
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RooJpaRepository(domainType = Order.class)
-public interface OrderRepository {
+@Repository
+public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpecificationExecutor<Order> {
 }

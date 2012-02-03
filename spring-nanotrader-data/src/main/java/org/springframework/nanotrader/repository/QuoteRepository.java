@@ -1,8 +1,10 @@
 package org.springframework.nanotrader.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.nanotrader.domain.Quote;
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RooJpaRepository(domainType = Quote.class)
-public interface QuoteRepository {
+@Repository
+public interface QuoteRepository extends JpaSpecificationExecutor<Quote>, JpaRepository<Quote, Integer> {
 }
