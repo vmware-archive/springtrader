@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.springframework.nanotrader</groupId>
-    <artifactId>nanotrader-data</artifactId>
+	<parent>
+	  <artifactId>spring-nanotrader-parent</artifactId>
+	  <groupId>org.springframework.nanotrader</groupId>
+	  <version>0.0.1.BUILD-SNAPSHOT</version>
+	</parent>
+    <artifactId>spring-nanotrader-data</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.0.BUILD-SNAPSHOT</version>
-    <name>nanotrader-data</name>
-    <properties>
-        <aspectj.version>1.6.12.M2</aspectj.version>
-        <java.version>6</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <roo.version>1.2.0.RELEASE</roo.version>
-        <slf4j.version>1.6.2</slf4j.version>
-        <spring.version>3.1.0.RELEASE</spring.version>
-    </properties>
+    <name>spring-nanotrader-data</name>
     <repositories>
         <repository>
             <id>spring-maven-release</id>

@@ -35,3 +35,4 @@ repository jpa --interface ~.repository.QuoteRepository --entity ~.domain.Quote
 service --interface ~.service.AccountService --entity ~.domain.Account
 service --interface ~.service.OrderService --entity ~.domain.Order
 service --interface ~.service.QuoteService --entity ~.domain.Quote
+// Spring Roo 1.2.0.RELEASE [rev 39eb957] log opened at 2012-02-03 11:56:31

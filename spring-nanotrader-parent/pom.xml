@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.springframework.nanotrader</groupId>
+	<artifactId>spring-nanotrader-parent</artifactId>
+	<version>0.0.1.BUILD-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Spring Nanotrader Parent</name>
+    <properties>
+        <aspectj.version>1.6.12.M2</aspectj.version>
+        <java.version>6</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <roo.version>1.2.0.RELEASE</roo.version>
+        <slf4j.version>1.6.2</slf4j.version>
+        <spring.version>3.1.0.RELEASE</spring.version>
+    </properties>
+</project>
+
