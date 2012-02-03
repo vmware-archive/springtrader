@@ -3,3 +3,6 @@ target
 .classpath
 .settings
 .springBeans
+build
+.gradle
+bin

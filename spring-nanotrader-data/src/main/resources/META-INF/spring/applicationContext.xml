@@ -67,5 +67,10 @@
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="persistenceUnitName" value="persistenceUnit"/>
         <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitPostProcessors">
+            <array>
+                <bean class="org.springframework.nanotrader.util.PUPostProcessor" />
+            </array>
+        </property>
     </bean>
 </beans>
