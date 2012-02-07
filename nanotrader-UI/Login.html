@@ -8,97 +8,87 @@
 </head>
 
 <body>
-	    <div id="vmware-bg"/>
-		<div id="header">
-    		<div id="headerLogo" title="Home" onclick="location.href='/Home.do'">&nbsp;</div>
-    		<div id="headerLinks">
-        		<ul>
-        			<li>
-        				<a id="helpLink" href="help.html">Help</a>		
-        			</li>
-        		</ul>
-    		</div>
+    <div id="outer">
+    <div id="vmware-bg">&nbsp;</div>
+    <div id="header">
+        <div id="headerLogo" title="Home" onclick="location.href='home.html'">&nbsp;</div>
+        </div>
+        <div id="marketWatch">
+            <div id="streamer" title="Streamer">&nbsp;</div>
+            <div id="streamerContent">
+                <table style="float: left;" width="200" border="0">
+                  <tr>
+                    <td>NanoTrader Index</td>
+                    <td>12345.99</td>
+                  </tr>
+                  <tr>
+                    <td>Volume</td>
+                    <td>120,000</td>
+                  </tr>
+                  <tr>
+                    <td>Change</td>
+                    <td>+55.12</td>
+                  </tr>
+                </table>
+                <table style="float: left;" id="winners" width="200" border="0">
+                  <tr>
+                    <td>AAPL</td>
+                    <td>455.10</td>
+                    <td>+10.12</td>
+                  </tr>
+                  <tr>
+                    <td>VMW</td>
+                    <td>102.10</td>
+                    <td>+7.12</td>
+                  </tr>
+                  <tr>
+                    <td>GOOG</td>
+                    <td>610.10</td>
+                    <td>+15.12</td>
+                  </tr>
+                </table>
+                <table style="float: left;" id="losers" width="200" border="0" >
+                  <tr>
+                    <td>HP</td>
+                    <td>22.10</td>
+                    <td>-3.12</td>
+                  </tr>
+                  <tr>
+                    <td>BB</td>
+                    <td>35.10</td>
+                    <td>-5.12</td>
+                  </tr>
+                  <tr>
+                    <td>ORCL</td>
+                    <td>10.10</td>
+                    <td>-1.12</td>
+                   </tr>
+                 </table>
+			</div>
+		</div>
+        <div id="content">
+        </div>
+        <div id="content">
+            <div class="loginPanel">
+                <form name="loginForm" action="home.html" method="POST">
+                    <div class="fieldsetTitle">NanoTrader Login</div>
+                    <div class="fieldsetNote">Please enter your username and password to login</div>
+                    <fieldset>                        
+                        <div class="fieldRow">
+                            <label for="j_username">Username</label> 
+                            <input style="width: 75%;" type="text" id="j_username" name="j_username" value="" />
+                        </div>
+                        <div class="fieldRow">
+                            <label for="j_password">Password</label> 
+                            <input style="width: 75%;" type="password" id="j_password" name="j_password" />
+                        </div>
+                        <div class="submitButtonContainer">
+                            <input type="submit" name="submit" class="button" value="Login" />                            
+                        </div>
+                    </fieldset>
+                </form>
+        	</div>
     	</div>
-<div id="marketWatch">
-    		<div id="streamer" title="Streamer">&nbsp;</div>
-    		<div id="streamerContent">
-
-<table style="float: left;" width="200" border="0">
-  <tr>
-    <td>NanoTrader Index</td>
-    <td>12345.99</td>
-  </tr>
-  <tr>
-    <td>Volume</td>
-    <td>120,000</td>
-  </tr>
-  <tr>
-    <td>Change</td>
-    <td>+55.12</td>
-  </tr>
-</table>
-<table style="float: left;" id="winners" width="200" border="0">
-  <tr>
-    <td>AAPL</td>
-    <td>455.10</td>
-    <td>+10.12</td>
-  </tr>
-  <tr>
-    <td>VMW</td>
-    <td>102.10</td>
-    <td>+7.12</td>
-  </tr>
-  <tr>
-    <td>GOOG</td>
-    <td>610.10</td>
-    <td>+15.12</td>
-  </tr>
-</table>
-<table style="float: left;" id="losers" width="200" border="0" >
-  <tr>
-    <td>HP</td>
-    <td>22.10</td>
-    <td>-3.12</td>
-  </tr>
-  <tr>
-    <td>BB</td>
-    <td>35.10</td>
-    <td>-5.12</td>
-  </tr>
-  <tr>
-    <td>ORCL</td>
-    <td>10.10</td>
-    <td>-1.12</td>
-   </tr>
- </table>
-</div>
-</div>
-
-	<div id="content">
-   	</div>
-
-	<div id="content">
-		<div class="loginPanel">
-			<form name="loginForm" action="home.html" method="POST">
-				<div class="fieldsetTitle">NanoTrader Login</div>
-				<div class="fieldsetNote">Please enter your username and password to login</div>
-				<fieldset>
-					
-					<div class="fieldRow">
-						<label for="j_username">Username</label> 
-						<input style="width: 75%;" type="text" id="j_username" name="j_username" value="" />
-					</div>
-					<div class="fieldRow">
-						<label for="j_password">Password</label> 
-						<input style="width: 75%;" type="password" id="j_password" name="j_password" />
-					</div>
-					<div class="submitButtonContainer">
-						<input type="submit" name="submit" class="button" value="Login" />
-						
-					</div>
-				</fieldset>
-			</form>
-	</div>
-	</div>
+    </div>
 </body>
 </html>

@@ -1,6 +1,5 @@
 body {
 	font: 76% Arial, Helvetica, sans-serif;
-	background: #ECECEC;
 	border: 0;
 	margin: 0;
 	min-width: 990px
@@ -15,52 +14,48 @@ a:visited, a:hover, a {
 	color: #88C7FC;
 	text-decoration: none
 }
+
+#outer {
+    width: 80%;
+    background-color:#FFFFFF;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+}
+ 
 #vmware-bg {
-	width: 950px;
-	background: url('../images/1.0/bg-wrapper.gif') no-repeat;
+    background: url('../images/1.0/bg-wrapper.gif') repeat-x ;
 }
 /* HEADER */
-#headerLogo {
+#headerLogo {	
 	background: url('../images/1.0/ntlogo.jpg') no-repeat;
-	width: 352px;
-	padding: 50px 0 0 10px;
+	width: 153px;
+	height: 23px;
+	margin-left: 35px;
+	margin-top: 20px;
 	cursor: pointer;
 	float: left;
 }
-#headerLinks {
-	position: absolute;
-	top: 0;
-	right: 0px;
-	height: 20px;
-	text-align: right;
-	padding: 8px 10px 0 0;
-	color: #FFF;
-	font-size: 11px
-}
-#headerLinks ul {
-	margin: 0;
-}
-#headerLinks li {
-	margin: 0 5px;
-	list-style: none;
-	float: left;
-}
+
 #headerLinks ul li a {
 	color: #88C7FC;
 	text-decoration: none;
 }
-#headerLinks span {
-	margin-left: 8px;
-	font-weight: 500;
-	color: #fff
-}
+
 fieldset {
 	border: 0;
 	margin: 6px 0 0;
 	border-image: initial;
 }
 #content .loginPanel {
-	margin: 10% auto 0;
+    width: 350px;
+    background: #CCC;
+	margin-left: 200px;
+	margin-right: 35px;
+	margin-bottom: 10px;
+	margin-top: 50px;	
 }
 .loginPanel {
 	width: 350px;
@@ -79,7 +74,7 @@ fieldset {
 	position: relative;
 	clear: none;
 	margin-bottom: 2px;
-	padding: 6px 0 5px 6px;
+	padding: 6px 5px 6px;
 }
 .loginPanel .fieldRow input {
 	position: absolute;
@@ -88,7 +83,7 @@ fieldset {
 	float: none;
 }
 .loginPanel .fieldRow label {
-	top: 5px;
+	top: 9px;
 	position: absolute;
 	text-align: left;
 	float: none;
@@ -137,21 +132,27 @@ fieldset {
 #header {
 	border-bottom-width: 3px;
 	border-bottom-style: solid;
-	border-bottom-color: #000000;
+	border-bottom-color: #999999;
 }
 #header, #footer {
 	position: relative;
 	z-index: 2;
-	height: 64px;
+	height: 60px;
 	background: transparenturl(../images/1.0/header_background.jpg) repeat-x scroll
 }
-#marketWatch {
+#marketWatch {	
 	position: relative;
 	height: 72px;
-	background: #CCC
+	width: 700px;
+    background: #CCC;
+	margin-left: 35px;
+	margin-right: 35px;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 #streamerContent {
-	margin-left: 20%
+	margin-left: 10%;
+	
 }
 #winners {
 	color: #060;
@@ -183,41 +184,38 @@ fieldset {
 }
 .container {
 	position: absolute;
-	width: 950px;
-	height: 600px;
 }
 .nav {
-	width: 950px;
+	
 	font-size: 12px;
 }
 .nav ul {
-	margin: 0;
-	padding: 0;
+	margin: 5px;
 	list-style: none;
-	background: url(../images/1.0/bg-nav.png) no-repeat;
-	width: 950px;
+	background: url(../images/1.0/bg-nav.png);	
 	font-weight: bold;
-	height: 45px;
-	*
-	background: none;
-	*
-	filter: progid :dximagetransform.microsoft.alphaimageloader(src='//www.vmware.com/files/templates/images/bg-nav.png', sizingmethod='crop');
-	padding-left: 60px;
+	height: 41px;
+	width: 100%;
+	padding-left: 15%;
 }
 .nav ul li {
 	float: left;
 	background: url(../images/1.0/sep-nav.gif) no-repeat right;
+	height: 39px;
 	position: relative;
-	padding: 0;
+	padding: 0px;
 }
-.nav ul li a {
+.nav ul li  a {
 	color: #4d4e53;
 	float: left;
-	height: 41px;
 	line-height: 38px;
-	padding: 5px 60px;
 	text-align: center;
-	width: inherit;
+	height: auto;
+	width: 20%;
+ 	padding-top: 5px;
+	padding-right: 45px;
+	padding-bottom: 10px;
+	padding-left: 45px;	
 }
 
 .nav ul li:hover a, .nav ul li.hover a, .nav ul a:hover, .nav ul a.hover {
@@ -226,8 +224,9 @@ fieldset {
 }
 
 .nav li.last {
-	background: none;
-	margin: 0px -20px;
+	background: url(../images/1.0/bg-nav.png) right;
+	margin: 0px;
+	padding-right: 5%;
 }
 .nav ul li.last a {
 	width: inherit !important;
@@ -243,5 +242,37 @@ fieldset {
 	height: 600px;
 	float: left;
 	font-size: 12px;
+	margin-left: 35px;
+	margin-right: 35px;
 }
 
+
+
+#Menu {
+	border-bottom-width: 10px;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+}
+#Menu ul {
+text-align: left;
+margin: 15px 0 5px 0;
+}
+#Menu li {
+display: inline; 
+}
+#Menu li a {
+padding: 7px 0 6px 10px;
+color: #5d5350;
+text-decoration: none;
+font-weight: bold;
+background: url(../images/1.0/tabbed-menu-left.gif) no-repeat left top; 
+}
+#Menu li a:hover {
+background: url(../images/1.0/tabbed-menu-left.gif) no-repeat left bottom;
+}
+#Menu li a span {
+padding: 7px 10px 6px 0;
+background: url(../images/1.0/tabbed-menu-right.gif) no-repeat right top; 
+#Menu li a:hover span {
+background: url(../images/1.0/tabbed-menu-right.gif) no-repeat right bottom ;
+}
