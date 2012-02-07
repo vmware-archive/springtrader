@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +23,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Order {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ORDER_SEQ")
+    @SequenceGenerator(name="ORDER_SEQ", sequenceName="ORDER_SEQUENCE")
     @Column(name = "orderid")
     private Integer orderid;
 
