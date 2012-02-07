@@ -217,12 +217,10 @@ fieldset {
 	padding-bottom: 10px;
 	padding-left: 45px;	
 }
-
 .nav ul li:hover a, .nav ul li.hover a, .nav ul a:hover, .nav ul a.hover {
 	background: url(../images/1.0/bg-nav-hover.gif) repeat-x;
 	color: #fff;
 }
-
 .nav li.last {
 	background: url(../images/1.0/bg-nav.png) right;
 	margin: 0px;
@@ -231,19 +229,46 @@ fieldset {
 .nav ul li.last a {
 	width: inherit !important;
 }
-.nav li.active a {
+.nav li.active {
 	background: url(../images/1.0/bg-nav-active.gif) no-repeat
 }
-.last {
+#last {
 	right: -8px !important;
 }
 .summary {
-	width:700px;
+	width: 700px;
 	height: 600px;
 	float: left;
 	font-size: 12px;
 	margin-left: 35px;
 	margin-right: 35px;
+}
+#trade-table {
+	background-color: #ECECEC;
+	border: 1px solid #B7B8B7;
+	height: 130px;
+	width: 240px;
+	margin-bottom: 10px;
+	margin-top: 30px;
+	margin-left: 400px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+#recent-trade {
+	background-color: #ECECEC;
+	border: 1px solid #B7B8B7;
+	height: 100px;
+	width: 610px;
+	margin-bottom: 10px;
+	margin-top: 30px;
+	margin-left: 30px;
+}
+#profile {
+	margin-top: 30px;
+	margin-left: 100px;
+	background-color: #ECECEC;
+	border: 1px solid #B7B8B7;
+	width: 500px;
 }
 
 
