@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -21,7 +22,8 @@ public class Accountprofile {
     }
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCOUNTPROFILE_SEQ")
+    @SequenceGenerator(name="ACCOUNTPROFILE_SEQ", sequenceName="ACCOUNTPROFILE_SEQUENCE")
     @Column(name = "profileid")
     private Integer profileid;
 
