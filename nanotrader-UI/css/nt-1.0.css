@@ -14,22 +14,20 @@ a:visited, a:hover, a {
 	color: #88C7FC;
 	text-decoration: none
 }
-
 #outer {
-    width: 80%;
-    background-color:#FFFFFF;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px;
+	width: 80%;
+	background-color: #FFFFFF;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
 }
- 
 #vmware-bg {
-    background: url('../images/1.0/bg-wrapper.gif') repeat-x ;
+	background: url('../images/1.0/bg-wrapper.gif') repeat-x;
 }
 /* HEADER */
-#headerLogo {	
+#headerLogo {
 	background: url('../images/1.0/ntlogo.jpg') no-repeat;
 	width: 153px;
 	height: 23px;
@@ -38,24 +36,21 @@ a:visited, a:hover, a {
 	cursor: pointer;
 	float: left;
 }
-
 #headerLinks ul li a {
 	color: #88C7FC;
 	text-decoration: none;
 }
-
 fieldset {
 	border: 0;
 	margin: 6px 0 0;
-	border-image: initial;
 }
 #content .loginPanel {
-    width: 350px;
-    background: #CCC;
+	width: 350px;
+	background: #CCC;
 	margin-left: 200px;
 	margin-right: 35px;
 	margin-bottom: 10px;
-	margin-top: 50px;	
+	margin-top: 50px;
 }
 .loginPanel {
 	width: 350px;
@@ -140,19 +135,20 @@ fieldset {
 	height: 60px;
 	background: transparenturl(../images/1.0/header_background.jpg) repeat-x scroll
 }
-#marketWatch {	
+#marketWatch {
 	position: relative;
 	height: 72px;
 	width: 700px;
-    background: #CCC;
+	background: #CCC;
 	margin-left: 35px;
 	margin-right: 35px;
 	margin-bottom: 10px;
 	margin-top: 10px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
 }
 #streamerContent {
 	margin-left: 10%;
-	
 }
 #winners {
 	color: #060;
@@ -186,13 +182,13 @@ fieldset {
 	position: absolute;
 }
 .nav {
-	
+
 	font-size: 12px;
 }
 .nav ul {
 	margin: 5px;
 	list-style: none;
-	background: url(../images/1.0/bg-nav.png);	
+	background: url(../images/1.0/bg-nav.png);
 	font-weight: bold;
 	height: 41px;
 	width: 100%;
@@ -212,10 +208,10 @@ fieldset {
 	text-align: center;
 	height: auto;
 	width: 20%;
- 	padding-top: 5px;
+	padding-top: 5px;
 	padding-right: 45px;
 	padding-bottom: 10px;
-	padding-left: 45px;	
+	padding-left: 45px;
 }
 .nav ul li:hover a, .nav ul li.hover a, .nav ul a:hover, .nav ul a.hover {
 	background: url(../images/1.0/bg-nav-hover.gif) repeat-x;
@@ -270,34 +266,32 @@ fieldset {
 	border: 1px solid #B7B8B7;
 	width: 500px;
 }
-
-
-
 #Menu {
 	border-bottom-width: 10px;
 	border-bottom-style: solid;
 	border-bottom-color: #999999;
 }
 #Menu ul {
-text-align: left;
-margin: 15px 0 5px 0;
+	text-align: left;
+	margin: 15px 0 5px 0;
 }
 #Menu li {
-display: inline; 
+	display: inline;
 }
 #Menu li a {
-padding: 7px 0 6px 10px;
-color: #5d5350;
-text-decoration: none;
-font-weight: bold;
-background: url(../images/1.0/tabbed-menu-left.gif) no-repeat left top; 
+	padding: 7px 0 6px 10px;
+	color: #5d5350;
+	text-decoration: none;
+	font-weight: bold;
+	background: url(../images/1.0/tabbed-menu-left.gif) no-repeat left top;
 }
 #Menu li a:hover {
-background: url(../images/1.0/tabbed-menu-left.gif) no-repeat left bottom;
+	background: url(../images/1.0/tabbed-menu-left.gif) no-repeat left bottom;
 }
 #Menu li a span {
-padding: 7px 10px 6px 0;
-background: url(../images/1.0/tabbed-menu-right.gif) no-repeat right top; 
+	padding: 7px 10px 6px 0;
+	background: url(../images/1.0/tabbed-menu-right.gif) no-repeat right top;
+}
 #Menu li a:hover span {
-background: url(../images/1.0/tabbed-menu-right.gif) no-repeat right bottom ;
+	background: url(../images/1.0/tabbed-menu-right.gif) no-repeat right bottom;
 }
