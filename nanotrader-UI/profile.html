@@ -91,34 +91,83 @@
 				</div>
 			</div>
 			<div id="profile">
-				<table>
-					<tbody>
-						<table bgcolor="#ECECEC" border="0" cellpadding="0" cellspacing="6" width="100%">
-							<tbody>
-								<tr>
-									<td nowrap="true" align="left" valign="top" width="170"><b>User Profile</b></td>
-								</tr>
-								<tr>
-									<td colspan="4" align="center" bgcolor="#999999" height="1" nowrap="true"></td>
-								</tr>
-								<tr>
-									<td nowrap="true" align="center" valign="top" width="170">Name</td>
-									<td width="90" valign="top" nowrap="true" align="right">Nano Trader
-									<br>
-								</tr>
-								<tr>
-									<td colspan="4" align="center" bgcolor="#999999" height="1" nowrap="true"></td>
-								</tr>
-								<tr>
-									<td nowrap="true" align="center" valign="top" width="170">Address</td>
-									<td width="90" valign="top" nowrap="true" align="right">3401, Hillview Avenue, Palo Alto, CA 94040
-									<br>
-								</tr>
-							</tbody>
-						</table></td>
-					</tbody>
-				</table>
-			</div>
+            	<h1> Account Profile </h1>
+				<div id="inner">
+                <form name="registerForm" action="profile.html" method="POST">
+            	<fieldset>
+                	<label class="string label" for="full_name">
+                    Full name
+                    </label>
+            	</fieldset>
+            	<fieldset>
+                    <input class="string input" id="full_name" maxlength="255" size="50" type="text" value="Kashyap Parikh">
+            	</fieldset>
+                 </div>
+				<div>
+            	<fieldset>
+                	<label class="" for="userid">
+                    UserId
+                    </label>
+            	</fieldset>
+            	<fieldset>
+                    <input class="" id="userid" maxlength="255" size="50" type="text" value="kparikh">
+            	</fieldset>
+                 </div>
+				<div>
+            	<fieldset>
+                	<label class="" for="password">
+                    New Password
+                    </label>
+            	</fieldset>
+            	<fieldset>
+                    <input class="" id="password" maxlength="255" size="50" type="text" value="*****">
+            	</fieldset>
+                 </div>
+				<div>
+            	<fieldset>
+                	<label class="" for="passwordconfirm">
+                    Password Confirmation
+                    </label>
+            	</fieldset>
+            	<fieldset>
+                    <input class="" id="passwordconfirm" maxlength="255" size="50" type="text" value="*****">
+            	</fieldset>
+                 </div>
+             	<div>
+            	<fieldset>
+                	<label class="" for="address">
+                    Address
+                    </label>
+            	</fieldset>
+            	<fieldset>
+                    <input class="" id="address" maxlength="255" size="50" type="text" value="1 Foster City Blvd, Foster City, CA, 94404">
+            	</fieldset>
+                 </div>
+				<div>
+            	<fieldset>
+                	<label class="" for="email">
+                    Email
+                    </label>
+            	</fieldset>
+            	<fieldset>
+                    <input class="" id="email" maxlength="255" size="50" type="text" value="kparikh@vmware.com">
+            	</fieldset>
+                 </div>
+				<div>
+            	<fieldset>
+                	<label class="" for="ccnum">
+                    Credit Card Number
+                    </label>
+            	</fieldset>
+            	<fieldset>
+                    <input class="" id="ccnum" maxlength="255" size="50" type="text" value="1234 5678 9012 4567">
+            	</fieldset>
+                 </div>
+                <div class="profile_button">
+                    <input type="submit" name="submit" class="button" value="Update" />                            
+                </div>
+	</div>
+    </form>
 		</div>
 	</body>
 </html>

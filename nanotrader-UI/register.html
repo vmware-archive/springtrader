@@ -69,25 +69,46 @@
         <div id="content">
         </div>
         <div id="content">
-            <div class="loginPanel">
-                <form name="loginForm" action="home.html" method="POST">
-                    <div class="fieldsetTitle">NanoTrader Login</div>
-                    <div class="fieldsetNote">Please enter your username and password to login</div>
-                    <fieldset>                        
+            <div class="registerPanel">
+                <form name="registerForm" action="home.html" method="POST">
+                    <div class="fieldsetTitle">Register New User </div>
+                    <div class="fieldsetNote">Please enter your account details</div>
+                    <fieldset>            
                         <div class="fieldRow">
-                            <label for="j_username">Username</label> 
-                            <input style="width: 75%;" type="text" id="j_username" name="j_username" value="" />
+                             <label for="fullname">Full Name</label> 
+                            <input  style="width: 75%;" type="text" id="fullname" name="fullname" value=""/>
                         </div>
                         <div class="fieldRow">
-                            <label for="j_password">Password</label> 
-                            <input style="width: 75%;" type="password" id="j_password" name="j_password" />
+                             <label for="fullname">Address</label> 
+                            <input  style="width: 75%;" type="text" id="address" name="address" value=""/>
                         </div>
-                        <div class="submitButtonContainer">
-                            <a href="register.html" class="button" id="button">Register</a>
-                            
+                        <div class="fieldRow">
+                             <label for="fullname">Email Address</label> 
+                            <input  style="width: 75%;" type="text" id="email" name="email" value=""/>
                         </div>
+                        <div class="fieldRow">
+                             <label for="fullname">User ID</label> 
+                            <input  style="width: 75%;" type="text" id="userid" name="userid" value=""/>
+                        </div>
+                        <div class="fieldRow">
+                             <label for="fullname">Password</label> 
+                            <input  style="width: 75%;" type="text" id="password" name="password" value=""/>
+                        </div>
+                        <div class="fieldRow">
+                             <label for="fullname">Confirm Password</label> 
+                            <input  style="width: 75%;" type="text" id="password" name="password" value=""/>
+                        </div>
+                        <div class="fieldRow">
+                             <label for="fullname">Opening Balance</label> 
+                            <input  style="width: 75%;" type="text" id="openbalance" name="openbalance" value=""/>
+                        </div>
+                        <div class="fieldRow">
+                             <label for="fullname">Credit Card Number</label> 
+                            <input  style="width: 75%;" type="text" id="ccnum" name="ccnum" value=""/>
+                        </div>
+
                         <div class="submitButtonContainer">
-                            <input type="submit" name="submit" class="button" value="Login" />                            
+                            <input type="submit" name="submit" class="button" value="Register" />                            
                         </div>
                   </fieldset>
                 </form>
