@@ -2,7 +2,9 @@ body {
 	font: 76% Arial, Helvetica, sans-serif;
 	border: 0;
 	margin: 0;
-	min-width: 990px
+	min-width: 990px;
+	
+	
 }
 .white {
 	background: #FFF;
@@ -11,7 +13,7 @@ body {
 	width: 100%;
 }
 a:visited, a:hover, a {
-	color: #88C7FC;
+	color: #FFF;
 	text-decoration: none
 }
 #outer {
@@ -106,6 +108,63 @@ fieldset {
 	font-weight: bold;
 	padding-left: 5px;
 }
+
+#content .registerPanel {
+	width: 550px;
+	background: #FFF;
+	margin-left: 50px;
+	margin-right: 35px;
+	margin-bottom: 10px;
+	margin-top: 50px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-box-shadow: 0 3px 3px #999;
+	-webkit-box-shadow: 0 3px 3px #999;
+
+}
+.registerPanel {
+	width: 550px;
+    border: 1px solid #2DBF3D;
+	background: #fff;
+	padding: 16px 16px 10px;
+	text-align: left;
+	
+}
+.registerPanel .fieldRow {
+	height: 33px;
+	max-height: 21px;
+	position: relative;
+	clear: none;
+	margin-bottom: 2px;
+	padding: 6px 5px 6px;
+}
+.registerPanel .fieldRow input {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	float: none;
+}
+.registerPanel .fieldRow label {
+	top: 9px;
+	position: absolute;
+	text-align: left;
+	float: none;
+}
+
+.registerPanel input[type="submit"] {
+	font-size: 1.1em ! important;
+}
+.registerPanel .submitButtonContainer {
+	text-align: right;
+	margin-right: 10px;
+}
+
+.registerPanel form fieldset {
+	padding: 0 10px;
+}
+
+
+
 .fieldsetTitle {
 	height: 17px;
 	font-weight: 700;
@@ -178,56 +237,27 @@ fieldset {
 	padding: 3px 15px;
 	cursor: pointer;
 }
+
+.profile_button {
+	color: #fff;
+	font-weight: 700;
+	font-size: 11px !important;
+	width: auto;
+	margin-left: 15px;
+	margin-top: 20px;
+	overflow: visible;
+	border: 1px solid #84B96D;
+	background: #2DBF3D bottom;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 3px;
+	cursor: pointer;
+	float: left;
+}
 .container {
 	position: absolute;
 }
-.nav {
 
-	font-size: 12px;
-}
-.nav ul {
-	margin: 5px;
-	list-style: none;
-	background: url(../images/1.0/bg-nav.png);
-	font-weight: bold;
-	height: 41px;
-	width: 100%;
-	padding-left: 15%;
-}
-.nav ul li {
-	float: left;
-	background: url(../images/1.0/sep-nav.gif) no-repeat right;
-	height: 39px;
-	position: relative;
-	padding: 0px;
-}
-.nav ul li  a {
-	color: #4d4e53;
-	float: left;
-	line-height: 38px;
-	text-align: center;
-	height: auto;
-	width: 20%;
-	padding-top: 5px;
-	padding-right: 45px;
-	padding-bottom: 10px;
-	padding-left: 45px;
-}
-.nav ul li:hover a, .nav ul li.hover a, .nav ul a:hover, .nav ul a.hover {
-	background: url(../images/1.0/bg-nav-hover.gif) repeat-x;
-	color: #fff;
-}
-.nav li.last {
-	background: url(../images/1.0/bg-nav.png) right;
-	margin: 0px;
-	padding-right: 5%;
-}
-.nav ul li.last a {
-	width: inherit !important;
-}
-.nav li.active {
-	background: url(../images/1.0/bg-nav-active.gif) no-repeat
-}
 #last {
 	right: -8px !important;
 }
@@ -256,15 +286,25 @@ fieldset {
 	height: 100px;
 	width: 610px;
 	margin-bottom: 10px;
-	margin-top: 30px;
-	margin-left: 30px;
+	margin-top: 30px;	
+	margin-left: 10px;
+	margin-right: 10px;
 }
 #profile {
-	margin-top: 30px;
-	margin-left: 100px;
-	background-color: #ECECEC;
-	border: 1px solid #B7B8B7;
-	width: 500px;
+	margin-top: 20px;
+	margin-left: 35px;
+	margin-bottom: 60px;
+	background-color: #FFFFFF;
+	border: 1px solid #2DBF3D; 
+	padding: 20px 20px 100px 20px;
+	width: 450px;
+	font-weight: 600;
+		-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 3px
+}
+#inner {
+	display:inline-block;
 }
 #Menu {
 	border-bottom-width: 10px;
