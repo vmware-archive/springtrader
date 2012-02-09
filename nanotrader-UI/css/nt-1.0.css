@@ -16,6 +16,12 @@ a:visited, a:hover, a {
 	color: #FFF;
 	text-decoration: none
 }
+tr a:visited, a:hover, a {
+	color: #000000;
+	text-decoration: underline;
+	font-weight: bold;
+	font-weight: bold;
+}
 #outer {
 	width: 80%;
 	background-color: #FFFFFF;
@@ -196,12 +202,12 @@ fieldset {
 }
 #marketWatch {
 	position: relative;
-	height: 72px;
+	height: 80px;
 	width: 700px;
 	background: #CCC;
 	margin-left: 35px;
 	margin-right: 35px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	margin-top: 10px;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -262,33 +268,70 @@ fieldset {
 	right: -8px !important;
 }
 .summary {
-	width: 700px;
-	height: 600px;
+	width: 520px;
+	height: 370px;
 	float: left;
 	font-size: 12px;
+	margin-top: 20px;
 	margin-left: 35px;
 	margin-right: 35px;
-}
-#trade-table {
-	background-color: #ECECEC;
-	border: 1px solid #B7B8B7;
-	height: 130px;
-	width: 240px;
-	margin-bottom: 10px;
-	margin-top: 30px;
-	margin-left: 400px;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
+	background-color: #84B96D;
+}
+.portfolio-summary {
+	width: 520px;
+	height: 160px;
+	float: left;
+	font-size: 12px;
+	margin-top: 20px;
+	margin-left: 35px;
+	margin-right: 35px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	background-color: #84B96D;
+}
+.portfolio {
+	width: 700px;
+	height: auto;
+	float: left;
+	font-size: 12px;
+	margin-top: 20px;
+	margin-left: 35px;
+	margin-right: 35px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	background-color: #84B96D;
+}
+#summary-head {
+	font-weight: bold;
+	padding: 10px 2px 5px;
+	font-size: 15px;
+}
+#quote {
+	position: relative;
+	height: auto;
+	width: 700px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	background-color: #FFFFFF;
+	border: 1px solid #84B96D;
+	margin-left: 35px;
+	margin-right: 35px;
+	margin-bottom: 20px;
+	margin-top: 10px;
 }
 #recent-trade {
-	background-color: #ECECEC;
-	border: 1px solid #B7B8B7;
-	height: 100px;
-	width: 610px;
-	margin-bottom: 10px;
-	margin-top: 30px;	
-	margin-left: 10px;
-	margin-right: 10px;
+	width: 700px;
+	height: auto;
+	float: left;
+	font-size: 12px;
+	margin-top: 20px;
+	margin-left: 35px;
+	margin-right: 35px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	background-color: #84B96D;
 }
 #profile {
 	margin-top: 20px;
