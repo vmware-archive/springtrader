@@ -41,6 +41,7 @@ subprojects { subproject ->
     jacksonVersion = '1.9.2'
     javaxActivationVersion = '1.1.1'
     junitVersion = '4.8.2'
+    httpunitVersion = '1.7'
     log4jVersion = '1.2.12'
     mockitoVersion = '1.9.0'
     springVersion = '3.1.0.RELEASE'
@@ -143,6 +144,24 @@ project('spring-nanotrader-services') {
     description = 'Spring Nanotrader Services'
     dependencies {
         compile project(":spring-nanotrader-data")
+    }
+}
+
+project('tests') {
+    description = 'HttpUnit-based functional tests'
+    test.onlyIf { Boolean.getBoolean('run.tests') }
+
+    sourceSets {
+      test {
+        java {
+          srcDir 'functional'
+        }
+      }
+    }
+
+    dependencies {
+        testCompile "junit:junit-dep:$junitVersion"
+        testCompile "httpunit:httpunit:$httpunitVersion"
     }
 }
 
