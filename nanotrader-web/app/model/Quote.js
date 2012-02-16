@@ -1,4 +1,5 @@
-Ext.regModel('NanoTrader.model.Quote', {
+Ext.define('NanoTrader.model.Quote', {
+    extend: 'Ext.data.Model',
 			fields : ['symbol', 'open1', 'volume', 'change1', 'price'],
 			proxy : {
 				type : 'rest',
@@ -8,4 +9,4 @@ Ext.regModel('NanoTrader.model.Quote', {
 					root : 'quote'
 				}
 			}
-		})
+		});
