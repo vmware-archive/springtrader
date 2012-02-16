@@ -1,4 +1,5 @@
-Ext.regModel('NanoTrader.model.Order', {
+Ext.define('NanoTrader.model.Order', {
+    extend: 'Ext.data.Model',
 			fields : ['order_id', 'order_status', 'creation_date',
 					'completion_date', 'transaction_fee', 'transaction_type',
 					'symbol', 'quantity'],
@@ -11,4 +12,4 @@ Ext.regModel('NanoTrader.model.Order', {
 					root : 'app'
 				}
 			}
-		})
+		});

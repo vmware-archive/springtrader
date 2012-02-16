@@ -1,5 +1,6 @@
-Ext.regStore('NanoTrader.store.Orders', {
+Ext.define('NanoTrader.store.Orders', {
+    extend: 'Ext.data.Store',
 			storeId : 'Orders',
-			model : 'NanoTrader.model.OrderModel',
+			model : 'NanoTrader.model.Order',
 			autoLoad : true
-		})
+		});

@@ -1,4 +1,5 @@
-Ext.regModel('NanoTrader.model.User', {
+Ext.define('NanoTrader.model.User', {
+    extend: 'Ext.data.Model',
 			fields : ['user_id', 'full_name', 'address', 'email', 'cc_number'],
 			hasMany : ['Orders', 'Holdings'],
 			proxy : {
@@ -9,4 +10,4 @@ Ext.regModel('NanoTrader.model.User', {
 					root : 'users'
 				}
 			}
-		})
+		});
