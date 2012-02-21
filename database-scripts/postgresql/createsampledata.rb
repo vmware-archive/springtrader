@@ -8,12 +8,27 @@
 #              - order
 
 # Usage: ruby createsampledata.rb <number_of_rows_per_table=10>
+# Usage: ruby createsampledata.rb <number_of_rows_per_table=10> <operation=CREATE>
+#
+# ruby createsampledata.rb
+# ruby createsampledata.rb 500
+# ruby createsampledata.rb 500 CREATE
+# ruby createsampledata.rb 500 INIT
 
 loop = 10
+operation = "CREATE"
 sql_file = 'create_rows.sql'
 
-ARGV.each do|a|
-  loop = a.to_i  
+arg_length = ARGV.length
+
+if (arg_length == 1)
+  loop = ARGV[0].to_i
+elsif (arg_length == 2)
+  loop = ARGV[0].to_i
+  operation = ARGV[1]
+elsif (arg_length >= 3)
+  puts "Unknown argument length"
+  Process.exit
 end
 
 # generate random stock quotes 
@@ -53,6 +68,7 @@ File.open(sql_file, 'w') do |f|
   f.puts "DELETE FROM QUOTE;"
   f.puts "DELETE FROM ACCOUNT;"
   f.puts "DELETE FROM \"order\";"
+  break if (not operation.upcase.eql?("CREATE"))
   insert_array.each do |sql|
     loop.times do |i|
       newsql = sql.gsub(/RANDOMCOUNT/, i.to_s)
