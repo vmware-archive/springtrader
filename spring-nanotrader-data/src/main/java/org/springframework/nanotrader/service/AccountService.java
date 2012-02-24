@@ -24,5 +24,8 @@ public interface AccountService {
 
 
 	public abstract Account updateAccount(Account account);
+	
+	
+	public abstract Account findByProfileProfileid(Account account);
 
 }

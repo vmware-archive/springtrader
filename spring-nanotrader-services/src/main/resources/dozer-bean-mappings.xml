@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping map-id="account">
+		<class-a>org.springframework.nanotrader.domain.Account</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Account
+		</class-b>
+	</mapping>
+
+	<!-- Start Account profile mappings -->
+	<mapping map-id="accountProfile">
+		<class-a>org.springframework.nanotrader.domain.Accountprofile
+		</class-a>
+		<class-b map-null="false">org.springframework.nanotrader.service.domain.Accountprofile
+		</class-b>
+		<field map-id="accountProfile.account">
+			<a>accounts</a>
+			<b>accounts</b>
+		</field>
+
+	</mapping>
+	<mapping map-id="accountProfile.account">
+		<class-a map-null="false">org.springframework.nanotrader.domain.Account
+		</class-a>
+		<class-b map-null="false">java.util.Map</class-b>
+		<field-exclude>
+			<a>orders</a>
+			<b>orders</b>
+		</field-exclude>
+		<field-exclude>
+			<a>profileProfileid</a>
+			<b>profileProfileid</b>
+		</field-exclude>
+	</mapping>
+	<!-- End Account profile mappings -->
+
+
+	<mapping map-id="holding">
+		<class-a>org.springframework.nanotrader.domain.Holding</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Holding
+		</class-b>
+		<field-exclude>
+			<a>orders</a>
+			<b>orders</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping map-id="order">
+		<class-a>org.springframework.nanotrader.domain.Order</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Order</class-b>
+		<field>
+			<a>accountAccountid.accountid</a>
+			<b>accountid</b>
+		</field>
+	</mapping>
+
+	<mapping map-id="quote">
+		<class-a>org.springframework.nanotrader.domain.Quote</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Quote</class-b>
+	</mapping>
+
+</mappings>

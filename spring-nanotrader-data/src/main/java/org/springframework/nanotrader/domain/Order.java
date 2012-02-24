@@ -1,7 +1,9 @@
 package org.springframework.nanotrader.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,13 +16,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(schema = "public",name = "order")
-public class Order {
+
+public class Order implements Serializable {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ORDER_SEQ")
@@ -69,9 +72,12 @@ public class Order {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "M-")
     private Date opendate;
+	
+	@ManyToOne
+	@JoinColumn(name = "quote_symbol", referencedColumnName = "symbol")
+    private Quote quote;
 
-	@Column(name = "quote_symbol", length = 250)
-    private String quoteSymbol;
+
 
 	public Account getAccountAccountid() {
         return accountAccountid;
@@ -145,15 +151,26 @@ public class Order {
         this.opendate = opendate;
     }
 
-	public String getQuoteSymbol() {
-        return quoteSymbol;
-    }
 
-	public void setQuoteSymbol(String quoteSymbol) {
-        this.quoteSymbol = quoteSymbol;
-    }
 
+	public Quote getQuote() {
+		return quote;
+	}
+
+	public void setQuote(Quote quote) {
+		this.quote = quote;
+	}
+
+	@Override
 	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+		return "Order [orderid=" + orderid + ", orderfee=" + orderfee + ", completiondate=" + completiondate
+				+ ", ordertype=" + ordertype + ", orderstatus=" + orderstatus + ", price=" + price + ", quantity="
+				+ quantity + ", opendate=" + opendate + "]";
+	}
+
+//	public String toString() {
+//        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+//    }
+	
+	
 }

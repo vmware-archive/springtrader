@@ -114,7 +114,9 @@ public class OrderDataOnDemand {
         if (quoteSymbol.length() > 250) {
             quoteSymbol = quoteSymbol.substring(0, 250);
         }
-        obj.setQuoteSymbol(quoteSymbol);
+        Quote quote = new Quote();
+        quote.setSymbol(quoteSymbol);
+        obj.setQuote(quote);
     }
 
 	public Order getSpecificOrder(int index) {
