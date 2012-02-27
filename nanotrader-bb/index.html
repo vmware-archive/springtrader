@@ -1,25 +1,30 @@
 <html>
 	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>NanoTrader</title>
+	    <link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/app.css" rel="stylesheet">
 	</head>
 	<body>
-		<div id="vmware-bg">
-			&nbsp;
+    	<div id="header"></div>
+    	<div id="tabs"></div>
+		<div class="container">
+		    <div class="row">
+		        <div id="content" class="span8>"></div>
+		    </div>		
 		</div>
-		<div id="header">
-			<div id="header-logo">
-				&nbsp;
-			</div>
-		</div>
-		<div id="container"></div>
 		<script src="lib/jquery-1.7.1-min.js"></script>
 		<script src="lib/underscore-min.js"></script>
 		<script src="lib/backbone-min.js"></script>
+		<script src="lib/backbone.validation.js"></script>
 		<script src="js/utils.js"></script>
 		<script src="js/model/accountsummary.js"></script>
 		<script src="js/model/userstatistics.js"></script>
+		<script src="js/model/accountprofile.js"></script>
 		<script src="js/view/home.js"></script>
+		<script src="js/view/accountprofile.js"></script>
+		<script src="js/view/header.js"></script>
+		<script src="js/view/nttabs.js"></script>
 		<script src="js/main.js"></script>
 	</body>
 </html>
