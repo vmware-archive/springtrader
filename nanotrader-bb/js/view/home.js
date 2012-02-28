@@ -5,6 +5,7 @@ AccountSummaryView = Backbone.View.extend({
 			},
 			render : function(eventName) {
 				var ac = new AccountSummary();
+				var type = ac.toJSON();
 				$(this.el).html(this.template(ac.toJSON()));
 				return this;
 			}
