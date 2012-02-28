@@ -2,11 +2,12 @@ UserStatistics = Backbone.Model.extend({
 			initialize : function() {
 				var model = this;
 				$.ajax({
-							type : "POST",
+							type : "GET",
 							url : 'data/userstatistics.json',
 							dataType : 'json',
 							// Make synchronous ajax call
 							async : false,
+							//Since GET request is cached, make the cache to false
 							cache: false,
 							success : function(response) {
 								model.set(response.results[0]);

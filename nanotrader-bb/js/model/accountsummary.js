@@ -7,6 +7,7 @@ AccountSummary = Backbone.Model.extend({
 							dataType : 'json',
 							//Make synchronous ajax call
 							async:   false,
+							//Since GET request is cached, make the cache to false
 							cache: false,
 							success : function(response) {
 								model.set(response.results[0]);
