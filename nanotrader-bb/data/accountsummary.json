@@ -1,0 +1,12 @@
+{
+	"success" : true,
+	"results" : [{
+				"summary_head" : "Account Summary",
+				"current_balance" : 1000,
+				"opening_balance" : 3000,
+				"cash_balance" : 100,
+				"total_holdings" : 7,
+				"number_of_holdings" : 5,
+				"current_gain_or_loss" : 500
+			}]
+}
