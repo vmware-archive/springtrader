@@ -9,16 +9,17 @@ import java.util.Random
 //              - ACCOUNT
 //              - order
 
-// Usage: groovy initdb.groovy
+// Usage: groovy configdb.groovy
 
-defaultNumberOfQuotes = 100
-defaultNumberOfUsers = 100
+defaultUser = "user"
+defaultQuote = "s"
+
+defaultNumberOfQuotes = 5000
+defaultNumberOfUsers = 1000000
 defaultNumberOfOrders = 10
 defaultNumberOfHoldings = 10
 
-sqlFile = "initdb.sql"
-defaultStockQuotes = "nasdaq-100.txt"
-defaultNames = "names-100.txt"
+sqlFile = "configdb.sql"
 
 quoteSymbolList = []
 
@@ -162,8 +163,8 @@ def generateDefaultAccounts(writer) {
 def generateDefaultAccountProfiles(writer) {
   long creditCardNumber = 1111222233330000
 
-  new File(defaultNames).eachLine { line ->
-    name = line.trim().toLowerCase()
+  defaultNumberOfUsers.times { count ->
+    name = defaultUser + count
     Random rand = new Random()
     newCreditCardNumber = creditCardNumber + rand.nextInt(1000)
     defaultAccountProfileRow = []
@@ -173,7 +174,7 @@ def generateDefaultAccountProfiles(writer) {
     defaultAccountProfileRow << name
     defaultAccountProfileRow << name + "@company.com"
     defaultAccountProfileRow << newCreditCardNumber
-    defaultAccountProfileRow << name + " " + name.substring(0,1)
+    defaultAccountProfileRow << name
 
     insertAccountProfileSQL = insertAccountProfileSQLTemplate
     //insertAccountProfileSQL = insertAccountProfileSQL.replace("PROFILEID", defaultAccountProfileRow[0]+"")
@@ -192,16 +193,9 @@ def generateDefaultStockQuotes(writer) {
   int stockPrice = 200
   int stockVolume = 5000000
 
-  new File(defaultStockQuotes).eachLine { line ->
-    i = line.lastIndexOf(" ")
-    quote = line.substring(i, line.length())
-    companyName = line.substring(0, i)
-    quote = quote.trim()
-    companyName = companyName.trim()
-    if (companyName.indexOf("'") >= 0) {
-      //print "found " + companyName
-      companyName = companyName.replace("'", " ")
-    }
+  defaultNumberOfQuotes.times { count ->
+    quote = defaultQuote + count
+    companyName = quote + " Company"
     quoteSymbolList << quote
     Random rand = new Random()
     float lowStockPrice = rand.nextInt(stockPrice)
