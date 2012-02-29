@@ -30,72 +30,83 @@ quoteSymbolList = []
 
 def generateDefaultOrders() {
   Random rand = new Random()
+  int orderCount = 0
+  int quoteIndex = 0
+  defaultNumberOfUsers.times { count ->
+    accountId = count + 1
+    defaultNumberOfOrders.times {
+      orderCount++
+      float orderFee = 9.99
+      def completionDate = "03/03/2012"
+      def orderType = ""
+      def orderStatus = ""
+      def toggle = rand.nextInt(10)
+      if (toggle <= 5) {
+        orderType = "Buy"
+      }
+      else {
+        orderType = "Sell"
+      }
+      toggle = rand.nextInt(10)
+      if (toggle <= 5) {
+        orderStatus = "Complete"
+      }
+      else {
+        orderStatus = "Progress"
+      }
+      float price = rand.nextInt(200) + Float.parseFloat(String.format("%.2f", rand.nextFloat()))
+      price = Float.parseFloat(String.format("%.2f", price))
+      int quantity = rand.nextInt(5000)
+      if (quantity <= 100) { quantity += 100 }
+      def openDate = "03/03/2012"
+      defaultOrderRow = []
+      defaultOrderRow << orderFee
+      defaultOrderRow << completionDate
+      defaultOrderRow << orderType
+      defaultOrderRow << orderStatus
+      defaultOrderRow << price
+      defaultOrderRow << quantity
+      defaultOrderRow << openDate
+      defaultOrderRow << 1
+      defaultOrderRow << accountId
+      defaultOrderRow << quoteSymbolList[quoteIndex++]
+      defaultOrderRow << orderCount
 
-  defaultNumberOfOrders.times {
-    float orderFee = 9.99
-    def completionDate = "03/03/2012"
-    def orderType = ""
-    def orderStatus = ""
-    def toggle = rand.nextInt(10)
-    if (toggle <= 5) {
-      orderType = "Buy"
-    }
-    else {
-      orderType = "Sell"
-    }
-    toggle = rand.nextInt(10)
-    if (toggle <= 5) {
-      orderStatus = "Complete"
-    }
-    else {
-      orderStatus = "Progress"
-    }
-    float price = rand.nextInt(200) + Float.parseFloat(String.format("%.2f", rand.nextFloat()))
-    price = Float.parseFloat(String.format("%.2f", price))
-    int quantity = rand.nextInt(5000)
-    if (quantity <= 100) { quantity += 100 }
-    def openDate = "03/03/2012"
-    int i = rand.nextInt(100)
-    if (i == 0) { i+= 1 }
-    int holdingId = rand.nextInt(11)
-    if (holdingId == 0) { holdingId += 1 }
-    defaultOrderRow = []
-    defaultOrderRow << orderFee
-    defaultOrderRow << completionDate
-    defaultOrderRow << orderType
-    defaultOrderRow << orderStatus
-    defaultOrderRow << price
-    defaultOrderRow << quantity
-    defaultOrderRow << openDate
-    defaultOrderRow << 1
-    defaultOrderRow << i
-    defaultOrderRow << quoteSymbolList[i]
-    defaultOrderRow << holdingId
+      if (quoteIndex >= defaultNumberOfQuotes) {
+        quoteIndex = 0
+      }
 
-    defaultOrderRowList << defaultOrderRow
+      defaultOrderRowList << defaultOrderRow
+    }
   }
 }
 
 def generateDefaultHoldings() {
   Random rand = new Random()
+  int quoteIndex = 0
 
-  defaultNumberOfHoldings.times {
-    float purchasePrice = rand.nextInt(200) + Float.parseFloat(String.format("%.2f", rand.nextFloat()))
-    purchasePrice = Float.parseFloat(String.format("%.2f", purchasePrice))
-    def purchaseDate = "03/03/2012"
-    int quantity = rand.nextInt(5000)
-    if (quantity <= 100) { quantity += 100 }
-    int i = rand.nextInt(100)
-    if (i == 0) { i+= 1 }
-    defaultHoldingRow = []
-    defaultHoldingRow << purchasePrice
-    defaultHoldingRow << 1
-    defaultHoldingRow << quantity
-    defaultHoldingRow << purchaseDate
-    defaultHoldingRow << i
-    defaultHoldingRow << quoteSymbolList[i]
+  defaultNumberOfUsers.times { count ->
+    accountId = count + 1
+    defaultNumberOfHoldings.times {
+      float purchasePrice = rand.nextInt(200) + Float.parseFloat(String.format("%.2f", rand.nextFloat()))
+      purchasePrice = Float.parseFloat(String.format("%.2f", purchasePrice))
+      def purchaseDate = "03/03/2012"
+      int quantity = rand.nextInt(5000)
+      if (quantity <= 100) { quantity += 100 }
+      defaultHoldingRow = []
+      defaultHoldingRow << purchasePrice
+      defaultHoldingRow << 1
+      defaultHoldingRow << quantity
+      defaultHoldingRow << purchaseDate
+      defaultHoldingRow << accountId
+      defaultHoldingRow << quoteSymbolList[quoteIndex++]
 
-    defaultHoldingRowList << defaultHoldingRow
+      if (quoteIndex >= defaultNumberOfQuotes) {
+        quoteIndex = 0
+      }
+
+      defaultHoldingRowList << defaultHoldingRow
+    }
   }
 }
 
