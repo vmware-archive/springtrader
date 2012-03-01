@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 
+import groovy.sql.Sql;
 import java.util.Random
 
 // Description: Generate default sample rows for the following tables:
@@ -15,7 +16,7 @@ defaultUser = "user"
 defaultQuote = "s"
 
 defaultNumberOfQuotes = 5000
-defaultNumberOfUsers = 1000000
+defaultNumberOfUsers = 100000
 defaultNumberOfOrders = 10
 defaultNumberOfHoldings = 10
 
@@ -23,7 +24,9 @@ sqlFile = "configdb.sql"
 
 quoteSymbolList = []
 
-def generateDefaultOrders(writer) {
+def sql = Sql.newInstance("jdbc:postgresql://localhost:" + "5432/nanotrader", "wkoh", "", "org.postgresql.Driver")
+
+def generateDefaultOrders(sql) {
   Random rand = new Random()
   int orderCount = 0
   int quoteIndex = 0
@@ -42,12 +45,15 @@ def generateDefaultOrders(writer) {
       else {
         orderType = "Sell"
       }
-      toggle = rand.nextInt(10)
-      if (toggle <= 5) {
-        orderStatus = "Complete"
+      toggle = rand.nextInt(5)
+      if (toggle == 0) {
+        orderStatus = "Open"
+      }
+      else if (toggle == 1) {
+        orderStatus = "Closed"
       }
       else {
-        orderStatus = "Progress"
+        orderStatus = "Completed"
       }
       float price = rand.nextInt(200) + Float.parseFloat(String.format("%.2f", rand.nextFloat()))
       price = Float.parseFloat(String.format("%.2f", price))
@@ -84,12 +90,13 @@ def generateDefaultOrders(writer) {
       insertOrderSQL = insertOrderSQL.replace("QUOTE_SYMBOL", defaultOrderRow[9]+"")
       insertOrderSQL = insertOrderSQL.replace("HOLDING_HOLDINGID", defaultOrderRow[10]+"")
 
-      writer.write(insertOrderSQL + "\n")
+      sql.executeInsert insertOrderSQL
+      //writer.write(insertOrderSQL + "\n")
     }
   }
 }
 
-def generateDefaultHoldings(writer) {
+def generateDefaultHoldings(sql) {
   Random rand = new Random()
   int quoteIndex = 0
 
@@ -121,12 +128,13 @@ def generateDefaultHoldings(writer) {
       insertHoldingSQL = insertHoldingSQL.replace("ACCOUNT_ACCOUNTID", defaultHoldingRow[4]+"")
       insertHoldingSQL = insertHoldingSQL.replace("QUOTE_SYMBOL", defaultHoldingRow[5]+"")
 
-      writer.write(insertHoldingSQL + "\n")
+      //writer.write(insertHoldingSQL + "\n")
+      sql.executeInsert insertHoldingSQL
     }
   }
 }
 
-def generateDefaultAccounts(writer) {
+def generateDefaultAccounts(sql) {
   int balance = 1000000
   int count = 0
   Random rand = new Random()
@@ -156,11 +164,12 @@ def generateDefaultAccounts(writer) {
     insertAccountSQL = insertAccountSQL.replace("LOGINCOUNT", defaultAccountRow[6]+"")
     insertAccountSQL = insertAccountSQL.replace("PROFILE_PROFILEID", defaultAccountRow[7]+"")
 
-    writer.write(insertAccountSQL + "\n")
+    //writer.write(insertAccountSQL + "\n")
+    sql.executeInsert insertAccountSQL
   }
 }
 
-def generateDefaultAccountProfiles(writer) {
+def generateDefaultAccountProfiles(sql) {
   long creditCardNumber = 1111222233330000
 
   defaultNumberOfUsers.times { count ->
@@ -185,11 +194,12 @@ def generateDefaultAccountProfiles(writer) {
     insertAccountProfileSQL = insertAccountProfileSQL.replace("CREDITCARD", defaultAccountProfileRow[5]+"")
     insertAccountProfileSQL = insertAccountProfileSQL.replace("FULLNAME", defaultAccountProfileRow[6]+"")
 
-    writer.write(insertAccountProfileSQL + "\n")
+    //writer.write(insertAccountProfileSQL + "\n")
+    sql.executeInsert insertAccountProfileSQL
   }
 }
 
-def generateDefaultStockQuotes(writer) {
+def generateDefaultStockQuotes(sql) {
   int stockPrice = 200
   int stockVolume = 5000000
 
@@ -231,7 +241,8 @@ def generateDefaultStockQuotes(writer) {
     insertQuoteSQL = insertQuoteSQL.replace("SYMBOL", defaultQuoteRow[7]+"")
     insertQuoteSQL = insertQuoteSQL.replace("CHANGE1", defaultQuoteRow[8]+"")
 
-    writer.write(insertQuoteSQL + "\n")
+    //writer.write(insertQuoteSQL + "\n")
+    sql.executeInsert insertQuoteSQL
   }
 }
 
@@ -249,11 +260,11 @@ insertOrderSQLTemplate = "INSERT INTO \"order\" VALUES(ORDERFEE, 'COMPLETIONDATE
 
 writer = new File(sqlFile).newWriter("UTF-8", false)
 
-generateDefaultStockQuotes(writer)
-generateDefaultAccountProfiles(writer)
-generateDefaultAccounts(writer)
-generateDefaultHoldings(writer)
-generateDefaultOrders(writer)
+generateDefaultStockQuotes(sql)
+generateDefaultAccountProfiles(sql)
+generateDefaultAccounts(sql)
+generateDefaultHoldings(sql)
+generateDefaultOrders(sql)
 
 writer.close()
 

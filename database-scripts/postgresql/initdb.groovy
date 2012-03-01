@@ -41,12 +41,15 @@ def generateDefaultOrders(writer) {
       else {
         orderType = "Sell"
       }
-      toggle = rand.nextInt(10)
-      if (toggle <= 5) {
-        orderStatus = "Complete"
+      toggle = rand.nextInt(5)
+      if (toggle == 0) {
+        orderStatus = "Open"
+      }
+      else if (toggle == 1) {
+        orderStatus = "Closed"
       }
       else {
-        orderStatus = "Progress"
+        orderStatus = "Completed"
       }
       float price = rand.nextInt(200) + Float.parseFloat(String.format("%.2f", rand.nextFloat()))
       price = Float.parseFloat(String.format("%.2f", price))
