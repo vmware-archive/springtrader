@@ -31,17 +31,6 @@ RecentTransactionsView = Backbone.View.extend({
 				return this;
 			}
 		});
-PortfolioView = Backbone.View.extend({
-			tagName : 'tr',
-			initialize : function() {
-				this.template = _.template(tpl.get('portfolio'));
-			},
-			render : function(eventName) {
-				$(this.el).html(this.template());
-				return this;
-			}
-		});
-
 PositionsView = Backbone.View.extend({
 			tagName : 'tr',
 			initialize : function() {
@@ -66,9 +55,7 @@ HomeView = Backbone.View.extend({
 				$('#user-statistics', this.el).append(new UserStatisticsView()
 						.render().el);
 				$('#recent-transactions', this.el)
-						.append(new RecentTransactionsView().render().el)
-				$('#portfolio', this.el)
-						.append(new PortfolioView().render().el);
+						.append(new RecentTransactionsView().render().el);
 				$('#positions', this.el)
 						.append(new PositionsView().render().el);
 				return this;

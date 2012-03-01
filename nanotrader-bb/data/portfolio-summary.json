@@ -1,0 +1,10 @@
+{
+	"success" : true,
+	"results" : [{
+				"summary_head" : "Portfolio Summary",
+				"market_value" : 2000,
+				"purchase_basis" : 3000,
+				"total_gain_or_loss" : 100,
+				"number_of_holdings" : 5
+			}]
+}
