@@ -36,6 +36,5 @@ public interface TradingService {
 
 	public abstract Quote findQuoteBySymbol(String symbol);
 
-	
 
 }

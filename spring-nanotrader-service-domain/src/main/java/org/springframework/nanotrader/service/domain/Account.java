@@ -13,7 +13,6 @@ import java.util.Set;
 
 public class Account {
 
-
     private Set<Order> orders;
     private Date creationdate;
     private BigDecimal openbalance;

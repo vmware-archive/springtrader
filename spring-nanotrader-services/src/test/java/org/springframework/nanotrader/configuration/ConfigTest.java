@@ -15,6 +15,7 @@ import org.springsource.nanotrader.configuration.ServiceConfig;
  *  @author Brian Dussault 
  *  @author
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { AppConfig.class, ServiceConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class ConfigTest {

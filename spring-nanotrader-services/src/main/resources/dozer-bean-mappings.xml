@@ -35,7 +35,6 @@
 		</field-exclude>
 	</mapping>
 	<!-- End Account profile mappings -->
-	
 	<mapping map-id="holding">
 		<class-a>org.springframework.nanotrader.domain.Holding</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.Holding

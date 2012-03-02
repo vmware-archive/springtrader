@@ -24,7 +24,6 @@ import org.springsource.nanotrader.configuration.WebConfig;
  *  @author
  */
 
-
 public class GlobalExceptionHandlerTest {
 	private static MockMvc mockMvc;
 	

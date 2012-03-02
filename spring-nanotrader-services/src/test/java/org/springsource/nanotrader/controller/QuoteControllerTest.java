@@ -54,6 +54,4 @@ public class QuoteControllerTest {
 				.andExpect(status().isNotFound())
 				.andDo(print());
 	}
-
-	
 }

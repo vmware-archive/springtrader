@@ -7,7 +7,6 @@ import java.util.Date;
  *  @author Brian Dussault 
  *  @author
  */
-
 public class Order {
 
 	private Integer orderid;

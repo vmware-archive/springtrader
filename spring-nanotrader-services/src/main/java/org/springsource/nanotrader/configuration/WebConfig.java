@@ -28,6 +28,7 @@ import org.springsource.nanotrader.exception.GlobalExceptionHandler;
  *  @author Brian Dussault 
  *  @author
  */
+
 @Configuration
 @ComponentScan(basePackages = "org.springsource.nanotrader")
 @ContextConfiguration(classes = { AppConfig.class, ServiceConfig.class }, loader = AnnotationConfigContextLoader.class)
