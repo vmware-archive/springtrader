@@ -3,6 +3,39 @@ body {
 	border: 0;
 	margin: 0;
 	min-width: 990px;
+}
+
+#vmware-bg {
+	background: url('../img/bg-wrapper.gif') repeat-x;
+}
+
+#headerLogo {
+	background: url('../img/ntlogo.jpg') no-repeat;
+	width: 153px;
+	height: 23px;
+	margin-left: 35px;
+	margin-top: 20px;
+	cursor: pointer;
+	float: left;
+}
+
+#headerfooter {
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+
+	position: relative;
+	z-index: 2;
+	height: 60px;
+	background: transparenturl(../images/1.0/header_background.jpg) repeat-x scroll
+}
+
+
+body {
+	font: 76% Arial, Helvetica, sans-serif;
+	border: 0;
+	margin: 0;
+	min-width: 990px;
 	
 	
 }
@@ -31,23 +64,7 @@ tr a:visited, a:hover, a {
 	margin-right: auto;
 	padding: 0px;
 }
-#vmware-bg {
-	background: url('../images/1.0/bg-wrapper.gif') repeat-x;
-}
-/* HEADER */
-#headerLogo {
-	background: url('../images/1.0/ntlogo.jpg') no-repeat;
-	width: 153px;
-	height: 23px;
-	margin-left: 35px;
-	margin-top: 20px;
-	cursor: pointer;
-	float: left;
-}
-#headerLinks ul li a {
-	color: #88C7FC;
-	text-decoration: none;
-}
+
 fieldset {
 	border: 0;
 	margin: 6px 0 0;
@@ -189,17 +206,7 @@ fieldset {
 	float: right;
 	margin: 10px 0px 0px 10px;
 }
-#header {
-	border-bottom-width: 3px;
-	border-bottom-style: solid;
-	border-bottom-color: #999999;
-}
-#header, #footer {
-	position: relative;
-	z-index: 2;
-	height: 60px;
-	background: transparenturl(../images/1.0/header_background.jpg) repeat-x scroll
-}
+
 #marketWatch {
 	position: relative;
 	height: 80px;
@@ -307,6 +314,7 @@ fieldset {
 	font-weight: bold;
 	padding: 10px 2px 5px;
 	font-size: 15px;
+	width: 100%;
 }
 #quote {
 	position: relative;
@@ -366,15 +374,15 @@ fieldset {
 	color: #5d5350;
 	text-decoration: none;
 	font-weight: bold;
-	background: url(../images/1.0/tabbed-menu-left.gif) no-repeat left top;
+	background: url(../img/tabbed-menu-left.gif) no-repeat left top;
 }
 #Menu li a:hover {
-	background: url(../images/1.0/tabbed-menu-left.gif) no-repeat left bottom;
+	background: url(../img/tabbed-menu-left.gif) no-repeat left bottom;
 }
 #Menu li a span {
 	padding: 7px 10px 6px 0;
-	background: url(../images/1.0/tabbed-menu-right.gif) no-repeat right top;
+	background: url(../img/tabbed-menu-right.gif) no-repeat right top;
 }
 #Menu li a:hover span {
-	background: url(../images/1.0/tabbed-menu-right.gif) no-repeat right bottom;
+	background: url(../img/tabbed-menu-right.gif) no-repeat right bottom;
 }

@@ -7,137 +7,216 @@
 		<link rel="stylesheet" type="text/css" href="css/nt-1.0.css" />
 	</head>
 	<body>
-        <div id="outer">
-            <div id="vmware-bg">&nbsp;</div>
-            <div id="header">
-                <div id="headerLogo" title="Home" onclick="location.href='home.html'">
-                    &nbsp;
-                </div>
-            </div>
-            <div id="Menu">
-                <ul>
-                    <li>
-                        <a href="home.html"><span>Home</span></a>
-                    </li>
-                    <li>
-                        <a href="portfolio.html"><span>Portfolio</span></a>
-                    </li>
-                    <li>
-                        <a href="trade.html"><span>Trade</span></a>
-                    </li>
-                    <li>
-                        <a href="profile.html"><span>Profile</span></a>
-                    </li>
-                    <li class="last">
-                        <a href="help.html"><span>Help</span></a>
-                    </li>
-                </ul>
-            </div>
-            <div id="marketWatch">
-                <div id="streamer" title="Streamer">
-                    &nbsp;
-                </div>
-                <div id="streamerContent">
-                    <table style="float: left;" width="200" border="0">
-                        <tr>
-                            <td>NanoTrader Index</td>
-                            <td>12345.99</td>
-                        </tr>
-                        <tr>
-                            <td>Volume</td>
-                            <td>120,000</td>
-                        </tr>
-                        <tr>
-                            <td>Change</td>
-                            <td>+55.12</td>
-                        </tr>
-                    </table>
-                    <table style="float: left;" id="winners" width="200" border="0">
-                        <tr>
-                            <td>AAPL</td>
-                            <td>455.10</td>
-                            <td>+10.12</td>
-                        </tr>
-                        <tr>
-                            <td>VMW</td>
-                            <td>102.10</td>
-                            <td>+7.12</td>
-                        </tr>
-                        <tr>
-                            <td>GOOG</td>
-                            <td>610.10</td>
-                            <td>+15.12</td>
-                        </tr>
-                    </table>
-                    <table style="float: left;" id="losers" width="200" border="0" >
-                        <tr>
-                            <td>HP</td>
-                            <td>22.10</td>
-                            <td>-3.12</td>
-                        </tr>
-                        <tr>
-                            <td>BB</td>
-                            <td>35.10</td>
-                            <td>-5.12</td>
-                        </tr>
-                        <tr>
-                            <td>ORCL</td>
-                            <td>10.10</td>
-                            <td>-1.12</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="summary">
-                <table width="100%" cellspacing="0" cellpadding="1" border="0">
-                    <tbody>
-                        <tr>
-                            <td bgcolor="#999999">
-                            <table bgcolor="#ECECEC" border="0" cellpadding="0" cellspacing="6" width="100%">
-                                <tbody>
-                                    <tr>
-                                        <td nowrap="true" align="left" valign="top" width="170"><b>Account Summary</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4" align="center" bgcolor="#999999" height="1" nowrap="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td nowrap="true" align="center" valign="top" width="170">Current Balance</td>
-                                        <td width="90" valign="top" nowrap="true" align="right"><b>$2,718.33</b>
-                                        <br>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4" align="center" bgcolor="#999999" height="1" nowrap="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td nowrap="true" align="center" valign="top" width="170">Opening Balance</td>
-                                        <td width="90" valign="top" nowrap="true" align="right"><b>$2,528.33</b>
-                                        <br>
-                                    </tr>
-                                </tbody>
-                            </table></td>
-                        </tr>
-                        <tr>
-                            <td bgcolor="#999999">
-                            <table bgcolor="#ECECEC" border="0" cellpadding="0" cellspacing="6" width="100%">
-                                <tbody>
-                                    <tr>
-                                        <td nowrap="true" align="left" valign="top" width="170"><a href="/recent_txn.html">Recent Transactions</a></td>
-                                        </br>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4" align="center" bgcolor="#999999" height="1" nowrap="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td nowrap="true" align="left" valign="top" width="170">Current Gain/Loss</td>
-                                        <td width="90" valign="top" nowrap="true" align="right"><b></b>
-                                        <br>
-                                    </tr>
-                                </tbody>
-                            </table></td>
-                        </tr>
-                    </tbody>
+		<div id="outer">
+			<div id="vmware-bg">
+				&nbsp;
+			</div>
+			<div id="header">
+				<div id="headerLogo" title="Home" onclick="location.href='home.html'">
+					&nbsp;
+				</div>
+			</div>
+			<div id="Menu">
+				<ul>
+					<li>
+						<a href="home.html"><span>Home</span></a>
+					</li>
+					<li>
+						<a href="portfolio.html"><span>Portfolio</span></a>
+					</li>
+					<li>
+						<a href="trade.html"><span>Trade</span></a>
+					</li>
+					<li>
+						<a href="profile.html"><span>Profile</span></a>
+					</li>
+					<li class="last">
+						<a href="help.html"><span>Help</span></a>
+					</li>
+				</ul>
+			</div>
+			<div id="marketWatch">
+				<div id="streamer" title="Streamer">
+					&nbsp;
+				</div>
+				<div id="streamerContent">
+					<table style="float: left;" width="200" border="0">
+						<tr>
+							<td>NanoTrader Index</td>
+							<td>12345.99</td>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>120,000</td>
+						</tr>
+						<tr>
+							<td>Change</td>
+							<td>+55.12</td>
+						</tr>
+					</table>
+					<table style="float: left;" id="winners" width="200" border="0">
+						<tr>
+							<td>AAPL</td>
+							<td>455.10</td>
+							<td>+10.12</td>
+						</tr>
+						<tr>
+							<td>VMW</td>
+							<td>102.10</td>
+							<td>+7.12</td>
+						</tr>
+						<tr>
+							<td>GOOG</td>
+							<td>610.10</td>
+							<td>+15.12</td>
+						</tr>
+					</table>
+					<table style="float: left;" id="losers" width="200" border="0" >
+						<tr>
+							<td>HP</td>
+							<td>22.10</td>
+							<td>-3.12</td>
+						</tr>
+						<tr>
+							<td>BB</td>
+							<td>35.10</td>
+							<td>-5.12</td>
+						</tr>
+						<tr>
+							<td>ORCL</td>
+							<td>10.10</td>
+							<td>-1.12</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+<table width="700px" border="0">
+<tr>
+<td width="50%">            
+			<div class="summary">
+				<table width="100%" cellspacing="0" cellpadding="1" border="0" >
+					<tbody>
+						<tr>
+							<td>
+							<table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="1" width="100%">
+								<tbody>
+									<tr>
+										<td colspan="4" bgcolor="#FFFFFF" nowrap="true" align="left" valign="top" height="20" width="170">
+										<div id="summary-head">
+											Account Summary
+										</div></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="center" bgcolor="#84B96D" height="1" nowrap="true"></td>
+									</tr>
+									<tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Current Balance</b></td>
+										<td width="90" valign="top" nowrap="true" align="right" style="padding-left: 30px">$2,718.33<br>
+									</tr>
+									<tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Opening Balance</b></td>
+										<td width="90" valign="top" nowrap="true" align="right" style="padding-left: 30px">$2,528.33</td>
+										<br>
+									</tr>
+									<tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Cash Balance</b></td>
+										<td width="90" valign="top" nowrap="true" align="right" style="padding-left: 30px">$3,528.33</td>
+										<br>
+									</tr>
+									<tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Total of holdings</b></td>
+										<td width="90" valign="top" nowrap="true" align="right" style="padding-left: 30px">$1238.12
+										<br>
+									</tr>
+									<tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Number of holdings</b></td>
+										<td width="90" valign="top" nowrap="true" align="right" style="padding-left: 10px">35
+										<br>
+									</tr>                                    
+										<tr>
+										<td colspan="2" align="center" bgcolor="#84B96D" height="1" nowrap="true"></td>
+									</tr>
+ 									<tr>
+										<td colspan="1" bgcolor="#FFFFFF" nowrap="true" align="left" valign="top" height="20" width="170">
+                                     </td>
+                                     </tr>
+                                     <tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Current Gain/Loss</b></td>
+										<td width="90" valign="top" nowrap="true" align="right" style="padding-left: 30px">$1238.12
+										</td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td>
+							<table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="6" width="100%">
+								<tbody>
+									<tr>
+										<td colspan="2" bgcolor="#FFFFFF" nowrap="true" align="left" valign="top" height="20" width="170">
+										<div id="summary-head">
+											User Statistics
+										</div></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="center" bgcolor="#84B96D" height="1" nowrap="true"></td>
+									</tr>
+									<tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Account ID</b></td>
+										<td width="90" valign="top" nowrap="true" align="right">1&nbsp;&nbsp;
+										<br>
+									</tr>
+									<tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Account Creation Date</b></td>
+										<td width="90" valign="top" nowrap="true" align="right">2/7/2012&nbsp;&nbsp;
+										<br>
+									</tr>
+									<tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Total Logins</b></td>
+										<td width="90" valign="top" nowrap="true" align="right">10&nbsp;&nbsp;
+										<br>
+									</tr>
+									<tr>
+										<td nowrap="true" align="left" valign="top" width="170" style="padding-left: 25px"><b>Session Created Date</b></td>
+										<td width="90" valign="top" nowrap="true" align="right">2/8/2012&nbsp;&nbsp;
+										<br>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+						<tr>
+							<td>
+							<table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="6" width="100%">
+								<tbody>
+									<tr>
+										<td colspan="1" bgcolor="#FFFFFF" nowrap="true" align="left" valign="top" height="20" width="170">
+										<div id="summary-head">
+											<a href="/order-confirm.html"> Recent Transactions</a>
+										</div></td>
+									</tr>
+								</tbody>
+							</table></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+</td>
+<td width="50%" align="left">                
+                <table >
+                <tr>
+                <td width="317" style="padding-left: 32px" >
+                <img src="images/1.0/portfolio.png" />
+                </td>
+                </tr>
+                <tr>
+                <td style="padding-top: 32px">
+                <img src="images/1.0/positions.png" />
+                </td>
+				</tr>                
                 </table>
-          	</div>
+</td>
+</tr>
+</table>
 	</body>
 </html>

@@ -1,0 +1,22 @@
+{
+	"success" : true,
+	"results" : [{
+				"purchase_date" : 1000,
+				"symbol" : "VMW",
+				"quantity" : 100,
+				"purchase_price" : 7,
+				"current_price" : 5,
+				"purchase_basis" : 500,
+				"market_value" : 500,
+				"total_gain_or_loss" : 50
+			}, {
+				"purchase_date" : 1000,
+				"symbol" : "AAPL",
+				"quantity" : 100,
+				"purchase_price" : 7,
+				"current_price" : 5,
+				"purchase_basis" : 500,
+				"market_value" : 500,
+				"total_gain_or_loss" : 50
+			}]
+}
