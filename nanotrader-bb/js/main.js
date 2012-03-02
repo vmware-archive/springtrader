@@ -3,6 +3,7 @@ var AppRouter = Backbone.Router.extend({
 			routes : {
 				"" : "home",
 				"/accountprofile/:id" : "accountprofile",
+                "/login"             : "login",
 				"/portfolio" : "portfolio"
 			},
 
@@ -10,7 +11,6 @@ var AppRouter = Backbone.Router.extend({
 				this.headerView = new HeaderView();
 				$('#header').html(this.headerView.render().el);
 			},
-
 			accountprofile : function(id) {
 				if (!this.accountProfileView) {
 					this.accountProfileView = new AccountProfileView();
@@ -24,6 +24,12 @@ var AppRouter = Backbone.Router.extend({
 				$('#tabs').html(this.tabView.el);
 
 			},
+    login : function() {
+        this.loginView = new LoginView();
+        this.loginView.render();
+        $('#content').html(this.loginView.el);
+    },
+    
 
 			home : function() {
 				this.homeView = new HomeView();
@@ -50,9 +56,8 @@ var AppRouter = Backbone.Router.extend({
 
 tpl.loadTemplates(['home', 'account-summary', 'user-statistics',
 				'recent-transactions', 'positions', 'portfolio',
-				'portfolio-summary', 'holdinglist', 'holding',
-				'accountprofile', 'tabs', 'header', 'portfolio-chart'],
-		function() {
+				'portfolio-summary', 'holdinglist', 'holding', 'accountprofile', 'tabs',
+				'header', 'login', 'portfolio-chart'], function() {
 			app = new AppRouter();
 			Backbone.history.start();
 		});
