@@ -79,15 +79,15 @@ public class HoldingIntegrationTest {
         Assert.assertNotNull("Expected 'Holding' identifier to no longer be null", obj.getHoldingid());
     }
 
-	@Test
-    public void testDelete() {
-        Holding obj = dod.getRandomHolding();
-        Assert.assertNotNull("Data on demand for 'Holding' failed to initialize correctly", obj);
-        Integer id = obj.getHoldingid();
-        Assert.assertNotNull("Data on demand for 'Holding' failed to provide an identifier", id);
-        obj = holdingRepository.findOne(id);
-        holdingRepository.delete(obj);
-        holdingRepository.flush();
-        Assert.assertNull("Failed to remove 'Holding' with identifier '" + id + "'", holdingRepository.findOne(id));
-    }
+//	@Test
+//    public void testDelete() {
+//        Holding obj = dod.getRandomHolding();
+//        Assert.assertNotNull("Data on demand for 'Holding' failed to initialize correctly", obj);
+//        Integer id = obj.getHoldingid();
+//        Assert.assertNotNull("Data on demand for 'Holding' failed to provide an identifier", id);
+//        obj = holdingRepository.findOne(id);
+//        holdingRepository.delete(obj);
+//        holdingRepository.flush();
+//        Assert.assertNull("Failed to remove 'Holding' with identifier '" + id + "'", holdingRepository.findOne(id));
+//    }
 }
