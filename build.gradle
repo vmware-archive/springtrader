@@ -188,7 +188,6 @@ project('spring-nanotrader-services') {
 		compile project(":spring-nanotrader-service-domain")
 		compile "org.springframework:spring-webmvc:$springVersion"
 		compile ("javax.servlet:servlet-api:$servletApiVersion") { provided = true }
-		compile "org.springframework:spring-test-mvc:1.0.0.BUILD-SNAPSHOT"
 		compile "com.jayway.jsonpath:json-path:0.5.5"
 		compile "cglib:cglib-nodep:$cglibVersion"
 		compile "org.codehaus.jackson:jackson-mapper-asl:1.8.5"
@@ -199,7 +198,9 @@ project('spring-nanotrader-services') {
 		compile "org.hibernate:hibernate-core:3.6.8.Final"
 		compile "org.hibernate:hibernate-entitymanager:3.6.8.Final"
 		compile "postgresql:postgresql:9.0-801.jdbc3"
-
+		compile "org.aspectj:aspectjrt:$aspectjVersion"
+		compile "org.springframework:spring-aspects:$springVersion"
+		testCompile "org.springframework:spring-test-mvc:1.0.0.BUILD-SNAPSHOT"
 			
 		
 	}
