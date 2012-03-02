@@ -17,6 +17,7 @@ import org.springframework.nanotrader.repository.AccountRepository;
 import org.springframework.nanotrader.service.AccountService;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @Configurable
 public class AccountDataOnDemand {

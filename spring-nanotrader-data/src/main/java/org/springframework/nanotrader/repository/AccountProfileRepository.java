@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccountProfileRepository extends JpaSpecificationExecutor<Accountprofile>, JpaRepository<Accountprofile, Integer> {
+	
+	public Accountprofile findByUseridAndPasswd(String userId, String passwd);
+	
 }

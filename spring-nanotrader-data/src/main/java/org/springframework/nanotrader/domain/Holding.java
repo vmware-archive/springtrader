@@ -1,8 +1,10 @@
 package org.springframework.nanotrader.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,14 +16,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(schema = "public",name = "holding")
-public class Holding {
-
+public class Holding implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="HOLDING_SEQ")
     @SequenceGenerator(name="HOLDING_SEQ", sequenceName="HOLDING_SEQUENCE")
@@ -105,7 +106,11 @@ public class Holding {
         this.quoteSymbol = quoteSymbol;
     }
 
+	@Override
 	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+		return "Holding [holdingid=" + holdingid + ", purchaseprice=" + purchaseprice + ", quantity=" + quantity
+				+ ", purchasedate=" + purchasedate + ", quoteSymbol=" + quoteSymbol + "]";
+	}
+
+	
 }

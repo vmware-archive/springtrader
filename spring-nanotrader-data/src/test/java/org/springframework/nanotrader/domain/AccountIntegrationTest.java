@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AccountIntegrationTest {
 
+	
     @Test
     public void testMarkerMethod() {
     }

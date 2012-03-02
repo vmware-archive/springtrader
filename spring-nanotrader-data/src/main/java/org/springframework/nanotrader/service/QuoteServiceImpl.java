@@ -15,6 +15,7 @@ public class QuoteServiceImpl implements QuoteService {
 	@Autowired
     QuoteRepository quoteRepository;
 
+	
 	public long countAllQuotes() {
         return quoteRepository.count();
     }

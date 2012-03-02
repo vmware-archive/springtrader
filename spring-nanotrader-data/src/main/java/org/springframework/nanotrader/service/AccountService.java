@@ -7,7 +7,6 @@ public interface AccountService {
 
 	public abstract long countAllAccounts();
 
-
 	public abstract void deleteAccount(Account account);
 
 
@@ -24,5 +23,8 @@ public interface AccountService {
 
 
 	public abstract Account updateAccount(Account account);
+	
+	
+	public abstract Account findByProfileProfileid(Account account);
 
 }

@@ -10,7 +10,6 @@ public interface QuoteService {
 
 	public abstract void deleteQuote(Quote quote);
 
-
 	public abstract Quote findQuote(Integer id);
 
 

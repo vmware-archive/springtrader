@@ -17,6 +17,7 @@ import org.springframework.nanotrader.repository.OrderRepository;
 import org.springframework.nanotrader.service.OrderService;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @Configurable
 public class OrderDataOnDemand {
@@ -114,7 +115,9 @@ public class OrderDataOnDemand {
         if (quoteSymbol.length() > 250) {
             quoteSymbol = quoteSymbol.substring(0, 250);
         }
-        obj.setQuoteSymbol(quoteSymbol);
+        Quote quote = new Quote();
+        quote.setSymbol(quoteSymbol);
+        obj.setQuote(quote);
     }
 
 	public Order getSpecificOrder(int index) {

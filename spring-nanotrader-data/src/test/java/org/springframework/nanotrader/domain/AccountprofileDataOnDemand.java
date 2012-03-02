@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.nanotrader.repository.AccountProfileRepository;
 import org.springframework.stereotype.Component;
 
+
 @Configurable
 @Component
 public class AccountprofileDataOnDemand {
@@ -19,7 +20,7 @@ public class AccountprofileDataOnDemand {
 	private Random rnd = new SecureRandom();
 
 	private List<Accountprofile> data;
-
+	
 	@Autowired
     AccountProfileRepository accountProfileRepository;
 

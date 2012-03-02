@@ -14,7 +14,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
     OrderRepository orderRepository;
-
+	
 	public long countAllOrders() {
         return orderRepository.count();
     }

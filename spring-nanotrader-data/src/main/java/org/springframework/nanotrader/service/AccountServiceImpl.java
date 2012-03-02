@@ -14,7 +14,6 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
     AccountRepository accountRepository;
-
 	public long countAllAccounts() {
         return accountRepository.count();
     }
@@ -42,4 +41,14 @@ public class AccountServiceImpl implements AccountService {
 	public Account updateAccount(Account account) {
         return accountRepository.save(account);
     }
+
+	@Override
+	public Account findByProfileProfileid(Account account) {
+		return accountRepository.findByProfileProfileid(account);
+		
+	}
+
+	
+
+	
 }

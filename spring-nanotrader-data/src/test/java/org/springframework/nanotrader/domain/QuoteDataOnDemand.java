@@ -14,6 +14,7 @@ import org.springframework.nanotrader.repository.QuoteRepository;
 import org.springframework.nanotrader.service.QuoteService;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @Configurable
 public class QuoteDataOnDemand {

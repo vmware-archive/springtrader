@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface QuoteRepository extends JpaSpecificationExecutor<Quote>, JpaRepository<Quote, Integer> {
+	
+	public Quote findBySymbol(String  symbol);
+	
 }

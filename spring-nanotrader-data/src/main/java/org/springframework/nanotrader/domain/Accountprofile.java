@@ -1,6 +1,8 @@
 package org.springframework.nanotrader.domain;
 
+import java.io.Serializable;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,17 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(schema = "public",name = "accountprofile")
-public class Accountprofile {
-
-	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
+public class Accountprofile implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCOUNTPROFILE_SEQ")
     @SequenceGenerator(name="ACCOUNTPROFILE_SEQ", sequenceName="ACCOUNTPROFILE_SEQUENCE")
@@ -112,4 +108,9 @@ public class Accountprofile {
 	public void setFullname(String fullname) {
         this.fullname = fullname;
     }
+	@Override
+	public String toString() {
+		return "Accountprofile [profileid=" + profileid + ", address=" + address + ", passwd=" + passwd + ", userid="
+				+ userid + ", email=" + email + ", creditcard=" + creditcard + ", fullname=" + fullname + "]";
+	}
 }
