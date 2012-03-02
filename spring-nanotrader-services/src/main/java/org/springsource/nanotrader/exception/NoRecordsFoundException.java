@@ -10,4 +10,5 @@ package org.springsource.nanotrader.exception;
 @SuppressWarnings("serial")
 public class NoRecordsFoundException extends Exception {
 
+	
 }

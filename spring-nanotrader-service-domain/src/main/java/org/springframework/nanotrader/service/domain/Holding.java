@@ -79,7 +79,6 @@ public class Holding {
         this.holdingid = id;
     }
 
-
 	@Override
 	public String toString() {
 		return "Holding [holdingid=" + holdingid + ", orders=" + orders + ", purchaseprice=" + purchaseprice

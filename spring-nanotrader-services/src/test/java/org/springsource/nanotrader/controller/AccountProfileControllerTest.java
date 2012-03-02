@@ -70,7 +70,6 @@ public class AccountProfileControllerTest {
 				.andDo(print());
 	}
 	
-	
 	@Test
 	public void updateAccountProfileJson() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("update-account-profile.json").getFile());

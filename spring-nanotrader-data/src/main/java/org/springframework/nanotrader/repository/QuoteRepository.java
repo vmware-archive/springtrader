@@ -10,4 +10,5 @@ public interface QuoteRepository extends JpaSpecificationExecutor<Quote>, JpaRep
 	
 	public Quote findBySymbol(String  symbol);
 	
+	
 }

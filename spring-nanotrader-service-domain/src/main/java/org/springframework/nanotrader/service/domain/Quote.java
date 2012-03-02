@@ -100,4 +100,5 @@ public class Quote {
 	public void setQuoteid(Integer id) {
         this.quoteid = id;
     }
+	
 }

@@ -10,4 +10,5 @@ public interface AccountRepository extends JpaSpecificationExecutor<Account>, Jp
 	
 	public Account findByProfileProfileid(Account account);
 
+
 }

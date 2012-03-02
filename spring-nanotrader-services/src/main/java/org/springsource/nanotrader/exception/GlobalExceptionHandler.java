@@ -38,7 +38,6 @@ public class GlobalExceptionHandler {
 	public @ResponseBody ServiceException handle(Exception exception) {
 		ServiceException serviceException = new ServiceException(FAILURE_MESSSAGE + exception.getMessage() );
 		return serviceException;
-	}
-	
+	}	
 	
 }

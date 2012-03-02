@@ -96,8 +96,6 @@ public class HoldingControllerTest {
 	}
 
 	
-
-	
 	@Test
 	public void updateHoldingJson() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("update-holding.json").getFile());

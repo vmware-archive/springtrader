@@ -12,4 +12,5 @@ public interface HoldingRepository extends JpaSpecificationExecutor<Holding>, Jp
 	
 	public List<Holding> findByAccountAccountid(Integer accountId);
 	
+	
 }
