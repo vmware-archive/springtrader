@@ -8,7 +8,6 @@ import java.util.Date;
  *  @author
  */
 
-
 public class Order {
 
 	private Integer orderid;

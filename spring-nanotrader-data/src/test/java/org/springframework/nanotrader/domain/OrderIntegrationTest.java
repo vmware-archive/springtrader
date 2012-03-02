@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Configurable
 public class OrderIntegrationTest {
 
+	
     @Test
     public void testMarkerMethod() {
     }

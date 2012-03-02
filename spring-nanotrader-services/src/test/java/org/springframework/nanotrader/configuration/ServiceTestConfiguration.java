@@ -27,7 +27,6 @@ import org.springframework.nanotrader.service.TradingServiceImpl;
  *  @author Brian Dussault 
  *  @author
  */
-
 @Configuration
 @Profile("test")
 public class ServiceTestConfiguration  {

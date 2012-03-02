@@ -11,18 +11,7 @@ import java.util.Set;
  */
 
 public class Holding {
-
-
     private Integer holdingid;
-
-	public Integer getHoldingid() {
-        return this.holdingid;
-    }
-
-	public void setHoldingid(Integer id) {
-        this.holdingid = id;
-    }
-
 
     private Set<Order> orders;
 
@@ -80,6 +69,14 @@ public class Holding {
 
 	public void setQuoteSymbol(String quoteSymbol) {
         this.quoteSymbol = quoteSymbol;
+    }
+
+	public Integer getHoldingid() {
+        return this.holdingid;
+    }
+
+	public void setHoldingid(Integer id) {
+        this.holdingid = id;
     }
 
 

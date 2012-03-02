@@ -7,7 +7,6 @@ public interface AccountService {
 
 	public abstract long countAllAccounts();
 
-
 	public abstract void deleteAccount(Account account);
 
 

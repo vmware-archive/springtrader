@@ -7,4 +7,5 @@
 
 	<repositories base-package="org.springframework.nanotrader" />
 
+
 </beans:beans>

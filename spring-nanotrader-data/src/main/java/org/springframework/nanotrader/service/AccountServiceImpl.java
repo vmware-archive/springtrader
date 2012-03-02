@@ -14,7 +14,6 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
     AccountRepository accountRepository;
-
 	public long countAllAccounts() {
         return accountRepository.count();
     }

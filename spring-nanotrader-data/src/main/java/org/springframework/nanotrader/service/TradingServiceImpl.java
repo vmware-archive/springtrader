@@ -289,4 +289,5 @@ public class TradingServiceImpl implements TradingService {
 	public Quote findQuoteBySymbol(String symbol) {
 		return quoteRepository.findBySymbol(symbol);
 	}
+	
 }

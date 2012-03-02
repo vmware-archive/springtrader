@@ -33,7 +33,6 @@ public class AccountProfileController {
 	@Resource
 	private TradingService tradingService;
 
-	
 	@Resource
 	private Mapper mapper;
 

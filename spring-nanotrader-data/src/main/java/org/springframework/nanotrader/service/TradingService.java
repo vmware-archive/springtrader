@@ -7,6 +7,7 @@ import org.springframework.nanotrader.domain.Holding;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.Quote;
 
+
 public interface TradingService {
 
 	public abstract Accountprofile findAccountProfile(Integer id);

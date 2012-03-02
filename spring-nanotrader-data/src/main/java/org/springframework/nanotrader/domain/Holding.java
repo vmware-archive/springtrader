@@ -23,7 +23,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(schema = "public",name = "holding")
 public class Holding implements Serializable {
-
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="HOLDING_SEQ")
     @SequenceGenerator(name="HOLDING_SEQ", sequenceName="HOLDING_SEQUENCE")

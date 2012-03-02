@@ -13,4 +13,5 @@
             <!-- property name="hibernate.validator.autoregister_listeners" value="false" /-->
         </properties>
     </persistence-unit>
+    
 </persistence>

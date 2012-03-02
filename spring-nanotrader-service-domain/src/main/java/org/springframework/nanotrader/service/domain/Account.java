@@ -20,8 +20,6 @@ public class Account {
     private Integer logoutcount;
     private BigDecimal balance;
     private Date lastlogin;
-
-
     private Integer logincount;
 
 	public Set<Order> getOrders() {

@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HoldingRepository extends JpaSpecificationExecutor<Holding>, JpaRepository<Holding, Integer> {
+	
 	public List<Holding> findByAccountAccountid(Integer accountId);
+	
 }

@@ -13,30 +13,17 @@ public class Quote {
 
     private Integer quoteid;
 
-	public Integer getQuoteid() {
-        return this.quoteid;
-    }
-
-	public void setQuoteid(Integer id) {
-        this.quoteid = id;
-    }
-
-
     private BigDecimal low;
 
     private BigDecimal open1;
 
     private BigDecimal volume;
 
-
     private BigDecimal price;
-
 
     private BigDecimal high;
 
-
     private String companyname;
-
 
     private String symbol;
 
@@ -106,5 +93,11 @@ public class Quote {
 	public void setChange1(BigDecimal change1) {
         this.change1 = change1;
     }
-	
+	public Integer getQuoteid() {
+        return this.quoteid;
+    }
+
+	public void setQuoteid(Integer id) {
+        this.quoteid = id;
+    }
 }

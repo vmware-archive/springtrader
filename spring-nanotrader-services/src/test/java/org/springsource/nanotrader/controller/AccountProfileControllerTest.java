@@ -52,8 +52,6 @@ public class AccountProfileControllerTest {
 				.andDo(print());
 	}
 	
-
-
 	@Test
 	public void createAccountProfileJson() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("create-account-profile.json").getFile());

@@ -28,7 +28,6 @@ import org.springsource.nanotrader.exception.NoRecordsFoundException;
  */
 
 @Controller
-
 public class HoldingController {
 	private static Logger log = LoggerFactory.getLogger(HoldingController.class);
 	private static String HOLDING_MAPPING = "holding";

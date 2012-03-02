@@ -26,11 +26,8 @@ import org.springsource.nanotrader.configuration.WebConfig;
 
 
 public class GlobalExceptionHandlerTest {
-
-
 	private static MockMvc mockMvc;
 	
-
 	@BeforeClass 
 	public static void setup() {
 		String warRootDir = "src/webapps";

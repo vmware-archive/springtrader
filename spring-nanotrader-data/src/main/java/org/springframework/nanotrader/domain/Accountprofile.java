@@ -17,7 +17,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(schema = "public",name = "accountprofile")
 public class Accountprofile implements Serializable {
-
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCOUNTPROFILE_SEQ")
     @SequenceGenerator(name="ACCOUNTPROFILE_SEQ", sequenceName="ACCOUNTPROFILE_SEQUENCE")

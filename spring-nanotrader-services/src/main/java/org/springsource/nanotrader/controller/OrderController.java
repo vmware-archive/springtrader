@@ -27,7 +27,6 @@ import org.springsource.nanotrader.exception.NoRecordsFoundException;
  *  @author Brian Dussault 
  *  @author
  */
-
 @Controller
 public class OrderController {
 	private static Logger log = LoggerFactory.getLogger(OrderController.class);

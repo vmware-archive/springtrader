@@ -17,6 +17,7 @@ import org.springframework.nanotrader.repository.OrderRepository;
 import org.springframework.nanotrader.service.OrderService;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @Configurable
 public class OrderDataOnDemand {

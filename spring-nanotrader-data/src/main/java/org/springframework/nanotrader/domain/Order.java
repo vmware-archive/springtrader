@@ -24,7 +24,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(schema = "public",name = "order")
 
 public class Order implements Serializable {
-
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ORDER_SEQ")
     @SequenceGenerator(name="ORDER_SEQ", sequenceName="ORDER_SEQUENCE")

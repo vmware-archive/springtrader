@@ -20,7 +20,6 @@ import org.springsource.nanotrader.exception.NoRecordsFoundException;
  *  @author Brian Dussault 
  *  @author
  */
-
 @Controller
 @RequestMapping("/quote/*")
 public class QuoteController {

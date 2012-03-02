@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.nanotrader.domain.Holding;
 
+
 public class FinancialUtils {
 
 	public final static int ROUND = BigDecimal.ROUND_HALF_UP;

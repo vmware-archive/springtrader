@@ -106,4 +106,5 @@ public class HoldingControllerTest {
 						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andDo(print());
 	}
 
+	
 }

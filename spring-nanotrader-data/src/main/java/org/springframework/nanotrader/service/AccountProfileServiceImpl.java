@@ -3,10 +3,8 @@ package org.springframework.nanotrader.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.repository.AccountProfileRepository;
-import org.springframework.nanotrader.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

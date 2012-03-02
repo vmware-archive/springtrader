@@ -10,7 +10,6 @@ public interface OrderService {
 
 	public abstract void deleteOrder(Order order);
 
-
 	public abstract Order findOrder(Integer id);
 
 

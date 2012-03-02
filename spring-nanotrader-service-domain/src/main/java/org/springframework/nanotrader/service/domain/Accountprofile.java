@@ -16,17 +16,13 @@ public class Accountprofile {
 
     private String address;
 
-	
     private String passwd;
 
-	
     private String userid;
-
 	
     private String email;
 
     private String creditcard;
-
 
     private String fullname;
 
