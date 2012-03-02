@@ -1,0 +1,12 @@
+{
+	"success" : true,
+	"results" : [{
+		"id" : 1,
+		"username": "kparikh",
+    	"creditcard": 1234123412341234,
+    	"fullname": "Kashyap Parikh",
+    	"address": "123 Main St",
+    	"email": "kparikh@vmware.com",
+    	"password": "test"
+	}]
+}

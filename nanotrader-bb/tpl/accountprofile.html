@@ -1,19 +1,19 @@
 
 
-<form name="profileform" class="well form-horizontal">
+<form name="profileform" class="well form-horizontal" action="#/accountprofile" id="profileForm">
 	<legend>Account Profile</legend>
 
     <div class="control-group">
       <label class="control-label" for="full_name">Full name</label>
       <div class="controls">
-			<input id="full_name" type="text" class="span3" value="<%= name %>">
+			<input id="fullname" type="text" class="span3" value="<%= fullname %>">
       </div>
     </div>
 
     <div class="control-group">
       <label class="control-label" for="userid">UserId</label>
       <div class="controls">
-		<input id="userid" type="text" class="span3" value="<%= username %>">
+		<input id="username" type="text" class="span3 required" minLength="3" value="<%= username %>">
         <p class="help-block">Alphabets or Numbers (3 to 25 chars)</p>
       </div>
     </div>
@@ -21,7 +21,7 @@
     <div class="control-group">
       <label class="control-label" for="password">Password</label>
       <div class="controls">
-		<input id="password" type="password" class="span3" value="<%= password %>">
+		<input id="password" type="password" class="span3 required" minLength="1" value="<%= password %>">
         <p class="help-block">Alphabets, Numbers of these [!@#$%^*()_] (3 to 25 chars)</p>
       </div>
     </div>
@@ -43,9 +43,17 @@
     </div>
 
     <div class="control-group">
+      <label class="control-label" for="address">Address</label>
+      <div class="controls">
+		<input id="address" type="text" class="span3" value="<%= address %>">
+        <p class="help-block">Alphabets or Numbers (3 to 100 chars)</p>
+      </div>
+    </div>
+
+    <div class="control-group">
       <label class="control-label" for="creditcard">Creditcard</label>
       <div class="controls">
-		<input id="creditcard" type="text" class="span3" value="<%= creditcard %>">
+		<input id="creditcard" type="text" class="span3 required" creditcard="true" value="<%= creditcard %>">
         <p class="help-block">Must be 16 digits</p>
       </div>
     </div>
