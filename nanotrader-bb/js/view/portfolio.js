@@ -9,17 +9,26 @@ PortfolioSummaryView = Backbone.View.extend({
 				return this;
 			}
 		});
-HoldingsView = Backbone.View.extend({
+
+HoldingView = Backbone.View.extend({
 			tagName : 'tr',
 			initialize : function() {
-				this.template = _.template(tpl.get('holdings'));
+				this.template = _.template(tpl.get('holding'));
+			}
+		});
+HoldingListView = Backbone.View.extend({
+			tagName : 'div',
+			initialize : function() {
+				this.template = _.template(tpl.get('holdinglist'));
 			},
 			render : function(eventName) {
+				$(this.el).html(this.template());
 				var holdings = new Holdings();
-				var thisView = this;
-				_.each(holdings.models, function(model) {
-							var test = this.el;
-							$(this.el).html(this.template(model.toJSON()));
+				_.each(holdings.models, function(holding) {
+							var holdingView = new HoldingView();
+							$(holdingView.el).html(holdingView.template(holding
+									.toJSON()));
+							$('#holdings', this.el).append(holdingView.el);
 						}, this);
 				return this;
 			}
@@ -35,7 +44,8 @@ PortfolioView = Backbone.View.extend({
 				$(this.el).html(this.template());
 				$('#portfolio-summary', this.el)
 						.append(new PortfolioSummaryView().render().el);
-				$('#holdings', this.el).append(new HoldingsView().render().el);
+				$('#holding-list', this.el).append(new HoldingListView()
+						.render().el);
 				return this;
 			}
 		});

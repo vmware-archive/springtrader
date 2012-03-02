@@ -49,7 +49,7 @@ var AppRouter = Backbone.Router.extend({
 
 tpl.loadTemplates(['home', 'account-summary', 'user-statistics',
 				'recent-transactions', 'positions', 'portfolio',
-				'portfolio-summary', 'holdings', 'accountprofile', 'tabs',
+				'portfolio-summary', 'holdinglist', 'holding', 'accountprofile', 'tabs',
 				'header'], function() {
 			app = new AppRouter();
 			Backbone.history.start();
