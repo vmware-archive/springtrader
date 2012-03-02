@@ -154,7 +154,6 @@ subprojects { subproject ->
 }
 
 
-
 project('spring-nanotrader-service-domain') {
 	description = 'Spring Nanotrader Dat Service Domain Model'
 	
