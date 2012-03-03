@@ -67,7 +67,6 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	@Transactional
 	public void saveAccountProfile(Accountprofile accountProfile) {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.saveAccountProfile: holdingId=" + accountProfile.toString());
@@ -249,31 +248,34 @@ public class TradingServiceImpl implements TradingService {
 			log.debug("TradingServices.findOrdersByStatus: accountId=" + accountId + " status=" + status);
 		}
 		List<Order> orders = null;
-		orders = orderRepository.findOrders(accountId, status);
-		if (orders != null && orders.size() > 0) {
-			// Loop over the orders to populate the lazy quote fields
-			for (Order order : orders) {
-				order.getQuote();
+		
+			orders = orderRepository.findOrders(accountId, status);
+			if (orders != null && orders.size() > 0) {
+				// Loop over the orders to populate the lazy quote fields
+				for (Order order : orders) {
+					order.getQuote();
+				}
+				if ("closed".equals(status)) {
+					orderRepository.updateClosedOrders(accountId);
+				}
 			}
-			if ("closed".equals(status)) {
-				orderRepository.updateClosedOrders(accountId);
+			if (log.isDebugEnabled()) {
+				log.debug("TradingServices.findOrdersByStatus: completed successfully.");
 			}
-		}
-		if (log.isDebugEnabled()) {
-			log.debug("TradingServices.findOrdersByStatus: completed successfully.");
-		}
+	
 		return orders;
 	}
 
 	
 	@Override
+	@Transactional
 	public List<Order> findOrders(Integer accountId) {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrders: accountId=" + accountId);
 		}
-
 		Account account = accountRepository.findOne(accountId);
-		List<Order> orders = null;
+		List<Order> orders = new ArrayList<Order>();
+	
 		if (account != null) {
 			orders = new ArrayList<Order>(account.getOrders());
 			for (Order order : orders) {
@@ -283,6 +285,7 @@ public class TradingServiceImpl implements TradingService {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrders: completed successfully.");
 		}
+		
 		return orders;
 	}
 
