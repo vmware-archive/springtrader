@@ -10,6 +10,10 @@ import org.springframework.nanotrader.domain.Quote;
 
 public interface TradingService {
 
+	public static final String ORDER_TYPE_BUY = "buy";
+
+	public static final String ORDER_TYPE_SELL = "sell";
+
 	public abstract Accountprofile findAccountProfile(Integer id);
 
 	public abstract void saveAccountProfile(Accountprofile accountProfile);

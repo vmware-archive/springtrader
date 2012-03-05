@@ -49,7 +49,7 @@ public class HoldingDataOnDemand {
     }
 
 	public void setPurchaseprice(Holding obj, int index) {
-        BigDecimal purchaseprice = BigDecimal.valueOf(index);
+        BigDecimal purchaseprice = BigDecimal.valueOf(index, 2);
         if (purchaseprice.compareTo(new BigDecimal("999999999999.99")) == 1) {
             purchaseprice = new BigDecimal("999999999999.99");
         }

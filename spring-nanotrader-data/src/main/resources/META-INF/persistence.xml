@@ -8,6 +8,8 @@
             <property name="hibernate.hbm2ddl.auto" value="validate"/>
             <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.DefaultNamingStrategy"/>
             <property name="hibernate.connection.charSet" value="UTF-8"/>
+            <property name="hibernate.show.sql" value="true"/>
+            <property name="hibernate.format.sql" value="true"/>
             <!-- Uncomment the following two properties for JBoss only -->
             <!-- property name="hibernate.validator.apply_to_ddl" value="false" /-->
             <!-- property name="hibernate.validator.autoregister_listeners" value="false" /-->
