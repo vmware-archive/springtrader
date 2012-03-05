@@ -1,5 +1,6 @@
 package org.springframework.nanotrader.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -83,15 +84,30 @@ public class AccountIntegrationTest {
         Assert.assertNotNull("Expected 'Account' identifier to no longer be null", obj.getAccountid());
     }
 
-//	@Test
-//    public void testDeleteAccount() {
-//        Account obj = dod.getRandomAccount();
-//        Assert.assertNotNull("Data on demand for 'Account' failed to initialize correctly", obj);
-//        Integer id = obj.getAccountid();
-//        Assert.assertNotNull("Data on demand for 'Account' failed to provide an identifier", id);
-//        obj = accountService.findAccount(id);
-//        accountService.deleteAccount(obj);
-//        accountRepository.flush();
-//        Assert.assertNull("Failed to remove 'Account' with identifier '" + id + "'", accountService.findAccount(id));
-//    }
+	@Test
+    public void testDeleteAccount() {
+        Account obj = dod.getRandomAccount();
+        Assert.assertNotNull("Data on demand for 'Account' failed to initialize correctly", obj);
+        Integer id = obj.getAccountid();
+        Assert.assertNotNull("Data on demand for 'Account' failed to provide an identifier", id);
+        obj = accountService.findAccount(id);
+        accountService.deleteAccount(obj);
+        accountRepository.flush();
+        Assert.assertNull("Failed to remove 'Account' with identifier '" + id + "'", accountService.findAccount(id));
+    }
+
+	@Test
+    public void testUpdateAccount() {
+        Account obj = dod.getRandomAccount();
+        Assert.assertNotNull("Data on demand for 'Account' failed to initialize correctly", obj);
+        Integer id = obj.getAccountid();
+        Assert.assertNotNull("Data on demand for 'Account' failed to provide an identifier", id);
+        obj = accountService.findAccount(id);
+        obj.setOpenbalance(new BigDecimal(1.1));
+        accountService.updateAccount(obj);
+        accountRepository.flush();
+        Account updated = accountService.findAccount(id);
+        Assert.assertEquals("Update failed", new BigDecimal(1.1), updated.getOpenbalance());
+    }
+
 }

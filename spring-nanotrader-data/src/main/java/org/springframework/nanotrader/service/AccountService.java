@@ -1,6 +1,7 @@
 package org.springframework.nanotrader.service;
 
 import java.util.List;
+
 import org.springframework.nanotrader.domain.Account;
 
 public interface AccountService {
@@ -24,7 +25,4 @@ public interface AccountService {
 
 	public abstract Account updateAccount(Account account);
 	
-	
-	public abstract Account findByProfileProfileid(Account account);
-
 }

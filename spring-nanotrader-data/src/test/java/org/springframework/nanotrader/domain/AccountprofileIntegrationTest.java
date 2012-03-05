@@ -1,6 +1,10 @@
 package org.springframework.nanotrader.domain;
 
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +31,9 @@ public class AccountprofileIntegrationTest {
 
 	@Autowired
     AccountProfileRepository accountProfileRepository;
+
+	@PersistenceContext
+	EntityManager entityManager;
 
 	@Test
     public void testCount() {
@@ -81,7 +88,11 @@ public class AccountprofileIntegrationTest {
 
 	@Test
     public void testDelete() {
-        Accountprofile obj = dod.getRandomAccountprofile();
+        Accountprofile obj = dod.getNewTransientAccountprofile(100);
+        accountProfileRepository.save(obj);
+        entityManager.flush();
+        entityManager.clear();
+
         Assert.assertNotNull("Data on demand for 'Accountprofile' failed to initialize correctly", obj);
         Integer id = obj.getProfileid();
         Assert.assertNotNull("Data on demand for 'Accountprofile' failed to provide an identifier", id);

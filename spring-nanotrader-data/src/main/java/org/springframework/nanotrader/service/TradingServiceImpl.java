@@ -1,11 +1,9 @@
 package org.springframework.nanotrader.service;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -29,10 +27,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class TradingServiceImpl implements TradingService {
-	public static final String ORDER_TYPE_BUY = "buy";
-	public static final String ORDER_TYPE_SELL = "sell";
-	public static BigDecimal DEFAULT_ORDER_FEE = new BigDecimal(10.50);
+
+	public static BigDecimal DEFAULT_ORDER_FEE = BigDecimal.valueOf(1050, 2);
+
 	private static Logger log = LoggerFactory.getLogger(TradingServiceImpl.class);
+
 	private static String OPEN_STATUS = "open";
 
 	@Autowired
