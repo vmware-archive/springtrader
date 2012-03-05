@@ -33,6 +33,9 @@ public class OrderDataOnDemand {
     private HoldingDataOnDemand holdingDataOnDemand;
 
 	@Autowired
+	private QuoteDataOnDemand quoteDataOnDemand;
+
+	@Autowired
     OrderService orderService;
 
 	@Autowired
@@ -49,7 +52,7 @@ public class OrderDataOnDemand {
         setOrdertype(obj, index);
         setPrice(obj, index);
         setQuantity(obj, index);
-        setQuoteSymbol(obj, index);
+        setQuote(obj, index);
         return obj;
     }
 
@@ -110,13 +113,8 @@ public class OrderDataOnDemand {
         obj.setQuantity(quantity);
     }
 
-	public void setQuoteSymbol(Order obj, int index) {
-        String quoteSymbol = "quoteSymbol_" + index;
-        if (quoteSymbol.length() > 250) {
-            quoteSymbol = quoteSymbol.substring(0, 250);
-        }
-        Quote quote = new Quote();
-        quote.setSymbol(quoteSymbol);
+	public void setQuote(Order obj, int index) {
+        Quote quote = quoteDataOnDemand.getRandomQuote();
         obj.setQuote(quote);
     }
 
