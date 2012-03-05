@@ -15,14 +15,18 @@ import java.util.Random
 defaultUser = "user"
 defaultQuote = "s"
 
-defaultNumberOfQuotes = 5000
-defaultNumberOfUsers = 100000
+defaultNumberOfQuotes = 500
+defaultNumberOfUsers = 50000
 defaultNumberOfOrders = 10
 defaultNumberOfHoldings = 10
+
+BATCH_SIZE = 5000
 
 sqlFile = "configdb.sql"
 
 quoteSymbolList = []
+
+sqlList = [][]
 
 def sql = Sql.newInstance("jdbc:postgresql://localhost:" + "5432/nanotrader", "wkoh", "", "org.postgresql.Driver")
 
@@ -30,6 +34,7 @@ def generateDefaultOrders(sql) {
   Random rand = new Random()
   int orderCount = 0
   int quoteIndex = 0
+  sqlList.clear()
   defaultNumberOfUsers.times { count ->
     accountId = count + 1
     defaultNumberOfOrders.times {
@@ -90,16 +95,38 @@ def generateDefaultOrders(sql) {
       insertOrderSQL = insertOrderSQL.replace("QUOTE_SYMBOL", defaultOrderRow[9]+"")
       insertOrderSQL = insertOrderSQL.replace("HOLDING_HOLDINGID", defaultOrderRow[10]+"")
 
-      sql.executeInsert insertOrderSQL
+      sqlList << insertOrderSQL
+      //sql.executeInsert insertOrderSQL
+
+      if (sqlList.size() == BATCH_SIZE) {
+        sql.connection.autoCommit = false
+        sql.withBatch(BATCH_SIZE) { stmt ->
+          sqlList.size().times { i ->
+            stmt.addBatch(sqlList[i])
+          }
+        }
+        sql.connection.commit()
+        sqlList.clear()
+      }
       //writer.write(insertOrderSQL + "\n")
     }
+  }
+  if (sqlList.size() > 0) {
+    sql.connection.autoCommit = false
+    sql.withBatch(BATCH_SIZE) { stmt ->
+      sqlList.size().times { i ->
+        stmt.addBatch(sqlList[i])
+      }
+    }
+    sql.connection.commit()
+    sqlList.clear()
   }
 }
 
 def generateDefaultHoldings(sql) {
   Random rand = new Random()
   int quoteIndex = 0
-
+  sqlList.clear()
   defaultNumberOfUsers.times { count ->
     accountId = count + 1
     defaultNumberOfHoldings.times {
@@ -128,9 +155,33 @@ def generateDefaultHoldings(sql) {
       insertHoldingSQL = insertHoldingSQL.replace("ACCOUNT_ACCOUNTID", defaultHoldingRow[4]+"")
       insertHoldingSQL = insertHoldingSQL.replace("QUOTE_SYMBOL", defaultHoldingRow[5]+"")
 
+      sqlList << insertHoldingSQL
       //writer.write(insertHoldingSQL + "\n")
-      sql.executeInsert insertHoldingSQL
+      //sql.executeInsert insertHoldingSQL
+      //sql.withBatch(BATCH_SIZE) { stmt ->
+       // stmt.addBatch(insertHoldingSQL)
+      //}
+      if (sqlList.size() == BATCH_SIZE) {
+        sql.connection.autoCommit = false
+        sql.withBatch(BATCH_SIZE) { stmt ->
+          sqlList.size().times { i ->
+            stmt.addBatch(sqlList[i])
+          }
+        }
+        sql.connection.commit()
+        sqlList.clear()
+      }
     }
+  }
+  if (sqlList.size() > 0) {
+    sql.connection.autoCommit = false
+    sql.withBatch(BATCH_SIZE) { stmt ->
+      sqlList.size().times { i ->
+        stmt.addBatch(sqlList[i])
+      }
+    }
+    sql.connection.commit()
+    sqlList.clear()
   }
 }
 
@@ -138,6 +189,7 @@ def generateDefaultAccounts(sql) {
   int balance = 1000000
   int count = 0
   Random rand = new Random()
+  sqlList.clear()
 
   defaultNumberOfUsers.times {
     float openBalance = rand.nextInt(balance) + Float.parseFloat(String.format("%.2f", rand.nextFloat()))
@@ -164,13 +216,39 @@ def generateDefaultAccounts(sql) {
     insertAccountSQL = insertAccountSQL.replace("LOGINCOUNT", defaultAccountRow[6]+"")
     insertAccountSQL = insertAccountSQL.replace("PROFILE_PROFILEID", defaultAccountRow[7]+"")
 
+    sqlList << insertAccountSQL
+
+    if (sqlList.size() == BATCH_SIZE) {
+      sql.connection.autoCommit = false
+      sql.withBatch(BATCH_SIZE) { stmt ->
+        sqlList.size().times { i ->
+          stmt.addBatch(sqlList[i])
+        }
+      }
+      sql.connection.commit()
+      sqlList.clear()
+    }
     //writer.write(insertAccountSQL + "\n")
-    sql.executeInsert insertAccountSQL
+    //sql.executeInsert insertAccountSQL
+    //sql.withBatch(BATCH_SIZE) { stmt ->
+     // stmt.addBatch(insertAccountSQL)
+    //}
+  }
+  if (sqlList.size() > 0) {
+    sql.connection.autoCommit = false
+    sql.withBatch(BATCH_SIZE) { stmt ->
+      sqlList.size().times { i ->
+        stmt.addBatch(sqlList[i])
+      }
+    }
+    sql.connection.commit()
+    sqlList.clear()
   }
 }
 
 def generateDefaultAccountProfiles(sql) {
   long creditCardNumber = 1111222233330000
+  sqlList.clear()
 
   defaultNumberOfUsers.times { count ->
     name = defaultUser + count
@@ -194,14 +272,40 @@ def generateDefaultAccountProfiles(sql) {
     insertAccountProfileSQL = insertAccountProfileSQL.replace("CREDITCARD", defaultAccountProfileRow[5]+"")
     insertAccountProfileSQL = insertAccountProfileSQL.replace("FULLNAME", defaultAccountProfileRow[6]+"")
 
+    sqlList << insertAccountProfileSQL
+
     //writer.write(insertAccountProfileSQL + "\n")
-    sql.executeInsert insertAccountProfileSQL
+    //sql.executeInsert insertAccountProfileSQL
+    //sql.withBatch(BATCH_SIZE) { stmt ->
+      //stmt.addBatch(insertAccountProfileSQL)
+    //}
+     if (sqlList.size() == BATCH_SIZE) {
+       sql.connection.autoCommit = false
+       sql.withBatch(BATCH_SIZE) { stmt ->
+         sqlList.size().times { i ->
+           stmt.addBatch(sqlList[i])
+         }
+       }
+       sql.connection.commit()
+       sqlList.clear()
+     }
+  }
+  if (sqlList.size() > 0) {
+    sql.connection.autoCommit = false
+    sql.withBatch(BATCH_SIZE) { stmt ->
+      sqlList.size().times { i ->
+        stmt.addBatch(sqlList[i])
+      }
+    }
+    sql.connection.commit()
+    sqlList.clear()
   }
 }
 
 def generateDefaultStockQuotes(sql) {
   int stockPrice = 200
   int stockVolume = 5000000
+  sqlList.clear()
 
   defaultNumberOfQuotes.times { count ->
     quote = defaultQuote + count
@@ -241,8 +345,33 @@ def generateDefaultStockQuotes(sql) {
     insertQuoteSQL = insertQuoteSQL.replace("SYMBOL", defaultQuoteRow[7]+"")
     insertQuoteSQL = insertQuoteSQL.replace("CHANGE1", defaultQuoteRow[8]+"")
 
+    sqlList << insertQuoteSQL
+
     //writer.write(insertQuoteSQL + "\n")
-    sql.executeInsert insertQuoteSQL
+    //sql.executeInsert insertQuoteSQL
+    //sql.withBatch(BATCH_SIZE) { stmt ->
+      //stmt.addBatch(insertQuoteSQL)
+    //}
+    if (sqlList.size() == BATCH_SIZE) {
+      sql.connection.autoCommit = false
+      sql.withBatch(BATCH_SIZE) { stmt ->
+        sqlList.size().times { i ->
+          stmt.addBatch(sqlList[i])
+        }
+      }
+      sql.connection.commit()
+      sqlList.clear()
+    }
+  }
+  if (sqlList.size() > 0) {
+    sql.connection.autoCommit = false
+    sql.withBatch(BATCH_SIZE) { stmt ->
+      sqlList.size().times { i ->
+        stmt.addBatch(sqlList[i])
+      }
+    }
+    sql.connection.commit()
+    sqlList.clear()
   }
 }
 
