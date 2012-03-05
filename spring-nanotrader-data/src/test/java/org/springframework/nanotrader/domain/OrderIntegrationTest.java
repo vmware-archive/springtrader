@@ -72,16 +72,16 @@ public class OrderIntegrationTest {
         Assert.assertEquals("Find entries method for 'Order' returned an incorrect number of entries", count, result.size());
     }
 
-//	@Test
-//    public void testSaveOrder() {
-//        Assert.assertNotNull("Data on demand for 'Order' failed to initialize correctly", dod.getRandomOrder());
-//        Order obj = dod.getNewTransientOrder(Integer.MAX_VALUE);
-//        Assert.assertNotNull("Data on demand for 'Order' failed to provide a new transient entity", obj);
-//        Assert.assertNull("Expected 'Order' identifier to be null", obj.getOrderid());
-//        orderService.saveOrder(obj);
-//        orderRepository.flush();
-//        Assert.assertNotNull("Expected 'Order' identifier to no longer be null", obj.getOrderid());
-//    }
+	@Test
+    public void testSaveOrder() {
+        Assert.assertNotNull("Data on demand for 'Order' failed to initialize correctly", dod.getRandomOrder());
+        Order obj = dod.getNewTransientOrder(Integer.MAX_VALUE);
+        Assert.assertNotNull("Data on demand for 'Order' failed to provide a new transient entity", obj);
+        Assert.assertNull("Expected 'Order' identifier to be null", obj.getOrderid());
+        orderService.saveOrder(obj);
+        orderRepository.flush();
+        Assert.assertNotNull("Expected 'Order' identifier to no longer be null", obj.getOrderid());
+    }
 
 	@Test
     public void testDeleteOrder() {
