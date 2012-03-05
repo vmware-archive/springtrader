@@ -10,7 +10,8 @@ import java.util.Random
 //              - ACCOUNT
 //              - order
 
-// Usage: groovy configdb.groovy
+// assuming postgres jdbc jar is downloaded
+// Usage: groovy -cp ~/Downloads/postgresql-9.1-901.jdbc4.jar configdb.groovy
 
 defaultUser = "user"
 defaultQuote = "s"
