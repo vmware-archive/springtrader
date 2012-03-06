@@ -3,13 +3,13 @@ package org.springsource.nanotrader.configuration;
 import java.util.Arrays;
 import java.util.List;
 
-import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.SerializationConfig.Feature;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.nanotrader.service.configuration.AppConfig;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.web.servlet.HandlerExceptionResolver;

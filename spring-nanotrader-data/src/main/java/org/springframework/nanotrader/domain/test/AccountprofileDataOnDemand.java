@@ -1,4 +1,4 @@
-package org.springframework.nanotrader.domain;
+package org.springframework.nanotrader.domain.test;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.repository.AccountProfileRepository;
 import org.springframework.stereotype.Component;
 

@@ -2,4 +2,5 @@ rootProject.name = 'spring-nanotrader'
 
 include 'spring-nanotrader-data'
 include 'spring-nanotrader-services'
-include 'spring-nanotrader-service-domain'
+include 'spring-nanotrader-asynch-services'
+include 'spring-nanotrader-service-support'

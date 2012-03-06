@@ -28,18 +28,17 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.nanotrader.domain.Account;
-import org.springframework.nanotrader.domain.AccountDataOnDemand;
 import org.springframework.nanotrader.domain.Accountprofile;
-import org.springframework.nanotrader.domain.AccountprofileDataOnDemand;
 import org.springframework.nanotrader.domain.Holding;
-import org.springframework.nanotrader.domain.HoldingDataOnDemand;
 import org.springframework.nanotrader.domain.Order;
-import org.springframework.nanotrader.domain.OrderDataOnDemand;
+import org.springframework.nanotrader.domain.test.AccountDataOnDemand;
+import org.springframework.nanotrader.domain.test.AccountprofileDataOnDemand;
+import org.springframework.nanotrader.domain.test.HoldingDataOnDemand;
+import org.springframework.nanotrader.domain.test.OrderDataOnDemand;
 import org.springframework.nanotrader.repository.AccountRepository;
 import org.springframework.nanotrader.repository.HoldingRepository;
 import org.springframework.test.context.ContextConfiguration;
@@ -163,7 +162,7 @@ public class TradingServiceTests {
 		order.setOrdertype(TradingService.ORDER_TYPE_BUY);
 		order.setOpendate(new java.sql.Date(System.currentTimeMillis()));
 		order.setCompletiondate(new java.sql.Date(System.currentTimeMillis()));
-		tradingService.saveOrder(order, true);
+		tradingService.saveOrder(order);
 		entityManager.flush();
 		entityManager.clear(); // force reload
 

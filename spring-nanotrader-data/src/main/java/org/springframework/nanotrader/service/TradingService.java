@@ -28,7 +28,7 @@ public interface TradingService {
 
 	public abstract Order findOrder(Integer id);
 
-	public abstract Order saveOrder(Order order, boolean isSynch);
+	public abstract Order saveOrder(Order order);
 
 	public abstract Order updateOrder(Order order);
 

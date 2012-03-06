@@ -16,9 +16,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.nanotrader.configuration.ServiceTestConfiguration;
 import org.springframework.nanotrader.service.TradingServiceImpl;
+import org.springframework.nanotrader.service.configuration.AppConfig;
 import org.springframework.test.web.server.MockMvc;
 import org.springframework.util.FileCopyUtils;
-import org.springsource.nanotrader.configuration.AppConfig;
 import org.springsource.nanotrader.configuration.WebConfig;
 
 

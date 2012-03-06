@@ -154,9 +154,16 @@ subprojects { subproject ->
 }
 
 
-project('spring-nanotrader-service-domain') {
-	description = 'Spring Nanotrader Dat Service Domain Model'
-	
+project('spring-nanotrader-service-support') {
+	description = 'Spring Nanotrader Data Service Support'
+
+	dependencies {
+		compile project(":spring-nanotrader-data")
+		compile "org.springframework.integration:spring-integration-amqp:$springIntegrationVersion"
+		compile "net.sf.dozer:dozer:$dozerVersion"
+		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
+		
+	}
 }
 
 project('spring-nanotrader-data') {
@@ -185,7 +192,7 @@ project('spring-nanotrader-services') {
 	description = 'Spring Nanotrader Services'
 	dependencies {
 		compile project(":spring-nanotrader-data")
-		compile project(":spring-nanotrader-service-domain")
+		compile project(":spring-nanotrader-service-support")
 		compile "org.springframework:spring-webmvc:$springVersion"
 		providedCompile  ("javax.servlet:servlet-api:$servletApiVersion")
 		compile "com.jayway.jsonpath:json-path:0.5.5"
@@ -202,6 +209,27 @@ project('spring-nanotrader-services') {
 
 }
 
+
+project('spring-nanotrader-asynch-services') {
+	apply plugin: 'war'
+
+	description = 'Spring Nanotrader Asynch Services'
+	dependencies {
+		compile project(":spring-nanotrader-data")
+		compile project(":spring-nanotrader-service-support")
+		compile "org.springframework:spring-webmvc:$springVersion"
+		providedCompile  ("javax.servlet:servlet-api:$servletApiVersion")
+		compile "com.jayway.jsonpath:json-path:0.5.5"
+		compile "cglib:cglib-nodep:$cglibVersion"
+		compile "org.codehaus.jackson:jackson-mapper-asl:1.8.5"
+		compile "javax.inject:javax.inject:$javaxInjectVersion"
+		compile "net.sf.dozer:dozer:$dozerVersion"
+		testCompile "org.springframework:spring-test-mvc:1.0.0.BUILD-SNAPSHOT"
+		compile "org.aspectj:aspectjweaver:$aspectjVersion"
+
+	}
+
+}
 
 
 
