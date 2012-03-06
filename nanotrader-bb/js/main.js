@@ -2,7 +2,7 @@ var AppRouter = Backbone.Router.extend({
 
 			routes : {
 				"" : "home",
-				"/accountprofile" : "accountprofile",
+                "/accountprofile/:id" : "accountprofile",
 				"/portfolio" : "portfolio"
 			},
 
@@ -11,10 +11,10 @@ var AppRouter = Backbone.Router.extend({
 				$('#header').html(this.headerView.render().el);
 			},
 
-			accountprofile : function() {
+			accountprofile : function(id) {
 				if (!this.accountProfileView) {
 					this.accountProfileView = new AccountProfileView();
-					this.accountProfileView.render();
+					this.accountProfileView.render(id);
 				}
 				$('#content').html(this.accountProfileView.el);
 				this.tabView = new TabView({
@@ -22,6 +22,7 @@ var AppRouter = Backbone.Router.extend({
 						});
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
+				
 			},
 
 			home : function() {
