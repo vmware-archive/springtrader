@@ -2,10 +2,10 @@ package org.springframework.nanotrader.configuration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.nanotrader.service.configuration.AppConfig;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springsource.nanotrader.configuration.AppConfig;
 import org.springsource.nanotrader.configuration.ServiceConfig;
 
 /**

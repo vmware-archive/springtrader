@@ -1,4 +1,4 @@
-package org.springsource.nanotrader.configuration;
+package org.springframework.nanotrader.service.configuration;
 
 import java.util.ArrayList;
 import java.util.List;

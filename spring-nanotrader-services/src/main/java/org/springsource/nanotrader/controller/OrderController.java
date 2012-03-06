@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.TradingService;
 import org.springframework.nanotrader.service.domain.Order;
+import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +37,9 @@ public class OrderController {
 
 	@Resource
 	private Mapper mapper;
+
+	@Resource
+	private TradingServiceFacade tradingServiceFacade;
 
 	private String ORDER_MAPPING = "order";
 	@RequestMapping(value = "/{id}/order", method = RequestMethod.GET)
@@ -88,9 +92,13 @@ public class OrderController {
 			log.debug("OrderController.save:" + orderRequest.toString());
 		}
 		orderRequest.setAccountId(accountId);
-		org.springframework.nanotrader.domain.Order order = new org.springframework.nanotrader.domain.Order();
-		mapper.map(orderRequest, order, ORDER_MAPPING);
-		tradingService.saveOrder(order, true);
+		Integer orderId = tradingServiceFacade.saveOrder(orderRequest, true);
+		// if asynch, pass in false and null will be returned
+		// response status ACCEPTED
+		// else return URL to order in Location: header
+		if (log.isDebugEnabled()) { 
+			log.debug("OrderController.save:" + orderId);
+		}
 	}
 
 	@RequestMapping(value = "/{id}/order", method = RequestMethod.PUT)

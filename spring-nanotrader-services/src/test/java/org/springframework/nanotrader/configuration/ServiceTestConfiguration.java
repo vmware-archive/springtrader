@@ -20,6 +20,7 @@ import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.Quote;
 import org.springframework.nanotrader.service.TradingService;
 import org.springframework.nanotrader.service.TradingServiceImpl;
+import org.springframework.nanotrader.service.support.TradingServiceFacade;
 
 /**
  *  ServiceTestConfiguration provides test objects and mock service layer for unit tests.
@@ -72,7 +73,7 @@ public class ServiceTestConfiguration  {
 		when(tradingService.findAccountProfile(NOT_A_VALID_PROFILE)).thenReturn(null);
 		when(tradingService.updateAccountProfile(any(Accountprofile.class))).thenReturn(accountProfile());
 		when(tradingService.findOrder(999)).thenReturn(order());
-		when(tradingService.saveOrder(any(Order.class), any(Boolean.class))).thenReturn(null);
+		when(tradingService.saveOrder(any(Order.class))).thenReturn(null);
 		when(tradingService.updateOrder(any(Order.class))).thenReturn(null);
 		when(tradingService.findOrdersByStatus(eq(2), any(String.class))).thenReturn(orders());
 		when(tradingService.findOrders(eq(2))).thenReturn(orders());
@@ -80,6 +81,12 @@ public class ServiceTestConfiguration  {
 		return tradingService ;
 	}
 	
+	@Bean
+	public TradingServiceFacade tradingServiceFacade() {
+		return Mockito.mock(TradingServiceFacade.class);
+		// TODO: configure for tests
+	}
+
 	@Bean 
 	public Holding holding() {
 		Holding holding = new Holding();

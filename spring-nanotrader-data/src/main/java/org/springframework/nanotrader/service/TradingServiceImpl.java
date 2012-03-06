@@ -152,13 +152,13 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public Order saveOrder(Order order, boolean isSynch) {
+	public Order saveOrder(Order order) {
 		Order createdOrder = null;
 		if (log.isDebugEnabled()) {
-			log.debug("TradingServices.saveOrder: order=" + order.toString() + " asynch transaction mode =" + isSynch);
+			log.debug("TradingServices.saveOrder: order=" + order.toString());
 		}
 		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
-			createdOrder = buy(order, isSynch);
+			createdOrder = buy(order);
 		} else if (ORDER_TYPE_SELL.equals(order.getOrdertype())) {
 			// TODO
 		} else {
@@ -170,18 +170,14 @@ public class TradingServiceImpl implements TradingService {
 		return createdOrder;
 	}
 
-	private Order buy(Order order, boolean isSynch) {
-		if (isSynch == true) {
-			Account account = accountRepository.findOne(order.getAccountAccountid().getAccountid());
-			Quote quote = quoteRepository.findBySymbol(order.getQuote().getSymbol());
-			Holding holding = null;
-			// create order and persist
-			Order createdOrder = createOrder(order, account, holding, quote);
-			// Update account balance and create holding
-			completeOrder(createdOrder);
-		} else {
-			// send order to rabbit to complete processing (create holding). SI flow entry goes here??
-		}
+	private Order buy(Order order) {
+		Account account = accountRepository.findOne(order.getAccountAccountid().getAccountid());
+		Quote quote = quoteRepository.findBySymbol(order.getQuote().getSymbol());
+		Holding holding = null;
+		// create order and persist
+		Order createdOrder = createOrder(order, account, holding, quote);
+		// Update account balance and create holding
+		completeOrder(createdOrder);
 
 		return order;
 	}

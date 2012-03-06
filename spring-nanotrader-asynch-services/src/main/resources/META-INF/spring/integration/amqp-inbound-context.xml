@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp-2.1.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="amqp-common-context.xml"/>
+
+	<int-amqp:inbound-channel-adapter channel="fromAmqpChannel"
+		queue-names="nanotrader.order.queue"
+		connection-factory="connectionFactory"/>
+
+	<int:channel id="fromAmqpChannel" />
+
+	<int:json-to-object-transformer input-channel="fromAmqpChannel"
+		output-channel="toServiceChannel"
+		type="org.springframework.nanotrader.service.domain.Order"/>
+
+	<int:channel id="toServiceChannel" />
+
+	<int:service-activator input-channel="toServiceChannel"
+		output-channel="nullChannel"
+		ref="tradingServiceFacadeImpl" method="saveOrderDirect"/>
+
+</beans>
