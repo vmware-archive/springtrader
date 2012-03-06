@@ -1,19 +1,32 @@
-window.AccountProfile = Backbone.Model.extend({
+var Account = Backbone.Model.extend({idAttribute : 'accountid'});
+var Accounts = Backbone.Collection.extend({
+            model : Account,
+});
 
+AccountProfile = Backbone.Model.extend({
+
+    urlRoot : 'spring-nanotrader-services/api/accountProfile',
 
     initialize:function () {
+        this.accounts = nestCollection(this, 'accounts', new Accounts(this.get('accounts')));
+        var model = this;
+        $.ajax({
+            type : "GET",
+            url : model.url() ,
+            dataType : 'json',
+            //Make synchronous ajax call
+            async:   false,
+            //Since GET request is cached, make the cache to false
+            cache: false,
+            success :  function(response) {
+                model.set(response);
+            },
+            error : function(xhr, textStatus, errorThrown) {
+                alert('Error'+ xhr.status + " " + errorThrown);
+            }
+        });
     },
     
-    defaults: {
-    	"username": 'kparikh',
-    	"creditcard": '1234123412341234',
-    	name: 'Kashyap Parikh',
-    	address: '123 Main St',
-    	email: 'kparikh@vmware.com',
-    	password: 'test'
-    	//isProfileActive: true
-    	
-    },
     validation : {
         name : {
             required: true | false,
