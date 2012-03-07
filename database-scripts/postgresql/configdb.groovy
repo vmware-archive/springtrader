@@ -29,7 +29,7 @@ quoteSymbolList = []
 
 sqlList = [][]
 
-def sql = Sql.newInstance("jdbc:postgresql://localhost:" + "5432/nanotrader", "wkoh", "", "org.postgresql.Driver")
+def sql = Sql.newInstance("jdbc:postgresql://localhost:" + "5432/nanotrader", "nanotrader", "nanotrader", "org.postgresql.Driver")
 
 def generateDefaultOrders(sql) {
   Random rand = new Random()
