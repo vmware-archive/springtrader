@@ -16,7 +16,7 @@
     <!-- Location of Java @Configuration classes that configure the components that makeup this application -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>org.springsource.nanotrader.configuration.WebConfig</param-value>
+        <param-value>org.springframework.nanotrader.web.configuration.WebConfig</param-value>
     </context-param>
 	
 	  <!-- Creates the Spring Container shared by all Servlets and Filters -->
