@@ -21,6 +21,7 @@ import org.springframework.nanotrader.domain.Quote;
 import org.springframework.nanotrader.service.TradingService;
 import org.springframework.nanotrader.service.TradingServiceImpl;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
+import org.springframework.nanotrader.service.support.TradingServiceFacadeImpl;
 
 /**
  *  ServiceTestConfiguration provides test objects and mock service layer for unit tests.
@@ -83,8 +84,7 @@ public class ServiceTestConfiguration  {
 	
 	@Bean
 	public TradingServiceFacade tradingServiceFacade() {
-		return Mockito.mock(TradingServiceFacade.class);
-		// TODO: configure for tests
+		return new TradingServiceFacadeImpl();
 	}
 
 	@Bean 

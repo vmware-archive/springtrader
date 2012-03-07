@@ -15,7 +15,12 @@
  */
 package org.springframework.nanotrader.service.support;
 
+import java.util.List;
+
+import org.springframework.nanotrader.service.domain.Accountprofile;
+import org.springframework.nanotrader.service.domain.Holding;
 import org.springframework.nanotrader.service.domain.Order;
+import org.springframework.nanotrader.service.domain.Quote;
 
 /**
  * @author Gary Russell
@@ -26,4 +31,26 @@ public interface TradingServiceFacade {
 	Integer saveOrder(Order order, boolean synch);
 
 	Integer saveOrderDirect(Order order);
+
+	Accountprofile findAccountProfile(Integer id);
+
+	void saveAccountProfile(Accountprofile accountProfileRequest);
+
+	void updateAccountProfile(Accountprofile accountProfileRequest);
+
+	Holding findHolding(Integer id);
+
+	List<Holding> findHoldingsByAccountId(Integer accountId);
+
+	void saveHolding(Holding holdingRequest);
+
+	void updateHolding(Holding holdingRequest);
+
+	Order findOrder(Integer orderId);
+
+	void updateOrder(Order orderRequest);
+
+	List<Order> findOrders(Integer accountId, String status);
+
+	Quote findQuoteBySymbol(String symbol);
 }

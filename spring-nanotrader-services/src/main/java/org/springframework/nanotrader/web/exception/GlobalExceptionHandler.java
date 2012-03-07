@@ -1,6 +1,7 @@
 package org.springframework.nanotrader.web.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.nanotrader.service.support.exception.NoRecordsFoundException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
