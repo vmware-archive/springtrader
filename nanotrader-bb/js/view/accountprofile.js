@@ -1,40 +1,46 @@
 window.AccountProfileView = Backbone.View.extend({
-    
-    tagName: "div",
-    
-    events: {
-        "submit #profileForm" : "handleForm"
+
+    tagName : "div",
+
+    events : {
+        "submit #profileForm" : "handleForm",
+        "change input" :"changed"
     },
-    
-    initialize:function () {
+    changed:function(evt) {
+        var changed = evt.currentTarget;
+        var value = $("#"+changed.id).val();
+        var obj = "{\""+changed.id +"\":\""+value+"\"}";
+        var objInst = JSON.parse(obj);
+        this.model.set(objInst);            
+    },
+    initialize : function(myid) {
+        _.bindAll(this, "changed");
         this.template = _.template(tpl.get('accountprofile'));
         this.template.isProfileActive = true;
-        this.model = new AccountProfile();        
-    },
-    
-    handleForm: function(data) {
-        this.model.set({
-            fullname:$("#fullname").val(),
-            email:$("#email").val(),
-            password:$('#password').val(),
-            password_confirm:$('#password_confirm').val(),
-            username:$('#username').val(),
-            address:$("#address").val(),
-            creditcard:$("#creditcard").val(),
-            id:$('#id').val()
+        this.model = new AccountProfile({
+            id : myid
         });
-        this.model.save();
     },
+    handleForm : function(data) {
+    //    this.model.set({
+     //      fullname : $("#fullname").val()
+      //  });
+        this.model.unset('logincount');
+        this.model.unset('logoutcount');
+        this.model.unset('creationdate');
+        this.model.unset('lastlogin');
+        this.model.unset('openbalance');
+        //this.model.unset('id');
 
-    render: function(myid) {
-        var ap = new AccountProfile({id: myid});
-        var type = ap.toJSON();
+        this.model.save(undefined, {url:'spring-nanotrader-services/api/accountProfile' });
+    },
+    render : function() {
         Backbone.Validation.bind(this, {
-            valid: function(view, attr) {
+            valid : function(view, attr) {
                 //something
             },
-            invalid: function(view, attr, error) {
-                alert("ERROR : " + error );
+            invalid : function(view, attr, error) {
+                alert("ERROR : " + error);
             }
         });
         $(this.el).html(this.template(this.model.toJSON()));
