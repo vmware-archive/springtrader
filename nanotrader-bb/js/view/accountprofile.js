@@ -20,6 +20,8 @@ window.AccountProfileView = Backbone.View.extend({
         this.model = new AccountProfile({
             id : myid
         });
+        this.model.bind('change', this.render, this);
+        this.model.fetch();
     },
     handleForm : function(data) {
     //    this.model.set({

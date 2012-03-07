@@ -12,21 +12,6 @@ AccountProfile = Backbone.Model.extend({
     initialize : function() {
         this.accounts = nestCollection(this, 'accounts', new Accounts(this.get('accounts')));
         var model = this;
-        $.ajax({
-            type : "GET",
-            url : model.url(),
-            dataType : 'json',
-            //Make synchronous ajax call
-            async : false,
-            //Since GET request is cached, make the cache to false
-            cache : false,
-            success : function(response) {
-                model.set(response);
-            },
-            error : function(xhr, textStatus, errorThrown) {
-                alert('Error' + xhr.status + " " + errorThrown);
-            }
-        });
     },
     validation : {
         fullname : {

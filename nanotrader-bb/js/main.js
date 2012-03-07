@@ -14,7 +14,7 @@ var AppRouter = Backbone.Router.extend({
     accountprofile : function(id) {
         if(!this.accountProfileView) {
             this.accountProfileView = new AccountProfileView(id);
-            this.accountProfileView.render();
+            //this.accountProfileView.render();
         }
         $('#content').html(this.accountProfileView.el);
         this.tabView = new TabView({
