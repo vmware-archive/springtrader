@@ -1,5 +1,5 @@
 AccountSummaryView = Backbone.View.extend({
-			tagName : 'tr',
+			tagName : 'div',
 			initialize : function() {
 				this.template = _.template(tpl.get('account-summary'));
 			},
@@ -11,7 +11,7 @@ AccountSummaryView = Backbone.View.extend({
 			}
 		});
 UserStatisticsView = Backbone.View.extend({
-			tagName : 'tr',
+			tagName : 'div',
 			initialize : function() {
 				this.template = _.template(tpl.get('user-statistics'));
 			},
@@ -22,7 +22,7 @@ UserStatisticsView = Backbone.View.extend({
 			}
 		});
 RecentTransactionsView = Backbone.View.extend({
-			tagName : 'tr',
+			tagName : 'div',
 			initialize : function() {
 				this.template = _.template(tpl.get('recent-transactions'));
 			},
@@ -31,8 +31,18 @@ RecentTransactionsView = Backbone.View.extend({
 				return this;
 			}
 		});
+PortfolioChartView = Backbone.View.extend({
+			tagName : 'div',
+			initialize : function() {
+				this.template = _.template(tpl.get('portfolio-chart'));
+			},
+			render : function(eventName) {
+				$(this.el).html(this.template());
+				return this;
+			}
+		});
 PositionsView = Backbone.View.extend({
-			tagName : 'tr',
+			tagName : 'div',
 			initialize : function() {
 				this.template = _.template(tpl.get('positions'));
 			},
@@ -56,6 +66,8 @@ HomeView = Backbone.View.extend({
 						.render().el);
 				$('#recent-transactions', this.el)
 						.append(new RecentTransactionsView().render().el);
+				$('#portfolio-chart', this.el).append(new PortfolioChartView()
+						.render().el);
 				$('#positions', this.el)
 						.append(new PositionsView().render().el);
 				return this;
