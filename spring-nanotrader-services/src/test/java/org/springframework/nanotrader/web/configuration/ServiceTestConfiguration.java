@@ -1,4 +1,4 @@
-package org.springframework.nanotrader.configuration;
+package org.springframework.nanotrader.web.configuration;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;

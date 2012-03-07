@@ -1,4 +1,4 @@
-package org.springsource.nanotrader.controller;
+package org.springframework.nanotrader.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.TradingService;
 import org.springframework.nanotrader.service.domain.Order;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
+import org.springframework.nanotrader.web.exception.NoRecordsFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springsource.nanotrader.exception.NoRecordsFoundException;
 
 /**
  *  Provides JSON based REST api to Order repository

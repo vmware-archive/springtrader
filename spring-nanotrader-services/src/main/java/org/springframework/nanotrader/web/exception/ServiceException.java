@@ -1,4 +1,4 @@
-package org.springsource.nanotrader.exception;
+package org.springframework.nanotrader.web.exception;
 
 /**
  *  ServiceException provides a simple representation for exceptions

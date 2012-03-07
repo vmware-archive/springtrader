@@ -1,12 +1,12 @@
-package org.springframework.nanotrader.configuration;
+package org.springframework.nanotrader.web.configuration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.nanotrader.service.configuration.AppConfig;
+import org.springframework.nanotrader.web.configuration.ServiceConfig;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springsource.nanotrader.configuration.ServiceConfig;
 
 /**
  *  Loads app config and service config to validate overall configurations. WebConfig is excluded here since

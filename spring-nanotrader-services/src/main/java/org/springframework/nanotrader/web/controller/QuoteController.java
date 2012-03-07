@@ -1,4 +1,4 @@
-package org.springsource.nanotrader.controller;
+package org.springframework.nanotrader.web.controller;
 
 import javax.annotation.Resource;
 
@@ -7,12 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.nanotrader.service.TradingService;
 import org.springframework.nanotrader.service.domain.Quote;
+import org.springframework.nanotrader.web.exception.NoRecordsFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springsource.nanotrader.exception.NoRecordsFoundException;
 
 /**
  *  Provides JSON based REST api to Quote repository

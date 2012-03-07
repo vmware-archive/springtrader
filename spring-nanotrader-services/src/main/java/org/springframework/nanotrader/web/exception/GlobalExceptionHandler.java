@@ -1,4 +1,4 @@
-package org.springsource.nanotrader.exception;
+package org.springframework.nanotrader.web.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpMediaTypeNotSupportedException;

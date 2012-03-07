@@ -1,4 +1,4 @@
-package org.springsource.nanotrader.exception;
+package org.springframework.nanotrader.web.exception;
 
 import java.lang.reflect.Method;
 

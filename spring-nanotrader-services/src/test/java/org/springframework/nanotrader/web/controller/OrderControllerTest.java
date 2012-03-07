@@ -1,4 +1,4 @@
-package org.springsource.nanotrader.controller;
+package org.springframework.nanotrader.web.controller;
 
 
 import static org.springframework.test.web.server.request.MockMvcRequestBuilders.get;
@@ -14,12 +14,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
-import org.springframework.nanotrader.configuration.ServiceTestConfiguration;
 import org.springframework.nanotrader.service.TradingServiceImpl;
 import org.springframework.nanotrader.service.configuration.AppConfig;
+import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration;
+import org.springframework.nanotrader.web.configuration.WebConfig;
 import org.springframework.test.web.server.MockMvc;
 import org.springframework.util.FileCopyUtils;
-import org.springsource.nanotrader.configuration.WebConfig;
 
 
 /**
