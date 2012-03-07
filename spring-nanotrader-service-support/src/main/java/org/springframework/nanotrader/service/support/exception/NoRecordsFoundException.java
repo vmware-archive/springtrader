@@ -1,4 +1,4 @@
-package org.springframework.nanotrader.web.exception;
+package org.springframework.nanotrader.service.support.exception;
 
 /**
  *  NoRecordsFoundException should be thrown whenever an entity is not 
@@ -8,7 +8,7 @@ package org.springframework.nanotrader.web.exception;
  *  @author
  */
 @SuppressWarnings("serial")
-public class NoRecordsFoundException extends Exception {
+public class NoRecordsFoundException extends RuntimeException {
 
 	
 }
