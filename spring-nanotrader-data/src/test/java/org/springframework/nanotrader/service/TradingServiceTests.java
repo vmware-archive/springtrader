@@ -118,6 +118,8 @@ public class TradingServiceTests {
 	
 	@Test
 	public void testFindHoldingsByAccount() {
+		Integer page = 0;
+		Integer pageSize = 10;
 		Holding holding100 = holdingDataOnDemand.getNewTransientHolding(100); 
 		Holding holding101 = holdingDataOnDemand.getNewTransientHolding(101);
 		holding101.setAccountAccountid(holding100.getAccountAccountid());
@@ -126,7 +128,7 @@ public class TradingServiceTests {
 		entityManager.flush();
 		entityManager.clear(); // force reload
 
-		List<Holding> holdings = tradingService.findHoldingsByAccountId(holding100.getAccountAccountid());
+		List<Holding> holdings = tradingService.findHoldingsByAccountId(holding100.getAccountAccountid(), page, pageSize);
 		assertEquals(2, holdings.size());
 		Map<Integer, Holding> map = new HashMap<Integer, Holding>();
 		map.put(holdings.get(0).getHoldingid(), holdings.get(0));

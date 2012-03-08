@@ -16,7 +16,11 @@
 package org.springframework.nanotrader.service.support;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -24,6 +28,7 @@ import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.nanotrader.service.domain.Account;
 import org.springframework.nanotrader.service.domain.Accountprofile;
 import org.springframework.nanotrader.service.domain.Holding;
 import org.springframework.nanotrader.service.domain.Quote;
@@ -42,15 +47,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class TradingServiceFacadeImpl implements TradingServiceFacade {
 
-	private static Logger log = LoggerFactory
-			.getLogger(TradingServiceFacadeImpl.class);
+	private static Logger log = LoggerFactory.getLogger(TradingServiceFacadeImpl.class);
 
 	private String ORDER_MAPPING = "order";
 
 	private static String HOLDING_MAPPING = "holding";
 
 	private static String QUOTE_MAPPING = "quote";
+	
+	private static final String ACCOUNT_MAPPING = "account";
 
+	private static Integer DEFAULT_PAGE = 0;
+	
+	private static Integer DEFAULT_PAGE_SIZE = 24;
+	
 	@Resource
 	private TradingService tradingService;
 
@@ -96,14 +106,16 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 		return accountProfileResponse;
 	}
 
-	public void saveAccountProfile(Accountprofile accountProfileRequest) {
+	public Integer saveAccountProfile(Accountprofile accountProfileRequest) {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServiceFacade.saveAccountProfile:"
 					+ accountProfileRequest.toString());
 		}
+		
 		org.springframework.nanotrader.domain.Accountprofile accountProfile = new org.springframework.nanotrader.domain.Accountprofile();
 		mapper.map(accountProfileRequest, accountProfile);
-		tradingService.saveAccountProfile(accountProfile);
+		org.springframework.nanotrader.domain.Accountprofile createdAccountProfile = tradingService.saveAccountProfile(accountProfile);
+		return createdAccountProfile.getProfileid();
 	}
 
 	public void updateAccountProfile(Accountprofile accountProfileRequest) {
@@ -116,21 +128,7 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 		tradingService.updateAccountProfile(accountProfile);
 	}
 
-	public Holding findHolding(Integer id) {
-		if (log.isDebugEnabled()) {
-			log.debug("TradingServiceFacade.findHolding: id=" + id);
-		}
-		Holding holdingResponse = new Holding();
-		org.springframework.nanotrader.domain.Holding holding = tradingService.findHolding(id);
-		if (holding == null) {
-			throw new NoRecordsFoundException();
-		}
-		mapper.map(holding, holdingResponse);
-		if (log.isDebugEnabled()) {
-			log.debug("TradingServiceFacade.findHolding - after service call. Payload is: " + holdingResponse);
-		}
-		return holdingResponse;
-	}
+	
 
 	public void updateHolding(Holding holdingRequest) {
 		if (log.isDebugEnabled()) {
@@ -194,23 +192,73 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 		}
 		return responseOrders;
 	}
+	
+	public Account findAccount(Integer id) {
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findAccount: id=" + id);
+		}
+		Account accountResponse = new Account();
+		org.springframework.nanotrader.domain.Account account = tradingService.findAccount(id);
+		if (account == null) {
+			throw new NoRecordsFoundException();
+		}
+		
+		mapper.map(account, accountResponse, ACCOUNT_MAPPING);
+		
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findAccount - after service call. Payload is: " + accountResponse);
+		}
+		return accountResponse;
+	}
+	
 
-	public List<Holding> findHoldingsByAccountId(Integer accountId) {
+	public Holding findHolding(Integer id) {
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findHolding: id=" + id);
+		}
+		Holding holdingResponse = new Holding();
+		org.springframework.nanotrader.domain.Holding holding = tradingService.findHolding(id);
+		if (holding == null) {
+			throw new NoRecordsFoundException();
+		}
+		Set<String> symbol = new HashSet<String>();
+		symbol.add(holding.getQuoteSymbol());
+		Map<String, Quote> currentQuote = getCurrentQuotes(symbol);
+		mapper.map(holding, holdingResponse);
+		holdingResponse.setQuote(currentQuote.get(holding.getQuoteSymbol()));
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findHolding - after service call. Payload is: " + holdingResponse);
+		}
+		return holdingResponse;
+	}
+	
+	
+	public List<Holding> findHoldingsByAccountId(Integer accountId, Integer page, Integer pageSize) {
+	
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServiceFacade.findHoldingsByAccount: id=" + accountId);
 		}
+		
 		List<Holding> holdingResponse = new ArrayList<Holding>();
-		List<org.springframework.nanotrader.domain.Holding> holdings = tradingService.findHoldingsByAccountId(accountId);
+		List<org.springframework.nanotrader.domain.Holding> holdings = tradingService.findHoldingsByAccountId(accountId, getPage(page), getPageSize(pageSize));
 		if (holdings == null ||  holdings.size() == 0) {
 			throw new NoRecordsFoundException();
 		}
+		
+		Set<String> symbols = new HashSet<String>();
+		for (org.springframework.nanotrader.domain.Holding h: holdings) { 
+			//get unique quotes symbols
+			symbols.add(h.getQuoteSymbol());
+		}
+		
+		Map<String, Quote> currentQuotes = getCurrentQuotes(symbols);
 		for(org.springframework.nanotrader.domain.Holding h: holdings) {
 			Holding holding = new Holding();
 			mapper.map(h, holding, HOLDING_MAPPING);
+			holding.setQuote(currentQuotes.get(h.getQuoteSymbol()));
 			holdingResponse.add(holding);
 		}
-
-
+	
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServiceFacade.findHoldingsByAccountId completed");
 		}
@@ -218,6 +266,17 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 		return holdingResponse;
 	}
 
+	private Map<String, Quote> getCurrentQuotes(Set<String> symbols) { 
+		List<org.springframework.nanotrader.domain.Quote> quotes = tradingService.findQuotesBySymbols(symbols);
+		Map<String, Quote> currentQuotes = new HashMap<String, Quote>();
+		for (org.springframework.nanotrader.domain.Quote q: quotes) {
+			Quote quote = new Quote();
+			mapper.map(q, quote);
+			currentQuotes.put(q.getSymbol(), quote);
+		}
+		return currentQuotes;
+	}
+	
 	public Quote findQuoteBySymbol(String symbol) {
 		if (log.isDebugEnabled()) {
 			log.debug("QuoteController.findQuote: quoteId=" + symbol);
@@ -234,6 +293,21 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 		return responseQuote;
 	}
 
+	private Integer getPageSize(Integer pageSize) { 
+		if (pageSize == null) { 
+			return DEFAULT_PAGE_SIZE;
+		}
+		return pageSize;
+	}
+	
+	private Integer getPage(Integer page) { 
+		if (page == null) { 
+			return DEFAULT_PAGE;
+		}
+		return page;
+	}
+	
+	
 	public static interface OrderGateway {
 
 		void sendOrder(Order order);

@@ -7,6 +7,10 @@
 		<class-a>org.springframework.nanotrader.domain.Account</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.Account
 		</class-b>
+		<field-exclude>
+			<a>orders</a>
+			<b>orders</b>
+		</field-exclude>
 	</mapping>
 
 	<!-- Start Account profile mappings -->
@@ -39,6 +43,10 @@
 		<class-a>org.springframework.nanotrader.domain.Holding</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.Holding
 		</class-b>
+		<field>
+			<a>quoteSymbol</a>
+			<b>quote.symbol</b>
+		</field>
 		<field-exclude>
 			<a>orders</a>
 			<b>orders</b>
