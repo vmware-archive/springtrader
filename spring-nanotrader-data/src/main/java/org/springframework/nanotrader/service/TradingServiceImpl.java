@@ -10,6 +10,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
@@ -66,9 +67,9 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public void saveAccountProfile(Accountprofile accountProfile) {
+	public Accountprofile saveAccountProfile(Accountprofile accountProfile) {
 		if (log.isDebugEnabled()) {
-			log.debug("TradingServices.saveAccountProfile: holdingId=" + accountProfile.toString());
+			log.debug("TradingServices.saveAccountProfile: accountProfile=" + accountProfile.toString());
 		}
 		Account account = accountProfile.getAccounts().iterator().next();
 		account.setProfileProfileid(accountProfile);
@@ -76,7 +77,7 @@ public class TradingServiceImpl implements TradingService {
 		account.setLogoutcount(0);
 		account.setBalance(account.getOpenbalance());
 		account.setCreationdate(new Date());
-		accountProfileRepository.save(accountProfile);
+		Accountprofile createdAccountProfile = accountProfileRepository.save(accountProfile);
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.saveAccountProfile: accountProfile saved.");
 		}
@@ -84,6 +85,7 @@ public class TradingServiceImpl implements TradingService {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.saveAccountProfile: completed successfully.");
 		}
+		return createdAccountProfile;
 	}
 
 	@Override
@@ -92,11 +94,11 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public List<Holding> findHoldingsByAccountId(Integer accountId) {
+	public List<Holding> findHoldingsByAccountId(Integer accountId, Integer page, Integer pageSize) {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findHoldingsByAccountId: accountId=" + accountId);
 		}
-		List<Holding> holdings = holdingRepository.findByAccountAccountid(accountId);
+		List<Holding> holdings = holdingRepository.findByAccountAccountid(accountId, new PageRequest(page, pageSize));
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findHoldingsByAccountId: completed successfully.");
 		}
@@ -288,5 +290,16 @@ public class TradingServiceImpl implements TradingService {
 	public Quote findQuoteBySymbol(String symbol) {
 		return quoteRepository.findBySymbol(symbol);
 	}
+	
+	@Override
+	public List<Quote> findQuotesBySymbols(Set<String> symbols) {
+		return quoteRepository.findBySymbolIn(symbols);
+	}
+	
+	@Override
+	public Account findAccount(Integer accountId) {
+		return accountRepository.findOne(accountId);
+	}
+	
 	
 }

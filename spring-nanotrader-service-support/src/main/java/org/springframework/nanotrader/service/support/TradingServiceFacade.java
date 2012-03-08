@@ -17,6 +17,7 @@ package org.springframework.nanotrader.service.support;
 
 import java.util.List;
 
+import org.springframework.nanotrader.service.domain.Account;
 import org.springframework.nanotrader.service.domain.Accountprofile;
 import org.springframework.nanotrader.service.domain.Holding;
 import org.springframework.nanotrader.service.domain.Order;
@@ -34,13 +35,13 @@ public interface TradingServiceFacade {
 
 	Accountprofile findAccountProfile(Integer id);
 
-	void saveAccountProfile(Accountprofile accountProfileRequest);
+	Integer saveAccountProfile(Accountprofile accountProfileRequest);
 
 	void updateAccountProfile(Accountprofile accountProfileRequest);
 
 	Holding findHolding(Integer id);
 
-	List<Holding> findHoldingsByAccountId(Integer accountId);
+	List<Holding> findHoldingsByAccountId(Integer accountId,  Integer page, Integer pageSize);
 
 	void saveHolding(Holding holdingRequest);
 
@@ -53,4 +54,6 @@ public interface TradingServiceFacade {
 	List<Order> findOrders(Integer accountId, String status);
 
 	Quote findQuoteBySymbol(String symbol);
+
+	Account findAccount(Integer id);
 }

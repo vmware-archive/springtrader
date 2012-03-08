@@ -1,6 +1,8 @@
 package org.springframework.nanotrader.web.configuration;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anySet;
+import static org.mockito.Matchers.anySetOf;
 import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.eq;
 
@@ -8,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -64,21 +67,33 @@ public class ServiceTestConfiguration  {
 	public static BigDecimal VOLUME	=  new BigDecimal(3000);
 	public static BigDecimal CURRENT_PRICE	=  new BigDecimal(48.44);
 	
+	//Account constants
+	public static BigDecimal ACCOUNT_OPEN_BALANCE	=  new BigDecimal(55.02);
+	public static BigDecimal ACCOUNT_BALANCE	=  new BigDecimal(40.11);
+	public static Integer LOGOUT_COUNT	=  new Integer(5);
+	public static Integer LOGIN_COUNT	=  new Integer(4);
+	
+	
+	@SuppressWarnings("unchecked")
 	@Bean 
 	public TradingService tradingService() {
 		TradingService tradingService = Mockito.mock(TradingService.class);
 		when(tradingService.findHolding(100)).thenReturn(holding());
-		when(tradingService.findHoldingsByAccountId(400)).thenReturn(holdings());
+		when(tradingService.findHoldingsByAccountId(eq(400), any(Integer.class), any(Integer.class))).thenReturn(holdings());
 		when(tradingService.updateHolding(any(Holding.class))).thenReturn(holding());
 		when(tradingService.findAccountProfile(400)).thenReturn(accountProfile());
 		when(tradingService.findAccountProfile(NOT_A_VALID_PROFILE)).thenReturn(null);
 		when(tradingService.updateAccountProfile(any(Accountprofile.class))).thenReturn(accountProfile());
 		when(tradingService.findOrder(999)).thenReturn(order());
 		when(tradingService.saveOrder(any(Order.class))).thenReturn(null);
+		when(tradingService.saveAccountProfile(any(Accountprofile.class))).thenReturn(accountProfile());
 		when(tradingService.updateOrder(any(Order.class))).thenReturn(null);
 		when(tradingService.findOrdersByStatus(eq(2), any(String.class))).thenReturn(orders());
 		when(tradingService.findOrders(eq(2))).thenReturn(orders());
-		when(tradingService.findQuoteBySymbol(eq("VMW"))).thenReturn(quote());
+		when(tradingService.findQuoteBySymbol(eq(SYMBOL))).thenReturn(quote());
+		when(tradingService.findQuotesBySymbols(anySetOf(String.class))).thenReturn(quotes());
+		when(tradingService.findAccount(eq(500))).thenReturn(account());
+		
 		return tradingService ;
 	}
 	
@@ -98,6 +113,21 @@ public class ServiceTestConfiguration  {
 		holding.setQuantity(QUANTITY);
 		return holding;
 	}
+	
+
+	@Bean 
+	public Account account() {
+		Account account = new Account();
+		account.setAccountid(ACCOUNT_ID);
+		account.setBalance(ACCOUNT_BALANCE);
+		account.setOpenbalance(ACCOUNT_OPEN_BALANCE);
+		account.setLogincount(LOGIN_COUNT);
+		account.setLogoutcount(LOGOUT_COUNT);
+		account.setCreationdate(new Date(1329759342904l));
+		account.setLastlogin(new Date(1329759342904l));
+		return account;
+	}
+	
 
 	@Bean 
 	public Accountprofile accountProfile() {
@@ -140,6 +170,12 @@ public class ServiceTestConfiguration  {
 		quote.setVolume(VOLUME);
 		quote.setPrice(CURRENT_PRICE);
 		return quote;
+	}
+	
+	public List<Quote> quotes() { 
+		List<Quote> quotes = new ArrayList<Quote>();
+		quotes.add(quote());
+		return quotes;
 	}
 	
 	public List<Order> orders() {

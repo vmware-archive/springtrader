@@ -26,10 +26,16 @@ public class Holding {
     private Integer accountAccountid;
 
 
-    private String quoteSymbol;
+    private Quote quote;
 
 
+	public Quote getQuote() {
+		return quote;
+	}
 
+	public void setQuote(Quote quote) {
+		this.quote = quote;
+	}
 
 	public BigDecimal getPurchaseprice() {
         return purchaseprice;
@@ -63,13 +69,7 @@ public class Holding {
         this.accountAccountid = accountAccountid;
     }
 
-	public String getQuoteSymbol() {
-        return quoteSymbol;
-    }
-
-	public void setQuoteSymbol(String quoteSymbol) {
-        this.quoteSymbol = quoteSymbol;
-    }
+	
 
 	public Integer getHoldingid() {
         return this.holdingid;
@@ -83,6 +83,6 @@ public class Holding {
 	public String toString() {
 		return "Holding [holdingid=" + holdingid + ", orders=" + orders + ", purchaseprice=" + purchaseprice
 				+ ", quantity=" + quantity + ", purchasedate=" + purchasedate + ", accountAccountid="
-				+ accountAccountid + ", quoteSymbol=" + quoteSymbol + "]";
+				+ accountAccountid + "]";
 	}
 }

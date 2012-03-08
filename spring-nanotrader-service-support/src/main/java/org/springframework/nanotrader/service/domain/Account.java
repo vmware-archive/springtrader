@@ -4,7 +4,6 @@ package org.springframework.nanotrader.service.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
 /**
  *  Account
  *  @author Brian Dussault 
@@ -13,22 +12,12 @@ import java.util.Set;
 
 public class Account {
 
-    private Set<Order> orders;
     private Date creationdate;
     private BigDecimal openbalance;
     private Integer logoutcount;
     private BigDecimal balance;
     private Date lastlogin;
     private Integer logincount;
-
-	public Set<Order> getOrders() {
-        return orders;
-    }
-
-	public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-
 
 	public Date getCreationdate() {
         return creationdate;

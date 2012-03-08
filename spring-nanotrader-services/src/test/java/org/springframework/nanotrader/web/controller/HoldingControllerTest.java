@@ -50,14 +50,15 @@ public class HoldingControllerTest {
 				.andExpect(jsonPath("$.holdingid").value(ServiceTestConfiguration.HOLDING_ID))
 				.andExpect(jsonPath("$.accountAccountid").value(ServiceTestConfiguration.ACCOUNT_ID))
 				.andExpect(jsonPath("$.purchasedate").value(PURCHASE_DATE))
-				.andExpect(jsonPath("$.quoteSymbol").value(ServiceTestConfiguration.SYMBOL))
+				.andExpect(jsonPath("$.quote.symbol").value(ServiceTestConfiguration.SYMBOL))
 				.andExpect(jsonPath("$.purchaseprice").value(PURCHASE_PRICE))
-				.andExpect(jsonPath("$.quantity").value(QUANTITY)).andDo(print());
+				.andExpect(jsonPath("$.quantity").value(QUANTITY))
+				.andDo(print());
 	}
 	
 	@Test
 	public void getHoldingByAccountIdNoRecordsFoundJson() throws Exception {
-		mockMvc.perform(get("/600/holding/").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound())
+		mockMvc.perform(get("/600/holding").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound())
 				.andExpect(content().type(MediaType.APPLICATION_JSON)).andDo(print());
 	}
 	
@@ -69,12 +70,12 @@ public class HoldingControllerTest {
 	
 	@Test
 	public void getHoldingsByAccountIdJson() throws Exception {
-		mockMvc.perform(get("/400/holding/").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mockMvc.perform(get("/400/holding").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.[0].holdingid").value(ServiceTestConfiguration.HOLDING_ID))
 				.andExpect(jsonPath("$.[0].accountAccountid").value(ServiceTestConfiguration.ACCOUNT_ID))
 				.andExpect(jsonPath("$.[0].purchasedate").value(PURCHASE_DATE))
-				.andExpect(jsonPath("$.[0].quoteSymbol").value(ServiceTestConfiguration.SYMBOL))
+				.andExpect(jsonPath("$.[0].quote.symbol").value(ServiceTestConfiguration.SYMBOL))
 				.andExpect(jsonPath("$.[0].purchaseprice").value(PURCHASE_PRICE))
 				.andExpect(jsonPath("$.[0].quantity").value(QUANTITY)).andDo(print());
 	}
@@ -83,7 +84,7 @@ public class HoldingControllerTest {
 	public void createHoldingJson() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("create-holding.json").getFile());
 		mockMvc.perform(
-				post("/400/holding/").accept(MediaType.APPLICATION_JSON).body(jsonRequest)
+				post("/400/holding").accept(MediaType.APPLICATION_JSON).body(jsonRequest)
 						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated()) // HTTP 201 - Created
 				.andDo(print());
 	}
@@ -91,7 +92,7 @@ public class HoldingControllerTest {
 	@Test
 	public void createHoldingUnsupportedMediaType() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("create-holding.json").getFile());
-		mockMvc.perform(post("/400/holding/").body(jsonRequest)).andExpect(status().is(415)) // unsupported media type
+		mockMvc.perform(post("/400/holding").body(jsonRequest)).andExpect(status().is(415)) // unsupported media type
 				.andDo(print());
 	}
 
@@ -100,7 +101,7 @@ public class HoldingControllerTest {
 	public void updateHoldingJson() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("update-holding.json").getFile());
 		mockMvc.perform(
-				put("/400/holding/").accept(MediaType.APPLICATION_JSON).body(jsonRequest)
+				put("/400/holding").accept(MediaType.APPLICATION_JSON).body(jsonRequest)
 						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andDo(print());
 	}
 

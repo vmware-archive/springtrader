@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -39,20 +40,22 @@ public class HoldingController {
 		return holdingResponse;
 	}
 	
-	@RequestMapping(value = "/{accountId}/holding/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{accountId}/holding", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Holding> findByAccountId(@PathVariable( "accountId" ) final Integer accountId ) {
-		List<Holding> holdingResponse = tradingServiceFacade.findHoldingsByAccountId(accountId);
+	public List<Holding> findByAccountId(@PathVariable( "accountId" ) final Integer accountId, 
+										 @RequestParam(value="page", required=false) Integer page, 
+										 @RequestParam(value="pageSize", required=false) Integer pageSize) {
+		List<Holding> holdingResponse = tradingServiceFacade.findHoldingsByAccountId(accountId, page, pageSize);
 		return holdingResponse;
 	}
 
-	@RequestMapping(value = "/{accountId}/holding/", method = RequestMethod.POST)
+	@RequestMapping(value = "/{accountId}/holding", method = RequestMethod.POST)
 	@ResponseStatus( HttpStatus.CREATED )
 	public void save(@RequestBody Holding holdingRequest) {
 		tradingServiceFacade.saveHolding(holdingRequest);
 	}
 
-	@RequestMapping(value = "/{accountId}/holding/", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{accountId}/holding", method = RequestMethod.PUT)
 	@ResponseStatus( HttpStatus.OK )
 	public void update(@RequestBody Holding holdingRequest) {
 		tradingServiceFacade.updateHolding(holdingRequest);

@@ -1,1 +1,1 @@
-{"purchaseprice":50000,"quantity":200,"purchasedate":"2012-02-20T17:35:42.904+0000","accountAccountid":500,"quoteSymbol":"VMW"}
+{"purchaseprice":50000,"quantity":200,"purchasedate":"2012-02-20T17:35:42.904+0000","accountAccountid":500, "quote":{"symbol":"VMW"}}
