@@ -13,15 +13,15 @@
     <div class="control-group">
       <label class="control-label" for="userid">UserId</label>
       <div class="controls">
-		<input id="userid" type="text" class="span3 required" minLength="3" value="<%= userid %>">
+		<input id="userid" type="text" class="span3 required" value="<%= userid %>">
         <p class="help-block">Alphabets or Numbers (3 to 25 chars)</p>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="password">Password</label>
+      <label class="control-label" for="passwd">Password</label>
       <div class="controls">
-		<input id="password" type="password" class="span3 required" minLength="1" value="<%= passwd %>">
+		<input id="passwd" type="password" class="span3" value="<%= passwd %>">
         <p class="help-block">Alphabets, Numbers of these [!@#$%^*()_] (3 to 25 chars)</p>
       </div>
     </div>
@@ -53,10 +53,12 @@
     <div class="control-group">
       <label class="control-label" for="creditcard">Creditcard</label>
       <div class="controls">
-		<input id="creditcard" type="text" class="span3 required" creditcard="true" value="<%= creditcard %>">
+		<input id="creditcard" type="text" class="span3" value="<%= creditcard %>">
         <p class="help-block">Must be 16 digits</p>
       </div>
     </div>
 
   <button type="submit" class="btn-success">Submit</button>
+  <div id="result"></div>
 </form>
+

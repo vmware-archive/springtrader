@@ -8,7 +8,7 @@ var Accounts = Backbone.Collection.extend({
 AccountProfile = Backbone.Model.extend({
 
     urlRoot : 'spring-nanotrader-services/api/accountProfile',
-
+    idAttribute : 'profileid',
     initialize : function() {
         this.accounts = nestCollection(this, 'accounts', new Accounts(this.get('accounts')));
         var model = this;
