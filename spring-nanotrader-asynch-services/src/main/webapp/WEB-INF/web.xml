@@ -6,7 +6,7 @@
     <!-- Location of Java @Configuration classes that configure the components that makeup this application -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>META-INF/spring/integration/application-context.xml</param-value>
+        <param-value>META-INF/spring/root-context.xml</param-value>
     </context-param>
 	
 	  <!-- Creates the Spring Container shared by all Servlets and Filters -->
