@@ -67,4 +67,9 @@
 		<class-b>org.springframework.nanotrader.service.domain.Quote</class-b>
 	</mapping>
 
+	<mapping map-id="portfolioSummary">
+		<class-a>org.springframework.nanotrader.domain.PortfolioSummary</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.PortfolioSummary
+		</class-b>
+	</mapping>
 </mappings>

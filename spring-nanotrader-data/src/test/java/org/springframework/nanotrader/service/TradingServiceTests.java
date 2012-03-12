@@ -28,6 +28,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,16 @@ import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
 import org.springframework.nanotrader.domain.Order;
+import org.springframework.nanotrader.domain.PortfolioSummary;
+import org.springframework.nanotrader.domain.Quote;
 import org.springframework.nanotrader.domain.test.AccountDataOnDemand;
 import org.springframework.nanotrader.domain.test.AccountprofileDataOnDemand;
 import org.springframework.nanotrader.domain.test.HoldingDataOnDemand;
 import org.springframework.nanotrader.domain.test.OrderDataOnDemand;
+import org.springframework.nanotrader.domain.test.QuoteDataOnDemand;
 import org.springframework.nanotrader.repository.AccountRepository;
 import org.springframework.nanotrader.repository.HoldingRepository;
+import org.springframework.nanotrader.repository.QuoteRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +59,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TradingServiceTests {
 
+	
+	@Autowired
+    private QuoteDataOnDemand dod;
+	
 	@Autowired
 	private AccountDataOnDemand accountDataOnDemand;
 
@@ -74,6 +83,12 @@ public class TradingServiceTests {
 
 	@Autowired
 	HoldingRepository holdingRepository;
+	
+	@Autowired
+    QuoteRepository quoteRepository;
+	
+	@Autowired
+    QuoteService quoteService;
 
 	@PersistenceContext
 	EntityManager entityManager;
@@ -158,6 +173,30 @@ public class TradingServiceTests {
 		
 	}
 
+	@Test
+	public void testFindAccountSummary() {
+		Holding holding = holdingDataOnDemand.getNewTransientHolding(100);
+		holding.setPurchasedate(new java.sql.Date(System.currentTimeMillis()));
+		tradingService.saveHolding(holding);
+		entityManager.flush();
+		entityManager.clear(); // force reload
+        Quote quote = new Quote();
+        quote.setSymbol("quoteSymbol_100");
+        quote.setPrice(new BigDecimal(50.00));
+        quote.setChange1(new BigDecimal(5.00));
+        quote.setVolume(new BigDecimal(50000));
+        quoteService.saveQuote(quote);
+        System.out.println(quote);
+        entityManager.flush();
+		entityManager.clear(); // force reload
+        Assert.assertNotNull("Expected 'Quote' identifier to no longer be null", quote.getQuoteid());
+		PortfolioSummary portfolioSummary = tradingService.findPortfolioSummary(100);
+		Assert.assertTrue("Expected 'PortfolioSummary' holding count to be equal to 1", portfolioSummary.getNumberOfHoldings() == 1);
+
+
+	}
+	
+	
 	@Test
 	public void testSaveAndFindOrder() {
 		Order order = orderDataOnDemand.getNewTransientOrder(100);

@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.nanotrader.service.domain.Account;
 import org.springframework.nanotrader.service.domain.Accountprofile;
 import org.springframework.nanotrader.service.domain.Holding;
+import org.springframework.nanotrader.service.domain.PortfolioSummary;
 import org.springframework.nanotrader.service.domain.Quote;
 import org.springframework.nanotrader.service.TradingService;
 import org.springframework.nanotrader.service.domain.Order;
@@ -56,6 +57,8 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 	private static String QUOTE_MAPPING = "quote";
 	
 	private static final String ACCOUNT_MAPPING = "account";
+
+	private static final String PORTFOLIO_SUMMARY__MAPPING = "portfolioSummary";
 
 	private static Integer DEFAULT_PAGE = 0;
 	
@@ -279,7 +282,7 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 	
 	public Quote findQuoteBySymbol(String symbol) {
 		if (log.isDebugEnabled()) {
-			log.debug("QuoteController.findQuote: quoteId=" + symbol);
+			log.debug("TradingServiceFacade.findQuote: quoteId=" + symbol);
 		}
 		org.springframework.nanotrader.domain.Quote quote = tradingService.findQuoteBySymbol(symbol);
 		if (quote == null) {
@@ -288,11 +291,25 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 		Quote responseQuote = new Quote();
 		mapper.map(quote, responseQuote, QUOTE_MAPPING);
 		if (log.isDebugEnabled()) {
-			log.debug("QuoteController.findQuote: completed successfully.");
+			log.debug("TradingServiceFacade.findQuote: completed successfully.");
 		}
 		return responseQuote;
 	}
 
+	
+	public PortfolioSummary findPortfolioSummary(Integer accountId) { 
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findPortfolioSummary: accountId=" + accountId);
+		}
+		org.springframework.nanotrader.domain.PortfolioSummary portfolioSummary = tradingService.findPortfolioSummary(accountId);
+		PortfolioSummary portfolioSummaryResponse = new PortfolioSummary();
+		mapper.map(portfolioSummary, portfolioSummaryResponse, PORTFOLIO_SUMMARY__MAPPING);
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findPortfolioSummary: completed successfully.");
+		}
+		return portfolioSummaryResponse;
+	}
+	
 	private Integer getPageSize(Integer pageSize) { 
 		if (pageSize == null) { 
 			return DEFAULT_PAGE_SIZE;
