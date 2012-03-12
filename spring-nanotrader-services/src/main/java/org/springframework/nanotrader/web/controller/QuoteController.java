@@ -2,8 +2,6 @@ package org.springframework.nanotrader.web.controller;
 
 import javax.annotation.Resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.nanotrader.service.domain.Quote;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
@@ -13,15 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- *  Provides JSON based REST api to Quote repository
- *  
- *  @author Brian Dussault 
- *  @author
+ * Provides JSON based REST api to Quote repository
+ * 
+ * @author Brian Dussault
+ * @author
  */
 @Controller
 @RequestMapping("/quote/*")
 public class QuoteController {
-	private static Logger log = LoggerFactory.getLogger(QuoteController.class);
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
 
