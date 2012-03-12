@@ -20,6 +20,7 @@ import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
 import org.springframework.nanotrader.domain.Order;
+import org.springframework.nanotrader.domain.PortfolioSummary;
 import org.springframework.nanotrader.domain.Quote;
 import org.springframework.nanotrader.service.TradingService;
 import org.springframework.nanotrader.service.TradingServiceImpl;
@@ -74,6 +75,11 @@ public class ServiceTestConfiguration  {
 	public static Integer LOGIN_COUNT	=  new Integer(4);
 	
 	
+	//Portfolio Summary
+	public static Integer HOLDING_COUNT	=  1;
+	public static BigDecimal BASIS =  new BigDecimal(150.25);
+	public static BigDecimal MARKET_VALUE =  new BigDecimal(300.10);
+	
 	@SuppressWarnings("unchecked")
 	@Bean 
 	public TradingService tradingService() {
@@ -93,8 +99,8 @@ public class ServiceTestConfiguration  {
 		when(tradingService.findQuoteBySymbol(eq(SYMBOL))).thenReturn(quote());
 		when(tradingService.findQuotesBySymbols(anySetOf(String.class))).thenReturn(quotes());
 		when(tradingService.findAccount(eq(500))).thenReturn(account());
-		
-		return tradingService ;
+		when(tradingService.findPortfolioSummary(eq(2))).thenReturn(portfolioSummary());
+		return tradingService;
 	}
 	
 	@Bean
@@ -188,6 +194,14 @@ public class ServiceTestConfiguration  {
 		List<Holding> holdings = new ArrayList<Holding>();
 		holdings.add(holding());
 		return holdings;
+	}
+	
+	public PortfolioSummary portfolioSummary() {
+		PortfolioSummary portfolioSummary = new PortfolioSummary();
+		portfolioSummary.setNumberOfHoldings(HOLDING_COUNT);
+		portfolioSummary.setTotalBasis(BASIS);
+		portfolioSummary.setTotalMarketValue(MARKET_VALUE);
+		return portfolioSummary;
 	}
 
 }

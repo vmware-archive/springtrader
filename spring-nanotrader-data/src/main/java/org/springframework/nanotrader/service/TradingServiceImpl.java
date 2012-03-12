@@ -15,9 +15,11 @@ import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
 import org.springframework.nanotrader.domain.Order;
+import org.springframework.nanotrader.domain.PortfolioSummary;
 import org.springframework.nanotrader.domain.Quote;
 import org.springframework.nanotrader.repository.AccountProfileRepository;
 import org.springframework.nanotrader.repository.AccountRepository;
+import org.springframework.nanotrader.repository.PortfolioSummaryRepository;
 import org.springframework.nanotrader.repository.HoldingRepository;
 import org.springframework.nanotrader.repository.OrderRepository;
 import org.springframework.nanotrader.repository.QuoteRepository;
@@ -49,6 +51,9 @@ public class TradingServiceImpl implements TradingService {
 
 	@Autowired
 	private QuoteRepository quoteRepository;
+	
+	@Autowired
+	private PortfolioSummaryRepository portfolioSummaryRepository;
 
 	@Override
 	public Accountprofile findAccountProfile(Integer id) {
@@ -291,7 +296,6 @@ public class TradingServiceImpl implements TradingService {
 		return quoteRepository.findBySymbol(symbol);
 	}
 	
-	@Override
 	public List<Quote> findQuotesBySymbols(Set<String> symbols) {
 		return quoteRepository.findBySymbolIn(symbols);
 	}
@@ -300,6 +304,12 @@ public class TradingServiceImpl implements TradingService {
 	public Account findAccount(Integer accountId) {
 		return accountRepository.findOne(accountId);
 	}
+	
+	public PortfolioSummary findPortfolioSummary(Integer accountId) { 
+		PortfolioSummary portfolioSummary = portfolioSummaryRepository.findPortfolioSummary(accountId);
+		return portfolioSummary;
+	}
+	
 	
 	
 }

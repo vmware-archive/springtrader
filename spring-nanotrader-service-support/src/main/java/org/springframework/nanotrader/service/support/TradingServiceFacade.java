@@ -21,6 +21,7 @@ import org.springframework.nanotrader.service.domain.Account;
 import org.springframework.nanotrader.service.domain.Accountprofile;
 import org.springframework.nanotrader.service.domain.Holding;
 import org.springframework.nanotrader.service.domain.Order;
+import org.springframework.nanotrader.service.domain.PortfolioSummary;
 import org.springframework.nanotrader.service.domain.Quote;
 
 /**
@@ -56,4 +57,6 @@ public interface TradingServiceFacade {
 	Quote findQuoteBySymbol(String symbol);
 
 	Account findAccount(Integer id);
+	
+	PortfolioSummary findPortfolioSummary(Integer accountId);
 }

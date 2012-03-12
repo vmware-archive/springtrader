@@ -7,6 +7,7 @@ import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
 import org.springframework.nanotrader.domain.Order;
+import org.springframework.nanotrader.domain.PortfolioSummary;
 import org.springframework.nanotrader.domain.Quote;
 
 
@@ -46,5 +47,5 @@ public interface TradingService {
 
 	public Account findAccount(Integer accountId);
 
-
+	public PortfolioSummary findPortfolioSummary(Integer accountId);
 }
