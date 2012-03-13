@@ -10,15 +10,20 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
 import org.springframework.nanotrader.domain.Quote;
 import org.springframework.nanotrader.repository.AccountProfileRepository;
 import org.springframework.nanotrader.repository.AccountRepository;
+import org.springframework.nanotrader.repository.MarketSummaryRepository;
 import org.springframework.nanotrader.repository.PortfolioSummaryRepository;
 import org.springframework.nanotrader.repository.HoldingRepository;
 import org.springframework.nanotrader.repository.OrderRepository;
@@ -37,6 +42,8 @@ public class TradingServiceImpl implements TradingService {
 
 	private static String OPEN_STATUS = "open";
 
+	private static Integer TOP_N = 3;
+	
 	@Autowired
 	private AccountProfileRepository accountProfileRepository;
 
@@ -54,6 +61,9 @@ public class TradingServiceImpl implements TradingService {
 	
 	@Autowired
 	private PortfolioSummaryRepository portfolioSummaryRepository;
+	
+	@Autowired
+	private MarketSummaryRepository marketSummaryRepository;
 
 	@Override
 	public Accountprofile findAccountProfile(Integer id) {
@@ -296,6 +306,7 @@ public class TradingServiceImpl implements TradingService {
 		return quoteRepository.findBySymbol(symbol);
 	}
 	
+	@Override
 	public List<Quote> findQuotesBySymbols(Set<String> symbols) {
 		return quoteRepository.findBySymbolIn(symbols);
 	}
@@ -305,11 +316,33 @@ public class TradingServiceImpl implements TradingService {
 		return accountRepository.findOne(accountId);
 	}
 	
+	@Override
 	public PortfolioSummary findPortfolioSummary(Integer accountId) { 
 		PortfolioSummary portfolioSummary = portfolioSummaryRepository.findPortfolioSummary(accountId);
 		return portfolioSummary;
 	}
 	
 	
+	public MarketSummary findMarketSummary() { 
+		MarketSummary marketSummary = marketSummaryRepository.findMarketSummary();
+		//get top losing stocks
+		Page<Quote> losers = quoteRepository.findAll(new PageRequest(0, TOP_N, new Sort(Direction.ASC, "change1")));
+		
+		//get top gaining stocks
+		Page<Quote> winners = quoteRepository.findAll(new PageRequest(0, TOP_N, new Sort(Direction.DESC, "change1")));
+		
+		List<Quote> topLosers = new ArrayList<Quote>(TOP_N);
+		for (Quote q: losers) { 
+			topLosers.add(q);
+		}
+		List<Quote> topGainers = new ArrayList<Quote>(TOP_N);
+		for (Quote q: winners) { 
+			topGainers.add(q);
+		}
+		marketSummary.setTopLosers(topLosers);
+		marketSummary.setTopGainers(topGainers);
+		marketSummary.setSummaryDate(new Date());
+		return marketSummary;
+	}
 	
 }

@@ -35,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
 import org.springframework.nanotrader.domain.Quote;
@@ -186,7 +187,6 @@ public class TradingServiceTests {
         quote.setChange1(new BigDecimal(5.00));
         quote.setVolume(new BigDecimal(50000));
         quoteService.saveQuote(quote);
-        System.out.println(quote);
         entityManager.flush();
 		entityManager.clear(); // force reload
         Assert.assertNotNull("Expected 'Quote' identifier to no longer be null", quote.getQuoteid());
@@ -226,5 +226,31 @@ public class TradingServiceTests {
 
 		updatedOrder = tradingService.findOrder(order.getOrderid());
 		assertEquals(foundOrder.toString(), updatedOrder.toString());
+	}
+	
+	@Test
+	public void testFindMarketSummary() {
+		
+        Quote quote = new Quote();
+        quote.setSymbol("symbol1");
+        quote.setPrice(new BigDecimal(50.00));
+        quote.setChange1(new BigDecimal(5.00));
+        quote.setVolume(new BigDecimal(50000));
+        quoteService.saveQuote(quote);
+		entityManager.flush();
+		entityManager.clear(); // force reload
+        Quote quote2 = new Quote();
+        quote2.setSymbol("symbol2");
+        quote2.setPrice(new BigDecimal(150.00));
+        quote2.setChange1(new BigDecimal(15.00));
+        quote2.setVolume(new BigDecimal(150000));
+        quoteService.saveQuote(quote2);
+        entityManager.flush();
+		entityManager.clear(); // force reload
+		MarketSummary marketSummary = tradingService.findMarketSummary();
+		// need to harden this test!!
+		Assert.assertTrue("Expected 'MarketSummary' Market Volume should be => than 200000", marketSummary.getTradeStockIndexVolume().intValue() >= 200000);
+
+
 	}
 }

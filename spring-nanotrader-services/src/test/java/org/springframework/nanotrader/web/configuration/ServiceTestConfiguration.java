@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
 import org.springframework.nanotrader.domain.Quote;
@@ -80,6 +81,11 @@ public class ServiceTestConfiguration  {
 	public static BigDecimal BASIS =  new BigDecimal(150.25);
 	public static BigDecimal MARKET_VALUE =  new BigDecimal(300.10);
 	
+	//Market Summary
+	public static BigDecimal MARKET_INDEX =  new BigDecimal(100.25);
+	public static BigDecimal MARKET_OPENING =  new BigDecimal(35.25);
+	public static BigDecimal MARKET_VOLUME =  new BigDecimal(40.45);
+	
 	@SuppressWarnings("unchecked")
 	@Bean 
 	public TradingService tradingService() {
@@ -100,6 +106,7 @@ public class ServiceTestConfiguration  {
 		when(tradingService.findQuotesBySymbols(anySetOf(String.class))).thenReturn(quotes());
 		when(tradingService.findAccount(eq(500))).thenReturn(account());
 		when(tradingService.findPortfolioSummary(eq(2))).thenReturn(portfolioSummary());
+		when(tradingService.findMarketSummary()).thenReturn(marketSummary());
 		return tradingService;
 	}
 	
@@ -204,4 +211,20 @@ public class ServiceTestConfiguration  {
 		return portfolioSummary;
 	}
 
+	public MarketSummary marketSummary() {
+		MarketSummary marketSummary = new MarketSummary();
+		marketSummary.setSummaryDate(new Date(1329759342904l));
+		marketSummary.setTradeStockIndexAverage(MARKET_INDEX);
+		marketSummary.setTradeStockIndexOpenAverage(MARKET_OPENING);
+		marketSummary.setTradeStockIndexVolume(MARKET_VOLUME);
+		List<Quote> loserQuotes = new ArrayList<Quote>();
+		loserQuotes.add(quote());
+		marketSummary.setTopLosers(loserQuotes);
+		List<Quote> gainingQuotes = new ArrayList<Quote>();
+		gainingQuotes.add(quote());
+		marketSummary.setTopGainers(gainingQuotes);
+		return marketSummary;
+	}
+
+	
 }
