@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.nanotrader.service.domain.Order;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  *  Provides JSON based REST api to Order repository
@@ -50,23 +53,25 @@ public class OrderController {
 	}
 	
 	
-
 	@RequestMapping(value = "/{id}/order", method = RequestMethod.POST)
 	@ResponseStatus( HttpStatus.CREATED )
-	public void save(@RequestBody Order orderRequest, @PathVariable( "id" ) final Integer accountId) {
-		if (log.isDebugEnabled()) { 
-			log.debug("OrderController.save:" + orderRequest.toString());
-		}
+	public ResponseEntity<String> save(@RequestBody Order orderRequest, @PathVariable( "id" ) final Integer accountId,
+										UriComponentsBuilder builder) {
 		orderRequest.setAccountId(accountId);
 		Integer orderId = tradingServiceFacade.saveOrder(orderRequest, true);
-		// if asynch, pass in false and null will be returned
-		// response status ACCEPTED
-		// else return URL to order in Location: header
-		if (log.isDebugEnabled()) { 
-			log.debug("OrderController.save:" + orderId);
-		}
+		HttpHeaders responseHeaders = new HttpHeaders();   
+		responseHeaders.setLocation(builder.path("/"+ accountId + "/order/{id}").buildAndExpand(orderId).toUri());
+		return new ResponseEntity<String>(responseHeaders, HttpStatus.CREATED);
 	}
 
+	
+	@RequestMapping(value = "/{id}/order/asynch", method = RequestMethod.POST)
+	@ResponseStatus( HttpStatus.ACCEPTED )
+	public void saveAsynch(@RequestBody Order orderRequest, @PathVariable( "id" ) final Integer accountId) {
+		orderRequest.setAccountId(accountId);
+		tradingServiceFacade.saveOrder(orderRequest, false);
+	}
+	
 	@RequestMapping(value = "/{id}/order", method = RequestMethod.PUT)
 	@ResponseStatus( HttpStatus.OK )
 	public void update( @RequestBody Order orderRequest) {

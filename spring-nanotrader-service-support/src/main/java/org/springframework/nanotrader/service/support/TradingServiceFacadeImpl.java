@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.nanotrader.service.domain.Account;
 import org.springframework.nanotrader.service.domain.Accountprofile;
 import org.springframework.nanotrader.service.domain.Holding;
+import org.springframework.nanotrader.service.domain.MarketSummary;
 import org.springframework.nanotrader.service.domain.PortfolioSummary;
 import org.springframework.nanotrader.service.domain.Quote;
 import org.springframework.nanotrader.service.TradingService;
@@ -58,7 +59,9 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 	
 	private static final String ACCOUNT_MAPPING = "account";
 
-	private static final String PORTFOLIO_SUMMARY__MAPPING = "portfolioSummary";
+	private static final String PORTFOLIO_SUMMARY_MAPPING = "portfolioSummary";
+	
+	private static final String MARKET_SUMMARY_MAPPING = "marketSummary";
 
 	private static Integer DEFAULT_PAGE = 0;
 	
@@ -303,11 +306,24 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 		}
 		org.springframework.nanotrader.domain.PortfolioSummary portfolioSummary = tradingService.findPortfolioSummary(accountId);
 		PortfolioSummary portfolioSummaryResponse = new PortfolioSummary();
-		mapper.map(portfolioSummary, portfolioSummaryResponse, PORTFOLIO_SUMMARY__MAPPING);
+		mapper.map(portfolioSummary, portfolioSummaryResponse, PORTFOLIO_SUMMARY_MAPPING);
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServiceFacade.findPortfolioSummary: completed successfully.");
 		}
 		return portfolioSummaryResponse;
+	}
+	
+	public MarketSummary findMarketSummary() { 
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findMarketSummary: Start");
+		}
+		org.springframework.nanotrader.domain.MarketSummary marketSummary = tradingService.findMarketSummary();
+		MarketSummary marketSummaryResponse = new MarketSummary();
+		mapper.map(marketSummary, marketSummaryResponse, MARKET_SUMMARY_MAPPING);
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findMarketSummary: completed successfully.");
+		}
+		return marketSummaryResponse;
 	}
 	
 	private Integer getPageSize(Integer pageSize) { 

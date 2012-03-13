@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class HoldingController {
-	private static Logger log = LoggerFactory.getLogger(HoldingController.class);
 
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;

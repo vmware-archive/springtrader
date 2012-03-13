@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
 import org.springframework.nanotrader.domain.Quote;
@@ -43,9 +44,11 @@ public interface TradingService {
 
 	public abstract Quote findQuoteBySymbol(String symbol);
 
-	public List<Quote> findQuotesBySymbols(Set<String> symbols);
+	public abstract List<Quote> findQuotesBySymbols(Set<String> symbols);
 
-	public Account findAccount(Integer accountId);
+	public abstract Account findAccount(Integer accountId);
 
-	public PortfolioSummary findPortfolioSummary(Integer accountId);
+	public abstract PortfolioSummary findPortfolioSummary(Integer accountId);
+	
+	public abstract MarketSummary findMarketSummary();
 }
