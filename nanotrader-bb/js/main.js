@@ -66,12 +66,14 @@ var AppRouter = Backbone.Router.extend({
 
 });
 
+
 tpl.loadTemplates(['home', 'account-summary', 'user-statistics',
 				'recent-transactions', 'positions', 'portfolio',
 				'portfolio-summary', 'holdinglist', 'holding', 'accountprofile', 'tabs',
 				'header', 'login', 'portfolio-chart',
 				'quote-row', 'quote-list', 'quote-prompt',
-				'recent-orders', 'trade'], function() {
+				'order-row', 'order-list',
+				'trade'], function() {
 			app = new AppRouter();
 			Backbone.history.start();
 		});

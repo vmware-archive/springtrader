@@ -20,13 +20,12 @@ TradeView = Backbone.View
             },
 
             render : function(eventName) {
-
+                var userid = 30;  //FIX_ME!  Needs to come from the app level
                 $(this.el).html(this.template());
                 $('#quote', this.el).append(new FullQuoteView().render().el);
-
-                // NOT YET IMPLEMENTED: recent orders data
+                
                 $('#recent-orders', this.el).append(
-                        new RecentOrdersView().render().el);
+                        new OrderListView(userid).render().el);
                 return this;
             }
 
