@@ -1,21 +1,45 @@
 Quote = Backbone.Model.extend({
-			initialize : function() {
-				var model = this;
-				$.ajax({
-							type : "GET",
-							url : 'data/quote.json',
-							dataType : 'json',
-							// Make synchronous ajax call
-							async : false,
-							// Since GET request is cached, make the cache to
-							// false
-							cache : false,
-							success : function(response) {
-								model.set(response.results[0]);
-							},
-							error : function(xhr, textStatus, errorThrown) {
-								alert('Error' + xhr.status + " " + errorThrown);
-							}
-						});
-			}
-		});
+    idAttribute : 'quoteid',
+
+    urlRoot : 'spring-nanotrader-services/api/quote',
+
+    initialize : function() {
+    }
+
+});
+
+QuoteCollection = Backbone.Collection.extend({
+
+    model : Quote,
+
+    url : "spring-nanotrader-services/api/quote",
+
+    findBySymbols : function(symbols) {
+        var self = this;
+        self.reset();
+        // Convert commas to spaces
+        symbols.replace(",", " ");
+        _.each(symbols.split(" "), function(symbol) {
+            if (symbol != "") {
+                var url = "spring-nanotrader-services/api/quote/" + symbol;
+                // FIX_ME: use a bind instead of ajax call
+                console.log("findBySymbols url: " + url);
+                $.ajax({
+                    url : url,
+                    dataType : "json",
+                    async : false,
+                    success : function(data) {
+                        console.log("search success: " + symbol + " length: "
+                                + data.length);
+                        self.add(data);
+                    },
+                    failure : function(data) {
+                        console.log("quote failure on " + symbol);
+                    }
+                });
+            }
+
+        });
+    }
+
+});
