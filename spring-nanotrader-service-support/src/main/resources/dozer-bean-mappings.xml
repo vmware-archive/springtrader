@@ -72,4 +72,9 @@
 		<class-b>org.springframework.nanotrader.service.domain.PortfolioSummary
 		</class-b>
 	</mapping>
+	
+	<mapping map-id="marketSummary">
+		<class-a>org.springframework.nanotrader.domain.MarketSummary</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.MarketSummary</class-b>
+	</mapping>
 </mappings>

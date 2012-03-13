@@ -56,6 +56,7 @@ public class TradingServiceFacadeTests {
 	public void testSynch() {
 		org.springframework.nanotrader.domain.Order existingOrder = 
 				orderDataOnDemand.getRandomOrder();
+		System.out.println("->" + existingOrder.getAccountAccountid());
 		Order orderRequest = new Order();
 		orderRequest.setAccountId(existingOrder.getAccountAccountid().getAccountid());
 		orderRequest.setOrdertype(TradingService.ORDER_TYPE_BUY);

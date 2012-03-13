@@ -30,8 +30,6 @@ public class Quote implements Serializable {
         this.quoteid = id;
     }
 
-
-
 	@Column(name = "low", precision = 14, scale = 2)
     private BigDecimal low;
 
