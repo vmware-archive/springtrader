@@ -5,6 +5,7 @@ var AppRouter = Backbone.Router.extend({
 				"/login" : "login",
 				"/portfolio/:id" : "portfolio"
 			},
+
 			initialize : function() {
 				this.headerView = new HeaderView();
 				$('#header').html(this.headerView.render().el);
@@ -26,9 +27,8 @@ var AppRouter = Backbone.Router.extend({
 				this.loginView.render();
 				$('#content').html(this.loginView.el);
 			},
-			home : function() {
-				this.homeView = new HomeView();
-				this.homeView.render();
+			home : function(id) {
+				this.homeView = new HomeView(id);
 				$('#content').html(this.homeView.el);
 				this.tabView = new TabView({
 							name : 'home'
@@ -36,30 +36,15 @@ var AppRouter = Backbone.Router.extend({
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
 			},
-			portfolio : function() {
-				this.PortfolioView = new PortfolioView();
-				this.PortfolioView.render();
+			portfolio : function(id) {
+				this.PortfolioView = new PortfolioView(id);
 				$('#content').html(this.PortfolioView.el);
 				this.tabView = new TabView({
 							name : 'portfolio'
 						});
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
-			},
-			trade : function() {
-				if (!this.tradeView) {
-					this.tradeView = new TradeView();
-					this.tradeView.render();
-				}
-				$('#content').html(this.tradeView.el);
-				this.tabView = new TabView({
-							name : 'trade'
-						});
-				this.tabView.render();
-				$('#tabs').html(this.tabView.el);
-
 			}
-
 		});
 
 tpl.loadTemplates(['home', 'account-summary', 'user-statistics',
