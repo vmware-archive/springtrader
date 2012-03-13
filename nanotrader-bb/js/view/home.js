@@ -1,16 +1,38 @@
 AccountSummaryView = Backbone.View.extend({
 			tagName : 'div',
 			initialize : function(account_id) {
+				this.account_id = account_id;
 				this.template = _.template(tpl.get('account-summary'));
 				this.model = new AccountSummary({
-							id : account_id
+							id : account_id,
+							numberOfHolding : "",
+							totalHolding : "",
+							gain : ""
 						});
-				this.model.bind('change', this.render, this);
+				this.model.bind('change', this.setPortfolio, this);
 				this.model.fetch();
 			},
 			render : function() {
+				var test = this.holding.get("numberOfHoldings");
+				var test1 = this.model.get("numberOfHoldings");
+				var attr = this.model.attributes;
+				this.model.set({
+							numberOfHoldings : this.holding
+									.get("numberOfHoldings"),
+							totalHolding : this.holding.get("totalMarketValue"),
+							gain : this.holding.get("gain")
+						}, {
+							silent : true
+						});
 				$(this.el).html(this.template(this.model.toJSON()));
 				return this;
+			},
+			setPortfolio : function() {
+				this.holding = new PortfolioSummary();
+				this.holding.url = 'spring-nanotrader-services/api/'
+						+ this.account_id + '/portfolioSummary';
+				this.holding.bind('change', this.render, this);
+				this.holding.fetch();
 			}
 		});
 UserStatisticsView = Backbone.View.extend({

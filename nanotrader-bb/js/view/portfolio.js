@@ -1,11 +1,15 @@
 PortfolioSummaryView = Backbone.View.extend({
 			tagName : 'div',
-			initialize : function() {
+			initialize : function(account_id) {
 				this.template = _.template(tpl.get('portfolio-summary'));
+				this.model = new PortfolioSummary({});
+				this.model.url = 'spring-nanotrader-services/api/' + account_id
+						+ '/portfolioSummary';
+				this.model.bind('change', this.render, this);
+				this.model.fetch();
 			},
 			render : function() {
-				var ps = new PortfolioSummary();
-				$(this.el).html(this.template(ps.toJSON()));
+				$(this.el).html(this.template(this.model.toJSON()));
 				return this;
 			}
 		});
@@ -17,7 +21,6 @@ HoldingView = Backbone.View.extend({
 				this.model = holding;
 			},
 			render : function() {
-				var test = this.model.toJSON();
 				$(this.el).html(this.template(this.model.toJSON()));
 				return this;
 			}
@@ -29,6 +32,7 @@ HoldingListView = Backbone.View.extend({
 				this.holdings = new Holdings();
 				this.holdings.url = 'spring-nanotrader-services/api/'
 						+ account_id + '/holding';
+				this.holdings.bind('add', this.render, this);
 				this.holdings.fetch();
 			},
 			render : function() {
@@ -48,8 +52,8 @@ PortfolioView = Backbone.View.extend({
 				this.template = _.template(tpl.get('portfolio'));
 				$(this.el).html(this.template());
 				$('#portfolio-summary', this.el)
-						.append(new PortfolioSummaryView().render().el);
+						.append(new PortfolioSummaryView(account_id).el);
 				$('#holding-list', this.el)
-						.append(new HoldingListView(account_id).render().el);
+						.append(new HoldingListView(account_id).el);
 			}
 		});

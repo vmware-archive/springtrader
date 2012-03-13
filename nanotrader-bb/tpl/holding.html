@@ -1,9 +1,8 @@
-<td nowrap="nowrap" height="25" align="left"> <%=purchasedate%></td>
-<td nowrap="nowrap" height="25" align="left"> <%=quote.symbol%></td>
-<td nowrap="nowrap" height="25"><%=quantity%>&nbsp;</td>
-<td nowrap="nowrap" height="25"><%=purchaseprice%>&nbsp; </td>
-<td nowrap="nowrap" height="25">Current Price&nbsp; </td>
-<td nowrap="nowrap" height="25">Purchase Basis&nbsp; </td>
-<td nowrap="nowrap" height="25"><font color="#006600">Market Value</font>&nbsp; </td>
-<td nowrap="nowrap" height="25"><font color="#006600">Total Gain</font>&nbsp; </td>
-<td><a href="trade.html"> Sell</a></td>
+<td nowrap="nowrap" width="300" height="45" align="left" padding="20px"> <%=purchasedate%></td>
+<td nowrap="nowrap" width="60" height="45" align="left" padding="20px"> <%=quote.symbol%></td>
+<td nowrap="nowrap" width="60" height="45" padding="20px"><%=quantity%>&nbsp;</td>
+<td nowrap="nowrap" width="60" height="45"><%=purchaseprice%>&nbsp; </td>
+<td nowrap="nowrap" width="70" height="45"><%=quote.price%>&nbsp; </td>
+<td nowrap="nowrap" width="120" height="45"><%=quantity * quote.price%>&nbsp; </td>
+<td nowrap="nowrap" width="120" height="45"><%= (quantity * quote.price) - (quantity * purchaseprice)%>&nbsp; </td>
+<td nowrap="nowrap" width="60" height="45"><a href="trade.html"> Sell</a></td>

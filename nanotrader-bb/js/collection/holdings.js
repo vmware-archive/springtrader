@@ -5,5 +5,10 @@ Holding = Backbone.Model.extend({
 		});
 
 Holdings = Backbone.Collection.extend({
-			model : Holding
+			model : Holding,
+			parse : function(response) {
+				_.each(response, function(model) {
+							this.add(model);
+						}, this);
+			}
 		});
