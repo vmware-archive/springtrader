@@ -10,6 +10,8 @@ window.TabView = Backbone.View.extend({
             variables.isHomeActive="active";
         } else if (activetab.name === 'profile') {
             variables.isProfileActive="active";
+        } else if (activetab.name === 'trade') {
+            variables.isTradeActive="trade";
         } else if (activetab.name === 'portfolio') {
             variables.isPortfolioActive="active";
         }

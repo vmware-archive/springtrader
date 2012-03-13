@@ -4,7 +4,8 @@ var AppRouter = Backbone.Router.extend({
         "" : "home",
         "/accountprofile/:id" : "accountprofile",
         "/login" : "login",
-        "/portfolio" : "portfolio"
+        "/portfolio" : "portfolio",
+        "/trade" : "trade"
     },
 
     initialize : function() {
@@ -48,13 +49,31 @@ var AppRouter = Backbone.Router.extend({
         });
         this.tabView.render();
         $('#tabs').html(this.tabView.el);
-    }
+    },
+    trade : function() {
+        if (!this.tradeView) {
+                this.tradeView = new TradeView();
+                this.tradeView.render();
+        }
+        $('#content').html(this.tradeView.el);
+        this.tabView = new TabView({
+                name : 'trade'
+        });
+        this.tabView.render();
+        $('#tabs').html(this.tabView.el);
+
+}
+
 });
+
 
 tpl.loadTemplates(['home', 'account-summary', 'user-statistics',
 				'recent-transactions', 'positions', 'portfolio',
 				'portfolio-summary', 'holdinglist', 'holding', 'accountprofile', 'tabs',
-				'header', 'login', 'portfolio-chart'], function() {
+				'header', 'login', 'portfolio-chart',
+				'quote-row', 'quote-list', 'quote-prompt',
+				'order-row', 'order-list',
+				'trade'], function() {
 			app = new AppRouter();
 			Backbone.history.start();
 		});
