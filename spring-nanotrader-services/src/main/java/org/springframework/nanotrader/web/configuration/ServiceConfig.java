@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @ImportResource({ "classpath:/META-INF/spring/applicationContext.xml",
-		"classpath:/META-INF/spring/applicationContext-jpa.xml" })
+		"classpath:/META-INF/spring/applicationContext-jpa.xml",  "classpath:/META-INF/spring/integration/amqp-outbound-context.xml" })
 @Profile("production")
 public class ServiceConfig {
 
