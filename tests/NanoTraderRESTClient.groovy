@@ -17,48 +17,80 @@ def init() {
   nanotrader = new RESTClient(path)
 }
 
-def getOrder(id, status="Buy") {
+def getOrder(id, status, positive=true) {
   try {
     def orderPath = "/spring-nanotrader-services/api/" + id + "/order"
-    def resp = nanotrader.get(path:"${orderPath}")
-    assert resp.status == 200
-    println "\n\n##################### ORDER DATA #####################"
-    println "DATA:" + resp.data + ":"
+    def resp = null
+    if (status == "all") {
+      resp = nanotrader.get(path:"${orderPath}")
+    }
+    else {
+     resp = nanotrader.get(path:"${orderPath}",
+                           query:[status:"${status}"])
+    }
+    if (positive) {
+      assert resp.status == 200
+      println "\n\n##################### ORDER DATA #####################"
+      println "DATA:" + resp.data + ":"
+    }
   }
   catch(ex) {
-    print ex.response.data
-    ex.printStackTrace()
-    assert false
+    if (!positive) {
+      assert ex.response.status == 404
+      println "404 response code found as expected"
+    }
+    else {
+      println "response code:" + ex.response.status
+      print ex.response.data
+      ex.printStackTrace()
+    }
   }
 }
 
-def synchronized createOrder() {
+def synchronized createOrder(id, quantity=555, orderType="buy", symbol="s0", positive=true) {
   try {
-    accountid = 1
-    def orderPath = "/spring-nanotrader-services/api/" + accountid + "/order"
+    def orderPath = "/spring-nanotrader-services/api/" + id + "/order"
     def resp = nanotrader.post(path:"${orderPath}",
-                             body:[quantity:-100,ordertype:"buy",quote:[symbol:"s0"]],
-                             requestContentType:JSON)
-   assert resp.status == 201
+                               body:[quantity:quantity, ordertype:orderType, quote:[symbol:symbol]],
+                               requestContentType:JSON)
+   if (positive) {
+     assert resp.status == 201
+   }
   }
   catch(ex) {
-    print ex.response.data
-    ex.printStackTrace()
-    assert false
-    
+    if (!positive) {
+      assert ex.response.status == 400
+      println "400 response code found as expected"
+    }
+    else {
+      println "response code:" + ex.response.status
+      print ex.response.data
+      ex.printStackTrace()
+    }
   }
 }
 
-def updateOrder(id) {
+def updateOrder(accountid, orderid, quantity=5555, positive=true) {
   try {
-    def orderPath = "/spring-nanotrader-services/api/" + id + "/order"
-    def resp = nanotrader.put(path:"${orderPath}")
+    def orderPath = "/spring-nanotrader-services/api/" + accountid + "/order"
+    def resp = nanotrader.put(path:"${orderPath}",
+                              body:[orderid:orderid, quantity:quantity, accountId:accountid],
+                              requestContentType:JSON)
+   if (positive) {
+     assert resp.status == 200
+   }
   }
   catch(ex) {
-    print ex.response.data
-    ex.printStackTrace()
-    assert false
-  }
+    if (!positive) {
+      assert ex.response.status == 400
+      println "400 response code found as expected"
+    }
+    else {
+      println "response code:" + ex.response.status
+      print ex.response.data
+      ex.printStackTrace()
+    }
+  } 
 }
 
 def synchronized getAccountProfile(id) {
@@ -251,11 +283,13 @@ def getQuoteLoop(count) {
   }
 }
 
+/*
 def createOrder(count) {
   count.times {
     createOrder('s0')
   }
-}
+}*/
+
 
 def loadTest() {
   500.times {
@@ -269,9 +303,25 @@ def loadTest() {
 
 init()
 
-getQuote('s0')
-getAllHoldingsForAccount(1)
-getSpecificHoldingForAccount(1, 1)
-getAccount(1)
-getAccountProfile(1)
-createOrder()
+/*
+getOrder(1, "all")
+getOrder(1, "Open")
+getOrder(1, "Completed")
+getOrder(1, "closed")
+getOrder(1, "unknown", false)
+
+createOrder(1, 555, 'buy', 's10')
+createOrder(1, 555, 'buy', 'invalid_quote', false)
+*/
+updateOrder(100, 999, 88888)
+updateOrder(567856785678, 1, 55000, false)
+
+
+
+
+//getQuote('s0')
+//getAllHoldingsForAccount(1)
+//getSpecificHoldingForAccount(1, 1)
+//getAccount(1)
+//getAccountProfile(1)
+
