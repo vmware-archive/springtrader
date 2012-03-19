@@ -1,35 +1,35 @@
 OrderListView = Backbone.View.extend({
 
-    tagName:'ul',
+    tagName:'table',
 
-    initialize:function (myuserid) {
-        this.model = new OrderCollection();
-        this.model.findMyOrders(myuserid);
-        this.model.bind("reset", this.render, this);
-        var self = this;
-        this.model.bind("add", function (order) {
-            $(self.el).append(new OrderListItemView({model:order}).render().el);
-        });
+    initialize:function (accountid) {
+        this.template = _.template(tpl.get('order-list'));
+        this.orders = new OrderCollection();
+        this.orders.url = 'spring-nanotrader-services/api/' + accountid + '/order';
+        this.orders.bind('add', this.render, this);
+        this.orders.fetch();     
+        
     },
 
-    render:function (eventName) {
-        this.template = _.template(tpl.get('order-list'));
+    render:function (event) {
+        console.log("Entered OrderList render...");
         $(this.el).html(this.template);
-        _.each(this.model.models, function (order) {
-            $(this.el).append(new OrderListItemView({model:order}).render().el);
+        _.each(this.orders.models, function (order) {
+            var orderView = new OrderView(order);
+            var orderRenderContent = orderView.render().el;
+            $(this.el).append(orderRenderContent);
         }, this);
         return this;
     }
 });
 
-OrderListItemView = Backbone.View.extend({
+OrderView = Backbone.View.extend({
 
     tagName:"tr",
 
-    initialize:function () {
+    initialize:function (order) {
         this.template = _.template(tpl.get('order-row'));
-        this.model.bind("change", this.render, this);
-        //this.model.bind("destroy", this.close, this);
+        this.model = order;
     },
 
     render:function (eventName) {
