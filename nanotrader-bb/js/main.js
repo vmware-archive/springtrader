@@ -3,6 +3,7 @@ var AppRouter = Backbone.Router.extend({
 				"/:id" : "home",
 				"/accountprofile/:id" : "accountprofile",
 				"/login" : "login",
+				"/trade/:id" : "trade",
 				"/portfolio/:id" : "portfolio"
 			},
 
@@ -44,7 +45,21 @@ var AppRouter = Backbone.Router.extend({
 						});
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
-			}
+			},
+	        trade : function() {
+                if (!this.tradeView) {
+                        this.tradeView = new TradeView();
+                        this.tradeView.render();
+                }
+                $('#content').html(this.tradeView.el);
+                this.tabView = new TabView({
+                        name : 'trade'
+                });
+                this.tabView.render();
+                $('#tabs').html(this.tabView.el);
+
+	        }
+
 		});
 
 tpl.loadTemplates(['home', 'account-summary', 'user-statistics',
