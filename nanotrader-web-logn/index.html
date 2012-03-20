@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <script type='text/javascript' src='/js/jquery-1.5.2.js'></script>
+        <script type='text/javascript' src='/js/underscore.js'></script>
+        <script type='text/javascript' src='/js/backbone.js'></script>
+        <script type='text/javascript' src='/js/models.js'></script>
+        <link rel="stylesheet" type="text/css" href="/css/index.css">
+        <title>Nanotrader Backbone.js</title>
+        <script>
+            $(document).ready(function(){
+                var account = new Account({accountid : 12});
+                console.log(account);
+                account.fetch({
+                        success : function(model){
+                            console.log(model);
+                            var result = $('#result');
+                            for (var i in model.attributes)
+                            {
+                                result.append('<strong>' + i + '</strong>: <span>' + model.attributes[i] + '</span><br>');
+                            }
+                        },
+                        error : function(error){
+                            console.log(error);
+                        }
+                    });
+            });
+        </script>
+    </head>
+    <body>
+    <h1>Hello Nano</h1>
+    <div>
+        <h3>Fetching info for account id:12</h3>
+        <div id="result">
+        </div>
+    </div>
+    </body>
+</html>
