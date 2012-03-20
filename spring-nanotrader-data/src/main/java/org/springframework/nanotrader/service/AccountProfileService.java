@@ -3,7 +3,6 @@ package org.springframework.nanotrader.service;
 
 import java.util.List;
 
-import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 
 public interface AccountProfileService {

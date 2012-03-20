@@ -52,6 +52,18 @@ public class Accountprofile implements Serializable {
 
 	@Column(name = "fullname", length = 250)
     private String fullname;
+	
+	
+	@Column(name = "authtoken", length = 100)
+    private String authtoken;
+
+	public String getAuthtoken() {
+		return authtoken;
+	}
+
+	public void setAuthtoken(String authtoken) {
+		this.authtoken = authtoken;
+	}
 
 	public Set<Account> getAccounts() {
         return accounts;

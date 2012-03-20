@@ -1,0 +1,6 @@
+To explore the nanotrader REST api there are sample requests located in this directory. The files can be opened by Firefox REST client.
+
+
+Instructions:
+1. Download Firefox
+2. Install REST Client firefox add-on: https://addons.mozilla.org/en-US/firefox/addon/restclient/
