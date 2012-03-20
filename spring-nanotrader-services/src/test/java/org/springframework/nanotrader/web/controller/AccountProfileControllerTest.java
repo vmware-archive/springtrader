@@ -7,16 +7,11 @@ import static org.springframework.test.web.server.result.MockMvcResultHandlers.p
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.server.setup.MockMvcBuilders.annotationConfigSetup;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
-import org.springframework.nanotrader.service.configuration.AppConfig;
 import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration;
-import org.springframework.nanotrader.web.configuration.WebConfig;
-import org.springframework.test.web.server.MockMvc;
 import org.springframework.util.FileCopyUtils;
 
 /**
@@ -26,17 +21,7 @@ import org.springframework.util.FileCopyUtils;
  *  @author
  */
 
-public class AccountProfileControllerTest {
-
-	private static MockMvc mockMvc;
-	
-	@BeforeClass
-	public static void setup() {
-		String warRootDir = "src/webapps";
-		boolean isClasspathRelative = false;
-		mockMvc = annotationConfigSetup(WebConfig.class, AppConfig.class, ServiceTestConfiguration.class)
-				.activateProfiles("test").configureWebAppRootDir(warRootDir, isClasspathRelative).build();
-	}
+public class AccountProfileControllerTest extends AbstractSecureControllerTest {
 
 	@Test
 	public void getAccountProfileByIdJson() throws Exception {
@@ -73,7 +58,7 @@ public class AccountProfileControllerTest {
 	@Test
 	public void updateAccountProfileJson() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("update-account-profile.json").getFile());
-		mockMvc.perform(put("/accountProfile/").accept(MediaType.APPLICATION_JSON)
+		mockMvc.perform(put("/accountProfile/400").accept(MediaType.APPLICATION_JSON)
 				.body(jsonRequest).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andDo(print());

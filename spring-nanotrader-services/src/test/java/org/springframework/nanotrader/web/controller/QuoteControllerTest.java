@@ -5,15 +5,10 @@ import static org.springframework.test.web.server.result.MockMvcResultHandlers.p
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.server.setup.MockMvcBuilders.annotationConfigSetup;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.http.MediaType;
-import org.springframework.nanotrader.service.configuration.AppConfig;
 import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration;
-import org.springframework.nanotrader.web.configuration.WebConfig;
-import org.springframework.test.web.server.MockMvc;
 
 /**
  *  QuoteControllerTest tests the Quote  REST api
@@ -22,17 +17,8 @@ import org.springframework.test.web.server.MockMvc;
  *  @author
  */
 
-public class QuoteControllerTest {
+public class QuoteControllerTest extends AbstractSecureControllerTest {
 
-	private static MockMvc mockMvc;
-	
-	@BeforeClass
-	public static void setup() {
-		String warRootDir = "src/webapps";
-		boolean isClasspathRelative = false;
-		mockMvc = annotationConfigSetup(WebConfig.class, AppConfig.class, ServiceTestConfiguration.class)
-				.activateProfiles("test").configureWebAppRootDir(warRootDir, isClasspathRelative).build();
-	}
 
 	@Test
 	public void getQuoteBySymbolJson() throws Exception {

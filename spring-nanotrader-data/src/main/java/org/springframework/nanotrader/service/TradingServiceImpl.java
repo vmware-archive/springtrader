@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,10 +36,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class TradingServiceImpl implements TradingService {
+	
+	private static Logger log = LoggerFactory.getLogger(TradingServiceImpl.class);
 
 	public static BigDecimal DEFAULT_ORDER_FEE = BigDecimal.valueOf(1050, 2);
-
-	private static Logger log = LoggerFactory.getLogger(TradingServiceImpl.class);
 
 	private static String OPEN_STATUS = "open";
 
@@ -65,6 +66,38 @@ public class TradingServiceImpl implements TradingService {
 	@Autowired
 	private MarketSummaryRepository marketSummaryRepository;
 
+	
+	@Override
+	public Accountprofile login(String username, String password) { 
+		Accountprofile accountProfile = accountProfileRepository.findByUseridAndPasswd(username, password);
+		if (accountProfile != null) { 
+			accountProfile.setAuthtoken(UUID.randomUUID().toString());
+			accountProfile = accountProfileRepository.save(accountProfile); // persist new auth token
+			Set<Account> accounts = accountProfile.getAccounts();
+			for (Account account: accounts) { 
+				account.setLogincount(account.getLogincount() + 1);
+				account.setLastlogin(new Date());
+				accountRepository.save(account);
+			}
+			return accountProfile;
+		}
+		return null;
+	}
+	
+	
+	@Override
+	public void logout(String authtoken) { 
+		Accountprofile accountProfile = accountProfileRepository.findByAuthtoken(authtoken);
+		accountProfile.setAuthtoken(null); //remove token
+		accountProfileRepository.save(accountProfile);
+		Set<Account> accounts = accountProfile.getAccounts();
+		for (Account account: accounts) { 
+			account.setLogoutcount(account.getLogincount() + 1);
+			accountRepository.save(account);
+		}
+	}
+	
+	
 	@Override
 	public Accountprofile findAccountProfile(Integer id) {
 		if (log.isDebugEnabled()) {
@@ -104,8 +137,14 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public Accountprofile updateAccountProfile(Accountprofile accountProfile) {
-		return accountProfileRepository.save(accountProfile);
+	public Accountprofile updateAccountProfile(Accountprofile accountProfile, String username) {
+		Accountprofile accountProfileResponse = null;
+		Accountprofile acctProfile = accountProfileRepository.findByUserid(username);
+		//make sure that the primary key hasn't been altered
+		if (acctProfile != null && acctProfile.getProfileid().equals(accountProfile.getProfileid())) { 
+			accountProfileResponse = accountProfileRepository.save(accountProfile);
+		}
+		return accountProfileResponse;
 	}
 
 	@Override
@@ -121,11 +160,11 @@ public class TradingServiceImpl implements TradingService {
 	}
 	
 	@Override
-	public Holding findHolding(Integer id) {
+	public Holding findHolding(Integer id, Integer accountId) {
 		if (log.isDebugEnabled()) {
-			log.debug("TradingServices.findHolding: holdingId=" + id);
+			log.debug("TradingServices.findHolding: holdingId=" + id + " accountid=" + accountId);
 		}
-		Holding holding = holdingRepository.findOne(id);
+		Holding holding = holdingRepository.findByHoldingidAndAccountAccountid(id, accountId);
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findHolding: completed successfully.");
 		}
@@ -157,11 +196,11 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public Order findOrder(Integer id) {
+	public Order findOrder(Integer id, Integer accountId) {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrder: orderId=" + id);
 		}
-		Order order = orderRepository.findOne(id);
+		Order order = orderRepository.findByOrderidAndAccountAccountid(id, accountId);
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrder: completed successfully.");
 		}
@@ -244,10 +283,20 @@ public class TradingServiceImpl implements TradingService {
 
 	@Override
 	public Order updateOrder(Order order) {
+		Order o = null;
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.updateOrder: order=" + order.toString());
 		}
-		Order o = orderRepository.save(order);
+		//Ensure that customers can't update another customers order record
+		Order orginalOrder = orderRepository.findByOrderidAndAccountAccountid(order.getOrderid(), order.getAccountAccountid().getAccountid());
+		if (orginalOrder != null) { 
+			if (log.isDebugEnabled()) {
+				log.debug("TradingServices.updateOrder: An order in the respository matched the requested order id and account ");
+			}
+			o = orderRepository.save(order);
+		
+		}
+		
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.updateOrder: completed successfully.");
 		}
@@ -344,5 +393,24 @@ public class TradingServiceImpl implements TradingService {
 		marketSummary.setSummaryDate(new Date());
 		return marketSummary;
 	}
+	
+
+	@Override
+	public Accountprofile findAccountByUserId(String id) {
+		return accountProfileRepository.findByUserid(id);
+		
+	}
+
+	@Override
+	public Accountprofile findByAuthtoken(String token) {
+		Accountprofile accountProfile = accountProfileRepository.findByAuthtoken(token);
+		if (accountProfile != null) { 
+			Set<Account> accounts = accountProfile.getAccounts();
+			accounts.iterator();
+			return accountProfile;
+		}
+		return null;
+	}
+	
 	
 }

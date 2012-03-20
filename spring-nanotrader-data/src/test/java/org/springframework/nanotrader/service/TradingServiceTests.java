@@ -124,7 +124,7 @@ public class TradingServiceTests {
 		Account account = accountDataOnDemand.getRandomAccount();
 		Accountprofile profile = account.getProfileProfileid();
 		profile.setAddress("changed");
-		tradingService.updateAccountProfile(profile);
+		tradingService.updateAccountProfile(profile, profile.getUserid() );
 		entityManager.flush();
 		entityManager.clear(); // force reload
 
@@ -161,7 +161,7 @@ public class TradingServiceTests {
 		entityManager.flush();
 		entityManager.clear(); // force reload
 
-		Holding newHolding = tradingService.findHolding(holding.getHoldingid());
+		Holding newHolding = tradingService.findHolding(holding.getHoldingid(), holding.getAccountAccountid());
 		assertEquals(holding.toString(), newHolding.toString());
 
 		newHolding.setPurchaseprice(BigDecimal.valueOf(1234.56));
@@ -169,7 +169,7 @@ public class TradingServiceTests {
 		entityManager.flush();
 		entityManager.clear(); // force reload
 
-		Holding updatedHolding = tradingService.findHolding(holding.getHoldingid());
+		Holding updatedHolding = tradingService.findHolding(holding.getHoldingid(), holding.getAccountAccountid());
 		assertEquals(newHolding.toString(), updatedHolding.toString());
 		
 	}
@@ -207,7 +207,7 @@ public class TradingServiceTests {
 		entityManager.flush();
 		entityManager.clear(); // force reload
 
-		Order foundOrder = tradingService.findOrder(order.getOrderid());
+		Order foundOrder = tradingService.findOrder(order.getOrderid(), order.getAccountAccountid().getAccountid());
 		assertNotNull(foundOrder);
 		
 		BigDecimal oldPrice = foundOrder.getPrice();
@@ -216,7 +216,7 @@ public class TradingServiceTests {
 		entityManager.flush();
 		entityManager.clear(); // force reload
 
-		Order updatedOrder = tradingService.findOrder(order.getOrderid());
+		Order updatedOrder = tradingService.findOrder(order.getOrderid(), order.getAccountAccountid().getAccountid());
 		assertTrue(!order.toString().equals(updatedOrder.toString()));
 		
 		order.setPrice(oldPrice);
@@ -224,7 +224,7 @@ public class TradingServiceTests {
 		entityManager.flush();
 		entityManager.clear(); // force reload
 
-		updatedOrder = tradingService.findOrder(order.getOrderid());
+		updatedOrder = tradingService.findOrder(order.getOrderid(), order.getAccountAccountid().getAccountid());
 		assertEquals(foundOrder.toString(), updatedOrder.toString());
 	}
 	

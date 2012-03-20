@@ -24,7 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 
 @Controller
-public class AccountProfileController {
+public class AccountProfileController extends BaseController {
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
 
@@ -34,7 +34,7 @@ public class AccountProfileController {
 		Accountprofile accountProfile = tradingServiceFacade.findAccountProfile(id);
 		return accountProfile;
 	}
-
+	
 	@RequestMapping(value = "/accountProfile", method = RequestMethod.POST)
 	public ResponseEntity<String> save(@RequestBody Accountprofile accountProfileRequest,  UriComponentsBuilder builder) {
 		Integer accountProfileId = tradingServiceFacade.saveAccountProfile(accountProfileRequest);
@@ -42,11 +42,13 @@ public class AccountProfileController {
 		responseHeaders.setLocation(builder.path("/accountProfile/{id}").buildAndExpand(accountProfileId).toUri());
 		return new ResponseEntity<String>(responseHeaders, HttpStatus.CREATED);
 	}
-
-	@RequestMapping(value = "/accountProfile", method = RequestMethod.PUT)
+	
+	@RequestMapping(value = "/accountProfile/{id}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@RequestBody Accountprofile accountProfileRequest) {
-		tradingServiceFacade.updateAccountProfile(accountProfileRequest);
+	public void update(@PathVariable("id") final Integer id, @RequestBody Accountprofile accountProfileRequest) {
+		Integer accountId = (Integer)accountProfileRequest.getAccounts().iterator().next().get("accountid");
+		this.getSecurityUtil().checkAccount(accountId); //verify that the nested account on the request is the same as the authenticated user
+		tradingServiceFacade.updateAccountProfile(accountProfileRequest, this.getSecurityUtil().getUsernameFromPrincipal());
 	}
 
 }

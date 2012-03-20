@@ -32,8 +32,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration
 @ComponentScan(basePackages = { "org.springframework.nanotrader.web",
 		"org.springframework.nanotrader.service.configuration" })
-// @ContextConfiguration(classes = { AppConfig.class, ServiceConfig.class },
-// loader = AnnotationConfigContextLoader.class)
 public class WebConfig extends WebMvcConfigurationSupport {
 
 	@Override

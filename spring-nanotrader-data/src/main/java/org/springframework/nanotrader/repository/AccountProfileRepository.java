@@ -12,4 +12,6 @@ public interface AccountProfileRepository extends JpaSpecificationExecutor<Accou
 	
 	public Accountprofile findByUserid(String userId);
 	
+	public Accountprofile findByAuthtoken(String authtoken);
+	
 }

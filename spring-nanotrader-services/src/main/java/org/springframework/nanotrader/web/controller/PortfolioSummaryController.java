@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *  @author
  */
 @Controller
-public class PortfolioSummaryController {
+public class PortfolioSummaryController extends BaseController {
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
 	
 	@RequestMapping(value = "/{accountId}/portfolioSummary", method = RequestMethod.GET)
 	@ResponseBody
 	public PortfolioSummary find(@PathVariable( "accountId" ) final Integer accountId ) {
+		this.getSecurityUtil().checkAccount(accountId);
 		return tradingServiceFacade.findPortfolioSummary(accountId);
 	
 	}

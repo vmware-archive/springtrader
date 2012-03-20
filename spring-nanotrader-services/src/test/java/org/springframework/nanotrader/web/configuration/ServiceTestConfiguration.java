@@ -1,14 +1,14 @@
 package org.springframework.nanotrader.web.configuration;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anySet;
 import static org.mockito.Matchers.anySetOf;
-import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -47,15 +47,18 @@ public class ServiceTestConfiguration  {
 	
 	//Account profile constants
 	public static Integer PROFILE_ID 	=  400;
-	public static String USER_ID 		= "bdussault";
+	public static String USER_ID 		= "johndoe";
 	public static String EMAIL 		= "anon@springsource.com";
 	public static String FULL_NAME 	= "John Doe";
 	public static String CC_NUMBER 	= "999999999";
 	public static String ADDRESS 		= "45 Test Dr.";
 	public static Integer NOT_A_VALID_PROFILE = 900;
+	public static String PASSWORD = "password";
+	public static String BAD_USER_ID  = "NA";
+	public static String BAD_PASSWORD  = "NA";
 	
 	//Order constants
-	public static Integer ORDER_ID 	=  602;
+	public static Integer ORDER_ID 	=  555;
 	public static BigDecimal ORDER_PRICE = new BigDecimal("100");
 	public static BigDecimal ORDER_QUANTITY = new BigDecimal("200");
 	public static String ORDER_TYPE_BUY	=  "buy";
@@ -74,6 +77,7 @@ public class ServiceTestConfiguration  {
 	public static BigDecimal ACCOUNT_BALANCE	=  new BigDecimal(40.11);
 	public static Integer LOGOUT_COUNT	=  new Integer(5);
 	public static Integer LOGIN_COUNT	=  new Integer(4);
+	public static String AUTH_TOKEN	=  "faef8649-280d-4ba4-bdf6-574e758a04a7";
 	
 	
 	//Portfolio Summary
@@ -86,27 +90,29 @@ public class ServiceTestConfiguration  {
 	public static BigDecimal MARKET_OPENING =  new BigDecimal(35.25);
 	public static BigDecimal MARKET_VOLUME =  new BigDecimal(40.45);
 	
-	@SuppressWarnings("unchecked")
+	
 	@Bean 
 	public TradingService tradingService() {
 		TradingService tradingService = Mockito.mock(TradingService.class);
-		when(tradingService.findHolding(100)).thenReturn(holding());
-		when(tradingService.findHoldingsByAccountId(eq(400), any(Integer.class), any(Integer.class))).thenReturn(holdings());
+		when(tradingService.findHolding(eq(100), eq(ACCOUNT_ID))).thenReturn(holding());
+		when(tradingService.findHoldingsByAccountId(eq(ACCOUNT_ID),  any(Integer.class), any(Integer.class))).thenReturn(holdings());
 		when(tradingService.updateHolding(any(Holding.class))).thenReturn(holding());
 		when(tradingService.findAccountProfile(400)).thenReturn(accountProfile());
 		when(tradingService.findAccountProfile(NOT_A_VALID_PROFILE)).thenReturn(null);
-		when(tradingService.updateAccountProfile(any(Accountprofile.class))).thenReturn(accountProfile());
-		when(tradingService.findOrder(999)).thenReturn(order());
+		when(tradingService.updateAccountProfile(any(Accountprofile.class), any(String.class))).thenReturn(accountProfile());
+		when(tradingService.findOrder(eq(999), eq(ACCOUNT_ID))).thenReturn(order());
 		when(tradingService.saveOrder(any(Order.class))).thenReturn(null);
 		when(tradingService.saveAccountProfile(any(Accountprofile.class))).thenReturn(accountProfile());
 		when(tradingService.updateOrder(any(Order.class))).thenReturn(null);
-		when(tradingService.findOrdersByStatus(eq(2), any(String.class))).thenReturn(orders());
-		when(tradingService.findOrders(eq(2))).thenReturn(orders());
+		when(tradingService.findOrdersByStatus(eq(ACCOUNT_ID), any(String.class))).thenReturn(orders());
+		when(tradingService.findOrders(eq(ACCOUNT_ID))).thenReturn(orders());
 		when(tradingService.findQuoteBySymbol(eq(SYMBOL))).thenReturn(quote());
 		when(tradingService.findQuotesBySymbols(anySetOf(String.class))).thenReturn(quotes());
-		when(tradingService.findAccount(eq(500))).thenReturn(account());
-		when(tradingService.findPortfolioSummary(eq(2))).thenReturn(portfolioSummary());
+		when(tradingService.findAccount(eq(ACCOUNT_ID))).thenReturn(account());
+		when(tradingService.findPortfolioSummary(eq(ACCOUNT_ID))).thenReturn(portfolioSummary());
 		when(tradingService.findMarketSummary()).thenReturn(marketSummary());
+		when(tradingService.login(eq(USER_ID), eq(PASSWORD))).thenReturn(accountProfile());
+		when(tradingService.login(eq(BAD_USER_ID), eq(BAD_PASSWORD))).thenReturn(null);
 		return tradingService;
 	}
 	
@@ -147,10 +153,15 @@ public class ServiceTestConfiguration  {
 		Accountprofile accountProfile = new Accountprofile();
 		accountProfile.setProfileid(PROFILE_ID);
 		accountProfile.setUserid(USER_ID);
+		accountProfile.setPasswd(PASSWORD);
 		accountProfile.setAddress(ADDRESS);
 		accountProfile.setEmail(EMAIL);
 		accountProfile.setFullname(FULL_NAME);
 		accountProfile.setCreditcard(CC_NUMBER);
+		accountProfile.setAuthtoken(AUTH_TOKEN);
+		Set<Account> accounts = new HashSet<Account>();
+		accounts.add(account());
+		accountProfile.setAccounts(accounts);
 		return accountProfile;
 	}
 	
@@ -226,5 +237,6 @@ public class ServiceTestConfiguration  {
 		return marketSummary;
 	}
 
+	 
 	
 }

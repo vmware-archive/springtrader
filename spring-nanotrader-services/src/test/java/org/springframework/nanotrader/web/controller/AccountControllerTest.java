@@ -15,7 +15,14 @@ import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration
 import org.springframework.nanotrader.web.configuration.WebConfig;
 import org.springframework.test.web.server.MockMvc;
 
-public class AccountControllerTest {
+/**
+ * AccountControllerTest tests the Account REST api 
+ * 
+ * @author Brian Dussault
+ * @author
+ */
+
+public class AccountControllerTest extends AbstractSecureControllerTest {
 
 private static MockMvc mockMvc;
 	private static String DATE = "2012-02-20T17:35:42.904+0000";
@@ -28,9 +35,10 @@ private static MockMvc mockMvc;
 				.activateProfiles("test").configureWebAppRootDir(warRootDir, isClasspathRelative).build();
 	}
 
+	
 	@Test
 	public void getQuoteBySymbolJson() throws Exception {
-		mockMvc.perform(get("/account/500").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.accountid").value(ServiceTestConfiguration.ACCOUNT_ID))
@@ -42,4 +50,7 @@ private static MockMvc mockMvc;
 				.andExpect(jsonPath("$.logincount").value(ServiceTestConfiguration.LOGIN_COUNT))
 				.andDo(print());
 	}
+	
+
+	
 }
