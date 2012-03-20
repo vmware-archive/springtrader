@@ -3,6 +3,7 @@ package org.springframework.nanotrader.web.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.support.exception.AuthenticationException;
 import org.springframework.nanotrader.service.support.exception.NoRecordsFoundException;
@@ -27,6 +28,7 @@ public class GlobalExceptionHandler {
 	private static final String CONSTRAINT_VIOLATION_MESSAGE = "The record already exists.";
 	private static final String UNAUTHORIZED_MESSAGE = "Authentication Failed: Can't find username and password combination.";
 	private static final String NO_ACCESS = "Access Denied.";
+	private static final String CANNOT_UPDATE_CLOSED_RECORD = "Update failed since processing status was 'complete'";
 	
 	@ExceptionHandler(value = NoRecordsFoundException.class)
 	@ResponseStatus( HttpStatus.NOT_FOUND )
@@ -42,6 +44,14 @@ public class GlobalExceptionHandler {
 		ServiceException serviceException = new ServiceException(FAILURE_MESSSAGE + exception.getMessage() );
 		return serviceException;
 	}
+	
+	@ExceptionHandler(value = IncorrectUpdateSemanticsDataAccessException.class)
+	@ResponseStatus( HttpStatus.BAD_REQUEST )
+	public @ResponseBody ServiceException handle(IncorrectUpdateSemanticsDataAccessException exception) {
+		logError(exception);
+		ServiceException serviceException = new ServiceException(CANNOT_UPDATE_CLOSED_RECORD);
+		return serviceException;
+	}	
 	
 	@ExceptionHandler(value = DataIntegrityViolationException.class)
 	@ResponseStatus( HttpStatus.FOUND )

@@ -32,6 +32,7 @@ import org.springframework.nanotrader.repository.QuoteRepository;
 import org.springframework.nanotrader.util.FinancialUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
 
 @Service
 @Transactional
@@ -141,7 +142,8 @@ public class TradingServiceImpl implements TradingService {
 		Accountprofile accountProfileResponse = null;
 		Accountprofile acctProfile = accountProfileRepository.findByUserid(username);
 		//make sure that the primary key hasn't been altered
-		if (acctProfile != null && acctProfile.getProfileid().equals(accountProfile.getProfileid())) { 
+		if (acctProfile != null ) { 
+			accountProfile.setAuthtoken(acctProfile.getAuthtoken());
 			accountProfileResponse = accountProfileRepository.save(accountProfile);
 		}
 		return accountProfileResponse;
@@ -288,14 +290,23 @@ public class TradingServiceImpl implements TradingService {
 			log.debug("TradingServices.updateOrder: order=" + order.toString());
 		}
 		//Ensure that customers can't update another customers order record
-		Order orginalOrder = orderRepository.findByOrderidAndAccountAccountid(order.getOrderid(), order.getAccountAccountid().getAccountid());
-		if (orginalOrder != null) { 
-			if (log.isDebugEnabled()) {
-				log.debug("TradingServices.updateOrder: An order in the respository matched the requested order id and account ");
-			}
-			o = orderRepository.save(order);
+		Order originalOrder = orderRepository.findByOrderidAndAccountAccountid(order.getOrderid(), order.getAccountAccountid().getAccountid());
 		
+		
+		if( !"completed".equals(originalOrder.getOrderstatus())) { 
+			if (originalOrder != null) { 
+				if (log.isDebugEnabled()) {
+					log.debug("TradingServices.updateOrder: An order in the respository matched the requested order id and account ");
+				}
+				originalOrder.setQuantity(order.getQuantity());
+				originalOrder.setOrdertype(order.getOrdertype());
+				o = orderRepository.save(originalOrder);
+			
+			}
+		} else { 
+			throw new IncorrectUpdateSemanticsDataAccessException("Attempted to update a completed order");
 		}
+		
 		
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.updateOrder: completed successfully.");

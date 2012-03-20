@@ -17,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("serial")
@@ -71,7 +72,7 @@ public class Order implements Serializable {
     @DateTimeFormat(style = "M-")
     private Date opendate;
 	
-	@ManyToOne
+	@ManyToOne 
 	@JoinColumn(name = "quote_symbol", referencedColumnName = "symbol")
     private Quote quote;
 

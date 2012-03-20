@@ -1,0 +1,1 @@
+{"address":"23","accounts":[{ "openbalance":100.00,"balance":111.00}],"passwd":"password","userid":"johndoe","email":"dussab@verizon.net","creditcard":"122222","fullname":"Brian Dussault"}

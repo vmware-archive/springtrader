@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AccountController extends BaseController {
+	
 	@RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Account find(@PathVariable( "id" ) final Integer id) {

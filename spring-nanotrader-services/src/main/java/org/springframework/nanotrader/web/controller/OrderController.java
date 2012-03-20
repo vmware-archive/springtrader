@@ -34,16 +34,16 @@ public class OrderController  extends BaseController {
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
 
-	@RequestMapping(value = "/{id}/order", method = RequestMethod.GET)
+	@RequestMapping(value = "/account/{accountId}/order", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Order> findOrders(@PathVariable( "id" ) final Integer accountId, @RequestParam(value="status", required=false) final String status) {
+	public List<Order> findOrders(@PathVariable( "accountId" ) final Integer accountId, @RequestParam(value="status", required=false) final String status) {
 		this.getSecurityUtil().checkAccount(accountId); //verify that the account on the path is the same as the authenticated user
 		List<Order> responseOrders = tradingServiceFacade.findOrders(accountId, status);
 		return responseOrders;
 	}
 
 	
-	@RequestMapping(value = "/{accountId}/order/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/account/{accountId}/order/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Order findOrder(@PathVariable( "accountId" ) final Integer accountId, @PathVariable( "id" ) final Integer orderId ) {
 		if (log.isDebugEnabled()) { 
@@ -55,7 +55,7 @@ public class OrderController  extends BaseController {
 	}
 	
 	
-	@RequestMapping(value = "/{accountId}/order", method = RequestMethod.POST)
+	@RequestMapping(value = "/account/{accountId}/order", method = RequestMethod.POST)
 	@ResponseStatus( HttpStatus.CREATED )
 	public ResponseEntity<String> save(@RequestBody Order orderRequest, @PathVariable( "accountId" ) final Integer accountId,
 										UriComponentsBuilder builder) {
@@ -68,18 +68,19 @@ public class OrderController  extends BaseController {
 	}
 
 	
-	@RequestMapping(value = "/{accountId}/order/asynch", method = RequestMethod.POST)
+	@RequestMapping(value = "/account/{accountId}/order/asynch", method = RequestMethod.POST)
 	@ResponseStatus( HttpStatus.ACCEPTED )
 	public void saveAsynch(@RequestBody Order orderRequest, @PathVariable( "accountId" ) final Integer accountId) {
 		orderRequest.setAccountId(accountId);
 		tradingServiceFacade.saveOrder(orderRequest, false);
 	}
 	
-	@RequestMapping(value = "/{accountId}/order/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/account/{accountId}/order/{id}", method = RequestMethod.PUT)
 	@ResponseStatus( HttpStatus.OK )
 	public void update( @RequestBody Order orderRequest, @PathVariable( "accountId" ) final Integer accountId, @PathVariable( "id" ) final Integer orderId) {
 		this.getSecurityUtil().checkAccount(accountId); //verify that the  account on the path is the same as the authenticated user
 		orderRequest.setAccountId(this.getSecurityUtil().getAccountFromPrincipal());
+		orderRequest.setOrderid(orderId);
 		tradingServiceFacade.updateOrder(orderRequest);
 	}
 	

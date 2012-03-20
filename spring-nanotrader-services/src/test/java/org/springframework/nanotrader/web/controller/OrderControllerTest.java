@@ -30,7 +30,7 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 
 	@Test
 	public void getOrderByIdJson() throws Exception {
-		mockMvc.perform(get("/" + ServiceTestConfiguration.ACCOUNT_ID + "/order/999/").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order/999/").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.orderid").value(ServiceTestConfiguration.ORDER_ID))
@@ -48,14 +48,14 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 
 	@Test
 	public void getOrderByIdNoRecordsFoundJson() throws Exception {
-		mockMvc.perform(get("/" + ServiceTestConfiguration.ACCOUNT_ID + "/order/"+ ServiceTestConfiguration.ORDER_ID).accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order/"+ ServiceTestConfiguration.ORDER_ID).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound())
 				.andDo(print());
 	}
 	
 	@Test
 	public void getOrders() throws Exception {
-		mockMvc.perform(get("/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.[0].orderid").value(ServiceTestConfiguration.ORDER_ID))
@@ -74,14 +74,14 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 	
 	@Test
 	public void getOrdersNoRecordsFoundJson() throws Exception {
-		mockMvc.perform(get("/3/order/").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/account/3/order/").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isUnauthorized());
 				
 	}
 
 	@Test
 	public void getClosedOrders() throws Exception {
-		mockMvc.perform(get("/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON).param("status", "closed"))
+		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON).param("status", "closed"))
 				.andExpect(status().isOk())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.[0].orderid").value(ServiceTestConfiguration.ORDER_ID))
@@ -102,7 +102,7 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 	public void createOrderJson() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("create-order.json").getFile());
 		mockMvc.perform(
-				post("/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON).body(jsonRequest)
+				post("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON).body(jsonRequest)
 						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated()) // HTTP 201 - Created
 				.andDo(print());
 	}
@@ -112,7 +112,7 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 	public void updateOrderJson() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("update-order.json").getFile());
 		mockMvc.perform(
-				put("/" + ServiceTestConfiguration.ACCOUNT_ID + "/order/"+ ServiceTestConfiguration.ORDER_ID).accept(MediaType.APPLICATION_JSON).body(jsonRequest)
+				put("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order/"+ ServiceTestConfiguration.ORDER_ID).accept(MediaType.APPLICATION_JSON).body(jsonRequest)
 						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andDo(print());
 	}
 

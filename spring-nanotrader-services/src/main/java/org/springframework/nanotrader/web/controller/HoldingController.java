@@ -26,7 +26,7 @@ public class HoldingController extends BaseController {
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
 	
-	@RequestMapping(value = "/{accountId}/holding/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/account/{accountId}/holding/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Holding find(@PathVariable( "id" ) final Integer id, @PathVariable( "accountId" ) final Integer accountId ) {
 		Holding holdingResponse = new Holding();
@@ -35,7 +35,7 @@ public class HoldingController extends BaseController {
 		return holdingResponse;
 	}
 	
-	@RequestMapping(value = "/{accountId}/holding", method = RequestMethod.GET)
+	@RequestMapping(value = "/account/{accountId}/holding", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Holding> findByAccountId(@PathVariable( "accountId" ) final Integer accountId, 
 										 @RequestParam(value="page", required=false) Integer page, 

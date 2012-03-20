@@ -46,8 +46,8 @@ public class AccountProfileController extends BaseController {
 	@RequestMapping(value = "/accountProfile/{id}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable("id") final Integer id, @RequestBody Accountprofile accountProfileRequest) {
-		Integer accountId = (Integer)accountProfileRequest.getAccounts().iterator().next().get("accountid");
-		this.getSecurityUtil().checkAccount(accountId); //verify that the nested account on the request is the same as the authenticated user
+		accountProfileRequest.getAccounts().iterator().next().put("accountid", this.getSecurityUtil().getAccountFromPrincipal());
+		accountProfileRequest.setProfileid(id);
 		tradingServiceFacade.updateAccountProfile(accountProfileRequest, this.getSecurityUtil().getUsernameFromPrincipal());
 	}
 
