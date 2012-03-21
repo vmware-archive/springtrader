@@ -84,4 +84,11 @@ public class OrderController  extends BaseController {
 		tradingServiceFacade.updateOrder(orderRequest);
 	}
 	
+	
+	@RequestMapping(value = "/account/{accountId}/order/{id}", method = RequestMethod.DELETE)
+	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	public void delete() {
+		
+	}
+	
 }
