@@ -63,7 +63,7 @@ public class OrderController  extends BaseController {
 		orderRequest.setAccountid(accountId);
 		Integer orderId = tradingServiceFacade.saveOrder(orderRequest, true);
 		HttpHeaders responseHeaders = new HttpHeaders();   
-		responseHeaders.setLocation(builder.path("/"+ accountId + "/order/{id}").buildAndExpand(orderId).toUri());
+		responseHeaders.setLocation(builder.path("/account/"+ accountId + "/order/{id}").buildAndExpand(orderId).toUri());
 		return new ResponseEntity<String>(responseHeaders, HttpStatus.CREATED);
 	}
 
