@@ -36,5 +36,10 @@ public class AuthenticationController {
 		Map<String, Object> authenticationResponse = tradingServiceFacade.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		return authenticationResponse;// authToken and accountId;
 	}
-	
+		
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	public void get() {
+		
+	}
 }

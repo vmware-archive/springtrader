@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.domain.Holding;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *  Provides JSON based REST api to Holdings repository
@@ -45,5 +47,23 @@ public class HoldingController extends BaseController {
 		return holdingResponse;
 	}
 
+	
+	@RequestMapping(value = "/account/{accountId}/holding", method = RequestMethod.POST)
+	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	public void post() {
+	}
+	
+	@RequestMapping(value = "/account/{accountId}/holding/{id}", method = RequestMethod.PUT)
+	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	public void put() {
+		
+	}
+	
+	@RequestMapping(value = "/account/{accountId}/holding/{id}", method = RequestMethod.DELETE)
+	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	public void delete() {
+		
+	}
+	
 	
 }
