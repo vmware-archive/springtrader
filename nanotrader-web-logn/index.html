@@ -8,30 +8,54 @@
         <link rel="stylesheet" type="text/css" href="/css/index.css">
         <title>Nanotrader Backbone.js</title>
         <script>
+            var consoleContainer = null;
+            var LOG_INFO = 'info';
+            var LOG_SUCCESS = 'success';
+            var LOG_ERROR = 'error';
+            var ACCOUNT_ID = 12;
             $(document).ready(function(){
-                var account = new Account({accountid : 12});
-                console.log(account);
+                consoleContainer = $('#console');
+                var account = new Account({accountid : ACCOUNT_ID});
                 account.fetch({
                         success : function(model){
-                            console.log(model);
-                            var result = $('#result');
-                            for (var i in model.attributes)
-                            {
-                                result.append('<strong>' + i + '</strong>: <span>' + model.attributes[i] + '</span><br>');
-                            }
+                            log(LOG_SUCCESS, 'Successfully fetched Account Object with id[' + ACCOUNT_ID + ']');
+                            var logincount = Math.floor(Math.random()*11);
+                            log(LOG_INFO, 'Updating logincount to: ' + logincount);
+                            //model.set({'logincount' : logincount});
+                            model.set("logincount", logincount);
+                            model.save({
+                                success : function(model){
+                                    log(LOG_SUCCESS, 'Account Object with id[' + ACCOUNT_ID + '] successfully updated.');
+                                },
+                                error: function(model, error){
+                                    log(LOG_ERROR, 'Unable to update Account Object with id[' + ACCOUNT_ID + ']: ' + error.responseText);
+                                },
+                            });
                         },
-                        error : function(error){
-                            console.log(error);
+                        error : function(model, error){
+                            log(LOG_ERROR, 'Unable to fetch Account Object with id[' + ACCOUNT_ID + ']: ' + error.responseText);
                         }
                     });
+               //var account2 = new Account
             });
+            function log(type, message){
+                if (consoleContainer)
+                {
+                    consoleContainer.append(
+                    '<div class="line ' + type + '">\
+                        <span class="type">' + type + ': </span>\
+                        <span>' + message + '</span>\
+                     </div>'
+                    );
+                }
+            }
         </script>
     </head>
     <body>
-    <h1>Hello Nano</h1>
+    <h1>Hello Nano TESTS</h1>
     <div>
-        <h3>Fetching info for account id:12</h3>
-        <div id="result">
+        <h3>Console</h3>
+        <div id="console">
         </div>
     </div>
     </body>
