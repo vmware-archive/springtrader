@@ -58,7 +58,7 @@ public class TradingServiceFacadeTests {
 				orderDataOnDemand.getRandomOrder();
 		System.out.println("->" + existingOrder.getAccountAccountid());
 		Order orderRequest = new Order();
-		orderRequest.setAccountId(existingOrder.getAccountAccountid().getAccountid());
+		orderRequest.setAccountid(existingOrder.getAccountAccountid().getAccountid());
 		orderRequest.setOrdertype(TradingService.ORDER_TYPE_BUY);
 		Quote quote = new Quote();
 		quote.setSymbol(existingOrder.getQuote().getSymbol());
@@ -74,7 +74,7 @@ public class TradingServiceFacadeTests {
 		org.springframework.nanotrader.domain.Order existingOrder = 
 				orderDataOnDemand.getRandomOrder();
 		Order orderRequest = new Order();
-		orderRequest.setAccountId(existingOrder.getAccountAccountid().getAccountid());
+		orderRequest.setAccountid(existingOrder.getAccountAccountid().getAccountid());
 		orderRequest.setOrdertype(TradingService.ORDER_TYPE_BUY);
 		Quote quote = new Quote();
 		quote.setSymbol(existingOrder.getQuote().getSymbol());

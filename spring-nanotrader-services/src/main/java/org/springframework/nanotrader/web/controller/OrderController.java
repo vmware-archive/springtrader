@@ -60,7 +60,7 @@ public class OrderController  extends BaseController {
 	public ResponseEntity<String> save(@RequestBody Order orderRequest, @PathVariable( "accountId" ) final Integer accountId,
 										UriComponentsBuilder builder) {
 		this.getSecurityUtil().checkAccount(accountId);
-		orderRequest.setAccountId(accountId);
+		orderRequest.setAccountid(accountId);
 		Integer orderId = tradingServiceFacade.saveOrder(orderRequest, true);
 		HttpHeaders responseHeaders = new HttpHeaders();   
 		responseHeaders.setLocation(builder.path("/"+ accountId + "/order/{id}").buildAndExpand(orderId).toUri());
@@ -71,7 +71,7 @@ public class OrderController  extends BaseController {
 	@RequestMapping(value = "/account/{accountId}/order/asynch", method = RequestMethod.POST)
 	@ResponseStatus( HttpStatus.ACCEPTED )
 	public void saveAsynch(@RequestBody Order orderRequest, @PathVariable( "accountId" ) final Integer accountId) {
-		orderRequest.setAccountId(accountId);
+		orderRequest.setAccountid(accountId);
 		tradingServiceFacade.saveOrder(orderRequest, false);
 	}
 	
@@ -79,7 +79,7 @@ public class OrderController  extends BaseController {
 	@ResponseStatus( HttpStatus.OK )
 	public void update( @RequestBody Order orderRequest, @PathVariable( "accountId" ) final Integer accountId, @PathVariable( "id" ) final Integer orderId) {
 		this.getSecurityUtil().checkAccount(accountId); //verify that the  account on the path is the same as the authenticated user
-		orderRequest.setAccountId(this.getSecurityUtil().getAccountFromPrincipal());
+		orderRequest.setAccountid(this.getSecurityUtil().getAccountFromPrincipal());
 		orderRequest.setOrderid(orderId);
 		tradingServiceFacade.updateOrder(orderRequest);
 	}
