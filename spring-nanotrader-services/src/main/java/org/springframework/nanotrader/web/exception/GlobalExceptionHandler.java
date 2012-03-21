@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
 	}	
 	
 	@ExceptionHandler(value = DataIntegrityViolationException.class)
-	@ResponseStatus( HttpStatus.FOUND )
+	@ResponseStatus( HttpStatus.BAD_REQUEST )
 	public @ResponseBody ServiceException handle(DataIntegrityViolationException exception) {
 		logError(exception);
 		ServiceException serviceException = new ServiceException(CONSTRAINT_VIOLATION_MESSAGE);
