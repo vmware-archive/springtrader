@@ -4,6 +4,9 @@
 import groovyx.net.http.RESTClient
 import groovy.util.slurpersupport.GPathResult
 
+import java.io.FileWriter
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.util.Random
 
 import static groovyx.net.http.ContentType.URLENC
@@ -12,9 +15,20 @@ import static groovyx.net.http.ContentType.HTML
 
 path = "http://localhost:8080"
 def nanotrader = 0
+def logFile = 0
 
 def init() {
   nanotrader = new RESTClient(path)
+  logFile = new PrintWriter(new FileWriter("nanotradertest.debug"))
+}
+
+def writeExceptionToFile(ex) {
+  StringWriter sw = new StringWriter();
+  PrintWriter pw = new PrintWriter(sw, true);
+  ex.printStackTrace(pw);
+  pw.flush();
+  sw.flush();
+  logFile.write(sw.toString());
 }
 
 def getOrder(id, status, positive=true) {
@@ -30,8 +44,8 @@ def getOrder(id, status, positive=true) {
     }
     if (positive) {
       assert resp.status == 200
-      println "\n\n##################### ORDER DATA #####################"
-      println "DATA:" + resp.data + ":"
+      //println "\n\n##################### ORDER DATA #####################"
+      //println "DATA:" + resp.data + ":"
     }
     else {
       assert resp.status == 404
@@ -40,12 +54,10 @@ def getOrder(id, status, positive=true) {
   catch(ex) {
     if (!positive) {
       assert ex.response.status == 404
-      println "404 response code found as expected"
+      //println "404 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -62,16 +74,20 @@ def synchronized createOrder(id, quantity=555, orderType="buy", symbol="s0", pos
    else {
      assert resp.status == 400
    }
+   headers = resp.getAllHeaders()
+   for (int i=0; i < headers.size(); i++) {
+     println "value" + headers[i].getValue()
+   }
+   new_id = resp.getFirstHeader('location').getValue()
+   println "createOrder:" + new_id
   }
   catch(ex) {
     if (!positive) {
       assert ex.response.status == 400
-      println "400 response code found as expected"
+      //println "400 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -92,40 +108,12 @@ def updateOrder(accountid, orderid, quantity=5555, positive=true) {
   catch(ex) {
     if (!positive) {
       assert ex.response.status == 400
-      println "400 response code found as expected"
+      //println "400 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   } 
-}
-
-def deleteOrder(accountid, orderid, positive=true) {
-  try {
-    def orderPath = "/spring-nanotrader-services/api/" + accountid + "/order"
-    def resp = nanotrader.delete(path:"${orderPath}",
-                              body:[orderid:orderid, accountId:accountid],
-                              requestContentType:JSON)
-   if (positive) {
-     assert resp.status == 200
-   }
-   else {
-     assert resp.status == 400
-   }
-  }
-  catch(ex) {
-    if (!positive) {
-      assert ex.response.status == 400
-      println "400 response code found as expected"
-    }
-    else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
-    }
-  }
 }
 
 def synchronized getAccountProfile(id, positive=true) {
@@ -135,8 +123,8 @@ def synchronized getAccountProfile(id, positive=true) {
     if (positive) {
       assert resp.status == 200
       //println Thread.getName()
-      println "\n\n##################### ACCOUNT PROFILE DATA #####################"
-      println "DATA:" + resp.data + ":"
+      //println "\n\n##################### ACCOUNT PROFILE DATA #####################"
+      //println "DATA:" + resp.data + ":"
     }
     else {
       assert resp.status == 404
@@ -145,12 +133,10 @@ def synchronized getAccountProfile(id, positive=true) {
   catch(ex) {
     if (!positive) {
       assert ex.response.status == 404
-      println "404 response code found as expected"
+      //println "404 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -172,7 +158,7 @@ def synchronized createAccountProfile(user="user1", positive=true) {
     else {
       userName = user
     }
-    println "username:" + userName
+    //println "username:" + userName
     def accountProfilePath = "/spring-nanotrader-services/api/accountProfile"
     def resp = nanotrader.post(path:"${accountProfilePath}",
                                requestContentType:JSON,
@@ -183,10 +169,10 @@ def synchronized createAccountProfile(user="user1", positive=true) {
                                      email:"randomname.company.com",
                                      creditcard:"222222222222",
                                      fullname:userName])
-    println "response code:" + resp.status
+    //println "response code:" + resp.status
     if (positive) {
       assert resp.status == 201
-      println "DATA:" + resp.data + ":"
+      //println "DATA:" + resp.data + ":"
     }
     else {
       assert resp.status == 400
@@ -195,12 +181,10 @@ def synchronized createAccountProfile(user="user1", positive=true) {
   catch(ex) {
     if (!positive) {
       assert ex.response.status == 400
-      println "400 response code found as expected"
+      //println "400 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -220,7 +204,7 @@ def updateAccountProfile(id=1, userid="user1", positive=true) {
                                     profileid:id])
     if (positive) {
       assert resp.status == 200
-      println "DATA:" + resp.data + ":"
+      //println "DATA:" + resp.data + ":"
     }
     else {
       assert resp.status == 400
@@ -229,12 +213,10 @@ def updateAccountProfile(id=1, userid="user1", positive=true) {
   catch(ex) {
     if (!positive) {
       assert ex.response.status == 400
-      println "400 response code found as expected"
+      //println "400 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -245,8 +227,8 @@ def getAccount(id, positive=true) {
     def resp = nanotrader.get(path:"${accountPath}")
     if (positive) {
       assert resp.status == 200
-      println "\n\n##################### ACCOUNT DATA #####################"
-      println "DATA:" + resp.data + ":"
+      //println "\n\n##################### ACCOUNT DATA #####################"
+      //println "DATA:" + resp.data + ":"
     }
     else {
       assert resp.status == 404
@@ -255,12 +237,10 @@ def getAccount(id, positive=true) {
   catch(ex) {
     if (!positive) {
       assert ex.response.status == 404
-      println "404 response code found as expected"
+      //println "404 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -270,12 +250,10 @@ def createAccount(id) {
     def accountPath = "/spring-nanotrader-services/api/account"
     def resp = nanotrader.post(path:"${accountPath}")
     assert resp.status == 201
-    println "DATA:" + resp.data + ":"
+    //println "DATA:" + resp.data + ":"
   }
   catch(ex) {
-    print ex.response.data
-    ex.printStackTrace()
-    assert false
+    throw ex
 }
 }
 
@@ -285,8 +263,8 @@ def getSpecificHoldingForAccount(accountid, holdingid, positive=true) {
     def resp = nanotrader.get(path:"${holdingPath}")
     if (positive) {
       assert resp.status == 200
-      println "\n\n##################### HOLDING DATA #####################"
-      println "DATA:" + resp.data + ":"
+      //println "\n\n##################### HOLDING DATA #####################"
+      //println "DATA:" + resp.data + ":"
     }
     else {
       assert resp.status == 404
@@ -295,12 +273,10 @@ def getSpecificHoldingForAccount(accountid, holdingid, positive=true) {
   catch(ex) {
    if (!positive) {
       assert ex.response.status == 404
-      println "404 response code found as expected"
+      //println "404 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -311,8 +287,8 @@ def getAllHoldingsForAccount(accountid, positive=true) {
     def resp = nanotrader.get(path:"${holdingPath}")
     if (positive) {
       assert resp.status == 200
-      println "\n\n##################### HOLDING DATA #####################"
-      println "DATA:" + resp.data + ":"
+      //println "\n\n##################### HOLDING DATA #####################"
+      //println "DATA:" + resp.data + ":"
     }
     else {
       assert resp.status == 404
@@ -321,43 +297,10 @@ def getAllHoldingsForAccount(accountid, positive=true) {
   catch(ex) {
    if (!positive) {
       assert ex.response.status == 404
-      println "404 response code found as expected"
+      //println "404 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
-    }
-  }
-}
-
-def createHolding(id, positive=true) {
-  try {
-    def holdingPath = "/spring-nanotrader-services/api/" + id + "/holding"
-    def resp = nanotrader.post(path:"${holdingPath}",
-                               requestContentType:JSON,
-                               body:[purchaseprice:50000,
-                                     quantity:200,
-                                     purchasedate:"2012-03-19T17:35:42.904+0000",
-                                     accountAccountid:id,
-                                     quoteSymbol:"VMW"])
-    if (positive) {
-      assert resp.status == 201
-      //println "DATA:" + resp.data + ":"
-    }
-    else {
-     assert resp.status == 400
-    }
-  }
-  catch(ex) {
-   if (!positive) {
-      assert ex.response.status == 400
-      println "400 response code found as expected"
-    }
-    else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -368,8 +311,8 @@ def synchronized getQuote(symbol, positive=true) {
     def resp = nanotrader.get(path:"${quotePath}")
     if (positive) {
       assert resp.status == 200
-      println "\n\n##################### QUOTE DATA #####################"
-      println "DATA:" + resp.data + ":"
+      //println "\n\n##################### QUOTE DATA #####################"
+      //println "DATA:" + resp.data + ":"
     }
     else {
      assert resp.status == 404
@@ -378,12 +321,10 @@ def synchronized getQuote(symbol, positive=true) {
   catch(ex) {
    if (!positive) {
       assert ex.response.status == 404
-      println "404 response code found as expected"
+      //println "404 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -403,7 +344,7 @@ def createQuote(companyName='newcompany', symbol='NCPY', positive=true) {
                                      change1:1])
     if (positive) {
       assert resp.status == 201
-      println "DATA:" + resp.data + ":"
+      //println "DATA:" + resp.data + ":"
     }
     else {
       assert resp.status == 400
@@ -412,12 +353,10 @@ def createQuote(companyName='newcompany', symbol='NCPY', positive=true) {
   catch(ex) {
    if (!positive) {
       assert ex.response.status == 400
-      println "400 response code found as expected"
+      //println "400 response code found as expected"
     }
     else {
-      println "response code:" + ex.response.status
-      print ex.response.data
-      ex.printStackTrace()
+      throw ex
     }
   }
 }
@@ -458,67 +397,261 @@ def loadTest() {
   }
 }
 
+def basicVerificationTests() {
+  testGetOrder()
+  testCreateOrder()
+  testUpdateOrder()
+  testGetAccountProfile()
+  testCreateAccountProfile()
+  testUpdateAccountProfile()
+  testGetAccount()
+  testGetSpecificHoldingForAccount()
+  testGetAllHoldingsForAccount()
+  testGetQuote()
+  testCreateQuote()
+}
+
+def verificationTests() {
+  testAdvancedCreateOrder()
+  testAdvancedUpdateOrder()
+  testAdvancedGetAccount()
+  testAdvancedGetQuote()
+}
+
+def testAdvancedCreateOrder() {
+  try {
+    createOrder(1, 8888, 'buy', 's1')
+    createOrder(2, 9999, 'buy', 's2')
+    holdingQuantityList = getAllHoldingsForAccount(1)
+    holdingQuantityList2 = getAllHoldingsForAccount(2)
+
+    if (orderquantity != 8888 || orderquantitty2 != 9999) {
+      println "testAdvancedCreateOrder FAIL"
+    }
+    else {
+      println "testAdvancedCreateOrder PASS"
+    }
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testAdvancedCreateOrder FAIL";
+  }
+}
+
+def testAdvancedUpdateOrder() {
+  try {
+    orderList = getOrder(1)
+    orderId1 = 3333
+    orderId2 = 4444
+    updateOrder(1, orderId1, 88888)
+    updateOrder(2, orderId2, 99999)
+    holdingQuantityList = getAllHoldingsForAccount(1)
+    holdingQuantityList2 = getAllHoldingsForAccount(2)
+
+    if (orderquantity != 88888 || orderquantitty2 != 99999) {
+      println "testAdvancedCreateOrder FAIL"
+    }
+    else {
+      println "testAdvancedUpdateOrder PASS"
+    }
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testAdvancedUpdateOrder FAIL";
+  }
+}
+
+def testAdvancedGetAccount() {
+  try {
+    createOrder(1, 8888, 'buy', 's1')
+    createOrder(2, 9999, 'buy', 's2')
+
+    balance = getAccount()
+
+    if (balance) {
+      println "testAdvancedGetAccount FAIL"
+    }
+    else {
+      println "testAdvancedGetAccount PASS"
+    }
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testAdvancedGetAccount FAIL";
+  }
+}
+
+def testAdvancedGetQuote() {
+  try {
+    createOrder(1, 8888, 'buy', 's1')
+    createOrder(2, 9999, 'buy', 's2')
+
+    values = getQuote('s1')
+    values = getQuote('s2')
+
+    if (nochange) {
+      println "testAdvancedGetQuote FAIL"
+    }
+    else {
+      println "testAdvancedGetQuote PASS"
+    }
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testAdvancedGetQuote FAIL";
+  }
+}
+
+def testGetOrder() {
+  try {
+    getOrder(1, "all")
+    getOrder(1, "Open")
+    getOrder(1, "Completed")
+    getOrder(1, "closed")
+    getOrder(1, "unknown", false)
+
+    println "testGetOrder PASS";
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testGetOrder FAIL";
+  }
+}
+
+def testCreateOrder() {
+  try {
+    createOrder(1, 555, 'buy', 's10')
+    createOrder(1, 555, 'buy', 'invalid_quote', false)
+
+    println "testCreateOrder PASS";
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testCreateOrder FAIL";
+  }
+}
+
+def testUpdateOrder() {
+  try {
+    updateOrder(100, 999, 88888)
+    updateOrder(567856785678, 1, 55000, false)
+
+    println "testUpdateOrder PASS"
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testUpdateOrder FAIL";
+  }
+}
+
+def testGetAccountProfile() {
+  try {
+    getAccountProfile(1)
+    getAccountProfile(555666777, false)
+
+    println "testGetAccountProfile PASS"
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testGetAccountProfile FAIL";
+  }
+}
+
+def testCreateAccountProfile() {
+  try {
+    createAccountProfile()
+    createAccountProfile("user1", false)
+
+    println "testCreateAccountProfile PASS"
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testCreateAccountProfile FAIL";
+  }
+}
+
+def testUpdateAccountProfile() {
+  try {
+    updateAccountProfile(2, "user1")
+    updateAccountProfile(777777777, "invalid_user", false)
+
+    println "testUpdateAccountProfile PASS"
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testUpdateAccountProfile FAIL";
+  }
+}
+
+def testGetAccount() {
+  try {
+    getAccount(1)
+    getAccount(5555555555, false)
+
+    println "testGetAccount PASS"
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testGetAccount FAIL";
+  }
+}
+
+def testGetSpecificHoldingForAccount() {
+  try {
+    getSpecificHoldingForAccount(1, 1)
+    getSpecificHoldingForAccount(1, 2)
+    getSpecificHoldingForAccount(1, 3)
+    getSpecificHoldingForAccount(55555555, 11)
+
+    println "testGetSpecificHoldingForAccount PASS"
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testGetSpecificHoldingForAccount FAIL";
+  }
+}
+
+def testGetAllHoldingsForAccount() {
+  try {
+    getAllHoldingsForAccount(1)
+    getAllHoldingsForAccount(555555555, false)
+
+    println "testGetAllHoldingsForAccount PASS"
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testGetAllHoldingsForAccount FAIL";
+  }
+}
+
+def testGetQuote() {
+  try {
+    getQuote('s0')
+    getQuote('InvalidQuote', false)
+
+    println "testGetQuote PASS"
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testGetQuote FAIL";
+  }
+}
+
+def testCreateQuote() {
+  try {
+    createQuote()
+    //createQuote('s1 company', 's1', false)
+
+    println "testCreateQuote PASS"
+  }
+  catch (Throwable t) {
+    writeExceptionToFile(t)
+    println "testCreateQuote FAIL";
+  }
+}
+
 init()
-
-/*
-getOrder(1, "all")
-getOrder(1, "Open")
-getOrder(1, "Completed")
-getOrder(1, "closed")
-getOrder(1, "unknown", false)
-
-createOrder(1, 555, 'buy', 's10')
-createOrder(1, 555, 'buy', 'invalid_quote', false)
-
-updateOrder(100, 999, 88888)
-updateOrder(567856785678, 1, 55000, false)
-*/
-deleteOrder(1, 1)
-deleteOrder(1, 100, false)
-deleteOrder(1, 55555555555, false)
-deleteOrder(55555555555, 1, false)
-
-/*
-getAccountProfile(1)
-getAccountProfile(555666777, false)
-
-createAccountProfile()
-createAccountProfile("user1", false)
-
-updateAccountProfile(2, "user1")
-updateAccountProfile(777777777, "invalid_user", false)
+basicVerificationTests()
 
 
-getAccount(1)
-getAccount(5555555555, false)
-
-
-getSpecificHoldingForAccount(1, 1)
-getSpecificHoldingForAccount(1, 2)
-getSpecificHoldingForAccount(1, 3)
-getSpecificHoldingForAccount(55555555, 11)
-
-
-getAllHoldingsForAccount(1)
-getAllHoldingsForAccount(555555555, false)
-
-
-createHolding(1)
-createHolding(555555555, false)
-
-
-getQuote('s0')
-getQuote('InvalidQuote', false)
-
-
-createQuote()
-createQuote('s1 company', 's1', false)
-*/
-
-
-//getQuote('s0')
-//getAllHoldingsForAccount(1)
-//getSpecificHoldingForAccount(1, 1)
-//getAccount(1)
-//getAccountProfile(1)
 
