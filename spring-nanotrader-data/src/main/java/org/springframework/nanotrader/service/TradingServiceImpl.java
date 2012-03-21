@@ -38,6 +38,8 @@ import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
 @Transactional
 public class TradingServiceImpl implements TradingService {
 	
+	 
+	    
 	private static Logger log = LoggerFactory.getLogger(TradingServiceImpl.class);
 
 	public static BigDecimal DEFAULT_ORDER_FEE = BigDecimal.valueOf(1050, 2);
@@ -280,9 +282,24 @@ public class TradingServiceImpl implements TradingService {
 		BigDecimal total = (order.getQuantity().multiply(price)).add(orderFee);
 		account.setBalance(balance.subtract(total));
 		accountRepository.save(account);
+		updateQuoteMarketData(order.getQuote().getSymbol(), FinancialUtils.getRandomPriceChangeFactor(), order.getQuantity());
 		return order;
 	}
 
+	private void updateQuoteMarketData(String symbol, BigDecimal changeFactor, BigDecimal sharesTraded) { 
+		Quote quote = quoteRepository.findBySymbol(symbol);
+		BigDecimal oldPrice = quote.getPrice();
+		if (quote.getPrice().equals(FinancialUtils.PENNY_STOCK_PRICE)) {
+            changeFactor = FinancialUtils.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
+        }
+        BigDecimal newPrice = changeFactor.multiply(oldPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
+        quote.setPrice(newPrice);
+        quote.setVolume(quote.getVolume().add(sharesTraded));
+        quote.setChange1(newPrice.subtract(quote.getOpen1()));
+        quoteRepository.save(quote);
+        //TODO: Publish quote change to rabbitmq
+	}
+	
 	@Override
 	public Order updateOrder(Order order) {
 		Order o = null;
