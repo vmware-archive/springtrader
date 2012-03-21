@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.nanotrader.service.configuration.AppConfig;
 import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration;
 import org.springframework.nanotrader.web.configuration.WebConfig;
+import org.springframework.nanotrader.web.controller.AbstractSecureControllerTest;
 import org.springframework.test.web.server.MockMvc;
 
 /**
@@ -24,19 +25,7 @@ import org.springframework.test.web.server.MockMvc;
  *  @author
  */
 
-public class GlobalExceptionHandlerTest {
-	private static MockMvc mockMvc;
-	
-	@BeforeClass 
-	public static void setup() {
-		String warRootDir = "src/webapps";
-		boolean isClasspathRelative = false;
-		mockMvc =
-				annotationConfigSetup(WebConfig.class, AppConfig.class, ServiceTestConfiguration.class)
-				.activateProfiles("test")
-				.configureWebAppRootDir(warRootDir, isClasspathRelative)
-				.build(); 
-	}
+public class GlobalExceptionHandlerTest extends AbstractSecureControllerTest {
 	
 	@Test
 	public void ExceptionHandlerTest() throws Exception  { 
@@ -52,9 +41,8 @@ public class GlobalExceptionHandlerTest {
 	@Test
 	public void getAccountProfileByIdJsonNoRecordFound() throws Exception {
 		mockMvc.perform(get("/accountProfile/900" + ServiceTestConfiguration.NOT_A_VALID_PROFILE).accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNotFound())
+				.andExpect(status().isUnauthorized())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.detail", containsString("No records found for the specified criteria")) )
 				.andDo(print());
 	}
 	

@@ -14,6 +14,17 @@ public class SecurityUtil {
 	public Integer getAccountFromPrincipal() {
 		return getPrincipal().getAccountId();
 	}
+	
+	public Integer getAccountProfileIdFromPrincipal() {
+		return getPrincipal().getAccountProfileId();
+	}
+
+	public void checkAccountProfile(Integer accountProfileId) {
+		if (accountProfileId == null
+				|| accountProfileId.compareTo(getAccountProfileIdFromPrincipal()) != 0) {
+			throw new AccessDeniedException(null);
+		}
+	}
 
 	public void checkAccount(Integer accountId) {
 		if (accountId == null
