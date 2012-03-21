@@ -24,5 +24,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpeci
 
 	@Query("SELECT o FROM Order o WHERE o.orderid = ?1 AND o.accountAccountid.accountid  = ?2")
 	public Order findByOrderidAndAccountAccountid(Integer orderId, Integer accountId);
+
 	
 }

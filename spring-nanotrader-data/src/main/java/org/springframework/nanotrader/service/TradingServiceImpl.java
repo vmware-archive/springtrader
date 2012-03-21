@@ -33,6 +33,7 @@ import org.springframework.nanotrader.util.FinancialUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
+import org.springframework.dao.DataRetrievalFailureException;
 
 @Service
 @Transactional
@@ -220,7 +221,7 @@ public class TradingServiceImpl implements TradingService {
 		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
 			createdOrder = buy(order);
 		} else if (ORDER_TYPE_SELL.equals(order.getOrdertype())) {
-			// TODO
+			createdOrder = sell(order);
 		} else {
 			throw new UnsupportedOperationException("Order type was not recognized. Valid order types are 'buy' or 'sell'");
 		}
@@ -238,14 +239,31 @@ public class TradingServiceImpl implements TradingService {
 		Order createdOrder = createOrder(order, account, holding, quote);
 		// Update account balance and create holding
 		completeOrder(createdOrder);
-
-		return order;
+		return createdOrder;
 	}
+	
+	private Order sell(Order order) {
+		Account account = accountRepository.findOne(order.getAccountAccountid().getAccountid());
+		Holding holding = holdingRepository.findByHoldingidAndAccountAccountid(order.getHoldingHoldingid().getHoldingid(), account.getAccountid());
+		if (holding == null) { 
+			throw new DataRetrievalFailureException("Attempted to sell holding" + order.getHoldingHoldingid().getHoldingid() + " which is already sold.");
+		}
+		Quote quote = quoteRepository.findBySymbol(holding.getQuoteSymbol());
+		// create order and persist
+		Order createdOrder = createOrder(order, account, holding, quote);
+		// Update account balance and create holding
+		completeOrder(createdOrder);
+		return createdOrder;
+	}
+	
 
 	private Order createOrder(Order order, Account account, Holding holding, Quote quote) {
 		Order createdOrder = null;
 		order.setAccountAccountid(account);
 		order.setQuote(quote);
+		if (order.getQuantity() == null) { 
+			order.setQuantity(holding.getQuantity());
+		}
 		order.setOrderfee(DEFAULT_ORDER_FEE);
 		order.setOrderstatus(OPEN_STATUS);
 		order.setOpendate(new Date());
@@ -255,6 +273,8 @@ public class TradingServiceImpl implements TradingService {
 		return createdOrder;
 	}
 
+	
+	//TO DO: refactor this
 	public Order completeOrder(Order order) {
 		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
 			if (order.getHoldingHoldingid() == null) {
@@ -269,29 +289,54 @@ public class TradingServiceImpl implements TradingService {
 				holding.setOrders(orders);
 				order.setHoldingHoldingid(holding);
 				holdingRepository.save(holding);
+				updateAccount(order);
 			}
+		} else { 
+			updateAccount(order);
 		}
 		order.setOrderstatus("closed");
 		order.setCompletiondate(new Date());
+		updateQuoteMarketData(order.getQuote().getSymbol(), FinancialUtils.getRandomPriceChangeFactor(), order.getQuantity());
+		return order;
+	}
+	
+	//TODO: Need to clean this up
+	private void updateAccount(Order order) { 
 		// update account balance
 		Quote quote = order.getQuote();
 		Account account = order.getAccountAccountid();
 		BigDecimal price = quote.getPrice();
 		BigDecimal orderFee = order.getOrderfee();
 		BigDecimal balance = account.getBalance();
-		BigDecimal total = (order.getQuantity().multiply(price)).add(orderFee);
-		account.setBalance(balance.subtract(total));
+		BigDecimal total = null;
+		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
+			total = (order.getQuantity().multiply(price)).add(orderFee);
+			account.setBalance(balance.subtract(total));
+		} else { 
+			total = (order.getQuantity().multiply(price)).subtract(orderFee);
+			account.setBalance(balance.add(total));
+			Set<Order> orders = order.getHoldingHoldingid().getOrders();
+			//Remove the holding id from the buy record
+			for (Order orderToDeleteHolding: orders) { 
+				orderToDeleteHolding.setHoldingHoldingid(null);
+			}
+			//remove the holding id from the sell record
+			Integer holdingId = order.getHoldingHoldingid().getHoldingid();
+			order.setHoldingHoldingid(null);
+			holdingRepository.delete(holdingId);
+		}
 		accountRepository.save(account);
-		updateQuoteMarketData(order.getQuote().getSymbol(), FinancialUtils.getRandomPriceChangeFactor(), order.getQuantity());
-		return order;
 	}
 
+	
 	private void updateQuoteMarketData(String symbol, BigDecimal changeFactor, BigDecimal sharesTraded) { 
 		Quote quote = quoteRepository.findBySymbol(symbol);
+		
 		BigDecimal oldPrice = quote.getPrice();
 		if (quote.getPrice().equals(FinancialUtils.PENNY_STOCK_PRICE)) {
             changeFactor = FinancialUtils.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
         }
+		
         BigDecimal newPrice = changeFactor.multiply(oldPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
         quote.setPrice(newPrice);
         quote.setVolume(quote.getVolume().add(sharesTraded));

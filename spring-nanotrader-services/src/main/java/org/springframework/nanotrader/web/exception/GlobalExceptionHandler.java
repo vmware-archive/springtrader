@@ -3,6 +3,7 @@ package org.springframework.nanotrader.web.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.support.exception.AuthenticationException;
@@ -29,6 +30,7 @@ public class GlobalExceptionHandler {
 	private static final String UNAUTHORIZED_MESSAGE = "Authentication Failed: Can't find username and password combination.";
 	private static final String NO_ACCESS = "Access Denied.";
 	private static final String CANNOT_UPDATE_CLOSED_RECORD = "Update failed since processing status was 'complete'";
+	private static final String CANNOT_RETRIEVE_RECORD = "The record does not exist.";
 	
 	@ExceptionHandler(value = NoRecordsFoundException.class)
 	@ResponseStatus( HttpStatus.NOT_FOUND )
@@ -58,6 +60,14 @@ public class GlobalExceptionHandler {
 	public @ResponseBody ServiceException handle(DataIntegrityViolationException exception) {
 		logError(exception);
 		ServiceException serviceException = new ServiceException(CONSTRAINT_VIOLATION_MESSAGE);
+		return serviceException;
+	}	
+	
+	@ExceptionHandler(value = DataRetrievalFailureException.class)
+	@ResponseStatus( HttpStatus.NOT_FOUND )
+	public @ResponseBody ServiceException handle(DataRetrievalFailureException exception) {
+		logError(exception);
+		ServiceException serviceException = new ServiceException(CANNOT_RETRIEVE_RECORD);
 		return serviceException;
 	}	
 	
