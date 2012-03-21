@@ -99,7 +99,7 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 
 	
 	@Test
-	public void createOrderJson() throws Exception {
+	public void createOrderBuyJson() throws Exception {
 		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("create-order.json").getFile());
 		mockMvc.perform(
 				post("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON).body(jsonRequest)
@@ -107,6 +107,14 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 				.andDo(print());
 	}
 
+	@Test
+	public void createOrderSellJson() throws Exception {
+		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("create-order-sell.json").getFile());
+		mockMvc.perform(
+				post("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON).body(jsonRequest)
+						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated()) // HTTP 201 - Created
+				.andDo(print());
+	}
 
 	@Test
 	public void updateOrderJson() throws Exception {

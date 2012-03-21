@@ -73,6 +73,10 @@
 			<a>accountAccountid.accountid</a>
 			<b>accountid</b>
 		</field>
+		<field>
+			<a>holdingHoldingid.holdingid</a>
+			<b>holdingid</b>
+		</field>
 	</mapping>
 
 	<mapping map-id="quote">
