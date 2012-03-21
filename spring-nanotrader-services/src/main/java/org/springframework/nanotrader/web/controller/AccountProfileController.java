@@ -31,6 +31,7 @@ public class AccountProfileController extends BaseController {
 	@RequestMapping(value = "/accountProfile/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Accountprofile find(@PathVariable("id") final Integer id) {
+		this.getSecurityUtil().checkAccountProfile(id);
 		Accountprofile accountProfile = tradingServiceFacade.findAccountProfile(id);
 		return accountProfile;
 	}
