@@ -31,7 +31,8 @@ def writeExceptionToFile(ex) {
   logFile.write(sw.toString());
 }
 
-def getOrder(id, status, positive=true) {
+def String getOrder(id, status, positive=true) {
+  String data = ""
   try {
     def orderPath = "/spring-nanotrader-services/api/" + id + "/order"
     def resp = null
@@ -45,7 +46,7 @@ def getOrder(id, status, positive=true) {
     if (positive) {
       assert resp.status == 200
       //println "\n\n##################### ORDER DATA #####################"
-      //println "DATA:" + resp.data + ":"
+      data = resp.data
     }
     else {
       assert resp.status == 404
@@ -60,9 +61,11 @@ def getOrder(id, status, positive=true) {
       throw ex
     }
   }
+  return data
 }
 
-def synchronized createOrder(id, quantity=555, orderType="buy", symbol="s0", positive=true) {
+def synchronized int createOrder(id, quantity=555, orderType="buy", symbol="s0", positive=true) {
+  int orderId = 0
   try {
     def orderPath = "/spring-nanotrader-services/api/" + id + "/order"
     def resp = nanotrader.post(path:"${orderPath}",
@@ -70,16 +73,15 @@ def synchronized createOrder(id, quantity=555, orderType="buy", symbol="s0", pos
                                requestContentType:JSON)
    if (positive) {
      assert resp.status == 201
+     new_id = resp.getFirstHeader('location').getValue()
+     i = new_id.lastIndexOf("/")
+     new_id = new_id.substring(i+1)
+     //println "new_id:" + new_id
+     orderId = Integer.parseInt(new_id)
    }
    else {
      assert resp.status == 400
    }
-   headers = resp.getAllHeaders()
-   for (int i=0; i < headers.size(); i++) {
-     println "value" + headers[i].getValue()
-   }
-   new_id = resp.getFirstHeader('location').getValue()
-   println "createOrder:" + new_id
   }
   catch(ex) {
     if (!positive) {
@@ -90,6 +92,7 @@ def synchronized createOrder(id, quantity=555, orderType="buy", symbol="s0", pos
       throw ex
     }
   }
+  return orderId
 }
 
 def updateOrder(accountid, orderid, quantity=5555, positive=true) {
@@ -281,7 +284,8 @@ def getSpecificHoldingForAccount(accountid, holdingid, positive=true) {
   }
 }
 
-def getAllHoldingsForAccount(accountid, positive=true) {
+def String getAllHoldingsForAccount(accountid, positive=true) {
+  String data = ""
   try {
     def holdingPath = "/spring-nanotrader-services/api/" + accountid + "/holding"
     def resp = nanotrader.get(path:"${holdingPath}")
@@ -289,6 +293,7 @@ def getAllHoldingsForAccount(accountid, positive=true) {
       assert resp.status == 200
       //println "\n\n##################### HOLDING DATA #####################"
       //println "DATA:" + resp.data + ":"
+      data = resp.data
     }
     else {
       assert resp.status == 404
@@ -303,6 +308,7 @@ def getAllHoldingsForAccount(accountid, positive=true) {
       throw ex
     }
   }
+  return data
 }
 
 def synchronized getQuote(symbol, positive=true) {
@@ -414,22 +420,36 @@ def basicVerificationTests() {
 def verificationTests() {
   testAdvancedCreateOrder()
   testAdvancedUpdateOrder()
-  testAdvancedGetAccount()
-  testAdvancedGetQuote()
+  //testAdvancedGetAccount()
+  //testAdvancedGetQuote()
 }
 
 def testAdvancedCreateOrder() {
   try {
-    createOrder(1, 8888, 'buy', 's1')
-    createOrder(2, 9999, 'buy', 's2')
-    holdingQuantityList = getAllHoldingsForAccount(1)
-    holdingQuantityList2 = getAllHoldingsForAccount(2)
+    accountid1 = 1
+    accountid2 = 2
+    quantity1 = 9876543
+    quantity2 = 3456789
+    symbol1 = 's1'
+    symbol2 = 's2'
 
-    if (orderquantity != 8888 || orderquantitty2 != 9999) {
-      println "testAdvancedCreateOrder FAIL"
+    createOrder(accountid1, quantity1, 'buy', symbol1)
+    createOrder(accountid2, quantity2, 'buy', symbol2)
+
+    data = getAllHoldingsForAccount(accountid1)
+    data2 = getAllHoldingsForAccount(accountid2)
+
+    //println data
+    //println data2
+
+    checkLabel1 = "\"quantity\":" + quantity1
+    checkLabel2 = "\"quantity\":" + quantity2
+
+    if (data.indexOf(checkLabel1) >= 0 && data2.indexOf(checkLabel2) >= 0) {
+      println "testAdvancedCreateOrder PASS"
     }
     else {
-      println "testAdvancedCreateOrder PASS"
+      println "testAdvancedCreateOrder FAIL"
     }
   }
   catch (Throwable t) {
@@ -440,11 +460,55 @@ def testAdvancedCreateOrder() {
 
 def testAdvancedUpdateOrder() {
   try {
-    orderList = getOrder(1)
-    orderId1 = 3333
-    orderId2 = 4444
-    updateOrder(1, orderId1, 88888)
-    updateOrder(2, orderId2, 99999)
+    oldQuantity1 = 56789
+    oldQuantity2 = 12345
+    newQuantity1 = oldQuantity1 + 1
+    newQuantity2 = oldQuantity2 + 1
+    orderId1 = createOrder(1, oldQuantity1, 'buy', 's1')
+    orderId2 = createOrder(2, oldQuantity2, 'buy', 's2')
+
+    //println "orderId1:" + orderId1
+    //println "orderId2:" + orderId2
+
+    updateOrder(1, orderId1, newQuantity1)
+    updateOrder(2, orderId2, newQuantity2)
+
+    data = getOrder(1, 'all')
+    data2 = getOrder(2, 'all')
+
+    //println "data:" + data
+    //println "data2:" + data2
+
+    i = data.indexOf("{\"orderid\":" + orderId1)
+    j = data2.indexOf("{\"orderid\":" + orderId2)
+
+    assert (i >=0 && j >= 0)
+
+    i2 = data.indexOf('}', i)
+    j2 = data2.indexOf('}', j)
+
+    checkString1 = data.substring(i, i2)
+    checkString2 = data2.substring(j, j2)
+
+    assert (checkString1 != null && checkString2 != null)
+
+    checkLabel1 = "\"quantity\":" + newQuantity1
+    checkLabel2 = "\"quantity\":" + newQuantity2
+
+    //println "checkString1:" + checkString1
+    //println "checkString2:" + checkString2
+
+    //println "checkLabel1:" + checkLabel1
+    //println "checkLabel2:" + checkLabel2
+
+    if (checkString1.indexOf(checkLabel1) >= 0 && checkString2.indexOf(checkLabel2) >= 0) {
+      println "testAdvancedUpdateOrder PASS"
+    }
+    else {
+      println "testAdvancedUpdateOrder FAIL"
+    }
+
+    /*
     holdingQuantityList = getAllHoldingsForAccount(1)
     holdingQuantityList2 = getAllHoldingsForAccount(2)
 
@@ -453,7 +517,7 @@ def testAdvancedUpdateOrder() {
     }
     else {
       println "testAdvancedUpdateOrder PASS"
-    }
+    }*/
   }
   catch (Throwable t) {
     writeExceptionToFile(t)
@@ -652,6 +716,7 @@ def testCreateQuote() {
 
 init()
 basicVerificationTests()
+verificationTests()
 
 
 
