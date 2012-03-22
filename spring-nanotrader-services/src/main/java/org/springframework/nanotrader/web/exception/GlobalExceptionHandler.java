@@ -10,6 +10,7 @@ import org.springframework.nanotrader.service.support.exception.AuthenticationEx
 import org.springframework.nanotrader.service.support.exception.NoRecordsFoundException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -31,6 +32,7 @@ public class GlobalExceptionHandler {
 	private static final String NO_ACCESS = "Access Denied.";
 	private static final String CANNOT_UPDATE_CLOSED_RECORD = "Update failed since processing status was 'complete'";
 	private static final String CANNOT_RETRIEVE_RECORD = "The record does not exist.";
+	private static final String METHOD_NOT_ALLOWED = "Request method not supported for this service";
 	
 	@ExceptionHandler(value = NoRecordsFoundException.class)
 	@ResponseStatus( HttpStatus.NOT_FOUND )
@@ -38,6 +40,7 @@ public class GlobalExceptionHandler {
 		ServiceException serviceException = new ServiceException(NO_RECORDS_FOUND_MESSSAGE );
 		return serviceException;
 	}
+	
 	
 	@ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
 	@ResponseStatus( HttpStatus.UNSUPPORTED_MEDIA_TYPE )

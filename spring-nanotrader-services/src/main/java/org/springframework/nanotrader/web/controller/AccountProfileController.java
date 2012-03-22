@@ -52,4 +52,9 @@ public class AccountProfileController extends BaseController {
 		tradingServiceFacade.updateAccountProfile(accountProfileRequest, this.getSecurityUtil().getUsernameFromPrincipal());
 	}
 
+	@RequestMapping(value = "/accountProfile/{id}", method = RequestMethod.DELETE)
+	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	public void delete() {
+		
+	}
 }
