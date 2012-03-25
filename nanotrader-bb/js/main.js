@@ -1,10 +1,20 @@
+Backbone.old_sync = Backbone.sync
+Backbone.sync = function(method, model, options) {
+    var new_options =  _.extend({
+        beforeSend: function(xhr) {
+            var token = $.cookie('API_TOKEN');
+            if (token !== null) xhr.setRequestHeader('API_TOKEN', token);
+        }
+    }, options)
+    Backbone.old_sync(method, model, new_options);
+};
 var AppRouter = Backbone.Router.extend({
 			routes : {
-				"/:id" : "home",
-				"/accountprofile/:id" : "accountprofile",
-				"/login" : "login",
-				"/trade/:id" : "trade",
-				"/portfolio/:id" : "portfolio"
+                "login" : "login",
+				"dashboard/:id" : "home",
+				"accountprofile/:id" : "accountprofile",
+				"trade/:id" : "trade",
+				"portfolio/:id" : "portfolio"
 			},
 
 			initialize : function() {
@@ -14,17 +24,19 @@ var AppRouter = Backbone.Router.extend({
 			accountprofile : function(id) {
 				if (!this.accountProfileView) {
 					this.accountProfileView = new AccountProfileView(id);
-					// this.accountProfileView.render();
 				}
 				$('#content').html(this.accountProfileView.el);
 				this.tabView = new TabView({
-							name : 'profile'
+							name : 'profile', accountid : id
 						});
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
 			},
 			login : function() {
-				this.loginView = new LoginView();
+			    
+				if (!this.loginView) { 
+				    this.loginView = new LoginView();
+				}
 				this.loginView.render();
 				$('#content').html(this.loginView.el);
 			},
@@ -32,7 +44,7 @@ var AppRouter = Backbone.Router.extend({
 				this.homeView = new HomeView(id);
 				$('#content').html(this.homeView.el);
 				this.tabView = new TabView({
-							name : 'home'
+							name : 'home', accountid : id
 						});
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
@@ -41,33 +53,32 @@ var AppRouter = Backbone.Router.extend({
 				this.PortfolioView = new PortfolioView(id);
 				$('#content').html(this.PortfolioView.el);
 				this.tabView = new TabView({
-							name : 'portfolio'
+							name : 'portfolio', accountid : id
 						});
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
 			},
-	        trade : function() {
+	        trade : function(id) {
                 if (!this.tradeView) {
-                        this.tradeView = new TradeView();
+                        this.tradeView = new TradeView(id);
                         this.tradeView.render();
                 }
                 $('#content').html(this.tradeView.el);
                 this.tabView = new TabView({
-                        name : 'trade'
+                        name : 'trade', accountid : id
                 });
                 this.tabView.render();
                 $('#tabs').html(this.tabView.el);
-
 	        }
-
 		});
 
+this.app = null;
 tpl.loadTemplates(['home', 'account-summary', 'user-statistics',
 				'recent-transactions', 'positions', 'portfolio',
 				'portfolio-summary', 'holdinglist', 'holding',
 				'accountprofile', 'tabs', 'header', 'login', 'portfolio-chart',
 				'quote-row', 'quote-list', 'quote-prompt', 'order-row',
 				'order-list', 'trade'], function() {
-			app = new AppRouter();
-			Backbone.history.start();
+		    this.app = new AppRouter();
+            Backbone.history.start();
 		});

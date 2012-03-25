@@ -7,7 +7,7 @@ tpl = {
 	// This implementation should be changed in a production environment. All
 	// the template files should be
 	// concatenated in a single file.
-	loadTemplates : function(names, callback) {
+	loadTemplates : function(names, callbackmethod) {
 
 		var that = this;
 
@@ -19,7 +19,7 @@ tpl = {
 						if (index < names.length) {
 							loadTemplate(index);
 						} else {
-							callback();
+							callbackmethod();
 						}
 					});
 		}

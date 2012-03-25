@@ -31,18 +31,26 @@ window.AccountProfileView = Backbone.View.extend({
                 $('#'+ attr).focus();
             }
         });
-        this.model.fetch();
+        this.model.fetch({
+            success: function() {
+                console.log("account profile fetch successful");
+            },
+            error: function() {
+                console.log("account profile fetch failed, go to login page");
+                app.navigate('/login',  {trigger: true});
+            }
+        }); 
     },
     handleForm : function(data) {
         this.model.unset('accounts', {
             silent : true
         });
-        this.model.unset('password_confirm', {
-            silent : true
-        });
-
+        if (this.model.get('password_confirm')) { 
+            this.model.unset('password_confirm', {
+                silent : true
+            });
+        }
         this.model.save(undefined, {
-            url : 'spring-nanotrader-services/api/accountProfile/',
             success : function(model, resp) {
                 console.log("model saved");
                 $('#result').append('<div id="showsuccess"<b> Success! </b></div>');
@@ -50,9 +58,9 @@ window.AccountProfileView = Backbone.View.extend({
                     $('#showsuccess').remove();
                 });
             },
-            error : function(data) {
+            error : function(model, resp) {
                 console.log("unable to save model");
-                $('#result').append('Failed!');
+                $('#result').append('Failed! ' + resp );
             }
         });
     },
