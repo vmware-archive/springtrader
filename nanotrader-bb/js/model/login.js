@@ -14,5 +14,5 @@ Login = Backbone.Model.extend( {
         this.set({API_TOKEN: $.cookie('API_TOKEN')});
         this.set({accountid: $.cookie('accountid')});
       }
-  }
+  },  
 })

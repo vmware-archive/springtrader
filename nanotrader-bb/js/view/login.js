@@ -20,30 +20,26 @@ LoginView = Backbone.View.extend({
     },
     
     handleForm : function() {
-        this.model.unset('API_TOKEN', {
-            silent : true
-        });
-        this.model.unset('authToken', {
-            silent : true
-        });
-        this.model.unset('accountid', {
-            silent : true
-        });
-        var acctid = null;
-        this.model.save(undefined, { wait: true,  
+        if (this.model.get('API_TOKEN')) { 
+            this.model.unset('API_TOKEN', {
+                silent : true
+            });
+            this.model.unset('accountid', {
+                silent : true
+            });
+        }
+        this.model.save(undefined, { async : false,
             success : function(model, resp) {
                 console.log("model saved : token = " + resp.authToken);
                 $.cookie('API_TOKEN', resp.authToken);
                 $.cookie('accountid', resp.accountid);
-                 acctid = resp.accountid;
+                app.navigate('dashboard/' + resp.accountid,  {trigger: true});
             },
             error : function() {
                 console.log("login failed!");
+                app.navigate('login',  {trigger: true});
             }
         });
-        // TBD: Why {wait:true} on save is not working? Shuold use model to get 
-        // attributes instead of resp
-        app.navigate('/accountprofile/' + acctid,  {trigger: true});
     },
     render: function() {
         $(this.el).html(this.template);       

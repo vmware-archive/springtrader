@@ -5,14 +5,13 @@ OrderListView = Backbone.View.extend({
     initialize:function (accountid) {
         this.template = _.template(tpl.get('order-list'));
         this.orders = new OrderCollection();
-        this.orders.url = 'spring-nanotrader-services/api/' + accountid + '/order';
+        this.orders.url = 'spring-nanotrader-services/api/account/' + accountid + '/order';
         this.orders.bind('add', this.render, this);
         this.orders.fetch();     
         
     },
 
     render:function (event) {
-        console.log("Entered OrderList render...");
         $(this.el).html(this.template);
         _.each(this.orders.models, function (order) {
             var orderView = new OrderView(order);

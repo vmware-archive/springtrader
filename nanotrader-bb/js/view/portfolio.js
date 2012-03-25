@@ -3,7 +3,7 @@ PortfolioSummaryView = Backbone.View.extend({
 			initialize : function(account_id) {
 				this.template = _.template(tpl.get('portfolio-summary'));
 				this.model = new PortfolioSummary({});
-				this.model.url = 'spring-nanotrader-services/api/' + account_id
+				this.model.url = 'spring-nanotrader-services/api/account/' + account_id
 						+ '/portfolioSummary';
 				this.model.bind('change', this.render, this);
 				this.model.fetch();
@@ -30,7 +30,7 @@ HoldingListView = Backbone.View.extend({
 			initialize : function(account_id) {
 				this.template = _.template(tpl.get('holdinglist'));
 				this.holdings = new Holdings();
-				this.holdings.url = 'spring-nanotrader-services/api/'
+				this.holdings.url = 'spring-nanotrader-services/api/account/'
 						+ account_id + '/holding';
 				this.holdings.bind('add', this.render, this);
 				this.holdings.fetch();

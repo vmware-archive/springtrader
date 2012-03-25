@@ -45,9 +45,11 @@ window.AccountProfileView = Backbone.View.extend({
         this.model.unset('accounts', {
             silent : true
         });
-        this.model.unset('password_confirm', {
-            silent : true
-        });
+        if (this.model.get('password_confirm')) { 
+            this.model.unset('password_confirm', {
+                silent : true
+            });
+        }
         this.model.save(undefined, {
             success : function(model, resp) {
                 console.log("model saved");
