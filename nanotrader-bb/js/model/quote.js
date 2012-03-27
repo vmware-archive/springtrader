@@ -35,6 +35,10 @@ QuoteCollection = Backbone.Collection.extend({
                     },
                     failure : function(data) {
                         console.log("quote failure on " + symbol);
+                    },
+                    beforeSend: function(xhr) {
+                        var token = $.cookie('API_TOKEN');
+                        if (token !== null) xhr.setRequestHeader('API_TOKEN', token);
                     }
                 });
             }
