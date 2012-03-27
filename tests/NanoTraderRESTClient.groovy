@@ -403,6 +403,182 @@ def createQuote(companyName='newcompany', symbol='NCPY', positive=true, response
   }
 }
 
+def getPortfolioSummary(accountid=1, positive=true, responseCode=200) {
+  try {
+    def path = "/spring-nanotrader-services/api/account/" + accountid + "/portfolioSummary"
+    def resp = nanotrader.get(path:"${path}",
+                              headers:[API_TOKEN:testAuthToken])
+    if (positive) {
+      assert resp.status == 200
+    }
+    else {
+     assert resp.status == responseCode
+    }
+  }
+  catch(ex) {
+   if (!positive) {
+      assert ex.response.status == responseCode
+    }
+    else {
+      throw ex
+    }
+  }
+}
+
+def getMarketSummary(positive=true, responseCode=200) {
+  try {
+    def path = "/spring-nanotrader-services/api/marketSummary"
+    def resp = nanotrader.get(path:"${path}",
+                              headers:[API_TOKEN:testAuthToken])
+    if (positive) {
+      assert resp.status == 200
+    }
+    else {
+     assert resp.status == responseCode
+    }
+  }
+  catch(ex) {
+   if (!positive) {
+      assert ex.response.status == responseCode
+    }
+    else {
+      throw ex
+    }
+  }
+}
+
+def createHolding(id=1, responseCode=405) {
+  try {
+    def holdingPath = "/spring-nanotrader-services/api/account/" + id + "/holding"
+    def resp = nanotrader.post(path:"${holdingPath}",
+                               headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def updateHolding(id=1, responseCode=405) {
+  try {
+    def holdingPath = "/spring-nanotrader-services/api/account/" + id + "/holding/" + id
+    def resp = nanotrader.put(path:"${holdingPath}",
+                              headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def deleteHolding(id=1, responseCode=405){
+ try {
+    def holdingPath = "/spring-nanotrader-services/api/account/" + id + "/holding/" + id
+    def resp = nanotrader.delete(path:"${holdingPath}",
+                                 headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def createAccount(responseCode=405) {
+  try {
+    def accountPath = "/spring-nanotrader-services/api/account"
+    def resp = nanotrader.post(path:"${accountPath}",
+                               headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def updateAccount(id=1, responseCode=405) {
+  try {
+    def accountPath = "/spring-nanotrader-services/api/account/" + id
+    def resp = nanotrader.put(path:"${accountPath}",
+                              headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def deleteAccount(id=1, responseCode=405) {
+  try {
+    def accountPath = "/spring-nanotrader-services/api/account/" + id
+    def resp = nanotrader.delete(path:"${accountPath}",
+                                 headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def deleteAccountProfile(id=1, responseCode=405) {
+  try {
+    def accountProfilePath = "/spring-nanotrader-services/api/accountProfile/" + id
+    def resp = nanotrader.delete(path:"${accountProfilePath}",
+                                 headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def deleteAllOrders(id=1, responseCode=405) {
+  try {
+    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order"
+    def resp = nanotrader.delete(path:"${orderPath}",
+                                 headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def deleteOrder(id=1, responseCode=405) {
+  try {
+    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order/" + id
+    def resp = nanotrader.delete(path:"${orderPath}",
+                                 headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def updateQuote(symbol='AAPL', responseCode=405) {
+ try {
+    def quotePath = "/spring-nanotrader-services/api/" + "quote/" + symbol
+    def resp = nanotrader.put(path:"${quotePath}",
+                              headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
+def deleteQuote(symbol='AAPL', responseCode=405) {
+  try {
+    def quotePath = "/spring-nanotrader-services/api/" + "quote/" + symbol
+    def resp = nanotrader.delete(path:"${quotePath}",
+                                 headers:[API_TOKEN:testAuthToken])
+    assert resp.status == responseCode
+  }
+  catch(ex) {
+    assert ex.response.status == responseCode
+  }
+}
+
 def createRandomAccountProfile(count) {
   count.times {
     createAccountProfile()
@@ -451,11 +627,14 @@ def basicVerificationTests() {
   testGetAllHoldingsForAccount()
   testGetQuote()
   testCreateQuote()
+  testGetPortfolioSummary()
+  testGetMarketSummary()
 }
 
 def verificationTests() {
   testAdvancedCreateOrder()
   testAdvancedUpdateOrder()
+  //testAdvancedSellOrder()
   //testAdvancedGetAccount()
   //testAdvancedGetQuote()
 }
@@ -469,73 +648,87 @@ def unauthorizedVerificationTests() {
   testUnauthorizedGetAccount()
   testUnauthorizedGetSpecificHoldingForAccount()
   testUnauthorizedGetAllHoldingsForAccount()
+  testUnauthorizedGetPortfolioSummary()
+}
+
+def unsupportedVerificationTests() {
+  testUnsupportedCreateHolding()
+  testUnsupportedUpdateHolding()
+  testUnsupportedDeleteHolding()
+  testUnsupportedCreateAccount()
+  testUnsupportedUpdateAccount()
+  testUnsupportedDeleteAccount()
+  testUnsupportedDeleteAccountProfile()
+  testUnsupportedDeleteOrder()
+  testUnsupportedDeleteAllOrders()
+  testUnsupportedUpdateQuote()
+  testUnsupportedDeleteQuote()
 }
 
 def testAdvancedCreateOrder() {
+  totalCount++
   try {
-    accountid1 = 1
-    accountid2 = 2
-    quantity1 = 9876543
-    quantity2 = 3456789
-    symbol1 = 's1'
-    symbol2 = 's2'
+    accountid = 1
+    quantity1 = 9876
+    quantity2 = 3456
+    symbol1 = 'AAPL'
+    symbol2 = 'GOOG'
 
-    createOrder(accountid1, quantity1, 'buy', symbol1)
-    createOrder(accountid2, quantity2, 'buy', symbol2)
+    createOrder(accountid, quantity1, 'buy', symbol1)
+    createOrder(accountid, quantity2, 'buy', symbol2)
 
-    data = getAllHoldingsForAccount(accountid1)
-    data2 = getAllHoldingsForAccount(accountid2)
-
-    //println data
-    //println data2
+    data = getAllHoldingsForAccount(accountid)
 
     checkLabel1 = "\"quantity\":" + quantity1
     checkLabel2 = "\"quantity\":" + quantity2
 
-    if (data.indexOf(checkLabel1) >= 0 && data2.indexOf(checkLabel2) >= 0) {
+    if (data.indexOf(checkLabel1) >= 0 && data.indexOf(checkLabel2) >= 0) {
+      passCount++
       println "testAdvancedCreateOrder PASS"
     }
     else {
+      failCount++
       println "testAdvancedCreateOrder FAIL"
     }
   }
   catch (Throwable t) {
+    failCount++
     writeExceptionToFile(t)
     println "testAdvancedCreateOrder FAIL";
   }
 }
 
 def testAdvancedUpdateOrder() {
+  totalCount++
   try {
-    oldQuantity1 = 56789
-    oldQuantity2 = 12345
+    oldQuantity1 = 5678
+    oldQuantity2 = 1234
     newQuantity1 = oldQuantity1 + 1
     newQuantity2 = oldQuantity2 + 1
-    orderId1 = createOrder(1, oldQuantity1, 'buy', 's1')
-    orderId2 = createOrder(2, oldQuantity2, 'buy', 's2')
+    orderId1 = createOrder(1, oldQuantity1, 'buy', 'AAPL')
+    orderId2 = createOrder(1, oldQuantity2, 'buy', 'GOOG')
 
     //println "orderId1:" + orderId1
     //println "orderId2:" + orderId2
 
     updateOrder(1, orderId1, newQuantity1)
-    updateOrder(2, orderId2, newQuantity2)
+    updateOrder(1, orderId2, newQuantity2)
 
     data = getOrder(1, 'all')
-    data2 = getOrder(2, 'all')
 
     //println "data:" + data
     //println "data2:" + data2
 
     i = data.indexOf("{\"orderid\":" + orderId1)
-    j = data2.indexOf("{\"orderid\":" + orderId2)
+    j = data.indexOf("{\"orderid\":" + orderId2)
 
     assert (i >=0 && j >= 0)
 
     i2 = data.indexOf('}', i)
-    j2 = data2.indexOf('}', j)
+    j2 = data.indexOf('}', j)
 
     checkString1 = data.substring(i, i2)
-    checkString2 = data2.substring(j, j2)
+    checkString2 = data.substring(j, j2)
 
     assert (checkString1 != null && checkString2 != null)
 
@@ -549,9 +742,11 @@ def testAdvancedUpdateOrder() {
     //println "checkLabel2:" + checkLabel2
 
     if (checkString1.indexOf(checkLabel1) >= 0 && checkString2.indexOf(checkLabel2) >= 0) {
+      passCount++
       println "testAdvancedUpdateOrder PASS"
     }
     else {
+      failCount++
       println "testAdvancedUpdateOrder FAIL"
     }
 
@@ -567,8 +762,46 @@ def testAdvancedUpdateOrder() {
     }*/
   }
   catch (Throwable t) {
+    failCount++
     writeExceptionToFile(t)
     println "testAdvancedUpdateOrder FAIL";
+  }
+}
+
+def testAdvancedSellOrder() {
+  totalCount++
+  try {
+    accountid = 1
+    quantity1 = 55
+    quantity2 = 66
+    symbol1 = 'AAPL'
+    symbol2 = 'GOOG'
+
+    createOrder(accountid, quantity1, 'buy', symbol1)
+    createOrder(accountid, quantity2, 'buy', symbol2)
+
+    createOrder(accountid, quantity1-1, 'sell', symbol1)
+    createOrder(accountid, quantity2, 'sell', symbol2)
+
+    data = getAllHoldingsForAccount(accountid)
+
+    /*
+    checkLabel1 = "\"quantity\":" + quantity1
+    checkLabel2 = "\"quantity\":" + quantity2
+
+    if (data.indexOf(checkLabel1) >= 0 && data.indexOf(checkLabel2) >= 0) {
+      passCount++
+      println "testAdvancedCreateOrder PASS"
+    }
+    else {
+      failCount++
+      println "testAdvancedCreateOrder FAIL"
+    }*/
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testAdvancedCreateOrder FAIL";
   }
 }
 
@@ -788,6 +1021,36 @@ def testCreateQuote() {
   }
 }
 
+def testGetPortfolioSummary() {
+  totalCount++
+  try {
+    getPortfolioSummary()
+
+    passCount++
+    println "testGetPortfolioSummary PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testGetPortfolioSummary FAIL";
+  }
+}
+
+def testGetMarketSummary() {
+  totalCount++
+  try {
+    getMarketSummary()
+
+    passCount++
+    println "testGetMarketSummary PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testGetMarketSummary FAIL";
+  }
+}
+
 def testUnauthorizedGetOrder() {
   totalCount++
   try {
@@ -908,6 +1171,186 @@ def testUnauthorizedGetAllHoldingsForAccount() {
   }
 }
 
+def testUnauthorizedGetPortfolioSummary() {
+  totalCount++
+  try {
+    getPortfolioSummary(2, false, 401)
+
+    passCount++
+    println "testUnauthorizedGetPortfolioSummary PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnauthorizedGetPortfolioSummary FAIL";
+  }
+}
+
+def testUnsupportedCreateHolding() {
+  totalCount++
+  try {
+    createHolding()
+
+    passCount++
+    println "testUnsupportedCreateHolding PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedCreateHolding FAIL";
+  }
+}
+
+def testUnsupportedUpdateHolding() {
+  totalCount++
+  try {
+    updateHolding()
+
+    passCount++
+    println "testUnsupportedUpdateHolding PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedUpdateHolding FAIL";
+  }
+}
+
+def testUnsupportedDeleteHolding() {
+  totalCount++
+  try {
+    deleteHolding()
+
+    passCount++
+    println "testUnsupportedDeleteHolding PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedDeleteHolding FAIL";
+  }
+}
+
+def testUnsupportedCreateAccount() {
+  totalCount++
+  try {
+    createAccount()
+
+    passCount++
+    println "testUnsupportedCreateAccount PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedCreateAccount FAIL";
+  }
+}
+
+def testUnsupportedUpdateAccount() {
+  totalCount++
+  try {
+    updateAccount()
+
+    passCount++
+    println "testUnsupportedUpdateAccount PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedUpdateAccount FAIL";
+  }
+}
+
+def testUnsupportedDeleteAccount() {
+  totalCount++
+  try {
+    deleteAccount()
+
+    passCount++
+    println "testUnsupportedDeleteAccount PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedDeleteAccount FAIL";
+  }
+}
+
+def testUnsupportedDeleteAccountProfile() {
+  totalCount++
+  try {
+    deleteAccountProfile()
+
+    passCount++
+    println "testUnsupportedDeleteAccountProfile PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedDeleteAccountProfile FAIL";
+  }
+}
+
+def testUnsupportedDeleteOrder() {
+  totalCount++
+  try {
+    deleteOrder()
+
+    passCount++
+    println "testUnsupportedDeleteOrder PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedDeleteOrder FAIL";
+  }
+}
+
+def testUnsupportedDeleteAllOrders() {
+  totalCount++
+  try {
+    deleteAllOrders()
+
+    passCount++
+    println "testUnsupportedDeleteAllOrders PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedDeleteAllOrders FAIL";
+  }
+}
+
+def testUnsupportedUpdateQuote() {
+  totalCount++
+  try {
+    updateQuote()
+
+    passCount++
+    println "testUnsupportedUpdateQuote PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedUpdateQuote FAIL";
+  }
+}
+
+def testUnsupportedDeleteQuote() {
+  totalCount++
+  try {
+    deleteQuote()
+
+    passCount++
+    println "testUnsupportedDeleteQuote PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testUnsupportedDeleteQuote FAIL";
+  }
+}
+
 def printSummary() {
   println "\nTotal:" + totalCount + "\tPass:" + passCount + "\tFail:" + failCount
   println "Debug log file written to: nanotradertest.debug" 
@@ -915,9 +1358,11 @@ def printSummary() {
 
 init()
 basicVerificationTests()
+verificationTests()
 unauthorizedVerificationTests()
+unsupportedVerificationTests()
 printSummary()
-//verificationTests()
+
 
 
 
