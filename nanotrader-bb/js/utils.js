@@ -33,3 +33,10 @@ tpl = {
 	}
 
 };
+
+nanodate = {
+        format : function(jsonDate) {
+            dateObj = new Date(jsonDate);
+            return dateObj.toLocaleDateString();
+        }
+}
