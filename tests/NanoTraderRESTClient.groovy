@@ -19,7 +19,8 @@ path = "http://localhost:8080"
 nanotrader = 0
 logFile = 0
 testAuthToken = 0
-int acctid = 1
+acctid = 1
+unauthorizedAcctId = 0
 
 totalCount = 0
 passCount = 0
@@ -37,8 +38,8 @@ def init() {
   nanotrader = new RESTClient(path)
   logFile = new PrintWriter(new FileWriter("nanotradertest.debug"))
   testAuthToken = getAuthToken()
-  println "Test Auth Token:" + testAuthToken + "\n"
-  println "Starting tests...\n"
+  //println "Test Auth Token:" + testAuthToken + "\n"
+  println "\nStarting tests...\n"
 }
 
 def String getAuthToken() {
@@ -46,7 +47,7 @@ def String getAuthToken() {
   int accountid = 1
   def user = "jack"
   def passwd = "jack"
-  println "****** Please initialize db with initdb.sql before running tests"
+  println "****** Please recreate schema and initialize db with initdb.sql before running tests"
   println "Test User:" + user
   println "Test User Password:" + passwd
   try {
@@ -60,8 +61,9 @@ def String getAuthToken() {
     authToken = jsonObj.authToken
     acctid = jsonObj.accountid
     accountid = acctid
+    unauthorizedAcctId = acctid + 1
     
-    println "Data:" + resp.data
+    //println "Data:" + resp.data
     println "Using authToken: " + authToken
     println "Using accountid: " + accountid
 
@@ -82,6 +84,13 @@ def writeExceptionToFile(ex) {
   sw.flush();
   logFile.write(sw.toString());
   logFile.flush()
+}
+
+def String getOrder(int accountid, int orderid) {
+  def orderPath = "/spring-nanotrader-services/api/account/" + accountid + "/order/" + orderid
+  def resp = nanotrader.get(path:"${orderPath}",
+                            headers:[API_TOKEN:testAuthToken])
+  return resp.data
 }
 
 def String getOrder(id, status, positive=true, responseCode=200) {
@@ -149,6 +158,24 @@ def synchronized int createOrder(id, quantity=555, orderType="buy", symbol="AAPL
   return orderId
 }
 
+def createSellOrder(accountid, holdingid, positive=true, responseCode=201) {
+  try {
+    def orderPath = "/spring-nanotrader-services/api/account/" + accountid + "/order"
+    def resp = nanotrader.post(path:"${orderPath}",
+                               body:[holdingid:holdingid, ordertype:'sell'],
+                               requestContentType:JSON,
+                               headers:[API_TOKEN:testAuthToken])
+  }
+  catch(ex) {
+    if (!positive) {
+      assert ex.response.status == responseCode
+    }
+    else {
+      throw ex
+    }
+  }
+}
+
 def updateOrder(accountid, orderid, quantity=5555, positive=true, responseCode=200) {
   try {
     def orderPath = "/spring-nanotrader-services/api/account/" + accountid + "/order/" + orderid
@@ -198,7 +225,8 @@ def synchronized getAccountProfile(id, positive=true, responseCode=200) {
   }
 }
 
-def synchronized createAccountProfile(user="user1", positive=true, responseCode=200) {
+def synchronized String createAccountProfile(user="user1", positive=true, responseCode=200) {
+  myUserName = ""
   try {
     userName = ""
     if (positive) {
@@ -229,6 +257,7 @@ def synchronized createAccountProfile(user="user1", positive=true, responseCode=
                                headers:[API_TOKEN:testAuthToken])
     if (positive) {
       assert resp.status == 201
+      myUserName = userName
       //println "DATA:" + resp.data + ":"
     }
     else {
@@ -243,6 +272,7 @@ def synchronized createAccountProfile(user="user1", positive=true, responseCode=
       throw ex
     }
   }
+  return myUserName
 }
 
 def updateAccountProfile(id=1, address="new address", positive=true, responseCode=200) {
@@ -274,12 +304,14 @@ def updateAccountProfile(id=1, address="new address", positive=true, responseCod
 }
 
 def getAccount(id, positive=true, responseCode=200) {
+  String data = ""
   try {
     def accountPath = "/spring-nanotrader-services/api/account/" + id
     def resp = nanotrader.get(path:"${accountPath}",
                               headers:[API_TOKEN:testAuthToken])
     if (positive) {
       assert resp.status == 200
+      data = resp.data
       //println "\n\n##################### ACCOUNT DATA #####################"
       //println "DATA:" + resp.data + ":"
     }
@@ -295,15 +327,18 @@ def getAccount(id, positive=true, responseCode=200) {
       throw ex
     }
   }
+  return data
 }
 
 def getSpecificHoldingForAccount(accountid, holdingid, positive=true, responseCode=200) {
+  String data = ""
   try {
     def holdingPath = "/spring-nanotrader-services/api/account/" + accountid + "/holding/" + holdingid
     def resp = nanotrader.get(path:"${holdingPath}",
                               headers:[API_TOKEN:testAuthToken])
     if (positive) {
       assert resp.status == 200
+      data = resp.data
       //println "\n\n##################### HOLDING DATA #####################"
       //println "DATA:" + resp.data + ":"
     }
@@ -319,6 +354,7 @@ def getSpecificHoldingForAccount(accountid, holdingid, positive=true, responseCo
       throw ex
     }
   }
+  return data
 }
 
 def String getAllHoldingsForAccount(accountid, positive=true, responseCode=200) {
@@ -349,12 +385,14 @@ def String getAllHoldingsForAccount(accountid, positive=true, responseCode=200) 
 }
 
 def synchronized getQuote(symbol, positive=true, responseCode=200) {
+  String data = ""
   try {
     def quotePath = "/spring-nanotrader-services/api/" + "quote/" + symbol
     def resp = nanotrader.get(path:"${quotePath}",
                               headers:[API_TOKEN:testAuthToken])
     if (positive) {
       assert resp.status == 200
+      data = resp.data
       //println "\n\n##################### QUOTE DATA #####################"
       //println "DATA:" + resp.data + ":"
     }
@@ -370,6 +408,7 @@ def synchronized getQuote(symbol, positive=true, responseCode=200) {
       throw ex
     }
   }
+  return data
 }
 
 def createQuote(companyName='newcompany', symbol='NCPY', positive=true, responseCode=200) {
@@ -635,9 +674,10 @@ def basicVerificationTests() {
 def verificationTests() {
   testAdvancedCreateOrder()
   testAdvancedUpdateOrder()
-  //testAdvancedSellOrder()
-  //testAdvancedGetAccount()
-  //testAdvancedGetQuote()
+  testAdvancedSellOrder()
+  testAdvancedGetAccount()
+  testAdvancedGetQuote()
+  testAdvancedCreateProfile()
 }
 
 def unauthorizedVerificationTests() {
@@ -666,10 +706,13 @@ def unsupportedVerificationTests() {
   testUnsupportedDeleteQuote()
 }
 
+/*
+ * a new "buy" order should generate a new "holding" row
+ */
 def testAdvancedCreateOrder() {
   totalCount++
   try {
-    accountid = 1
+    accountid = acctid
     quantity1 = 9876
     quantity2 = 3456
     symbol1 = 'AAPL'
@@ -699,6 +742,30 @@ def testAdvancedCreateOrder() {
   }
 }
 
+def testAdvancedCreateProfile() {
+  totalCount++
+  try {
+    user = createAccountProfile()
+    password = "randompasswd"
+
+    def path = "/spring-nanotrader-services/api/login"
+    def resp = nanotrader.post(path:"${path}",
+                              body:[username:user, password:password],
+                              requestContentType:JSON)
+    assert resp.status == 201
+    passCount++
+    println "testAdvancedCreateProfile PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testAdvancedCreateProfile FAIL";
+  }
+}
+
+/*
+ * update a "buy" order should update corresponding "holding" row
+ */
 def testAdvancedUpdateOrder() {
   totalCount++
   try {
@@ -706,43 +773,40 @@ def testAdvancedUpdateOrder() {
     oldQuantity2 = 1234
     newQuantity1 = oldQuantity1 + 1
     newQuantity2 = oldQuantity2 + 1
-    orderId1 = createOrder(1, oldQuantity1, 'buy', 'AAPL')
-    orderId2 = createOrder(1, oldQuantity2, 'buy', 'GOOG')
+    orderId1 = createOrder(acctid, oldQuantity1, 'buy', 'AAPL')
+    orderId2 = createOrder(acctid, oldQuantity2, 'buy', 'GOOG')
 
-    //println "orderId1:" + orderId1
-    //println "orderId2:" + orderId2
+    updateOrder(acctid, orderId1, newQuantity1)
+    updateOrder(acctid, orderId2, newQuantity2)
 
-    updateOrder(1, orderId1, newQuantity1)
-    updateOrder(1, orderId2, newQuantity2)
+    mydata = getOrder(acctid, orderId1)
+    mydata2 = getOrder(acctid, orderId2)
 
-    data = getOrder(1, 'all')
+    //println "mydata:" + mydata
+    //println "mydata2:" + mydata2
 
-    //println "data:" + data
-    //println "data2:" + data2
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    holdingId1 = jsonObj.holdingid
 
-    i = data.indexOf("{\"orderid\":" + orderId1)
-    j = data.indexOf("{\"orderid\":" + orderId2)
+    jsonObj = new JsonSlurper().parseText(mydata2)
+    holdingId2 = jsonObj.holdingid
 
-    assert (i >=0 && j >= 0)
+    //println "holding1:" + holdingId1
+    //println "holding2:" + holdingId2
 
-    i2 = data.indexOf('}', i)
-    j2 = data.indexOf('}', j)
+    holdingData = getSpecificHoldingForAccount(acctid, holdingId1)
+    holdingData2 = getSpecificHoldingForAccount(acctid, holdingId2)
 
-    checkString1 = data.substring(i, i2)
-    checkString2 = data.substring(j, j2)
+    jsonObj = new JsonSlurper().parseText(holdingData)
+    quantityCheck = jsonObj.quantity
 
-    assert (checkString1 != null && checkString2 != null)
+    jsonObj = new JsonSlurper().parseText(holdingData2)
+    quantityCheck2 = jsonObj.quantity
 
-    checkLabel1 = "\"quantity\":" + newQuantity1
-    checkLabel2 = "\"quantity\":" + newQuantity2
+    //println "quantitycheck1:" + quantityCheck
+    //println "quantitycheck2:" + quantityCheck2
 
-    //println "checkString1:" + checkString1
-    //println "checkString2:" + checkString2
-
-    //println "checkLabel1:" + checkLabel1
-    //println "checkLabel2:" + checkLabel2
-
-    if (checkString1.indexOf(checkLabel1) >= 0 && checkString2.indexOf(checkLabel2) >= 0) {
+    if (newQuantity1 == quantityCheck && newQuantity2 == quantityCheck2) {
       passCount++
       println "testAdvancedUpdateOrder PASS"
     }
@@ -750,17 +814,6 @@ def testAdvancedUpdateOrder() {
       failCount++
       println "testAdvancedUpdateOrder FAIL"
     }
-
-    /*
-    holdingQuantityList = getAllHoldingsForAccount(1)
-    holdingQuantityList2 = getAllHoldingsForAccount(2)
-
-    if (orderquantity != 88888 || orderquantitty2 != 99999) {
-      println "testAdvancedCreateOrder FAIL"
-    }
-    else {
-      println "testAdvancedUpdateOrder PASS"
-    }*/
   }
   catch (Throwable t) {
     failCount++
@@ -769,79 +822,119 @@ def testAdvancedUpdateOrder() {
   }
 }
 
+/*
+ * sell "order" should remove corresponding holding row
+ * subsequent request of the corresponding holding row should give 404
+ * subsequent sell of the same "order" should give 404
+ */
 def testAdvancedSellOrder() {
   totalCount++
   try {
-    accountid = 1
+    accountid = acctid
     quantity1 = 55
     quantity2 = 66
     symbol1 = 'AAPL'
     symbol2 = 'GOOG'
 
-    createOrder(accountid, quantity1, 'buy', symbol1)
-    createOrder(accountid, quantity2, 'buy', symbol2)
+    orderId1 = createOrder(accountid, quantity1, 'buy', symbol1)
+    orderId2 = createOrder(accountid, quantity2, 'buy', symbol2)
 
-    createOrder(accountid, quantity1-1, 'sell', symbol1)
-    createOrder(accountid, quantity2, 'sell', symbol2)
+    mydata = getOrder(acctid, orderId1)
+    mydata2 = getOrder(acctid, orderId2)
 
-    data = getAllHoldingsForAccount(accountid)
+    //println "mydata:" + mydata
+    //println "mydata2:" + mydata2
 
-    /*
-    checkLabel1 = "\"quantity\":" + quantity1
-    checkLabel2 = "\"quantity\":" + quantity2
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    holdingId1 = jsonObj.holdingid
 
-    if (data.indexOf(checkLabel1) >= 0 && data.indexOf(checkLabel2) >= 0) {
-      passCount++
-      println "testAdvancedCreateOrder PASS"
-    }
-    else {
-      failCount++
-      println "testAdvancedCreateOrder FAIL"
-    }*/
+    jsonObj = new JsonSlurper().parseText(mydata2)
+    holdingId2 = jsonObj.holdingid
+
+    getSpecificHoldingForAccount(acctid, holdingId1)
+    getSpecificHoldingForAccount(acctid, holdingId2)
+
+    createSellOrder(accountid, holdingId1)
+    createSellOrder(accountid, holdingId2)
+
+    getSpecificHoldingForAccount(acctid, holdingId1, false, 404)
+    getSpecificHoldingForAccount(acctid, holdingId2, false, 404)
+
+    createSellOrder(accountid, holdingId1, false, 404)
+    createSellOrder(accountid, holdingId2, false, 404)
+
+    passCount++
+    println "testAdvancedSellOrder PASS"
   }
   catch (Throwable t) {
     failCount++
     writeExceptionToFile(t)
-    println "testAdvancedCreateOrder FAIL";
+    println "testAdvancedSellOrder FAIL"
   }
 }
 
+/*
+ * a "buy" order should change the balance of account table accordingly
+ */
 def testAdvancedGetAccount() {
+  totalCount++
   try {
-    createOrder(1, 8888, 'buy', 's1')
-    createOrder(2, 9999, 'buy', 's2')
+    mydata = getAccount(acctid)
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    oldBalance = jsonObj.balance
+    createOrder(acctid, 1, 'buy', 'AAPL')
+    mydata = getAccount(acctid)
+    jsonObj = new JsonSlurper().parseText(mydata)
+    newBalance = jsonObj.balance
 
-    balance = getAccount()
+    //println "oldBalance:" + oldBalance
+    //println "newBalance:" + newBalance
 
-    if (balance) {
+    if (oldBalance == newBalance) {
+      failCount++
       println "testAdvancedGetAccount FAIL"
     }
     else {
+      passCount++
       println "testAdvancedGetAccount PASS"
     }
   }
   catch (Throwable t) {
+    failCount++
     writeExceptionToFile(t)
     println "testAdvancedGetAccount FAIL";
   }
 }
 
+/*
+ * a "buy and "sell" order should change the volume of quote table accordingly
+ */
 def testAdvancedGetQuote() {
+  totalCount++
   try {
-    createOrder(1, 8888, 'buy', 's1')
-    createOrder(2, 9999, 'buy', 's2')
+    mydata = getQuote('AAPL')
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    oldVolume = jsonObj.volume
+    orderId = createOrder(acctid, 5, 'buy', 'AAPL')
+    mydata = getOrder(acctid, orderId)
+    jsonObj = new JsonSlurper().parseText(mydata)
+    holdingId = jsonObj.holdingid
+    createSellOrder(acctid, holdingId)
+    mydata = getQuote('AAPL')
+    jsonObj = new JsonSlurper().parseText(mydata)
+    newVolume = jsonObj.volume
 
-    values = getQuote('s1')
-    values = getQuote('s2')
-
-    if (nochange) {
-      println "testAdvancedGetQuote FAIL"
+    if (newVolume == oldVolume+10) {
+      passCount++
+      println "testAdvancedGetQuote PASS"
     }
     else {
-      println "testAdvancedGetQuote PASS"
+      failCount++
+      println "testAdvancedGetQuote FAIL"
     }
   }
   catch (Throwable t) {
+    failCount++
     writeExceptionToFile(t)
     println "testAdvancedGetQuote FAIL";
   }
@@ -869,8 +962,8 @@ def testGetOrder() {
 def testCreateOrder() {
   totalCount++
   try {
-    createOrder(1, 555, 'buy', 'AAPL')
-    createOrder(1, 555, 'buy', 'invalid_quote', false, 400)
+    createOrder(acctid, 555, 'buy', 'AAPL')
+    createOrder(acctid, 555, 'buy', 'invalid_quote', false, 400)
 
     passCount++
     println "testCreateOrder PASS";
@@ -885,7 +978,7 @@ def testCreateOrder() {
 def testUpdateOrder() {
   totalCount++
   try {
-    updateOrder(1, 1, 88888)
+    updateOrder(acctid, 1, 88888)
    
     passCount++
     println "testUpdateOrder PASS"
@@ -900,7 +993,7 @@ def testUpdateOrder() {
 def testGetAccountProfile() {
   totalCount++
   try {
-    getAccountProfile(1)
+    getAccountProfile(acctid)
 
     passCount++
     println "testGetAccountProfile PASS"
@@ -931,7 +1024,7 @@ def testCreateAccountProfile() {
 def testUpdateAccountProfile() {
   totalCount++
   try {
-    updateAccountProfile(1, "NewAddress")
+    updateAccountProfile(acctid, "NewAddress")
     //updateAccountProfile(2, "invalid_user", false)
 
     passCount++
@@ -947,7 +1040,7 @@ def testUpdateAccountProfile() {
 def testGetAccount() {
   totalCount++
   try {
-    getAccount(1)
+    getAccount(acctid)
    
     passCount++
     println "testGetAccount PASS"
@@ -962,9 +1055,9 @@ def testGetAccount() {
 def testGetSpecificHoldingForAccount() {
   totalCount++
   try {
-    getSpecificHoldingForAccount(1, 1)
-    getSpecificHoldingForAccount(1, 2)
-    getSpecificHoldingForAccount(1, 3)
+    getSpecificHoldingForAccount(acctid, 1)
+    getSpecificHoldingForAccount(acctid, 2)
+    getSpecificHoldingForAccount(acctid, 3)
    
     passCount++
     println "testGetSpecificHoldingForAccount PASS"
@@ -979,7 +1072,7 @@ def testGetSpecificHoldingForAccount() {
 def testGetAllHoldingsForAccount() {
   totalCount++
   try {
-    getAllHoldingsForAccount(1)
+    getAllHoldingsForAccount(acctid)
  
     passCount++
     println "testGetAllHoldingsForAccount PASS"
@@ -1055,7 +1148,7 @@ def testGetMarketSummary() {
 def testUnauthorizedGetOrder() {
   totalCount++
   try {
-    getOrder(2, "all", false, 401)
+    getOrder(unauthorizedAcctId, "all", false, 401)
 
     passCount++
     println "testUnauthorizedGetOrder PASS";
@@ -1070,7 +1163,7 @@ def testUnauthorizedGetOrder() {
 def testUnauthorizedCreateOrder() {
   totalCount++
   try {
-    createOrder(2, 555, 'buy', 'AAPL', false, 401)
+    createOrder(unauthorizedAcctId, 555, 'buy', 'AAPL', false, 401)
 
     passCount++
     println "testUnauthorizedCreateOrder PASS";
@@ -1085,7 +1178,7 @@ def testUnauthorizedCreateOrder() {
 def testUnauthorizedUpdateOrder() {
   totalCount++
   try {
-    updateOrder(2, 1, 55000, false, 401)
+    updateOrder(unauthorizedAcctId, 1, 55000, false, 401)
 
     passCount++
     println "testUnauthorizedUpdateOrder PASS"
@@ -1100,7 +1193,7 @@ def testUnauthorizedUpdateOrder() {
 def testUnauthorizedGetAccountProfile() {
   totalCount++
   try {
-    getAccountProfile(2, false, 401)
+    getAccountProfile(unauthorizedAcctId, false, 401)
 
     passCount++
     println "testUnauthorizedGetAccountProfile PASS"
@@ -1115,7 +1208,7 @@ def testUnauthorizedGetAccountProfile() {
 def testUnauthorizedUpdateAccountProfile() {
   totalCount++
   try {
-    updateAccountProfile(2, "new address", false, 401)
+    updateAccountProfile(unauthorizedAcctId, "new address", false, 401)
 
     passCount++
     println "testUnauthorizedUpdateAccountProfile PASS"
@@ -1130,7 +1223,7 @@ def testUnauthorizedUpdateAccountProfile() {
 def testUnauthorizedGetAccount() {
   totalCount++
   try {
-    getAccount(2, false, 401)
+    getAccount(unauthorizedAcctId, false, 401)
 
     passCount++
     println "testUnauthorizedGetAccount PASS"
@@ -1145,7 +1238,7 @@ def testUnauthorizedGetAccount() {
 def testUnauthorizedGetSpecificHoldingForAccount() {
   totalCount++
   try {
-    getSpecificHoldingForAccount(2, 11, false, 401)
+    getSpecificHoldingForAccount(unauthorizedAcctId, 11, false, 401)
 
     passCount++
     println "testUnauthorizedGetSpecificHoldingForAccount PASS"
@@ -1160,7 +1253,7 @@ def testUnauthorizedGetSpecificHoldingForAccount() {
 def testUnauthorizedGetAllHoldingsForAccount() {
   totalCount++
   try {
-    getAllHoldingsForAccount(2, false, 401)
+    getAllHoldingsForAccount(unauthorizedAcctId, false, 401)
 
     passCount++
     println "testUnauthorizedGetAllHoldingsForAccount PASS"
@@ -1175,7 +1268,7 @@ def testUnauthorizedGetAllHoldingsForAccount() {
 def testUnauthorizedGetPortfolioSummary() {
   totalCount++
   try {
-    getPortfolioSummary(2, false, 401)
+    getPortfolioSummary(unauthorizedAcctId, false, 401)
 
     passCount++
     println "testUnauthorizedGetPortfolioSummary PASS"
@@ -1359,9 +1452,9 @@ def printSummary() {
 
 init()
 basicVerificationTests()
-verificationTests()
 unauthorizedVerificationTests()
 unsupportedVerificationTests()
+verificationTests()
 printSummary()
 
 
