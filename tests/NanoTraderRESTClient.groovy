@@ -3,6 +3,7 @@
 //groovy -classpath /Users/administrator/Downloads/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar:/Users/administrator/Downloads/ezmorph-1.0.5.jar:/Users/administrator/Downloads/commons-lang-2.6/commons-lang-2.6.jar:/Users/administrator/Downloads/xerces-2_11_0/xercesImpl.jar:/Users/administrator/Downloads/nekohtml-1.9.15/nekohtml.jar:/Users/administrator/Downloads/commons-collections-3.2.1/commons-collections-3.2.1.jar:/Users/administrator/Downloads/xml-commons-resolver-1.2/resolver.jar:/Users/administrator/Downloads/json-lib-2.3-jdk15.jar:/Users/administrator/Downloads/http-builder-0.5.2.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/commons-codec-1.4.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpclient-4.1.3.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpcore-4.1.4.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/commons-logging-1.1.1.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpclient-cache-4.1.3.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpmime-4.1.3.jar NanoTraderRESTClient.groovy
 import groovyx.net.http.RESTClient
 import groovy.util.slurpersupport.GPathResult
+import groovy.json.JsonSlurper
 
 import java.io.FileWriter
 import java.io.PrintWriter
@@ -18,6 +19,7 @@ path = "http://localhost:8080"
 nanotrader = 0
 logFile = 0
 testAuthToken = 0
+int acctid = 1
 
 totalCount = 0
 passCount = 0
@@ -54,16 +56,15 @@ def String getAuthToken() {
                               requestContentType:JSON)
     assert resp.status == 201
     authToken = resp.data
+    def jsonObj = new JsonSlurper().parseText(authToken)
+    authToken = jsonObj.authToken
+    acctid = jsonObj.accountid
+    accountid = acctid
     
-    //println "Data:" + authToken
-    
-    i = authToken.indexOf("\"authToken\":\"")
-    j = authToken.indexOf(",", i)
-    
-    assert (i >= 0 && j >= 0)
-    authToken = authToken.substring(i+"\"authToken\":\"".length(), j-1)
-    
-    //println "authToken:" + authToken
+    println "Data:" + resp.data
+    println "Using authToken: " + authToken
+    println "Using accountid: " + accountid
+
     return authToken
   }
   catch(ex) {
@@ -849,11 +850,11 @@ def testAdvancedGetQuote() {
 def testGetOrder() {
   totalCount++
   try {
-    getOrder(1, "all")
-    getOrder(1, "Open")
-    getOrder(1, "Completed")
-    getOrder(1, "Closed")
-    getOrder(1, "unknown", false, 404)
+    getOrder(acctid, "all")
+    getOrder(acctid, "Open")
+    getOrder(acctid, "Completed")
+    getOrder(acctid, "Closed")
+    getOrder(acctid, "unknown", false, 404)
 
     passCount++
     println "testGetOrder PASS";
