@@ -1,6 +1,7 @@
 OrderListView = Backbone.View.extend({
 
     tagName:'table',
+    attributes: {'class' : 'table table-striped table-bordered'},
 
     initialize:function (accountid) {
         this.template = _.template(tpl.get('order-list'));
