@@ -259,10 +259,10 @@ insertOrderSQLTemplate = "INSERT INTO \"order\" VALUES(ORDERFEE, 'COMPLETIONDATE
 writer = new File(sqlFile).newWriter("UTF-8", false)
 
 generateDefaultStockQuotes(writer)
-generateDefaultAccountProfiles(writer)
-generateDefaultAccounts(writer)
-generateDefaultHoldings(writer)
-generateDefaultOrders(writer)
+//generateDefaultAccountProfiles(writer)
+//generateDefaultAccounts(writer)
+//generateDefaultHoldings(writer)
+//generateDefaultOrders(writer)
 
 writer.close()
 
