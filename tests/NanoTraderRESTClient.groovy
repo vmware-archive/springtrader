@@ -260,6 +260,8 @@ def synchronized String createAccountProfile(user="user1", positive=true, respon
       assert resp.status == 201
       myUserName = userName
       //println "DATA:" + resp.data + ":"
+      //location = resp.getFirstHeader('location').getValue()
+      //println "location:" + location
     }
     else {
       assert resp.status == responseCode
@@ -681,8 +683,8 @@ def verificationTests() {
   testAdvancedSellOrder()
   testAdvancedGetAccount()
   testAdvancedGetQuote()
-  testAdvancedCreateProfile()
-  testAdvancedUpdateProfile()
+  //testAdvancedCreateProfile()
+  //testAdvancedUpdateProfile()
 }
 
 def unauthorizedVerificationTests() {
@@ -747,6 +749,9 @@ def testAdvancedCreateOrder() {
   }
 }
 
+/*
+ * After creating a new account profile, we should be able to use it to login
+ */
 def testAdvancedCreateProfile() {
   totalCount++
   try {
@@ -774,6 +779,9 @@ def testAdvancedCreateProfile() {
   }
 }
 
+/*
+ * After updating account profile, we should still be able to access account
+ */
 def testAdvancedUpdateProfile() {
   totalCount++
   try {
