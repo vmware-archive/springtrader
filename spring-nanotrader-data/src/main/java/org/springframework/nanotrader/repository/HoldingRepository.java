@@ -13,5 +13,6 @@ public interface HoldingRepository extends JpaSpecificationExecutor<Holding>, Jp
 	
 	public List<Holding> findByAccountAccountid(Integer accountId, Pageable pageable);
 	
+	public Holding findByHoldingidAndAccountAccountid(Integer holdingId, Integer accountId);
 	
 }

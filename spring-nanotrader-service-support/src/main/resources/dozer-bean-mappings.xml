@@ -38,6 +38,19 @@
 			<b>profileProfileid</b>
 		</field-exclude>
 	</mapping>
+	
+	<mapping map-id="accountProfile-no-accounts">
+		<class-a>org.springframework.nanotrader.domain.Accountprofile
+		</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Accountprofile
+		</class-b>
+	<field-exclude>
+			<a>accounts</a>
+			<b>accounts</b>
+		</field-exclude>
+
+	</mapping>
+	
 	<!-- End Account profile mappings -->
 	<mapping map-id="holding">
 		<class-a>org.springframework.nanotrader.domain.Holding</class-a>
@@ -59,6 +72,10 @@
 		<field>
 			<a>accountAccountid.accountid</a>
 			<b>accountid</b>
+		</field>
+		<field>
+			<a>holdingHoldingid.holdingid</a>
+			<b>holdingid</b>
 		</field>
 	</mapping>
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Exclude the login/token service from the list of protected resources -->
+	<http create-session="stateless" pattern="/api/login" security="none" />
+
+	<!-- Exclude accountProfile create operation from the list of protected resources since this resource is required for 
+		new user registration -->
+	<http create-session="stateless" pattern="/api/accountProfile" security="none" />
+
+	<!-- Protect all the nanotrader services -->
+	<http create-session="stateless" entry-point-ref="entryPoint">
+		<intercept-url pattern="/api/**" access="ROLE_API_USER" />
+		<custom-filter ref="restPreauthFilter" position="PRE_AUTH_FILTER" />
+	</http>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="preauthAuthProvider" />
+	</authentication-manager>
+
+	<beans:bean id="restPreauthFilter"
+		class="org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter">
+		<beans:property name="principalRequestHeader" value="API_TOKEN" />
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="exceptionIfHeaderMissing" value="false" />
+	</beans:bean>
+
+	<beans:bean id="preauthAuthProvider"
+		class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+		<beans:property name="preAuthenticatedUserDetailsService">
+			<beans:bean id="userDetailsServiceWrapper"
+				class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+				<beans:property name="userDetailsService" ref="userDetailsService" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="userDetailsService" class="org.springframework.nanotrader.web.security.UserDetailsServiceImpl" />
+
+
+</beans:beans>

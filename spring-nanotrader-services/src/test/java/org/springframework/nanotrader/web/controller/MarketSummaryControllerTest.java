@@ -17,6 +17,12 @@ import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration
 import org.springframework.nanotrader.web.configuration.WebConfig;
 import org.springframework.test.web.server.MockMvc;
 
+/**
+ *  MarketSummaryControllerTest tests the MarketSummary REST api
+ *  
+ *  @author Brian Dussault 
+ *  @author
+ */
 public class MarketSummaryControllerTest {
 
 	private static MockMvc mockMvc;

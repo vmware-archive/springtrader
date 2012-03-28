@@ -24,17 +24,18 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 
 @Controller
-public class AccountProfileController {
+public class AccountProfileController extends BaseController {
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
 
 	@RequestMapping(value = "/accountProfile/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Accountprofile find(@PathVariable("id") final Integer id) {
+		this.getSecurityUtil().checkAccountProfile(id);
 		Accountprofile accountProfile = tradingServiceFacade.findAccountProfile(id);
 		return accountProfile;
 	}
-
+	
 	@RequestMapping(value = "/accountProfile", method = RequestMethod.POST)
 	public ResponseEntity<String> save(@RequestBody Accountprofile accountProfileRequest,  UriComponentsBuilder builder) {
 		Integer accountProfileId = tradingServiceFacade.saveAccountProfile(accountProfileRequest);
@@ -42,11 +43,18 @@ public class AccountProfileController {
 		responseHeaders.setLocation(builder.path("/accountProfile/{id}").buildAndExpand(accountProfileId).toUri());
 		return new ResponseEntity<String>(responseHeaders, HttpStatus.CREATED);
 	}
-
-	@RequestMapping(value = "/accountProfile", method = RequestMethod.PUT)
+	
+	@RequestMapping(value = "/accountProfile/{id}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@RequestBody Accountprofile accountProfileRequest) {
-		tradingServiceFacade.updateAccountProfile(accountProfileRequest);
+	public void update(@PathVariable("id") final Integer id, @RequestBody Accountprofile accountProfileRequest) {
+		accountProfileRequest.getAccounts().iterator().next().put("accountid", this.getSecurityUtil().getAccountFromPrincipal());
+		accountProfileRequest.setProfileid(id);
+		tradingServiceFacade.updateAccountProfile(accountProfileRequest, this.getSecurityUtil().getUsernameFromPrincipal());
 	}
 
+	@RequestMapping(value = "/accountProfile/{id}", method = RequestMethod.DELETE)
+	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	public void delete() {
+		
+	}
 }

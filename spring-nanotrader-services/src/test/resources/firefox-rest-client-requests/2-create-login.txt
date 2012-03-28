@@ -1,0 +1,1 @@
+{"requestUrl":"http://localhost:8080/spring-nanotrader-services/api/login","requestMethod":"POST","requestBody":"{\"password\":\"password\",\"username\":\"johndoe\"}\n","headers":["Content-Type","application/json"]}

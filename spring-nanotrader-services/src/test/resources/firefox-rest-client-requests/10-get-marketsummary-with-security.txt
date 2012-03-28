@@ -1,0 +1,1 @@
+{"requestUrl":"http://localhost:8080/spring-nanotrader-services/api/marketSummary","requestMethod":"GET","requestBody":"","headers":["Content-Type","application/json","API_TOKEN","5dc0f967-61bd-4986-96b8-593526cf7cff"]}

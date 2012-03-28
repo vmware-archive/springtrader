@@ -2,14 +2,14 @@ package org.springframework.nanotrader.web.controller;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.domain.MarketSummary;
-import org.springframework.nanotrader.service.domain.PortfolioSummary;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 /**
@@ -29,4 +29,10 @@ public class MarketSummaryController {
 		return tradingServiceFacade.findMarketSummary();
 	}
 
+	@RequestMapping(value = "/marketSummary", method = RequestMethod.POST)
+	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	public void post() {
+	}
+	
+	
 }

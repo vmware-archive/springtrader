@@ -16,6 +16,7 @@
 package org.springframework.nanotrader.service.support;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.nanotrader.service.domain.Account;
 import org.springframework.nanotrader.service.domain.Accountprofile;
@@ -27,29 +28,31 @@ import org.springframework.nanotrader.service.domain.Quote;
 
 /**
  * @author Gary Russell
- *
+ * 
  */
 public interface TradingServiceFacade {
+	
+	Map<String, Object> login(String username, String password);
 
-	Integer saveOrder(Order order, boolean synch);
-
-	Integer saveOrderDirect(Order order);
+	void logout(String authtoken);
 
 	Accountprofile findAccountProfile(Integer id);
+	
+	Accountprofile findAccountprofileByUserId(String username);
 
 	Integer saveAccountProfile(Accountprofile accountProfileRequest);
 
-	void updateAccountProfile(Accountprofile accountProfileRequest);
+	void updateAccountProfile(Accountprofile accountProfileRequest, String username);
+	
+	Integer saveOrder(Order order, boolean synch);
 
-	Holding findHolding(Integer id);
+	Integer saveOrderDirect(Order order);
+	
+	Holding findHolding(Integer id, Integer accountId);
 
-	List<Holding> findHoldingsByAccountId(Integer accountId,  Integer page, Integer pageSize);
+	List<Holding> findHoldingsByAccountId(Integer accountId, Integer page, Integer pageSize);
 
-	void saveHolding(Holding holdingRequest);
-
-	void updateHolding(Holding holdingRequest);
-
-	Order findOrder(Integer orderId);
+	Order findOrder(Integer orderId, Integer accountId);
 
 	void updateOrder(Order orderRequest);
 
@@ -58,8 +61,10 @@ public interface TradingServiceFacade {
 	Quote findQuoteBySymbol(String symbol);
 
 	Account findAccount(Integer id);
-	
+
 	PortfolioSummary findPortfolioSummary(Integer accountId);
-	
+
 	MarketSummary findMarketSummary();
+	
+	Accountprofile findAccountprofileByAuthtoken(String token);
 }

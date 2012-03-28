@@ -17,20 +17,26 @@ public interface TradingService {
 	public static final String ORDER_TYPE_BUY = "buy";
 
 	public static final String ORDER_TYPE_SELL = "sell";
-
+	
+	public abstract Accountprofile login(String username, String password);
+	
+	public abstract void logout(String authtoken);
+	
 	public abstract Accountprofile findAccountProfile(Integer id);
+	
+	public abstract Accountprofile findAccountByUserId(String id);
 
 	public abstract Accountprofile saveAccountProfile(Accountprofile accountProfile);
 
-	public abstract Accountprofile updateAccountProfile(Accountprofile accountProfile);
+	public abstract Accountprofile updateAccountProfile(Accountprofile accountProfile, String username);
 
-	public abstract Holding findHolding(Integer id);
+	public abstract Holding findHolding(Integer id, Integer accountId);
 
 	public abstract Holding updateHolding(Holding holding);
 
 	public abstract void saveHolding(Holding holding);
 
-	public abstract Order findOrder(Integer id);
+	public abstract Order findOrder(Integer id, Integer accountId);
 
 	public abstract Order saveOrder(Order order);
 
@@ -51,4 +57,6 @@ public interface TradingService {
 	public abstract PortfolioSummary findPortfolioSummary(Integer accountId);
 	
 	public abstract MarketSummary findMarketSummary();
+
+	public abstract Accountprofile findByAuthtoken(String token);
 }

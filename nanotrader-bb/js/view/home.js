@@ -29,7 +29,7 @@ AccountSummaryView = Backbone.View.extend({
 			},
 			setPortfolio : function() {
 				this.holding = new PortfolioSummary();
-				this.holding.url = 'spring-nanotrader-services/api/'
+				this.holding.url = 'spring-nanotrader-services/api/account/'
 						+ this.account_id + '/portfolioSummary';
 				this.holding.bind('change', this.render, this);
 				this.holding.fetch();

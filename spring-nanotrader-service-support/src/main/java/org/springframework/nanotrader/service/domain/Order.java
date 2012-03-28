@@ -11,7 +11,9 @@ public class Order {
 
 	private Integer orderid;
 
-	private Integer accountId;
+	private Integer accountid;
+	
+	private Integer holdingid;
 
 	private BigDecimal orderfee;
 
@@ -38,15 +40,14 @@ public class Order {
 	}
 
 
-	public Integer getAccountId() {
-		return accountId;
+	public Integer getAccountid() {
+		return accountid;
 	}
 
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
+	public void setAccountid(Integer accountId) {
+		this.accountid = accountId;
 	}
 
-	
 	public BigDecimal getOrderfee() {
 		return orderfee;
 	}
@@ -111,5 +112,22 @@ public class Order {
 		this.quote = quote;
 	}
 
-	
+	public Integer getHoldingid() {
+		return holdingid;
+	}
+
+	public void setHoldingid(Integer holdingid) {
+		this.holdingid = holdingid;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Order [orderid=" + orderid + ", accountid=" + accountid
+				+ ", holdingid=" + holdingid + ", orderfee=" + orderfee
+				+ ", completiondate=" + completiondate + ", ordertype="
+				+ ordertype + ", orderstatus=" + orderstatus + ", price="
+				+ price + ", quantity=" + quantity + ", opendate=" + opendate
+				+ ", quote=" + quote + "]";
+	}
 }

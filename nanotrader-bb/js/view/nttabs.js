@@ -4,7 +4,7 @@ window.TabView = Backbone.View.extend({
 
     initialize:function (activetab) {
         var variables = { isHomeActive : "inactive", isPortfolioActive : "inactive", 
-                          isTradeActive: "inactive", isProfileActive: "inactive" };
+                          isTradeActive: "inactive", isProfileActive: "inactive", accountid:null };
         
         if (activetab.name    === 'home') {
             variables.isHomeActive="active";
@@ -15,6 +15,7 @@ window.TabView = Backbone.View.extend({
         } else if (activetab.name === 'portfolio') {
             variables.isPortfolioActive="active";
         }
+        variables.accountid = activetab.accountid;
         this.template = _.template(tpl.get('tabs'), variables);
     },
 

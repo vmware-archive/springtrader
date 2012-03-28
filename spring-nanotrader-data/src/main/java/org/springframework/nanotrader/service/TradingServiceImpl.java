@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,14 +32,18 @@ import org.springframework.nanotrader.repository.QuoteRepository;
 import org.springframework.nanotrader.util.FinancialUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
+import org.springframework.dao.DataRetrievalFailureException;
 
 @Service
 @Transactional
 public class TradingServiceImpl implements TradingService {
+	
+	 
+	    
+	private static Logger log = LoggerFactory.getLogger(TradingServiceImpl.class);
 
 	public static BigDecimal DEFAULT_ORDER_FEE = BigDecimal.valueOf(1050, 2);
-
-	private static Logger log = LoggerFactory.getLogger(TradingServiceImpl.class);
 
 	private static String OPEN_STATUS = "open";
 
@@ -65,6 +70,38 @@ public class TradingServiceImpl implements TradingService {
 	@Autowired
 	private MarketSummaryRepository marketSummaryRepository;
 
+	
+	@Override
+	public Accountprofile login(String username, String password) { 
+		Accountprofile accountProfile = accountProfileRepository.findByUseridAndPasswd(username, password);
+		if (accountProfile != null) { 
+			accountProfile.setAuthtoken(UUID.randomUUID().toString());
+			accountProfile = accountProfileRepository.save(accountProfile); // persist new auth token
+			Set<Account> accounts = accountProfile.getAccounts();
+			for (Account account: accounts) { 
+				account.setLogincount(account.getLogincount() + 1);
+				account.setLastlogin(new Date());
+				accountRepository.save(account);
+			}
+			return accountProfile;
+		}
+		return null;
+	}
+	
+	
+	@Override
+	public void logout(String authtoken) { 
+		Accountprofile accountProfile = accountProfileRepository.findByAuthtoken(authtoken);
+		accountProfile.setAuthtoken(null); //remove token
+		accountProfileRepository.save(accountProfile);
+		Set<Account> accounts = accountProfile.getAccounts();
+		for (Account account: accounts) { 
+			account.setLogoutcount(account.getLogincount() + 1);
+			accountRepository.save(account);
+		}
+	}
+	
+	
 	@Override
 	public Accountprofile findAccountProfile(Integer id) {
 		if (log.isDebugEnabled()) {
@@ -104,8 +141,15 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public Accountprofile updateAccountProfile(Accountprofile accountProfile) {
-		return accountProfileRepository.save(accountProfile);
+	public Accountprofile updateAccountProfile(Accountprofile accountProfile, String username) {
+		Accountprofile accountProfileResponse = null;
+		Accountprofile acctProfile = accountProfileRepository.findByUserid(username);
+		//make sure that the primary key hasn't been altered
+		if (acctProfile != null ) { 
+			accountProfile.setAuthtoken(acctProfile.getAuthtoken());
+			accountProfileResponse = accountProfileRepository.save(accountProfile);
+		}
+		return accountProfileResponse;
 	}
 
 	@Override
@@ -121,11 +165,11 @@ public class TradingServiceImpl implements TradingService {
 	}
 	
 	@Override
-	public Holding findHolding(Integer id) {
+	public Holding findHolding(Integer id, Integer accountId) {
 		if (log.isDebugEnabled()) {
-			log.debug("TradingServices.findHolding: holdingId=" + id);
+			log.debug("TradingServices.findHolding: holdingId=" + id + " accountid=" + accountId);
 		}
-		Holding holding = holdingRepository.findOne(id);
+		Holding holding = holdingRepository.findByHoldingidAndAccountAccountid(id, accountId);
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findHolding: completed successfully.");
 		}
@@ -157,11 +201,11 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public Order findOrder(Integer id) {
+	public Order findOrder(Integer id, Integer accountId) {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrder: orderId=" + id);
 		}
-		Order order = orderRepository.findOne(id);
+		Order order = orderRepository.findByOrderidAndAccountAccountid(id, accountId);
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrder: completed successfully.");
 		}
@@ -177,7 +221,7 @@ public class TradingServiceImpl implements TradingService {
 		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
 			createdOrder = buy(order);
 		} else if (ORDER_TYPE_SELL.equals(order.getOrdertype())) {
-			// TODO
+			createdOrder = sell(order);
 		} else {
 			throw new UnsupportedOperationException("Order type was not recognized. Valid order types are 'buy' or 'sell'");
 		}
@@ -195,14 +239,31 @@ public class TradingServiceImpl implements TradingService {
 		Order createdOrder = createOrder(order, account, holding, quote);
 		// Update account balance and create holding
 		completeOrder(createdOrder);
-
-		return order;
+		return createdOrder;
 	}
+	
+	private Order sell(Order order) {
+		Account account = accountRepository.findOne(order.getAccountAccountid().getAccountid());
+		Holding holding = holdingRepository.findByHoldingidAndAccountAccountid(order.getHoldingHoldingid().getHoldingid(), account.getAccountid());
+		if (holding == null) { 
+			throw new DataRetrievalFailureException("Attempted to sell holding" + order.getHoldingHoldingid().getHoldingid() + " which is already sold.");
+		}
+		Quote quote = quoteRepository.findBySymbol(holding.getQuoteSymbol());
+		// create order and persist
+		Order createdOrder = createOrder(order, account, holding, quote);
+		// Update account balance and create holding
+		completeOrder(createdOrder);
+		return createdOrder;
+	}
+	
 
 	private Order createOrder(Order order, Account account, Holding holding, Quote quote) {
 		Order createdOrder = null;
 		order.setAccountAccountid(account);
 		order.setQuote(quote);
+		if (order.getQuantity() == null) { 
+			order.setQuantity(holding.getQuantity());
+		}
 		order.setOrderfee(DEFAULT_ORDER_FEE);
 		order.setOrderstatus(OPEN_STATUS);
 		order.setOpendate(new Date());
@@ -212,6 +273,8 @@ public class TradingServiceImpl implements TradingService {
 		return createdOrder;
 	}
 
+	
+	//TO DO: refactor this
 	public Order completeOrder(Order order) {
 		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
 			if (order.getHoldingHoldingid() == null) {
@@ -226,28 +289,87 @@ public class TradingServiceImpl implements TradingService {
 				holding.setOrders(orders);
 				order.setHoldingHoldingid(holding);
 				holdingRepository.save(holding);
+				updateAccount(order);
 			}
+		} else { 
+			updateAccount(order);
 		}
 		order.setOrderstatus("closed");
 		order.setCompletiondate(new Date());
+		updateQuoteMarketData(order.getQuote().getSymbol(), FinancialUtils.getRandomPriceChangeFactor(), order.getQuantity());
+		return order;
+	}
+	
+	//TODO: Need to clean this up
+	private void updateAccount(Order order) { 
 		// update account balance
 		Quote quote = order.getQuote();
 		Account account = order.getAccountAccountid();
 		BigDecimal price = quote.getPrice();
 		BigDecimal orderFee = order.getOrderfee();
 		BigDecimal balance = account.getBalance();
-		BigDecimal total = (order.getQuantity().multiply(price)).add(orderFee);
-		account.setBalance(balance.subtract(total));
+		BigDecimal total = null;
+		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
+			total = (order.getQuantity().multiply(price)).add(orderFee);
+			account.setBalance(balance.subtract(total));
+		} else { 
+			total = (order.getQuantity().multiply(price)).subtract(orderFee);
+			account.setBalance(balance.add(total));
+			Set<Order> orders = order.getHoldingHoldingid().getOrders();
+			//Remove the holding id from the buy record
+			for (Order orderToDeleteHolding: orders) { 
+				orderToDeleteHolding.setHoldingHoldingid(null);
+			}
+			//remove the holding id from the sell record
+			Integer holdingId = order.getHoldingHoldingid().getHoldingid();
+			order.setHoldingHoldingid(null);
+			holdingRepository.delete(holdingId);
+		}
 		accountRepository.save(account);
-		return order;
 	}
 
+	
+	private void updateQuoteMarketData(String symbol, BigDecimal changeFactor, BigDecimal sharesTraded) { 
+		Quote quote = quoteRepository.findBySymbol(symbol);
+		
+		BigDecimal oldPrice = quote.getPrice();
+		if (quote.getPrice().equals(FinancialUtils.PENNY_STOCK_PRICE)) {
+            changeFactor = FinancialUtils.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
+        }
+		
+        BigDecimal newPrice = changeFactor.multiply(oldPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
+        quote.setPrice(newPrice);
+        quote.setVolume(quote.getVolume().add(sharesTraded));
+        quote.setChange1(newPrice.subtract(quote.getOpen1()));
+        quoteRepository.save(quote);
+        //TODO: Publish quote change to rabbitmq
+	}
+	
 	@Override
 	public Order updateOrder(Order order) {
+		Order o = null;
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.updateOrder: order=" + order.toString());
 		}
-		Order o = orderRepository.save(order);
+		//Ensure that customers can't update another customers order record
+		Order originalOrder = orderRepository.findByOrderidAndAccountAccountid(order.getOrderid(), order.getAccountAccountid().getAccountid());
+		
+		
+		if( !"completed".equals(originalOrder.getOrderstatus())) { 
+			if (originalOrder != null) { 
+				if (log.isDebugEnabled()) {
+					log.debug("TradingServices.updateOrder: An order in the respository matched the requested order id and account ");
+				}
+				originalOrder.setQuantity(order.getQuantity());
+				originalOrder.setOrdertype(order.getOrdertype());
+				o = orderRepository.save(originalOrder);
+			
+			}
+		} else { 
+			throw new IncorrectUpdateSemanticsDataAccessException("Attempted to update a completed order");
+		}
+		
+		
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.updateOrder: completed successfully.");
 		}
@@ -344,5 +466,24 @@ public class TradingServiceImpl implements TradingService {
 		marketSummary.setSummaryDate(new Date());
 		return marketSummary;
 	}
+	
+
+	@Override
+	public Accountprofile findAccountByUserId(String id) {
+		return accountProfileRepository.findByUserid(id);
+		
+	}
+
+	@Override
+	public Accountprofile findByAuthtoken(String token) {
+		Accountprofile accountProfile = accountProfileRepository.findByAuthtoken(token);
+		if (accountProfile != null) { 
+			Set<Account> accounts = accountProfile.getAccounts();
+			accounts.iterator();
+			return accountProfile;
+		}
+		return null;
+	}
+	
 	
 }
