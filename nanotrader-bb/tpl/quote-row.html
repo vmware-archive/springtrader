@@ -1,12 +1,11 @@
-	  <tr>
 	    <td><%= symbol %></td>
 	    <td><%= companyname %></td>
-	    <td><%= volume %></td>
-	    <td><%= low %></td>
-	    <td><%= high %></td>
-	    <td><%= open1 %></td>
-	    <td><%= price %></td>
-	    <td><%= change1 %></td>
+	    <td align='right'><%= volume %></td>
+	    <td align='right'><% print(low.toFixed(2)) %></td>
+	    <td align='right'><% print(high.toFixed(2)) %></td>
+	    <td align='right'><% print(open1.toFixed(2)) %></td>
+	    <td align='right'><% print(price.toFixed(2)) %></td>
+	    <td align='right'><% print(change1.toFixed(2)) %></td>
+	    <input type='hidden' id="symbol_<%=quoteid%>" value="<%=symbol%>" />
 	    <td><input id="order_qty_<%=quoteid%>" type="text" value="0" class="span2"></input></td>
 	    <td><input type="submit" id="quote_buy_<%=quoteid%>" value="Buy" class="quote_buy"></input></td>
-	  </tr>
