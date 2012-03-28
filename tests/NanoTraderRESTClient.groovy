@@ -21,6 +21,7 @@ logFile = 0
 testAuthToken = 0
 acctid = 1
 unauthorizedAcctId = 0
+dummyUser = 'DummyUser'
 
 totalCount = 0
 passCount = 0
@@ -275,15 +276,18 @@ def synchronized String createAccountProfile(user="user1", positive=true, respon
   return myUserName
 }
 
-def updateAccountProfile(id=1, address="new address", positive=true, responseCode=200) {
+def updateAccountProfile(id=1, user=1, password=1, address="new address", positive=true, responseCode=200) {
  try {
     def accountProfilePath = "/spring-nanotrader-services/api/accountProfile/" + id
     def resp = nanotrader.put(path:"${accountProfilePath}",
                               requestContentType:JSON,
                               body:[address:address,
                                     accounts:[[openbalance:200.00]],
+                                    userid:user,
+                                    passwd:password,
                                     email:"updated email",
-                                    creditcard:"666666666666"],
+                                    creditcard:"666666666666",
+                                    fullname:user],
                               headers:[API_TOKEN:testAuthToken])
     if (positive) {
       assert resp.status == 200
@@ -661,7 +665,7 @@ def basicVerificationTests() {
   testUpdateOrder()
   testGetAccountProfile()
   testCreateAccountProfile()
-  testUpdateAccountProfile()
+  //testUpdateAccountProfile()
   testGetAccount()
   testGetSpecificHoldingForAccount()
   testGetAllHoldingsForAccount()
@@ -678,6 +682,7 @@ def verificationTests() {
   testAdvancedGetAccount()
   testAdvancedGetQuote()
   testAdvancedCreateProfile()
+  testAdvancedUpdateProfile()
 }
 
 def unauthorizedVerificationTests() {
@@ -685,7 +690,7 @@ def unauthorizedVerificationTests() {
   testUnauthorizedCreateOrder()
   testUnauthorizedUpdateOrder()
   testUnauthorizedGetAccountProfile()
-  testUnauthorizedUpdateAccountProfile()
+  //testUnauthorizedUpdateAccountProfile()
   testUnauthorizedGetAccount()
   testUnauthorizedGetSpecificHoldingForAccount()
   testUnauthorizedGetAllHoldingsForAccount()
@@ -746,6 +751,7 @@ def testAdvancedCreateProfile() {
   totalCount++
   try {
     user = createAccountProfile()
+    dummyUser = user
     password = "randompasswd"
 
     def path = "/spring-nanotrader-services/api/login"
@@ -753,6 +759,11 @@ def testAdvancedCreateProfile() {
                               body:[username:user, password:password],
                               requestContentType:JSON)
     assert resp.status == 201
+    String authToken = resp.data
+    def jsonObj = new JsonSlurper().parseText(authToken)
+    authToken = jsonObj.authToken
+    testAuthToken = authToken
+    acctid = jsonObj.accountid
     passCount++
     println "testAdvancedCreateProfile PASS"
   }
@@ -760,6 +771,23 @@ def testAdvancedCreateProfile() {
     failCount++
     writeExceptionToFile(t)
     println "testAdvancedCreateProfile FAIL";
+  }
+}
+
+def testAdvancedUpdateProfile() {
+  totalCount++
+  try {
+    getAccount(acctid)
+    updateAccountProfile(acctid, dummyUser, 'DummyPassword', 'Dummy Address')
+    getAccount(acctid)
+
+    passCount++
+    println "testAdvancedUpdateProfile PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testAdvancedUpdateProfile FAIL";
   }
 }
 
@@ -1208,7 +1236,7 @@ def testUnauthorizedGetAccountProfile() {
 def testUnauthorizedUpdateAccountProfile() {
   totalCount++
   try {
-    updateAccountProfile(unauthorizedAcctId, "new address", false, 401)
+    updateAccountProfile(unauthorizedAcctId, "1", "1", "new address", false, 401)
 
     passCount++
     println "testUnauthorizedUpdateAccountProfile PASS"
