@@ -40,19 +40,21 @@ def init() {
   disableLogger()
   nanotrader = new RESTClient(path)
   logFile = new PrintWriter(new FileWriter("nanotradertest.debug"))
-  testAuthToken = getAuthToken()
+  def jsonResponse = getAuthToken()
+  testAuthToken = jsonResponse.authToken
+  acctid = jsonResponse.accountid
   //println "Test Auth Token:" + testAuthToken + "\n"
-  println "\nStarting tests...\n"
+  //println "\nStarting tests...\n"
 }
 
-def String getAuthToken() {
+def Object getAuthToken(username='jack', password='jack') {
   String authToken = ""
   int accountid = 1
-  def user = "jack"
-  def passwd = "jack"
-  println "****** Please recreate schema and initialize db with initdb.sql before running tests"
-  println "Test User:" + user
-  println "Test User Password:" + passwd
+  def user = username
+  def passwd = password
+  //println "****** Please recreate schema and initialize db with initdb.sql before running tests"
+  //println "Test User:" + user
+  //println "Test User Password:" + passwd
   try {
     def path = "/spring-nanotrader-services/api/login"
     def resp = nanotrader.post(path:"${path}",
@@ -61,22 +63,14 @@ def String getAuthToken() {
     assert resp.status == 201
     authToken = resp.data
     def jsonObj = new JsonSlurper().parseText(authToken)
-    authToken = jsonObj.authToken
     acctid = jsonObj.accountid
-    accountid = acctid
     unauthorizedAcctId = acctid + 1
-    
-    //println "Data:" + resp.data
-    println "Using authToken: " + authToken
-    println "Using accountid: " + accountid
-
-    return authToken
+    return jsonObj
   }
   catch(ex) {
    ex.printStackTrace()
    throw ex
   }
-  return authToken
 }
 
 def writeExceptionToFile(ex) {
@@ -271,7 +265,8 @@ def synchronized String createAccountProfile(user="user1", positive=true, respon
   }
   catch(ex) {
     if (!positive) {
-      assert ex.response.status == responseCode
+      //assert ex.response.status == responseCode
+      throw ex
     }
     else {
       throw ex
