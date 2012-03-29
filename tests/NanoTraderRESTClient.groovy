@@ -1,4 +1,4 @@
-#!/usr/bin/env groovy
+//#!/usr/bin/env groovy
 
 //groovy -classpath /Users/administrator/Downloads/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar:/Users/administrator/Downloads/ezmorph-1.0.5.jar:/Users/administrator/Downloads/commons-lang-2.6/commons-lang-2.6.jar:/Users/administrator/Downloads/xerces-2_11_0/xercesImpl.jar:/Users/administrator/Downloads/nekohtml-1.9.15/nekohtml.jar:/Users/administrator/Downloads/commons-collections-3.2.1/commons-collections-3.2.1.jar:/Users/administrator/Downloads/xml-commons-resolver-1.2/resolver.jar:/Users/administrator/Downloads/json-lib-2.3-jdk15.jar:/Users/administrator/Downloads/http-builder-0.5.2.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/commons-codec-1.4.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpclient-4.1.3.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpcore-4.1.4.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/commons-logging-1.1.1.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpclient-cache-4.1.3.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpmime-4.1.3.jar NanoTraderRESTClient.groovy
 import groovyx.net.http.RESTClient
@@ -15,17 +15,19 @@ import static groovyx.net.http.ContentType.URLENC
 import static groovyx.net.http.ContentType.JSON
 import static groovyx.net.http.ContentType.HTML
 
-path = "http://localhost:8080"
-nanotrader = 0
-logFile = 0
-testAuthToken = 0
-acctid = 1
-unauthorizedAcctId = 0
-dummyUser = 'DummyUser'
+public class NanoTraderRESTClient {
 
-totalCount = 0
-passCount = 0
-failCount = 0
+def path = "http://localhost:8080"
+def nanotrader = 0
+def logFile = 0
+def testAuthToken = 0
+def acctid = 1
+def unauthorizedAcctId = 0
+def dummyUser = 'DummyUser'
+
+def totalCount = 0
+def passCount = 0
+def failCount = 0
 
 def disableLogger() {
   Handler[] handlers = Logger.getLogger("").getHandlers()
@@ -138,8 +140,8 @@ def synchronized int createOrder(id, quantity=555, orderType="buy", symbol="AAPL
                                headers:[API_TOKEN:testAuthToken])
    if (positive) {
      assert resp.status == 201
-     new_id = resp.getFirstHeader('location').getValue()
-     i = new_id.lastIndexOf("/")
+     def new_id = resp.getFirstHeader('location').getValue()
+     def i = new_id.lastIndexOf("/")
      new_id = new_id.substring(i+1)
      //println "new_id:" + new_id
      orderId = Integer.parseInt(new_id)
@@ -227,16 +229,16 @@ def synchronized getAccountProfile(id, positive=true, responseCode=200) {
 }
 
 def synchronized String createAccountProfile(user="user1", positive=true, responseCode=200) {
-  myUserName = ""
+  def myUserName = ""
   try {
-    userName = ""
+    def userName = ""
     if (positive) {
       Random rand = new Random()
       int range = 10000000
       userName = "randomuser" + rand.nextInt(range)
-      now = Calendar.instance
-      date = now.time
-      millis = date.time
+      def now = Calendar.instance
+      def date = now.time
+      def millis = date.time
       //println Thread.getName()
       //print "### userName:" + userName + millis
       userName += millis
@@ -719,19 +721,19 @@ def unsupportedVerificationTests() {
 def testAdvancedCreateOrder() {
   totalCount++
   try {
-    accountid = acctid
-    quantity1 = 9876
-    quantity2 = 3456
-    symbol1 = 'AAPL'
-    symbol2 = 'GOOG'
+    def accountid = acctid
+    def quantity1 = 9876
+    def quantity2 = 3456
+    def symbol1 = 'AAPL'
+    def symbol2 = 'GOOG'
 
     createOrder(accountid, quantity1, 'buy', symbol1)
     createOrder(accountid, quantity2, 'buy', symbol2)
 
-    data = getAllHoldingsForAccount(accountid)
+    def data = getAllHoldingsForAccount(accountid)
 
-    checkLabel1 = "\"quantity\":" + quantity1
-    checkLabel2 = "\"quantity\":" + quantity2
+    def checkLabel1 = "\"quantity\":" + quantity1
+    def checkLabel2 = "\"quantity\":" + quantity2
 
     if (data.indexOf(checkLabel1) >= 0 && data.indexOf(checkLabel2) >= 0) {
       passCount++
@@ -755,9 +757,9 @@ def testAdvancedCreateOrder() {
 def testAdvancedCreateProfile() {
   totalCount++
   try {
-    user = createAccountProfile()
+    def user = createAccountProfile()
     dummyUser = user
-    password = "randompasswd"
+    def password = "randompasswd"
 
     def path = "/spring-nanotrader-services/api/login"
     def resp = nanotrader.post(path:"${path}",
@@ -805,39 +807,39 @@ def testAdvancedUpdateProfile() {
 def testAdvancedUpdateOrder() {
   totalCount++
   try {
-    oldQuantity1 = 5678
-    oldQuantity2 = 1234
-    newQuantity1 = oldQuantity1 + 1
-    newQuantity2 = oldQuantity2 + 1
-    orderId1 = createOrder(acctid, oldQuantity1, 'buy', 'AAPL')
-    orderId2 = createOrder(acctid, oldQuantity2, 'buy', 'GOOG')
+    def oldQuantity1 = 5678
+    def oldQuantity2 = 1234
+    def newQuantity1 = oldQuantity1 + 1
+    def newQuantity2 = oldQuantity2 + 1
+    def orderId1 = createOrder(acctid, oldQuantity1, 'buy', 'AAPL')
+    def orderId2 = createOrder(acctid, oldQuantity2, 'buy', 'GOOG')
 
     updateOrder(acctid, orderId1, newQuantity1)
     updateOrder(acctid, orderId2, newQuantity2)
 
-    mydata = getOrder(acctid, orderId1)
-    mydata2 = getOrder(acctid, orderId2)
+    def mydata = getOrder(acctid, orderId1)
+    def mydata2 = getOrder(acctid, orderId2)
 
     //println "mydata:" + mydata
     //println "mydata2:" + mydata2
 
     def jsonObj = new JsonSlurper().parseText(mydata)
-    holdingId1 = jsonObj.holdingid
+    def holdingId1 = jsonObj.holdingid
 
     jsonObj = new JsonSlurper().parseText(mydata2)
-    holdingId2 = jsonObj.holdingid
+    def holdingId2 = jsonObj.holdingid
 
     //println "holding1:" + holdingId1
     //println "holding2:" + holdingId2
 
-    holdingData = getSpecificHoldingForAccount(acctid, holdingId1)
-    holdingData2 = getSpecificHoldingForAccount(acctid, holdingId2)
+    def holdingData = getSpecificHoldingForAccount(acctid, holdingId1)
+    def holdingData2 = getSpecificHoldingForAccount(acctid, holdingId2)
 
     jsonObj = new JsonSlurper().parseText(holdingData)
-    quantityCheck = jsonObj.quantity
+    def quantityCheck = jsonObj.quantity
 
     jsonObj = new JsonSlurper().parseText(holdingData2)
-    quantityCheck2 = jsonObj.quantity
+    def quantityCheck2 = jsonObj.quantity
 
     //println "quantitycheck1:" + quantityCheck
     //println "quantitycheck2:" + quantityCheck2
@@ -866,26 +868,26 @@ def testAdvancedUpdateOrder() {
 def testAdvancedSellOrder() {
   totalCount++
   try {
-    accountid = acctid
-    quantity1 = 55
-    quantity2 = 66
-    symbol1 = 'AAPL'
-    symbol2 = 'GOOG'
+    def accountid = acctid
+    def quantity1 = 55
+    def quantity2 = 66
+    def symbol1 = 'AAPL'
+    def symbol2 = 'GOOG'
 
-    orderId1 = createOrder(accountid, quantity1, 'buy', symbol1)
-    orderId2 = createOrder(accountid, quantity2, 'buy', symbol2)
+    def orderId1 = createOrder(accountid, quantity1, 'buy', symbol1)
+    def orderId2 = createOrder(accountid, quantity2, 'buy', symbol2)
 
-    mydata = getOrder(acctid, orderId1)
-    mydata2 = getOrder(acctid, orderId2)
+    def mydata = getOrder(acctid, orderId1)
+    def mydata2 = getOrder(acctid, orderId2)
 
     //println "mydata:" + mydata
     //println "mydata2:" + mydata2
 
     def jsonObj = new JsonSlurper().parseText(mydata)
-    holdingId1 = jsonObj.holdingid
+    def holdingId1 = jsonObj.holdingid
 
     jsonObj = new JsonSlurper().parseText(mydata2)
-    holdingId2 = jsonObj.holdingid
+    def holdingId2 = jsonObj.holdingid
 
     getSpecificHoldingForAccount(acctid, holdingId1)
     getSpecificHoldingForAccount(acctid, holdingId2)
@@ -915,13 +917,13 @@ def testAdvancedSellOrder() {
 def testAdvancedGetAccount() {
   totalCount++
   try {
-    mydata = getAccount(acctid)
+    def mydata = getAccount(acctid)
     def jsonObj = new JsonSlurper().parseText(mydata)
-    oldBalance = jsonObj.balance
+    def oldBalance = jsonObj.balance
     createOrder(acctid, 1, 'buy', 'AAPL')
     mydata = getAccount(acctid)
     jsonObj = new JsonSlurper().parseText(mydata)
-    newBalance = jsonObj.balance
+    def newBalance = jsonObj.balance
 
     //println "oldBalance:" + oldBalance
     //println "newBalance:" + newBalance
@@ -948,17 +950,17 @@ def testAdvancedGetAccount() {
 def testAdvancedGetQuote() {
   totalCount++
   try {
-    mydata = getQuote('AAPL')
+    def mydata = getQuote('AAPL')
     def jsonObj = new JsonSlurper().parseText(mydata)
-    oldVolume = jsonObj.volume
-    orderId = createOrder(acctid, 5, 'buy', 'AAPL')
+    def oldVolume = jsonObj.volume
+    def orderId = createOrder(acctid, 5, 'buy', 'AAPL')
     mydata = getOrder(acctid, orderId)
     jsonObj = new JsonSlurper().parseText(mydata)
-    holdingId = jsonObj.holdingid
+    def holdingId = jsonObj.holdingid
     createSellOrder(acctid, holdingId)
     mydata = getQuote('AAPL')
     jsonObj = new JsonSlurper().parseText(mydata)
-    newVolume = jsonObj.volume
+    def newVolume = jsonObj.volume
 
     if (newVolume == oldVolume+10) {
       passCount++
@@ -1486,13 +1488,17 @@ def printSummary() {
   println "Debug log file written to: nanotradertest.debug" 
 }
 
-init()
-basicVerificationTests()
-unauthorizedVerificationTests()
-unsupportedVerificationTests()
-verificationTests()
-printSummary()
+static main(args) {
 
+def inst = new NanoTraderRESTClient()
+inst.init()
+inst.basicVerificationTests()
+inst.unauthorizedVerificationTests()
+inst.unsupportedVerificationTests()
+inst.verificationTests()
+inst.printSummary()
+}
+}
 
 
 
