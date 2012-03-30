@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en-GB" class="no-js ie6"> <![endif]-->
+<!--[if IE 7   ]>      <html lang="en-GB" class="no-js ie7"> <![endif]-->
+<!--[if IE 8   ]>      <html lang="en-GB" class="no-js ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-GB" class="no-js"> <!--<![endif]-->
+<html lang="en">
+    <head>	
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+		<title>NanoTrader :: Profile</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="custom/css/jquery.jqplot.min.css" rel="stylesheet">
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="custom/css/style.css" rel="stylesheet">
+		<link href="custom/css/stylesheet.css" rel="stylesheet">
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+			<!--[if lt IE 9]>
+			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<![endif]-->
+		<!-- Le fav and touch icons -->
+		<link rel="shortcut icon" href="assets/ico/favicon.ico">
+		
+		
+
+		<!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">	-->
+				
+	</head>
+	<body>									
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					  <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					  </a>
+					  <a href="index.html" class="logo brand">NanoTrader</a>
+					  <div class="nav-collapse">
+						<ul class="nav nav-top">
+						  <li class="divider-vertical"></li>
+						  <li class="active">
+							<a href="index.html"><i class="icon-home icon-white"></i>dashboard</a>
+						  </li>
+						  <li class="divider-vertical"></li>
+						  <li>
+							<a href="portfolio.html"><i class="icon-custom icon-portfolio"></i>portfolio</a>
+						  </li>
+						  <li class="divider-vertical"></li>
+						  <li>
+							<a href="trade.html"><i class="icon-custom icon-trade"></i>trade</a>
+						  </li>
+						  <li class="divider-vertical"></li>
+						</ul>
+						<div class="navbar-text pull-right">
+							<ul class="nav">
+							<li class="divider-vertical"></li>
+							<li class="dropdown" id="fat-menu">
+							<a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown"><i class="icon-custom icon-user"></i>svetlanka.ua@gmail.com <span></span></a>
+							<div class="dropdown-menu">
+								<p class="user-title">Svetlana Agafonova</p>
+								<p>svetlanka.ua@gmail.com</p>
+								<ul class="dropdown-nav">
+									<li><a href="profile.html">Profile</a></li>
+									<li><a href="help.html">Help</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Logout</a></li>
+								</ul>
+							</div>
+							</li>
+							<li class="divider-vertical"></li>
+							</ul>
+						</div>
+					  </div>
+				</div>
+			</div>
+		</div>
+		<div class="container page profile-page">
+			<div class="row clearfix">				
+				<div class="span2 columns sidebar">
+					<div class="profile-header">
+						<h3>Svetlana Agafonova</h3>
+						<p>svetlanka.ua@gmail.com</p>
+					</div>
+					    <ul class="nav nav-tabs nav-stacked">
+						 <li class="active"><a href="profile.html">Profile</a></li>
+						 <li><a href="help.html">Help</a></li>
+						</ul>
+				</div>
+				<div class="span9 columns">
+					<form class="form-horizontal">						
+						<fieldset>
+							<h3>Account Profile</h3>
+							 <div class="span4">
+								 <div class="control-group">
+									<label for="focusedInput" class="control-label">Full name:</label>
+									<div class="controls">
+									  <input type="text" value="Svetlana Agafonova" id="focusedInput" class="input-xlarge focused">									  
+									</div>									
+								  </div>
+								  <div class="control-group">
+									<label for="focusedInput" class="control-label">User:</label>
+									<div class="controls">
+									  <input type="text" value="Svetlana" id="focusedInput" class="input-xlarge focused">									  
+									</div>									
+								  </div>
+								  <div class="control-group">
+									<label for="focusedInput" class="control-label">New Password:</label>
+									<div class="controls">
+									  <input type="password" value="" id="focusedInput" class="input-xlarge focused">									  
+									</div>									
+								  </div>
+								  <div class="control-group error">
+									<label for="inputError" class="control-label">Password Confirmation:</label>
+									<div class="controls">
+									  <input type="text" id="inputError" class="input-xlarge focused"><br/>
+									  <span class="help-inline">Please make sure Password fields are matching</span>
+									</div>
+								  </div>
+							  </div>
+							  <div class="span4">
+								 <div class="control-group">
+									<label for="focusedInput" class="control-label">Email:</label>
+									<div class="controls">
+									  <input type="text" value="svetlanka.ua@gmail.com" id="focusedInput" class="input-xlarge focused">
+									</div>
+								  </div>
+								  <div class="control-group">
+									<label for="focusedInput" class="control-label">Credit Card Number:</label>
+									<div class="controls">
+									  <input type="text" value="1234   1234    5678    5678" id="focusedInput" class="input-xlarge focused">
+									</div>
+								  </div>
+								  <div class="control-group">
+									<label for="textarea" class="control-label">Address:</label>
+									<div class="controls">
+									  <textarea rows="3" id="textarea" class="input-xlarge">Lorem</textarea>
+									</div>
+								  </div>
+							  </div>
+							  <div class="form-actions">
+								<button class="btn green-btn">Update</button>
+							  </div>
+						</fieldset>
+					</form>
+					<p><img src="custom/images/bg-corner.png" alt="" class="corner" /></p>
+				</div>
+			</div>
+		</div>
+
+				
+		</div>
+		<div class="footer">
+			<div class="container clearfix">
+				<p class="pull-left">Copyright &copy; 2012 VMWare, Inc. All rights reserved.</p>
+				<ul class="nav pull-left">
+					<li>
+						<a href="contact.html">Contact Us</a> <span class="divider">|</span>
+					</li>
+					<li>
+						<a href="help.html">Help</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>			
+		<script src="assets/js/bootstrap-collapse.js"></script>
+		<script src="assets/js/bootstrap-dropdown.js"></script>
+		<script src="assets/js/bootstrap-button.js"></script>
+		<script src="assets/js/bootstrap-alert.js"></script>
+		<script src="assets/js/bootstrap-typeahead.js"></script>		
+		<script>
+			$(document).ready(function() {
+			$('div#collapseOne').hide(); 
+				$(".collapse").collapse('show');
+				$('div.show-transactions').click(function () {
+					if ($('div.show-transactions').hasClass('active')) {
+						$('div#collapseOne').hide();
+						$('div.show-transactions').removeClass('active');
+					} else {
+						$('div#collapseOne').show(); 
+						$('div.show-transactions').addClass('active');
+					}
+				}
+ 				
+				);
+			$('.dropdown-toggle').dropdown();
+			$('.typeahead').typeahead();
+			$('.myModal').modal('hide')
+			});
+		</script>
+				
+	</body>
+</html>

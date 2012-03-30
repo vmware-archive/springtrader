@@ -1,0 +1,1 @@
+steal("funcunit/qunit", "./nanotrader_test.js");
