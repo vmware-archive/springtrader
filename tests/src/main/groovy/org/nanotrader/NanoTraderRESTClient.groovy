@@ -1,6 +1,5 @@
-//#!/usr/bin/env groovy
+package org.nanotrader
 
-//groovy -classpath /Users/administrator/Downloads/commons-beanutils-1.8.3/commons-beanutils-1.8.3.jar:/Users/administrator/Downloads/ezmorph-1.0.5.jar:/Users/administrator/Downloads/commons-lang-2.6/commons-lang-2.6.jar:/Users/administrator/Downloads/xerces-2_11_0/xercesImpl.jar:/Users/administrator/Downloads/nekohtml-1.9.15/nekohtml.jar:/Users/administrator/Downloads/commons-collections-3.2.1/commons-collections-3.2.1.jar:/Users/administrator/Downloads/xml-commons-resolver-1.2/resolver.jar:/Users/administrator/Downloads/json-lib-2.3-jdk15.jar:/Users/administrator/Downloads/http-builder-0.5.2.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/commons-codec-1.4.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpclient-4.1.3.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpcore-4.1.4.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/commons-logging-1.1.1.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpclient-cache-4.1.3.jar:/Users/administrator/Downloads/httpcomponents-client-4.1.3/lib/httpmime-4.1.3.jar NanoTraderRESTClient.groovy
 import groovyx.net.http.RESTClient
 import groovy.util.slurpersupport.GPathResult
 import groovy.json.JsonSlurper
@@ -33,6 +32,15 @@ def disableLogger() {
   Handler[] handlers = Logger.getLogger("").getHandlers()
   for (Handler handler : handlers) {
     handler.setLevel(Level.OFF)
+  }
+}
+
+def createFirstUser() {
+  try {
+    nanotrader = new RESTClient(path)
+    createAccountProfile('jack',false, 201, 'jack')
+  } catch (ex) {
+    //do nothing
   }
 }
 
@@ -83,26 +91,26 @@ def writeExceptionToFile(ex) {
   logFile.flush()
 }
 
-def String getOrder(int accountid, int orderid) {
+def String getOrder(int accountid, int orderid, authToken=testAuthToken) {
   def orderPath = "/spring-nanotrader-services/api/account/" + accountid + "/order/" + orderid
   def resp = nanotrader.get(path:"${orderPath}",
-                            headers:[API_TOKEN:testAuthToken])
+                            headers:[API_TOKEN:authToken])
   return resp.data
 }
 
-def String getOrder(id, status, positive=true, responseCode=200) {
+def String getOrder(id, status, positive=true, responseCode=200, authToken=testAuthToken) {
   String data = ""
   try {
     def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order"
     def resp = null
     if (status == "all") {
       resp = nanotrader.get(path:"${orderPath}",
-                            headers:[API_TOKEN:testAuthToken])
+                            headers:[API_TOKEN:authToken])
     }
     else {
      resp = nanotrader.get(path:"${orderPath}",
                            query:[status:"${status}"],
-                           headers:[API_TOKEN:testAuthToken])
+                           headers:[API_TOKEN:authToken])
     }
     if (positive) {
       assert resp.status == 200
@@ -124,14 +132,14 @@ def String getOrder(id, status, positive=true, responseCode=200) {
   return data
 }
 
-def synchronized int createOrder(id, quantity=555, orderType="buy", symbol="AAPL", positive=true, responseCode=201) {
+def synchronized int createOrder(id, quantity=555, orderType="buy", symbol="AAPL", positive=true, responseCode=201, authToken=testAuthToken) {
   int orderId = 0
   try {
     def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order"
     def resp = nanotrader.post(path:"${orderPath}",
                                body:[quantity:quantity, ordertype:orderType, quote:[symbol:symbol]],
                                requestContentType:JSON,
-                               headers:[API_TOKEN:testAuthToken])
+                               headers:[API_TOKEN:authToken])
    if (positive) {
      assert resp.status == 201
      def new_id = resp.getFirstHeader('location').getValue()
@@ -155,13 +163,13 @@ def synchronized int createOrder(id, quantity=555, orderType="buy", symbol="AAPL
   return orderId
 }
 
-def createSellOrder(accountid, holdingid, positive=true, responseCode=201) {
+def createSellOrder(accountid, holdingid, positive=true, responseCode=201, authToken=testAuthToken) {
   try {
     def orderPath = "/spring-nanotrader-services/api/account/" + accountid + "/order"
     def resp = nanotrader.post(path:"${orderPath}",
                                body:[holdingid:holdingid, ordertype:'sell'],
                                requestContentType:JSON,
-                               headers:[API_TOKEN:testAuthToken])
+                               headers:[API_TOKEN:authToken])
   }
   catch(ex) {
     if (!positive) {
@@ -222,7 +230,7 @@ def synchronized getAccountProfile(id, positive=true, responseCode=200) {
   }
 }
 
-def synchronized String createAccountProfile(user="user1", positive=true, responseCode=200) {
+def synchronized String createAccountProfile(user="user1", positive=true, responseCode=200, password="randompasswd", openbal=100.00) {
   def myUserName = ""
   try {
     def userName = ""
@@ -245,11 +253,11 @@ def synchronized String createAccountProfile(user="user1", positive=true, respon
     def resp = nanotrader.post(path:"${accountProfilePath}",
                                requestContentType:JSON,
                                body:[address:"My Random Address",
-                                     accounts:[[openbalance:100.00]],
-                                     passwd:"randompasswd",
+                                     accounts:[[openbalance:openbal]],
+                                     passwd:password,
                                      userid:userName,
-                                     email:"randomname.company.com",
-                                     creditcard:"222222222222",
+                                     email:"randomname@company.com",
+                                     creditcard:"1111222233334444",
                                      fullname:userName],
                                headers:[API_TOKEN:testAuthToken])
     if (positive) {
@@ -284,8 +292,8 @@ def updateAccountProfile(id=1, user=1, password=1, address="new address", positi
                                     accounts:[[openbalance:200.00]],
                                     userid:user,
                                     passwd:password,
-                                    email:"updated email",
-                                    creditcard:"666666666666",
+                                    email:"updated@email.com",
+                                    creditcard:"1111222211112222",
                                     fullname:user],
                               headers:[API_TOKEN:testAuthToken])
     if (positive) {
@@ -1484,14 +1492,14 @@ def printSummary() {
 }
 
 static main(args) {
-
-def inst = new NanoTraderRESTClient()
-inst.init()
-inst.basicVerificationTests()
-inst.unauthorizedVerificationTests()
-inst.unsupportedVerificationTests()
-inst.verificationTests()
-inst.printSummary()
+  def inst = new NanoTraderRESTClient()
+  inst.createFirstUser()
+  inst.init()
+  inst.basicVerificationTests()
+  inst.unauthorizedVerificationTests()
+  inst.unsupportedVerificationTests()
+  inst.verificationTests()
+  inst.printSummary()
 }
 }
 
