@@ -25,7 +25,7 @@ import org.springframework.test.web.server.MockMvc;
 public class AccountControllerTest extends AbstractSecureControllerTest {
 
 private static MockMvc mockMvc;
-	private static String DATE = "2012-02-20T17:35:42.904+0000";
+	private static String DATE = "2012-02-20";
 
 	@BeforeClass
 	public static void setup() {

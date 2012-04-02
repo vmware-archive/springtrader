@@ -6,9 +6,11 @@ import java.util.Set;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.HoldingSummary;
 import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
+import org.springframework.nanotrader.domain.HoldingAggregate;
 import org.springframework.nanotrader.domain.Quote;
 
 
@@ -59,4 +61,6 @@ public interface TradingService {
 	public abstract MarketSummary findMarketSummary();
 
 	public abstract Accountprofile findByAuthtoken(String token);
+	
+	public abstract HoldingSummary findHoldingSummary(Integer accountId);
 }

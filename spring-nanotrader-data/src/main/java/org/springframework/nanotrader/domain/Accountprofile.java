@@ -120,6 +120,7 @@ public class Accountprofile implements Serializable {
 	public void setFullname(String fullname) {
         this.fullname = fullname;
     }
+	
 	@Override
 	public String toString() {
 		return "Accountprofile [profileid=" + profileid + ", address=" + address + ", passwd=" + passwd + ", userid="
