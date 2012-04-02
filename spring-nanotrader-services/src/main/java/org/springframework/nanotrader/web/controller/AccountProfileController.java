@@ -47,7 +47,8 @@ public class AccountProfileController extends BaseController {
 	@RequestMapping(value = "/accountProfile/{id}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable("id") final Integer id, @RequestBody Accountprofile accountProfileRequest) {
-		accountProfileRequest.getAccounts().iterator().next().put("accountid", this.getSecurityUtil().getAccountFromPrincipal());
+		this.getSecurityUtil().checkAccountProfile(id);
+		accountProfileRequest.setAccounts(null); //dont expect this to be populated by the client
 		accountProfileRequest.setProfileid(id);
 		tradingServiceFacade.updateAccountProfile(accountProfileRequest, this.getSecurityUtil().getUsernameFromPrincipal());
 	}
