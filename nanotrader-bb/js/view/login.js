@@ -27,12 +27,16 @@ LoginView = Backbone.View.extend({
             this.model.unset('accountid', {
                 silent : true
             });
+            this.model.unset('profileid', {
+                silent : true
+            });
         }
         this.model.save(undefined, { async : false,
             success : function(model, resp) {
                 console.log("model saved : token = " + resp.authToken);
                 $.cookie('API_TOKEN', resp.authToken);
                 $.cookie('accountid', resp.accountid);
+                $.cookie('profileid', resp.profileid);
                 app.navigate('dashboard/' + resp.accountid,  {trigger: true});
             },
             error : function() {

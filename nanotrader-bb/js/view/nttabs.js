@@ -16,6 +16,7 @@ window.TabView = Backbone.View.extend({
             variables.isPortfolioActive="active";
         }
         variables.accountid = activetab.accountid;
+        variables.profileid = activetab.profileid;
         this.template = _.template(tpl.get('tabs'), variables);
     },
 
