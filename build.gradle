@@ -162,6 +162,8 @@ project('spring-nanotrader-service-support') {
 		compile "org.springframework.integration:spring-integration-amqp:$springIntegrationVersion"
 		compile "net.sf.dozer:dozer:$dozerVersion"
 		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
+		compile  "joda-time:joda-time:1.6"
+
 		
 	}
 }

@@ -26,7 +26,7 @@ import org.springframework.util.FileCopyUtils;
 
 
 public class OrderControllerTest extends AbstractSecureControllerTest {
-	private static String PURCHASE_DATE = "2012-02-20T17:35:42.904+0000";
+	private static String PURCHASE_DATE = "2012-02-20";
 
 	@Test
 	public void getOrderByIdJson() throws Exception {
@@ -116,12 +116,5 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 				.andDo(print());
 	}
 
-	@Test
-	public void updateOrderJson() throws Exception {
-		byte[] jsonRequest = FileCopyUtils.copyToByteArray(new ClassPathResource("update-order.json").getFile());
-		mockMvc.perform(
-				put("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order/"+ ServiceTestConfiguration.ORDER_ID).accept(MediaType.APPLICATION_JSON).body(jsonRequest)
-						.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andDo(print());
-	}
 
 }

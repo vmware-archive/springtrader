@@ -76,12 +76,9 @@ public class OrderController  extends BaseController {
 	}
 	
 	@RequestMapping(value = "/account/{accountId}/order/{id}", method = RequestMethod.PUT)
-	@ResponseStatus( HttpStatus.OK )
+	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
 	public void update( @RequestBody Order orderRequest, @PathVariable( "accountId" ) final Integer accountId, @PathVariable( "id" ) final Integer orderId) {
-		this.getSecurityUtil().checkAccount(accountId); //verify that the  account on the path is the same as the authenticated user
-		orderRequest.setAccountid(this.getSecurityUtil().getAccountFromPrincipal());
-		orderRequest.setOrderid(orderId);
-		tradingServiceFacade.updateOrder(orderRequest);
+
 	}
 	
 	
