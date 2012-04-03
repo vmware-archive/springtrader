@@ -475,12 +475,7 @@ public class TradingServiceImpl implements TradingService {
 	
 	@Override
 	public HoldingSummary findHoldingSummary(Integer accountId) {
-
 		HoldingSummary summary = holdingAggregateRepository.findHoldingAggregated(accountId);
-		for (HoldingAggregate ha: summary.getHoldingRollups()) { 
-			System.out.println(ha);
-			
-		}
 		return summary;
 	}
 	
