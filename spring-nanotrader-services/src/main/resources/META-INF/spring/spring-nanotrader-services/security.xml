@@ -12,6 +12,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 	<http create-session="stateless" pattern="/api/accountProfile" security="none" />
 	
 	<http create-session="stateless" pattern="/api/marketSummary" security="none" />
+	
+	<http create-session="stateless" pattern="/api/chaos/**" security="none" />
 
 	<!-- Protect all the nanotrader services -->
 	<http create-session="stateless" entry-point-ref="entryPoint">
