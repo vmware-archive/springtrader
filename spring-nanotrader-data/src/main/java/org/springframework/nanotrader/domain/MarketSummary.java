@@ -23,6 +23,16 @@ public class MarketSummary {
 	
 	private BigDecimal percentGain;
 
+	private BigDecimal change;
+	
+	public BigDecimal getChange() {
+		return change;
+	}
+
+	public void setChange(BigDecimal change) {
+		this.change = change;
+	}
+
 	public BigDecimal getPercentGain() {
 		return FinancialUtils.computeGainPercent(getTradeStockIndexAverage(), getTradeStockIndexOpenAverage());
 	}
