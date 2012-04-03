@@ -43,7 +43,6 @@ public class AccountProfileController extends BaseController {
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable("id") final Integer id, @RequestBody Accountprofile accountProfileRequest) {
 		this.getSecurityUtil().checkAccountProfile(id);
-		accountProfileRequest.setAccounts(null); //dont expect this to be populated by the client
 		accountProfileRequest.setProfileid(id);
 		getTradingServiceFacade().updateAccountProfile(accountProfileRequest, this.getSecurityUtil().getUsernameFromPrincipal());
 	}

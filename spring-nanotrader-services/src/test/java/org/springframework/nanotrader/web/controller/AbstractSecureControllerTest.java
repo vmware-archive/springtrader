@@ -26,8 +26,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class AbstractSecureControllerTest extends AbstractBaseControllerTest {
 	private static String API_ROLE = "API_USER";
 
-
-	
 	@Before
 	public  void login() { 
 		Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
