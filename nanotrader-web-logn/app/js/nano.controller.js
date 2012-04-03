@@ -31,7 +31,7 @@ nano.Controller = function(conf, strings) {
             }
             else
             {
-                nano.instances.login.render();
+                nano.instances.controller.renderLogin();
             }
         });
     };

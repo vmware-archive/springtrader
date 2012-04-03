@@ -20,7 +20,7 @@ Backbone.sync = function(method, model, options)
     options.success = function(resp, status, xhr)
     {
         // This is the function that will run through the model
-        // changing the Pearson Date string into a Date() object
+        // changing the Nanotrader Date string into a Date() object
         var convertDateStrs = function(obj)
         {
             for (var i in obj)
