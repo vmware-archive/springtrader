@@ -1,6 +1,8 @@
 package org.springframework.nanotrader.service;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -18,12 +20,15 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.HoldingSummary;
 import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
+import org.springframework.nanotrader.domain.HoldingAggregate;
 import org.springframework.nanotrader.domain.Quote;
 import org.springframework.nanotrader.repository.AccountProfileRepository;
 import org.springframework.nanotrader.repository.AccountRepository;
+import org.springframework.nanotrader.repository.HoldingAggregateRepository;
 import org.springframework.nanotrader.repository.MarketSummaryRepository;
 import org.springframework.nanotrader.repository.PortfolioSummaryRepository;
 import org.springframework.nanotrader.repository.HoldingRepository;
@@ -70,6 +75,9 @@ public class TradingServiceImpl implements TradingService {
 	@Autowired
 	private MarketSummaryRepository marketSummaryRepository;
 
+	@Autowired
+	private HoldingAggregateRepository holdingAggregateRepository;
+	
 	
 	@Override
 	public Accountprofile login(String username, String password) { 
@@ -467,11 +475,22 @@ public class TradingServiceImpl implements TradingService {
 		return marketSummary;
 	}
 	
+	@Override
+	public HoldingSummary findHoldingSummary(Integer accountId) {
 
+		HoldingSummary summary = holdingAggregateRepository.findHoldingAggregated(accountId);
+		for (HoldingAggregate ha: summary.getHoldingRollups()) { 
+			System.out.println(ha);
+			
+		}
+		return summary;
+	}
+	
+	
+	
 	@Override
 	public Accountprofile findAccountByUserId(String id) {
 		return accountProfileRepository.findByUserid(id);
-		
 	}
 
 	@Override

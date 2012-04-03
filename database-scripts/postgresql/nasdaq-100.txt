@@ -92,7 +92,7 @@ Urban Outfitters, Inc. 	URBN
 VeriSign, Inc. 	VRSN
 Vertex Pharmaceuticals Incorporated 	VRTX
 Virgin Media Inc. 	VMED
-Vodafone Group Plc 	VOD
+VMware 	 VMW
 Warner Chilcott plc 	WCRX
 Whole Foods Market, Inc. 	WFM
 Wynn Resorts, Limited 	WYNN

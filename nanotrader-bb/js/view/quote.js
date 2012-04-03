@@ -15,9 +15,10 @@ FullQuoteView = Backbone.View.extend({
         this.model.set(objInst);
     },
 
-    initialize : function(myid) {
+    initialize : function(accountid) {
         this.quoteprompttemplate = _.template(tpl.get('quote-prompt'));
         this.quotelisttemplate = _.template(tpl.get('quote-list'));
+        this.accountid = accountid;
 
         if (!this.quoteCollection) {
             this.quoteCollection = new QuoteCollection();
@@ -27,7 +28,7 @@ FullQuoteView = Backbone.View.extend({
     handleQuoteForm : function(data) {
         // User has input a stock symbol. Store the stock symbol into the model,
         // which will force a re-render displaying the value of the stock.
-        var inputsymbols = $("#input-stocksymbol").val();
+        var inputsymbols = $("#input-stocksymbol").val().toUpperCase();
         this.quoteCollection.findBySymbols(inputsymbols);
         this.render(); // Should not be necessary
     },
@@ -36,31 +37,53 @@ FullQuoteView = Backbone.View.extend({
       var click_id = event.target.id;
       // Extract the ID of the stock ordered from the event target id,
       // then get the corresponding quantity
-      var quote_id = click_id.replace("quote_buy_","");
-      var qty = $("#order_qty_"+quote_id).val();
+      var quoteid = click_id.replace("quote_buy_","");
+      var qty = parseInt($("#order_qty_"+quoteid).val());
+      var symbol = $("#symbol_"+quoteid).val().toUpperCase();
       if (qty > 0) {
           // User has requested a stock purchase
-          alert("FIX_ME: stock purchase not implemented yet");
+          console.log("About to buy " + qty + " shares of " + symbol + " id: " + quoteid);
+          var quote = new Quote({symbol : symbol});
+          var order = new Order(
+                  {quantity : qty,
+                   ordertype : 'buy',
+                   quote : quote});
+          order.url = 'spring-nanotrader-services/api/account/' + this.accountid + '/order';
+          
+          order.save(undefined, {
+              success : function(model, resp) {
+                  console.log("successfully requested stock purchase");
+                  $('#buy_result').append('<div id="showsuccess"<b> Successfully requested stock purchase</b></div>');
+                  $('#showsuccess').fadeOut(5000, function() {
+                      $('#showsuccess').remove();
+                  });
+              },
+              error : function(model, resp) {
+                  console.log("unable to process order");
+                  $('#buy_result').append('<div id="showerror"<b> Failed! </b>' + resp.responseText + '</div>');
+                  $('#showerror').fadeOut(10000, function() {
+                      $('#showerror').remove();
+                  });
+              }
+          });
+    
+          
       }
       
     },
 
     render : function() {
-        $(this.el).html(this.quoteprompttemplate);
+        $(this.el).html(this.quoteprompttemplate({"accountid" : this.accountid}));
         // render the list of stock quotes only if we have at least one
         if (this.quoteCollection.length > 0) {
             // Add the table header
-            $(this.el).append(this.quotelisttemplate);
+            $(this.el).append(this.quotelisttemplate({"accountid" : this.accountid}));
             // For each quote, create and display a quoteView
             var self = this;
             _.each(this.quoteCollection.models, function(quote) {
-                console.log("quote url is: "+quote.url());
-                // FIX_ME: insertion is not nesting properly inside the table
                 var quoteView = new QuoteView(quote.attributes);
                 $(quoteView.el).html(quoteView.template(quote.toJSON()));
-                // $('#quote-table tr:last', this.el).after(quoteView.el);
                 $('#quote-table', this.el).append(quoteView.el);
-                // $(this.el).append(quoteView.el)
             }, this);
         }
         return this;
@@ -70,8 +93,7 @@ FullQuoteView = Backbone.View.extend({
 // View of a SINGLE quote
 QuoteView = Backbone.View.extend({
 
-    tagName : "div", // WRONG? forces creation of a div that merges table
-    // cells?
+    tagName : "tr",
 
     initialize : function(quoteattrs) {
         this.template = _.template(tpl.get('quote-row'));
@@ -83,7 +105,8 @@ QuoteView = Backbone.View.extend({
 });
 
 QuoteListView = Backbone.View.extend({
-    tagName : 'div',
+    tagName : 'table',
+    attributes : {'class' : 'table table-bordered'},
     initialize : function() {
         this.template = _.template(tpl.get('quote-list'));
     },

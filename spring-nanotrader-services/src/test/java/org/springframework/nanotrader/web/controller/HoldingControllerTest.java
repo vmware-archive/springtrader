@@ -21,7 +21,7 @@ import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration
 
 public class HoldingControllerTest extends AbstractSecureControllerTest {
 	private static Integer PURCHASE_PRICE = 50000;
-	private static String PURCHASE_DATE = "2012-02-20T17:35:42.904+0000";
+	private static String PURCHASE_DATE = "2012-02-20";
 	private static Integer QUANTITY = 200;
 
 	@Test

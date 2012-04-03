@@ -20,6 +20,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -35,9 +37,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.HoldingSummary;
 import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
+import org.springframework.nanotrader.domain.HoldingAggregate;
 import org.springframework.nanotrader.domain.Quote;
 import org.springframework.nanotrader.domain.test.AccountDataOnDemand;
 import org.springframework.nanotrader.domain.test.AccountprofileDataOnDemand;
@@ -253,4 +257,7 @@ public class TradingServiceTests {
 
 
 	}
+	
+	
+	
 }

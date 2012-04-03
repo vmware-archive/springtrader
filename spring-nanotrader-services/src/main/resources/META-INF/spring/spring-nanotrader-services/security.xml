@@ -10,6 +10,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 	<!-- Exclude accountProfile create operation from the list of protected resources since this resource is required for 
 		new user registration -->
 	<http create-session="stateless" pattern="/api/accountProfile" security="none" />
+	
+	<http create-session="stateless" pattern="/api/marketSummary" security="none" />
 
 	<!-- Protect all the nanotrader services -->
 	<http create-session="stateless" entry-point-ref="entryPoint">

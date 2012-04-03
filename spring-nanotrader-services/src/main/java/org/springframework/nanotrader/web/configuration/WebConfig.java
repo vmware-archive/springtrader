@@ -1,7 +1,9 @@
 package org.springframework.nanotrader.web.configuration;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.codehaus.jackson.map.SerializationConfig.Feature;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,8 +24,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * exceptionResolvers) enabling consistent REST exception handling across
  * Controllers.
  * 
- * Jackson Marshaller is also configured (WRITE_DATES_AS_TIMESTAMPS) to use
- * ISO-8601 compliant dates.
  * 
  * @author Brian Dussault
  * @author
@@ -42,7 +42,11 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		mappingJacksonHttpMessageConverter.setSupportedMediaTypes(Arrays
 				.asList(MediaType.APPLICATION_JSON));
 		mappingJacksonHttpMessageConverter.getObjectMapper().configure(
-				Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+				Feature.WRITE_DATES_AS_TIMESTAMPS, true);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		// There is no need to set the timezone as Jackson uses GMT and not the local time zone (which is exactly what you want)
+		// Note: While SimpleDateFormat is not threadsafe, Jackson Marshaller's StdSerializerProvider clones the configured formatter for each thread
+		mappingJacksonHttpMessageConverter.getObjectMapper().setDateFormat(format);
 		mappingJacksonHttpMessageConverter.getObjectMapper().configure(
 				Feature.INDENT_OUTPUT, true);
 		// mappingJacksonHttpMessageConverter.getObjectMapper().getSerializationConfig().setSerializationInclusion(Inclusion.NON_NULL);

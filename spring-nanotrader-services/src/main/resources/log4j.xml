@@ -9,7 +9,7 @@
 	</appender>
 	<!-- Loggers -->
 	<logger name="org.springframework">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 
 	<logger name="org.springframework.nanotrader.service">
@@ -27,7 +27,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="info" />
+		<priority value="debug" />
 		<appender-ref ref="console" />
 
 	</root>

@@ -1,7 +1,7 @@
 <!--  This table will only be displayed when a stocksymbol
       has been entered by the user. -->
 
-<form name="orderform" class="well form-horizontal" action="#/trade"
+<form name="orderform" class="well form-horizontal" action="#/trade/<%=accountid%>"
 	id="orderForm">
 	<table id="quote-table" border="1">
 		<thead>
@@ -22,3 +22,5 @@
 		</tbody>
 	</table>
 </form>
+<!--  placeholder where view shows status of purchase attempt -->
+<div id="buy_result"/>

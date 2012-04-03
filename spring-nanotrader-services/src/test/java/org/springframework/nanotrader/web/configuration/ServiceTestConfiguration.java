@@ -6,6 +6,8 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -19,6 +21,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.HoldingAggregate;
+import org.springframework.nanotrader.domain.HoldingSummary;
 import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
@@ -27,6 +31,7 @@ import org.springframework.nanotrader.service.TradingService;
 import org.springframework.nanotrader.service.TradingServiceImpl;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.nanotrader.service.support.TradingServiceFacadeImpl;
+import org.springframework.nanotrader.util.FinancialUtils;
 
 /**
  *  ServiceTestConfiguration provides test objects and mock service layer for unit tests.
@@ -90,6 +95,11 @@ public class ServiceTestConfiguration  {
 	public static BigDecimal MARKET_OPENING =  new BigDecimal(35.25);
 	public static BigDecimal MARKET_VOLUME =  new BigDecimal(40.45);
 	
+	//Holding Summary
+	public static BigDecimal HOLDING_SUMMARY_GAINS =  new BigDecimal(1000.54);
+	public static BigDecimal GAIN1 =  new BigDecimal(600.54);
+	public static BigDecimal GAIN2 =  new BigDecimal(400.00);
+	public static String SYMBOL2 = "OTHER";
 	
 	@Bean 
 	public TradingService tradingService() {
@@ -113,6 +123,7 @@ public class ServiceTestConfiguration  {
 		when(tradingService.findMarketSummary()).thenReturn(marketSummary());
 		when(tradingService.login(eq(USER_ID), eq(PASSWORD))).thenReturn(accountProfile());
 		when(tradingService.login(eq(BAD_USER_ID), eq(BAD_PASSWORD))).thenReturn(null);
+		when(tradingService.findHoldingSummary(eq(ACCOUNT_ID))).thenReturn(holdingSummary());
 		return tradingService;
 	}
 	
@@ -237,6 +248,23 @@ public class ServiceTestConfiguration  {
 		return marketSummary;
 	}
 
+	public HoldingSummary holdingSummary() {
+		HoldingSummary holdingSummary = new HoldingSummary();
+		List<HoldingAggregate> holdings = new ArrayList<HoldingAggregate>();
+		holdingSummary.setHoldingsTotalGains(HOLDING_SUMMARY_GAINS.setScale(2, RoundingMode.HALF_UP));
+		HoldingAggregate holding1 = new HoldingAggregate();
+		holding1.setSymbol(SYMBOL);
+		holding1.setGain(GAIN1.setScale(2, RoundingMode.HALF_UP));
+		holding1.setPercent(FinancialUtils.calculateGainPercentage(holding1.getGain(), holdingSummary.getHoldingsTotalGains()).setScale(2, RoundingMode.HALF_UP));
+		holdings.add(holding1);
+		HoldingAggregate holding2 = new HoldingAggregate();
+		holding2.setSymbol(SYMBOL2);
+		holding2.setGain(GAIN2.setScale(2, RoundingMode.HALF_UP));
+		holding2.setPercent(FinancialUtils.calculateGainPercentage(holding2.getGain(), holdingSummary.getHoldingsTotalGains()).setScale(2, RoundingMode.HALF_UP));
+		holdings.add(holding2);
+		holdingSummary.setHoldingRollups(holdings);
+		return holdingSummary;
+	}
 	 
 	
 }

@@ -1,6 +1,8 @@
 package org.springframework.nanotrader.util;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.Random;
 
@@ -90,4 +92,10 @@ public class FinancialUtils {
 		return (new Float(random() * i)).floatValue();
 	}
 
+	public static BigDecimal calculateGainPercentage(BigDecimal gain, BigDecimal totalGains) { 
+		BigDecimal percent = gain.divide(totalGains, 4, RoundingMode.HALF_UP);
+		percent = percent.multiply(new BigDecimal(100),
+				new MathContext(4, RoundingMode.HALF_UP));
+		return percent;
+	}
 }

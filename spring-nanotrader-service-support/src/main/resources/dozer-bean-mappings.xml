@@ -94,4 +94,10 @@
 		<class-a>org.springframework.nanotrader.domain.MarketSummary</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.MarketSummary</class-b>
 	</mapping>
+	
+	<mapping map-id="holdingSummary">
+		<class-a>org.springframework.nanotrader.domain.HoldingSummary</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.HoldingSummary</class-b>
+	</mapping>
+	
 </mappings>

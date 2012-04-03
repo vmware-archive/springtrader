@@ -27,7 +27,7 @@ var AppRouter = Backbone.Router.extend({
 				}
 				$('#content').html(this.accountProfileView.el);
 				this.tabView = new TabView({
-							name : 'profile', accountid : id
+							name : 'profile', profileid : id, accountid : $.cookie('accountid')
 						});
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
@@ -44,7 +44,7 @@ var AppRouter = Backbone.Router.extend({
 				this.homeView = new HomeView(id);
 				$('#content').html(this.homeView.el);
 				this.tabView = new TabView({
-							name : 'home', accountid : id
+							name : 'home', accountid : id, profileid : $.cookie('profileid')
 						});
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
@@ -53,7 +53,7 @@ var AppRouter = Backbone.Router.extend({
 				this.PortfolioView = new PortfolioView(id);
 				$('#content').html(this.PortfolioView.el);
 				this.tabView = new TabView({
-							name : 'portfolio', accountid : id
+							name : 'portfolio', accountid : id, profileid : $.cookie('profileid')
 						});
 				this.tabView.render();
 				$('#tabs').html(this.tabView.el);
@@ -65,7 +65,7 @@ var AppRouter = Backbone.Router.extend({
                 }
                 $('#content').html(this.tradeView.el);
                 this.tabView = new TabView({
-                        name : 'trade', accountid : id
+                        name : 'trade', accountid : id, profileid : $.cookie('profileid')
                 });
                 this.tabView.render();
                 $('#tabs').html(this.tabView.el);

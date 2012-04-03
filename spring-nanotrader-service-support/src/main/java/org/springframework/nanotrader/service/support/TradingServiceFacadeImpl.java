@@ -32,6 +32,7 @@ import org.springframework.nanotrader.service.TradingService;
 import org.springframework.nanotrader.service.domain.Account;
 import org.springframework.nanotrader.service.domain.Accountprofile;
 import org.springframework.nanotrader.service.domain.Holding;
+import org.springframework.nanotrader.service.domain.HoldingSummary;
 import org.springframework.nanotrader.service.domain.MarketSummary;
 import org.springframework.nanotrader.service.domain.Order;
 import org.springframework.nanotrader.service.domain.PortfolioSummary;
@@ -65,7 +66,9 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 	private static final String PORTFOLIO_SUMMARY_MAPPING = "portfolioSummary";
 	
 	private static final String MARKET_SUMMARY_MAPPING = "marketSummary";
-
+	
+	private static final String HOLDING_SUMMARY_MAPPING = "holdingSummary";
+	
 	private static Integer DEFAULT_PAGE = 0;
 	
 	private static Integer DEFAULT_PAGE_SIZE = 24;
@@ -107,6 +110,7 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 			loginResponse = new HashMap<String, Object>();
 			Set<org.springframework.nanotrader.domain.Account> accounts = accountProfile.getAccounts();
 			loginResponse.put("authToken", accountProfile.getAuthtoken());
+			loginResponse.put("profileid", accountProfile.getProfileid());
 			for (org.springframework.nanotrader.domain.Account account: accounts) { 
 				loginResponse.put("accountid", account.getAccountid());
 			}
@@ -357,6 +361,19 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 			log.debug("TradingServiceFacade.findMarketSummary: completed successfully.");
 		}
 		return marketSummaryResponse;
+	}
+	
+	public HoldingSummary findHoldingSummary(Integer accountId) {
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findHoldingSummary: Start");
+		}
+		org.springframework.nanotrader.domain.HoldingSummary holdingSummary = tradingService.findHoldingSummary(accountId);
+		HoldingSummary holdingSummaryResponse = new HoldingSummary();
+		mapper.map(holdingSummary, holdingSummaryResponse, HOLDING_SUMMARY_MAPPING);
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServiceFacade.findHoldingSummary: completed successfully.");
+		}
+		return holdingSummaryResponse;
 	}
 	
 	private Integer getPageSize(Integer pageSize) { 

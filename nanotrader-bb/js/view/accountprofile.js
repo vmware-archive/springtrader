@@ -42,9 +42,11 @@ window.AccountProfileView = Backbone.View.extend({
         }); 
     },
     handleForm : function(data) {
-        this.model.unset('accounts', {
-            silent : true
-        });
+        if (this.model.get('accounts')) {
+            this.model.unset('accounts', {
+                silent : true
+            });
+        }
         if (this.model.get('password_confirm')) { 
             this.model.unset('password_confirm', {
                 silent : true
@@ -60,7 +62,10 @@ window.AccountProfileView = Backbone.View.extend({
             },
             error : function(model, resp) {
                 console.log("unable to save model");
-                $('#result').append('Failed! ' + resp );
+                $('#result').append('<div id="showerror"<b> Failed! </b>' + resp.responseText + '</div>');
+                $('#showerror').fadeOut(10000, function() {
+                    $('#showerror').remove();
+                });
             }
         });
     },
