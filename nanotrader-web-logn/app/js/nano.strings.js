@@ -21,5 +21,10 @@ nano.strings = {
     forgotPassword : 'Forgot password?',
     registration : 'Registration',
     dontHaveNanotrader : 'Don\'t have a NanoTrade login and password yet?',
-    pleaseRegister : 'Please Register me now'
+    pleaseRegister : 'Please Register me now',
+    price : 'Price',
+    username : 'Username',
+    invalidUser : 'Invaild Username and/or Password. Please try again.',
+    ohSnap : 'Oh snap! You got an error!',
+    unknowError : 'An unknown error has occurred. Please try again alter.'
 };

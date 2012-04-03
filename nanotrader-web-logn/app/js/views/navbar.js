@@ -46,11 +46,17 @@ nano.ui.Navbar = function(element) {
 
     this.render = function(){
         var data = { 
-            email: 'carlos.soto@lognllc.com',
-            username: 'Carlos Soto'
+            email: nano.session.username + '@nanotrader.com',
+            username: nano.session.username
         };
         var navbar = _.template(nano.templates.navbar)(data);
         this.element.html(navbar);
         this.element.find('.dropdown-toggle').dropdown();
+        this.element.show();
+
+        this.element.find('#logout').click(function(){
+            nano.utils.logout();
+            nano.instances.controller.renderLogin();
+        });
     };
 };

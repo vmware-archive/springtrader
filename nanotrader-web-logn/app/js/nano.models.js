@@ -48,6 +48,10 @@ Backbone.sync = function(method, model, options)
             success(resp, status, xhr);
         }
     };
+
+    // Add the proper Nanotrader HTTP headers
+    options.headers = nano.utils.getHttpHeaders();
+
     return Backbone._sync_orig(method, model, options);
 }
 
@@ -81,6 +85,7 @@ nano.models.MarketSummary = function(){
         var model = this;
         $.ajax({
             url : nano.conf.urlRoot + 'marketSummary',
+            headers : nano.utils.getHttpHeaders(),
             success : function(data, textStatus, jqXHR){
                 var response = {
                     textStatus : textStatus,
