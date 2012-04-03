@@ -27,7 +27,6 @@ public class AuthenticationController extends BaseController {
 	@ResponseStatus( HttpStatus.CREATED )
 	@ResponseBody
 	public Map<String, Object> login(@RequestBody AuthenticationRequest authenticationRequest) {
-		
 		Map<String, Object> authenticationResponse = getTradingServiceFacade().login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		return authenticationResponse;// authToken and accountId;
 	}

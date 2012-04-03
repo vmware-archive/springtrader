@@ -164,6 +164,7 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 			log.debug("TradingServiceFacade.updateAccountProfile:"
 					+ accountProfileRequest.toString());
 		}
+		accountProfileRequest.setAccounts(null); //dont expect this to be populated by the client
 		org.springframework.nanotrader.domain.Accountprofile accountProfile = new org.springframework.nanotrader.domain.Accountprofile();
 		mapper.map(accountProfileRequest, accountProfile);
 		tradingService.updateAccountProfile(accountProfile, username);

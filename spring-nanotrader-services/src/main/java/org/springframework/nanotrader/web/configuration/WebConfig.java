@@ -3,7 +3,6 @@ package org.springframework.nanotrader.web.configuration;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.codehaus.jackson.map.SerializationConfig.Feature;
 import org.springframework.context.annotation.ComponentScan;

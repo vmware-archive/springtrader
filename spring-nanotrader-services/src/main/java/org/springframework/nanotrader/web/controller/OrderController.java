@@ -2,8 +2,6 @@ package org.springframework.nanotrader.web.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 @Controller
 public class OrderController extends BaseController {
-	private static Logger log = LoggerFactory.getLogger(OrderController.class);
-
+	
 	@RequestMapping(value = "/account/{accountId}/order", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Order> findOrders(@PathVariable( "accountId" ) final Integer accountId, @RequestParam(value="status", required=false) final String status) {
@@ -40,9 +37,6 @@ public class OrderController extends BaseController {
 	@RequestMapping(value = "/account/{accountId}/order/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Order findOrder(@PathVariable( "accountId" ) final Integer accountId, @PathVariable( "id" ) final Integer orderId ) {
-		if (log.isDebugEnabled()) { 
-			log.debug("OrderController.findOrder: accountId=" + accountId + " orderId=" + orderId);
-		}
 		this.getSecurityUtil().checkAccount(accountId);
 		Order responseOrder =  getTradingServiceFacade().findOrder(orderId, accountId);
 		return responseOrder;

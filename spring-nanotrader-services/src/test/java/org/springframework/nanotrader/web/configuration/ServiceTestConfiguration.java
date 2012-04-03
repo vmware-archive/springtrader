@@ -4,6 +4,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anySetOf;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -123,6 +124,7 @@ public class ServiceTestConfiguration  {
 		when(tradingService.login(eq(USER_ID), eq(PASSWORD))).thenReturn(accountProfile());
 		when(tradingService.login(eq(BAD_USER_ID), eq(BAD_PASSWORD))).thenReturn(null);
 		when(tradingService.findHoldingSummary(eq(ACCOUNT_ID))).thenReturn(holdingSummary());
+		doNothing().when(tradingService).logout(any(String.class));
 		return tradingService;
 	}
 	

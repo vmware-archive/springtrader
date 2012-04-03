@@ -1,6 +1,7 @@
 package org.springframework.nanotrader.web.controller;
 
 import static org.springframework.test.web.server.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.server.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.server.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.status;
@@ -11,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration;
 import org.springframework.util.FileCopyUtils;
 
-public class AuthenticationControllerTest extends AbstractBaseControllerTest {
+public class AuthenticationControllerTest extends AbstractSecureControllerTest {
 
 	@Test
 	public void loginJson() throws Exception {
@@ -40,5 +41,12 @@ public class AuthenticationControllerTest extends AbstractBaseControllerTest {
 						.andDo(print());
 	}
 
-	
+	@Test
+	public void serviceLogout() throws Exception {
+		mockMvc.perform(
+				get("/logout")
+						.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()) // HTTP 200
+				.andDo(print());
+	}
 }
