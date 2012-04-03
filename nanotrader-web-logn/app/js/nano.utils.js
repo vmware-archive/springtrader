@@ -1,9 +1,13 @@
+// namespace container
 var nano = {
     templates : {},
     utils : {},
     ui : {},
     instances : {},
-    containers : {}
+    containers : {},
+    models : {},
+    strings : {},
+    conf : {}
 };
 
 /**
@@ -14,8 +18,8 @@ var nano = {
 */
 nano.utils.translate = function translate(key) {
     var value = key;
-    if (typeof strings[key] != 'undefined') {
-        value = strings[key];
+    if (typeof nano.strings[key] != 'undefined') {
+        value = nano.strings[key];
     }
 
     // replace the rest of the arguments into the string
@@ -28,17 +32,26 @@ nano.utils.translate = function translate(key) {
 
 
 nano.utils.getSession = function() {
-    return $.cookie( conf.sessionCookieName );
+    return $.cookie( nano.conf.sessionCookieName );
 };
 
 nano.utils.login = function(username, password, callbacks) {
-    $.cookie( conf.sessionCookieName, 'wewewwe');
+    $.cookie( nano.conf.sessionCookieName, 'wewewwe');
 };
 
 nano.utils.loggedIn = function() {
     var session = this.getSession();
     return (session != null);
 };
+
+nano.utils.round = function (number, decimals) {
+  if (typeof decimals == 'undefined')
+  {
+      var decimals = 2;
+  }
+  var newNumber = Math.round(number*Math.pow(10,decimals))/Math.pow(10,decimals);
+  return parseFloat(newNumber);
+}
 
 // Shorten the name for the templates
 var translate = nano.utils.translate

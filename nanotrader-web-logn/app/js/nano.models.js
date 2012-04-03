@@ -1,4 +1,3 @@
-var urlRoot = '/spring-nanotrader-services/api/';
 
 /**
  * This part is tricky. We're using Backbone.js to handle all of the communication between our code 
@@ -56,9 +55,9 @@ Backbone.sync = function(method, model, options)
  * Model to interact with the Event Object
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
-Account = Backbone.Model.extend({
+nano.models.Account = Backbone.Model.extend({
     idAttribute: 'accountid',
-    urlRoot : urlRoot + 'account'
+    urlRoot : nano.conf.urlRoot + 'account'
     /*
     url : function(){
         var url = urlRoot + 'account/';
@@ -71,5 +70,47 @@ Account = Backbone.Model.extend({
     */
 });
 
-var nanotrader = nanotrader || {};
-nanotrader.utils = nanotrader.utils || {};
+/**
+ * Model to interact with the Event Object. 
+ * Not really a REST based architecture which is why we're using a regular ajax call.
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.models.MarketSummary = function(){
+    this.attributes = {};
+    this.fetch = function(callbacks){
+        var model = this;
+        $.ajax({
+            url : nano.conf.urlRoot + 'marketSummary',
+            success : function(data, textStatus, jqXHR){
+                var response = {
+                    textStatus : textStatus,
+                    jqXHR : jqXHR
+                };
+                model.attributes = data;
+                if (_.isFunction(callbacks.success))
+                {
+                    callbacks.success(model, response);
+                }
+            },
+            error : function(jqXHR, textStatus, errorThrown){
+                var response = {
+                    textStatus : textStatus,
+                    errorThrown : errorThrown,
+                    jqXHR : jqXHR
+                };
+                if (_.isFunction(callbacks.error))
+                {
+                    callbacks.error(model, response);
+                }
+            }
+        });
+    };
+    this.get = function(key){
+        var value = null;
+        if (!_.isNull(this.attributes[key]))
+        {
+            value = this.attributes[key];
+        }
+        return value;
+    };
+}

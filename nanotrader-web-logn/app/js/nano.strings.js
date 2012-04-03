@@ -1,4 +1,4 @@
-var strings = {
+nano.strings = {
     nanotrader : 'NanoTrader',
     dashboard : 'dashboard',
     portfolio : 'portfolio',
@@ -7,5 +7,19 @@ var strings = {
     help : 'Help',
     logout : 'Logout',
     copyright : 'Copyright &copy; 2012 VMWare, Inc. All rights reserved.',
-    contactUs : 'Contact us'
+    contactUs : 'Contact us',
+    daysGains : 'days gains',
+    daysLosses : 'days losses',
+    index : 'Index',
+    volume : 'Volume',
+    change : 'Change',
+    login : 'Login',
+    enterUsername : 'Please enter your username and password to login.',
+    email : 'Email',
+    rememberMe : 'Remember me',
+    password : 'Password',
+    forgotPassword : 'Forgot password?',
+    registration : 'Registration',
+    dontHaveNanotrader : 'Don\'t have a NanoTrade login and password yet?',
+    pleaseRegister : 'Please Register me now'
 };

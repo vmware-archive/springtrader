@@ -1,10 +1,16 @@
-nano.Controller = function(options) {
-
-    if ( !_.isNull(options) )
+nano.Controller = function(conf, strings) {
+/*
+    if ( !_.isNull(conf) )
     {
-        nano.conf = options || conf;
+        nano.conf = conf;
+        alert('nano.conf');
     }
-
+    if ( !_.isNull(strings) )
+    {
+        nano.strings = strings;
+        alert('nano.strings');
+    }
+*/
     this.run = function(){
         //Create instances of the views
         nano.instances.navbar = new nano.ui.Navbar($('#navbar'));
@@ -14,9 +20,6 @@ nano.Controller = function(options) {
         //Store the dom Object for the loading message div
         nano.containers.loading = $('#loading');
 
-        //Hide the loading Message
-        nano.containers.loading.hide();
-
         if(nano.utils.loggedIn()) {
             this.renderDashboard();
         }
@@ -24,8 +27,8 @@ nano.Controller = function(options) {
         {
             nano.instances.login.render();
         }
-
         nano.instances.footer.render();
+
     };
 
     this.renderDashboard = function(){
