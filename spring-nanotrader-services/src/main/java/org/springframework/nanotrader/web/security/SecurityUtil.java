@@ -32,7 +32,19 @@ public class SecurityUtil {
 			throw new AccessDeniedException(null);
 		}
 	}
+	
+	public void checkAuthToken(String token) {
+		if (token == null
+				|| !token.equals(getAuthToken())) {
+			throw new AccessDeniedException(null);
+		}
+	}
+	
 
+	public String getAuthToken() { 
+		return getPrincipal().getAuthToken();
+	}
+	
 	public String getUsernameFromPrincipal() { 
 		return getPrincipal().getUsername();
 	}

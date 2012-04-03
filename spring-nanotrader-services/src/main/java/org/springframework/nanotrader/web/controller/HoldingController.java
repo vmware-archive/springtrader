@@ -2,11 +2,8 @@ package org.springframework.nanotrader.web.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.domain.Holding;
-import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,15 +22,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class HoldingController extends BaseController {
 
-	@Resource
-	private TradingServiceFacade tradingServiceFacade;
-	
 	@RequestMapping(value = "/account/{accountId}/holding/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Holding find(@PathVariable( "id" ) final Integer id, @PathVariable( "accountId" ) final Integer accountId ) {
 		Holding holdingResponse = new Holding();
 		this.getSecurityUtil().checkAccount(accountId);
-		holdingResponse = tradingServiceFacade.findHolding(id, this.getSecurityUtil().getAccountFromPrincipal());
+		holdingResponse =  getTradingServiceFacade().findHolding(id, this.getSecurityUtil().getAccountFromPrincipal());
 		return holdingResponse;
 	}
 	
@@ -43,7 +37,7 @@ public class HoldingController extends BaseController {
 										 @RequestParam(value="page", required=false) Integer page, 
 										 @RequestParam(value="pageSize", required=false) Integer pageSize) {
 		this.getSecurityUtil().checkAccount(accountId);
-		List<Holding> holdingResponse = tradingServiceFacade.findHoldingsByAccountId(accountId, page, pageSize);
+		List<Holding> holdingResponse =  getTradingServiceFacade().findHoldingsByAccountId(accountId, page, pageSize);
 		return holdingResponse;
 	}
 

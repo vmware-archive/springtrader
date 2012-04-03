@@ -2,11 +2,8 @@ package org.springframework.nanotrader.web.controller;
 
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.domain.AuthenticationRequest;
-import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,20 +20,25 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 
 @Controller
-public class AuthenticationController {
+public class AuthenticationController extends BaseController {
 
-	@Resource
-	private TradingServiceFacade tradingServiceFacade;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseStatus( HttpStatus.CREATED )
 	@ResponseBody
 	public Map<String, Object> login(@RequestBody AuthenticationRequest authenticationRequest) {
 		
-		Map<String, Object> authenticationResponse = tradingServiceFacade.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+		Map<String, Object> authenticationResponse = getTradingServiceFacade().login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		return authenticationResponse;// authToken and accountId;
 	}
-		
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@ResponseStatus( HttpStatus.OK )
+	@ResponseBody
+	public void logout() {
+		getTradingServiceFacade().logout(this.getSecurityUtil().getAuthToken());
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
 	public void get() {
