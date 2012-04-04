@@ -10,7 +10,6 @@ import org.springframework.nanotrader.domain.HoldingSummary;
 import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
-import org.springframework.nanotrader.domain.HoldingAggregate;
 import org.springframework.nanotrader.domain.Quote;
 
 

@@ -25,7 +25,8 @@ public class MarketSummaryRepository {
 		Query query = em.createQuery("SELECT SUM(q.price)/count(q) as tradeStockIndexAverage, " +
 									        "SUM(q.open1)/count(q) as tradeStockIndexOpenAverage, " +
 									        "SUM(q.volume) as tradeStockIndexVolume, " +
-									        "SUM(q) as cnt " + 
+									        "SUM(q) as cnt , " + 
+									        "SUM(q.change1)" + 
 									        "FROM Quote q ");
 	
 		List<Object[]> result = query.getResultList();
@@ -33,6 +34,7 @@ public class MarketSummaryRepository {
 			 marketSummary.setTradeStockIndexAverage((BigDecimal)o[0]);
 			 marketSummary.setTradeStockIndexOpenAverage((BigDecimal)o[1]);
 			 marketSummary.setTradeStockIndexVolume(((BigDecimal)o[2]));
+			 marketSummary.setChange(((BigDecimal)o[4]));
 		 }
 		
     	return marketSummary;

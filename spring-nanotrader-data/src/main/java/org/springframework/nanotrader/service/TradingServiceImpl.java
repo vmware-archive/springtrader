@@ -1,8 +1,6 @@
 package org.springframework.nanotrader.service;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,6 +11,8 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataRetrievalFailureException;
+import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,25 +20,23 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.nanotrader.domain.Account;
 import org.springframework.nanotrader.domain.Accountprofile;
 import org.springframework.nanotrader.domain.Holding;
+import org.springframework.nanotrader.domain.HoldingAggregate;
 import org.springframework.nanotrader.domain.HoldingSummary;
 import org.springframework.nanotrader.domain.MarketSummary;
 import org.springframework.nanotrader.domain.Order;
 import org.springframework.nanotrader.domain.PortfolioSummary;
-import org.springframework.nanotrader.domain.HoldingAggregate;
 import org.springframework.nanotrader.domain.Quote;
 import org.springframework.nanotrader.repository.AccountProfileRepository;
 import org.springframework.nanotrader.repository.AccountRepository;
 import org.springframework.nanotrader.repository.HoldingAggregateRepository;
-import org.springframework.nanotrader.repository.MarketSummaryRepository;
-import org.springframework.nanotrader.repository.PortfolioSummaryRepository;
 import org.springframework.nanotrader.repository.HoldingRepository;
+import org.springframework.nanotrader.repository.MarketSummaryRepository;
 import org.springframework.nanotrader.repository.OrderRepository;
+import org.springframework.nanotrader.repository.PortfolioSummaryRepository;
 import org.springframework.nanotrader.repository.QuoteRepository;
 import org.springframework.nanotrader.util.FinancialUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
-import org.springframework.dao.DataRetrievalFailureException;
 
 @Service
 @Transactional
@@ -104,7 +102,7 @@ public class TradingServiceImpl implements TradingService {
 		accountProfileRepository.save(accountProfile);
 		Set<Account> accounts = accountProfile.getAccounts();
 		for (Account account: accounts) { 
-			account.setLogoutcount(account.getLogincount() + 1);
+			account.setLogoutcount(account.getLogoutcount() + 1);
 			accountRepository.save(account);
 		}
 	}
@@ -477,12 +475,7 @@ public class TradingServiceImpl implements TradingService {
 	
 	@Override
 	public HoldingSummary findHoldingSummary(Integer accountId) {
-
 		HoldingSummary summary = holdingAggregateRepository.findHoldingAggregated(accountId);
-		for (HoldingAggregate ha: summary.getHoldingRollups()) { 
-			System.out.println(ha);
-			
-		}
 		return summary;
 	}
 	

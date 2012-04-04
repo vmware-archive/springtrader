@@ -1,10 +1,7 @@
 package org.springframework.nanotrader.web.controller;
 
-import javax.annotation.Resource;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.domain.Quote;
-import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +16,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author
  */
 @Controller
-public class QuoteController {
-	@Resource
-	private TradingServiceFacade tradingServiceFacade;
-
+public class QuoteController extends BaseController {
+	
 	@RequestMapping(value = "/quote/{symbol}", method = RequestMethod.GET)
 	@ResponseBody
 	public Quote findQuote(@PathVariable("symbol") final String symbol) {
-		Quote responseQuote = tradingServiceFacade.findQuoteBySymbol(symbol);
+		Quote responseQuote = getTradingServiceFacade().findQuoteBySymbol(symbol);
 		return responseQuote;
 	}
 	

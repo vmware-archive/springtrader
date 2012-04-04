@@ -1,10 +1,7 @@
 package org.springframework.nanotrader.web.controller;
 
-import javax.annotation.Resource;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.domain.PortfolioSummary;
-import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +17,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @Controller
 public class PortfolioSummaryController extends BaseController {
-	@Resource
-	private TradingServiceFacade tradingServiceFacade;
-	
+
 	@RequestMapping(value = "/account/{accountId}/portfolioSummary", method = RequestMethod.GET)
 	@ResponseBody
 	public PortfolioSummary find(@PathVariable( "accountId" ) final Integer accountId ) {
 		this.getSecurityUtil().checkAccount(accountId);
-		return tradingServiceFacade.findPortfolioSummary(accountId);
+		return getTradingServiceFacade().findPortfolioSummary(accountId);
 	
 	}
 	

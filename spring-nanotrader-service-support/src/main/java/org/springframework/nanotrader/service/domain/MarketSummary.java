@@ -11,10 +11,25 @@ public class MarketSummary {
 	
 	private BigDecimal tradeStockIndexOpenAverage;
 	
+	private BigDecimal change;
+	
+	private BigDecimal percentGain;
+	
+	private Date summaryDate;
+	
 	private List<Quote> topLosers;
 	
 	private List<Quote> topGainers;
 	
+	
+	public BigDecimal getChange() {
+		return change;
+	}
+
+	public void setChange(BigDecimal change) {
+		this.change = change;
+	}
+
 	public BigDecimal getPercentGain() {
 		return percentGain;
 	}
@@ -22,10 +37,6 @@ public class MarketSummary {
 	public void setPercentGain(BigDecimal percentGain) {
 		this.percentGain = percentGain;
 	}
-
-	private BigDecimal percentGain;
-	
-	private Date summaryDate;
 
 	public BigDecimal getTradeStockIndexAverage() {
 		return tradeStockIndexAverage;
