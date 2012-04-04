@@ -72,26 +72,15 @@ nano.ui.MarketSummary = function(element) {
     this.element = element;
     nano.containers.marketSummary = element;
 
-    this.render = function(callback) {
-        var that = this;
-        var marketSummary = new nano.models.MarketSummary();
-        marketSummary.fetch({
-            success : function(model, response){
-                //Hide the loading Message
-                nano.containers.loading.hide();
-
-                var data = {
+    this.render = function(model) {
+        var data = {
                     index : nano.utils.round( model.get('tradeStockIndexAverage') ),
                     volume : nano.utils.round( model.get('tradeStockIndexVolume') ),
                     change : nano.utils.round( model.get('percentGain') ),
                     daysGains : model.get('topGainers'),
                     daysLosses : model.get('topLosers')
                 };
-                var marketSummaryTpl = _.template(nano.templates.marketSummary)(data);
-                that.element.html(marketSummaryTpl);
-                callback();
-            },
-            error : function(model, response){}
-        });
+        var marketSummaryTpl = _.template(nano.templates.marketSummary)(data);
+        this.element.html(marketSummaryTpl);
     };
 };

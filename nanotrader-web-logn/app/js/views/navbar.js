@@ -45,18 +45,23 @@ nano.ui.Navbar = function(element) {
     nano.containers.navbar = element;
 
     this.render = function(){
-        var data = { 
-            email: nano.session.username + '@nanotrader.com',
-            username: nano.session.username
-        };
-        var navbar = _.template(nano.templates.navbar)(data);
-        this.element.html(navbar);
-        this.element.find('.dropdown-toggle').dropdown();
+
+        if ( !this.element.html() )
+        {
+            var data = { 
+                email: nano.session.username + '@nanotrader.com',
+                username: nano.session.username
+            };
+            var navbar = _.template(nano.templates.navbar)(data);
+            this.element.html(navbar);
+            this.element.find('.dropdown-toggle').dropdown();
+
+            this.element.find('#logout').click(function(){
+                nano.utils.logout();
+                nano.instances.controller.renderLogin();
+            });
+        }
         this.element.show();
 
-        this.element.find('#logout').click(function(){
-            nano.utils.logout();
-            nano.instances.controller.renderLogin();
-        });
     };
 };

@@ -58,6 +58,7 @@ nano.utils.login = function(username, password, callbacks) {
                 var info = {
                     username : username,
                     accountid : data.accountid,
+                    profileid : data.profileid,
                     authToken : data.authToken
                 };
                 nano.session = info;

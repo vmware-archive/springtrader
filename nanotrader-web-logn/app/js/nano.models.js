@@ -75,6 +75,15 @@ nano.models.Account = Backbone.Model.extend({
 });
 
 /**
+ * Model to interact with the Account Profile Object
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.models.AccountProfile = Backbone.Model.extend({
+    idAttribute: 'profileid',
+    urlRoot : nano.conf.urlRoot + 'accountProfile'
+});
+
+/**
  * Model to interact with the Event Object. 
  * Not really a REST based architecture which is why we're using a regular ajax call.
  * @author Carlos Soto <carlos.soto@lognllc.com>
@@ -119,3 +128,32 @@ nano.models.MarketSummary = function(){
         return value;
     };
 }
+
+nano.models.HoldingSummary = Backbone.Model.extend({
+    initialize: function(options) {
+        this.accountid = options.accountid;
+    },
+    urlRoot : nano.conf.urlRoot + 'account/{accountid}/holdingSummary',
+    url: function() {
+        return this.urlRoot.replace('{accountid}', this.accountid);
+    }
+});
+
+/**
+ * Model to interact with the Holding Object
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.models.Holding = Backbone.Model.extend({
+    idAttribute: 'holdingid',
+});
+
+nano.models.Holdings = Backbone.Collection.extend({
+    model : nano.models.Holding,
+    initialize: function(options) {
+        this.accountid = options.accountid;
+    },
+    urlRoot : nano.conf.urlRoot + 'account/{accountid}/holding',
+    url: function() {
+        return this.urlRoot.replace('{accountid}', this.accountid);
+    }
+});
