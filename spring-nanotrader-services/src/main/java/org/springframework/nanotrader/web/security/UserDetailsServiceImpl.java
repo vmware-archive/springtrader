@@ -32,6 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private TradingServiceFacade tradingServiceFacade;
 	
 	@Override
+
 	public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException  {
 		Accountprofile accountProfile = tradingServiceFacade.findAccountprofileByAuthtoken(token);
 		if (accountProfile == null){ 

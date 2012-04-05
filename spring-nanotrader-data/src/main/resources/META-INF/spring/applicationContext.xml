@@ -44,7 +44,7 @@
         The most commonly used annotation is @Autowired, which instructs Spring to
         dependency inject an object into your class.
     -->
-    <context:component-scan base-package="org.springframework.nanotrader">
+    <context:component-scan base-package="org.springframework.nanotrader.data">
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
@@ -70,7 +70,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="persistenceUnitPostProcessors">
             <array>
-                <bean class="org.springframework.nanotrader.util.PUPostProcessor" />
+                <bean class="org.springframework.nanotrader.data.util.PUPostProcessor" />
             </array>
         </property>
         <property name="jpaVendorAdapter">
@@ -81,6 +81,7 @@
      	</property>
     </bean>
         
-                
+    
+        
 	
 </beans>

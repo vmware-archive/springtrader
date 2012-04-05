@@ -12,8 +12,10 @@ allprojects {
 	group = 'org.springframework.nanotrader'
 
 	repositories {
-		maven { url 'http://repo.springsource.org/libs-milestone' }
-		maven { url 'http://spring-roo-repository.springsource.org/release' }
+		maven { url  'http://dist.gemstone.com/maven/release' }
+		maven { url  'http://maven.springframework.org/release' }
+		maven { url  'http://repo.springsource.org/libs-milestone' }
+		maven { url  'http://spring-roo-repository.springsource.org/release' }
 		mavenCentral()
 		maven { url 'http://maven.springframework.org/snapshot' }
 	}
@@ -163,8 +165,8 @@ project('spring-nanotrader-service-support') {
 		compile "net.sf.dozer:dozer:$dozerVersion"
 		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 		compile  "joda-time:joda-time:1.6"
-
-		
+		compile "com.gemstone.gemfire:gemfire:6.6.2"	
+		compile  "org.springframework.data:spring-data-gemfire:1.1.1.RELEASE"
 	}
 }
 
@@ -193,7 +195,6 @@ project('spring-nanotrader-services') {
 
 	description = 'Spring Nanotrader Services'
 	dependencies {
-		compile project(":spring-nanotrader-data")
 		compile project(":spring-nanotrader-service-support")
 		compile "org.springframework:spring-webmvc:$springVersion"
 		providedCompile  ("javax.servlet:servlet-api:$servletApiVersion")
