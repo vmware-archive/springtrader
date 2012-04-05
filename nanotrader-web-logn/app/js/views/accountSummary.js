@@ -1,4 +1,7 @@
-// HTML template
+/**
+ * HTML template for the Account Summary
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
 nano.templates.accountSummary = '<div class="well show-well">\
                                     <div class="title"><h3><%= translate("accountSummary") %></h3></div>\
                                     <div class="table-outer">\
@@ -27,10 +30,20 @@ nano.templates.accountSummary = '<div class="well show-well">\
                                     </div>\
                                 </div>';
 
-nano.ui.AccountSummary = function(element) {
+/**
+ * View Class for the Account Summary
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.views.AccountSummary = function(element) {
     this.element = element;
     nano.containers.accountSummary = element;
 
+    /**
+     * Renders the Account Summary View
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param nano.models.Account: instance of the model with the info to be displayed
+     * @return void
+     */
     this.render = function(model) {
         var that = this;
 

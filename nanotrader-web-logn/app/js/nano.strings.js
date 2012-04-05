@@ -1,3 +1,7 @@
+/**
+ * Default internationalization object
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
 nano.strings = {
     nanotrader : 'NanoTrader',
     dashboard : 'dashboard',
@@ -37,5 +41,6 @@ nano.strings = {
     accountId : 'Account Id',
     accountCreationDate : 'Account Creation Date',
     totalLogins : 'Total Logins',
-    sessionCreatedDate : 'Session Created Date'
+    sessionCreatedDate : 'Session Created Date',
+    sessionExpired : 'Your session has expired. Please login in to continue.'
 };

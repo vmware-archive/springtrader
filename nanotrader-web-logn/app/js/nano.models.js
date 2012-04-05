@@ -1,12 +1,11 @@
 
 /**
- * This part is tricky. We're using Backbone.js to handle all of the communication between our code 
- * and the REST api. If you're not familiar with Backbone please go to the Backbone.js site 
- * (http://documentcloud.github.com/backbone) before continuing reading this code (I know it's a LOT 
- * of reading, but trust me, it'll be worth it. This following sync code, overwrites the default sync 
- * function used by Backbone to send requests to the server so that we can parse any dates using into 
+ * Since we're using Backbone.js to handle all of the communication between our code 
+ * and the REST api, we're overwriting the default sync function used by Backbone to 
+ * send requests to the server so that we can parse any dates using into 
  * Javascript Date() objects... This way, the models used later won't have to deal 
  * with the problem of parsing the response into Date Objects that they can use.
+ * We're also including the Nanaotrader headers here so we don't have to add them on every call.
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 Backbone._sync_orig = Backbone.sync;
@@ -56,22 +55,12 @@ Backbone.sync = function(method, model, options)
 }
 
 /**
- * Model to interact with the Event Object
+ * Model to interact with the Account Object
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.models.Account = Backbone.Model.extend({
     idAttribute: 'accountid',
-    urlRoot : nano.conf.urlRoot + 'account'
-    /*
-    url : function(){
-        var url = urlRoot + 'account/';
-        if ( !this.isNew() )
-        {
-            url += this.id;
-        }
-        return url;
-    }
-    */
+    urlRoot : nano.conf.urls.account
 });
 
 /**
@@ -80,62 +69,28 @@ nano.models.Account = Backbone.Model.extend({
  */
 nano.models.AccountProfile = Backbone.Model.extend({
     idAttribute: 'profileid',
-    urlRoot : nano.conf.urlRoot + 'accountProfile'
+    urlRoot : nano.conf.urls.accountProfile
 });
 
 /**
- * Model to interact with the Event Object. 
- * Not really a REST based architecture which is why we're using a regular ajax call.
+ * Model to interact with the Market Summary Object (Not really a REST based Object, but it works with Backbone.js)
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
-nano.models.MarketSummary = function(){
-    this.attributes = {};
-    this.fetch = function(callbacks){
-        var model = this;
-        $.ajax({
-            url : nano.conf.urlRoot + 'marketSummary',
-            headers : nano.utils.getHttpHeaders(),
-            success : function(data, textStatus, jqXHR){
-                var response = {
-                    textStatus : textStatus,
-                    jqXHR : jqXHR
-                };
-                model.attributes = data;
-                if (_.isFunction(callbacks.success))
-                {
-                    callbacks.success(model, response);
-                }
-            },
-            error : function(jqXHR, textStatus, errorThrown){
-                var response = {
-                    textStatus : textStatus,
-                    errorThrown : errorThrown,
-                    jqXHR : jqXHR
-                };
-                if (_.isFunction(callbacks.error))
-                {
-                    callbacks.error(model, response);
-                }
-            }
-        });
-    };
-    this.get = function(key){
-        var value = null;
-        if (!_.isNull(this.attributes[key]))
-        {
-            value = this.attributes[key];
-        }
-        return value;
-    };
-}
+nano.models.MarketSummary = Backbone.Model.extend({
+    urlRoot : nano.conf.urls.marketSummary,
+});
 
+/**
+ * Model to interact with the Holding Summary Object (Not really a REST based Object, but it works with Backbone.js)
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
 nano.models.HoldingSummary = Backbone.Model.extend({
     initialize: function(options) {
         this.accountid = options.accountid;
     },
-    urlRoot : nano.conf.urlRoot + 'account/{accountid}/holdingSummary',
+    urlRoot : nano.conf.urls.holdingSummary,
     url: function() {
-        return this.urlRoot.replace('{accountid}', this.accountid);
+        return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
     }
 });
 
@@ -145,15 +100,26 @@ nano.models.HoldingSummary = Backbone.Model.extend({
  */
 nano.models.Holding = Backbone.Model.extend({
     idAttribute: 'holdingid',
+    //=================================================> There's no url for this object, we need to include one!
 });
 
+/**
+ * Collection to interact with the Holdings Collection (list of Holding Objects)
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
 nano.models.Holdings = Backbone.Collection.extend({
     model : nano.models.Holding,
     initialize: function(options) {
         this.accountid = options.accountid;
     },
-    urlRoot : nano.conf.urlRoot + 'account/{accountid}/holding',
+    urlRoot : nano.conf.urls.holdings,
+
+    /**
+     * Builds the url to fetch the Collection
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return string: Url for the Holdings Collection
+     */
     url: function() {
-        return this.urlRoot.replace('{accountid}', this.accountid);
+        return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
     }
 });

@@ -1,8 +1,11 @@
-// namespace container
+/**
+ * Nano namespace object
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
 var nano = {
     templates : {},
     utils : {},
-    ui : {},
+    views : {},
     instances : {},
     containers : {},
     models : {},
@@ -31,20 +34,37 @@ nano.utils.translate = function translate(key) {
     return value;
 }
 
-
+/**
+ * Fetches the session from it's container (cookie)
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object: Session data
+ */
 nano.utils.getSession = function() {
     return $.cookie( nano.conf.sessionCookieName );
 };
 
+/**
+ * Tells whether the session has been created or not.
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return boolean
+ */
 nano.utils.loggedIn = function() {
     var session = this.getSession();
     nano.session = session;
     return (session != null);
 };
 
+/**
+ * Logs the user into the system
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param string username: username to log in
+ * @param string password: user's password
+ * @param object callbacks: object with success and error callback
+ * @return boolean
+ */
 nano.utils.login = function(username, password, callbacks) {
         $.ajax({
-            url : nano.conf.urlRoot + 'login',
+            url : nano.conf.urls.login,
             type : 'POST',
             headers : nano.utils.getHttpHeaders(),
             dataType : 'json',
@@ -77,10 +97,20 @@ nano.utils.login = function(username, password, callbacks) {
         });
 };
 
+/**
+ * Logouts the user (deletes the cookie)
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return void
+ */
 nano.utils.logout = function(){
     $.cookie( nano.conf.sessionCookieName, null);
 };
 
+/**
+ * Builds the HTTP headers array for the api calls. Includes the session token.
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object
+ */
 nano.utils.getHttpHeaders = function(){
     var headers = {
         "Content-Type" : "application/json"
@@ -93,6 +123,11 @@ nano.utils.getHttpHeaders = function(){
     return headers;
 };
 
+/**
+ * Hides all of the different UI components fon the User except from the Footer and the Market Summary
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object
+ */
 nano.utils.hideAll = function() {
     for (var i in nano.containers)
     {
@@ -103,6 +138,11 @@ nano.utils.hideAll = function() {
     }
 };
 
+/**
+ * Rounds up a number. Default decimals are two.
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object
+ */
 nano.utils.round = function (number, decimals) {
   if (typeof decimals == 'undefined')
   {
@@ -112,5 +152,8 @@ nano.utils.round = function (number, decimals) {
   return parseFloat(newNumber);
 }
 
-// Shorten the name for the templates
-var translate = nano.utils.translate
+/**
+ * Alias for the translation function
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+ var translate = nano.utils.translate

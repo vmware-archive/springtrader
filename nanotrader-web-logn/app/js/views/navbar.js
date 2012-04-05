@@ -1,5 +1,8 @@
-// HTML template
-nano.templates.navbar = '<div class="navbar navbar-fixed-top">\
+/**
+ * HTML template for the Navbar
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+ nano.templates.navbar = '<div class="navbar navbar-fixed-top">\
                             <div class="navbar-inner">\
                                 <div class="container">\
                                     <a class="logo brand"><%= translate("nanotrader") %></a>\
@@ -40,10 +43,19 @@ nano.templates.navbar = '<div class="navbar navbar-fixed-top">\
                             </div>\
                         </div>';
 
-nano.ui.Navbar = function(element) {
+/**
+ * View Class for the Navbar
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.views.Navbar = function(element) {
     this.element = element;
     nano.containers.navbar = element;
 
+    /**
+     * Renders the Navbar View
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return void
+     */
     this.render = function(){
 
         if ( !this.element.html() )

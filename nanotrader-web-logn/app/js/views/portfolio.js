@@ -1,4 +1,7 @@
-// HTML template
+/**
+ * HTML template for the Portfolio
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
 nano.templates.portfolio = '<div class="well show-well">\
                                 <div class="title"><h3>Portfolio</h3><a class="tooltip-question"></a></div>\
                                 <div class="jqplot-target">\
@@ -33,11 +36,21 @@ nano.templates.portfolio = '<div class="well show-well">\
                                 </div>\
                             </div>';
 
-nano.ui.Portfolio = function(element) {
+/**
+ * View Class for the Portfolio
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.views.Portfolio = function(element) {
     this.element = element;
     nano.containers.portfolio = element;
 
-    this.render = function() {
+    /**
+     * Renders the Portfolio View
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param nano.models.HoldingSummary: instance of the model with the info to be displayed
+     * @return void
+     */
+    this.render = function(model) {
 
         if ( !this.element.html() )
         {

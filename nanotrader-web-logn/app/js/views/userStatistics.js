@@ -1,4 +1,7 @@
-// HTML template
+/**
+ * HTML template for the User Statistics
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
 nano.templates.userStatistics = '<div class="well show-well">\
                                     <div class="title"><h3><%= translate("userStatistics") %></h3></div>\
                                     <div class="table-outer">\
@@ -17,7 +20,7 @@ nano.templates.userStatistics = '<div class="well show-well">\
                                             </tr>\
                                             <tr>\
                                                 <td><%= translate("sessionCreatedDate") %></td>\
-                                                <td><%= creationdate %></td>\
+                                                <td><%= lastlogin %></td>\
                                             </tr>\
                                             <tr>\
                                                 <td>&nbsp;</td>\
@@ -27,10 +30,20 @@ nano.templates.userStatistics = '<div class="well show-well">\
                                     </div>\
                                 </div>';
 
-nano.ui.UserStatistics = function(element) {
+/**
+ * View Class for the User Statistics
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.views.UserStatistics = function(element) {
     this.element = element;
     nano.containers.userStatistics = element;
 
+    /**
+     * Renders the User Statistic View
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param nano.models.Account: instance of the model with the info to be displayed
+     * @return void
+     */
     this.render = function(model) {
         var that = this;
 

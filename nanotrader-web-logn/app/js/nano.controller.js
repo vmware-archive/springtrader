@@ -1,24 +1,35 @@
+/**
+ * Class in charge of Managing the workflow of the app
+ * @author Carlos Soto <carlos@lognllc.com>
+ */
 nano.Controller = function(conf, strings) {
 
+    // Overwrite the configuration and the
+    // language strings if sent as a parameter
     if ( typeof conf != 'undefined' )
     {
-        nano.conf = conf;
+        nano.conf = _.extend(nano.conf, conf);
     }
     if ( typeof strings != 'undefined' )
     {
-        nano.strings = strings;
+        nano.strings = _.extend(nano.strings, strings);
     }
 
-    this.run = function(){
+    /**
+     * It's the "main()" of our app
+     * @author Carlos Soto <carlos@lognllc.com>
+     * @return void
+     */
+    this.run = function() {
         //Create instances of the views
         nano.instances.controller = this;
-        nano.instances.navbar = new nano.ui.Navbar($('#navbar'));
-        nano.instances.login = new nano.ui.Login($('#login'));
-        nano.instances.marketSummary = new nano.ui.MarketSummary($('#market-summary'));
-        nano.instances.footer = new nano.ui.Footer($('#footer'));
-        nano.instances.portfolio = new nano.ui.Portfolio($('#portfolio'));
-        nano.instances.userStatistics = new nano.ui.UserStatistics($('#user-statistics'));
-        nano.instances.accountSummary = new nano.ui.AccountSummary($('#account-summary'));
+        nano.instances.navbar = new nano.views.Navbar($('#navbar'));
+        nano.instances.login = new nano.views.Login($('#login'));
+        nano.instances.marketSummary = new nano.views.MarketSummary($('#market-summary'));
+        nano.instances.footer = new nano.views.Footer($('#footer'));
+        nano.instances.portfolio = new nano.views.Portfolio($('#portfolio'));
+        nano.instances.userStatistics = new nano.views.UserStatistics($('#user-statistics'));
+        nano.instances.accountSummary = new nano.views.AccountSummary($('#account-summary'));
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#loading');
@@ -39,7 +50,7 @@ nano.Controller = function(conf, strings) {
 
                 // Render the Dashboard of logged in or the Login otherwise
                 if(nano.utils.loggedIn()) {
-                nano.instances.controller.renderDashboard();
+                    nano.instances.controller.renderDashboard();
                 }
                 else
                 {
@@ -52,6 +63,11 @@ nano.Controller = function(conf, strings) {
         });
     };
 
+    /**
+     * Renders the dashboard on the main page
+     * @author Carlos Soto <carlos@lognllc.com>
+     * @return void
+     */
     this.renderDashboard = function() {
         nano.utils.hideAll();
         nano.containers.loading.show();
@@ -73,8 +89,9 @@ nano.Controller = function(conf, strings) {
                 nano.containers.loading.hide();
                 nano.instances.accountSummary.render(models[0]);
                 nano.instances.userStatistics.render(models[0]);
-                //=======================> FIX ME! Portfolio api call is all messed up, we need to figure that out first
-                //nano.instances.portfolio.render();
+                //=======================> FIX ME! HoldingSummary api call is all messed up, we need to figure that out first
+                //nano.instances.portfolio.render(models[1]); // uses the HoldingSummary Model
+                //nano.instances.positions.render(models[12); // uses the Holdings Collection
             }
         };
         for (var i in models)
@@ -83,13 +100,28 @@ nano.Controller = function(conf, strings) {
                 success : onFetchSuccess,
                 error : function(model, error){
                     // What do we do?
+                    console.log(error);
+                    switch( error.status ) {
+                        case 403:
+                            nano.instances.controller.renderLogin('sessionExpired');
+                            break;
+                        default:
+                            // Error Message!
+                            alert('An unknown error has occured, please try again later.');
+                            break;
+                    }
                 }
             });
         }
     };
 
-    this.renderLogin = function() {
+    /**
+     * Renders the Login Page
+     * @author Carlos Soto <carlos@lognllc.com>
+     * @return void
+     */
+    this.renderLogin = function(errorKey) {
         nano.utils.hideAll();
-        nano.instances.login.render();
+        nano.instances.login.render(errorKey);
     };
 };

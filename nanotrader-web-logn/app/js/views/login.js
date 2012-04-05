@@ -1,5 +1,8 @@
-// HTML template
-nano.templates.login = '<div class="row clearfix">\
+/**
+ * HTML template for the Login Page
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+ nano.templates.login = '<div class="row clearfix">\
                             <div class="span9 columns">\
                                 <form class="form-horizontal">\
                                     <fieldset>\
@@ -39,11 +42,22 @@ nano.templates.login = '<div class="row clearfix">\
                         </div>\
                     </div>';
 
-nano.ui.Login = function(element) {
+
+/**
+ * View Class for the Login
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.views.Login = function(element) {
     this.element = element;
     nano.containers.login = element;
 
-    this.render = function() {
+    /**
+     * Renders the Footer View
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
+     * @return void
+     */
+    this.render = function(errorKey) {
         var that = this;
 
         // Render the login block only if it hasn't been rendered before.
@@ -52,12 +66,18 @@ nano.ui.Login = function(element) {
             var login = _.template(nano.templates.login)({});
             that.element.html(login);
 
+            var loginError = that.element.find('#login-error');
+            if (errorKey)
+            {
+                loginError.find('p').html(translate(errorKey));
+                loginError.removeClass('hide');
+            }
+
             that.element.find('#loginBtn').click(function(event){
 
                 // Cache the login and password controls for performance
                 var loginControl = that.element.find('#login-control');
                 var passwordControl = that.element.find('#password-control');
-                var loginError = that.element.find('#login-error');
 
                 loginError.addClass('hide');
                 loginControl.removeClass('error');
