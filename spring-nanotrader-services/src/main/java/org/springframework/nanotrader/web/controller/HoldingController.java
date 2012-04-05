@@ -31,7 +31,7 @@ public class HoldingController extends BaseController {
 		return holdingResponse;
 	}
 	
-	@RequestMapping(value = "/account/{accountId}/holding", method = RequestMethod.GET)
+	@RequestMapping(value = "/account/{accountId}/holdings", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Holding> findByAccountId(@PathVariable( "accountId" ) final Integer accountId, 
 										 @RequestParam(value="page", required=false) Integer page, 

@@ -14,24 +14,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.nanotrader.domain.Account;
-import org.springframework.nanotrader.domain.Accountprofile;
-import org.springframework.nanotrader.domain.Holding;
-import org.springframework.nanotrader.domain.HoldingAggregate;
-import org.springframework.nanotrader.domain.HoldingSummary;
-import org.springframework.nanotrader.domain.MarketSummary;
-import org.springframework.nanotrader.domain.Order;
-import org.springframework.nanotrader.domain.PortfolioSummary;
-import org.springframework.nanotrader.domain.Quote;
-import org.springframework.nanotrader.service.TradingService;
-import org.springframework.nanotrader.service.TradingServiceImpl;
+import org.springframework.nanotrader.data.domain.Account;
+import org.springframework.nanotrader.data.domain.Accountprofile;
+import org.springframework.nanotrader.data.domain.Holding;
+import org.springframework.nanotrader.data.domain.HoldingAggregate;
+import org.springframework.nanotrader.data.domain.HoldingSummary;
+import org.springframework.nanotrader.data.domain.MarketSummary;
+import org.springframework.nanotrader.data.domain.Order;
+import org.springframework.nanotrader.data.domain.PortfolioSummary;
+import org.springframework.nanotrader.data.domain.Quote;
+import org.springframework.nanotrader.data.service.TradingService;
+import org.springframework.nanotrader.data.service.TradingServiceImpl;
+import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.nanotrader.service.support.TradingServiceFacadeImpl;
-import org.springframework.nanotrader.util.FinancialUtils;
 
 /**
  *  ServiceTestConfiguration provides test objects and mock service layer for unit tests.
@@ -267,5 +269,5 @@ public class ServiceTestConfiguration  {
 		return holdingSummary;
 	}
 	 
-	
+
 }

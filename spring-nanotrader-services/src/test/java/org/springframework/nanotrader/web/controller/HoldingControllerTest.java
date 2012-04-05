@@ -39,7 +39,7 @@ public class HoldingControllerTest extends AbstractSecureControllerTest {
 	
 	@Test
 	public void getHoldingByAccountIdNoRecordsFoundJson() throws Exception {
-		mockMvc.perform(get("/account/600/holding").accept(MediaType.APPLICATION_JSON)).andExpect(status().isUnauthorized())
+		mockMvc.perform(get("/account/600/holdings").accept(MediaType.APPLICATION_JSON)).andExpect(status().isUnauthorized())
 				.andExpect(content().type(MediaType.APPLICATION_JSON)).andDo(print());
 	}
 	
@@ -51,7 +51,7 @@ public class HoldingControllerTest extends AbstractSecureControllerTest {
 	
 	@Test
 	public void getHoldingsByAccountIdJson() throws Exception {
-		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/holding").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/holdings").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.[0].holdingid").value(ServiceTestConfiguration.HOLDING_ID))
 				.andExpect(jsonPath("$.[0].accountAccountid").value(ServiceTestConfiguration.ACCOUNT_ID))

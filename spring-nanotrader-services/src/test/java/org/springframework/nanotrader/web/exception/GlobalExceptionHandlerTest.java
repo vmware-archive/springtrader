@@ -11,7 +11,7 @@ import static org.springframework.test.web.server.setup.MockMvcBuilders.annotati
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.http.MediaType;
-import org.springframework.nanotrader.service.configuration.AppConfig;
+import org.springframework.nanotrader.service.configuration.ServiceConfig;
 import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration;
 import org.springframework.nanotrader.web.configuration.WebConfig;
 import org.springframework.nanotrader.web.controller.AbstractSecureControllerTest;

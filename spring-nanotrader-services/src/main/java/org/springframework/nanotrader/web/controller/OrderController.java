@@ -25,7 +25,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 public class OrderController extends BaseController {
 	
-	@RequestMapping(value = "/account/{accountId}/order", method = RequestMethod.GET)
+	@RequestMapping(value = "/account/{accountId}/orders", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Order> findOrders(@PathVariable( "accountId" ) final Integer accountId, @RequestParam(value="status", required=false) final String status) {
 		this.getSecurityUtil().checkAccount(accountId); //verify that the account on the path is the same as the authenticated user

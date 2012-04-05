@@ -31,7 +31,6 @@ public class GlobalExceptionHandler {
 	private static final String NO_ACCESS = "Access Denied.";
 	private static final String CANNOT_UPDATE_CLOSED_RECORD = "Update failed since processing status was 'complete'";
 	private static final String CANNOT_RETRIEVE_RECORD = "The record does not exist.";
-	private static final String METHOD_NOT_ALLOWED = "Request method not supported for this service";
 	
 	@ExceptionHandler(value = NoRecordsFoundException.class)
 	@ResponseStatus( HttpStatus.NOT_FOUND )
