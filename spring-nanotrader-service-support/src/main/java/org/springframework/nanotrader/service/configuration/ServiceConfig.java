@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile;
  */
 
 @Configuration
-@ImportResource({"classpath:/META-INF/spring/cache/spring-nanotrader-service-support-cache.xml"})
+@ImportResource({"classpath:/META-INF/spring/cache/spring-nanotrader-service-support.xml"})
 @Profile("production")
 public class ServiceConfig   {
 	
