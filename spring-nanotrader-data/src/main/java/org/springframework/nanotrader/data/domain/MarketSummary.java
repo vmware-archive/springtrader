@@ -34,7 +34,7 @@ public class MarketSummary {
 	}
 
 	public BigDecimal getPercentGain() {
-		return FinancialUtils.computeGainPercent(getTradeStockIndexAverage(), getTradeStockIndexOpenAverage());
+		return FinancialUtils.computeGainPercent(getTradeStockIndexAverage(), getTradeStockIndexOpenAverage()).setScale(FinancialUtils.SCALE, FinancialUtils.ROUND);
 	}
 
 	
