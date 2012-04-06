@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.nanotrader.data.domain.MarketSummary;
+import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -31,9 +32,10 @@ public class MarketSummaryRepository {
 	
 		List<Object[]> result = query.getResultList();
 		 for (Object[] o: result) { 
-			 marketSummary.setTradeStockIndexAverage((BigDecimal)o[0]);
-			 marketSummary.setTradeStockIndexOpenAverage((BigDecimal)o[1]);
-			 marketSummary.setTradeStockIndexVolume(((BigDecimal)o[2]));
+			
+			 marketSummary.setTradeStockIndexAverage(((BigDecimal)o[0]).setScale(FinancialUtils.SCALE, FinancialUtils.ROUND) );
+			 marketSummary.setTradeStockIndexOpenAverage(((BigDecimal)o[1]).setScale(FinancialUtils.SCALE, FinancialUtils.ROUND) );
+			 marketSummary.setTradeStockIndexVolume(((BigDecimal)o[2]).setScale(FinancialUtils.SCALE, FinancialUtils.ROUND) );
 			 marketSummary.setChange(((BigDecimal)o[4]));
 		 }
 		
