@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class HoldingAggregateRepository {
-	private static int TOP_N = 2;
+	private static int TOP_N = 4;
 	@PersistenceContext
 	private EntityManager em;
 
