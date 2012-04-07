@@ -1,58 +1,37 @@
 /**
- * HTML template for the Account Summary
- * @author Carlos Soto <carlos.soto@lognllc.com>
- */
-nano.templates.accountSummary = '<div class="well show-well">\
-                                    <div class="title"><h3><%= translate("accountSummary") %></h3></div>\
-                                    <div class="table-outer">\
-                                        <table class="table">\
-                                            <tr>\
-                                                <td><%= translate("currentBalance") %></td>\
-                                                <td>$<%= nano.utils.round(balance) %></td>\
-                                            </tr>\
-                                            <tr>\
-                                                <td><%= translate("openingBalance") %></td>\
-                                                <td>$<%= nano.utils.round(openbalance)%></td>\
-                                            </tr>\
-                                            <tr>\
-                                                <td><%= translate("cashBalance") %></td>\
-                                                <td>$<%= "N/A" %></td>\
-                                            </tr>\
-                                            <tr>\
-                                                <td><%= translate("holdingsTotal") %></td>\
-                                                <td><%= "N/A" %></td>\
-                                            </tr>\
-                                            <tr class="summary">\
-                                                <td><%= translate("currentGainLoss") %></td>\
-                                                <td class="average">$<%= "N/A" %></td>\
-                                            </tr>\
-                                        </table>\
-                                    </div>\
-                                </div>';
-
-/**
  * View Class for the Account Summary
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
-nano.views.AccountSummary = function(element) {
-    this.element = element;
-    nano.containers.accountSummary = element;
+nano.views.AccountSummary = Backbone.View.extend({
+
+    /**
+     * Class constructor
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object options:
+     * - el: selector for the container
+     * - model: nano.models.AccountSummary instance
+     * @return void
+     */
+    initialize : function(options) {
+        nano.containers.accountSummary = this.$el;
+    },
+
+    /**
+     * Templating function (inyects data into an HTML Template)
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object data: data to be replaced in the template
+     * @return string
+     */
+    template : _.template(nano.utils.getTemplate(nano.conf.tpls.accountSummary)),
 
     /**
      * Renders the Account Summary View
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param nano.models.Account: instance of the model with the info to be displayed
      * @return void
      */
-    this.render = function(model) {
-        var that = this;
-
-        // Render the login block only if it hasn't been rendered before.
-        if ( !this.element.html() )
-        {
-            var accountSummary = _.template(nano.templates.accountSummary)(model.attributes);
-            this.element.html(accountSummary);
-        }
-        this.element.show();
-    };
-};
+     render: function() {
+            var accountSummary = this.template(this.model.toJSON());
+            this.$el.html(accountSummary);
+            this.$el.show();
+    }
+});

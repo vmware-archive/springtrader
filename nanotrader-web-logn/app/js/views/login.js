@@ -1,118 +1,100 @@
 /**
- * HTML template for the Login Page
- * @author Carlos Soto <carlos.soto@lognllc.com>
- */
- nano.templates.login = '<div class="row clearfix">\
-                            <div class="span9 columns">\
-                                <form class="form-horizontal">\
-                                    <fieldset>\
-                                        <h3><%= translate("login") %><span><%= translate("enterUsername") %></span></h3>\
-                                        <div id="login-error" class="hide span8 alert alert-block alert-error fade in">\
-                                            <a data-dismiss="alert" class="close">x</a>\
-                                            <h4 class="alert-heading"><%= translate("ohSnap") %></h4>\
-                                            <p></p>\
-                                        </div>\
-                                        <div class="span4">\
-                                            <div id="login-control" class="control-group">\
-                                                <label for="username-input" class="control-label"><%= translate("username") %>:</label>\
-                                                <div class="controls">\
-                                                    <input type="text" value="" id="username-input" class="input-xlarge focused" tabindex="1">\
-                                                    <label class="checkbox"><input id="remember-me" type="checkbox" tabindex="3" /> <%= translate("rememberMe") %></label>\
-                                                </div>\
-                                            </div>\
-                                        </div>\
-                                        <div class="span4">\
-                                            <div id="password-control" class="password control-group">\
-                                                <label for="password-input" class="control-label"><%= translate("password") %>:</label>\
-                                                <div class="controls"><input type="password" id="password-input" class="input-xlarge focused" tabindex="2" /></div>\
-                                            </div>\
-                                        </div>\
-                                        <div class="form-actions">\
-                                            <a class="forgot-password pull-left"><%= translate("forgotPassword") %></a>\
-                                            <button id="loginBtn" class="btn green-btn"><%= translate("login") %></button>\
-                                        </div>\
-                                    </fieldset>\
-                                </form>\
-                            </div>\
-                            <div class="span2 columns sidebar">\
-                                <h3><%= translate("registration") %></h3>\
-                                <p><%= translate("dontHaveNanotrader") %></p>\
-                                <p><a><%= translate("pleaseRegister") %></a></p>\
-                            </div>\
-                        </div>\
-                    </div>';
-
-
-/**
  * View Class for the Login
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
-nano.views.Login = function(element) {
-    this.element = element;
-    nano.containers.login = element;
+nano.views.Login = Backbone.View.extend({
 
     /**
-     * Renders the Footer View
+     * Bind the events functions to the different HTML elements
+     */
+    events : {
+        'click #loginBtn' : 'login'
+    },
+
+    /**
+     * Class constructor
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object options:
+     * - el: selector for the container
+     * @return void
+     */
+    initialize : function(options) {
+        nano.containers.login = this.$el;
+    },
+
+    /**
+     * Templating function (inyects data into an HTML Template)
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object data: data to be replaced in the template
+     * @return string
+     */
+    template : _.template(nano.utils.getTemplate(nano.conf.tpls.login)),
+
+    /**
+     * Renders the Account Summary View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
      * @return void
      */
-    this.render = function(errorKey) {
-        var that = this;
-
-        // Render the login block only if it hasn't been rendered before.
-        if ( !this.element.html() )
-        {
-            var login = _.template(nano.templates.login)({});
-            that.element.html(login);
-
-            var loginError = that.element.find('#login-error');
-            if (errorKey)
+     render: function(errorKey) {
+            if ( !this.$el.html() )
             {
-                loginError.find('p').html(translate(errorKey));
-                loginError.removeClass('hide');
+                var login = this.template();
+                this.$el.html(login);
+                if (errorKey)
+                {
+                    var loginError = this.$el.find('#login-error');
+                    loginError.find('p').html(translate(errorKey));
+                    loginError.removeClass('hide');
+                }
             }
+            this.$el.show();
+    },
 
-            that.element.find('#loginBtn').click(function(event){
+    /**
+     * Login event
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return void
+     */
+    login : function(event){
 
-                // Cache the login and password controls for performance
-                var loginControl = that.element.find('#login-control');
-                var passwordControl = that.element.find('#password-control');
+        // Cache the login and password controls for performance
+        var loginControl = this.$el.find('#login-control');
+        var passwordControl = this.$el.find('#password-control');
+        var loginError = this.$el.find('#login-error');
 
-                loginError.addClass('hide');
-                loginControl.removeClass('error');
-                passwordControl.removeClass('error');
+        loginError.addClass('hide');
+        loginControl.removeClass('error');
+        passwordControl.removeClass('error');
 
-                event.preventDefault();
-                var username = that.element.find('#username-input').val();
-                var password = that.element.find('#password-input').val();
-                nano.utils.login(username, password, {
-                    success : function(jqXHR, textStatus){
+        event.preventDefault();
+        var username = this.$el.find('#username-input').val();
+        var password = this.$el.find('#password-input').val();
+        var view = this;
+        nano.utils.login(username, password, {
+            success : function(jqXHR, textStatus){
 
-                        //Clear the credentials from the inputs
-                        that.element.find('#username-input').val('');
-                        that.element.find('#password-input').val('');
+                //Clear the credentials from the inputs
+                view.$el.find('#username-input').val('');
+                view.$el.find('#password-input').val('');
 
-                        //Show the loading page, hide the login page and render the dashboard
-                        nano.instances.controller.renderDashboard();
-                    },
-                    error : function(jqXHR, textStatus, errorThrown) {
-                        switch(jqXHR.status) {
-                            case 401:
-                                loginControl.addClass('error');
-                                passwordControl.addClass('error');
-                                loginError.find('p').html(translate('invalidUser'));
-                                loginError.removeClass('hide');
-                                break;
-                            default:
-                                loginError.find('p').html(translate('unknowError'));
-                                loginError.removeClass('hide');
-                                break;
-                        }
-                    }
-                });
-            });
-        }
-        this.element.show();
-    };
-};
+                //Show the loading page, hide the login page and render the dashboard
+                nano.instances.controller.renderDashboard();
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                switch(jqXHR.status) {
+                    case 401:
+                        loginControl.addClass('error');
+                        passwordControl.addClass('error');
+                        loginError.find('p').html(translate('invalidUser'));
+                        loginError.removeClass('hide');
+                        break;
+                    default:
+                        loginError.find('p').html(translate('unknowError'));
+                        loginError.removeClass('hide');
+                        break;
+                }
+            }
+        });
+    }
+});

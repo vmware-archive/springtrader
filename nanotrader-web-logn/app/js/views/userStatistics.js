@@ -1,58 +1,36 @@
 /**
- * HTML template for the User Statistics
- * @author Carlos Soto <carlos.soto@lognllc.com>
- */
-nano.templates.userStatistics = '<div class="well show-well">\
-                                    <div class="title"><h3><%= translate("userStatistics") %></h3></div>\
-                                    <div class="table-outer">\
-                                        <table class="table">\
-                                            <tr>\
-                                                <td><%= translate("accountId") %></td>\
-                                                <td><%= accountid %></td>\
-                                            </tr>\
-                                            <tr>\
-                                                <td><%= translate("accountCreationDate") %></td>\
-                                                <td><%= creationdate %></td>\
-                                            </tr>\
-                                            <tr>\
-                                                <td><%= translate("totalLogins") %></td>\
-                                                <td><%= logincount %></td>\
-                                            </tr>\
-                                            <tr>\
-                                                <td><%= translate("sessionCreatedDate") %></td>\
-                                                <td><%= lastlogin %></td>\
-                                            </tr>\
-                                            <tr>\
-                                                <td>&nbsp;</td>\
-                                                <td>&nbsp;</td>\
-                                            </tr>\
-                                        </table>\
-                                    </div>\
-                                </div>';
-
-/**
  * View Class for the User Statistics
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
-nano.views.UserStatistics = function(element) {
-    this.element = element;
-    nano.containers.userStatistics = element;
+nano.views.UserStatistics = Backbone.View.extend({
 
     /**
-     * Renders the User Statistic View
+     * Class constructor
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param nano.models.Account: instance of the model with the info to be displayed
+     * @param Object options:
+     * - el: selector for the container
+     * - model: nano.models.Account instance
      * @return void
      */
-    this.render = function(model) {
-        var that = this;
+    initialize : function(options) {
+        nano.containers.userStatistics = this.$el;
+    },
 
-        // Render the login block only if it hasn't been rendered before.
-        if ( !this.element.html() )
-        {
-            var userStatistics = _.template(nano.templates.userStatistics)(model.attributes);
-            this.element.html(userStatistics);
-        }
-        this.element.show();
-    };
-};
+    /**
+     * Templating function (inyects data into an HTML Template)
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object data: data to be replaced in the template
+     * @return string
+     */
+    template : _.template(nano.utils.getTemplate(nano.conf.tpls.userStatistics)),
+
+    /**
+     * Renders the Portfolio View
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return void
+     */
+     render : function() {
+        this.$el.html(this.template(this.model.toJSON()));
+        this.$el.show();
+    }
+});

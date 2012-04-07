@@ -3,7 +3,6 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 var nano = {
-    templates : {},
     utils : {},
     views : {},
     instances : {},
@@ -151,6 +150,19 @@ nano.utils.round = function (number, decimals) {
   var newNumber = Math.round(number*Math.pow(10,decimals))/Math.pow(10,decimals);
   return parseFloat(newNumber);
 }
+
+/**
+ * Fetches an html template synchronously
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object
+ */
+nano.utils.getTemplate = function(url){
+    var response = $.ajax(url, {
+        async : false,
+        dataTypeString : 'html'
+    });
+    return response.responseText;
+};
 
 /**
  * Alias for the translation function

@@ -23,13 +23,8 @@ nano.Controller = function(conf, strings) {
     this.run = function() {
         //Create instances of the views
         nano.instances.controller = this;
-        nano.instances.navbar = new nano.views.Navbar($('#navbar'));
-        nano.instances.login = new nano.views.Login($('#login'));
-        nano.instances.marketSummary = new nano.views.MarketSummary($('#market-summary'));
-        nano.instances.footer = new nano.views.Footer($('#footer'));
-        nano.instances.portfolio = new nano.views.Portfolio($('#portfolio'));
-        nano.instances.userStatistics = new nano.views.UserStatistics($('#user-statistics'));
-        nano.instances.accountSummary = new nano.views.AccountSummary($('#account-summary'));
+        nano.instances.navbar = new nano.views.Navbar({ el : '#navbar'});
+        nano.instances.footer = new nano.views.Footer({ el : '#footer'});
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#loading');
@@ -46,7 +41,11 @@ nano.Controller = function(conf, strings) {
                 nano.containers.loading.hide();
 
                 // Render the Market Summary with the newly fetched info
-                nano.instances.marketSummary.render(model);
+                nano.instances.marketSummary = new nano.views.MarketSummary({
+                    el : '#market-summary',
+                    model : model
+                });
+                nano.instances.marketSummary.render();
 
                 // Render the Dashboard of logged in or the Login otherwise
                 if(nano.utils.loggedIn()) {
@@ -87,11 +86,48 @@ nano.Controller = function(conf, strings) {
             if (++modelCount == models.length)
             {
                 nano.containers.loading.hide();
-                nano.instances.accountSummary.render(models[0]);
-                nano.instances.userStatistics.render(models[0]);
-                //=======================> FIX ME! HoldingSummary api call is all messed up, we need to figure that out first
-                //nano.instances.portfolio.render(models[1]); // uses the HoldingSummary Model
-                //nano.instances.positions.render(models[12); // uses the Holdings Collection
+
+                // Render the Account Summary View
+                if (!nano.instances.accountSummary)
+                {
+                    nano.instances.accountSummary = new nano.views.AccountSummary({
+                        el : '#account-summary',
+                        model : models[0]
+                    });
+                }
+                nano.instances.accountSummary.render();
+
+                // Render the User Statistics View
+                if (!nano.instances.userStatistics)
+                {
+                    nano.instances.userStatistics = new nano.views.UserStatistics({
+                        el : '#user-statistics',
+                        model : models[0]
+                    });
+                }
+                nano.instances.userStatistics.render();
+
+                // Render the Portfolio View
+                if (!nano.instances.Portfolio)
+                {
+                    nano.instances.portfolio = new nano.views.Portfolio({
+                        el : '#portfolio',
+                        model : models[1] //==> HoldingSummary Model
+                    });
+                }
+                nano.instances.portfolio.render();
+
+                /*
+                // Render the Positions View
+                if (!nano.instances.Positions)
+                {
+                    nano.instances.positions = new nano.views.Positions({
+                        el : '#positions',
+                        model : models[2] //==> Holdings Collection
+                    });
+                }
+                nano.instances.positions.render();
+                */
             }
         };
         for (var i in models)
@@ -122,6 +158,10 @@ nano.Controller = function(conf, strings) {
      */
     this.renderLogin = function(errorKey) {
         nano.utils.hideAll();
+        if ( !nano.instances.login)
+        {
+            nano.instances.login = new nano.views.Login({el : '#login'});
+        }
         nano.instances.login.render(errorKey);
     };
 };

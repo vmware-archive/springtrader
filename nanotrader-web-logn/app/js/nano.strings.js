@@ -42,5 +42,6 @@ nano.strings = {
     accountCreationDate : 'Account Creation Date',
     totalLogins : 'Total Logins',
     sessionCreatedDate : 'Session Created Date',
-    sessionExpired : 'Your session has expired. Please login in to continue.'
+    sessionExpired : 'Your session has expired. Please login in to continue.',
+    contactUs : 'Contact Us'
 };
