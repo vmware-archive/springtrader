@@ -31,6 +31,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -235,6 +236,7 @@ public class TradingServiceTests {
 	}
 	
 	@Test
+	@Ignore
 	public void testFindMarketSummary() {
 		
         Quote quote = new Quote();
