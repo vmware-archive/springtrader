@@ -450,7 +450,7 @@ public class TradingServiceImpl implements TradingService {
 		return portfolioSummary;
 	}
 	
-	
+	//TODO: Defensive coding
 	public MarketSummary findMarketSummary() { 
 		MarketSummary marketSummary = marketSummaryRepository.findMarketSummary();
 		//get top losing stocks
