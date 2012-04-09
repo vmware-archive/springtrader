@@ -28,8 +28,11 @@ public class MarketSummaryRepository {
 						+ "SUM(q.volume) as tradeStockIndexVolume, "
 						+ "SUM(q) as cnt , "
 						+ "SUM(q.change1)"
-						+ "FROM Quote q ");
-
+						+ "FROM Quote q");
+		marketSummary.setTradeStockIndexAverage(new BigDecimal("0.00").setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
+		marketSummary.setTradeStockIndexOpenAverage(new BigDecimal("0.00").setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
+		marketSummary.setTradeStockIndexVolume(new BigDecimal("0.00").setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
+		marketSummary.setChange(new BigDecimal("0.00").setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
 		List<Object[]> result = query.getResultList();
 		for (Object[] o : result) {
 			if (o[0] != null && o[1] != null && o[2] != null && o[3] != null && o[4] != null) {
