@@ -20,7 +20,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.nanotrader.data.domain.Account;
 import org.springframework.nanotrader.data.domain.Accountprofile;
 import org.springframework.nanotrader.data.domain.Holding;
-import org.springframework.nanotrader.data.domain.HoldingAggregate;
 import org.springframework.nanotrader.data.domain.HoldingSummary;
 import org.springframework.nanotrader.data.domain.MarketSummary;
 import org.springframework.nanotrader.data.domain.Order;
@@ -75,7 +74,9 @@ public class TradingServiceImpl implements TradingService {
 
 	@Autowired
 	private HoldingAggregateRepository holdingAggregateRepository;
-	
+
+	@Autowired
+	QuotePublisher quotePublisher;
 	
 	@Override
 	public Accountprofile login(String username, String password) { 
@@ -348,7 +349,7 @@ public class TradingServiceImpl implements TradingService {
         quote.setVolume(quote.getVolume().add(sharesTraded));
         quote.setChange1(newPrice.subtract(quote.getOpen1()));
         quoteRepository.save(quote);
-        //TODO: Publish quote change to rabbitmq
+        this.quotePublisher.publishQuote(quote);
 	}
 	
 	@Override
@@ -508,5 +509,8 @@ public class TradingServiceImpl implements TradingService {
 		return null;
 	}
 	
-	
+	public static interface QuotePublisher {
+
+		void publishQuote(Quote quote);
+	}
 }

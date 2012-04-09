@@ -15,9 +15,12 @@
 
     <rabbit:queue name="nanotrader.order.queue" />
 
+    <rabbit:queue name="nanotrader.quote.queue" />
+
     <rabbit:direct-exchange name="nanotrader.exchange">
         <rabbit:bindings>
             <rabbit:binding queue="nanotrader.order.queue" key="nanotrader.order.binding" />
+            <rabbit:binding queue="nanotrader.quote.queue" key="nanotrader.quote.binding" />
         </rabbit:bindings>
     </rabbit:direct-exchange>
 

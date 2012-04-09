@@ -185,6 +185,8 @@ project('spring-nanotrader-data') {
 		compile "org.aspectj:aspectjrt:$aspectjVersion"
 		compile "org.springframework:spring-aspects:$springVersion"
 		compile "postgresql:postgresql:9.0-801.jdbc3"
+		compile "org.springframework.integration:spring-integration-amqp:$springIntegrationVersion"
+		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 
 	}
 }
