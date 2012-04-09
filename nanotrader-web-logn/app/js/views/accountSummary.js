@@ -17,6 +17,16 @@ nano.views.AccountSummary = Backbone.View.extend({
     },
 
     /**
+     * Sets the model into the object
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object model: Instance of a nano.models Class
+     * @return void
+     */
+    setModel : function(model) {
+        this.model = model;
+    },
+
+    /**
      * Templating function (inyects data into an HTML Template)
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param Object data: data to be replaced in the template
@@ -27,9 +37,14 @@ nano.views.AccountSummary = Backbone.View.extend({
     /**
      * Renders the Account Summary View
      * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object model: Instance of nano.models.AccountSummary
      * @return void
      */
-     render: function() {
+     render: function(model) {
+            if (model)
+            {
+                this.model = model;
+            }
             var accountSummary = this.template(this.model.toJSON());
             this.$el.html(accountSummary);
             this.$el.show();

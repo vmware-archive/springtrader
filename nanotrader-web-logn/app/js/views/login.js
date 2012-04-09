@@ -23,6 +23,16 @@ nano.views.Login = Backbone.View.extend({
     },
 
     /**
+     * Sets the model into the object
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object model: Instance of a nano.models Class
+     * @return void
+     */
+    setModel : function(model) {
+        this.model = model;
+    },
+
+    /**
      * Templating function (inyects data into an HTML Template)
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param Object data: data to be replaced in the template
@@ -43,7 +53,7 @@ nano.views.Login = Backbone.View.extend({
                 this.$el.html(login);
                 if (errorKey)
                 {
-                    var loginError = this.$el.find('#login-error');
+                    var loginError = this.$('#login-error');
                     loginError.find('p').html(translate(errorKey));
                     loginError.removeClass('hide');
                 }
@@ -59,27 +69,27 @@ nano.views.Login = Backbone.View.extend({
     login : function(event){
 
         // Cache the login and password controls for performance
-        var loginControl = this.$el.find('#login-control');
-        var passwordControl = this.$el.find('#password-control');
-        var loginError = this.$el.find('#login-error');
+        var loginControl = this.$('#login-control');
+        var passwordControl = this.$('#password-control');
+        var loginError = this.$('#login-error');
 
         loginError.addClass('hide');
         loginControl.removeClass('error');
         passwordControl.removeClass('error');
 
         event.preventDefault();
-        var username = this.$el.find('#username-input').val();
-        var password = this.$el.find('#password-input').val();
+        var username = this.$('#username-input').val();
+        var password = this.$('#password-input').val();
         var view = this;
         nano.utils.login(username, password, {
             success : function(jqXHR, textStatus){
 
                 //Clear the credentials from the inputs
-                view.$el.find('#username-input').val('');
-                view.$el.find('#password-input').val('');
+                view.$('#username-input').val('');
+                view.$('#password-input').val('');
 
                 //Show the loading page, hide the login page and render the dashboard
-                nano.instances.controller.renderDashboard();
+                nano.utils.goTo( nano.conf.hash.dashboard );
             },
             error : function(jqXHR, textStatus, errorThrown) {
                 switch(jqXHR.status) {

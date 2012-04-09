@@ -165,6 +165,15 @@ nano.utils.getTemplate = function(url){
 };
 
 /**
+ * Redirects to a different url/application widget
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object
+ */
+nano.utils.goTo = function(url) {
+    window.location = url
+}
+
+/**
  * Alias for the translation function
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */

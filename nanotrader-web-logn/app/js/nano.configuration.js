@@ -30,3 +30,14 @@ nano.conf.tpls = {
     portfolio : nano.conf.tplRoot + 'portfolio.tpl',
     userStatistics : nano.conf.tplRoot + 'userStatistics.tpl'
 };
+
+/**
+ * Hash tags to use on the code for the different application routes of the Backbone.Router
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.conf.hash = {
+    login  : '#login',
+    dashboard : '#dashboard',
+    portfolio : '#portfolio',
+    trade : '#trade'
+};

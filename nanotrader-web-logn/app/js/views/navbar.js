@@ -23,6 +23,16 @@ nano.views.Navbar = Backbone.View.extend({
     },
 
     /**
+     * Sets the model into the object
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object model: Instance of a nano.models Class
+     * @return void
+     */
+    setModel : function(model) {
+        this.model = model;
+    },
+
+    /**
      * Templating function (inyects data into an HTML Template)
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param Object data: data to be replaced in the template
@@ -42,7 +52,7 @@ nano.views.Navbar = Backbone.View.extend({
                 username: nano.session.username
             };
             this.$el.html(this.template(data));
-            this.$el.find('.dropdown-toggle').dropdown();
+            this.$('.dropdown-toggle').dropdown();
         }
         this.$el.show();
     },
@@ -54,6 +64,6 @@ nano.views.Navbar = Backbone.View.extend({
      */
     logout : function() {
         nano.utils.logout();
-        nano.instances.controller.renderLogin();
+        nano.utils.goTo( nano.conf.hash.login );
     }
 });
