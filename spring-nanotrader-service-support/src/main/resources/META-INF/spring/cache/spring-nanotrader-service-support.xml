@@ -26,9 +26,7 @@
 
   <bean id="gemfireCacheManager" class="org.springframework.data.gemfire.support.GemfireCacheManager" p:cache-ref="c"/>
   
-  <bean class="org.springframework.nanotrader.service.support.TradingServiceFacadeImpl" />
-
 	<bean class="org.dozer.spring.DozerBeanMapperFactoryBean">
         <property name="mappingFiles" value="classpath*:/dozer-bean-mappings.xml"/>
-        </bean>
+    </bean>
 </beans>
