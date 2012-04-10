@@ -42,13 +42,22 @@ nano.Router = Backbone.Router.extend({
                 nano.containers.loading.hide();
 
                 // Render the Market Summary with the newly fetched info
-                nano.instances.marketSummary.setModel(model);
-                nano.instances.marketSummary.render();
+                nano.instances.marketSummary.render(model);
             },
             error : function(model, response){
                 // Error message?
             }
-       });
+        });
+
+        // Create an interval to update the Market Summary section every X amount of time
+        window.setInterval(function(){
+            marketSummary.fetch({
+                success : function(model, response){
+                    nano.instances.marketSummary.update(model);
+                }
+            });
+       },
+       nano.conf.marketSummaryUpdateMillisecs);
     },
 
     help: function() {
@@ -93,7 +102,6 @@ nano.Router = Backbone.Router.extend({
                     success : onFetchSuccess,
                     error : function(model, error){
                         // What do we do?
-                        console.log(error);
                         switch( error.status ) {
                             case 403:
                                 nano.utils.logout();
