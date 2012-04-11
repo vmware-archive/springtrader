@@ -2,6 +2,7 @@ package org.springframework.nanotrader.service.domain;
 
 
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  *  @author
  */
 
-public class Account {
+public class Account implements Serializable {
 
     private Date creationdate;
     private BigDecimal openbalance;
