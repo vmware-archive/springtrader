@@ -3,11 +3,13 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.strings = {
+    dailyTopGains : 'Daily Top Gains',
     nanotrader : 'NanoTrader',
     dashboard : 'dashboard',
     portfolio : 'portfolio',
     trade : 'trade',
     profile : 'Profile',
+    assetDistribution : 'Asset Distribution',
     help : 'Help',
     logout : 'Logout',
     copyright : 'Copyright &copy; 2012 VMWare, Inc. All rights reserved.',
@@ -35,6 +37,7 @@ nano.strings = {
     currentBalance : 'Current Balance',
     openingBalance : 'Opening Balance',
     cashBalance : 'Cash Balance',
+    portfolioValue : 'Portfolio Value',
     holdingsTotal : 'Total of Holdings',
     currentGainLoss : 'Current Gain/Loss',
     userStatistics : 'User Statistics',

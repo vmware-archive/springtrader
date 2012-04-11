@@ -1,8 +1,8 @@
 /**
- * View Class for the Portfolio
+ * View Class for the Positions
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
- nano.views.Portfolio = Backbone.View.extend({
+ nano.views.Positions = Backbone.View.extend({
 
     /**
      * Class constructor
@@ -12,7 +12,7 @@
      * @return void
      */
     initialize : function(options) {
-        nano.containers.portfolio = this.$el;
+        nano.containers.positions = this.$el;
     },
 
     /**
@@ -21,35 +21,31 @@
      * @param Object data: data to be replaced in the template
      * @return string
      */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.portfolio)),
+    template : _.template(nano.utils.getTemplate(nano.conf.tpls.positions)),
 
     /**
-     * Renders the Portfolio View
+     * Renders the Positions View
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object portfolioSummary: Instance of nano.models.PortfolioSummary
-     * @param Object account: Instance of nano.models.account
+     * @param Object model: Instance of nano.models.holdingSummary
      * @return void
      */
-     render : function(portfolioSummary, account) {
-        if (portfolioSummary)
+     render : function(model) {
+        if (model)
         {
-            this.portfolioSummary = portfolioSummary;
+            this.model = model;
         }
-        if (account)
-        {
-            this.account = account;
-        }
+
         this.$el.html(this.template());
         this.$el.show();
-        var totalAssets = portfolioSummary.get('totalMarketValue') + account.get('balance');
-        var data = [
-            [translate('cashBalance'), (account.get('balance') / totalAssets)],
-            [translate('portfolioValue'), (portfolioSummary.get('totalMarketValue') / totalAssets)]
-        ];
-        var plot1 = jQuery.jqplot ('ad-pie-chart', [data], {
+
+        var data = [];
+        var holdingRollups = model.get('holdingRollups');
+        for (var i in holdingRollups)
+        {
+            data.push([holdingRollups[i].symbol, holdingRollups[i].percent]);
+        }
+        var plot1 = jQuery.jqplot ('dtg-pie-chart', [data], {
             grid: {
-                    //drawGridLines: true,        // wether to draw lines across the grid or not.
-                    //gridLineColor: '#cccccc',    // *Color of the grid lines.
                     background: '#ffffff',      // CSS color spec for background color of grid.
                     borderColor: '#ffffff',     // CSS color spec for border around grid.
                     shadow: false               // draw a shadow for grid.
