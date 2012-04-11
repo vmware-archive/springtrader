@@ -1,6 +1,7 @@
 package org.springframework.nanotrader.service.domain;
 
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
  */
 
 
-public class Accountprofile {
+public class Accountprofile implements Serializable{
 
 	private Integer profileid;
 

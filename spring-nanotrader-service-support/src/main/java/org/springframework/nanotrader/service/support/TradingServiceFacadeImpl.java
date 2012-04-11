@@ -86,12 +86,18 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 
 	@Cacheable(value="authorizationCache")
 	public Accountprofile findAccountprofileByAuthtoken(String token) { 
+		if (token == null) { 
+			log.error("TradingServiceFacadeImpl.findAccountprofileByAuthtoken(): token is null");
+		}
 		Accountprofile accountProfileResponse = null;
 		org.springframework.nanotrader.data.domain.Accountprofile accountProfile = new org.springframework.nanotrader.data.domain.Accountprofile();
 		accountProfile = tradingService.findByAuthtoken(token);
 		if (accountProfile != null) { 
 			accountProfileResponse = new Accountprofile();
 			mapper.map(accountProfile, accountProfileResponse, ACCOUNT_PROFILE_MAPPING);
+		} else { 
+			log.error("TradingServiceFacadeImpl.findAccountprofileByAuthtoken(): accountProfile is null");
+			throw new AuthenticationException();
 		}
 		return accountProfileResponse;
 	}

@@ -18,7 +18,9 @@
 
 	<gfe:cache id="c" properties-ref="props"  />
 	
-	<gfe:replicated-region  id="authorizationCache" cache-ref="c"  />
+	<gfe:replicated-region  id="authorizationCache" statistics="true" cache-ref="c"  >
+		<gfe:eviction  threshold="10000"/>
+	</gfe:replicated-region>
 	
 	<util:properties id="props" location="classpath:/gemfire.properties" />
 	
