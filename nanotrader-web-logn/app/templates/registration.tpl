@@ -27,25 +27,25 @@
                                 <input type="password" value="" id="password-input" class="input-xlarge focused">
                             </div>
                         </div>
-                        <div id="matchpasswd-control" class="control-group error">
+                        <div id="matchpasswd-control" class="control-group">
                             <label for="matchpasswd-input" class="control-label"><%= translate("passwordConfirmation") %>:</label>
                             <div class="controls">
                                 <input type="password" id="matchpasswd-input" class="input-xlarge focused"><br/>
-                                <span id="matchpasswd-error" class="help-inline"><%= translate("passwordMatching") %></span>
+                                <span id="matchpasswd-error" class="help-inline hide"><%= translate("passwordMatching") %></span>
                             </div>
                         </div>
                     </div>
                     <div class="span4">
-                        <div id="userid-control" class="control-group">
-                            <label for="userid-input" class="control-label"><%= translate("userId") %>:</label>
+                        <div id="username-control" class="control-group">
+                            <label for="username-input" class="control-label"><%= translate("username") %>:</label>
                             <div class="controls">
-                                <input type="text" value="" id="userid-input" class="input-xlarge focused">
+                                <input type="text" value="" id="username-input" class="input-xlarge focused">
                             </div>
                         </div>
-                        <div id="openingbalance-control" class="control-group">
+                        <div id="openbalance-control" class="control-group">
                             <label class="control-label"><%= translate("openingBalance") %>:</label>
                             <div class="controls">
-                                <input type="text" value="" id="openingbalance-input" class="input-xlarge focused">
+                                <input type="text" value="" id="openbalance-input" class="input-xlarge focused">
                             </div>
                         </div>
                         <div id="creditcard-control" class="control-group">

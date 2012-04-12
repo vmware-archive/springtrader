@@ -43,13 +43,6 @@ nano.views.Registration = Backbone.View.extend({
             var registration = this.template();
             this.$el.html(registration);
             
-            var matchpasswdControl = this.$('#matchpasswd-control');
-            var matchpasswdError = this.$('#matchpasswd-error');
-            
-            // TODO: clean
-            matchpasswdError.addClass('hide');
-            matchpasswdControl.removeClass('error');
-            
             if (errorKey)
             {
                 var registrationError = this.$('#registration-error');
@@ -66,9 +59,6 @@ nano.views.Registration = Backbone.View.extend({
      * @return void
      */
     registration : function(event){
-        var inputs = document.getElementsByTagName('input');
-        var emptyFields = false;
-        
         var matchpasswdControl = this.$('#matchpasswd-control');        
         var matchpasswdError = this.$('#matchpasswd-error');
         var registrationError = this.$('#registration-error');
@@ -83,17 +73,20 @@ nano.views.Registration = Backbone.View.extend({
         var email = this.$('#email-input').val();
         var password = this.$('#password-input').val();
         var matchpasswd = this.$('#matchpasswd-input').val();
-        var userid = this.$('#userid-input').val();
-        var openingbalance = this.$('#openingbalance-input').val();
+        var username = this.$('#username-input').val();
+        var openbalance = this.$('#openbalance-input').val();
         var creditcard = this.$('#creditcard-input').val();
         var address = this.$('#address-input').val();
         var view = this;
         
-        for(var i = 0, j = inputs.length; i < j; i++) {
-            if(inputs[i].value == ''){
+        var inputArray = [fullname, email, password, matchpasswd, username, openbalance, creditcard, address];
+        var emptyField = false;
+        
+        for(var i = 0, j = inputArray.length; i < j; i++) {
+            if(inputArray[i] == ''){
                 registrationError.find('p').html(translate('emptyFieldError'));
                 registrationError.removeClass('hide');
-                emptyFields = true;
+                emptyField = true;
                 break
             }
         }
@@ -104,15 +97,15 @@ nano.views.Registration = Backbone.View.extend({
         // Registration callbacks
         var callbacks = {
             success : function() {
-                nano.utils.login(userid, password, {
+                nano.utils.login(username, password, {
                     success : function(jqXHR, textStatus){
                         // Clear the credentials from the inputs
                         view.$('#fullname-input').val('');
                         view.$('#email-input').val('');
                         view.$('#password-input').val('');
                         view.$('#matchpasswd-input').val('');
-                        view.$('#userid-input').val('');
-                        view.$('#openingbalance-input').val('');
+                        view.$('#username-input').val('');
+                        view.$('#openbalance-input').val('');
                         view.$('#creditcard-input').val('');
                         view.$('#address-input').val('');
                         // Show the loading page and render the dashboard
@@ -136,24 +129,26 @@ nano.views.Registration = Backbone.View.extend({
             }
         };
         
-        if (emptyFields == false && password == matchpasswd){
-            // Save the new account profile
-            this.model.save(
-                {
-                    fullname: fullname,
-                    email: email,
-                    passwd: password,
-                    userid: userid,
-                    accounts : [{openbalance : openingbalance}],
-                    creditcard: creditcard,
-                    address: address
-                },
-                callbacks
-            );
-        }
-        else {
-            matchpasswdError.removeClass('hide');
-            matchpasswdControl.addClass('error');
+        if (emptyField == false){
+            if(password == matchpasswd){
+                // Save the new account profile
+                this.model.save(
+                    {
+                        fullname: fullname,
+                        email: email,
+                        passwd: password,
+                        userid: username,
+                        accounts : [{openbalance : openbalance}],
+                        creditcard: creditcard,
+                        address: address
+                    },
+                    callbacks
+                );
+            }
+            else {
+                matchpasswdError.removeClass('hide');
+                matchpasswdControl.addClass('error');
+            }
         }
     },
 
