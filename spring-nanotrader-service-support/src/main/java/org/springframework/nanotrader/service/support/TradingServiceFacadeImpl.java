@@ -96,9 +96,10 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 			accountProfileResponse = new Accountprofile();
 			mapper.map(accountProfile, accountProfileResponse, ACCOUNT_PROFILE_MAPPING);
 		} else { 
-			log.error("TradingServiceFacadeImpl.findAccountprofileByAuthtoken(): accountProfile is null");
-			throw new AuthenticationException();
+			log.error("TradingServiceFacadeImpl.findAccountprofileByAuthtoken(): accountProfile is null for token=" + token);
+			throw new AuthenticationException("Authorization Token not found");
 		}
+		
 		return accountProfileResponse;
 	}
 	
@@ -125,9 +126,13 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 				loginResponse.put("accountid", account.getAccountid());
 			}
 		} else {
-			throw new AuthenticationException();
+			log.error("TradingServiceFacade.login failed to find username=" + username + " password" + password);
+			throw new AuthenticationException("Login failed for user: " + username);
 		}
-
+		
+		if (log.isDebugEnabled()) { 
+			log.error("TradingServiceFacade.login success for " + username + " username::token=" + loginResponse.get("authToken"));
+		}
 		return loginResponse;
 		
 	}
@@ -139,6 +144,10 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 
 	@CacheEvict(value="authorizationCache")
 	public void logout(String authtoken) {
+		
+		if (log.isDebugEnabled()) { 
+			log.error("TradingServiceFacade.logout: username::token=" + authtoken);
+		}
 		tradingService.logout(authtoken);
 	}
 	
@@ -381,7 +390,7 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 	
 	public HoldingSummary findHoldingSummary(Integer accountId) {
 		if (log.isDebugEnabled()) {
-			log.debug("TradingServiceFacade.findHoldingSummary: Start");
+			log.debug("TradingServiceFacade.findHoldingSummary: Start accountId=" + accountId );
 		}
 		org.springframework.nanotrader.data.domain.HoldingSummary holdingSummary = tradingService.findHoldingSummary(accountId);
 		HoldingSummary holdingSummaryResponse = new HoldingSummary();

@@ -51,7 +51,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		for(Map account: accounts ) { 
 			accountId = (Integer)account.get("accountid");
 		}
+		
+	
 		User user = new CustomUser(accountProfile.getUserid(), accountProfile.getPasswd(), getAuthorities(), accountId, accountProfile.getProfileid(), token);
+		if (log.isDebugEnabled()) { 
+			log.debug("UserDetailsServiceImpl.loadUserByUsername(): user=" + user  + " username::token" + token);
+		}
+		
 		return user;
 	}
 
