@@ -29,7 +29,7 @@ public class PortfollioSummaryControllerTest extends AbstractSecureControllerTes
 				.andExpect(jsonPath("$.numberOfHoldings").value(ServiceTestConfiguration.HOLDING_COUNT))
 				.andExpect(jsonPath("$.totalBasis").value(ServiceTestConfiguration.BASIS.doubleValue()))
 				.andExpect(jsonPath("$.totalMarketValue").value(ServiceTestConfiguration.MARKET_VALUE.doubleValue()))
-				.andExpect(jsonPath("$.gain").value(new BigDecimal(149.85000000000002).doubleValue()))
+				.andExpect(jsonPath("$.gain").value(new BigDecimal("149.85").doubleValue()))
 				.andDo(print());
 	}
 	

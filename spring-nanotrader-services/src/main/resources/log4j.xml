@@ -21,6 +21,13 @@
 		<level value="error" />
 	</logger>
 	
+	<logger name="org.springframework.nanotrader.service.support">
+		<level value="debug" />
+	</logger>
+	<logger name="org.springframework.nanotrader.web.security">
+		<level value="debug" />
+	</logger>
+	
 	
 	<logger name="org.springframework.data.gemfire">
 		<level value="error" />
