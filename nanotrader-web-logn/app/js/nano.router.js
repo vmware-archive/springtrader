@@ -78,7 +78,7 @@ nano.Router = Backbone.Router.extend({
             var modelCount = 0;
             var models = {
                 account : new nano.models.Account({accountid : nano.session.accountid}),
-                accountProfile : new nano.models.AccountProfile({ profileid : nano.session.profileid }),
+                //accountProfile : new nano.models.AccountProfile({ profileid : nano.session.profileid }),
                 holdingSummary : new nano.models.HoldingSummary({ accountid : nano.session.accountid }),
                 portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
                 //holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
@@ -93,10 +93,10 @@ nano.Router = Backbone.Router.extend({
                     nano.instances.userStatistics.render(models.account);
 
                     // Render the Account Summary View
-                    nano.instances.accountSummary.render(models.accountProfile);
+                    nano.instances.accountSummary.render(models.account, models.portfolioSummary);
 
                     // Render the Portfolio View
-                    nano.instances.portfolio.render(models.portfolioSummary, models.account);
+                    nano.instances.portfolio.render(models.account, models.portfolioSummary);
 
                     // Render the Positions View
                     nano.instances.positions.render(models.holdingSummary);

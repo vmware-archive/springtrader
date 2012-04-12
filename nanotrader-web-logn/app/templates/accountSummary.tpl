@@ -4,23 +4,23 @@
         <table class="table">
             <tr>
                 <td><%= translate("currentBalance") %></td>
-                <td>$<%= nano.utils.round(balance) %></td>
+                <td class="gray-background">$<%= nano.utils.round(balance + totalMarketValue) %></td>
             </tr>
             <tr>
                 <td><%= translate("openingBalance") %></td>
-                <td>$<%= nano.utils.round(openbalance)%></td>
+                <td class="gray-background">$<%= nano.utils.round(openbalance)%></td>
             </tr>
             <tr>
                 <td><%= translate("cashBalance") %></td>
-                <td>$<%= "N/A" %></td>
+                <td class="gray-background">$<%= nano.utils.round(balance) %></td>
             </tr>
             <tr>
                 <td><%= translate("holdingsTotal") %></td>
-                <td><%= "N/A" %></td>
+                <td class="gray-background"><%= nano.utils.round(totalMarketValue) %></td>
             </tr>
-            <tr class="summary">
+            <tr class="summary <%= (gain > 0 ? 'alert alert-block alert-success' : 'alert alert-block alert-error') %>">
                 <td><%= translate("currentGainLoss") %></td>
-                <td class="average">$<%= "N/A" %></td>
+                <td class="average">$<%= gain %></td>
             </tr>
         </table>
     </div>
