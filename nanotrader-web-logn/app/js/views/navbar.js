@@ -8,7 +8,7 @@ nano.views.Navbar = Backbone.View.extend({
      * Bind the events functions to the different HTML elements
      */
     events : {
-        'click #logout' : 'logout',
+        'click #logout' : 'logout'
     },
 
     /**
