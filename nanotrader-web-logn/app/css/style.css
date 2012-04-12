@@ -49,10 +49,10 @@
 }body {
     background:url(../images/bg.gif);
     padding-top:110px;
-}#loading .logo, #loading .loading
+}#nc-loading .logo, #nc-loading .loading
 {
     margin: auto;
-}#loading .loading{
+}#nc-loading .loading{
     margin-top: 20px;
 }.loading
 {
@@ -636,13 +636,13 @@ table td input {
 
 /* @group footer 
 --------------------------------------*/
-#footer {
+#nc-footer {
     padding:15px 30px;
     color:#757575;
     font:normal 11px/14px Arial, sans-serif;
-}#footer .nav {
+}#nc-footer .nav {
     margin:0 0 0 20px;
-}#footer .nav li, #footer .nav li a{
+}#nc-footer .nav li, #nc-footer .nav li a{
     display:inline;
 }
 /* @group make responsive (max-width: 979px)
