@@ -70,7 +70,7 @@
         <div class="span2 columns sidebar">
             <h3><%= translate("nanoTraderLogin") %></h3>
             <p><%= translate("alreadyRegistered") %></p>
-            <p><a href="login.html"><%= translate("visitLoginPage") %></a></p>
+            <p><a id="showLoginBtn"><%= translate("visitLoginPage") %></a></p>
         </div>
     </div>
 </div>

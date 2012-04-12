@@ -26,13 +26,8 @@ nano.Router = Backbone.Router.extend({
         nano.instances.userStatistics = new nano.views.UserStatistics({el : '#user-statistics'});
         nano.instances.portfolio = new nano.views.Portfolio({el : '#portfolio'});
         nano.instances.login = new nano.views.Login({el : '#login'});
-<<<<<<< HEAD
         nano.instances.registration = new nano.views.Registration({el : '#registration'});
-        
-        //nano.instances.positions = new nano.views.Positions({el : '#positions'});
-=======
         nano.instances.positions = new nano.views.Positions({el : '#positions'});
->>>>>>> origin/master
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#loading');

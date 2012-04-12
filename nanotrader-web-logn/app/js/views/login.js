@@ -8,7 +8,8 @@ nano.views.Login = Backbone.View.extend({
      * Bind the events functions to the different HTML elements
      */
     events : {
-        'click #loginBtn' : 'login'
+        'click #loginBtn' : 'login',
+        'click #showRegistrationBtn' : 'registration'
     },
 
     /**
@@ -49,6 +50,15 @@ nano.views.Login = Backbone.View.extend({
                 }
             }
             this.$el.show();
+    },
+
+    /**
+     * Registration event
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return void
+     */
+    registration : function() {
+        window.location = nano.conf.hash.registration;
     },
 
     /**

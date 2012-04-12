@@ -30,13 +30,9 @@ nano.conf.tpls = {
     footer : nano.conf.tplRoot + 'footer.tpl',
     login : nano.conf.tplRoot + 'login.tpl',
     portfolio : nano.conf.tplRoot + 'portfolio.tpl',
-<<<<<<< HEAD
+    positions : nano.conf.tplRoot + 'positions.tpl',
     userStatistics : nano.conf.tplRoot + 'userStatistics.tpl',
     registration : nano.conf.tplRoot + 'registration.tpl'
-=======
-    positions : nano.conf.tplRoot + 'positions.tpl',
-    userStatistics : nano.conf.tplRoot + 'userStatistics.tpl'
->>>>>>> origin/master
 };
 
 /**

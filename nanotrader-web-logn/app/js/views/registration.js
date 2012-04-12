@@ -8,7 +8,8 @@ nano.views.Registration = Backbone.View.extend({
      * Bind the events functions to the different HTML elements
      */
     events : {
-        'click #registrationBtn' : 'registration'
+        'click #registrationBtn' : 'registration',
+        'click #showLoginBtn' : 'login'
     },
     
     /**
@@ -154,5 +155,9 @@ nano.views.Registration = Backbone.View.extend({
             matchpasswdError.removeClass('hide');
             matchpasswdControl.addClass('error');
         }
+    },
+
+    login : function (){
+        window.location = nano.conf.hash.login;
     }
 });
