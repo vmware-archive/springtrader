@@ -43,5 +43,18 @@ nano.strings = {
     totalLogins : 'Total Logins',
     sessionCreatedDate : 'Session Created Date',
     sessionExpired : 'Your session has expired. Please login in to continue.',
-    contactUs : 'Contact Us'
+    contactUs : 'Contact Us',
+    registerUserName : 'Register New User',
+    enterAccountDetails : 'Please enter your account details',
+    fullName : 'Full name',
+    passwordConfirmation : 'Password Confirmation',
+    passwordMatching : 'Please make sure Password fields are matching',
+    userId : 'User ID',
+    creditCardNumber : 'Credit Card Number',
+    address : 'Address',
+    register : 'Register',
+    alreadyRegistered : 'If you already registered enter your login and password on login page',
+    visitLoginPage : 'Visit login page',
+    nanoTraderLogin : 'NanoTrader Login',
+    emptyFieldError : 'Please complete all the registration fields.'
 };

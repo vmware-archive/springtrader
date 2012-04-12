@@ -28,7 +28,8 @@ nano.conf.tpls = {
     footer : nano.conf.tplRoot + 'footer.tpl',
     login : nano.conf.tplRoot + 'login.tpl',
     portfolio : nano.conf.tplRoot + 'portfolio.tpl',
-    userStatistics : nano.conf.tplRoot + 'userStatistics.tpl'
+    userStatistics : nano.conf.tplRoot + 'userStatistics.tpl',
+    registration : nano.conf.tplRoot + 'registration.tpl'
 };
 
 /**
@@ -39,5 +40,6 @@ nano.conf.hash = {
     login  : '#login',
     dashboard : '#dashboard',
     portfolio : '#portfolio',
-    trade : '#trade'
+    trade : '#trade',
+    registration : '#registration'
 };

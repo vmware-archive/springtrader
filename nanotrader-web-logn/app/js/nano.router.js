@@ -14,7 +14,8 @@ nano.Router = Backbone.Router.extend({
         "login/:error"  : "login",    // #login page
         "login"         : "login",    // #login page
         "dashboard"     : "dashboard",   // #dashboard page
-        ""              : "dashboard" // #dashboard page
+        ""              : "dashboard", // #dashboard page
+        "registration"  : "registration" // #registration page
     },
 
     initialize: function() {
@@ -25,6 +26,8 @@ nano.Router = Backbone.Router.extend({
         nano.instances.userStatistics = new nano.views.UserStatistics({el : '#user-statistics'});
         nano.instances.portfolio = new nano.views.Portfolio({el : '#portfolio'});
         nano.instances.login = new nano.views.Login({el : '#login'});
+        nano.instances.registration = new nano.views.Registration({el : '#registration'});
+        
         //nano.instances.positions = new nano.views.Positions({el : '#positions'});
 
         //Store the dom Object for the loading message div.
@@ -121,6 +124,16 @@ nano.Router = Backbone.Router.extend({
         else {
             nano.utils.hideAll();
             nano.instances.login.render(error);
+        }
+    },
+    
+    registration: function(error){
+        if(nano.utils.loggedIn()) {
+            nano.utils.goTo( nano.conf.hash.dashboard );
+        }
+        else {
+            nano.utils.hideAll();
+            nano.instances.registration.render(error);
         }
     }
 });

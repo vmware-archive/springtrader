@@ -1,0 +1,76 @@
+<div class="row clearfix">
+        <div class="span9 columns">
+            <form class="form-horizontal">
+                <fieldset>
+                    <h3><%= translate("registerUserName") %><span><%= translate("enterAccountDetails") %></span></h3>
+                    <div id="registration-error" class="hide span8 alert alert-block alert-error fade in">
+                        <a data-dismiss="alert" class="close">x</a>
+                        <h4 class="alert-heading"><%= translate("ohSnap") %></h4>
+                        <p></p>
+                    </div>
+                    <div class="span4">
+                        <div id="fullname-control" class="control-group">
+                            <label for="fullname-input" class="control-label"><%= translate("fullName") %>:</label>
+                            <div class="controls">
+                                <input type="text" value="" id="fullname-input" class="input-xlarge focused">
+                            </div>
+                        </div>
+                        <div id="email-control" class="control-group">
+                            <label class="control-label"><%= translate("email") %>:</label>
+                            <div class="controls">
+                                <input type="text" value="" id="email-input" class="input-xlarge focused">
+                            </div>
+                        </div>
+                        <div id="password-control" class="control-group">
+                            <label class="control-label"><%= translate("password") %>:</label>
+                            <div class="controls">
+                                <input type="password" value="" id="password-input" class="input-xlarge focused">
+                            </div>
+                        </div>
+                        <div id="matchpasswd-control" class="control-group error">
+                            <label for="matchpasswd-input" class="control-label"><%= translate("passwordConfirmation") %>:</label>
+                            <div class="controls">
+                                <input type="password" id="matchpasswd-input" class="input-xlarge focused"><br/>
+                                <span id="matchpasswd-error" class="help-inline"><%= translate("passwordMatching") %></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div id="userid-control" class="control-group">
+                            <label for="userid-input" class="control-label"><%= translate("userId") %>:</label>
+                            <div class="controls">
+                                <input type="text" value="" id="userid-input" class="input-xlarge focused">
+                            </div>
+                        </div>
+                        <div id="openingbalance-control" class="control-group">
+                            <label class="control-label"><%= translate("openingBalance") %>:</label>
+                            <div class="controls">
+                                <input type="text" value="" id="openingbalance-input" class="input-xlarge focused">
+                            </div>
+                        </div>
+                        <div id="creditcard-control" class="control-group">
+                            <label class="control-label"><%= translate("creditCardNumber") %>:</label>
+                            <div class="controls">
+                                <input type="text" value="" id="creditcard-input" class="input-xlarge focused">
+                            </div>
+                        </div>
+                        <div id="address-control" class="control-group">
+                            <label class="control-label"><%= translate("address") %>:</label>
+                            <div class="controls">
+                                <input type="text" value="" id="address-input" class="input-xlarge focused">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button id="registrationBtn" class="btn green-btn"><%= translate("register") %></button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="span2 columns sidebar">
+            <h3><%= translate("nanoTraderLogin") %></h3>
+            <p><%= translate("alreadyRegistered") %></p>
+            <p><a href="login.html"><%= translate("visitLoginPage") %></a></p>
+        </div>
+    </div>
+</div>
