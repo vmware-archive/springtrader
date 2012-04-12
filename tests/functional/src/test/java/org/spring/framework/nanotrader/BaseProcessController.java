@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseProcessController {
-  enum ProcessType { TC_SERVER };
+  enum ProcessType { TC_SERVER, RABBIT_MQ};
   ProcessType pType = ProcessType.TC_SERVER;
   List<Integer> pids = new ArrayList<Integer>();
   
