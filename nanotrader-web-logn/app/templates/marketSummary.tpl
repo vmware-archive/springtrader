@@ -6,17 +6,19 @@
             </tr>
             <tr class="caps">
                 <% for (var i in topGainers) { %>
-                <td title="<%= topGainers[i].companyname %>"><%= topGainers[i].symbol %></td>
+                <td id="ms-tg-sym-<%= i %>" title=""></td>
                 <% } %>
             </tr>
             <tr>
                 <% for (var i in topGainers) { %>
-                <td title="<%= translate("price") %>"><%= nano.utils.round(topGainers[i].price) %></td>
+                <td id="ms-tg-price-<%= i %>" title=""></td>
                 <% } %>
             </tr>
             <tr>
                 <% for (var i in topGainers) { %>
-                <td title="<%= translate("change") %>">+<%= nano.utils.round(topGainers[i].change1) %><span>&uarr;</span></td>
+                <td id="ms-tg-change-<%= i %>" title="">
+                    <span>&uarr;</span>
+                </td>
                 <% } %>
             </tr>
         </table>
@@ -28,17 +30,16 @@
             </tr>
             <tr>
                 <td><%= translate("index") %>:</td>
-                <td><%= nano.utils.round(tradeStockIndexAverage) %></td>
+                <td id="ms-index"></td>
             </tr>
             <tr>
                 <td><%= translate("volume") %>:</td>
-                <td><%= nano.utils.round(tradeStockIndexVolume) %></td>
+                <td id="ms-volume"></td>
             </tr>
             <tr>
                 <td><%= translate("change") %>:</td>
-                <td class="<%= (percentGain > 0 ? "green-color" : "red-color") %>">
-                <% print((percentGain > 0 ? "+" : "") + nano.utils.round(percentGain)) %>
-                <span><%= (percentGain > 0 ? "&uarr;" : "&darr;") %></span>
+                <td id="ms-change" class="">
+                <span id="ms-change-arrow"></span>
                 </td>
             </tr>
         </table>
@@ -50,17 +51,17 @@
             </tr>
             <tr class="caps">
                 <% for (var i in topLosers) { %>
-                <td title="<%= topLosers[i].companyname %>"><%= topLosers[i].symbol %></td>
+                <td id="ms-tl-sym-<%= i %>" title=""></td>
                 <% } %>
             </tr>
             <tr>
                 <% for (var i in topLosers) { %>
-                <td title="<%= translate("price") %>"><%= nano.utils.round(topLosers[i].price) %></td>
+                <td id="ms-tl-price-<%= i %>" title=""></td>
                 <% } %>
             </tr>
             <tr>
                 <% for (var i in topLosers) { %>
-                <td title="<%= translate("change") %>"><!--&minus;--><%= nano.utils.round(topLosers[i].change1) %><span>&darr;</span></td>
+                <td id="ms-tl-change-<%= i %>" title=""><span>&darr;</span></td>
                 <% } %>
             </tr>
         </table>

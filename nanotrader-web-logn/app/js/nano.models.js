@@ -69,7 +69,24 @@ nano.models.Account = Backbone.Model.extend({
  */
 nano.models.AccountProfile = Backbone.Model.extend({
     idAttribute: 'profileid',
-    urlRoot : nano.conf.urls.accountProfile
+    urlRoot : nano.conf.urls.accountProfile,
+    url: function() {
+        return this.urlRoot + '/' + this.id;
+    }
+});
+
+/**
+ * Model to interact with the Account Profile Object
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.models.PortfolioSummary = Backbone.Model.extend({
+    initialize: function(options) {
+        this.accountid = options.accountid;
+    },
+    urlRoot : nano.conf.urls.portfolioSummary,
+    url: function() {
+        return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+    }
 });
 
 /**

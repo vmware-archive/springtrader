@@ -3,10 +3,11 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.conf = {
-    sessionCookieName : 'nanotraderSession',      // Name of the Cookie that will store the session info in the browser
-    urlRoot : '/spring-nanotrader-services/api/', // Path to the API service
+    sessionCookieName : 'nanotraderSession',       // Name of the Cookie that will store the session info in the browser
+    urlRoot : '/spring-nanotrader-services/api/',  // Path to the API service
     tplRoot : './templates/',                      // Path to the Templates directory
-    accountIdUrlKey : '{accountid}'               // Key in the api urls that's gonna be replaced with the actual accountid
+    accountIdUrlKey : '{accountid}',               // Key in the api urls that's gonna be replaced with the actual accountid
+    marketSummaryUpdateMillisecs : 10000           // Interval of milliseconds in which the Market Summary section updates
 };
 /**
  * API urls
@@ -18,6 +19,7 @@ nano.conf.urls = {
     accountProfile : nano.conf.urlRoot + 'accountProfile',
     marketSummary : nano.conf.urlRoot + 'marketSummary',
     holdingSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdingSummary',
+    portfolioSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/portfolioSummary',
     holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holding',
 };
 
@@ -28,8 +30,13 @@ nano.conf.tpls = {
     footer : nano.conf.tplRoot + 'footer.tpl',
     login : nano.conf.tplRoot + 'login.tpl',
     portfolio : nano.conf.tplRoot + 'portfolio.tpl',
+<<<<<<< HEAD
     userStatistics : nano.conf.tplRoot + 'userStatistics.tpl',
     registration : nano.conf.tplRoot + 'registration.tpl'
+=======
+    positions : nano.conf.tplRoot + 'positions.tpl',
+    userStatistics : nano.conf.tplRoot + 'userStatistics.tpl'
+>>>>>>> origin/master
 };
 
 /**

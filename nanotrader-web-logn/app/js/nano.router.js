@@ -26,9 +26,13 @@ nano.Router = Backbone.Router.extend({
         nano.instances.userStatistics = new nano.views.UserStatistics({el : '#user-statistics'});
         nano.instances.portfolio = new nano.views.Portfolio({el : '#portfolio'});
         nano.instances.login = new nano.views.Login({el : '#login'});
+<<<<<<< HEAD
         nano.instances.registration = new nano.views.Registration({el : '#registration'});
         
         //nano.instances.positions = new nano.views.Positions({el : '#positions'});
+=======
+        nano.instances.positions = new nano.views.Positions({el : '#positions'});
+>>>>>>> origin/master
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#loading');
@@ -45,13 +49,22 @@ nano.Router = Backbone.Router.extend({
                 nano.containers.loading.hide();
 
                 // Render the Market Summary with the newly fetched info
-                nano.instances.marketSummary.setModel(model);
-                nano.instances.marketSummary.render();
+                nano.instances.marketSummary.render(model);
             },
             error : function(model, response){
                 // Error message?
             }
-       });
+        });
+
+        // Create an interval to update the Market Summary section every X amount of time
+        window.setInterval(function(){
+            marketSummary.fetch({
+                success : function(model, response){
+                    nano.instances.marketSummary.update(model);
+                }
+            });
+       },
+       nano.conf.marketSummaryUpdateMillisecs);
     },
 
     help: function() {
@@ -66,28 +79,30 @@ nano.Router = Backbone.Router.extend({
             nano.instances.navbar.render();
 
             var modelCount = 0;
-            var models = [
-                new nano.models.Account({accountid : nano.session.accountid}),
-                new nano.models.HoldingSummary({ accountid : nano.session.accountid }),
-                new nano.models.Holdings({ accountid : nano.session.accountid })
-            ];
+            var models = {
+                account : new nano.models.Account({accountid : nano.session.accountid}),
+                accountProfile : new nano.models.AccountProfile({ profileid : nano.session.profileid }),
+                holdingSummary : new nano.models.HoldingSummary({ accountid : nano.session.accountid }),
+                portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
+                //holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
+            };
 
             var onFetchSuccess = function() {
-                if (++modelCount == models.length)
+                if (++modelCount == _.keys(models).length)
                 {
                     nano.containers.loading.hide();
 
-                    // Render the Account Summary View
-                    nano.instances.accountSummary.render(models[0]); //==> Account Model
-
                     // Render the User Statistics View
-                    nano.instances.userStatistics.render(models[0]); //==> Account Model
+                    nano.instances.userStatistics.render(models.account);
+
+                    // Render the Account Summary View
+                    nano.instances.accountSummary.render(models.accountProfile);
 
                     // Render the Portfolio View
-                    nano.instances.portfolio.render(models[1]); //==> HoldingSummary Model
+                    nano.instances.portfolio.render(models.portfolioSummary, models.account);
 
                     // Render the Positions View
-                    //nano.instances.positions.render(models[2]); //==> Holdings Collection
+                    nano.instances.positions.render(models.holdingSummary);
                 }
             };
             for (var i in models)
@@ -96,7 +111,6 @@ nano.Router = Backbone.Router.extend({
                     success : onFetchSuccess,
                     error : function(model, error){
                         // What do we do?
-                        console.log(error);
                         switch( error.status ) {
                             case 403:
                                 nano.utils.logout();
