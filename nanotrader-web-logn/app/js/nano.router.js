@@ -15,22 +15,24 @@ nano.Router = Backbone.Router.extend({
         "login"         : "login",    // #login page
         "dashboard"     : "dashboard",   // #dashboard page
         ""              : "dashboard", // #dashboard page
-        "registration"  : "registration" // #registration page
+        "registration"  : "registration", // #registration page
+        "portfolio"     : "portfolio", // #portfolio page
+        "trade"         : "trade" // #trade page
     },
 
     initialize: function() {
-        nano.instances.navbar = new nano.views.Navbar({ el : '#navbar'});
-        nano.instances.footer = new nano.views.Footer({ el : '#footer'});
-        nano.instances.marketSummary = new nano.views.MarketSummary({el : '#market-summary'});
-        nano.instances.accountSummary = new nano.views.AccountSummary({el : '#account-summary'});
-        nano.instances.userStatistics = new nano.views.UserStatistics({el : '#user-statistics'});
-        nano.instances.portfolio = new nano.views.Portfolio({el : '#portfolio'});
-        nano.instances.login = new nano.views.Login({el : '#login'});
-        nano.instances.registration = new nano.views.Registration({el : '#registration'});
-        nano.instances.positions = new nano.views.Positions({el : '#positions'});
+        nano.instances.navbar = new nano.views.Navbar({ el : '#nc-navbar'});
+        nano.instances.footer = new nano.views.Footer({ el : '#nc-footer'});
+        nano.instances.marketSummary = new nano.views.MarketSummary({el : '#nc-market-summary'});
+        nano.instances.accountSummary = new nano.views.AccountSummary({el : '#nc-account-summary'});
+        nano.instances.userStatistics = new nano.views.UserStatistics({el : '#nc-user-statistics'});
+        nano.instances.portfolio = new nano.views.Portfolio({el : '#nc-portfolio'});
+        nano.instances.login = new nano.views.Login({el : '#nc-login'});
+        nano.instances.registration = new nano.views.Registration({el : '#nc-registration'});
+        nano.instances.positions = new nano.views.Positions({el : '#nc-positions'});
 
         //Store the dom Object for the loading message div.
-        nano.containers.loading = $('#loading');
+        nano.containers.loading = $('#nc-loading');
 
         // Render the footer since it's always shown.
         nano.instances.footer.render();
@@ -143,6 +145,26 @@ nano.Router = Backbone.Router.extend({
         else {
             nano.utils.hideAll();
             nano.instances.registration.render(error);
+        }
+    },
+
+    portfolio: function() {
+        if(nano.utils.loggedIn()) {
+            nano.utils.hideAll();
+            nano.instances.navbar.render(nano.conf.hash.portfolio);
+        }
+        else {
+            nano.utils.goTo( nano.conf.hash.login );
+        }
+    },
+
+    trade: function() {
+        if(nano.utils.loggedIn()) {
+            nano.utils.hideAll();
+            nano.instances.navbar.render(nano.conf.hash.trade);
+        }
+        else {
+            nano.utils.goTo( nano.conf.hash.login );
         }
     }
 });
