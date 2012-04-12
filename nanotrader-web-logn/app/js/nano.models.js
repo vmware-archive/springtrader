@@ -71,7 +71,12 @@ nano.models.AccountProfile = Backbone.Model.extend({
     idAttribute: 'profileid',
     urlRoot : nano.conf.urls.accountProfile,
     url: function() {
-        return this.urlRoot + '/' + this.id;
+        var url = this.urlRoot;
+        if (!this.isNew())
+        {
+            url += '/' + this.id;
+        }
+        return url;
     }
 });
 
