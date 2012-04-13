@@ -1,4 +1,3 @@
-
 /** 
  * Router class for the application: http://documentcloud.github.com/backbone/#Router
  * @author Carlos Soto <carlos.soto@lognllc.com>
@@ -17,12 +16,13 @@ nano.Router = Backbone.Router.extend({
         ""              : "dashboard", // #dashboard page
         "registration"  : "registration", // #registration page
         "portfolio"     : "portfolio", // #portfolio page
-        "trade"         : "trade" // #trade page
+        "trade"         : "trade", // #trade page
+        "profile"       : "profile" // #profile page
     },
 
     initialize: function() {
-        nano.instances.navbar = new nano.views.Navbar({ el : '#nc-navbar'});
-        nano.instances.footer = new nano.views.Footer({ el : '#nc-footer'});
+        nano.instances.navbar = new nano.views.Navbar({el : '#nc-navbar'});
+        nano.instances.footer = new nano.views.Footer({el : '#nc-footer'});
         nano.instances.marketSummary = new nano.views.MarketSummary({el : '#nc-market-summary'});
         nano.instances.accountSummary = new nano.views.AccountSummary({el : '#nc-account-summary'});
         nano.instances.userStatistics = new nano.views.UserStatistics({el : '#nc-user-statistics'});
@@ -30,6 +30,7 @@ nano.Router = Backbone.Router.extend({
         nano.instances.login = new nano.views.Login({el : '#nc-login'});
         nano.instances.registration = new nano.views.Registration({el : '#nc-registration'});
         nano.instances.positions = new nano.views.Positions({el : '#nc-positions'});
+        nano.instances.profile = new nano.views.Profile({el : '#nc-profile'});
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#nc-loading');
@@ -162,6 +163,32 @@ nano.Router = Backbone.Router.extend({
         if(nano.utils.loggedIn()) {
             nano.utils.hideAll();
             nano.instances.navbar.render(nano.conf.hash.trade);
+        }
+        else {
+            nano.utils.goTo( nano.conf.hash.login );
+        }
+    },
+    
+    profile: function() {
+        if(nano.utils.loggedIn()) {
+            nano.utils.hideAll();
+            // Hide the Market Summary on the profile page
+            nano.containers['marketSummary'].hide();
+            nano.instances.navbar.render();
+            // Set the Account profile model with the profileid of the current user
+            var model = new nano.models.AccountProfile({ profileid : nano.session.profileid })
+            
+            var onFetchSuccess = function() {
+                //alert(JSON.stringify(model.toJSON()));
+                nano.instances.profile.render(model);
+            }
+            
+            model.fetch({
+                success : onFetchSuccess,
+                error : function(error){
+                    alert('An unknown error has occured, please try again later.');
+                }
+            });
         }
         else {
             nano.utils.goTo( nano.conf.hash.login );

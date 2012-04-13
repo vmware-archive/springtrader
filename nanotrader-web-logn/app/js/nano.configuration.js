@@ -32,7 +32,8 @@ nano.conf.tpls = {
     portfolio : nano.conf.tplRoot + 'portfolio.tpl',
     positions : nano.conf.tplRoot + 'positions.tpl',
     userStatistics : nano.conf.tplRoot + 'userStatistics.tpl',
-    registration : nano.conf.tplRoot + 'registration.tpl'
+    registration : nano.conf.tplRoot + 'registration.tpl',
+    profile : nano.conf.tplRoot + 'profile.tpl'
 };
 
 /**
@@ -44,5 +45,6 @@ nano.conf.hash = {
     dashboard : '#dashboard',
     portfolio : '#portfolio',
     trade : '#trade',
-    registration : '#registration'
+    registration : '#registration',
+    profile : '#profile'
 };

@@ -59,5 +59,8 @@ nano.strings = {
     alreadyRegistered : 'If you already registered enter your login and password on login page',
     visitLoginPage : 'Visit login page',
     nanoTraderLogin : 'NanoTrader Login',
-    emptyFieldError : 'Please complete all the registration fields.'
+    emptyFieldError : 'Please complete all the registration fields.',
+    newPassword : 'New Password',
+    accountProfile : 'Account Profile',
+    update : 'Update'
 };
