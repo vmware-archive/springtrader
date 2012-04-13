@@ -27,16 +27,22 @@ nano.views.AccountSummary = Backbone.View.extend({
     /**
      * Renders the Account Summary View
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object model: Instance of nano.models.AccountSummary
+     * @param Object account: Instance of nano.models.account
+     * @param Object portfolioSummary: Instance of nano.models.PortfolioSummary
      * @return void
      */
-     render: function(model) {
-            if (model)
-            {
-                this.model = model;
-            }
-            var accountSummary = this.template(this.model.get('accounts')[0]);
-            this.$el.html(accountSummary);
-            this.$el.show();
+     render : function(account, portfolioSummary) {
+        if (portfolioSummary)
+        {
+            this.portfolioSummary = portfolioSummary;
+        }
+        if (account)
+        {
+            this.account = account;
+        }
+        var data = _.extend(portfolioSummary.toJSON(), account.toJSON());
+        var accountSummary = this.template(data);
+        this.$el.html(accountSummary);
+        this.$el.show();
     }
 });

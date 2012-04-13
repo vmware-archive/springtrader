@@ -26,11 +26,11 @@
     /**
      * Renders the Portfolio View
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object portfolioSummary: Instance of nano.models.PortfolioSummary
      * @param Object account: Instance of nano.models.account
+     * @param Object portfolioSummary: Instance of nano.models.PortfolioSummary
      * @return void
      */
-     render : function(portfolioSummary, account) {
+     render : function(account, portfolioSummary) {
         if (portfolioSummary)
         {
             this.portfolioSummary = portfolioSummary;
