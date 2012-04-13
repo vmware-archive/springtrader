@@ -36,34 +36,89 @@ nano.views.Profile = Backbone.View.extend({
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
      * @return void
      */
-    //render: function(errorKey) {
-    render: function() {
+    render: function(model) {
         if ( !this.$el.html() )
         {
-            var profile = this.template();
-            this.$el.html(profile);
-            //alert(JSON.stringify(nano.session));
-            //sacar el profile del usuario para completar los campos del profile
-            
             // Set the Account Profile model
-            this.model = new nano.models.AccountProfile();
+            this.model = model;
+            var profile = this.template(this.model.toJSON());
             
-            
-            
-            //this.$('#container-page').addClass('profile-page');
-            
-            //if (errorKey)
-            //{
-            //    var registrationError = this.$('#registration-error');
-            //    registrationError.find('p').html(translate(errorKey));
-            //    registrationError.removeClass('hide');
-            //}
+            this.$el.html(profile);
         }
         this.$el.show();
     },
     
-    update : function (){
-        alert('click');
+    /**
+     * Update event
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @return void
+     */
+    update : function (event){
+        var matchpasswdControl = this.$('#matchpasswd-control');        
+        var matchpasswdError = this.$('#matchpasswd-error');
+        var updateError = this.$('#update-error');
+        
+        matchpasswdControl.removeClass('error');
+        matchpasswdError.addClass('hide');
+        updateError.addClass('hide');
+        
+        event.preventDefault();
+        
+        var fullname = this.$('#fullname-input').val();
+        var email = this.$('#email-input').val();
+        var password = this.$('#password-input').val();
+        var matchpasswd = this.$('#matchpasswd-input').val();
+        var username = this.$('#username-input').val();
+        var creditcard = this.$('#creditcard-input').val();
+        var address = this.$('#address-input').val();
+        var view = this;
+        
+        var inputArray = [fullname, email, password, matchpasswd, username, creditcard, address];
+        var emptyField = false;
+        
+        for(var i = 0, j = inputArray.length; i < j; i++) {
+            if(inputArray[i] == ''){
+                updateError.find('p').html(translate('emptyFieldError'));
+                updateError.removeClass('hide');
+                emptyField = true;
+                break
+            }
+        }
+        
+        // Update model callbacks
+        var callbacks = {
+            success : function() {
+                view.$('#password-input').val('');
+                view.$('#matchpasswd-input').val('');
+                // Show the loading page and render the dashboard
+                nano.utils.goTo( nano.conf.hash.dashboard );
+            },
+            error : function() {
+                updateError.find('p').html(translate('unknowError'));
+                updateError.removeClass('hide');
+            }
+        };
+        
+        if (emptyField == false){
+            if(password == matchpasswd){
+                // Save the new account profile
+                this.model.save(
+                    {
+                        fullname: fullname,
+                        email: email,
+                        passwd: password,
+                        userid: username,
+                        creditcard: creditcard,
+                        address: address
+                    },
+                    callbacks
+                );
+            }
+            else {
+                matchpasswdError.removeClass('hide');
+                matchpasswdControl.addClass('error');
+            }
+        }
     }
     
 });

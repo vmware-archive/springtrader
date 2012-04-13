@@ -10,7 +10,8 @@ nano.views.Navbar = Backbone.View.extend({
     events : {
         'click #logout' : 'logout',
         'click #nb-logo' : 'navigationClick',
-        'click .nav-link' : 'navigationClick'
+        'click .nav-link' : 'navigationClick',
+        'click #profile' : 'profile',
     },
 
     /**
@@ -136,5 +137,14 @@ nano.views.Navbar = Backbone.View.extend({
         {
             window.location = nano.conf.hash.dashboard;
         }
-    }
+    },
+    
+    /**
+     * Profile Click Event
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @return void
+     */
+    profile : function() {
+        nano.utils.goTo( nano.conf.hash.profile );
+    },
 });

@@ -179,7 +179,6 @@ nano.Router = Backbone.Router.extend({
             var model = new nano.models.AccountProfile({ profileid : nano.session.profileid })
             
             var onFetchSuccess = function() {
-                //alert(JSON.stringify(model.toJSON()));
                 nano.instances.profile.render(model);
             }
             

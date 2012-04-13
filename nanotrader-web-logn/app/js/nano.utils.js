@@ -128,6 +128,7 @@ nano.utils.getHttpHeaders = function(){
  * @return Object
  */
 nano.utils.hideAll = function() {
+    nano.containers['marketSummary'].show();
     for (var i in nano.containers)
     {
         if (i != 'footer' && i != 'marketSummary')
