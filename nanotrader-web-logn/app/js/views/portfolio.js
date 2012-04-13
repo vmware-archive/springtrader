@@ -41,30 +41,12 @@
         }
         this.$el.html(this.template());
         this.$el.show();
+
         var totalAssets = portfolioSummary.get('totalMarketValue') + account.get('balance');
         var data = [
             [translate('cashBalance'), (account.get('balance') / totalAssets)],
             [translate('portfolioValue'), (portfolioSummary.get('totalMarketValue') / totalAssets)]
         ];
-        var plot1 = jQuery.jqplot ('ad-pie-chart', [data], {
-            grid: {
-                    //drawGridLines: true,        // wether to draw lines across the grid or not.
-                    //gridLineColor: '#cccccc',    // *Color of the grid lines.
-                    background: '#ffffff',      // CSS color spec for background color of grid.
-                    borderColor: '#ffffff',     // CSS color spec for border around grid.
-                    shadow: false               // draw a shadow for grid.
-            },
-            seriesDefaults: {
-                // Make this a pie chart.
-                renderer: jQuery.jqplot.PieRenderer,
-                rendererOptions: {
-                    // Put data labels on the pie slices.
-                    // By default, labels show the percentage of the slice.
-                    showDataLabels: true
-                }
-            },
-            legend: { show:true, location: 'e' }
-        });
-
+        var plot1 = nano.utils.renderPieChart('ad-pie-chart', data);
     }
 });

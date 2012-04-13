@@ -168,14 +168,81 @@ nano.utils.getTemplate = function(url){
 /**
  * Redirects to a different url/application widget
  * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param string url: new location to go to
  * @return Object
  */
 nano.utils.goTo = function(url) {
-    window.location = url
+    window.location = url;
 }
 
 /**
- * Alias for the translation function
+ * Renders a pie chart on the desired html id
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param string htmlId: id of the container (div) for the pie chart
+ * @param array data: info to be rendered, array of array pairs of label and value
+ * @return Object: plotter object.
+ */
+nano.utils.renderPieChart = function(htmlId, data) {
+    var plot = jQuery.jqplot(htmlId, [data], {
+        grid: {
+                background: '#ffffff',      // CSS color spec for background color of grid.
+                borderColor: '#ffffff',     // CSS color spec for border around grid.
+                shadow: false               // draw a shadow for grid.
+        },
+        seriesDefaults: {
+            // Make this a pie chart.
+            renderer: jQuery.jqplot.PieRenderer,
+            rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+            }
+        },
+        legend: { show:true, location: 'e' }
+    });
+    return plot;
+};
+
+/**
+ * Prints an amount with it's currency in proper format
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param int amount: number to add the currency to
+ * @return Object
+ */
+nano.utils.printCurrency = function(amount, decimals) {
+    var value = '';
+    if (amount < 0)
+    {
+        value += '-';
+        amount = Math.sqrt(Math.pow(amount, 2)); //Turn it into a positive value.
+    }
+    value += nano.conf.currency + nano.utils.round(amount, decimals);
+    return value;
+}
+
+/**
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * Handles API errors
+ * @param int amount: number to add the currency to
+ * @return Object
+ */
+nano.utils.onApiError = function(model, error){
+    // What do we do?
+    switch( error.status ) {
+        case 403:
+            nano.utils.logout();
+            nano.utils.goTo( nano.conf.hash.login + '/sessionExpired' );
+            break;
+        default:
+            // Error Message!
+            alert('An unknown error has occured, please try again later.');
+            break;
+    }
+};
+
+/**
+ * Aliases for the functions used in the views to make them shorter
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
- var translate = nano.utils.translate
+var translate = nano.utils.translate;
+var printCurrency = nano.utils.printCurrency;

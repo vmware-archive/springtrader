@@ -24,6 +24,7 @@ nano.Router = Backbone.Router.extend({
         nano.instances.navbar = new nano.views.Navbar({el : '#nc-navbar'});
         nano.instances.footer = new nano.views.Footer({el : '#nc-footer'});
         nano.instances.marketSummary = new nano.views.MarketSummary({el : '#nc-market-summary'});
+        nano.instances.portfolioSummary = new nano.views.PortfolioSummary({el : '#nc-portfolio-summary'});
         nano.instances.accountSummary = new nano.views.AccountSummary({el : '#nc-account-summary'});
         nano.instances.userStatistics = new nano.views.UserStatistics({el : '#nc-user-statistics'});
         nano.instances.portfolio = new nano.views.Portfolio({el : '#nc-portfolio'});
@@ -107,19 +108,7 @@ nano.Router = Backbone.Router.extend({
             {
                 models[i].fetch({
                     success : onFetchSuccess,
-                    error : function(model, error){
-                        // What do we do?
-                        switch( error.status ) {
-                            case 403:
-                                nano.utils.logout();
-                                nano.utils.goTo( nano.conf.hash.login + '/sessionExpired' );
-                                break;
-                            default:
-                                // Error Message!
-                                alert('An unknown error has occured, please try again later.');
-                                break;
-                        }
-                    }
+                    error : nano.utils.onApiError
                 });
             }
         }
@@ -150,9 +139,39 @@ nano.Router = Backbone.Router.extend({
     },
 
     portfolio: function() {
-        if(nano.utils.loggedIn()) {
+        if(nano.utils.loggedIn())
+        {
             nano.utils.hideAll();
+            nano.containers.loading.show();
             nano.instances.navbar.render(nano.conf.hash.portfolio);
+
+            var modelCount = 0;
+            var models = {
+                account : new nano.models.Account({accountid : nano.session.accountid}),
+                portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
+                holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
+            };
+
+            var onFetchSuccess = function() {
+                if (++modelCount == _.keys(models).length)
+                {
+                    nano.containers.loading.hide();
+
+                    // Render the Portfolio View
+                    nano.instances.portfolio.render(models.account, models.portfolioSummary);
+
+                    // Render the Portfolio Summary View
+                    nano.instances.portfolioSummary.render(models.portfolioSummary);
+
+                }
+            };
+            for (var i in models)
+            {
+                models[i].fetch({
+                    success : onFetchSuccess,
+                    error : nano.utils.onApiError
+                });
+            }
         }
         else {
             nano.utils.goTo( nano.conf.hash.login );

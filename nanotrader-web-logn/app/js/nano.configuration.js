@@ -7,7 +7,8 @@ nano.conf = {
     urlRoot : '/spring-nanotrader-services/api/',  // Path to the API service
     tplRoot : './templates/',                      // Path to the Templates directory
     accountIdUrlKey : '{accountid}',               // Key in the api urls that's gonna be replaced with the actual accountid
-    marketSummaryUpdateMillisecs : 10000           // Interval of milliseconds in which the Market Summary section updates
+    marketSummaryUpdateMillisecs : 15000,          // Interval of milliseconds in which the Market Summary section updates
+    currency : '$'                                 // Current currency is dollars
 };
 /**
  * API urls
@@ -25,6 +26,7 @@ nano.conf.urls = {
 
 nano.conf.tpls = {
     marketSummary : nano.conf.tplRoot + 'marketSummary.tpl',
+    portfolioSummary : nano.conf.tplRoot + 'portfolioSummary.tpl',
     navbar : nano.conf.tplRoot + 'navbar.tpl',
     accountSummary : nano.conf.tplRoot + 'accountSummary.tpl',
     footer : nano.conf.tplRoot + 'footer.tpl',

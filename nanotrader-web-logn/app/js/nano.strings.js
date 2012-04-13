@@ -3,6 +3,11 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.strings = {
+    portfolioSummary : 'Portfolio Summary',
+    numberOfHoldings : 'Number of Holdings',
+    purchaseBasics : 'Purchase Basics',
+    marketValue : 'Market Value',
+    totalGainLoss : 'Total Gain/Loss',
     dailyTopGains : 'Daily Top Gains',
     nanotrader : 'NanoTrader',
     dashboard : 'dashboard',
