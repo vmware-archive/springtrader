@@ -28,6 +28,7 @@ nano.conf.urls = {
 
 nano.conf.tpls = {
     holdings : nano.conf.tplRoot + 'holdings.tpl',
+    holdingItem : nano.conf.tplRoot + 'holdingItem.tpl',
     marketSummary : nano.conf.tplRoot + 'marketSummary.tpl',
     portfolioSummary : nano.conf.tplRoot + 'portfolioSummary.tpl',
     navbar : nano.conf.tplRoot + 'navbar.tpl',

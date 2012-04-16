@@ -31,10 +31,12 @@ nano.views.Holdings = Backbone.View.extend({
     /**
      * Renders the List Of Holdings View
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param nano.models.Holdings: Collection of holdings
+     * @param nano.models.Holdings model: Collection of holdings
+     * @param int page: page of the List of Holdings to display
      * @return void
      */
-     render: function(model) {
+     render: function(model, page) {
+         alert(page);
             if (model)
             {
                 this.model = model;

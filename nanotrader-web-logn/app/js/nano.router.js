@@ -16,6 +16,7 @@ nano.Router = Backbone.Router.extend({
         ""              : "dashboard", // #dashboard page
         "registration"  : "registration", // #registration page
         "portfolio"     : "portfolio", // #portfolio page
+        "portfolio/p:page" : "holdings", // #portolio - pagination of List of Holdings
         "trade"         : "trade", // #trade page
         "profile"       : "profile", // #profile page
         "contact"       : "contact" // #contact page
@@ -141,7 +142,11 @@ nano.Router = Backbone.Router.extend({
         }
     },
 
-    portfolio: function() {
+    portfolio: function(page) {
+        if (isNaN(page))
+        {
+            page = 1;
+        }
         if(nano.utils.loggedIn())
         {
             nano.utils.hideAll();
@@ -167,7 +172,7 @@ nano.Router = Backbone.Router.extend({
                     nano.instances.portfolioSummary.render(models.portfolioSummary);
 
                     // Render the List of Holdings View
-                    nano.instances.holdings.render(models.holdings);
+                    nano.instances.holdings.render(models.holdings, page);
 
                 }
             };
@@ -181,6 +186,22 @@ nano.Router = Backbone.Router.extend({
         }
         else {
             nano.utils.goTo( nano.conf.hash.login );
+        }
+    },
+
+    holdings: function (page) {
+        if (isNaN(page))
+        {
+            page = 1;
+        }
+        if (!nano.containers.holdings.html())
+        {
+            this.portfolio(page);
+        }
+        else
+        {
+            // Render the List of Holdings View
+            nano.instances.holdings.render(null, page);
         }
     },
 
