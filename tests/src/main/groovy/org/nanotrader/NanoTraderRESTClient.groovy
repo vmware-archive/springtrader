@@ -92,6 +92,14 @@ def writeExceptionToFile(ex) {
   logFile.flush()
 }
 
+
+def void logout(authToken=testAuthToken) {
+  def logoutPath = "/spring-nanotrader-services/api/logout"
+  def resp = nanotrader.get(path:"${logoutPath}",
+                            headers:[API_TOKEN:authToken])
+  assert resp.status == 200
+}
+
 def String getOrder(int accountid, int orderid, authToken=testAuthToken) {
   def orderPath = "/spring-nanotrader-services/api/account/" + accountid + "/order/" + orderid
   def resp = nanotrader.get(path:"${orderPath}",
@@ -717,6 +725,26 @@ def unsupportedVerificationTests() {
   testUnsupportedDeleteAllOrders()
   testUnsupportedUpdateQuote()
   testUnsupportedDeleteQuote()
+}
+
+def endTests() {
+  testLogout()
+}
+
+def testLogout() {
+  totalCount++
+  try {
+    getOrder(acctid, "all")
+    logout()
+    getOrder(acctid, "all", false, "401")
+    passCount++
+    println "testLogout PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testLogout FAIL";
+  }
 }
 
 /*
@@ -1500,6 +1528,7 @@ static main(args) {
   inst.unauthorizedVerificationTests()
   inst.unsupportedVerificationTests()
   inst.verificationTests()
+  inst.endTests()
   inst.printSummary()
 }
 }
