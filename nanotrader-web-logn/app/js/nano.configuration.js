@@ -22,6 +22,7 @@ nano.conf.urls = {
     holdingSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdingSummary',
     portfolioSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/portfolioSummary',
     holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holding',
+    orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order'
 };
 
 nano.conf.tpls = {
@@ -35,7 +36,9 @@ nano.conf.tpls = {
     positions : nano.conf.tplRoot + 'positions.tpl',
     userStatistics : nano.conf.tplRoot + 'userStatistics.tpl',
     registration : nano.conf.tplRoot + 'registration.tpl',
-    profile : nano.conf.tplRoot + 'profile.tpl'
+    profile : nano.conf.tplRoot + 'profile.tpl',
+    trade : nano.conf.tplRoot + 'trade.tpl',
+    contact : nano.conf.tplRoot + 'contact.tpl'
 };
 
 /**
@@ -48,5 +51,6 @@ nano.conf.hash = {
     portfolio : '#portfolio',
     trade : '#trade',
     registration : '#registration',
-    profile : '#profile'
+    profile : '#profile',
+    contact : '#contact'
 };

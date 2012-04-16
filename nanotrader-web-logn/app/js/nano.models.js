@@ -145,3 +145,42 @@ nano.models.Holdings = Backbone.Collection.extend({
         return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
     }
 });
+
+/**
+ * Model to interact with the Order Object
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ */
+nano.models.Order = Backbone.Model.extend({
+    idAttribute: 'orderid',
+    urlRoot : nano.conf.urls.orders,
+    url: function() {
+        var url = this.urlRoot;
+        if (!this.isNew())
+        {
+            url += '/' + this.id;
+        }
+        return url;
+    }
+});
+
+/**
+ * Collection to interact with the Orders Collection (list of Order Objects)
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ */
+nano.models.Orders = Backbone.Collection.extend({
+    model : nano.models.Order,
+    
+    initialize: function(options) {
+        this.accountid = options.accountid;
+    },
+    urlRoot : nano.conf.urls.orders,
+
+    /**
+     * Builds the url to fetch the Collection
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return string: Url for the Holdings Collection
+     */
+    url: function() {
+        return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+    }
+});

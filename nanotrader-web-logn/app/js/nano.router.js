@@ -17,7 +17,8 @@ nano.Router = Backbone.Router.extend({
         "registration"  : "registration", // #registration page
         "portfolio"     : "portfolio", // #portfolio page
         "trade"         : "trade", // #trade page
-        "profile"       : "profile" // #profile page
+        "profile"       : "profile", // #profile page
+        "contact"       : "contact" // #contact page
     },
 
     initialize: function() {
@@ -32,6 +33,9 @@ nano.Router = Backbone.Router.extend({
         nano.instances.registration = new nano.views.Registration({el : '#nc-registration'});
         nano.instances.positions = new nano.views.Positions({el : '#nc-positions'});
         nano.instances.profile = new nano.views.Profile({el : '#nc-profile'});
+        nano.instances.contact = new nano.views.Contact({el: '#nc-contact'});
+        // new trade page view
+        nano.instances.trade = new nano.views.Trade({el : '#nc-trade'});
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#nc-loading');
@@ -149,7 +153,7 @@ nano.Router = Backbone.Router.extend({
             var models = {
                 account : new nano.models.Account({accountid : nano.session.accountid}),
                 portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
-                holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
+                //holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
             };
 
             var onFetchSuccess = function() {
@@ -181,7 +185,22 @@ nano.Router = Backbone.Router.extend({
     trade: function() {
         if(nano.utils.loggedIn()) {
             nano.utils.hideAll();
+            nano.containers.loading.show();
             nano.instances.navbar.render(nano.conf.hash.trade);
+            
+            var orders = new nano.models.Orders({ accountid : nano.session.accountid });
+            
+            var onFetchSuccess = function() {
+                nano.containers.loading.hide();
+                
+                // render the trade view
+                nano.instances.trade.render(orders);
+            };
+            
+            orders.fetch({
+                success : onFetchSuccess,
+                error: nano.utils.onApiError
+            });
         }
         else {
             nano.utils.goTo( nano.conf.hash.login );
@@ -211,6 +230,18 @@ nano.Router = Backbone.Router.extend({
         else {
             nano.utils.goTo( nano.conf.hash.login );
         }
+    },
+    
+    contact: function() {
+        if(nano.utils.loggedIn()) {
+            nano.utils.hideAll();
+            nano.instances.navbar.render();
+            nano.instances.contact.render();
+        }
+        else {
+            nano.utils.hideAll();
+            nano.instances.contact.render();
+        }        
     }
 });
 

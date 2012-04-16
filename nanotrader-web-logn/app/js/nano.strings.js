@@ -67,5 +67,32 @@ nano.strings = {
     emptyFieldError : 'Please complete all the registration fields.',
     newPassword : 'New Password',
     accountProfile : 'Account Profile',
-    update : 'Update'
+    update : 'Update',
+    name : 'Name',
+    phone : 'Phone',
+    message : 'Message',
+    send : 'Send',
+    enterSymbol : 'Enter Symbol',
+    getQuote : 'Get Quote',
+    symbolDoesNotExist : 'Ticker symbol does not exist',
+    resentOrders : 'Resent orders',
+    orderId : 'Order ID',
+    orderStatus : 'Order Status',
+    creationDate : 'Creation Date',
+    completionDate : 'Completion Date',
+    transactionFee : 'Transaction Fee',
+    transactionType : 'Transaction Type',
+    // Sympol ???
+    sympol : 'Sympol',
+    symbol  : 'Symbol',
+    quantity : 'Quantity',
+    completed : 'Completed',
+    orderConfirmation: 'Order Confirmation',
+    ok : 'OK',
+    cancel : 'Cancel',
+    buy : 'Buy',
+    uncompleted : 'Uncompleted',
+    // Free ??? 
+    transactionFree : 'Transaction Free' 
+    
 };

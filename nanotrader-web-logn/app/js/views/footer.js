@@ -3,6 +3,15 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.views.Footer = Backbone.View.extend({
+    
+    /**
+     * Bind the events functions to the different HTML elements
+     */
+    events : {
+        'click #contactUsBtn' : 'contact',
+        'click #helpBtn' : 'help'
+    },
+    
     /**
      * Class constructor
      * @author Carlos Soto <carlos.soto@lognllc.com>
@@ -30,5 +39,13 @@ nano.views.Footer = Backbone.View.extend({
     render: function() {
             var footer = this.template();
             this.$el.html(footer);
+    },
+    
+    contact: function() {
+        window.location = nano.conf.hash.contact;
+    },
+    
+    help: function() {
+        alert('goto -> help');
     }
 });
