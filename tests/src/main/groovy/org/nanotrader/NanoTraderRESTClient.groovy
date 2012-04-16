@@ -585,7 +585,7 @@ def deleteAccountProfile(id=1, responseCode=405) {
 
 def deleteAllOrders(id=1, responseCode=405) {
   try {
-    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order"
+    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/orders"
     def resp = nanotrader.delete(path:"${orderPath}",
                                  headers:[API_TOKEN:testAuthToken])
     assert resp.status == responseCode
@@ -690,7 +690,7 @@ def verificationTests() {
   testAdvancedGetAccount()
   testAdvancedGetQuote()
   //testAdvancedCreateProfile()
-  //testAdvancedUpdateProfile()
+  testAdvancedUpdateProfile()
 }
 
 def unauthorizedVerificationTests() {
@@ -792,7 +792,7 @@ def testAdvancedUpdateProfile() {
   totalCount++
   try {
     getAccount(acctid)
-    updateAccountProfile(acctid, dummyUser, 'DummyPassword', 'Dummy Address')
+    updateAccountProfile(acctid, 'jack', 'jack', 'Dummy Address')
     getAccount(acctid)
 
     passCount++
@@ -1068,8 +1068,8 @@ def testCreateAccountProfile() {
 def testUpdateAccountProfile() {
   totalCount++
   try {
-    updateAccountProfile(acctid, "NewAddress")
-    //updateAccountProfile(2, "invalid_user", false)
+    updateAccountProfile(acctid, "jack", "jack", "NewAddress")
+    updateAccountProfile(unauthorizedAcctId, "jack", "jack", "NewAddress", false, 401)
 
     passCount++
     println "testUpdateAccountProfile PASS"
@@ -1445,7 +1445,7 @@ def testUnsupportedDeleteOrder() {
 def testUnsupportedDeleteAllOrders() {
   totalCount++
   try {
-    deleteAllOrders()
+    deleteAllOrders(acctid)
 
     passCount++
     println "testUnsupportedDeleteAllOrders PASS"
