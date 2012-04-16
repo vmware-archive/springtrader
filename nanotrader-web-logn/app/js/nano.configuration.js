@@ -8,7 +8,8 @@ nano.conf = {
     tplRoot : './templates/',                      // Path to the Templates directory
     accountIdUrlKey : '{accountid}',               // Key in the api urls that's gonna be replaced with the actual accountid
     marketSummaryUpdateMillisecs : 15000,          // Interval of milliseconds in which the Market Summary section updates
-    currency : '$'                                 // Current currency is dollars
+    currency : '$',                                // Current currency is dollars
+    itemsPerPage: 5,                                // Amount of items to be displayed on list views
 };
 /**
  * API urls
@@ -26,6 +27,7 @@ nano.conf.urls = {
 };
 
 nano.conf.tpls = {
+    holdings : nano.conf.tplRoot + 'holdings.tpl',
     marketSummary : nano.conf.tplRoot + 'marketSummary.tpl',
     portfolioSummary : nano.conf.tplRoot + 'portfolioSummary.tpl',
     navbar : nano.conf.tplRoot + 'navbar.tpl',

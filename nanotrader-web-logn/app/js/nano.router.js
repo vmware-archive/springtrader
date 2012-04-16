@@ -32,6 +32,7 @@ nano.Router = Backbone.Router.extend({
         nano.instances.login = new nano.views.Login({el : '#nc-login'});
         nano.instances.registration = new nano.views.Registration({el : '#nc-registration'});
         nano.instances.positions = new nano.views.Positions({el : '#nc-positions'});
+        nano.instances.holdings = new nano.views.Holdings({el: '#nc-holdings'});
         nano.instances.profile = new nano.views.Profile({el : '#nc-profile'});
         nano.instances.contact = new nano.views.Contact({el: '#nc-contact'});
         // new trade page view
@@ -84,10 +85,8 @@ nano.Router = Backbone.Router.extend({
             var modelCount = 0;
             var models = {
                 account : new nano.models.Account({accountid : nano.session.accountid}),
-                //accountProfile : new nano.models.AccountProfile({ profileid : nano.session.profileid }),
                 holdingSummary : new nano.models.HoldingSummary({ accountid : nano.session.accountid }),
                 portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
-                //holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
             };
 
             var onFetchSuccess = function() {
@@ -153,7 +152,7 @@ nano.Router = Backbone.Router.extend({
             var models = {
                 account : new nano.models.Account({accountid : nano.session.accountid}),
                 portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
-                //holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
+                holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
             };
 
             var onFetchSuccess = function() {
@@ -166,6 +165,9 @@ nano.Router = Backbone.Router.extend({
 
                     // Render the Portfolio Summary View
                     nano.instances.portfolioSummary.render(models.portfolioSummary);
+
+                    // Render the List of Holdings View
+                    nano.instances.holdings.render(models.holdings);
 
                 }
             };

@@ -32,7 +32,7 @@ nano.views.Login = Backbone.View.extend({
     template : _.template(nano.utils.getTemplate(nano.conf.tpls.login)),
 
     /**
-     * Renders the Account Summary View
+     * Renders the Login View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
      * @return void
