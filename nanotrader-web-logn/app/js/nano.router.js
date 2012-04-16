@@ -199,7 +199,7 @@ nano.Router = Backbone.Router.extend({
             
             orders.fetch({
                 success : onFetchSuccess,
-                error: nano.utils.onApiError
+                error: nano.utils.onApiErreor
             });
         }
         else {
@@ -208,23 +208,19 @@ nano.Router = Backbone.Router.extend({
     },
     
     profile: function() {
-        if(nano.utils.loggedIn()) {
-            nano.utils.hideAll();
+        if(nano.utils.loggedIn())
+        {
+            nano.utils.hideAll(false);
             // Hide the Market Summary on the profile page
-            nano.containers['marketSummary'].hide();
             nano.instances.navbar.render();
+
             // Set the Account profile model with the profileid of the current user
             var model = new nano.models.AccountProfile({ profileid : nano.session.profileid })
-            
-            var onFetchSuccess = function() {
-                nano.instances.profile.render(model);
-            }
-            
             model.fetch({
-                success : onFetchSuccess,
-                error : function(error){
-                    alert('An unknown error has occured, please try again later.');
-                }
+                success : function() {
+                nano.instances.profile.render(model);
+            },
+                error : nano.utils.onApiErreor
             });
         }
         else {
@@ -241,7 +237,7 @@ nano.Router = Backbone.Router.extend({
         else {
             nano.utils.hideAll();
             nano.instances.contact.render();
-        }        
+        }
     }
 });
 

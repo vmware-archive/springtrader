@@ -59,7 +59,7 @@ nano.views.Registration = Backbone.View.extend({
      * @return void
      */
     registration : function(event){
-        var matchpasswdControl = this.$('#matchpasswd-control');        
+        var matchpasswdControl = this.$('#matchpasswd-control');
         var matchpasswdError = this.$('#matchpasswd-error');
         var registrationError = this.$('#registration-error');
         

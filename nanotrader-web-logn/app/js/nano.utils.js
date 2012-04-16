@@ -125,13 +125,22 @@ nano.utils.getHttpHeaders = function(){
 /**
  * Hides all of the different UI components fon the User except from the Footer and the Market Summary
  * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param boolean showMarketSummary: tells whether to show the Market Summary section or not
  * @return Object
  */
-nano.utils.hideAll = function() {
-    nano.containers['marketSummary'].show();
+nano.utils.hideAll = function(showMarketSummary) {
+    if ( !_.isBoolean(showMarketSummary) )
+    {
+        var showMarketSummary = true;
+    }
+
+    if( showMarketSummary ) {
+        nano.containers['marketSummary'].show();
+    }
+
     for (var i in nano.containers)
     {
-        if (i != 'footer' && i != 'marketSummary')
+        if ( i != 'footer' && (i != 'marketSummary' || (i == 'marketSummary'&& !showMarketSummary)) )
         {
             nano.containers[i].hide();
         }
