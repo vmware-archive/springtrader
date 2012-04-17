@@ -49,10 +49,10 @@
 }body {
     background:url(../images/bg.gif);
     padding-top:110px;
-}#loading .logo, #loading .loading
+}#nc-loading .logo, #nc-loading .loading
 {
     margin: auto;
-}#loading .loading{
+}#nc-loading .loading{
     margin-top: 20px;
 }.loading
 {
@@ -417,19 +417,25 @@ h3 span{
     padding:5px;
 }
 .span6 .well.show-well table tr td:nth-child(even), .span6:last-child .well.show-well table tr td:nth-child(even) {
-  background-color: #f9f9f9;
   border-left:1px solid #e9e9e9; 
 }
-.span6 .well.show-well table tr:hover td:nth-child(even), .span6:last-child .well.show-well table tr:hover td:nth-child(even), .span6:last-child .well.show-well table tr:last-child:hover td:nth-child(odd) {
+.span6 .well.show-well table tr:hover td:nth-child(even),
+.span6:last-child .well.show-well table tr:hover td:nth-child(even),
+.span6:last-child .well.show-well table tr:last-child:hover td:nth-child(odd) {
   background-color: #f5f5f5;
-}table tbody tr.summary td, .span6 .well.show-well table tbody tr.summary:hover td, .span6 .well.show-well table tbody tr.summary td.average,
-.span6 .well.show-well table tr.summary:hover td:nth-child(even), .span6:last-child .well.show-well table tr.summary:hover td:nth-child(even), .span6:last-child .well.show-well table tr.summary:last-child:hover td:nth-child(odd)  {
-    background-color: #f0f6dd !important;
+}
+table tbody tr.summary td, 
+.span6 .well.show-well table tbody tr.summary:hover td,
+.span6 .well.show-well table tbody tr.summary td{
     border-bottom:1px solid #e9e9e9 !important;
 }
 .average {
-    color:#5daf1b;
     font:bold 18px/20px Arial, sans-serif;
+}
+.gray-background
+{
+  background-color: #f9f9f9;
+
 }
 .span12 .table-bordered {
     border:0;	
@@ -636,13 +642,13 @@ table td input {
 
 /* @group footer 
 --------------------------------------*/
-#footer {
+#nc-footer {
     padding:15px 30px;
     color:#757575;
     font:normal 11px/14px Arial, sans-serif;
-}#footer .nav {
+}#nc-footer .nav {
     margin:0 0 0 20px;
-}#footer .nav li, #footer .nav li a{
+}#nc-footer .nav li, #nc-footer .nav li a{
     display:inline;
 }
 /* @group make responsive (max-width: 979px)

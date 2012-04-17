@@ -1,8 +1,10 @@
-// namespace container
+/**
+ * Nano namespace object
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
 var nano = {
-    templates : {},
     utils : {},
-    ui : {},
+    views : {},
     instances : {},
     containers : {},
     models : {},
@@ -31,20 +33,37 @@ nano.utils.translate = function translate(key) {
     return value;
 }
 
-
+/**
+ * Fetches the session from it's container (cookie)
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object: Session data
+ */
 nano.utils.getSession = function() {
     return $.cookie( nano.conf.sessionCookieName );
 };
 
+/**
+ * Tells whether the session has been created or not.
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return boolean
+ */
 nano.utils.loggedIn = function() {
     var session = this.getSession();
     nano.session = session;
     return (session != null);
 };
 
+/**
+ * Logs the user into the system
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param string username: username to log in
+ * @param string password: user's password
+ * @param object callbacks: object with success and error callback
+ * @return boolean
+ */
 nano.utils.login = function(username, password, callbacks) {
         $.ajax({
-            url : nano.conf.urlRoot + 'login',
+            url : nano.conf.urls.login,
             type : 'POST',
             headers : nano.utils.getHttpHeaders(),
             dataType : 'json',
@@ -58,6 +77,7 @@ nano.utils.login = function(username, password, callbacks) {
                 var info = {
                     username : username,
                     accountid : data.accountid,
+                    profileid : data.profileid,
                     authToken : data.authToken
                 };
                 nano.session = info;
@@ -76,10 +96,20 @@ nano.utils.login = function(username, password, callbacks) {
         });
 };
 
+/**
+ * Logouts the user (deletes the cookie)
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return void
+ */
 nano.utils.logout = function(){
     $.cookie( nano.conf.sessionCookieName, null);
 };
 
+/**
+ * Builds the HTTP headers array for the api calls. Includes the session token.
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object
+ */
 nano.utils.getHttpHeaders = function(){
     var headers = {
         "Content-Type" : "application/json"
@@ -92,16 +122,36 @@ nano.utils.getHttpHeaders = function(){
     return headers;
 };
 
-nano.utils.hideAll = function() {
+/**
+ * Hides all of the different UI components fon the User except from the Footer and the Market Summary
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param boolean showMarketSummary: tells whether to show the Market Summary section or not
+ * @return Object
+ */
+nano.utils.hideAll = function(showMarketSummary) {
+    if ( !_.isBoolean(showMarketSummary) )
+    {
+        var showMarketSummary = true;
+    }
+
+    if( showMarketSummary ) {
+        nano.containers['marketSummary'].show();
+    }
+
     for (var i in nano.containers)
     {
-        if (i != 'footer' && i != 'marketSummary')
+        if ( i != 'footer' && (i != 'marketSummary' || (i == 'marketSummary'&& !showMarketSummary)) )
         {
             nano.containers[i].hide();
         }
     }
 };
 
+/**
+ * Rounds up a number. Default decimals are two.
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object
+ */
 nano.utils.round = function (number, decimals) {
   if (typeof decimals == 'undefined')
   {
@@ -111,5 +161,97 @@ nano.utils.round = function (number, decimals) {
   return parseFloat(newNumber);
 }
 
-// Shorten the name for the templates
-var translate = nano.utils.translate
+/**
+ * Fetches an html template synchronously
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return Object
+ */
+nano.utils.getTemplate = function(url){
+    var response = $.ajax(url, {
+        async : false,
+        dataTypeString : 'html'
+    });
+    return response.responseText;
+};
+
+/**
+ * Redirects to a different url/application widget
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param string url: new location to go to
+ * @return Object
+ */
+nano.utils.goTo = function(url) {
+    window.location = url;
+}
+
+/**
+ * Renders a pie chart on the desired html id
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param string htmlId: id of the container (div) for the pie chart
+ * @param array data: info to be rendered, array of array pairs of label and value
+ * @return Object: plotter object.
+ */
+nano.utils.renderPieChart = function(htmlId, data) {
+    var plot = jQuery.jqplot(htmlId, [data], {
+        grid: {
+                background: '#ffffff',      // CSS color spec for background color of grid.
+                borderColor: '#ffffff',     // CSS color spec for border around grid.
+                shadow: false               // draw a shadow for grid.
+        },
+        seriesDefaults: {
+            // Make this a pie chart.
+            renderer: jQuery.jqplot.PieRenderer,
+            rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+            }
+        },
+        legend: { show:true, location: 'e' }
+    });
+    return plot;
+};
+
+/**
+ * Prints an amount with it's currency in proper format
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param int amount: number to add the currency to
+ * @return Object
+ */
+nano.utils.printCurrency = function(amount, decimals) {
+    var value = '';
+    if (amount < 0)
+    {
+        value += '-';
+        amount = Math.sqrt(Math.pow(amount, 2)); //Turn it into a positive value.
+    }
+    value += nano.conf.currency + nano.utils.round(amount, decimals);
+    return value;
+}
+
+/**
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * Handles API errors
+ * @param int amount: number to add the currency to
+ * @return Object
+ */
+nano.utils.onApiError = function(model, error){
+    // What do we do?
+    switch( error.status ) {
+        case 403:
+            nano.utils.logout();
+            nano.utils.goTo( nano.conf.hash.login + '/sessionExpired' );
+            break;
+        default:
+            // Error Message!
+            alert('An unknown error has occured, please try again later.');
+            break;
+    }
+};
+
+/**
+ * Aliases for the functions used in the views to make them shorter
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+var translate = nano.utils.translate;
+var printCurrency = nano.utils.printCurrency;

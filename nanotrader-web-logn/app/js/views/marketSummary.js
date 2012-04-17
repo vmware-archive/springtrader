@@ -1,97 +1,116 @@
-// HTML template
-nano.templates.marketSummary = '<div class="row show-table">\
-                        <div class="span4">\
-                            <table class="table">\
-                                <tr>\
-                                    <th colspan="3"><span class="icon-custom icon-gains"></span><%= translate("daysGains") %></th>\
-                                </tr>\
-                                <tr class="caps">\
-                                    <% for (var i in daysGains) { %>\
-                                    <td title="<%= daysGains[i].companyname %>"><%= daysGains[i].symbol %></td>\
-                                    <% } %>\
-                                </tr>\
-                                <tr>\
-                                    <% for (var i in daysGains) { %>\
-                                    <td title="<%= translate("price") %>"><%= nano.utils.round(daysGains[i].price) %></td>\
-                                    <% } %>\
-                                </tr>\
-                                <tr>\
-                                    <% for (var i in daysGains) { %>\
-                                    <td title="<%= translate("change") %>">+<%= nano.utils.round(daysGains[i].change1) %><span>&uarr;</span></td>\
-                                    <% } %>\
-                                </tr>\
-                            </table>\
-                        </div>\
-                        <div class="span4 center-table">\
-                            <table class="table">\
-                                <tr>\
-                                    <th colspan="2"><div class="logo-table" title="<%= translate("nanotrader") %>"/></th>\
-                                </tr>\
-                                <tr>\
-                                    <td><%= translate("index") %>:</td>\
-                                    <td><%= index %></td>\
-                                </tr>\
-                                <tr>\
-                                    <td><%= translate("volume") %>:</td>\
-                                    <td><%= volume %></td>\
-                                </tr>\
-                                <tr>\
-                                    <td><%= translate("change") %>:</td>\
-                                    <td class="<%= (change > 0 ? "green-color" : "red-color") %>">\
-                                    <% print((change > 0 ? "+" : "") + change) %>\
-                                    <span><%= (change > 0 ? "&uarr;" : "&darr;") %></span>\
-                                    </td>\
-                                </tr>\
-                            </table>\
-                        </div>\
-                        <div class="span4">\
-                            <table class="table">\
-                                <tr>\
-                                    <th colspan="3"><span class="icon-custom icon-lost"></span><%= translate("daysLosses") %></th>\
-                                </tr>\
-                                <tr class="caps">\
-                                    <% for (var i in daysLosses) { %>\
-                                    <td title="<%= daysGains[i].companyname %>"><%= daysLosses[i].symbol %></td>\
-                                    <% } %>\
-                                </tr>\
-                                <tr>\
-                                    <% for (var i in daysLosses) { %>\
-                                    <td title="<%= translate("price") %>"><%= nano.utils.round(daysLosses[i].price) %></td>\
-                                    <% } %>\
-                                </tr>\
-                                <tr>\
-                                    <% for (var i in daysLosses) { %>\
-                                    <td title="<%= translate("change") %>"><!--&minus;--><%= nano.utils.round(daysLosses[i].change1) %><span>&darr;</span></td>\
-                                    <% } %>\
-                                </tr>\
-                            </table>\
-                        </div>\
-            </div>';
+/**
+ * View Class for the Market Summary
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+nano.views.MarketSummary = Backbone.View.extend({
 
-nano.ui.MarketSummary = function(element) {
-    this.element = element;
-    nano.containers.marketSummary = element;
+    /**
+     * Class constructor
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object options:
+     * - el: selector for the container
+     * - model: nano.models.MarketSummary instance
+     * @return void
+     */
+    initialize : function(options) {
+        nano.containers.marketSummary = this.$el;
+    },
 
-    this.render = function(callback) {
-        var that = this;
-        var marketSummary = new nano.models.MarketSummary();
-        marketSummary.fetch({
-            success : function(model, response){
-                //Hide the loading Message
-                nano.containers.loading.hide();
+    /**
+     * Templating function (inyects data into an HTML Template)
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object data: data to be replaced in the template
+     * @return string
+     */
+    template : _.template(nano.utils.getTemplate(nano.conf.tpls.marketSummary)),
 
-                var data = {
-                    index : nano.utils.round( model.get('tradeStockIndexAverage') ),
-                    volume : nano.utils.round( model.get('tradeStockIndexVolume') ),
-                    change : nano.utils.round( model.get('percentGain') ),
-                    daysGains : model.get('topGainers'),
-                    daysLosses : model.get('topLosers')
-                };
-                var marketSummaryTpl = _.template(nano.templates.marketSummary)(data);
-                that.element.html(marketSummaryTpl);
-                callback();
-            },
-            error : function(model, response){}
-        });
-    };
-};
+    /**
+     * Renders the Market Summary View
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object model: Instance of nano.models.MarketSummary
+     * @return void
+     */
+    render: function(model) {
+        if (model)
+        {
+            this.model = model;
+        }
+        var marketSummaryTpl = this.template(this.model.toJSON());
+        this.$el.html(marketSummaryTpl);
+
+        //Cache the jQuery objects of the MS view
+        this.elements = {
+            index : this.$('#ms-index'),
+            volume : this.$('#ms-volume'),
+            change : this.$('#ms-change'),
+            changeArrow : this.$('#ms-change-arrow'),
+            topGainers : [],
+            topLosers : []
+        };
+
+        for (var i in this.model.get('topGainers') )
+        {
+            this.elements.topGainers[i] = {
+                symbol : this.$('#ms-tg-sym-' + i),
+                price : this.$('#ms-tg-price-' + i),
+                change : this.$('#ms-tg-change-' + i)
+            };
+        }
+
+        for ( i in this.model.get('topLosers') )
+        {
+            this.elements.topLosers[i] = {
+                symbol : this.$('#ms-tl-sym-' + i),
+                price : this.$('#ms-tl-price-' + i),
+                change : this.$('#ms-tl-change-' + i)
+            };
+        }
+        this.update(this.model);
+    },
+
+    /**
+     * Updates the Market Summary View with a new model
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object model: Instance of nano.models.MarketSummary
+     * @return void
+     */
+    update: function(model) {
+        this.model = model;
+
+        this.elements.index.html( nano.utils.round(model.get('tradeStockIndexAverage')) );
+        this.elements.volume.html( nano.utils.round(model.get('tradeStockIndexVolume')) );
+        if ( model.get('percentGain') >= 0 )
+        {
+            this.elements.change.html( '+' + nano.utils.round(model.get('percentGain')) );
+            this.elements.change.removeClass('red-color');
+            this.elements.change.removeClass('green-color');
+            this.elements.changeArrow.html('&uarr');
+
+        }
+        else
+        {
+            this.elements.change.html( nano.utils.round(model.get('percentGain')) );
+            this.elements.change.removeClass('green-color');
+            this.elements.change.removeClass('red-color');
+            this.elements.changeArrow.html('&darr');
+        }
+
+        var topGainers = model.get('topGainers');
+        for ( var i in topGainers )
+        {
+                this.elements.topGainers[i].symbol.html( topGainers[i].symbol );
+                this.elements.topGainers[i].symbol.attr('title', topGainers[i].companyname );
+                this.elements.topGainers[i].price.html( topGainers[i].price );
+                this.elements.topGainers[i].change.html( topGainers[i].change1 );
+        }
+
+        var topLosers = model.get('topLosers');
+        for ( i in topGainers )
+        {
+                this.elements.topLosers[i].symbol.html( topLosers[i].symbol );
+                this.elements.topLosers[i].symbol.attr('title', topLosers[i].companyname );
+                this.elements.topLosers[i].price.html( topLosers[i].price );
+                this.elements.topLosers[i].change.html( topLosers[i].change1 );
+        }
+    }
+});

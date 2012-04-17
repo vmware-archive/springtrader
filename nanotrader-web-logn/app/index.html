@@ -22,6 +22,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="js/jquery.json.js"></script>
         <script src="js/jquery.cookie.js"></script>
+        <script src="js/jquery.jqplot.js"></script>
+        <script src="js/jqplot.pieRenderer.js"></script>
         <script src="js/underscore.js"></script>
         <script src="js/backbone.js"></script>
         <script src="js/bootstrap.collapse.js"></script>
@@ -35,45 +37,47 @@
         <script src="js/nano.models.js"></script>
         <script src="js/views/navbar.js"></script>
         <script src="js/views/login.js"></script>
+        <script src="js/views/portfolio.js"></script>
+        <script src="js/views/positions.js"></script>
+        <script src="js/views/accountSummary.js"></script>
         <script src="js/views/marketSummary.js"></script>
+        <script src="js/views/portfolioSummary.js"></script>
+        <script src="js/views/userStatistics.js"></script>
         <script src="js/views/footer.js"></script>
-        <script src="js/nano.controller.js"></script>
-        <script>
-            $(document).ready(function() {
-                var controller = new nano.Controller();
-                controller.run();
-            /*
-            $('div#collapseOne').hide(); 
-                $(".collapse").collapse('show');
-                $('div.show-transactions').click(function () {
-                    if ($('div.show-transactions').hasClass('active')) {
-                        $('div#collapseOne').hide();
-                        $('div.show-transactions').removeClass('active');
-                    } else {
-                        $('div#collapseOne').show(); 
-                        $('div.show-transactions').addClass('active');
-                    }
-                }
-                
-                );
-            $('.dropdown-toggle').dropdown();
-            $('.typeahead').typeahead();
-            $('.myModal').modal('hide')
-            */
-            });
-        </script>
+        <script src="js/views/registration.js"></script>
+        <script src="js/views/profile.js"></script>
+        <script src="js/views/contact.js"></script>
+        <script src="js/views/trade.js"></script>
+        <script src="js/views/holdings.js"></script>
+        <script src="js/views/orders.js"></script>
+        <script src="js/nano.router.js"></script>
         <link rel="shortcut icon" href="ico/favicon.ico">
     </head>
     <body>
-        <div id="navbar"></div>
+        <!-- The prefix "nc" stands for "nano container"-->
+        <div id="nc-navbar"></div>
         <div class="container page">
-            <div id="market-summary"></div>
-            <div id="loading">
+            <div id="nc-market-summary"></div>
+            <div class="row">
+                <div id="nc-portfolio-summary" class="span6"></div>
+                <div id="nc-portfolio" class="span6"></div>
+                <div id="nc-positions" class="span6"></div>
+            </div>
+            <div class="row">
+                <div id="nc-account-summary" class="span6"></div>
+                <div id="nc-user-statistics" class="span6"></div>
+            </div>
+            <div id="nc-loading">
                 <div class="logo brand"></div>
                 <div class="loading"></div>
             </div>
-            <div id="login"></div>
+            <div id="nc-login"></div>
+            <div id="nc-registration"></div>
+            <div id="nc-holdings" class="row"></div>
+            <div id="nc-profile"></div>
+            <div id="nc-contact"></div>
+            <div id="nc-trade"></div>
         </div>
-        <div id="footer"></div>
+        <div id="nc-footer"></div>
     </body>
 </html>
