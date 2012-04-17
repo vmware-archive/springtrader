@@ -18,6 +18,7 @@ nano.Router = Backbone.Router.extend({
         "portfolio"     : "portfolio", // #portfolio page
         "portfolio/p:page" : "holdings", // #portolio - pagination of List of Holdings
         "trade"         : "trade", // #trade page
+        "trade/p:page"  : "orders", // #trade - pagination of List of Orders
         "profile"       : "profile", // #profile page
         "contact"       : "contact" // #contact page
     },
@@ -205,28 +206,46 @@ nano.Router = Backbone.Router.extend({
         }
     },
 
-    trade: function() {
+    trade: function(page) {
         if(nano.utils.loggedIn()) {
             nano.utils.hideAll();
             nano.containers.loading.show();
             nano.instances.navbar.render(nano.conf.hash.trade);
             
-            var orders = new nano.models.Orders({ accountid : nano.session.accountid });
+            var model = new nano.models.Orders({ accountid : nano.session.accountid });
             
             var onFetchSuccess = function() {
                 nano.containers.loading.hide();
                 
-                // render the trade view
-                nano.instances.trade.render(orders);
+                // Render the trade view
+                var trade = nano.instances.trade.render(model);
+                if (trade){
+                    // Instance the order view 
+                    nano.instances.orders = new nano.views.Orders({el: '#nc-orders-tbody'});
+                }
+                // Render the orders list
+                nano.instances.orders.render(model, page);
             };
             
-            orders.fetch({
+            model.fetch({
                 success : onFetchSuccess,
                 error: nano.utils.onApiErreor
             });
         }
         else {
             nano.utils.goTo( nano.conf.hash.login );
+        }
+    },
+    
+    orders: function(page) {
+        if (!nano.containers.orders)
+        {
+            this.trade(page);
+        }
+        else
+        {
+            // Render the List of Holdings View
+            nano.instances.orders.render(null, page);
         }
     },
     

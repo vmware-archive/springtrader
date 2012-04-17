@@ -43,7 +43,8 @@ nano.conf.tpls = {
     registration : nano.conf.tplRoot + 'registration.tpl',
     profile : nano.conf.tplRoot + 'profile.tpl',
     trade : nano.conf.tplRoot + 'trade.tpl',
-    contact : nano.conf.tplRoot + 'contact.tpl'
+    contact : nano.conf.tplRoot + 'contact.tpl',
+    orders : nano.conf.tplRoot + 'orders.tpl'
 };
 
 /**

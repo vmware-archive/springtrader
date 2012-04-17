@@ -36,16 +36,36 @@ nano.views.Trade = Backbone.View.extend({
      * @param Object orders: Instance of nano.models.Orders
      * @return void
      */
-    render: function(orders) {
-        if (orders) {
-            this.orders = orders;
+    render: function(model) {
+        if (model) {
+            this.model = model;
         }
+
+        // getting the amount of orders
+        var orderCount = this.model.length;
+        // calculate the number of pages we are going to have
+        var pagesCount = Math.ceil(orderCount/nano.conf.itemsPerPage);
         
-        alert(JSON.stringify(this.orders.toJSON()));
+        
+        // navigation options on the paginator:
+        var navigation_html = '<ul>';
+
+        //navigation_html += '<li><a id="previous">&laquo;</a></li>';
+        var current_link = 0;
+        while(pagesCount > current_link){
+            navigation_html += '<li class="page_link">';
+            navigation_html += '<a href="#trade/p' + current_link + '" id="page">'+ (current_link + 1) +'</a>';
+            current_link++;
+            navigation_html += '</li>';
+        }
+        //navigation_html += '<li><a id="next">&raquo;</a></li>';
+        navigation_html += '</ul>';
         
         this.$el.html(this.template());
         this.$el.show();
         
+        this.$('#pagination').html(navigation_html);
+        return this
     },
     
     /**
