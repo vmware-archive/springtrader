@@ -10,6 +10,8 @@ nano.conf = {
     marketSummaryUpdateMillisecs : 15000,          // Interval of milliseconds in which the Market Summary section updates
     currency : '$',                                // Current currency is dollars
     itemsPerPage: 5,                                // Amount of items to be displayed on list views
+    successCss : 'alert alert-block alert-success', // CSS Class to show success message (or Positive Balance)
+    errorCss : 'alert alert-block alert-error'      // CSS Class to show error message (or Negative Balance)
 };
 /**
  * API urls
@@ -28,7 +30,7 @@ nano.conf.urls = {
 
 nano.conf.tpls = {
     holdings : nano.conf.tplRoot + 'holdings.tpl',
-    holdingItem : nano.conf.tplRoot + 'holdingItem.tpl',
+    holdingRow : nano.conf.tplRoot + 'holdingRow.tpl',
     marketSummary : nano.conf.tplRoot + 'marketSummary.tpl',
     portfolioSummary : nano.conf.tplRoot + 'portfolioSummary.tpl',
     navbar : nano.conf.tplRoot + 'navbar.tpl',
