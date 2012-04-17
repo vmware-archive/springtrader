@@ -192,7 +192,15 @@ nano.utils.goTo = function(url) {
  * @return Object: plotter object.
  */
 nano.utils.renderPieChart = function(htmlId, data) {
+
+    // Options: http://www.jqplot.com/docs/files/jqPlotOptions-txt.html
     var plot = jQuery.jqplot(htmlId, [data], {
+        /**
+         * Colors that will be assigned to the series.  If there are more series 
+         * than colors, colors will wrap around and start at the beginning again.
+         */
+        seriesColors: [ "#f17961", "#f4b819", "#efe52e", "#7cb940", "#47b7e9", "#4bb2c5", "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12", "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
+
         grid: {
                 background: '#ffffff',      // CSS color spec for background color of grid.
                 borderColor: '#ffffff',     // CSS color spec for border around grid.
@@ -204,8 +212,10 @@ nano.utils.renderPieChart = function(htmlId, data) {
             rendererOptions: {
                 // Put data labels on the pie slices.
                 // By default, labels show the percentage of the slice.
-                showDataLabels: true
-            }
+                showDataLabels: true,
+                sliceMargin: 5
+            },
+            trendline:{ show: false }
         },
         legend: { show:true, location: 'e' }
     });
@@ -255,3 +265,4 @@ nano.utils.onApiError = function(model, error){
  */
 var translate = nano.utils.translate;
 var printCurrency = nano.utils.printCurrency;
+var round = nano.utils.round;

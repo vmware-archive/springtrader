@@ -21,9 +21,9 @@
                     <tfoot>
                         <tr class="summary bold <%= (totalGainLoss > 0 ? nano.conf.successCss : nano.conf.errorCss ) %>">
                             <td colspan="5"><%= translate("total") %></td>
-                            <td class="large-size"><%= totalPurchaseBasis %></td>
-                            <td class="large-size"><%= totalMarketValue %></td>
-                            <td class="large-size"><%= totalGainLoss %></td>
+                            <td class="large-size"><%= printCurrency(totalPurchaseBasis) %></td>
+                            <td class="large-size"><%= printCurrency(totalMarketValue) %></td>
+                            <td class="large-size"><%= printCurrency(totalGainLoss) %></td>
                             <td>&nbsp;</td>
                         </tr>
                     </tfoot>

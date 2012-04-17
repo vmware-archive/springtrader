@@ -51,24 +51,31 @@ nano.views.Holdings = Backbone.View.extend({
             // Render the List of Holdings container
             if ( !this.$el.html() )
             {
-                this.model.each(function(holding){
-                    //console.log(holding);
-                    // Calculate the totals here!
-                });
                 var data = {
-                    totalPurchaseBasis : -1,
-                    totalMarketValue : -1, 
-                    totalGainLoss : 1,
+                    totalPurchaseBasis : 0,
+                    totalMarketValue : 0, 
+                    totalGainLoss : 0,
                     pageCount : Math.ceil(this.model.length / nano.conf.itemsPerPage),
                     currentPage : page
                 };
+
+                this.model.each(function(holding) {
+                    var quote = holding.get('quote');
+                    holding.set( "purchaseBasis", holding.get('quantity') * holding.get('purchaseprice') );
+                    holding.set( "marketValue", holding.get('quantity') * quote.price );
+                    holding.set( "gainLoss", holding.get('marketValue') - holding.get("purchaseBasis") );
+
+                    data.totalPurchaseBasis += holding.get( "purchaseBasis");
+                    data.totalMarketValue += holding.get( "marketValue");
+                    data.totalGainLoss += holding.get( "gainLoss");
+                });
                 var tpl = this.template(data);
                 this.tbody = this.$('#list-of-holdings > tbody');
             }
             // Clear it
             else
             {
-                this.tbody.html('');
+                //set the page number on the paginator
             }
             this.$el.html(tpl);
             this.$el.show();
@@ -84,6 +91,15 @@ nano.views.Holdings = Backbone.View.extend({
      * @return void
      */
     renderRows: function(page) {
-        var listTpl = _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow));
+        this.tbody.html('');
+        var i = (page - 1) * nano.conf.itemsPerPage;
+        var next = i + nano.conf.itemsPerPage;
+        var length = this.model.length;
+        for ( i; i < length && i < next; ++i )
+        {
+            console.log('i: ' + i);
+            conso.log('model:' + this.model.at(i));
+            this.tbody.append( this.rowTemplate(this.model.at(i).toJSON()) );
+        }
     }
 });

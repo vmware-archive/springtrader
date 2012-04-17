@@ -77,8 +77,8 @@ nano.views.MarketSummary = Backbone.View.extend({
     update: function(model) {
         this.model = model;
 
-        this.elements.index.html( nano.utils.round(model.get('tradeStockIndexAverage')) );
-        this.elements.volume.html( nano.utils.round(model.get('tradeStockIndexVolume')) );
+        this.elements.index.html( round(model.get('tradeStockIndexAverage')) );
+        this.elements.volume.html( round(model.get('tradeStockIndexVolume')) );
         if ( model.get('percentGain') >= 0 )
         {
             this.elements.change.html( '+' + nano.utils.round(model.get('percentGain')) );
@@ -89,7 +89,7 @@ nano.views.MarketSummary = Backbone.View.extend({
         }
         else
         {
-            this.elements.change.html( nano.utils.round(model.get('percentGain')) );
+            this.elements.change.html( round(model.get('percentGain')) );
             this.elements.change.removeClass('green-color');
             this.elements.change.removeClass('red-color');
             this.elements.changeArrow.html('&darr');
