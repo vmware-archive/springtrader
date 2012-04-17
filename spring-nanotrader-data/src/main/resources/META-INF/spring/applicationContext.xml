@@ -70,17 +70,17 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="persistenceUnitPostProcessors">
             <array>
-                <bean class="org.springframework.nanotrader.util.PUPostProcessor" />
+                <bean class="org.springframework.nanotrader.data.util.PUPostProcessor" />
             </array>
         </property>
         <property name="jpaVendorAdapter">
 	        <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-	           <property name="showSql" value="true" />
+	           <property name="showSql" value="false" />
 	           <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
 	        </bean>
      	</property>
     </bean>
         
-                
+	<import resource="classpath:/META-INF/spring/integration/amqp-data-outbound-context.xml" />
 	
 </beans>

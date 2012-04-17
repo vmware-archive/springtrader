@@ -12,8 +12,10 @@ allprojects {
 	group = 'org.springframework.nanotrader'
 
 	repositories {
-		maven { url 'http://repo.springsource.org/libs-milestone' }
-		maven { url 'http://spring-roo-repository.springsource.org/release' }
+		maven { url  'http://dist.gemstone.com/maven/release' }
+		maven { url  'http://maven.springframework.org/release' }
+		maven { url  'http://repo.springsource.org/libs-milestone' }
+		maven { url  'http://spring-roo-repository.springsource.org/release' }
 		mavenCentral()
 		maven { url 'http://maven.springframework.org/snapshot' }
 	}
@@ -44,7 +46,7 @@ subprojects { subproject ->
 	junitVersion = '4.8.2'
 	log4jVersion = '1.2.12'
 	mockitoVersion = '1.9.0'
-	springVersion = '3.1.0.RELEASE'
+	springVersion = '3.1.1.RELEASE'
 	springAmqpVersion = '1.0.0.RELEASE'
 	springDataMongoVersion = '1.0.0.RELEASE'
 	springDataRedisVersion = '1.0.0.RELEASE'
@@ -66,30 +68,7 @@ subprojects { subproject ->
 		buildCommand 'org.eclipse.wst.validation.validationbuilder'
 	}
 
-	// add libraries to deployment assembly
-	eclipse {
-		classpath {
-			file {
-				withXml {
-					def assembly = new Node(null, 'attributes')
-					assembly.appendNode(
-							'attribute',
-							[name: "org.eclipse.jst.component.dependency", value: "/WEB-INF/lib"],
-							null)
-
-					def node = it.asNode()
-					def children = node.children()
-					children.each {
-						def kind = it.attributes().get('kind')
-						if (kind != null && kind == 'lib') {
-							it.append(assembly)
-						}
-					}
-				}
-			}
-		}
-	}
-
+	
 
 	sourceSets {
 		test {
@@ -163,8 +142,8 @@ project('spring-nanotrader-service-support') {
 		compile "net.sf.dozer:dozer:$dozerVersion"
 		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 		compile  "joda-time:joda-time:1.6"
-
-		
+		compile "com.gemstone.gemfire:gemfire:6.6.2"	
+		compile  "org.springframework.data:spring-data-gemfire:1.1.1.RELEASE"
 	}
 }
 
@@ -183,9 +162,33 @@ project('spring-nanotrader-data') {
 		compile "org.aspectj:aspectjrt:$aspectjVersion"
 		compile "org.springframework:spring-aspects:$springVersion"
 		compile "postgresql:postgresql:9.0-801.jdbc3"
+		compile "org.springframework.integration:spring-integration-amqp:$springIntegrationVersion"
+		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 
 	}
 }
+
+project('spring-nanotrader-mobile') {
+	apply plugin: 'war'
+
+	description = 'Spring Nanotrader Mobile'
+	dependencies {
+		
+		compile "org.springframework:spring-webmvc:$springVersion"
+		compile "org.codehaus.jackson:jackson-mapper-asl:1.8.5"
+		compile "javax.inject:javax.inject:$javaxInjectVersion"
+		compile "net.sf.dozer:dozer:$dozerVersion"
+		testCompile "org.springframework:spring-test-mvc:1.0.0.BUILD-SNAPSHOT@jar"
+		compile "org.aspectj:aspectjweaver:$aspectjVersion"
+		compile "org.springframework.mobile:spring-mobile-device:1.0.0.RC1@jar"
+		providedCompile  ("javax.servlet:servlet-api:$servletApiVersion" ) 
+		providedCompile ("javax.servlet.jsp:jsp-api:2.1")
+		compile ("javax.servlet:jstl:1.2")
+
+	}
+
+}
+
 
 
 project('spring-nanotrader-services') {
@@ -193,7 +196,6 @@ project('spring-nanotrader-services') {
 
 	description = 'Spring Nanotrader Services'
 	dependencies {
-		compile project(":spring-nanotrader-data")
 		compile project(":spring-nanotrader-service-support")
 		compile "org.springframework:spring-webmvc:$springVersion"
 		providedCompile  ("javax.servlet:servlet-api:$servletApiVersion")
@@ -345,8 +347,8 @@ task dist(dependsOn: assemble) {
 
 task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
-	gradleVersion = '1.0-milestone-8'
-	distributionUrl = 'http://repo.gradle.org/gradle/distributions-snapshots/gradle-1.0-milestone-8-20120112000036+0100-bin.zip'
+	gradleVersion = '1.0-rc-1-20120409112701+0200'
+	distributionUrl = 'http://services.gradle.org/distributions-snapshots/gradle-1.0-rc-1-20120409112701+0200-bin.zip'
 	jarFile = '.wrapper/gradle-wrapper.jar'
 }
 

@@ -53,6 +53,7 @@ def init() {
   acctid = jsonResponse.accountid
   //println "Test Auth Token:" + testAuthToken + "\n"
   //println "\nStarting tests...\n"
+  //println "accountid:" + acctid
 }
 
 def Object getAuthToken(username='jack', password='jack') {
@@ -91,6 +92,14 @@ def writeExceptionToFile(ex) {
   logFile.flush()
 }
 
+
+def void logout(authToken=testAuthToken) {
+  def logoutPath = "/spring-nanotrader-services/api/logout"
+  def resp = nanotrader.get(path:"${logoutPath}",
+                            headers:[API_TOKEN:authToken])
+  assert resp.status == 200
+}
+
 def String getOrder(int accountid, int orderid, authToken=testAuthToken) {
   def orderPath = "/spring-nanotrader-services/api/account/" + accountid + "/order/" + orderid
   def resp = nanotrader.get(path:"${orderPath}",
@@ -101,7 +110,7 @@ def String getOrder(int accountid, int orderid, authToken=testAuthToken) {
 def String getOrder(id, status, positive=true, responseCode=200, authToken=testAuthToken) {
   String data = ""
   try {
-    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order"
+    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/orders"
     def resp = null
     if (status == "all") {
       resp = nanotrader.get(path:"${orderPath}",
@@ -371,7 +380,7 @@ def getSpecificHoldingForAccount(accountid, holdingid, positive=true, responseCo
 def String getAllHoldingsForAccount(accountid, positive=true, responseCode=200) {
   String data = ""
   try {
-    def holdingPath = "/spring-nanotrader-services/api/account/" + accountid + "/holding"
+    def holdingPath = "/spring-nanotrader-services/api/account/" + accountid + "/holdings"
     def resp = nanotrader.get(path:"${holdingPath}",
                               headers:[API_TOKEN:testAuthToken])
     if (positive) {
@@ -456,7 +465,7 @@ def createQuote(companyName='newcompany', symbol='NCPY', positive=true, response
 
 def getPortfolioSummary(accountid=1, positive=true, responseCode=200) {
   try {
-    def path = "/spring-nanotrader-services/api/account/" + accountid + "/portfolioSummary"
+    def path = "/spring-nanotrader-services/api/account/" + accountid + "/holdingSummary"
     def resp = nanotrader.get(path:"${path}",
                               headers:[API_TOKEN:testAuthToken])
     if (positive) {
@@ -584,7 +593,7 @@ def deleteAccountProfile(id=1, responseCode=405) {
 
 def deleteAllOrders(id=1, responseCode=405) {
   try {
-    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order"
+    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/orders"
     def resp = nanotrader.delete(path:"${orderPath}",
                                  headers:[API_TOKEN:testAuthToken])
     assert resp.status == responseCode
@@ -667,12 +676,12 @@ def loadTest() {
 }
 
 def basicVerificationTests() {
-  testGetOrder()
+  //testGetOrder()
   testCreateOrder()
-  testUpdateOrder()
+  //testUpdateOrder()
   testGetAccountProfile()
   testCreateAccountProfile()
-  //testUpdateAccountProfile()
+  testUpdateAccountProfile()
   testGetAccount()
   testGetSpecificHoldingForAccount()
   testGetAllHoldingsForAccount()
@@ -684,18 +693,18 @@ def basicVerificationTests() {
 
 def verificationTests() {
   testAdvancedCreateOrder()
-  testAdvancedUpdateOrder()
+  //testAdvancedUpdateOrder()
   testAdvancedSellOrder()
   testAdvancedGetAccount()
   testAdvancedGetQuote()
   //testAdvancedCreateProfile()
-  //testAdvancedUpdateProfile()
+  testAdvancedUpdateProfile()
 }
 
 def unauthorizedVerificationTests() {
   testUnauthorizedGetOrder()
   testUnauthorizedCreateOrder()
-  testUnauthorizedUpdateOrder()
+  //testUnauthorizedUpdateOrder()
   testUnauthorizedGetAccountProfile()
   //testUnauthorizedUpdateAccountProfile()
   testUnauthorizedGetAccount()
@@ -716,6 +725,26 @@ def unsupportedVerificationTests() {
   testUnsupportedDeleteAllOrders()
   testUnsupportedUpdateQuote()
   testUnsupportedDeleteQuote()
+}
+
+def endTests() {
+  testLogout()
+}
+
+def testLogout() {
+  totalCount++
+  try {
+    getOrder(acctid, "all")
+    logout()
+    getOrder(acctid, "all", false, "401")
+    passCount++
+    println "testLogout PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testLogout FAIL";
+  }
 }
 
 /*
@@ -791,7 +820,7 @@ def testAdvancedUpdateProfile() {
   totalCount++
   try {
     getAccount(acctid)
-    updateAccountProfile(acctid, dummyUser, 'DummyPassword', 'Dummy Address')
+    updateAccountProfile(acctid, 'jack', 'jack', 'Dummy Address')
     getAccount(acctid)
 
     passCount++
@@ -985,10 +1014,10 @@ def testGetOrder() {
   totalCount++
   try {
     getOrder(acctid, "all")
-    getOrder(acctid, "Open")
+    /*getOrder(acctid, "Open")
     getOrder(acctid, "Completed")
     getOrder(acctid, "Closed")
-    getOrder(acctid, "unknown", false, 404)
+    getOrder(acctid, "unknown", false, 404)*/
 
     passCount++
     println "testGetOrder PASS";
@@ -1005,6 +1034,8 @@ def testCreateOrder() {
   try {
     createOrder(acctid, 555, 'buy', 'AAPL')
     createOrder(acctid, 555, 'buy', 'invalid_quote', false, 400)
+
+    getOrder(acctid, "all")
 
     passCount++
     println "testCreateOrder PASS";
@@ -1050,7 +1081,7 @@ def testCreateAccountProfile() {
   totalCount++
   try {
     createAccountProfile()
-    createAccountProfile("jack", false, 400)
+    //createAccountProfile("jack", false, 400)
 
     passCount++
     println "testCreateAccountProfile PASS"
@@ -1065,8 +1096,8 @@ def testCreateAccountProfile() {
 def testUpdateAccountProfile() {
   totalCount++
   try {
-    updateAccountProfile(acctid, "NewAddress")
-    //updateAccountProfile(2, "invalid_user", false)
+    updateAccountProfile(acctid, "jack", "jack", "NewAddress")
+    updateAccountProfile(unauthorizedAcctId, "jack", "jack", "NewAddress", false, 401)
 
     passCount++
     println "testUpdateAccountProfile PASS"
@@ -1096,10 +1127,8 @@ def testGetAccount() {
 def testGetSpecificHoldingForAccount() {
   totalCount++
   try {
-    getSpecificHoldingForAccount(acctid, 1)
-    getSpecificHoldingForAccount(acctid, 2)
-    getSpecificHoldingForAccount(acctid, 3)
-   
+    getSpecificHoldingForAccount(acctid, 1, false, 404)
+
     passCount++
     println "testGetSpecificHoldingForAccount PASS"
   }
@@ -1159,7 +1188,7 @@ def testCreateQuote() {
 def testGetPortfolioSummary() {
   totalCount++
   try {
-    getPortfolioSummary()
+    getPortfolioSummary(acctid)
 
     passCount++
     println "testGetPortfolioSummary PASS"
@@ -1444,7 +1473,7 @@ def testUnsupportedDeleteOrder() {
 def testUnsupportedDeleteAllOrders() {
   totalCount++
   try {
-    deleteAllOrders()
+    deleteAllOrders(acctid)
 
     passCount++
     println "testUnsupportedDeleteAllOrders PASS"
@@ -1499,6 +1528,7 @@ static main(args) {
   inst.unauthorizedVerificationTests()
   inst.unsupportedVerificationTests()
   inst.verificationTests()
+  inst.endTests()
   inst.printSummary()
 }
 }

@@ -11,7 +11,7 @@ import static org.springframework.test.web.server.result.MockMvcResultMatchers.s
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
-import org.springframework.nanotrader.service.TradingServiceImpl;
+import org.springframework.nanotrader.data.service.TradingServiceImpl;
 import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration;
 import org.springframework.util.FileCopyUtils;
 
@@ -54,7 +54,7 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 	
 	@Test
 	public void getOrders() throws Exception {
-		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/orders").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.[0].orderid").value(ServiceTestConfiguration.ORDER_ID))
@@ -73,14 +73,14 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 	
 	@Test
 	public void getOrdersNoRecordsFoundJson() throws Exception {
-		mockMvc.perform(get("/account/3/order/").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/account/3/orders").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isUnauthorized());
 				
 	}
 
 	@Test
 	public void getClosedOrders() throws Exception {
-		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/order").accept(MediaType.APPLICATION_JSON).param("status", "closed"))
+		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/orders").accept(MediaType.APPLICATION_JSON).param("status", "closed"))
 				.andExpect(status().isOk())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.[0].orderid").value(ServiceTestConfiguration.ORDER_ID))

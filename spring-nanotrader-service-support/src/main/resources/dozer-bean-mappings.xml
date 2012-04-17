@@ -4,7 +4,7 @@
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
 	<mapping map-id="account">
-		<class-a>org.springframework.nanotrader.domain.Account</class-a>
+		<class-a>org.springframework.nanotrader.data.domain.Account</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.Account
 		</class-b>
 		<field-exclude>
@@ -15,7 +15,7 @@
 
 	<!-- Start Account profile mappings -->
 	<mapping map-id="accountProfile">
-		<class-a>org.springframework.nanotrader.domain.Accountprofile
+		<class-a>org.springframework.nanotrader.data.domain.Accountprofile
 		</class-a>
 		<class-b map-null="false">org.springframework.nanotrader.service.domain.Accountprofile
 		</class-b>
@@ -26,7 +26,7 @@
 
 	</mapping>
 	<mapping map-id="accountProfile.account">
-		<class-a map-null="false">org.springframework.nanotrader.domain.Account
+		<class-a map-null="false">org.springframework.nanotrader.data.domain.Account
 		</class-a>
 		<class-b map-null="false">java.util.Map</class-b>
 		<field-exclude>
@@ -40,7 +40,7 @@
 	</mapping>
 	
 	<mapping map-id="accountProfile-no-accounts">
-		<class-a>org.springframework.nanotrader.domain.Accountprofile
+		<class-a>org.springframework.nanotrader.data.domain.Accountprofile
 		</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.Accountprofile
 		</class-b>
@@ -53,7 +53,7 @@
 	
 	<!-- End Account profile mappings -->
 	<mapping map-id="holding">
-		<class-a>org.springframework.nanotrader.domain.Holding</class-a>
+		<class-a>org.springframework.nanotrader.data.domain.Holding</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.Holding
 		</class-b>
 		<field>
@@ -67,7 +67,7 @@
 	</mapping>
 
 	<mapping map-id="order">
-		<class-a>org.springframework.nanotrader.domain.Order</class-a>
+		<class-a>org.springframework.nanotrader.data.domain.Order</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.Order</class-b>
 		<field>
 			<a>accountAccountid.accountid</a>
@@ -80,23 +80,23 @@
 	</mapping>
 
 	<mapping map-id="quote">
-		<class-a>org.springframework.nanotrader.domain.Quote</class-a>
+		<class-a>org.springframework.nanotrader.data.domain.Quote</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.Quote</class-b>
 	</mapping>
 
 	<mapping map-id="portfolioSummary">
-		<class-a>org.springframework.nanotrader.domain.PortfolioSummary</class-a>
+		<class-a>org.springframework.nanotrader.data.domain.PortfolioSummary</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.PortfolioSummary
 		</class-b>
 	</mapping>
 	
 	<mapping map-id="marketSummary">
-		<class-a>org.springframework.nanotrader.domain.MarketSummary</class-a>
+		<class-a>org.springframework.nanotrader.data.domain.MarketSummary</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.MarketSummary</class-b>
 	</mapping>
 	
 	<mapping map-id="holdingSummary">
-		<class-a>org.springframework.nanotrader.domain.HoldingSummary</class-a>
+		<class-a>org.springframework.nanotrader.data.domain.HoldingSummary</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.HoldingSummary</class-b>
 	</mapping>
 	

@@ -31,26 +31,29 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.nanotrader.domain.Account;
-import org.springframework.nanotrader.domain.Accountprofile;
-import org.springframework.nanotrader.domain.Holding;
-import org.springframework.nanotrader.domain.HoldingSummary;
-import org.springframework.nanotrader.domain.MarketSummary;
-import org.springframework.nanotrader.domain.Order;
-import org.springframework.nanotrader.domain.PortfolioSummary;
-import org.springframework.nanotrader.domain.HoldingAggregate;
-import org.springframework.nanotrader.domain.Quote;
-import org.springframework.nanotrader.domain.test.AccountDataOnDemand;
-import org.springframework.nanotrader.domain.test.AccountprofileDataOnDemand;
-import org.springframework.nanotrader.domain.test.HoldingDataOnDemand;
-import org.springframework.nanotrader.domain.test.OrderDataOnDemand;
-import org.springframework.nanotrader.domain.test.QuoteDataOnDemand;
-import org.springframework.nanotrader.repository.AccountRepository;
-import org.springframework.nanotrader.repository.HoldingRepository;
-import org.springframework.nanotrader.repository.QuoteRepository;
+import org.springframework.nanotrader.data.domain.Account;
+import org.springframework.nanotrader.data.domain.Accountprofile;
+import org.springframework.nanotrader.data.domain.Holding;
+import org.springframework.nanotrader.data.domain.HoldingAggregate;
+import org.springframework.nanotrader.data.domain.HoldingSummary;
+import org.springframework.nanotrader.data.domain.MarketSummary;
+import org.springframework.nanotrader.data.domain.Order;
+import org.springframework.nanotrader.data.domain.PortfolioSummary;
+import org.springframework.nanotrader.data.domain.Quote;
+import org.springframework.nanotrader.data.domain.test.AccountDataOnDemand;
+import org.springframework.nanotrader.data.domain.test.AccountprofileDataOnDemand;
+import org.springframework.nanotrader.data.domain.test.HoldingDataOnDemand;
+import org.springframework.nanotrader.data.domain.test.OrderDataOnDemand;
+import org.springframework.nanotrader.data.domain.test.QuoteDataOnDemand;
+import org.springframework.nanotrader.data.repository.AccountRepository;
+import org.springframework.nanotrader.data.repository.HoldingRepository;
+import org.springframework.nanotrader.data.repository.QuoteRepository;
+import org.springframework.nanotrader.data.service.QuoteService;
+import org.springframework.nanotrader.data.service.TradingService;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -233,6 +236,7 @@ public class TradingServiceTests {
 	}
 	
 	@Test
+
 	public void testFindMarketSummary() {
 		
         Quote quote = new Quote();
@@ -240,6 +244,8 @@ public class TradingServiceTests {
         quote.setPrice(new BigDecimal(50.00));
         quote.setChange1(new BigDecimal(5.00));
         quote.setVolume(new BigDecimal(50000));
+        quote.setChange1(new BigDecimal(4.00));
+        quote.setOpen1(new BigDecimal(49.00));
         quoteService.saveQuote(quote);
 		entityManager.flush();
 		entityManager.clear(); // force reload
@@ -248,6 +254,8 @@ public class TradingServiceTests {
         quote2.setPrice(new BigDecimal(150.00));
         quote2.setChange1(new BigDecimal(15.00));
         quote2.setVolume(new BigDecimal(150000));
+        quote2.setChange1(new BigDecimal(4.00));
+        quote2.setOpen1(new BigDecimal(120.00));
         quoteService.saveQuote(quote2);
         entityManager.flush();
 		entityManager.clear(); // force reload

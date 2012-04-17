@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.User;
 
 @SuppressWarnings("serial")
 public class CustomUser extends User {
+	
+
 	private Integer accountId;
 	private Integer accountProfileId;
 	private String authToken;
@@ -44,6 +46,11 @@ public class CustomUser extends User {
 		return accountId;
 	}
 
+	@Override
+	public String toString() {
+		return "CustomUser [accountId=" + accountId + ", accountProfileId="
+				+ accountProfileId + ", authToken=" + authToken + "]";
+	}
 
 	
 }

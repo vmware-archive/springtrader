@@ -14,24 +14,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.nanotrader.domain.Account;
-import org.springframework.nanotrader.domain.Accountprofile;
-import org.springframework.nanotrader.domain.Holding;
-import org.springframework.nanotrader.domain.HoldingAggregate;
-import org.springframework.nanotrader.domain.HoldingSummary;
-import org.springframework.nanotrader.domain.MarketSummary;
-import org.springframework.nanotrader.domain.Order;
-import org.springframework.nanotrader.domain.PortfolioSummary;
-import org.springframework.nanotrader.domain.Quote;
-import org.springframework.nanotrader.service.TradingService;
-import org.springframework.nanotrader.service.TradingServiceImpl;
+import org.springframework.nanotrader.data.domain.Account;
+import org.springframework.nanotrader.data.domain.Accountprofile;
+import org.springframework.nanotrader.data.domain.Holding;
+import org.springframework.nanotrader.data.domain.HoldingAggregate;
+import org.springframework.nanotrader.data.domain.HoldingSummary;
+import org.springframework.nanotrader.data.domain.MarketSummary;
+import org.springframework.nanotrader.data.domain.Order;
+import org.springframework.nanotrader.data.domain.PortfolioSummary;
+import org.springframework.nanotrader.data.domain.Quote;
+import org.springframework.nanotrader.data.service.TradingService;
+import org.springframework.nanotrader.data.service.TradingServiceImpl;
+import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.nanotrader.service.support.TradingServiceFacadeImpl;
-import org.springframework.nanotrader.util.FinancialUtils;
 
 /**
  *  ServiceTestConfiguration provides test objects and mock service layer for unit tests.
@@ -46,9 +48,9 @@ public class ServiceTestConfiguration  {
 	//Holding constants
 	public static Integer HOLDING_ID = 100;
 	public static Integer ACCOUNT_ID = 500;
-	public static BigDecimal PURCHASE_PRICE = new BigDecimal(50000);
+	public static BigDecimal PURCHASE_PRICE = new BigDecimal("50000");
 	public static String SYMBOL = "VMW";
-	public static BigDecimal QUANTITY = new BigDecimal(200);
+	public static BigDecimal QUANTITY = new BigDecimal("200");
 	
 	//Account profile constants
 	public static Integer PROFILE_ID 	=  400;
@@ -72,14 +74,14 @@ public class ServiceTestConfiguration  {
 	//Quote constants
 	public static Integer QUOTE_ID = 1;
 	public static String COMPANY_NAME	=  "VMware";
-	public static BigDecimal HIGH	=  new BigDecimal(50.02);
-	public static BigDecimal OPEN	=  new BigDecimal(40.11);
-	public static BigDecimal VOLUME	=  new BigDecimal(3000);
-	public static BigDecimal CURRENT_PRICE	=  new BigDecimal(48.44);
+	public static BigDecimal HIGH	=  new BigDecimal("50.02");
+	public static BigDecimal OPEN	=  new BigDecimal("40.11");
+	public static BigDecimal VOLUME	=  new BigDecimal("3000");
+	public static BigDecimal CURRENT_PRICE	=  new BigDecimal("48.44");
 	
 	//Account constants
-	public static BigDecimal ACCOUNT_OPEN_BALANCE	=  new BigDecimal(55.02);
-	public static BigDecimal ACCOUNT_BALANCE	=  new BigDecimal(40.11);
+	public static BigDecimal ACCOUNT_OPEN_BALANCE	=  new BigDecimal("55.02");
+	public static BigDecimal ACCOUNT_BALANCE	=  new BigDecimal("40.11");
 	public static Integer LOGOUT_COUNT	=  new Integer(5);
 	public static Integer LOGIN_COUNT	=  new Integer(4);
 	public static String AUTH_TOKEN	=  "faef8649-280d-4ba4-bdf6-574e758a04a7";
@@ -87,18 +89,18 @@ public class ServiceTestConfiguration  {
 	
 	//Portfolio Summary
 	public static Integer HOLDING_COUNT	=  1;
-	public static BigDecimal BASIS =  new BigDecimal(150.25);
-	public static BigDecimal MARKET_VALUE =  new BigDecimal(300.10);
+	public static BigDecimal BASIS =  new BigDecimal("150.25");
+	public static BigDecimal MARKET_VALUE =  new BigDecimal("300.10");
 	
 	//Market Summary
-	public static BigDecimal MARKET_INDEX =  new BigDecimal(100.25);
-	public static BigDecimal MARKET_OPENING =  new BigDecimal(35.25);
-	public static BigDecimal MARKET_VOLUME =  new BigDecimal(40.45);
+	public static BigDecimal MARKET_INDEX =  new BigDecimal("100.25");
+	public static BigDecimal MARKET_OPENING =  new BigDecimal("35.25");
+	public static BigDecimal MARKET_VOLUME =  new BigDecimal("40.45");
 	
 	//Holding Summary
-	public static BigDecimal HOLDING_SUMMARY_GAINS =  new BigDecimal(1000.54);
-	public static BigDecimal GAIN1 =  new BigDecimal(600.54);
-	public static BigDecimal GAIN2 =  new BigDecimal(400.00);
+	public static BigDecimal HOLDING_SUMMARY_GAINS =  new BigDecimal("1000.54");
+	public static BigDecimal GAIN1 =  new BigDecimal("600.54");
+	public static BigDecimal GAIN2 =  new BigDecimal("400.00");
 	public static String SYMBOL2 = "OTHER";
 	
 	@Bean 
@@ -267,5 +269,5 @@ public class ServiceTestConfiguration  {
 		return holdingSummary;
 	}
 	 
-	
+
 }
