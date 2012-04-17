@@ -1,29 +1,29 @@
 <div class="span12">
     <div class="well show-well">
-        <div class="title"><h3>List of Holdings</h3></div>
+        <div class="title"><h3><%= translate("listOfHoldings") %></h3></div>
             <div class="table-outer">
-                <table class="table table-striped table-bordered table-condensed">
+                <table id="list-of-holdings" class="table table-striped table-bordered table-condensed">
                     <thead>
                         <tr>
-                            <th>Purchase Date</th>
-                            <th>Sympol</th>
-                            <th>Quantity</th>
-                            <th>Purchase Price</th>
-                            <th>Current Price</th>
-                            <th>Purchase Basis</th>
-                            <th>Market Value</th>
-                            <th>Total Gain / Loss</th>
-                            <th>Trade</th>
+                            <th><%= translate("purchaseDate") %></th>
+                            <th><%= translate("symbol") %></th>
+                            <th><%= translate("quantity") %></th>
+                            <th><%= translate("purchasePrice") %></th>
+                            <th><%= translate("currentPrice") %></th>
+                            <th><%= translate("purchaseBasis") %></th>
+                            <th><%= translate("marketValue") %></th>
+                            <th><%= translate("totalGainLoss") %></th>
+                            <th><%= translate("trade") %></th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                     <tfoot>
-                        <tr class="summary bold">
-                            <td colspan="5">Total</td>
-                            <td class="large-size">570.00</td>
-                            <td class="green-color large-size">700</td>
-                            <td class="green-color large-size">150</td>
+                        <tr class="summary bold <%= (totalGainLoss > 0 ? nano.conf.successCss : nano.conf.errorCss ) %>">
+                            <td colspan="5"><%= translate("total") %></td>
+                            <td class="large-size"><%= totalPurchaseBasis %></td>
+                            <td class="large-size"><%= totalMarketValue %></td>
+                            <td class="large-size"><%= totalGainLoss %></td>
                             <td>&nbsp;</td>
                         </tr>
                     </tfoot>
@@ -33,10 +33,9 @@
         <div class="pagination pagination-right">
             <ul>
                 <li class="disabled"><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
+                <% for (var i = 1 ; i <= pageCount; ++i) { %>
+                <li class="<%= (i == currentPage ? "active" : "") %>"><a><%= i %></a></li>
+                <% } %>
                 <li><a href="#">&raquo;</a></li>
             </ul>
         </div>
