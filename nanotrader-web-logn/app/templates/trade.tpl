@@ -22,7 +22,7 @@
 <div class="row">
     <div class="span12">
         <div class="well show-well">
-            <div class="title"><h3><%= translate("resentOrders") %></h3></div>
+            <div class="title"><h3><%= translate("recentOrders") %></h3></div>
             <table class="table table-striped table-bordered table-condensed">
                 <thead>
                     <tr>
@@ -32,7 +32,7 @@
                         <th><%= translate("completionDate") %></th>
                         <th><%= translate("transactionFee") %></th>
                         <th><%= translate("transactionType") %></th>
-                        <th><%= translate("sympol") %></th>
+                        <th><%= translate("symbol") %></th>
                         <th><%= translate("quantity") %></th>
                     </tr>
                 </thead>
