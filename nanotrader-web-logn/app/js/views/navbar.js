@@ -65,6 +65,11 @@ nano.views.Navbar = Backbone.View.extend({
             this.$('ul.nav.nav-top a.nav-link').each(function(i, ele){
                 that.linkContainers[ele.id] = $(ele.parentNode);
             });
+            this.username = $('#nb-username');
+        }
+        else
+        {
+            this.username.html(nano.session.username);
         }
         // Maps the different hash urls to the id of the link in the navbar
         var hashMap = {};
