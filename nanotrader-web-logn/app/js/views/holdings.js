@@ -84,17 +84,41 @@ nano.views.Holdings = Backbone.View.extend({
                 var tpl = this.template(data);
                 this.$el.html(tpl);
                 this.tbody = this.$('#list-of-holdings > tbody');
+                this.paginators = this.$('#loh-pagination > li.g2p');
+                this.previous = this.$('#lohp-previous');
+                this.next = this.$('#lohp-next');
+
+                // Store the total amount of pages
+                this.pageCount = data.pageCount;
             }
-            // Clear it
+
+            //Set the page number on the paginator
+            this.paginators.removeClass('active');
+            this.paginators[page-1].className = 'g2p active';
+
+            if (page == 1)
+            {
+                this.previous.addClass('disabled');
+            }
             else
             {
-                //set the page number on the paginator
+                this.previous.removeClass('disabled');
             }
+            if (page == this.pageCount)
+            {
+                this.next.addClass('disabled');
+            }
+            else
+            {
+                this.next.removeClass('disabled');
+            }
+
             this.$el.show();
 
             // Render the list
             this.renderRows(page);
-            // Store the current Page number
+
+            // Store the current Page number 
             this.page = page;
     },
 
@@ -111,7 +135,6 @@ nano.views.Holdings = Backbone.View.extend({
         var length = this.model.length;
         for ( i; i < length && i < next; ++i )
         {
-            console.log(this.model.at(i));
             this.tbody.append( this.rowTemplate(this.model.at(i).toJSON()) );
         }
     },
@@ -121,9 +144,15 @@ nano.views.Holdings = Backbone.View.extend({
         window.location = nano.conf.hash.portfolioWithPage.replace(nano.conf.pageUrlKey, pageNumber);
     },
     previousPage : function(evt) {
-        alert('previousPage');
+        if ( this.page > 1 )
+        {
+            window.location = nano.conf.hash.portfolioWithPage.replace( nano.conf.pageUrlKey, (this.page-1) );
+        }
     },
     nextPage : function(evt) {
-        alert('nextPage');
+        if ( this.page < this.pageCount )
+        {
+            window.location = nano.conf.hash.portfolioWithPage.replace( nano.conf.pageUrlKey, (parseInt(this.page)+1) );
+        }
     }
 });
