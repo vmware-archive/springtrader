@@ -150,13 +150,19 @@ nano.models.Holdings = Backbone.Collection.extend({
  * Model to interact with the Order Object
  * @author Jean Chassoul <jean.chassoul@lognllc.com>
  */
+//nano.models.Order = Backbone.Model.extend({
+//    idAttribute: 'orderid',
+//    //=================================================> There's no url for this object, we need to include one!
+//});
 nano.models.Order = Backbone.Model.extend({
     idAttribute: 'orderid',
+    initialize: function(options) {
+        this.accountid = options.accountid;
+    },
     urlRoot : nano.conf.urls.orders,
     url: function() {
-        var url = this.urlRoot;
-        if (!this.isNew())
-        {
+        var url = this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+        if (!this.isNew()){
             url += '/' + this.id;
         }
         return url;
@@ -178,9 +184,39 @@ nano.models.Orders = Backbone.Collection.extend({
     /**
      * Builds the url to fetch the Collection
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @return string: Url for the Holdings Collection
+     * @return string: Url for the Orders Collection
      */
     url: function() {
         return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+    }
+});
+
+/**
+ * Model to interact with the Quote Object
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ */
+nano.models.Quote = Backbone.Model.extend({
+    idAttribute: 'quoteid',
+    //=================================================> There's no url for this object, we need to include one!
+});
+
+
+/**
+ * Collection to interact with the Orders Collection (list of Order Objects)
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ */
+nano.models.Quotes = Backbone.Collection.extend({
+    model : nano.models.Quote,
+    
+    initialize: function(options) {
+        this.quoteid = options.quoteid;
+    },
+    urlRoot : nano.conf.urls.quote,
+
+    url: function() {
+        var url = this.urlRoot;
+        url += '/' + this.quoteid;
+        
+        return url;
     }
 });

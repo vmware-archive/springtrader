@@ -52,7 +52,7 @@ nano.views.Orders = Backbone.View.extend({
         
         var orders = this.model.toJSON().slice(start_from, end_on);
         var data = '';
-        
+
         for(var i = 0, j = orders.length; i < j; i++) {
             data += this.template(orders[i]);
         }

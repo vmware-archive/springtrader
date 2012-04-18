@@ -8,7 +8,7 @@ nano.views.Trade = Backbone.View.extend({
      * Bind the events functions to the different HTML elements
      */
     events : {
-        'click #sendBtn' : 'send',
+        'click #getQuoteBtn' : 'quote',
     },
     
     /**
@@ -69,12 +69,37 @@ nano.views.Trade = Backbone.View.extend({
     },
     
     /**
-     * Send event
+     * Quote event
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @return void
      */
-    send : function (event){
-        alert('send');
+    quote : function (event){
+        var quoteControl = this.$('#quote-control');        
+        var quoteError = this.$('#quote-error');
+        var quoteResult = this.$('#quote-result')
+        
+        event.preventDefault();
+        
+        var quote = this.$('#quote-input').val();
+        
+        var model = new nano.models.Quotes({ quoteid : quote });
+            
+        var onFetchSuccess = function() {
+            // Render the orders list
+            nano.instances.quotes.render(model);
+            quoteResult.removeClass('hide');
+            quoteError.addClass('hide');
+        };
+        
+        var onError = function() {
+            quoteError.removeClass('hide');
+            quoteResult.addClass('hide');
+        };
+            
+        model.fetch({
+            success : onFetchSuccess,
+            error: onError
+        });
     }
     
 });

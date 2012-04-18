@@ -98,7 +98,7 @@ nano.strings = {
     cancel : 'Cancel',
     buy : 'Buy',
     uncompleted : 'Uncompleted',
-    // Free ??? 
-    transactionFree : 'Transaction Free' 
+    price : 'Price',
+    quote : 'Quote'
     
 };

@@ -25,7 +25,8 @@ nano.conf.urls = {
     holdingSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdingSummary',
     portfolioSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/portfolioSummary',
     holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holding',
-    orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order'
+    orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order', // the 's is missing on the API for this collection
+    quote : nano.conf.urlRoot + 'quote'
 };
 
 nano.conf.tpls = {
@@ -44,7 +45,8 @@ nano.conf.tpls = {
     profile : nano.conf.tplRoot + 'profile.tpl',
     trade : nano.conf.tplRoot + 'trade.tpl',
     contact : nano.conf.tplRoot + 'contact.tpl',
-    orders : nano.conf.tplRoot + 'orders.tpl'
+    orders : nano.conf.tplRoot + 'orders.tpl',
+    quotes : nano.conf.tplRoot + 'quotes.tpl'
 };
 
 /**
