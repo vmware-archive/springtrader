@@ -7,7 +7,11 @@ nano.views.Holdings = Backbone.View.extend({
     /**
      * Bind the events functions to the different HTML elements
      */
-    events : {},
+    events : {
+        'click #loh-pagination > li.g2p' : 'go2page',
+        'click #lohp-previous' : 'previousPage',
+        'click #lohp-next' : 'nextPage'
+    },
 
     /**
      * Class constructor
@@ -37,6 +41,14 @@ nano.views.Holdings = Backbone.View.extend({
     rowTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow)),
 
     /**
+     * Templating function for the rows in the List of Holdings
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object data: data to be replaced in the template
+     * @return string
+     */
+    modalTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow)),
+
+    /**
      * Renders the List Of Holdings View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param nano.models.Holdings model: Collection of holdings
@@ -51,30 +63,63 @@ nano.views.Holdings = Backbone.View.extend({
             // Render the List of Holdings container
             if ( !this.$el.html() )
             {
-                this.model.each(function(holding){
-                    //console.log(holding);
-                    // Calculate the totals here!
-                });
                 var data = {
-                    totalPurchaseBasis : -1,
-                    totalMarketValue : -1, 
-                    totalGainLoss : 1,
+                    totalPurchaseBasis : 0,
+                    totalMarketValue : 0, 
+                    totalGainLoss : 0,
                     pageCount : Math.ceil(this.model.length / nano.conf.itemsPerPage),
                     currentPage : page
                 };
+
+                this.model.each(function(holding) {
+                    var quote = holding.get('quote');
+                    holding.set( "purchaseBasis", holding.get('quantity') * holding.get('purchaseprice') );
+                    holding.set( "marketValue", holding.get('quantity') * quote.price );
+                    holding.set( "gainLoss", holding.get('marketValue') - holding.get("purchaseBasis") );
+
+                    data.totalPurchaseBasis += holding.get( "purchaseBasis");
+                    data.totalMarketValue += holding.get( "marketValue");
+                    data.totalGainLoss += holding.get( "gainLoss");
+                });
                 var tpl = this.template(data);
+                this.$el.html(tpl);
                 this.tbody = this.$('#list-of-holdings > tbody');
+                this.paginators = this.$('#loh-pagination > li.g2p');
+                this.previous = this.$('#lohp-previous');
+                this.next = this.$('#lohp-next');
+
+                // Store the total amount of pages
+                this.pageCount = data.pageCount;
             }
-            // Clear it
+
+            //Set the page number on the paginator
+            this.paginators.removeClass('active');
+            this.paginators[page-1].className = 'g2p active';
+
+            if (page == 1)
+            {
+                this.previous.addClass('disabled');
+            }
             else
             {
-                this.tbody.html('');
+                this.previous.removeClass('disabled');
             }
-            this.$el.html(tpl);
+            if (page == this.pageCount)
+            {
+                this.next.addClass('disabled');
+            }
+            else
+            {
+                this.next.removeClass('disabled');
+            }
+
             this.$el.show();
 
             // Render the list
             this.renderRows(page);
+
+            // Store the current Page number 
+            this.page = page;
     },
 
     /**
@@ -84,6 +129,30 @@ nano.views.Holdings = Backbone.View.extend({
      * @return void
      */
     renderRows: function(page) {
-        var listTpl = _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow));
+        this.tbody.html('');
+        var i = (page - 1) * nano.conf.itemsPerPage;
+        var next = i + nano.conf.itemsPerPage;
+        var length = this.model.length;
+        for ( i; i < length && i < next; ++i )
+        {
+            this.tbody.append( this.rowTemplate(this.model.at(i).toJSON()) );
+        }
+    },
+
+    go2page : function(evt) {
+        var pageNumber = evt.target.innerHTML;
+        window.location = nano.conf.hash.portfolioWithPage.replace(nano.conf.pageUrlKey, pageNumber);
+    },
+    previousPage : function(evt) {
+        if ( this.page > 1 )
+        {
+            window.location = nano.conf.hash.portfolioWithPage.replace( nano.conf.pageUrlKey, (this.page-1) );
+        }
+    },
+    nextPage : function(evt) {
+        if ( this.page < this.pageCount )
+        {
+            window.location = nano.conf.hash.portfolioWithPage.replace( nano.conf.pageUrlKey, (parseInt(this.page)+1) );
+        }
     }
 });

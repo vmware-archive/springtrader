@@ -3,6 +3,7 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.strings = {
+    sell : 'Sell',
     listOfHoldings : 'List of Holdings',
     purchaseDate : 'Purchase Date',
     symbo : 'Symbol',
@@ -13,7 +14,7 @@ nano.strings = {
     total : 'Total',
     portfolioSummary : 'Portfolio Summary',
     numberOfHoldings : 'Number of Holdings',
-    purchaseBasics : 'Purchase Basics',
+    purchaseBasis : 'Purchase Basis',
     marketValue : 'Market Value',
     totalGainLoss : 'Total Gain/Loss',
     dailyTopGains : 'Daily Top Gains',

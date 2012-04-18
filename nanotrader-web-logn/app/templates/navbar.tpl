@@ -17,7 +17,7 @@
                       <li class="divider-vertical"></li>
                       <li class="dropdown" id="fat-menu"><a class="dropdown-toggle pull-right" data-toggle="dropdown">
                               <span class="icon-custom icon-user"></span>
-                              <span><%= username %></span>
+                              <span id="nb-username"><%= username %></span>
                               <span class="icon-down-arrow"></span>
                           </a>
                           <div class="dropdown-menu">
