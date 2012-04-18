@@ -699,6 +699,7 @@ def verificationTests() {
   testAdvancedGetQuote()
   //testAdvancedCreateProfile()
   testAdvancedUpdateProfile()
+  testForNull()
 }
 
 def unauthorizedVerificationTests() {
@@ -1007,6 +1008,39 @@ def testAdvancedGetQuote() {
     failCount++
     writeExceptionToFile(t)
     println "testAdvancedGetQuote FAIL";
+  }
+}
+
+/*
+ * For a newly created profile, orders, holdings, portfolioSummary should return empty 200 instead of 404
+ *
+ */
+def testForNull() {
+  totalCount++
+  try {
+    def now = Calendar.instance
+    def date = now.time
+    def millis = date.time
+    def testuser = "testuser"
+    testuser += millis
+    println "testuser:" + testuser
+    createAccountProfile(testuser, false, 201, "testuser")
+    def jsonResponse = getAuthToken(testuser, "testuser")
+    testAuthToken = jsonResponse.authToken
+    acctid = jsonResponse.accountid
+    println "authtoken:" + testAuthToken
+    println "acctid:" + acctid
+    getOrder(acctid, "all")
+    getAllHoldingsForAccount(acctid)
+    getPortfolioSummary(acctid)
+
+    passCount++
+    println "testForNull PASS";
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testForNull FAIL";
   }
 }
 
