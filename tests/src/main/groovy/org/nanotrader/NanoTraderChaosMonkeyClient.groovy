@@ -65,6 +65,10 @@ def printSummary() {
   println "Debug log file written to: nanotraderchaostest.debug"
 }
 
+/*
+ * Send 'kill' message to TCServer
+ *
+ */
 def killTCServer() {
   totalCount++
   try {
@@ -108,6 +112,10 @@ def restartTCServer() {
   }
 }
 
+/*
+ * Send 'crash' message to TCServer
+ *
+ */
 def crashTCServer() {
   totalCount++
   try {
@@ -137,6 +145,10 @@ def startRabbitMQ() {
   }
 }
 
+/*
+ * ssh to rabbitmq server host and issue graceful shutdown command
+ *
+ */
 def stopRabbitMQ() {
   totalCount++
   try {
@@ -151,6 +163,10 @@ def stopRabbitMQ() {
   }
 }
 
+/*
+ * ssh to rabbitmq server host and issue 'kill -9' process id
+ *
+ */
 def killRabbitMQ() {
   totalCount++
   try {
