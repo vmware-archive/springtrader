@@ -7,7 +7,11 @@ nano.views.Holdings = Backbone.View.extend({
     /**
      * Bind the events functions to the different HTML elements
      */
-    events : {},
+    events : {
+        'click #loh-pagination > li.g2p' : 'go2page',
+        'click #lohp-previous' : 'previousPage',
+        'click #lohp-next' : 'nextPage'
+    },
 
     /**
      * Class constructor
@@ -35,6 +39,14 @@ nano.views.Holdings = Backbone.View.extend({
      * @return string
      */
     rowTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow)),
+
+    /**
+     * Templating function for the rows in the List of Holdings
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @param Object data: data to be replaced in the template
+     * @return string
+     */
+    modalTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow)),
 
     /**
      * Renders the List Of Holdings View
@@ -70,6 +82,7 @@ nano.views.Holdings = Backbone.View.extend({
                     data.totalGainLoss += holding.get( "gainLoss");
                 });
                 var tpl = this.template(data);
+                this.$el.html(tpl);
                 this.tbody = this.$('#list-of-holdings > tbody');
             }
             // Clear it
@@ -77,11 +90,12 @@ nano.views.Holdings = Backbone.View.extend({
             {
                 //set the page number on the paginator
             }
-            this.$el.html(tpl);
             this.$el.show();
 
             // Render the list
             this.renderRows(page);
+            // Store the current Page number
+            this.page = page;
     },
 
     /**
@@ -97,9 +111,19 @@ nano.views.Holdings = Backbone.View.extend({
         var length = this.model.length;
         for ( i; i < length && i < next; ++i )
         {
-            console.log('i: ' + i);
-            conso.log('model:' + this.model.at(i));
+            console.log(this.model.at(i));
             this.tbody.append( this.rowTemplate(this.model.at(i).toJSON()) );
         }
+    },
+
+    go2page : function(evt) {
+        var pageNumber = evt.target.innerHTML;
+        window.location = nano.conf.hash.portfolioWithPage.replace(nano.conf.pageUrlKey, pageNumber);
+    },
+    previousPage : function(evt) {
+        alert('previousPage');
+    },
+    nextPage : function(evt) {
+        alert('nextPage');
     }
 });

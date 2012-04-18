@@ -30,13 +30,15 @@
                 </table>
             </div>
         </div>
+        <!-- The prefix "lohp" stands for "List Of Holdings Pagination" -->
         <div class="pagination pagination-right">
-            <ul>
-                <li class="disabled"><a href="#">&laquo;</a></li>
+            <!-- The prefix "loh" stands for "List Of Holdings" -->
+            <ul id="loh-pagination">
+                <li id="lohp-previous" class="disabled"><a>&laquo;</a></li>
                 <% for (var i = 1 ; i <= pageCount; ++i) { %>
-                <li class="<%= (i == currentPage ? "active" : "") %>"><a><%= i %></a></li>
+                <li class="g2p <%= (i == currentPage ? "active" : "") %>"><a><%= i %></a></li>
                 <% } %>
-                <li><a href="#">&raquo;</a></li>
+                <li id="lohp-next"><a>&raquo;</a></li>
             </ul>
         </div>
     </div>
