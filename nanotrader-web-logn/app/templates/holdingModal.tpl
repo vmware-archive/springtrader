@@ -42,7 +42,7 @@
         </table>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn green-btn"><%= translate("ok") %></a>
-        <a href="#" class="btn btn-inverse"><%= translate("cancel") %></a>
+        <a id="loh-sell" data-dismiss="modal" class="btn green-btn"><%= translate("sell") %></a>
+        <a data-dismiss="modal" class="btn btn-inverse"><%= translate("cancel") %></a>
     </div>
 </div>
