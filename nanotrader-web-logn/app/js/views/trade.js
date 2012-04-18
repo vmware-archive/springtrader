@@ -46,7 +46,6 @@ nano.views.Trade = Backbone.View.extend({
         // calculate the number of pages we are going to have
         var pagesCount = Math.ceil(orderCount/nano.conf.itemsPerPage);
         
-        
         // navigation options on the paginator:
         var navigation_html = '<ul>';
 
@@ -81,6 +80,7 @@ nano.views.Trade = Backbone.View.extend({
         event.preventDefault();
         
         var quote = this.$('#quote-input').val();
+        quote = quote.toUpperCase();
         
         var model = new nano.models.Quotes({ quoteid : quote });
             

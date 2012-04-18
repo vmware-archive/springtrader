@@ -1,11 +1,14 @@
 <tr>
     <td><%= orderid %></td>
-    <!--<td><span class="uncompleted"><%= translate("uncompleted") %></span></td>-->
-    <td><%= orderstatus %></td>
+    <td>
+        <span class="<%= (orderstatus == 'closed' ? "completed" : "uncompleted") %>">
+            <%= (orderstatus == 'closed' ? translate("completed") : translate("pending")) %>
+        </span>
+    </td>
     <td><%= opendate %></td>
     <td><%= completiondate %></td>
     <td><%= orderfee %></td>
-    <td><%= ordertype %></td>
+    <td><%= translate(ordertype) %></td>
     <td><%= quote.symbol %></td>
     <td><%= quantity %></td>
 </tr>

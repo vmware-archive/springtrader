@@ -99,6 +99,7 @@ nano.strings = {
     cancel : 'Cancel',
     buy : 'Buy',
     uncompleted : 'Uncompleted',
+    pending : 'Pending',
     price : 'Price',
     quote : 'Quote'
     

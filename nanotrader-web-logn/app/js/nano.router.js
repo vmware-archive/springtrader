@@ -19,7 +19,6 @@ nano.Router = Backbone.Router.extend({
         "portfolio/p:page" : "holdings", // #portolio - pagination of List of Holdings
         "trade"         : "trade", // #trade page
         "trade/p:page"  : "orders", // #trade - pagination of List of Orders
-        "trade/q:quote" : "quotes", // #trade - list of quotes
         "profile"       : "profile", // #profile page
         "contact"       : "contact" // #contact page
     },
@@ -247,30 +246,6 @@ nano.Router = Backbone.Router.extend({
         else {
             // Render the List of Holdings View
             nano.instances.orders.render(null, page);
-        }
-    },
-    
-    quotes: function(quote){
-        
-        if (!nano.containers.trade){
-            this.trade(0);
-        }
-        if (!nano.instances.quotes){
-            window.location = nano.conf.hash.trade;
-        }
-        else {
-            // Render the List of Holdings View
-            var model = new nano.models.Quotes({ quoteid : quote });
-            
-            var onFetchSuccess = function() {
-                // Render the orders list
-                nano.instances.quotes.render(model);
-            };
-            
-            model.fetch({
-                success : onFetchSuccess,
-                error: function(){alert('error');}
-            });
         }
     },
     
