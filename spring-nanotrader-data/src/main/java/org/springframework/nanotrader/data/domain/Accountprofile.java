@@ -15,11 +15,11 @@ import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(schema = "public",name = "accountprofile")
+@Table(name = "accountprofile")
 public class Accountprofile implements Serializable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCOUNTPROFILE_SEQ")
-    @SequenceGenerator(name="ACCOUNTPROFILE_SEQ", sequenceName="ACCOUNTPROFILE_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    //@SequenceGenerator(name="ACCOUNTPROFILE_SEQ", sequenceName="ACCOUNTPROFILE_SEQUENCE")
     @Column(name = "profileid")
     private Integer profileid;
 

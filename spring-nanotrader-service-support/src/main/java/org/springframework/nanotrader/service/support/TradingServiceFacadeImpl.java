@@ -223,24 +223,21 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 		
 		List<Holding> holdingResponse = new ArrayList<Holding>();
 		List<org.springframework.nanotrader.data.domain.Holding> holdings = tradingService.findHoldingsByAccountId(accountId, getPage(page), getPageSize(pageSize));
-		if (holdings == null ||  holdings.size() == 0) {
-			throw new NoRecordsFoundException();
+		if (holdings != null  &&  holdings.size() > 0) {
+			Set<String> symbols = new HashSet<String>();
+			for (org.springframework.nanotrader.data.domain.Holding h: holdings) { 
+				//get unique quotes symbols
+				symbols.add(h.getQuoteSymbol());
+			}
+			
+			Map<String, Quote> currentQuotes = getCurrentQuotes(symbols);
+			for(org.springframework.nanotrader.data.domain.Holding h: holdings) {
+				Holding holding = new Holding();
+				mapper.map(h, holding, HOLDING_MAPPING);
+				holding.setQuote(currentQuotes.get(h.getQuoteSymbol()));
+				holdingResponse.add(holding);
+			}
 		}
-		
-		Set<String> symbols = new HashSet<String>();
-		for (org.springframework.nanotrader.data.domain.Holding h: holdings) { 
-			//get unique quotes symbols
-			symbols.add(h.getQuoteSymbol());
-		}
-		
-		Map<String, Quote> currentQuotes = getCurrentQuotes(symbols);
-		for(org.springframework.nanotrader.data.domain.Holding h: holdings) {
-			Holding holding = new Holding();
-			mapper.map(h, holding, HOLDING_MAPPING);
-			holding.setQuote(currentQuotes.get(h.getQuoteSymbol()));
-			holdingResponse.add(holding);
-		}
-	
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServiceFacade.findHoldingsByAccountId completed");
 		}
@@ -301,13 +298,14 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
 			orders = tradingService.findOrders(accountId); //get all orders
 		}
 		List<Order> responseOrders = new ArrayList<Order>();
-		if (orders == null || orders.size() == 0 ) {
-			throw new NoRecordsFoundException();
-		}
-		for(org.springframework.nanotrader.data.domain.Order o: orders) {
-			Order order = new Order();
-			mapper.map(o, order, ORDER_MAPPING);
-			responseOrders.add(order);
+		if (orders != null && orders.size() > 0 ) {
+			
+		
+			for(org.springframework.nanotrader.data.domain.Order o: orders) {
+				Order order = new Order();
+				mapper.map(o, order, ORDER_MAPPING);
+				responseOrders.add(order);
+			}
 		}
 		return responseOrders;
 	}

@@ -23,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(schema = "public",name = "account")
+@Table(name = "ACCOUNT")
 public class Account implements Serializable {
 
 	@OneToMany(mappedBy = "accountAccountid")
@@ -122,8 +122,8 @@ public class Account implements Serializable {
     }
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCOUNT_SEQ")
-    @SequenceGenerator(name="ACCOUNT_SEQ", sequenceName="ACCOUNT_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.TABLE) //, generator="ACCOUNT_SEQ")
+  //  @SequenceGenerator(name="ACCOUNT_SEQ", sequenceName="ACCOUNT_SEQUENCE")
     @Column(name = "accountid")
     private Integer accountid;
 
