@@ -14,11 +14,11 @@ import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(schema = "public",name = "quote")
+@Table(name = "quote")
 public class Quote implements Serializable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="QUOTE_SEQ")
-    @SequenceGenerator(name="QUOTE_SEQ", sequenceName="QUOTE_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.TABLE) //, generator="QUOTE_SEQ")
+   // @SequenceGenerator(name="QUOTE_SEQ", sequenceName="QUOTE_SEQUENCE")
     @Column(name = "quoteid")
     private Integer quoteid;
 

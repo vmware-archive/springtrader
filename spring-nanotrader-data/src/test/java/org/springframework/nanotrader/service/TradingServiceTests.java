@@ -177,6 +177,7 @@ public class TradingServiceTests {
 		entityManager.clear(); // force reload
 
 		Holding updatedHolding = tradingService.findHolding(holding.getHoldingid(), holding.getAccountAccountid());
+		
 		assertEquals(newHolding.toString(), updatedHolding.toString());
 		
 	}

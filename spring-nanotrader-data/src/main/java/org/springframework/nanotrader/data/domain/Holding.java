@@ -21,11 +21,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(schema = "public",name = "holding")
+@Table(name = "holding")
 public class Holding implements Serializable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="HOLDING_SEQ")
-    @SequenceGenerator(name="HOLDING_SEQ", sequenceName="HOLDING_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.TABLE) //, generator="HOLDING_SEQ")
+   // @SequenceGenerator(name="HOLDING_SEQ", sequenceName="HOLDING_SEQUENCE")
     @Column(name = "holdingid")
     private Integer holdingid;
 
@@ -43,7 +43,7 @@ public class Holding implements Serializable {
 	@Column(name = "purchaseprice", precision = 14, scale = 2)
     private BigDecimal purchaseprice;
 
-	@Column(name = "quantity")
+	@Column(name = "quantity", precision = 14, scale = 0)
     @NotNull
     private BigDecimal quantity;
 

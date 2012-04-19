@@ -22,10 +22,10 @@
 	</logger>
 	
 	<logger name="org.springframework.nanotrader.service.support">
-		<level value="debug" />
+		<level value="error" />
 	</logger>
 	<logger name="org.springframework.nanotrader.web.security">
-		<level value="debug" />
+		<level value="error" />
 	</logger>
 	
 	
