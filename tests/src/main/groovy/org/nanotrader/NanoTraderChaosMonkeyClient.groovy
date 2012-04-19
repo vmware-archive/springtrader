@@ -181,6 +181,10 @@ def killRabbitMQ() {
   }
 }
 
+def methodMissing(String name, args) {
+  println "groovy NanoTraderChaosMonkeyClient.groovy [killTCServer|crashTCServer|startTCServer|restartTCServer|stopRabbitMQ|killRabbitMQ|startRabbitMQ]"
+}
+
 static main(args) {
   def inst = new NanoTraderChaosMonkeyClient()
   inst.init()

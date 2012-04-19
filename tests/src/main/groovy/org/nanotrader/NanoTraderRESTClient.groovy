@@ -1023,13 +1023,13 @@ def testForNull() {
     def millis = date.time
     def testuser = "testuser"
     testuser += millis
-    println "testuser:" + testuser
+    //println "testuser:" + testuser
     createAccountProfile(testuser, false, 201, "testuser")
     def jsonResponse = getAuthToken(testuser, "testuser")
     testAuthToken = jsonResponse.authToken
     acctid = jsonResponse.accountid
-    println "authtoken:" + testAuthToken
-    println "acctid:" + acctid
+    //println "authtoken:" + testAuthToken
+    //println "acctid:" + acctid
     getOrder(acctid, "all")
     getAllHoldingsForAccount(acctid)
     getPortfolioSummary(acctid)
@@ -1161,7 +1161,8 @@ def testGetAccount() {
 def testGetSpecificHoldingForAccount() {
   totalCount++
   try {
-    getSpecificHoldingForAccount(acctid, 1, false, 404)
+    getSpecificHoldingForAccount(acctid, 1, true, 200)
+    getSpecificHoldingForAccount(acctid, 12345678, false, 404)
 
     passCount++
     println "testGetSpecificHoldingForAccount PASS"
