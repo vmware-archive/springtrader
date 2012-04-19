@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en-GB" class="no-js ie6"> <![endif]-->
+<!--[if IE 7   ]>      <html lang="en-GB" class="no-js ie7"> <![endif]-->
+<!--[if IE 8   ]>      <html lang="en-GB" class="no-js ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-GB" class="no-js"> <!--<![endif]-->
+<html lang="en">
+    <head>	
+		<meta charset="utf-8">
+		<title>NanoTrader :: Portfolio</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="custom/css/jquery.jqplot.min.css" rel="stylesheet">
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="custom/css/style.css" rel="stylesheet">
+		<link href="custom/css/stylesheet.css" rel="stylesheet">
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+			<!--[if lt IE 9]>
+			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<![endif]-->
+		<!-- Le fav and touch icons -->
+		<link rel="shortcut icon" href="assets/ico/favicon.ico">
+		
+		
+
+		<!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">	-->
+				
+	</head>
+	<body>									
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					  <a data-target="div.nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					  </a>
+					  <a href="index.html" class="logo brand">NanoTrader</a>
+					  <div class="nav-collapse">
+						<ul class="nav nav-top">
+						  <li class="divider-vertical"></li>
+						  <li>
+							<a href="index.html"><i class="icon-home icon-white"></i>dashboard</a>
+						  </li>
+						  <li class="divider-vertical"></li>
+						  <li class="active">
+							<a href="portfolio.html"><i class="icon-custom icon-portfolio"></i>portfolio</a>
+						  </li>
+						  <li class="divider-vertical"></li>
+						  <li>
+							<a href="trade.html"><i class="icon-custom icon-trade"></i>trade</a>
+						  </li>
+						  <li class="divider-vertical"></li>
+						</ul>
+						<div class="navbar-text pull-right">
+							<ul class="nav">
+							<li class="divider-vertical"></li>
+							<li class="dropdown" id="fat-menu">
+							<a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown">
+								<i class="icon-custom icon-user"></i>Svetlana Agafonova<br/>								
+								<span class="user_email">svetlanka.ua@gmail.com</span>							
+							</a>
+							<div class="dropdown-menu">
+								<ul class="dropdown-nav">
+									<li><a href="profile.html">Profile</a></li>
+									<li><a href="help.html">Help</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Logout</a></li>
+								</ul>
+							</div>
+							</li>
+							<li class="divider-vertical"></li>
+							</ul>
+						</div>
+					  </div>
+				</div>
+			</div>
+		</div>
+		<div class="container portfolio-page" id="accordion2">
+				<div class="row show-table">
+					<div class="well show-well">
+						<div class="well">
+							<table class="table table-center">
+								<tr>
+									<td>Index</td>
+									<td>10240.99</td>
+								</tr>
+								<tr>
+									<td>Volume</td>
+									<td>120</td>
+								</tr>
+								<tr>
+									<td class="gray">Change:</td>
+									<td class="green-color gray">+55.15 <span>&uarr;</span></td>
+								</tr>
+							</table>
+						</div>
+						<table class="table">
+							<tr>
+								<th colspan="2" class="green-color"><i class="icon-custom icon-gains"></i>days gains</th>
+								<th colspan="2" class="red-color"><i class="icon-custom icon-lost"></i>days losses</th>
+							</tr>
+							<tr>
+								<td class="caps">goog</td>
+								<td class="green-color gray">+15.05 <span>&uarr;</span></td>
+								<td class="caps">goog</td>
+								<td class="red-color gray">&minus;15.05 <span>&darr;</span></td>
+							</tr>
+							<tr>
+								<td class="caps">app</td>
+								<td class="green-color gray">+15.05 <span>&uarr;</span></td>
+								<td class="caps">app</td>
+								<td class="red-color gray">&minus;15.05 <span>&darr;</span></td>
+							</tr>
+							<tr>
+								<td class="caps">vmw</td>
+								<td class="green-color gray">+15.05 <span>&uarr;</span></td>
+								<td class="caps">vmw</td>
+								<td class="red-color gray">&minus;15.05 <span>&darr;</span></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span6">
+						<div class="well show-well">
+							<div class="title"><h3><a href="#collapseOne" class="btn-transaction" data-toggle="collapse" data-parent="#accordion2">Portfolio summary <span></span></a></h3></div>
+							<div class="table-outer collapse in" id="collapseOne">
+								<table class="table">
+									<tr>
+										<td>Number of Holldings</td>
+										<td>4</td>
+									</tr>
+									<tr>
+										<td>Purchase Basis</td>
+										<td>$ 570.00</td>
+									</tr>
+									<tr>
+										<td>Market Value</td>
+										<td>$ 700.00</td>
+									</tr>
+									<tr class="summary">
+										<td>Total Gain / Loss</td>
+										<td class="average">$150.00</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span12">
+						
+						<div class="well show-well">
+							
+							<div class="title"><h3><a href="#collapseTwo" class="btn-transaction" data-toggle="collapse" data-parent="#accordion2">List of Holdings <span></span></a></h3></div>
+								<div class="table-outer collapse in" id="collapseTwo">
+									<table class="table">
+									<tr>
+										<td>Purchase Date</td>
+										<td class="gray">2 / 7 /2012</td>
+										<td class="gray">2 / 7 /2012</td>
+									</tr>
+									<tr>
+										<td>Sympol</td>
+										<td class="gray">VMW</td>
+										<td class="gray">VMW</td>
+									</tr>
+									<tr>
+										<td>Quantity</td>
+										<td class="gray">1</td>
+										<td class="gray">1</td>
+									</tr>
+									<tr>
+										<td>Purchase Price</td>
+										<td class="gray">100.00</td>
+										<td class="gray">100.00</td>
+									</tr>
+									<tr>
+										<td>Current Price</td>
+										<td class="gray">125.00</td>
+										<td class="gray">125.00</td>
+									</tr>
+									<tr>
+										<td>Purchase Basis</td>
+										<td class="gray">100.00</td>
+										<td class="gray">100.00</td>
+									</tr>
+									<tr>
+										<td>Market Value</td>
+										<td class="green-color gray">125.00</td>
+										<td class="green-color gray">125.00</td>
+									</tr>
+									<tr>
+										<td>Total Gain / Loss</td>
+										<td class="green-color gray">125.00 <span>&uarr;</span></td>
+										<td class="green-color gray">125.00 <span>&uarr;</span></td>
+									</tr>
+									<tr>
+										<td>Trade</td>
+										<td class="gray">
+											<div class="modal hide fade myModal" id="myModal" style="display: none;">
+														<div class="modal-header">
+															<a class="close" data-dismiss="modal">&times;</a>
+															<h3>Order Confirmation</h3>
+														</div>
+														<div class="modal-body">
+															<table class="table">
+																<tr>
+																	<td>Purchase Date:</td>
+																	<td>2 / 7 / 2012</td>
+																</tr>
+																<tr>
+																	<td>Sympol:</td>
+																	<td>VMW</td>
+																</tr>
+																<tr>
+																	<td>Purchase Price:</td>
+																	<td>100.00</td>
+																</tr>
+																<tr>
+																	<td>Current Price:</td>
+																	<td>125.00</td>
+																</tr>
+																<tr>
+																	<td>Purchase Basis:</td>
+																	<td>100.00</td>
+																</tr>
+																<tr>
+																	<td>Market Value:</td>
+																	<td class="green-color">125.00</td>
+																</tr>
+																<tr>
+																	<td>Total Gain / Loss:</td>
+																	<td class="green-color">125.00 <span>&uarr;</span></td>
+																</tr>
+															</table>
+														</div>
+														<div class="modal-footer">
+															<a href="#" class="btn green-btn">OK</a>
+															<a href="#" class="btn btn-inverse">Cancel</a>
+														</div>
+													</div>
+											<a href="myModal" data-toggle="modal" class="btn green-btn">Sell</a>
+										
+										</td>
+										<td class="gray">
+										<div class="modal hide fade myModal" id="myModal2" style="display: none;">
+														<div class="modal-header">
+															<a class="close" data-dismiss="modal">&times;</a>
+															<h3>Order Confirmation</h3>
+														</div>
+														<div class="modal-body">
+															<table class="table">
+																<tr>
+																	<td>Purchase Date:</td>
+																	<td>2 / 7 / 2012</td>
+																</tr>
+																<tr>
+																	<td>Sympol:</td>
+																	<td>VMW</td>
+																</tr>
+																<tr>
+																	<td>Purchase Price:</td>
+																	<td>100.00</td>
+																</tr>
+																<tr>
+																	<td>Current Price:</td>
+																	<td>125.00</td>
+																</tr>
+																<tr>
+																	<td>Purchase Basis:</td>
+																	<td>100.00</td>
+																</tr>
+																<tr>
+																	<td>Market Value:</td>
+																	<td class="green-color">125.00</td>
+																</tr>
+																<tr>
+																	<td>Total Gain / Loss:</td>
+																	<td class="green-color">125.00 <span>&uarr;</span></td>
+																</tr>
+															</table>
+														</div>
+														<div class="modal-footer">
+															<a href="#" class="btn green-btn">OK</a>
+															<a href="#" class="btn btn-inverse">Cancel</a>
+														</div>
+													</div>
+										<a href="#myModal2" data-toggle="modal" class="btn green-btn">Sell</a>
+										
+										</td>
+									</tr>
+								</table>
+								<div class="pagination pagination-centered">
+									<ul>
+										<li class="disabled"><a href="#">&laquo;</a></li>
+										<li class="active"><a href="#">1</a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">4</a></li>
+										<li><a href="#">&raquo;</a></li>
+									</ul>
+								</div>
+								<table class="table show-table-total">
+									<tr>
+										<th colspan="2">Totals of Holdings</th>
+									</tr>
+									<tr>
+										<td>Purchase Basis</td>
+										<td class="green-color large-size">$150.00</td>
+									</tr>
+									<tr>
+										<td>Market Value</td>
+										<td class="green-color large-size">$150.00</td>
+									</tr>
+									<tr>
+										<td>Total Gain / Loss</td>
+										<td class="green-color large-size">$150.00</td>
+									</tr>
+								</table>
+							</div>	
+						</div>	
+								
+						</div>
+					</div>
+				</div>
+		<div class="footer">
+			<div class="container clearfix">
+				<p class="pull-left">Copyright &copy; 2012 VMWare, Inc. All rights reserved.</p>
+				<ul class="nav pull-left">
+					<li>
+						<a href="contact.html">Contact Us</a> <span class="divider">|</span>
+					</li>
+					<li>
+						<a href="help.html">Help</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>			
+		<script src="assets/js/bootstrap-collapse.js"></script>
+		<script src="assets/js/bootstrap-dropdown.js"></script>
+		<script src="assets/js/bootstrap-button.js"></script>
+		<script src="assets/js/bootstrap-alert.js"></script>
+		<script src="assets/js/bootstrap-typeahead.js"></script>		
+		<script src="assets/js/bootstrap-modal.js"></script>		
+		<script>
+			$(document).ready(function() {
+			$('.collapse').collapse('hide'); 
+			$('.collapse').on('shown', function () {
+					$('.table-outer.in').prev().addClass('active');
+			});
+			$('.collapse').on('hide', function () {
+					$('.table-outer.in').prev().removeClass('active');
+			});
+			
+			$('.collapse').on('shown', function () {
+					$('.table-indent.in').prev().addClass('active');
+			});
+			$('.collapse').on('hide', function () {
+					$('.table-indent.in').prev().removeClass('active');
+			});
+			
+			$('.dropdown-toggle').dropdown();
+			$('.typeahead').typeahead();
+			$('.myModal').modal('hide')
+			});
+		</script>
+				
+	</body>
+</html>

@@ -37,7 +37,6 @@ nano.Router = Backbone.Router.extend({
         nano.instances.holdings = new nano.views.Holdings({el: '#nc-holdings'});
         nano.instances.profile = new nano.views.Profile({el : '#nc-profile'});
         nano.instances.contact = new nano.views.Contact({el: '#nc-contact'});
-        // new trade page view
         nano.instances.trade = new nano.views.Trade({el : '#nc-trade'});
 
         //Store the dom Object for the loading message div.
