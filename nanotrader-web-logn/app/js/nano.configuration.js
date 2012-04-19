@@ -27,7 +27,8 @@ nano.conf.urls = {
     portfolioSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/portfolioSummary',
     holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdings',
     sellHolding : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order',
-    orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/orders', // the 's is missing on the API for this collection
+    orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/orders', 
+    order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order', 
     quote : nano.conf.urlRoot + 'quote'
 };
 

@@ -159,7 +159,7 @@ nano.models.Order = Backbone.Model.extend({
     initialize: function(options) {
         this.accountid = options.accountid;
     },
-    urlRoot : nano.conf.urls.orders,
+    urlRoot : nano.conf.urls.order,
     url: function() {
         var url = this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
         if (!this.isNew()){
