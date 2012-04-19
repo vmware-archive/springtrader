@@ -25,9 +25,9 @@ nano.conf.urls = {
     marketSummary : nano.conf.urlRoot + 'marketSummary',
     holdingSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdingSummary',
     portfolioSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/portfolioSummary',
-    holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holding',
+    holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdings',
     sellHolding : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order',
-    orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order', // the 's is missing on the API for this collection
+    orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/orders', // the 's is missing on the API for this collection
     quote : nano.conf.urlRoot + 'quote'
 };
 
