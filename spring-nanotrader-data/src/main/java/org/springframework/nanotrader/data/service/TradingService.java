@@ -62,4 +62,6 @@ public interface TradingService {
 	public abstract Accountprofile findByAuthtoken(String token);
 	
 	public abstract HoldingSummary findHoldingSummary(Integer accountId);
+
+	public Long findCountOfHoldingsByAccountId(Integer accountId);
 }

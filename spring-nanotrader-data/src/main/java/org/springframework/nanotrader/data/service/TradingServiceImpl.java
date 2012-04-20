@@ -160,6 +160,18 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
+	public Long findCountOfHoldingsByAccountId(Integer accountId) {
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServices.findHoldingsByAccountId: accountId=" + accountId);
+		}
+		Long  countOfHoldings = holdingRepository.findCountOfHoldings(accountId);
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServices.findHoldingsByAccountId: completed successfully.");
+		}
+		return countOfHoldings;
+	}
+	
+	@Override
 	public List<Holding> findHoldingsByAccountId(Integer accountId, Integer page, Integer pageSize) {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findHoldingsByAccountId: accountId=" + accountId);
