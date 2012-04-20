@@ -9,7 +9,8 @@ nano.views.Footer = Backbone.View.extend({
      */
     events : {
         'click #contactUsBtn' : 'contact',
-        'click #helpBtn' : 'help'
+        'click #helpBtn' : 'help',
+        'click #logoutBtn' : 'logout'
     },
     
     /**
@@ -40,12 +41,32 @@ nano.views.Footer = Backbone.View.extend({
             var footer = this.template();
             this.$el.html(footer);
     },
-    
+
+    /**
+     * Contact link click event
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return void
+     */
     contact: function() {
         window.location = nano.conf.hash.contact;
     },
-    
+
+    /**
+     * Help link click event
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return void
+     */
     help: function() {
         alert('goto -> help');
+    },
+
+    /**
+     * Logout Click Event
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return void
+     */
+    logout : function() {
+        nano.utils.logout();
+        nano.utils.goTo( nano.conf.hash.login );
     }
 });

@@ -3,7 +3,7 @@
             <form class="form-horizontal">
                 <fieldset>
                     <h3><%= translate("login") %><span><%= translate("enterUsername") %></span></h3>
-                    <div id="login-error" class="hide span8 alert alert-block alert-error fade in">
+                    <div id="login-error" class="span8 alert alert-block alert-error fade in" style="display:none;">
                         <a data-dismiss="alert" class="close">x</a>
                         <h4 class="alert-heading"><%= translate("ohSnap") %></h4>
                         <p></p>

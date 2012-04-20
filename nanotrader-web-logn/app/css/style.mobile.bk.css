@@ -44,21 +44,41 @@
          url('../fonts/colaborate-light-webfont.svg#ColaborateLightRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-}a {
+}
+a {
     cursor: pointer;
-}body {
+}
+body {
     background:url(../images/bg.gif);
     padding-top:110px;
-}#nc-loading .logo, #nc-loading .loading
+    font-size: 15px;
+}
+#nc-loading .logo, #nc-loading .loading
 {
     margin: auto;
-}#nc-loading .loading{
+}
+#nc-loading .loading{
     margin-top: 20px;
-}.loading
+}
+.loading
 {
     background:url(../images/loading.gif) no-repeat;
     width: 32px;
     height: 32px;
+}
+.container.sub-page h3 {
+    margin: 0 0 10px 60px;
+}
+.container.sub-page h3 {
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 10px 20px;
+}
+.container.sub-page h3 span {
+    color: #656565;
+    font-size: 15px;
+    margin-top: 10px;
 }
 /* @group of top navigation
 -------------------------------------*/
@@ -84,12 +104,16 @@
     padding:0;
     margin:5px 20px;
 }
+a.dropdown-toggle .icon-down-arrow
+{
+    display: none;
+}
 .navbar .nav.nav-top > li > a, .navbar-text .nav a.dropdown-toggle {
-    padding:15px 20px;
-    font: 16px/18px 'ColaborateRegular', Arial, sans-serif;
+    font: 20px/22px 'ColaborateRegular',Arial,sans-serif;
     position:relative;
     color:#b7b7b7;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
+    padding: 15px 20px;
 }
 .navbar .nav.nav-top
 {
@@ -646,13 +670,13 @@ table td input {
 
 /* @group footer 
 --------------------------------------*/
-.footer {
+#nc-footer {
     padding:15px 30px;
     color:#757575;
     font:normal 11px/14px Arial, sans-serif;
-}.footer .nav {
+}#nc-footer .nav {
     margin:0 0 0 20px;
-}.footer .nav li, .footer .nav li a{
+}#nc-footer .nav li, #nc-footer .nav li a{
     display:inline;
 }
 /* @group make responsive (max-width: 979px)
@@ -769,4 +793,8 @@ table td input {
 }.jqplot-table-legend {
     background:none !important;
     border:0 !important;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    vertical-align: -2px;
 }
