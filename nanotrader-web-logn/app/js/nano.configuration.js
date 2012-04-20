@@ -3,13 +3,14 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.conf = {
-    sessionCookieName : 'nanotraderSession',       // Name of the Cookie that will store the session info in the browser
-    urlRoot : '/spring-nanotrader-services/api/',  // Path to the API service
-    tplRoot : './templates/',                      // Path to the Templates directory
-    accountIdUrlKey : '{accountid}',               // Key in the api urls that's gonna be replaced with the actual accountid
-    pageUrlKey : '{page}',               // Key in the api urls that's gonna be replaced with the actual accountid
-    marketSummaryUpdateMillisecs : 15000,          // Interval of milliseconds in which the Market Summary section updates
-    currency : '$',                                // Current currency is dollars
+    sessionCookieName : 'nanotraderSession',        // Name of the Cookie that will store the session info in the browser
+    urlRoot : '/spring-nanotrader-services/api/',   // Path to the API service
+    tplRoot : './templates/',                       // Path to the Templates directory
+    accountIdUrlKey : '{accountid}',                // Key in the api urls that's gonna be replaced with the actual accountid
+    pageUrlKey : '{page}',                          // Key in the api urls that's gonna be replaced with the actual accountid
+    quoteUrlKey : '{quote}',                        // Key in the api urls that's gonna be replaced with the actual accountid
+    marketSummaryUpdateMillisecs : 15000,           // Interval of milliseconds in which the Market Summary section updates
+    currency : '$',                                 // Current currency is dollars
     itemsPerPage: 5,                                // Amount of items to be displayed on list views
     successCss : 'alert alert-block alert-success', // CSS Class to show success message (or Positive Balance)
     errorCss : 'alert alert-block alert-error'      // CSS Class to show error message (or Negative Balance)
@@ -50,7 +51,10 @@ nano.conf.tpls = {
     trade : nano.conf.tplRoot + 'trade.tpl',
     contact : nano.conf.tplRoot + 'contact.tpl',
     orders : nano.conf.tplRoot + 'orders.tpl',
-    quotes : nano.conf.tplRoot + 'quotes.tpl'
+    orderRow : nano.conf.tplRoot + 'orderRow.tpl',
+    quotes : nano.conf.tplRoot + 'quotes.tpl',
+    quoteRow : nano.conf.tplRoot + 'quoteRow.tpl',
+    quoteModal : nano.conf.tplRoot + 'quoteModal.tpl'
 };
 
 /**
@@ -63,6 +67,8 @@ nano.conf.hash = {
     portfolio : '#portfolio',
     portfolioWithPage : '#portfolio/p{page}',
     trade : '#trade',
+    tradeWithPage : '#trade/p{page}',
+    tradeWithQuote : '#trade/q{quote}',
     registration : '#registration',
     profile : '#profile',
     contact : '#contact'

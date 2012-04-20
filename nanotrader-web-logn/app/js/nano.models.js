@@ -150,10 +150,6 @@ nano.models.Holdings = Backbone.Collection.extend({
  * Model to interact with the Order Object
  * @author Jean Chassoul <jean.chassoul@lognllc.com>
  */
-//nano.models.Order = Backbone.Model.extend({
-//    idAttribute: 'orderid',
-//    //=================================================> There's no url for this object, we need to include one!
-//});
 nano.models.Order = Backbone.Model.extend({
     idAttribute: 'orderid',
     initialize: function(options) {
