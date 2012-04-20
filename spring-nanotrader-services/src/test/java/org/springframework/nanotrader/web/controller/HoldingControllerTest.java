@@ -53,12 +53,12 @@ public class HoldingControllerTest extends AbstractSecureControllerTest {
 	public void getHoldingsByAccountIdJson() throws Exception {
 		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/holdings").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().type(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.[0].holdingid").value(ServiceTestConfiguration.HOLDING_ID))
-				.andExpect(jsonPath("$.[0].accountAccountid").value(ServiceTestConfiguration.ACCOUNT_ID))
-				.andExpect(jsonPath("$.[0].purchasedate").value(PURCHASE_DATE))
-				.andExpect(jsonPath("$.[0].quote.symbol").value(ServiceTestConfiguration.SYMBOL))
-				.andExpect(jsonPath("$.[0].purchaseprice").value(PURCHASE_PRICE))
-				.andExpect(jsonPath("$.[0].quantity").value(QUANTITY)).andDo(print());
+				.andExpect(jsonPath("$.results.[0].holdingid").value(ServiceTestConfiguration.HOLDING_ID))
+				.andExpect(jsonPath("$.results.[0].accountAccountid").value(ServiceTestConfiguration.ACCOUNT_ID))
+				.andExpect(jsonPath("$.results.[0].purchasedate").value(PURCHASE_DATE))
+				.andExpect(jsonPath("$.results.[0].quote.symbol").value(ServiceTestConfiguration.SYMBOL))
+				.andExpect(jsonPath("$.results.[0].purchaseprice").value(PURCHASE_PRICE))
+				.andExpect(jsonPath("$.results.[0].quantity").value(QUANTITY)).andDo(print());
 	}
 	
 }

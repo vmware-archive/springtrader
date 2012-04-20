@@ -11,7 +11,9 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.dozer.DozerBeanMapper;
@@ -102,12 +104,16 @@ public class ServiceTestConfiguration  {
 	public static BigDecimal GAIN1 =  new BigDecimal("600.54");
 	public static BigDecimal GAIN2 =  new BigDecimal("400.00");
 	public static String SYMBOL2 = "OTHER";
-	
+	public static String PAGE_LABEL = "page";
+	public static String PAGE_SIZE = "pageSize";
+	public static String TOTAL_RECORDS = "totalRecords";
+	public static Long RESULT_COUNT  = new Long(1);
 	@Bean 
 	public TradingService tradingService() {
 		TradingService tradingService = Mockito.mock(TradingService.class);
 		when(tradingService.findHolding(eq(100), eq(ACCOUNT_ID))).thenReturn(holding());
 		when(tradingService.findHoldingsByAccountId(eq(ACCOUNT_ID),  any(Integer.class), any(Integer.class))).thenReturn(holdings());
+		when(tradingService.findCountOfHoldingsByAccountId(eq(ACCOUNT_ID))).thenReturn(RESULT_COUNT);
 		when(tradingService.updateHolding(any(Holding.class))).thenReturn(holding());
 		when(tradingService.findAccountProfile(400)).thenReturn(accountProfile());
 		when(tradingService.findAccountProfile(NOT_A_VALID_PROFILE)).thenReturn(null);
@@ -227,6 +233,7 @@ public class ServiceTestConfiguration  {
 		holdings.add(holding());
 		return holdings;
 	}
+	
 	
 	public PortfolioSummary portfolioSummary() {
 		PortfolioSummary portfolioSummary = new PortfolioSummary();

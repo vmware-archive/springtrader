@@ -21,6 +21,7 @@ import java.util.Map;
 import org.springframework.nanotrader.data.service.TradingService;
 import org.springframework.nanotrader.service.domain.Account;
 import org.springframework.nanotrader.service.domain.Accountprofile;
+import org.springframework.nanotrader.service.domain.CollectionResult;
 import org.springframework.nanotrader.service.domain.Holding;
 import org.springframework.nanotrader.service.domain.HoldingSummary;
 import org.springframework.nanotrader.service.domain.MarketSummary;
@@ -53,7 +54,7 @@ public interface TradingServiceFacade {
 	
 	Holding findHolding(Integer id, Integer accountId);
 
-	List<Holding> findHoldingsByAccountId(Integer accountId, Integer page, Integer pageSize);
+	CollectionResult findHoldingsByAccountId(Integer accountId, Integer page, Integer pageSize);
 
 	Order findOrder(Integer orderId, Integer accountId);
 

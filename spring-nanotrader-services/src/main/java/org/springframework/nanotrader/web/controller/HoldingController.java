@@ -1,8 +1,10 @@
 package org.springframework.nanotrader.web.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.nanotrader.service.domain.CollectionResult;
 import org.springframework.nanotrader.service.domain.Holding;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,12 +35,12 @@ public class HoldingController extends BaseController {
 	
 	@RequestMapping(value = "/account/{accountId}/holdings", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Holding> findByAccountId(@PathVariable( "accountId" ) final Integer accountId, 
+	public CollectionResult findByAccountId(@PathVariable( "accountId" ) final Integer accountId, 
 										 @RequestParam(value="page", required=false) Integer page, 
 										 @RequestParam(value="pageSize", required=false) Integer pageSize) {
 		this.getSecurityUtil().checkAccount(accountId);
-		List<Holding> holdingResponse =  getTradingServiceFacade().findHoldingsByAccountId(accountId, page, pageSize);
-		return holdingResponse;
+		return getTradingServiceFacade().findHoldingsByAccountId(accountId, page, pageSize);
+		
 	}
 
 	
