@@ -13,6 +13,7 @@ nano.Router = Backbone.Router.extend({
         "login/:error"  : "login",    // #login page
         "login"         : "login",    // #login page
         "dashboard"     : "dashboard",   // #dashboard page
+        "dashboard/p:page" : "orders",  // #dashboard - pagination of List of Orders
         ""              : "dashboard", // #dashboard page
         "registration"  : "registration", // #registration page
         "portfolio"     : "portfolio", // #portfolio page
@@ -79,7 +80,10 @@ nano.Router = Backbone.Router.extend({
         alert('Help goes here!');
     },
 
-    dashboard: function() {
+    dashboard: function(page) {
+        if (isNaN(page)){
+            page = 1;
+        }
         // Render the Dashboard of logged in or the Login otherwise
         if(nano.utils.loggedIn()) {
             nano.utils.hideAll();
@@ -91,6 +95,7 @@ nano.Router = Backbone.Router.extend({
                 account : new nano.models.Account({accountid : nano.session.accountid}),
                 holdingSummary : new nano.models.HoldingSummary({ accountid : nano.session.accountid }),
                 portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
+                orders : new nano.models.Orders({ accountid : nano.session.accountid }),
             };
 
             var onFetchSuccess = function() {
@@ -109,6 +114,9 @@ nano.Router = Backbone.Router.extend({
 
                     // Render the Positions View
                     nano.instances.positions.render(models.holdingSummary);
+                    
+                    // Render the Orders View
+                    nano.instances.orders.render(models.orders, page, nano.conf.hash.dashboardWithPage);
                 }
             };
             for (var i in models)
@@ -226,7 +234,7 @@ nano.Router = Backbone.Router.extend({
                 nano.instances.trade.render(model);
                 
                 // Render the List of Orders View
-                nano.instances.orders.render(model, page);
+                nano.instances.orders.render(model, page, nano.conf.hash.tradeWithPage);
                 
                 // Render the List of Quotes View
                 nano.instances.quotes.render();

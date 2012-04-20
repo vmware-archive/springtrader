@@ -65,6 +65,7 @@ nano.conf.tpls = {
 nano.conf.hash = {
     login  : '#login',
     dashboard : '#dashboard',
+    dashboardWithPage : '#dashboard/p{page}',
     portfolio : '#portfolio',
     portfolioWithPage : '#portfolio/p{page}',
     trade : '#trade',

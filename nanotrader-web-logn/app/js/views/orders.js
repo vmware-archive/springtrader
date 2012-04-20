@@ -47,9 +47,13 @@ nano.views.Orders = Backbone.View.extend({
      * @param int page: page of the List of Orders to display
      * @return void
      */
-    render: function(model, page) {
+    render: function(model, page, hash) {
         if (model){
             this.model = model;
+        }
+        
+        if (hash){
+            this.hash = hash;
         }
         
         // Store the total amount of pages
@@ -125,7 +129,7 @@ nano.views.Orders = Backbone.View.extend({
      */
     go2page : function(event) {
         var pageNumber = event.target.innerHTML;
-        window.location = nano.conf.hash.tradeWithPage.replace(nano.conf.pageUrlKey, pageNumber);
+        window.location = this.hash.replace(nano.conf.pageUrlKey, pageNumber);
     },
 
     /**
@@ -135,7 +139,7 @@ nano.views.Orders = Backbone.View.extend({
      */
     previousPage : function() {
         if ( this.page > 1 ){
-            window.location = nano.conf.hash.tradeWithPage.replace( nano.conf.pageUrlKey, (this.page-1) );
+            window.location = this.hash.replace( nano.conf.pageUrlKey, (this.page-1) );
         }
     },
 
@@ -146,7 +150,7 @@ nano.views.Orders = Backbone.View.extend({
      */
     nextPage : function(event) {
         if ( this.page < this.pageCount ){
-            window.location = nano.conf.hash.tradeWithPage.replace( nano.conf.pageUrlKey, (parseInt(this.page)+1) );
+            window.location = this.hash.replace( nano.conf.pageUrlKey, (parseInt(this.page)+1) );
         }
     }
 });
