@@ -101,6 +101,7 @@ nano.strings = {
     uncompleted : 'Uncompleted',
     pending : 'Pending',
     price : 'Price',
-    quote : 'Quote'
+    quote : 'Quote',
+    recentTransactions : 'Recent Transactions'
     
 };

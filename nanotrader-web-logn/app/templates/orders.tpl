@@ -1,5 +1,13 @@
 <div class="span12">
-    <div class="well show-well">
+    
+    <!-- toggle -->
+    <div id="toggle-orders-control" class="show-transactions hide">
+        <a class="accordion-toggle"><%= translate("recentTransactions") %></a>
+        <span class="border-bg"></span>
+    </div>
+    <!-- toggle -->
+    
+    <div id="orders-control" class="well show-well">
         <div class="title"><h3><%= translate("recentOrders") %></h3></div>
         <table id="list-of-orders" class="table table-striped table-bordered table-condensed">
             <thead>
@@ -19,7 +27,7 @@
         </table>
     </div>
     <!-- The prefix "loop" stands for "List Of Orders Pagination" -->
-    <div class="pagination pagination-right">
+    <div id="pagination-control" class="pagination pagination-right">
         <!-- The prefix "loo" stands for "List Of Orders" -->
         <ul id="loo-pagination">
             <li id="loop-previous"><a>&laquo;</a></li>

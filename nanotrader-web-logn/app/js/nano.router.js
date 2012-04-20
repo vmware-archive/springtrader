@@ -115,6 +115,8 @@ nano.Router = Backbone.Router.extend({
                     // Render the Positions View
                     nano.instances.positions.render(models.holdingSummary);
                     
+                    // Show the toggle control on the dashboard
+                    nano.instances.orders.options.showToggle = true;
                     // Render the Orders View
                     nano.instances.orders.render(models.orders, page, nano.conf.hash.dashboardWithPage);
                 }
@@ -232,6 +234,9 @@ nano.Router = Backbone.Router.extend({
                 
                 // Render the trade view
                 nano.instances.trade.render(model);
+                
+                // Show the toggle control on the dashboard
+                nano.instances.orders.options.showToggle = false;
                 
                 // Render the List of Orders View
                 nano.instances.orders.render(model, page, nano.conf.hash.tradeWithPage);

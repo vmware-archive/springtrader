@@ -10,7 +10,8 @@ nano.views.Orders = Backbone.View.extend({
     events : {
         'click #loo-pagination > li.g2p' : 'go2page',
         'click #loop-previous' : 'previousPage',
-        'click #loop-next' : 'nextPage'
+        'click #loop-next' : 'nextPage',
+        'click #toggle-orders-control a' : 'toggle'
     },
 
     /**
@@ -48,6 +49,7 @@ nano.views.Orders = Backbone.View.extend({
      * @return void
      */
     render: function(model, page, hash) {
+        // hash as a option??????
         if (model){
             this.model = model;
         }
@@ -76,6 +78,29 @@ nano.views.Orders = Backbone.View.extend({
             this.paginators = this.$('#loo-pagination > li.g2p');
             this.previous = this.$('#loop-previous');
             this.next = this.$('#loop-next');
+            // Toggle Control
+            this.toggleControl = this.$('#toggle-orders-control');
+            // Orders Control
+            this.ordersControl = this.$('#orders-control');
+            // Orders Pagination Control
+            this.paginationControl = this.$('#pagination-control');
+        }
+        if (this.options.showToggle){
+            this.toggleControl.removeClass('hide');
+            this.$('#orders-control div.title').addClass('hide');
+            
+            if(this.toggleControl.hasClass('active')){
+                this.ordersControl.show();
+                this.paginationControl.show();
+            } else {
+                this.ordersControl.hide();
+                this.paginationControl.hide();
+            }
+        } else {
+            this.toggleControl.addClass('hide');
+            this.$('#orders-control div.title').removeClass('hide');
+            this.ordersControl.show();
+            this.paginationControl.show();
         }
 
         //Set the page number on the paginator
@@ -151,6 +176,18 @@ nano.views.Orders = Backbone.View.extend({
     nextPage : function(event) {
         if ( this.page < this.pageCount ){
             window.location = this.hash.replace( nano.conf.pageUrlKey, (parseInt(this.page)+1) );
+        }
+    },
+    
+    toggle : function(event){
+        if(this.toggleControl.hasClass('active')) {
+            this.ordersControl.hide();
+            this.paginationControl.hide();
+            this.toggleControl.removeClass('active');
+        } else {
+            this.ordersControl.show();
+            this.paginationControl.show();
+            this.toggleControl.addClass('active');
         }
     }
 });
