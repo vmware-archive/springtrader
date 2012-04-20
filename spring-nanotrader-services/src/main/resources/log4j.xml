@@ -28,6 +28,10 @@
 		<level value="error" />
 	</logger>
 	
+	<logger name="net.minidev.json">
+		<level value="error" />
+	</logger>
+	
 	
 	<logger name="org.springframework.data.gemfire">
 		<level value="error" />
