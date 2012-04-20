@@ -3,6 +3,7 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.conf = {
+    device : 'computer',                            // Device rendering the application (changes to "mobile" depending on the user agent)
     sessionCookieName : 'nanotraderSession',        // Name of the Cookie that will store the session info in the browser
     urlRoot : '/spring-nanotrader-services/api/',   // Path to the API service
     tplRoot : './templates/',                       // Path to the Templates directory

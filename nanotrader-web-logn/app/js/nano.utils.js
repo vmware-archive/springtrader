@@ -10,7 +10,8 @@ var nano = {
     models : {},
     strings : {},
     conf : {},
-    session : {}
+    session : {},
+    device : 'computer'
 };
 
 /**

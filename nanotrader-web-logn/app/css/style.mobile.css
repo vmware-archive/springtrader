@@ -44,17 +44,23 @@
          url('../fonts/colaborate-light-webfont.svg#ColaborateLightRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-}a {
+}
+a {
     cursor: pointer;
-}body {
+}
+body {
     background:url(../images/bg.gif);
     padding-top:110px;
-}#nc-loading .logo, #nc-loading .loading
+    font-size: 15px;
+}
+#nc-loading .logo, #nc-loading .loading
 {
     margin: auto;
-}#nc-loading .loading{
+}
+#nc-loading .loading{
     margin-top: 20px;
-}.loading
+}
+.loading
 {
     background:url(../images/loading.gif) no-repeat;
     width: 32px;
@@ -84,12 +90,16 @@
     padding:0;
     margin:5px 20px;
 }
+a.dropdown-toggle .icon-down-arrow
+{
+    display: none;
+}
 .navbar .nav.nav-top > li > a, .navbar-text .nav a.dropdown-toggle {
-    padding:15px 20px;
-    font: 16px/18px 'ColaborateRegular', Arial, sans-serif;
+    font: 20px/22px 'ColaborateRegular',Arial,sans-serif;
     position:relative;
     color:#b7b7b7;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
+    padding: 15px 20px;
 }
 .navbar .nav.nav-top
 {
@@ -769,4 +779,8 @@ table td input {
 }.jqplot-table-legend {
     background:none !important;
     border:0 !important;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    vertical-align: -2px;
 }
