@@ -260,6 +260,16 @@ nano.utils.onApiError = function(model, error){
     }
 };
 
+nano.utils.setCollapsable = function(view) {
+    view.$('.collapse').collapse('hide');
+    view.$('.collapse').on('hide', function () {
+        view.$('.title').removeClass('active');
+    });
+    view.$('.collapse').on('show', function () {
+        view.$('.title').addClass('active');
+    });
+};
+
 /**
  * Aliases for the functions used in the views to make them shorter
  * @author Carlos Soto <carlos.soto@lognllc.com>

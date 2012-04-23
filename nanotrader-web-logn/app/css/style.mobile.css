@@ -347,6 +347,8 @@ h3 span{
 }
 
 .row.show-table {
+    margin: -30px 0 30px;
+    position: relative;
 	padding:30px 0 0;
 }
 

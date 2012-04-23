@@ -56,7 +56,7 @@ nano.views.Navbar = Backbone.View.extend({
             this.$el.html(this.template(nano.session));
 
             // Enable the dropdown for the User Profile options on the right
-            this.$('.dropdown-toggle').dropdown();
+            this.$('.dropdown-toggle').dropdown(); 
 
             // Cache the containers of the links 
             // (for the "active" display when clicking on the link)

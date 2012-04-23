@@ -112,13 +112,16 @@ nano.Router = Backbone.Router.extend({
                     // Render the Portfolio View
                     nano.instances.portfolio.render(models.account, models.portfolioSummary);
 
-                    // Render the Positions View
-                    nano.instances.positions.render(models.holdingSummary);
-                    
                     // Show the toggle control on the dashboard
                     nano.instances.orders.options.showToggle = true;
                     // Render the Orders View
                     nano.instances.orders.render(models.orders, page, nano.conf.hash.dashboardWithPage);
+
+                    if (nano.conf.device != 'mobile' )
+                    {
+                        // Render the Positions View
+                        nano.instances.positions.render(models.holdingSummary);
+                    }
                 }
             };
             for (var i in models)
