@@ -9,6 +9,8 @@ nano.views.Profile = Backbone.View.extend({
      */
     events : {
         'click #updateBtn' : 'update',
+        'click #overview' : 'overview',
+        'click #help' : 'help'
     },
     
     /**
@@ -41,15 +43,15 @@ nano.views.Profile = Backbone.View.extend({
         {
             // Set the Account Profile model
             this.model = model;
-            
+
             if (!this.creditcard){
                 // Set the real creditcard number
                 this.creditcard = this.model.toJSON().creditcard;
                 // Set the current creditcard slice
-                this.ccSlice = this.creditcard.slice(12,16);
+                this.ccSlice = this.creditcard.slice(-4);
             }
             
-            var data = this.model.toJSON()            
+            var data = this.model.toJSON()
             data.creditcard = '************' + this.ccSlice;
             // template
             var profile = this.template(data);
@@ -102,7 +104,7 @@ nano.views.Profile = Backbone.View.extend({
             success : function() {
                 view.$('#password-input').val('');
                 view.$('#matchpasswd-input').val('');
-                view.$('#creditcard-input').val('************' + creditcard.slice(12,16))
+                view.$('#creditcard-input').val('************' + creditcard.slice(-4))
                 // Show the loading page and render the dashboard
                 nano.utils.goTo( nano.conf.hash.dashboard );
             },
@@ -125,7 +127,7 @@ nano.views.Profile = Backbone.View.extend({
             reCreditcard = new RegExp(/^\b[\d]{16}\b$/);
             if (creditcard.match(reCreditcard) == null){
                 // any changes?
-                if (this.ccSlice == creditcard.slice(12,16)){
+                if (this.ccSlice == creditcard.slice(-4)){
                     creditcard = this.creditcard;
                 }
             }
@@ -150,6 +152,14 @@ nano.views.Profile = Backbone.View.extend({
                 this.model.save(attrs, callbacks);
             }
         }
+    },
+    
+    overview : function(){
+        window.location = nano.conf.hash.overview;
+    },
+    
+    help : function(){
+        window.location = nano.conf.hash.help;
     }
     
 });

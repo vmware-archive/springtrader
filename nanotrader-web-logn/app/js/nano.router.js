@@ -22,7 +22,8 @@ nano.Router = Backbone.Router.extend({
         "trade/p:page"  : "orders", // #trade - pagination of List of Orders
         "trade/q:quote" : "quotes", // #trade - list of quotes
         "profile"       : "profile", // #profile page
-        "contact"       : "contact" // #contact page
+        "contact"       : "contact", // #contact page
+        "overview"      : "overview" // #overview page
     },
 
     initialize: function() {
@@ -42,6 +43,8 @@ nano.Router = Backbone.Router.extend({
         nano.instances.trade = new nano.views.Trade({el : '#nc-trade'});
         nano.instances.quotes = new nano.views.Quotes({el : '#nc-quotes'});
         nano.instances.orders = new nano.views.Orders({el: '#nc-orders'});
+        nano.instances.help = new nano.views.Help({el : '#nc-help'});
+        nano.instances.overview = new nano.views.Overview({el: '#nc-overview'});
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#nc-loading');
@@ -77,7 +80,27 @@ nano.Router = Backbone.Router.extend({
     },
 
     help: function() {
-        alert('Help goes here!');
+        if(nano.utils.loggedIn()){
+            nano.utils.hideAll(false);
+            // Render the navbar
+            nano.instances.navbar.render();
+            nano.instances.help.render();
+        } else {
+            nano.utils.hideAll(false);
+            nano.instances.help.render();
+        }
+    },
+
+    overview: function() {
+        if(nano.utils.loggedIn()){
+            nano.utils.hideAll(false);
+            // Render the navbar
+            nano.instances.navbar.render();
+            nano.instances.overview.render();
+        } else {
+            nano.utils.hideAll(false);
+            nano.instances.overview.render();
+        }
     },
 
     dashboard: function(page) {
