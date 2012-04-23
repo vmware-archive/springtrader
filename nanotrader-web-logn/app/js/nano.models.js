@@ -69,7 +69,7 @@ nano.models.Account = Backbone.Model.extend({
  */
 nano.models.AccountProfile = Backbone.Model.extend({
     idAttribute: 'profileid',
-    urlRoot : nano.conf.urls.accountProfile,
+    urlRoot: nano.conf.urls.accountProfile,
     url: function() {
         var url = this.urlRoot;
         if (!this.isNew())
@@ -77,6 +77,46 @@ nano.models.AccountProfile = Backbone.Model.extend({
             url += '/' + this.id;
         }
         return url;
+    },
+    // Account Profile model validation
+    validate: function(attrs){
+        // RegExp attrs validation
+        reFullname = new RegExp(/^\b[\w\d\s]{2,25}\b$/);
+        reEmail = new RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+        //rePasswd = new RegExp();
+        reUserid = new RegExp(/^\b[\w\d]{3,25}\b$/);
+        reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/); // a testear el infinito
+        reCreditcard = new RegExp(/^\b[\d]{16}\b$/); // implementar regex para verificar si es realmente una cc (yes se puede al parecer)
+        //reAddress = new RegExp();
+        
+        // fullname validation
+        if (attrs.fullname.match(reFullname) == null){
+            return "fullnameError"
+        }
+        // email validation
+        if (attrs.email.match(reEmail) == null){
+            return "emailError"
+        }
+        // passwd validation
+        if (attrs.passwd.length < 3 || attrs.passwd.length > 25){
+            return "passwdError"
+        }
+        // userid validation
+        if (attrs.userid.match(reUserid) == null){
+            return "useridError"
+        }
+        // openbalance validation
+        //if (attrs.accounts[0].openbalance.match(reOpenbalance) == null){
+        //    return "openbalanceError"
+        //}
+        // creditcard validation
+        if (attrs.creditcard.match(reCreditcard) == null){
+            return "creditcardError"
+        }
+        // address validation
+        if (attrs.address.length < 3 || attrs.address.length > 100){
+            return "addressError"
+        }
     }
 });
 

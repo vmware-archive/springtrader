@@ -102,6 +102,14 @@ nano.strings = {
     pending : 'Pending',
     price : 'Price',
     quote : 'Quote',
-    recentTransactions : 'Recent Transactions'
-    
+    recentTransactions : 'Recent Transactions',
+    applicationOverview : 'Application Overview',    
+    errorOcurred : 'An error has occurred.',
+    fullnameError : 'Error! You got an Fullname field validation error!',
+    emailError : 'Error! You got an Email field validation error!',
+    passwdError : 'Error! You got an Password field validation error!',
+    useridError : 'Error! You got an Username field validation error!',
+    openbalanceError : 'Error! You got an Open balance field validation error!',
+    creditcardError : 'Error! You got an Creditcard field validation error!',
+    addressError : 'Error! You got an Address field validation error!'
 };

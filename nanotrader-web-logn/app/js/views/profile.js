@@ -41,7 +41,9 @@ nano.views.Profile = Backbone.View.extend({
         {
             // Set the Account Profile model
             this.model = model;
-            var profile = this.template(this.model.toJSON());
+            var data = this.model.toJSON()
+            data.creditcard = '************' + data.creditcard.slice(12,16);
+            var profile = this.template(data);
             
             this.$el.html(profile);
         }

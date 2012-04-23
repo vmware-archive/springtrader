@@ -6,7 +6,8 @@
         </div>
             <ul class="nav nav-tabs nav-stacked">
                 <li class="active"><a href="profile.html"><%= translate("profile") %></a></li>
-                <li><a href="help.html"><%= translate("help") %></a></li>
+                <li><a id="app-overview"href=""><%= translate("applicationOverview") %></a></li>
+                <li><a id="help"><%= translate("help") %></a></li>
             </ul>
     </div>
     <div class="span9 columns">
