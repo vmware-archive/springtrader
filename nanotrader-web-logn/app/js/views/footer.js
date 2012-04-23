@@ -57,7 +57,7 @@ nano.views.Footer = Backbone.View.extend({
      * @return void
      */
     help: function() {
-        alert('goto -> help');
+        window.location = nano.conf.hash.help;
     },
 
     /**

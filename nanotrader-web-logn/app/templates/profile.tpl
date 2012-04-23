@@ -4,9 +4,9 @@
             <h3><%= fullname %></h3>
             <p><%= email %></p>
         </div>
-            <ul class="nav nav-tabs nav-stacked">
-                <li class="active"><a href="profile.html"><%= translate("profile") %></a></li>
-                <li><a id="app-overview"href=""><%= translate("applicationOverview") %></a></li>
+            <ul class="nav nav-tabs nav-stacked">                
+                <li class="active"><a id="profile"><%= translate("profile") %></a></li>
+                <li><a id="overview"><%= translate("applicationOverview") %></a></li>
                 <li><a id="help"><%= translate("help") %></a></li>
             </ul>
     </div>

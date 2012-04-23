@@ -55,7 +55,9 @@ nano.conf.tpls = {
     orderRow : nano.conf.tplRoot + 'orderRow.tpl',
     quotes : nano.conf.tplRoot + 'quotes.tpl',
     quoteRow : nano.conf.tplRoot + 'quoteRow.tpl',
-    quoteModal : nano.conf.tplRoot + 'quoteModal.tpl'
+    quoteModal : nano.conf.tplRoot + 'quoteModal.tpl',
+    help : nano.conf.tplRoot + 'help.tpl',
+    overview : nano.conf.tplRoot + 'overview.tpl'
 };
 
 /**
@@ -73,5 +75,7 @@ nano.conf.hash = {
     tradeWithQuote : '#trade/q{quote}',
     registration : '#registration',
     profile : '#profile',
-    contact : '#contact'
+    contact : '#contact',
+    help : '#help',
+    overview : '#overview'
 };

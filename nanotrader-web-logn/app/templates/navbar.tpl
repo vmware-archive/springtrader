@@ -28,7 +28,7 @@
                           <div class="dropdown-menu">
                               <ul class="dropdown-nav">
                                   <li><a id="profile"><%= translate("profile") %></a></li>
-                                  <li><a class="help"><%= translate("help") %></a></li>
+                                  <li><a id="help"><%= translate("help") %></a></li>
                                   <li class="divider"></li>
                                   <li><a id="logout"><%= translate("logout") %></a></li>
                               </ul>
