@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.nanotrader.data.domain.Holding;
 import org.springframework.nanotrader.data.repository.HoldingRepository;
+import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.stereotype.Component;
 
 
@@ -51,6 +52,7 @@ public class HoldingDataOnDemand {
 
 	public void setPurchaseprice(Holding obj, int index) {
         BigDecimal purchaseprice = BigDecimal.valueOf(index, 2);
+       
         if (purchaseprice.compareTo(new BigDecimal("999999999999.99")) == 1) {
             purchaseprice = new BigDecimal("999999999999.99");
         }
@@ -58,7 +60,7 @@ public class HoldingDataOnDemand {
     }
 
 	public void setQuantity(Holding obj, int index) {
-        BigDecimal quantity = BigDecimal.valueOf(index);
+		BigDecimal quantity = BigDecimal.valueOf(index);
         obj.setQuantity(quantity);
     }
 

@@ -6,9 +6,9 @@ public class PortfolioSummary {
 
 	private Integer numberOfHoldings = 0;
 
-	private BigDecimal totalBasis;
+	private BigDecimal totalBasis = new BigDecimal("0.0");
 
-	private BigDecimal totalMarketValue;
+	private BigDecimal totalMarketValue = new BigDecimal("0.0");
 
 	public Integer getNumberOfHoldings() {
 		return numberOfHoldings;
@@ -23,7 +23,10 @@ public class PortfolioSummary {
 	}
 
 	public void setTotalBasis(BigDecimal totalBasis) {
-		this.totalBasis = totalBasis;
+		if (totalBasis != null) { 
+			this.totalBasis = totalBasis;
+		}
+		
 	}
 
 	public BigDecimal getTotalMarketValue() {
@@ -31,14 +34,14 @@ public class PortfolioSummary {
 	}
 
 	public void setTotalMarketValue(BigDecimal totalMarketValue) {
-		this.totalMarketValue = totalMarketValue;
+		if (totalMarketValue != null) { 
+			this.totalMarketValue = totalMarketValue;
+		}
+		
 	}
 
 	public BigDecimal getGain() {
-		BigDecimal calculatedGain = new BigDecimal(0.0);
-		if (totalMarketValue != null && totalBasis != null) {
-			calculatedGain = totalMarketValue.subtract(totalBasis);
-		}
+		BigDecimal	calculatedGain = totalMarketValue.subtract(totalBasis);
 		return calculatedGain;
 	}
 

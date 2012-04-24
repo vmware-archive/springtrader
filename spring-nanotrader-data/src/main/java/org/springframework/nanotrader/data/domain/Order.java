@@ -21,11 +21,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(schema = "public",name = "order")
+@Table(name = "orders")
 public class Order implements Serializable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ORDER_SEQ")
-    @SequenceGenerator(name="ORDER_SEQ", sequenceName="ORDER_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.TABLE) //, generator="ORDER_SEQ")
+   // @SequenceGenerator(name="ORDER_SEQ", sequenceName="ORDER_SEQUENCE")
     @Column(name = "orderid")
     private Integer orderid;
 
@@ -166,9 +166,5 @@ public class Order implements Serializable {
 				+ quantity + ", opendate=" + opendate + "]";
 	}
 
-//	public String toString() {
-//        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-//    }
-	
 	
 }

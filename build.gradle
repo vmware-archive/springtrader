@@ -18,6 +18,9 @@ allprojects {
 		maven { url  'http://spring-roo-repository.springsource.org/release' }
 		mavenCentral()
 		maven { url 'http://maven.springframework.org/snapshot' }
+	 	flatDir dirs: ["${gradle.gradleHomeDir}/lib"]
+
+
 	}
 }
 
@@ -162,6 +165,7 @@ project('spring-nanotrader-data') {
 		compile "org.aspectj:aspectjrt:$aspectjVersion"
 		compile "org.springframework:spring-aspects:$springVersion"
 		compile "postgresql:postgresql:9.0-801.jdbc3"
+		compile files("../lib/sqlfireclient-1.0.1.jar")
 		compile "org.springframework.integration:spring-integration-amqp:$springIntegrationVersion"
 		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 
@@ -215,6 +219,14 @@ project('spring-nanotrader-services') {
 
 }
 
+project('spring-nanotrader-web') {
+	apply plugin: 'war'
+
+	description = 'Spring Nanotrader Web'
+	dependencies {
+		compile project(":spring-nanotrader-service-support")
+        }
+}
 
 project('spring-nanotrader-asynch-services') {
 	apply plugin: 'war'

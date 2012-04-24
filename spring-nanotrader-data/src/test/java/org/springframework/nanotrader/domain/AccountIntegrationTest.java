@@ -11,6 +11,7 @@ import org.springframework.nanotrader.data.domain.Account;
 import org.springframework.nanotrader.data.domain.test.AccountDataOnDemand;
 import org.springframework.nanotrader.data.repository.AccountRepository;
 import org.springframework.nanotrader.data.service.AccountService;
+import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -105,11 +106,11 @@ public class AccountIntegrationTest {
         Integer id = obj.getAccountid();
         Assert.assertNotNull("Data on demand for 'Account' failed to provide an identifier", id);
         obj = accountService.findAccount(id);
-        obj.setOpenbalance(new BigDecimal(1.1));
+        obj.setOpenbalance(new BigDecimal("1.1"));
         accountService.updateAccount(obj);
         accountRepository.flush();
         Account updated = accountService.findAccount(id);
-        Assert.assertEquals("Update failed", new BigDecimal(1.1), updated.getOpenbalance());
+        Assert.assertEquals("Update failed", new BigDecimal("1.1"), updated.getOpenbalance());
     }
 
 }
