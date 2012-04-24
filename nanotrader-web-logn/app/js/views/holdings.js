@@ -98,6 +98,12 @@ nano.views.Holdings = Backbone.View.extend({
                 this.paginators = this.$('#loh-pagination > li.g2p');
                 this.previous = this.$('#lohp-previous');
                 this.next = this.$('#lohp-next');
+
+                //Prepare the view for collapsing sections
+                if ( nano.utils.isMobile() )
+                {
+                    nano.utils.setCollapsable(this);
+                }
             }
 
             //Set the page number on the paginator
@@ -128,6 +134,7 @@ nano.views.Holdings = Backbone.View.extend({
 
             // Store the current Page number 
             this.page = page;
+
     },
 
     /**

@@ -1,7 +1,7 @@
 nano.conf.device = 'mobile';
 nano.conf.itemsPerPage = 2;
 nano.conf.tpls = {
-    holdings : nano.conf.tplRoot + 'holdings.tpl',
+    holdings : nano.conf.tplRoot + 'holdings.mobile.tpl',
     holdingRow : nano.conf.tplRoot + 'holdingRow.tpl',
     holdingModal : nano.conf.tplRoot + 'holdingModal.tpl',
     marketSummary : nano.conf.tplRoot + 'marketSummary.mobile.tpl',
