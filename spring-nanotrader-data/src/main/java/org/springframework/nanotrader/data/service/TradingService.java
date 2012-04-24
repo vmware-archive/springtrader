@@ -42,10 +42,12 @@ public interface TradingService {
 	public abstract Order saveOrder(Order order);
 
 	public abstract Order updateOrder(Order order);
+	
+	public abstract Long findCountOfOrders(Integer accountId, String status);
 
-	public abstract List<Order> findOrdersByStatus(Integer accountId, String status);
+	public abstract List<Order> findOrdersByStatus(Integer accountId, String status, Integer page, Integer pageSize);
 
-	public abstract List<Order> findOrders(Integer accountId);
+	public abstract List<Order> findOrders(Integer accountId, Integer page, Integer pageSize);
 
 	public abstract List<Holding> findHoldingsByAccountId(Integer accountId, Integer page, Integer pageSize);
 

@@ -114,6 +114,7 @@ public class ServiceTestConfiguration  {
 		when(tradingService.findHolding(eq(100), eq(ACCOUNT_ID))).thenReturn(holding());
 		when(tradingService.findHoldingsByAccountId(eq(ACCOUNT_ID),  any(Integer.class), any(Integer.class))).thenReturn(holdings());
 		when(tradingService.findCountOfHoldingsByAccountId(eq(ACCOUNT_ID))).thenReturn(RESULT_COUNT);
+		when(tradingService.findCountOfOrders(eq(ACCOUNT_ID) , any(String.class))).thenReturn(RESULT_COUNT);
 		when(tradingService.updateHolding(any(Holding.class))).thenReturn(holding());
 		when(tradingService.findAccountProfile(400)).thenReturn(accountProfile());
 		when(tradingService.findAccountProfile(NOT_A_VALID_PROFILE)).thenReturn(null);
@@ -122,8 +123,8 @@ public class ServiceTestConfiguration  {
 		when(tradingService.saveOrder(any(Order.class))).thenReturn(null);
 		when(tradingService.saveAccountProfile(any(Accountprofile.class))).thenReturn(accountProfile());
 		when(tradingService.updateOrder(any(Order.class))).thenReturn(null);
-		when(tradingService.findOrdersByStatus(eq(ACCOUNT_ID), any(String.class))).thenReturn(orders());
-		when(tradingService.findOrders(eq(ACCOUNT_ID))).thenReturn(orders());
+		when(tradingService.findOrdersByStatus(eq(ACCOUNT_ID), any(String.class), any(Integer.class), any(Integer.class))).thenReturn(orders());
+		when(tradingService.findOrders(eq(ACCOUNT_ID), any(Integer.class), any(Integer.class))).thenReturn(orders());
 		when(tradingService.findQuoteBySymbol(eq(SYMBOL))).thenReturn(quote());
 		when(tradingService.findQuotesBySymbols(anySetOf(String.class))).thenReturn(quotes());
 		when(tradingService.findAccount(eq(ACCOUNT_ID))).thenReturn(account());

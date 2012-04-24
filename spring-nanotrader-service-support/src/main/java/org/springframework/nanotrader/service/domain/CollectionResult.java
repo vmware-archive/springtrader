@@ -10,7 +10,7 @@ public class CollectionResult {
 	private Long totalRecords = null;
 	private Integer page = null;
 	private Integer pageSize = null;
-	private List<Object> results = null;
+	private List<?> results = null;
 	
 	public Integer getPage() {
 		return page;
@@ -31,10 +31,10 @@ public class CollectionResult {
 		this.totalRecords = totalRecords;
 	}
 	
-	public List<Object> getResults() {
+	public List<?> getResults() {
 		return results;
 	}
-	public void setResults(List<Object> results) {
+	public void setResults(List<?> results) {
 		this.results = results;
 	}
 	

@@ -396,13 +396,31 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	public List<Order> findOrdersByStatus(Integer accountId, String status) {
+	public Long findCountOfOrders(Integer accountId, String status) {
+		Long  countOfOrders = null;
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServices.findCountOfHoldings: accountId=" + accountId + " status=" + status);
+		}
+		if (status != null) { 
+			countOfOrders = orderRepository.findCountOfOrders(accountId, status);
+		} else { 
+			countOfOrders = orderRepository.findCountOfOrders(accountId);
+		}
+			
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServices.findCountOfHoldings: completed successfully.");
+		}
+		return countOfOrders;
+	}
+	
+	@Override
+	public List<Order> findOrdersByStatus(Integer accountId, String status, Integer page, Integer pageSize) {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrdersByStatus: accountId=" + accountId + " status=" + status);
 		}
 		List<Order> orders = null;
 		
-			orders = orderRepository.findOrders(accountId, status);
+			orders = orderRepository.findOrdersByStatus(accountId, status,  new PageRequest(page, pageSize));
 			if (orders != null && orders.size() > 0) {
 				// Loop over the orders to populate the lazy quote fields
 				for (Order order : orders) {
@@ -422,19 +440,20 @@ public class TradingServiceImpl implements TradingService {
 	
 	@Override
 	@Transactional
-	public List<Order> findOrders(Integer accountId) {
+	public List<Order> findOrders(Integer accountId, Integer page, Integer pageSize) {
+		List<Order> orders = null;
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrders: accountId=" + accountId);
 		}
-		Account account = accountRepository.findOne(accountId);
-		List<Order> orders = new ArrayList<Order>();
-	
-		if (account != null) {
-			orders = new ArrayList<Order>(account.getOrders());
+		orders = orderRepository.findOrdersByAccountAccountid_Accountid(accountId, new PageRequest(page, pageSize));
+		
+		if (orders != null && orders.size() > 0) {
+			// Loop over the orders to populate the lazy quote fields
 			for (Order order : orders) {
 				order.getQuote();
 			}
 		}
+		
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrders: completed successfully.");
 		}

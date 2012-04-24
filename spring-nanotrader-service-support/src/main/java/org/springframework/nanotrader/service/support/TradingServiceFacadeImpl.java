@@ -232,7 +232,7 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
         }
         
         
-        List<Object> holdingResponse = new ArrayList<Object>();
+        List<Holding> holdingResponse = new ArrayList<Holding>();
         collectionResults.setTotalRecords(tradingService.findCountOfHoldingsByAccountId(accountId));
         List<org.springframework.nanotrader.data.domain.Holding> holdings = tradingService.findHoldingsByAccountId(accountId, getPage(page), getPageSize(pageSize));
     
@@ -305,16 +305,21 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
         tradingService.updateOrder(order);
     }
 
-    public List<Order> findOrders(Integer accountId, String status) {
+    public CollectionResult findOrders(Integer accountId, String status, Integer page, Integer pageSize) {
+    	CollectionResult  collectionResults = new CollectionResult();
         if (log.isDebugEnabled()) {
             log.debug("OrderController.findOrders: accountId=" + accountId + " status" + status);
         }
         List<org.springframework.nanotrader.data.domain.Order> orders = null;
+        
+        collectionResults.setTotalRecords(tradingService.findCountOfOrders(accountId, status));
         if (status != null) {
-            orders = tradingService.findOrdersByStatus(accountId, status); //get by status
+            orders = tradingService.findOrdersByStatus(accountId, status, getPage(page), getPageSize(pageSize)); //get by status
         } else {
-            orders = tradingService.findOrders(accountId); //get all orders
+            orders = tradingService.findOrders(accountId, getPage(page), getPageSize(pageSize)); //get all orders
         }
+        
+       
         List<Order> responseOrders = new ArrayList<Order>();
         if (orders != null && orders.size() > 0 ) {
             
@@ -325,7 +330,12 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
                 responseOrders.add(order);
             }
         }
-        return responseOrders;
+        
+        collectionResults.setPage(getPage(page));
+        collectionResults.setPageSize(getPageSize(pageSize));
+        collectionResults.setResults(responseOrders);
+        
+        return collectionResults;
     }
     
     public Account findAccount(Integer id) {
