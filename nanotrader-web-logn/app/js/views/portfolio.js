@@ -50,7 +50,7 @@
         var plot1 = nano.utils.renderPieChart('ad-pie-chart', data);
 
         //Prepare the view for collapsing sections
-        if (nano.conf.device == 'mobile')
+        if ( nano.utils.isMobile() )
         {
             nano.utils.setCollapsable(this);
         }

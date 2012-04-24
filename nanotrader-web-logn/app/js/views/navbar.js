@@ -59,6 +59,11 @@ nano.views.Navbar = Backbone.View.extend({
             // Enable the dropdown for the User Profile options on the right
             this.$('.dropdown-toggle').dropdown(); 
 
+            if( nano.utils.isMobile() )
+            {
+                this.collapsableMenu = this.$('#navbar-collapse');
+            }
+
             // Cache the containers of the links 
             // (for the "active" display when clicking on the link)
             this.linkContainers = {};
@@ -142,6 +147,10 @@ nano.views.Navbar = Backbone.View.extend({
         else
         {
             window.location = nano.conf.hash.dashboard;
+        }
+        if( nano.utils.isMobile() )
+        {
+            this.collapsableMenu.collapse('hide');
         }
     },
     

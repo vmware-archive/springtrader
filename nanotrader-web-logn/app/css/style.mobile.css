@@ -102,6 +102,9 @@ body {
 	color:#b7b7b7;
 	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
+.navbar .nav.nav-top{
+    text-transform: lowercase;
+}
 
 .navbar-text .navbar .nav {
 	float:none;

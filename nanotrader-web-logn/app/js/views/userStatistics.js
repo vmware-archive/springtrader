@@ -39,7 +39,7 @@ nano.views.UserStatistics = Backbone.View.extend({
         this.$el.show();
 
         //Prepare the view for collapsing sections
-        if (nano.conf.device == 'mobile')
+        if ( nano.utils.isMobile() )
         {
             nano.utils.setCollapsable(this);
         }

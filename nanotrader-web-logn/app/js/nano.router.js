@@ -140,7 +140,7 @@ nano.Router = Backbone.Router.extend({
                     // Render the Orders View
                     nano.instances.orders.render(models.orders, page, nano.conf.hash.dashboardWithPage);
 
-                    if (nano.conf.device != 'mobile' )
+                    if ( !nano.utils.isMobile() )
                     {
                         // Render the Positions View
                         nano.instances.positions.render(models.holdingSummary);

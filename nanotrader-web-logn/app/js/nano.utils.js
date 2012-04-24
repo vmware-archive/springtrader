@@ -260,6 +260,12 @@ nano.utils.onApiError = function(model, error){
     }
 };
 
+/**
+ * Sets the right collapsable properties to a view's content
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param object view: Backbone View Object
+ * @return void
+ */
 nano.utils.setCollapsable = function(view) {
     view.$('.collapse').collapse('hide');
     view.$('.collapse').on('hide', function () {
@@ -268,6 +274,15 @@ nano.utils.setCollapsable = function(view) {
     view.$('.collapse').on('show', function () {
         view.$('.title').addClass('active');
     });
+};
+
+/**
+ * Tells whether the viewer is using a mobile device or not
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return boolean
+ */
+nano.utils.isMobile = function() {
+    return nano.conf.device == 'mobile';
 };
 
 /**

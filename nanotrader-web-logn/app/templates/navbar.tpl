@@ -1,13 +1,13 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
       <div class="container">
-          <a data-target="div.nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+          <a data-target="div#navbar-collapse" data-toggle="collapse" class="btn btn-navbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
           <a id="nb-logo" class="logo brand"><%= translate("nanotrader") %></a>
-          <div class="nav-collapse">
+          <div id="navbar-collapse" class="nav-collapse">
               <ul class="nav nav-top">
                   <li class="divider-vertical"></li>
                   <li><a id="nb-dashboard" class="nav-link"><span class="icon-home icon-white"></span><%= translate("dashboard") %></a></li>
