@@ -70,27 +70,28 @@ nano.views.Holdings = Backbone.View.extend({
                 page = this.pageCount;
             }
 
+            var data = {
+                totalPurchaseBasis : 0,
+                totalMarketValue : 0, 
+                totalGainLoss : 0,
+                pageCount : this.pageCount,
+                currentPage : page
+            };
+
+            this.model.each(function(holding) {
+                var quote = holding.get('quote');
+                holding.set( "purchaseBasis", holding.get('quantity') * holding.get('purchaseprice') );
+                holding.set( "marketValue", holding.get('quantity') * quote.price );
+                holding.set( "gainLoss", holding.get('marketValue') - holding.get("purchaseBasis") );
+
+                data.totalPurchaseBasis += holding.get( "purchaseBasis");
+                data.totalMarketValue += holding.get( "marketValue");
+                data.totalGainLoss += holding.get( "gainLoss");
+            });
+
             // Render the List of Holdings container
             if ( !this.$el.html() )
             {
-                var data = {
-                    totalPurchaseBasis : 0,
-                    totalMarketValue : 0, 
-                    totalGainLoss : 0,
-                    pageCount : this.pageCount,
-                    currentPage : page
-                };
-
-                this.model.each(function(holding) {
-                    var quote = holding.get('quote');
-                    holding.set( "purchaseBasis", holding.get('quantity') * holding.get('purchaseprice') );
-                    holding.set( "marketValue", holding.get('quantity') * quote.price );
-                    holding.set( "gainLoss", holding.get('marketValue') - holding.get("purchaseBasis") );
-
-                    data.totalPurchaseBasis += holding.get( "purchaseBasis");
-                    data.totalMarketValue += holding.get( "marketValue");
-                    data.totalGainLoss += holding.get( "gainLoss");
-                });
                 var tpl = this.template(data);
                 this.$el.html(tpl);
                 this.tbody = this.$('#list-of-holdings > tbody');

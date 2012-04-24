@@ -5,7 +5,7 @@ nano.conf.tpls = {
     holdingRow : nano.conf.tplRoot + 'holdingRow.tpl',
     holdingModal : nano.conf.tplRoot + 'holdingModal.tpl',
     marketSummary : nano.conf.tplRoot + 'marketSummary.mobile.tpl',
-    portfolioSummary : nano.conf.tplRoot + 'portfolioSummary.tpl',
+    portfolioSummary : nano.conf.tplRoot + 'portfolioSummary.mobile.tpl',
     navbar : nano.conf.tplRoot + 'navbar.tpl',
     accountSummary : nano.conf.tplRoot + 'accountSummary.tpl',
     footer : nano.conf.tplRoot + 'footer.tpl',
