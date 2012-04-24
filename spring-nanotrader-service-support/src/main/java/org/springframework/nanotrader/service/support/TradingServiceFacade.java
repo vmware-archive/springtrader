@@ -60,7 +60,7 @@ public interface TradingServiceFacade {
 
 	void updateOrder(Order orderRequest);
 
-	List<Order> findOrders(Integer accountId, String status);
+	CollectionResult findOrders(Integer accountId, String status, Integer page, Integer pageSize);
 
 	Quote findQuoteBySymbol(String symbol);
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.nanotrader.service.domain.CollectionResult;
 import org.springframework.nanotrader.service.domain.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +28,11 @@ public class OrderController extends BaseController {
 	
 	@RequestMapping(value = "/account/{accountId}/orders", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Order> findOrders(@PathVariable( "accountId" ) final Integer accountId, @RequestParam(value="status", required=false) final String status) {
+	public CollectionResult findOrders(@PathVariable( "accountId" ) final Integer accountId, @RequestParam(value="status", required=false) final String status,
+			 @RequestParam(value="page", required=false) Integer page, 
+			 @RequestParam(value="pageSize", required=false) Integer pageSize) {
 		this.getSecurityUtil().checkAccount(accountId); //verify that the account on the path is the same as the authenticated user
-		List<Order> responseOrders = getTradingServiceFacade().findOrders(accountId, status);
-		return responseOrders;
+		return getTradingServiceFacade().findOrders(accountId, status, page, pageSize);
 	}
 
 	
