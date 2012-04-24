@@ -1,13 +1,13 @@
 <div class="well show-well">
     <div class="title">
         <h3>
-            <a data-target="div#as-account-summary" data-toggle="collapse" class="btn-transaction" data-toggle="collapse">
+            <a data-target="#as-content" data-toggle="collapse" class="btn-transaction" data-toggle="collapse">
                 <%= translate('accountSummary') %>
                 <span></span>
             </a>
         </h3>
     </div>
-    <div id="as-account-summary" class="table-outer collapse in">
+    <div id="as-content" class="table-outer collapse in">
         <table class="table">
             <tr>
                 <td><%= translate("currentBalance") %></td>

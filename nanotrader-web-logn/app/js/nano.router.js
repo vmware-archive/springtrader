@@ -204,8 +204,10 @@ nano.Router = Backbone.Router.extend({
                 {
                     nano.containers.loading.hide();
 
-                    // Render the Portfolio View
-                    nano.instances.portfolio.render(models.account, models.portfolioSummary);
+                    if( !nano.utils.isMobile() ) {
+                        // Render the Portfolio View
+                        nano.instances.portfolio.render(models.account, models.portfolioSummary);
+                    }
 
                     // Render the Portfolio Summary View
                     nano.instances.portfolioSummary.render(models.portfolioSummary);
