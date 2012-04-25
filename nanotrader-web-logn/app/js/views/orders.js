@@ -74,6 +74,13 @@ nano.views.Orders = Backbone.View.extend({
             };
             
             this.$el.html(this.template(data));
+            
+            // check the device
+            if (nano.utils.isMobile()){
+                // Set a table variable for store the rows on a mobile device
+                this.table = this.$('#list-of-orders');
+            }
+            // tbody variable used for store the rows on a computer device.
             this.tbody = this.$('#list-of-orders > tbody');
             this.paginators = this.$('#loo-pagination > li.g2p');
             this.previous = this.$('#loop-previous');
@@ -136,13 +143,54 @@ nano.views.Orders = Backbone.View.extend({
      * @return void
      */
     renderRows: function(page) {
-        this.tbody.html('');
         var i = (page - 1) * nano.conf.itemsPerPage;
         var next = i + nano.conf.itemsPerPage;
         var length = this.model.length;
-        for ( i; i < length && i < next; ++i )
-        {
-            this.tbody.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
+        
+        if (nano.utils.isMobile()){
+            var rows = this.table.html('');
+            
+            var orderid = [translate("orderId")];
+            var orderstatus = [translate("orderStatus")];
+            var opendate = [translate("creationDate")];
+            var completiondate = [translate("completionDate")];
+            var orderfee = [translate("transactionFee")];
+            var ordertype = [translate("transactionType")];
+            var symbol = [translate("symbol")];
+            var quantity = [translate("quantity")];
+            
+ 
+            for ( i; i < length && i < next; ++i ){
+                orderid[orderid.length] = this.model.at(i).toJSON().orderid;
+                orderstatus[orderstatus.length] = this.model.at(i).toJSON().orderstatus;
+                opendate[opendate.length] = this.model.at(i).toJSON().opendate;
+                completiondate[completiondate.length] = this.model.at(i).toJSON().completiondate;
+                orderfee[orderfee.length] = this.model.at(i).toJSON().orderfee;
+                ordertype[ordertype.length] = this.model.at(i).toJSON().ordertype;
+                symbol[symbol.length] = this.model.at(i).toJSON().quote.symbol;
+                quantity[quantity.length] = this.model.at(i).toJSON().quantity;
+            }
+            
+            var data = {
+                orderid : orderid,
+                orderstatus : orderstatus,
+                opendate : opendate,
+                completiondate : completiondate,
+                orderfee : orderfee,
+                ordertype : ordertype,
+                symbol : symbol,
+                quantity : quantity
+            }
+            
+            rows.append(this.rowTemplate(data));
+
+        }
+        else {
+            var rows = this.tbody.html('');
+            
+            for ( i; i < length && i < next; ++i ){
+                rows.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
+            }
         }
     },
 
@@ -191,3 +239,6 @@ nano.views.Orders = Backbone.View.extend({
         }
     }
 });
+
+
+

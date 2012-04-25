@@ -1,24 +1,30 @@
 <tr>
-    <%= orderid %>
+    <% _.each(orderid, function(id) { %> <td><%= id %></td> <% }); %>
 </tr>
 <tr>
-    <%= orderstatus %>
+    <td><%= orderstatus[0] %></td> 
+    <% _.each(orderstatus.slice(1, orderstatus.length), function(id) { %> 
+    <td>
+        <span class="<%= (id == 'closed' ? "completed" : "uncompleted") %>">
+            <%= (id == 'closed' ? translate("completed") : translate("pending")) %>
+        </span>
+    </td> <% }); %>
 </tr>
 <tr>
-    <%= opendate %>
+    <% _.each(opendate, function(id) { %> <td><%= id %></td> <% }); %>
 </tr>
 <tr>
-    <%= completiondate %>
+    <% _.each(completiondate, function(id) { %> <td><%= id %></td> <% }); %>
 </tr>
 <tr>
-    <%= orderfee %>
+    <% _.each(orderfee, function(id) { %> <td><%= id %></td> <% }); %>
 </tr>
 <tr>
-    <%= translate(ordertype) %>
+    <% _.each(ordertype, function(id) { %> <td><%= translate(id) %></td> <% }); %>
 </tr>
 <tr>
-    <%= symbol %>
+    <% _.each(symbol, function(id) { %> <td><%= id %></td> <% }); %>
 </tr>
 <tr>
-    <td><%= quantity %></td>
+    <% _.each(quantity, function(id) { %> <td><%= id %></td> <% }); %>
 </tr>
