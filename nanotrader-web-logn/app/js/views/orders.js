@@ -115,8 +115,7 @@ nano.views.Orders = Backbone.View.extend({
         }
 
         //Set the page number on the paginator
-        this.paginators.removeClass('active');
-        this.paginators[page-1].className = 'g2p active';
+        this.paginators.removeClass('active');        
 
         if (page == 1){
             this.previous.addClass('disabled');
@@ -133,8 +132,11 @@ nano.views.Orders = Backbone.View.extend({
 
         this.$el.show();
 
-        // Render the list
-        this.renderRows(page);
+        if (this.pageCount > 0){
+            this.paginators[page-1].className = 'g2p active';
+            // Render the list
+            this.renderRows(page);
+        }
 
         // Store the current Page number 
         this.page = page;
