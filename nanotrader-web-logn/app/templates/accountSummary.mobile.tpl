@@ -1,7 +1,7 @@
 <div class="well show-well">
     <div class="title">
         <h3>
-            <a data-target="#as-content" data-toggle="collapse" class="btn-transaction" data-toggle="collapse">
+            <a data-target="#as-content" data-toggle="collapse" class="btn-transaction">
                 <%= translate('accountSummary') %>
                 <span></span>
             </a>

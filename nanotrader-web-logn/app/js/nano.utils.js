@@ -195,7 +195,6 @@ nano.utils.goTo = function(url) {
 nano.utils.renderPieChart = function(htmlId, data) {
 
     var error = false;
-    console.log(data);
     if (data.length < 1)
     {
         error = true;

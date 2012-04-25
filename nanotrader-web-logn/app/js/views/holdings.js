@@ -137,6 +137,8 @@ nano.views.Holdings = Backbone.View.extend({
             // Store the current Page number 
             this.page = page;
 
+            //0=-==============================================>> Not sure why I had to add this here
+            this.$('#loh-content').collapse('hide');
     },
 
     /**
