@@ -28,10 +28,6 @@
 	<servlet>
 		<servlet-name>service</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextClass</param-name>
-			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-		</init-param>
 		 <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value></param-value>
