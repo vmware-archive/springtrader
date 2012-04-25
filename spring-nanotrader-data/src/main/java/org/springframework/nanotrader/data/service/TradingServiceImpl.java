@@ -257,12 +257,15 @@ public class TradingServiceImpl implements TradingService {
 		Quote quote = quoteRepository.findBySymbol(order.getQuote().getSymbol());
 		Holding holding = null;
 		// create order and persist
-		Order createdOrder = createOrder(order, account, holding, quote);
+		Order createdOrder = null;
 		
-		if (order.getQuantity().intValue() > 0) { //cannot buy 
+		if (order.getQuantity() != null && order.getQuantity().intValue() > 0) { //cannot buy 
+			createdOrder = createOrder(order, account, holding, quote);
 			// Update account balance and create holding
 			completeOrder(createdOrder);
 		} else { 
+			order.setQuantity(new BigDecimal(0));
+			createdOrder = createOrder(order, account, holding, quote);
 			//cancel order
 			createdOrder.setOrderstatus(CANCELLED_STATUS);
 		}
