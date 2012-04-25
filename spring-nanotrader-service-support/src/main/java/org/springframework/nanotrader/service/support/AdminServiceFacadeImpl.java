@@ -3,6 +3,7 @@
  */
 package org.springframework.nanotrader.service.support;
 
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +21,6 @@ import org.springframework.nanotrader.data.domain.Account;
 import org.springframework.nanotrader.data.domain.Accountprofile;
 import org.springframework.nanotrader.data.repository.AccountProfileRepository;
 import org.springframework.nanotrader.data.repository.AccountRepository;
-import org.springframework.nanotrader.data.repository.HoldingRepository;
 import org.springframework.nanotrader.data.repository.QuoteRepository;
 import org.springframework.nanotrader.data.service.TradingService;
 import org.springframework.nanotrader.service.domain.Order;
@@ -104,5 +104,4 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			tradingServiceFacade.saveOrder(o, false);
 		}
 	}
-
 }
