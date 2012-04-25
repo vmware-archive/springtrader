@@ -9,9 +9,9 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.nanotrader.data.service.TradingServiceImpl;
 import org.springframework.nanotrader.service.domain.Accountprofile;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
+import org.springframework.nanotrader.service.support.exception.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -42,10 +42,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			log.error("UserDetailsServiceImpl.loadUserByUsername(): User not found with null token");
 			throw new UsernameNotFoundException("UserDetailsServiceImpl.loadUserByUsername(): User not found with null token");
 		}
-		Accountprofile accountProfile = tradingServiceFacade.findAccountprofileByAuthtoken(token);
-		if (accountProfile == null){ 
-				throw new UsernameNotFoundException("UserDetailsServiceImpl.loadUserByUsername(): User not found with token:" + token);
+		Accountprofile accountProfile = null;
+		try { 
+			accountProfile = tradingServiceFacade.findAccountprofileByAuthtoken(token);
+		} catch (AuthenticationException ae) { 
+			throw new UsernameNotFoundException("UserDetailsServiceImpl.loadUserByUsername(): User not found with token:" + token);
 		}
+		
 		Set<Map> accounts = accountProfile.getAccounts();
 		Integer accountId = null;
 		for(Map account: accounts ) { 
