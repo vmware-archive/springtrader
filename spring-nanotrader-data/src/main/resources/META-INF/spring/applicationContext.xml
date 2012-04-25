@@ -60,32 +60,7 @@
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
-    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
-        <property name="driverClassName" value="${database.driverClassName}"/>
-        <property name="url" value="${database.url}"/>
-        <property name="username" value="${database.username}"/>
-        <property name="password" value="${database.password}"/>
-        <property name="testOnBorrow" value="true"/>
-        <property name="testOnReturn" value="true"/>
-        <property name="testWhileIdle" value="true"/>
-        <property name="timeBetweenEvictionRunsMillis" value="1800000"/>
-        <property name="numTestsPerEvictionRun" value="3"/>
-        <property name="minEvictableIdleTimeMillis" value="1800000"/>
-      
-        <!-- 
-         	Default isolation level for SQLfire is NONE.
-         	Default isolation level for vPostgres is TRANSACTION_READ_COMMITTED
-         	Constant value documentation: http://docs.oracle.com/javase/6/docs/api/constant-values.html
-         	Override the default isolation level to ensure consistent unit test 
-         	behavior across data stores.
-			Examples:
-          	NONE = 0
-           	TRANSACTION_READ_UNCOMMITTED = 1
-       		TRANSACTION_READ_COMMITTED = 2 
-       	-->
-       <property name="defaultTransactionIsolation" value="2"/> 
-		<!-- <property name="validationQuery" value="SELECT version();"/> -->
-    </bean>
+
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
@@ -107,7 +82,39 @@
 	        </bean>
      	</property>
     </bean>
-        
+
 	<import resource="classpath:/META-INF/spring/integration/amqp-data-outbound-context.xml" />
-	
+
+	<beans profile="default">
+	    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
+	        <property name="driverClassName" value="${database.driverClassName}"/>
+	        <property name="url" value="${database.url}"/>
+	        <property name="username" value="${database.username}"/>
+	        <property name="password" value="${database.password}"/>
+	        <property name="testOnBorrow" value="true"/>
+	        <property name="testOnReturn" value="true"/>
+	        <property name="testWhileIdle" value="true"/>
+	        <property name="timeBetweenEvictionRunsMillis" value="1800000"/>
+	        <property name="numTestsPerEvictionRun" value="3"/>
+	        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+	      
+	        <!-- 
+	         	Default isolation level for SQLfire is NONE.
+	         	Default isolation level for vPostgres is TRANSACTION_READ_COMMITTED
+	         	Constant value documentation: http://docs.oracle.com/javase/6/docs/api/constant-values.html
+	         	Override the default isolation level to ensure consistent unit test 
+	         	behavior across data stores.
+				Examples:
+	          	NONE = 0
+	           	TRANSACTION_READ_UNCOMMITTED = 1
+	       		TRANSACTION_READ_COMMITTED = 2 
+	       	-->
+	       <property name="defaultTransactionIsolation" value="2"/> 
+			<!-- <property name="validationQuery" value="SELECT version();"/> -->
+	    </bean>
+	</beans>
+
+	<beans profile="jndi">
+		<jee:jndi-lookup id="dataSource" jndi-name="jdbc/nanodb" />
+	</beans>
 </beans>
