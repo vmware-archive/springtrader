@@ -4,9 +4,10 @@
             <h3><%= fullname %></h3>
             <p><%= email %></p>
         </div>
-            <ul class="nav nav-tabs nav-stacked">
-                <li class="active"><a href="profile.html"><%= translate("profile") %></a></li>
-                <li><a href="help.html"><%= translate("help") %></a></li>
+            <ul class="nav nav-tabs nav-stacked">                
+                <li class="active"><a id="profile"><%= translate("profile") %></a></li>
+                <li><a id="overview"><%= translate("applicationOverview") %></a></li>
+                <li><a id="help"><%= translate("help") %></a></li>
             </ul>
     </div>
     <div class="span9 columns">
@@ -15,7 +16,7 @@
                 <h3><%= translate("accountProfile") %></h3>
                 <div id="update-error" class="hide span8 alert alert-block alert-error fade in">
                     <a data-dismiss="alert" class="close">x</a>
-                    <h4 class="alert-heading"><%= translate("ohSnap") %></h4>
+                    <h4 class="alert-heading"></h4>
                     <p></p>
                 </div>
                 <div class="span4">

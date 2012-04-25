@@ -32,7 +32,7 @@ nano.views.Login = Backbone.View.extend({
     template : _.template(nano.utils.getTemplate(nano.conf.tpls.login)),
 
     /**
-     * Renders the Account Summary View
+     * Renders the Login View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
      * @return void
@@ -46,7 +46,7 @@ nano.views.Login = Backbone.View.extend({
                 {
                     var loginError = this.$('#login-error');
                     loginError.find('p').html(translate(errorKey));
-                    loginError.removeClass('hide');
+                    loginError.show();
                 }
             }
             this.$el.show();
@@ -73,7 +73,7 @@ nano.views.Login = Backbone.View.extend({
         var passwordControl = this.$('#password-control');
         var loginError = this.$('#login-error');
 
-        loginError.addClass('hide');
+        loginError.show();
         loginControl.removeClass('error');
         passwordControl.removeClass('error');
 
@@ -92,16 +92,15 @@ nano.views.Login = Backbone.View.extend({
                 nano.utils.goTo( nano.conf.hash.dashboard );
             },
             error : function(jqXHR, textStatus, errorThrown) {
+                loginError.show();
                 switch(jqXHR.status) {
                     case 401:
                         loginControl.addClass('error');
                         passwordControl.addClass('error');
                         loginError.find('p').html(translate('invalidUser'));
-                        loginError.removeClass('hide');
                         break;
                     default:
                         loginError.find('p').html(translate('unknowError'));
-                        loginError.removeClass('hide');
                         break;
                 }
             }

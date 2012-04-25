@@ -5,7 +5,7 @@
                     <h3><%= translate("registerUserName") %><span><%= translate("enterAccountDetails") %></span></h3>
                     <div id="registration-error" class="hide span8 alert alert-block alert-error fade in">
                         <a data-dismiss="alert" class="close">x</a>
-                        <h4 class="alert-heading"><%= translate("ohSnap") %></h4>
+                        <h4 class="alert-heading"></h4>
                         <p></p>
                     </div>
                     <div class="span4">

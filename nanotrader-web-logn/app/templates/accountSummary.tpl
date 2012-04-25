@@ -16,9 +16,9 @@
             </tr>
             <tr>
                 <td><%= translate("holdingsTotal") %></td>
-                <td class="gray-background"><%= nano.utils.round(totalMarketValue) %></td>
+                <td class="gray-background"><%= round(totalMarketValue) %></td>
             </tr>
-            <tr class="summary <%= (gain > 0 ? "alert alert-block alert-success" : "alert alert-block alert-error") %>">
+            <tr class="summary <%= (gain > 0 ? nano.conf.successCss : nano.conf.errorCss ) %>">
                 <td><%= translate("currentGainLoss") %></td>
                 <td class="average"><%= printCurrency(gain) %></td>
             </tr>
