@@ -259,7 +259,8 @@ public class TradingServiceImpl implements TradingService {
 		// create order and persist
 		Order createdOrder = null;
 		
-		if (order.getQuantity() != null && order.getQuantity().intValue() > 0) { //cannot buy 
+		if ( (order.getQuantity() != null && order.getQuantity().intValue() > 0)
+					&& (account.getBalance().subtract(order.getQuantity().multiply(quote.getPrice())).doubleValue() > 0)) { //cannot buy 
 			createdOrder = createOrder(order, account, holding, quote);
 			// Update account balance and create holding
 			completeOrder(createdOrder);
@@ -267,6 +268,7 @@ public class TradingServiceImpl implements TradingService {
 			order.setQuantity(new BigDecimal(0));
 			createdOrder = createOrder(order, account, holding, quote);
 			//cancel order
+			createdOrder.setCompletiondate(new Date());
 			createdOrder.setOrderstatus(CANCELLED_STATUS);
 		}
 		
