@@ -38,8 +38,8 @@
             </tr>
             <tr>
                 <td><%= translate("change") %>:</td>
-                <td id="ms-change" class="">
-                <span id="ms-change-arrow"></span>
+                <td>
+                    <span id="ms-change"></span><span id="ms-change-arrow"></span>
                 </td>
             </tr>
         </table>

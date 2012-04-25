@@ -46,7 +46,7 @@ nano.views.Login = Backbone.View.extend({
                 {
                     var loginError = this.$('#login-error');
                     loginError.find('p').html(translate(errorKey));
-                    loginError.removeClass('hide');
+                    loginError.show();
                 }
             }
             this.$el.show();
@@ -73,9 +73,9 @@ nano.views.Login = Backbone.View.extend({
         var passwordControl = this.$('#password-control');
         var loginError = this.$('#login-error');
 
-        loginError.addClass('hide');
-        loginControl.removeClass('error');
-        passwordControl.removeClass('error');
+        //loginError.show();
+        //loginControl.removeClass('error');
+        //passwordControl.removeClass('error');
 
         event.preventDefault();
         var username = this.$('#username-input').val();
@@ -92,16 +92,15 @@ nano.views.Login = Backbone.View.extend({
                 nano.utils.goTo( nano.conf.hash.dashboard );
             },
             error : function(jqXHR, textStatus, errorThrown) {
+                loginError.show();
                 switch(jqXHR.status) {
                     case 401:
                         loginControl.addClass('error');
                         passwordControl.addClass('error');
                         loginError.find('p').html(translate('invalidUser'));
-                        loginError.removeClass('hide');
                         break;
                     default:
                         loginError.find('p').html(translate('unknowError'));
-                        loginError.removeClass('hide');
                         break;
                 }
             }

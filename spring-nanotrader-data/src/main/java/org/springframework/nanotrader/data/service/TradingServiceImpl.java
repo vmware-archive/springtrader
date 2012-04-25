@@ -48,6 +48,8 @@ public class TradingServiceImpl implements TradingService {
 	public static BigDecimal DEFAULT_ORDER_FEE = BigDecimal.valueOf(1050, 2);
 
 	private static String OPEN_STATUS = "open";
+	
+	private static String CANCELLED_STATUS = "cancelled";
 
 	private static Integer TOP_N = 3;
 	
@@ -255,9 +257,20 @@ public class TradingServiceImpl implements TradingService {
 		Quote quote = quoteRepository.findBySymbol(order.getQuote().getSymbol());
 		Holding holding = null;
 		// create order and persist
-		Order createdOrder = createOrder(order, account, holding, quote);
-		// Update account balance and create holding
-		completeOrder(createdOrder);
+		Order createdOrder = null;
+		
+		if (order.getQuantity() != null && order.getQuantity().intValue() > 0) { //cannot buy 
+			createdOrder = createOrder(order, account, holding, quote);
+			// Update account balance and create holding
+			completeOrder(createdOrder);
+		} else { 
+			order.setQuantity(new BigDecimal(0));
+			createdOrder = createOrder(order, account, holding, quote);
+			//cancel order
+			createdOrder.setOrderstatus(CANCELLED_STATUS);
+		}
+		
+		
 		return createdOrder;
 	}
 	

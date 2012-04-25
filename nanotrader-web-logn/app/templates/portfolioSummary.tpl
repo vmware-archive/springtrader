@@ -8,7 +8,7 @@
                     <td><%= numberOfHoldings %></td>
                 </tr>
                 <tr>
-                    <td><%= translate("purchaseBasics") %></td>
+                    <td><%= translate("purchaseBasis") %></td>
                     <td><%= printCurrency(totalBasis) %></td>
                 </tr>
                 <tr>

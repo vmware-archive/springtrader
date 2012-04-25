@@ -1,55 +1,40 @@
-<tr>
-    <td><%= orderid %></td>
-    <td><span class="uncompleted"><%= translate("uncompleted") %></span></td>
-    <td><%= opendate %></td>
-    <td><%= completiondate %></td>
-    <td><%= orderfee %></td>
-    <td>
-        <input type="text" placeholder="" class="input-mini">
-        <div class="modal hide fade myModal" id="myModal2" style="display: none;">
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal">&times;</a>
-                <h3><%= translate("orderConfirmation") %></h3>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <tr>
-                        <td><%= translate("orderId") %>:</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td><%= translate("orderStatus") %>:</td>
-                        <td><span class="completed"><%= translate("completed") %></span></td>
-                    </tr>
-                    <tr>
-                        <td><%= translate("creationDate") %>:</td>
-                        <td>2 / 7 / 2012</td>
-                    </tr>
-                    <tr>
-                        <td><%= translate("completionDate") %>:</td>
-                        <td>2 / 7 / 2012</td>
-                    </tr>
-                    <tr>
-                        <td><%= translate("transactionFree") %>:</td>
-                        <td>VMW</td>
-                    </tr>
-                    <tr>
-                        <td><%= translate("sympol") %>:</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td><%= translate("quantity") %>:</td>
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn green-btn"><%= translate("ok") %></a>
-                <a href="#" class="btn btn-inverse"><%= translate("cancel") %></a>
-            </div>
-        </div>
-        <a href="#myModal2" data-toggle="modal" class="btn green-btn"><%= translate("buy") %></a>
-    </td>
-    <td><%= quote.symbol %></td>
-    <td><%= quantity %></td>
-</tr>
+<div class="span12">
+    
+    <!-- toggle -->
+    <div id="toggle-orders-control" class="show-transactions hide">
+        <a class="accordion-toggle"><%= translate("recentTransactions") %></a>
+        <span class="border-bg"></span>
+    </div>
+    <!-- toggle -->
+    
+    <div id="orders-control" class="well show-well">
+        <div class="title"><h3><%= translate("recentOrders") %></h3></div>
+        <table id="list-of-orders" class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th><%= translate("orderId") %></th>
+                    <th><%= translate("orderStatus") %></th>
+                    <th><%= translate("creationDate") %></th>
+                    <th><%= translate("completionDate") %></th>
+                    <th><%= translate("transactionFee") %></th>
+                    <th><%= translate("transactionType") %></th>
+                    <th><%= translate("symbol") %></th>
+                    <th><%= translate("quantity") %></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <!-- The prefix "loop" stands for "List Of Orders Pagination" -->
+    <div id="pagination-control" class="pagination pagination-right">
+        <!-- The prefix "loo" stands for "List Of Orders" -->
+        <ul id="loo-pagination">
+            <li id="loop-previous"><a>&laquo;</a></li>
+            <% for (var i = 1 ; i <= pageCount; ++i) { %>
+            <li class="g2p <%= (i == currentPage ? "active" : "") %>"><a><%= i %></a></li>
+            <% } %>
+            <li id="loop-next"><a>&raquo;</a></li>
+        </ul>
+    </div>
+</div>

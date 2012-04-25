@@ -13,14 +13,17 @@ nano.Router = Backbone.Router.extend({
         "login/:error"  : "login",    // #login page
         "login"         : "login",    // #login page
         "dashboard"     : "dashboard",   // #dashboard page
+        "dashboard/p:page" : "orders",  // #dashboard - pagination of List of Orders
         ""              : "dashboard", // #dashboard page
         "registration"  : "registration", // #registration page
         "portfolio"     : "portfolio", // #portfolio page
         "portfolio/p:page" : "holdings", // #portolio - pagination of List of Holdings
         "trade"         : "trade", // #trade page
         "trade/p:page"  : "orders", // #trade - pagination of List of Orders
+        "trade/q:quote" : "quotes", // #trade - list of quotes
         "profile"       : "profile", // #profile page
-        "contact"       : "contact" // #contact page
+        "contact"       : "contact", // #contact page
+        "overview"      : "overview" // #overview page
     },
 
     initialize: function() {
@@ -37,8 +40,11 @@ nano.Router = Backbone.Router.extend({
         nano.instances.holdings = new nano.views.Holdings({el: '#nc-holdings'});
         nano.instances.profile = new nano.views.Profile({el : '#nc-profile'});
         nano.instances.contact = new nano.views.Contact({el: '#nc-contact'});
-        // new trade page view
         nano.instances.trade = new nano.views.Trade({el : '#nc-trade'});
+        nano.instances.quotes = new nano.views.Quotes({el : '#nc-quotes'});
+        nano.instances.orders = new nano.views.Orders({el: '#nc-orders'});
+        nano.instances.help = new nano.views.Help({el : '#nc-help'});
+        nano.instances.overview = new nano.views.Overview({el: '#nc-overview'});
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#nc-loading');
@@ -74,10 +80,33 @@ nano.Router = Backbone.Router.extend({
     },
 
     help: function() {
-        alert('Help goes here!');
+        if(nano.utils.loggedIn()){
+            nano.utils.hideAll(false);
+            // Render the navbar
+            nano.instances.navbar.render();
+            nano.instances.help.render();
+        } else {
+            nano.utils.hideAll(false);
+            nano.instances.help.render();
+        }
     },
 
-    dashboard: function() {
+    overview: function() {
+        if(nano.utils.loggedIn()){
+            nano.utils.hideAll(false);
+            // Render the navbar
+            nano.instances.navbar.render();
+            nano.instances.overview.render();
+        } else {
+            nano.utils.hideAll(false);
+            nano.instances.overview.render();
+        }
+    },
+
+    dashboard: function(page) {
+        if (isNaN(page)){
+            page = 1;
+        }
         // Render the Dashboard of logged in or the Login otherwise
         if(nano.utils.loggedIn()) {
             nano.utils.hideAll();
@@ -89,6 +118,7 @@ nano.Router = Backbone.Router.extend({
                 account : new nano.models.Account({accountid : nano.session.accountid}),
                 holdingSummary : new nano.models.HoldingSummary({ accountid : nano.session.accountid }),
                 portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
+                orders : new nano.models.Orders({ accountid : nano.session.accountid }),
             };
 
             var onFetchSuccess = function() {
@@ -105,8 +135,16 @@ nano.Router = Backbone.Router.extend({
                     // Render the Portfolio View
                     nano.instances.portfolio.render(models.account, models.portfolioSummary);
 
-                    // Render the Positions View
-                    nano.instances.positions.render(models.holdingSummary);
+                    if ( !nano.utils.isMobile() )
+                    {
+                        // Render the Positions View
+                        nano.instances.positions.render(models.holdingSummary);
+                    }
+
+                    // Show the toggle control on the dashboard
+                    nano.instances.orders.options.showToggle = true;
+                    // Render the Orders View
+                    nano.instances.orders.render(models.orders, page, nano.conf.hash.dashboardWithPage);
                 }
             };
             for (var i in models)
@@ -166,8 +204,10 @@ nano.Router = Backbone.Router.extend({
                 {
                     nano.containers.loading.hide();
 
-                    // Render the Portfolio View
-                    nano.instances.portfolio.render(models.account, models.portfolioSummary);
+                    if( !nano.utils.isMobile() ) {
+                        // Render the Portfolio View
+                        nano.instances.portfolio.render(models.account, models.portfolioSummary);
+                    }
 
                     // Render the Portfolio Summary View
                     nano.instances.portfolioSummary.render(models.portfolioSummary);
@@ -207,6 +247,9 @@ nano.Router = Backbone.Router.extend({
     },
 
     trade: function(page) {
+        if (isNaN(page)){
+            page = 1;
+        }
         if(nano.utils.loggedIn()) {
             nano.utils.hideAll();
             nano.containers.loading.show();
@@ -218,13 +261,16 @@ nano.Router = Backbone.Router.extend({
                 nano.containers.loading.hide();
                 
                 // Render the trade view
-                var trade = nano.instances.trade.render(model);
-                if (trade){
-                    // Instance the order view 
-                    nano.instances.orders = new nano.views.Orders({el: '#nc-orders-tbody'});
-                }
-                // Render the orders list
-                nano.instances.orders.render(model, page);
+                nano.instances.trade.render(model);
+                
+                // Show the toggle control on the dashboard
+                nano.instances.orders.options.showToggle = false;
+                
+                // Render the List of Orders View
+                nano.instances.orders.render(model, page, nano.conf.hash.tradeWithPage);
+                
+                // Render the List of Quotes View
+                nano.instances.quotes.render();
             };
             
             model.fetch({
@@ -238,14 +284,39 @@ nano.Router = Backbone.Router.extend({
     },
     
     orders: function(page) {
-        if (!nano.containers.orders)
-        {
+        if (isNaN(page)){
+            page = 1;
+        }
+        if (!nano.containers.orders.html()){
             this.trade(page);
         }
-        else
-        {
-            // Render the List of Holdings View
+        else {
+            // Render the List of Orders View
             nano.instances.orders.render(null, page);
+        }
+    },
+    
+    quotes: function(quote) {
+        if (!nano.containers.quotes.html()){
+            this.trade();
+        }
+        else {
+            var model = new nano.models.Quotes({ quoteid : quote });
+            
+            var onFetchSuccess = function() {
+                // Render the quotes list
+                nano.instances.quotes.render(model, quote);
+                nano.instances.trade.error(false)
+            };
+        
+            var onError = function() {
+                nano.instances.trade.error(true)
+            };
+            
+            model.fetch({
+                success : onFetchSuccess,
+                error: onError
+            });
         }
     },
     

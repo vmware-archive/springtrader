@@ -3,6 +3,10 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.strings = {
+    noDataAvailable : 'No Data Available.',
+    warning : 'Warning!',
+    totalOfHoldings : 'Total Of Holdings',
+    sell : 'Sell',
     listOfHoldings : 'List of Holdings',
     purchaseDate : 'Purchase Date',
     symbo : 'Symbol',
@@ -13,7 +17,7 @@ nano.strings = {
     total : 'Total',
     portfolioSummary : 'Portfolio Summary',
     numberOfHoldings : 'Number of Holdings',
-    purchaseBasics : 'Purchase Basics',
+    purchaseBasis : 'Purchase Basis',
     marketValue : 'Market Value',
     totalGainLoss : 'Total Gain/Loss',
     dailyTopGains : 'Daily Top Gains',
@@ -39,7 +43,8 @@ nano.strings = {
     password : 'Password',
     forgotPassword : 'Forgot password?',
     registration : 'Registration',
-    dontHaveNanotrader : 'Don\'t have a NanoTrade login and password yet?',
+    dontHaveNanotrader : 'Don\'t have a nanoTrader account yet?',
+    createOneNow : 'Create one now!',
     pleaseRegister : 'Please Register me now',
     price : 'Price',
     username : 'Username',
@@ -98,7 +103,19 @@ nano.strings = {
     cancel : 'Cancel',
     buy : 'Buy',
     uncompleted : 'Uncompleted',
-    // Free ??? 
-    transactionFree : 'Transaction Free' 
-    
+    pending : 'Pending',
+    price : 'Price',
+    quote : 'Quote',
+    recentTransactions : 'Recent Transactions',
+    applicationOverview : 'Application Overview',    
+    errorOcurred : 'An error has occurred.',
+    fullnameError : 'Error! You got an Fullname field validation error!',
+    emailError : 'Error! You got an Email field validation error!',
+    passwdError : 'Error! You got an Password field validation error!',
+    useridError : 'Error! You got an Username field validation error!',
+    openbalanceError : 'Error! You got an Open balance field validation error!',
+    creditcardError : 'Error! You got an Creditcard field validation error!',
+    addressError : 'Error! You got an Address field validation error!',
+    gainingMsg : 'This chart shows the top 4 gaining stocks in your portfolio',
+    portfolioMsg : 'This chart shows the cash balance and the portfolio value as a % of the total assets in your account'
 };
