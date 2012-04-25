@@ -16,10 +16,8 @@ import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.nanotrader.data.domain.Account;
 import org.springframework.nanotrader.data.domain.Accountprofile;
-import org.springframework.nanotrader.data.domain.Holding;
 import org.springframework.nanotrader.data.repository.AccountProfileRepository;
 import org.springframework.nanotrader.data.repository.AccountRepository;
 import org.springframework.nanotrader.data.repository.HoldingRepository;
@@ -51,9 +49,6 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 	private AccountRepository accountRepository;
 
 	@Autowired
-	private HoldingRepository holdingRepository;
-
-	@Autowired
 	private QuoteRepository quoteRepository;
 
 	@Resource
@@ -61,12 +56,12 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 
 	@Override
 	public void recreateData(int count) {
-		List<org.springframework.nanotrader.data.domain.Quote> quotes = quoteRepository.findAll();
-		List<Quote> currentQuotes = new ArrayList<Quote>();
-		for (org.springframework.nanotrader.data.domain.Quote q : quotes) {
+		List<org.springframework.nanotrader.data.domain.Quote> quotesrepo = quoteRepository.findAll();
+		ArrayList<Quote> quotes = new ArrayList<Quote>();
+		for (org.springframework.nanotrader.data.domain.Quote q : quotesrepo) {
 			Quote quote = new Quote();
 			mapper.map(q, quote);
-			currentQuotes.add(quote);
+			quotes.add(quote);
 		}
 		for (int i = 1; i <= count; i++) {
 			String userid = "user" + i;
@@ -97,34 +92,17 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			o.setCompletiondate(creationdate);
 			o.setQuantity(new BigDecimal(1000));
 			o.setOrdertype("buy");
-			o.setQuote(currentQuotes.get(0));
+			o.setQuote(quotes.get(0));
 			tradingServiceFacade.saveOrder(o, false);
-			o.setQuote(currentQuotes.get(1));
+			o.setQuote(quotes.get(1));
 			tradingServiceFacade.saveOrder(o, false);
-			o.setQuote(currentQuotes.get(2));
+			o.setQuote(quotes.get(2));
 			tradingServiceFacade.saveOrder(o, false);
-			o.setQuote(currentQuotes.get(3));
+			o.setQuote(quotes.get(3));
 			tradingServiceFacade.saveOrder(o, false);
-			o.setQuote(currentQuotes.get(4));
+			o.setQuote(quotes.get(4));
 			tradingServiceFacade.saveOrder(o, false);
-			o.setQuote(currentQuotes.get(5));
-			tradingServiceFacade.saveOrder(o, false);
-			List<Holding> holdings = holdingRepository.findByAccountAccountid(ac.getAccountid(), new PageRequest(0, 3));
-			sellStock(ac, holdings.get(0), currentQuotes.get(0));
-			sellStock(ac, holdings.get(1), currentQuotes.get(1));
-			sellStock(ac, holdings.get(2), currentQuotes.get(2));
 		}
-	}
-
-	private void sellStock(Account ac, Holding holding, Quote quote) {
-		Date completionDate = new Date();
-		Order o = new Order();
-		o.setAccountid(ac.getAccountid());
-		o.setCompletiondate(completionDate);
-		o.setQuantity(new BigDecimal(1000));
-		o.setOrdertype("sell");
-		o.setQuote(quote);
-		tradingServiceFacade.saveOrder(o, false);
 	}
 
 }
