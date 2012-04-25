@@ -85,8 +85,8 @@ nano.models.AccountProfile = Backbone.Model.extend({
         reEmail = new RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
         //rePasswd = new RegExp();
         reUserid = new RegExp(/^\b[\w\d]{3,25}\b$/);
-        reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/); // a testear el infinito
-        reCreditcard = new RegExp(/^\b[\d]{16}\b$/); // implementar regex para verificar si es realmente una cc (yes se puede al parecer)
+        reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/);
+        reCreditcard = new RegExp(/^\b[\d]{16}\b$/);
         //reAddress = new RegExp();
         
         // fullname validation
