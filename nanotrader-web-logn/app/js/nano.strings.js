@@ -41,7 +41,8 @@ nano.strings = {
     password : 'Password',
     forgotPassword : 'Forgot password?',
     registration : 'Registration',
-    dontHaveNanotrader : 'Don\'t have a NanoTrade login and password yet?',
+    dontHaveNanotrader : 'Don\'t have a nanoTrader account yet?',
+    createOneNow : 'Create one now!',
     pleaseRegister : 'Please Register me now',
     price : 'Price',
     username : 'Username',
@@ -112,5 +113,7 @@ nano.strings = {
     useridError : 'Error! You got an Username field validation error!',
     openbalanceError : 'Error! You got an Open balance field validation error!',
     creditcardError : 'Error! You got an Creditcard field validation error!',
-    addressError : 'Error! You got an Address field validation error!'
+    addressError : 'Error! You got an Address field validation error!',
+    gainingMsg : 'This chart shows the top 4 gaining stocks in your portfolio',
+    portfolioMsg : 'This chart shows the cash balance and the portfolio value as a % of the total assets in your account'
 };
