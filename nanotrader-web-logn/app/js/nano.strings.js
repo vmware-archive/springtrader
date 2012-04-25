@@ -3,6 +3,7 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.strings = {
+    totalOfHoldings : 'Total Of Holdings',
     sell : 'Sell',
     listOfHoldings : 'List of Holdings',
     purchaseDate : 'Purchase Date',
