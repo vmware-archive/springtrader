@@ -234,6 +234,7 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
+	@Transactional
 	public Order saveOrder(Order order) {
 		Order createdOrder = null;
 		if (log.isDebugEnabled()) {
