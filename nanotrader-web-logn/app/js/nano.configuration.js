@@ -56,6 +56,7 @@ nano.conf.tpls = {
     quotes : nano.conf.tplRoot + 'quotes.tpl',
     quoteRow : nano.conf.tplRoot + 'quoteRow.tpl',
     quoteModal : nano.conf.tplRoot + 'quoteModal.tpl',
+    warning : nano.conf.tplRoot + 'warning.tpl',
     help : nano.conf.tplRoot + 'help.tpl',
     overview : nano.conf.tplRoot + 'overview.tpl'
 };
