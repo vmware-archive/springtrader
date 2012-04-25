@@ -13,7 +13,6 @@
                             <label for="username-input" class="control-label"><%= translate("username") %>:</label>
                             <div class="controls">
                                 <input type="text" value="" id="username-input" class="input-xlarge focused" tabindex="1">
-                                <label class="checkbox"><input id="remember-me" type="checkbox" tabindex="3" /> <%= translate("rememberMe") %></label>
                             </div>
                         </div>
                     </div>
