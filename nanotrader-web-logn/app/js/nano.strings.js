@@ -3,6 +3,8 @@
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.strings = {
+    noDataAvailable : 'No Data Available.',
+    warning : 'Warning!',
     totalOfHoldings : 'Total Of Holdings',
     sell : 'Sell',
     listOfHoldings : 'List of Holdings',
