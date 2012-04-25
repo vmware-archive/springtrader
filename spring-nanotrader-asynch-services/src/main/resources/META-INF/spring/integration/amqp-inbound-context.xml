@@ -9,7 +9,7 @@
 
 	<import resource="amqp-common-context.xml"/>
 
-	<int-amqp:inbound-channel-adapter channel="fromAmqpOrdersChannel"
+	<int-amqp:inbound-channel-adapter  channel="fromAmqpOrdersChannel"
 		queue-names="nanotrader.order.queue"
 		connection-factory="connectionFactory"/>
 
