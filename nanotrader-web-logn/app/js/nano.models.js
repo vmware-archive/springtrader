@@ -85,8 +85,8 @@ nano.models.AccountProfile = Backbone.Model.extend({
         reEmail = new RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
         //rePasswd = new RegExp();
         reUserid = new RegExp(/^\b[\w\d]{3,25}\b$/);
-        reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/); // a testear el infinito
-        reCreditcard = new RegExp(/^\b[\d]{16}\b$/); // implementar regex para verificar si es realmente una cc (yes se puede al parecer)
+        reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/);
+        reCreditcard = new RegExp(/^\b[\d]{16}\b$/);
         //reAddress = new RegExp();
         
         // fullname validation
@@ -183,7 +183,19 @@ nano.models.Holdings = Backbone.Collection.extend({
      */
     url: function() {
         return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+    },
+
+   /**
+    * Called by Backbone whenever a collection's models are returned by the server, in fetch. The function is 
+    * passed the raw response object, and should return the array of model attributes to be added to the collection
+    * @author Carlos Soto <carlos.soto@lognllc.com>
+    * @param Object response: whatever comes from the server
+    * @return array of that for the collection
+    */
+    parse: function(response) {
+        return response.results;
     }
+
 });
 
 /**

@@ -13,7 +13,6 @@
                             <label for="username-input" class="control-label"><%= translate("username") %>:</label>
                             <div class="controls">
                                 <input type="text" value="" id="username-input" class="input-xlarge focused" tabindex="1">
-                                <label class="checkbox"><input id="remember-me" type="checkbox" tabindex="3" /> <%= translate("rememberMe") %></label>
                             </div>
                         </div>
                     </div>
@@ -24,7 +23,6 @@
                         </div>
                     </div>
                     <div class="form-actions">
-                        <a class="forgot-password pull-left"><%= translate("forgotPassword") %></a>
                         <button id="loginBtn" class="btn green-btn"><%= translate("login") %></button>
                     </div>
                 </fieldset>
@@ -33,7 +31,7 @@
         <div class="span2 columns sidebar">
             <h3><%= translate("registration") %></h3>
             <p><%= translate("dontHaveNanotrader") %></p>
-            <p><a id="showRegistrationBtn"><%= translate("pleaseRegister") %></a></p>
+            <p><a id="showRegistrationBtn"><%= translate("createOneNow") %></a></p>
         </div>
     </div>
 </div>

@@ -33,6 +33,6 @@
     <div class="span2 columns sidebar">
         <h3><%= translate("registration") %></h3>
         <p><%= translate("dontHaveNanotrader") %></p>
-        <p><a id="showRegistrationBtn"><%= translate("pleaseRegister") %></a></p>
+        <p><a id="showRegistrationBtn"><%= translate("createOneNow") %></a></p>
     </div>
 </div>

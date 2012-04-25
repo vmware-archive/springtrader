@@ -78,19 +78,23 @@ nano.views.Orders = Backbone.View.extend({
             // check the device
             if (nano.utils.isMobile()){
                 // Set a table variable for store the rows on a mobile device
-                this.table = this.$('#list-of-orders');
+                this.table = this.$('#orders-content > table');
             }
             // tbody variable used for store the rows on a computer device.
             this.tbody = this.$('#list-of-orders > tbody');
             this.paginators = this.$('#loo-pagination > li.g2p');
             this.previous = this.$('#loop-previous');
             this.next = this.$('#loop-next');
+            
+            
             // Toggle Control
             this.toggleControl = this.$('#toggle-orders-control');
             // Orders Control
             this.ordersControl = this.$('#orders-control');
             // Orders Pagination Control
             this.paginationControl = this.$('#pagination-control');
+            
+            
         }
         if (this.options.showToggle){
             this.toggleControl.removeClass('hide');
@@ -111,8 +115,7 @@ nano.views.Orders = Backbone.View.extend({
         }
 
         //Set the page number on the paginator
-        this.paginators.removeClass('active');
-        this.paginators[page-1].className = 'g2p active';
+        this.paginators.removeClass('active');        
 
         if (page == 1){
             this.previous.addClass('disabled');
@@ -129,11 +132,20 @@ nano.views.Orders = Backbone.View.extend({
 
         this.$el.show();
 
-        // Render the list
-        this.renderRows(page);
+        if (this.pageCount > 0){
+            this.paginators[page-1].className = 'g2p active';
+            // Render the list
+            this.renderRows(page);
+        }
 
         // Store the current Page number 
         this.page = page;
+        
+        //Prepare the view for collapsing sections
+        if ( nano.utils.isMobile() )
+        {
+            nano.utils.setCollapsable(this);
+        }
     },
 
     /**
@@ -229,6 +241,7 @@ nano.views.Orders = Backbone.View.extend({
     
     toggle : function(event){
         if(this.toggleControl.hasClass('active')) {
+
             this.ordersControl.hide();
             this.paginationControl.hide();
             this.toggleControl.removeClass('active');

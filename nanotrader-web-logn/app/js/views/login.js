@@ -73,9 +73,9 @@ nano.views.Login = Backbone.View.extend({
         var passwordControl = this.$('#password-control');
         var loginError = this.$('#login-error');
 
-        loginError.show();
-        loginControl.removeClass('error');
-        passwordControl.removeClass('error');
+        //loginError.show();
+        //loginControl.removeClass('error');
+        //passwordControl.removeClass('error');
 
         event.preventDefault();
         var username = this.$('#username-input').val();

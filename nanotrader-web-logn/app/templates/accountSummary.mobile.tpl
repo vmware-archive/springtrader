@@ -1,7 +1,7 @@
 <div class="well show-well">
     <div class="title">
         <h3>
-            <a data-target="#as-content" data-toggle="collapse" class="btn-transaction" data-toggle="collapse">
+            <a data-target="#as-content" data-toggle="collapse" class="btn-transaction">
                 <%= translate('accountSummary') %>
                 <span></span>
             </a>
@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td><%= translate("holdingsTotal") %></td>
-                <td class="gray-background"><%= round(totalMarketValue) %></td>
+                <td class="gray-background"><%= printCurrency(round(totalMarketValue)) %></td>
             </tr>
             <tr class="summary <%= (gain > 0 ? nano.conf.successCss : nano.conf.errorCss ) %>">
                 <td><%= translate("currentGainLoss") %></td>
