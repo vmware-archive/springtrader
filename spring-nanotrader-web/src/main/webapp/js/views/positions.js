@@ -34,7 +34,6 @@
         {
             this.model = model;
         }
-
         this.$el.html(this.template());
         this.$el.show();
 

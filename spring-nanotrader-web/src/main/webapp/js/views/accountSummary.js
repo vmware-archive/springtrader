@@ -44,5 +44,11 @@ nano.views.AccountSummary = Backbone.View.extend({
         var accountSummary = this.template(data);
         this.$el.html(accountSummary);
         this.$el.show();
+
+        //Prepare the view for collapsing sections
+        if ( nano.utils.isMobile() )
+        {
+            nano.utils.setCollapsable(this);
+        }
     }
 });

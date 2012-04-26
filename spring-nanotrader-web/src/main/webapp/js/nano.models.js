@@ -69,7 +69,7 @@ nano.models.Account = Backbone.Model.extend({
  */
 nano.models.AccountProfile = Backbone.Model.extend({
     idAttribute: 'profileid',
-    urlRoot : nano.conf.urls.accountProfile,
+    urlRoot: nano.conf.urls.accountProfile,
     url: function() {
         var url = this.urlRoot;
         if (!this.isNew())
@@ -77,6 +77,46 @@ nano.models.AccountProfile = Backbone.Model.extend({
             url += '/' + this.id;
         }
         return url;
+    },
+    // Account Profile model validation
+    validate: function(attrs){
+        // RegExp attrs validation
+        reFullname = new RegExp(/^\b[\w\d\s]{2,25}\b$/);
+        reEmail = new RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+        //rePasswd = new RegExp();
+        reUserid = new RegExp(/^\b[\w\d]{3,25}\b$/);
+        reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/);
+        reCreditcard = new RegExp(/^\b[\d]{16}\b$/);
+        //reAddress = new RegExp();
+        
+        // fullname validation
+        if (attrs.fullname.match(reFullname) == null){
+            return "fullnameError"
+        }
+        // email validation
+        if (attrs.email.match(reEmail) == null){
+            return "emailError"
+        }
+        // passwd validation
+        if (attrs.passwd.length < 3 || attrs.passwd.length > 25){
+            return "passwdError"
+        }
+        // userid validation
+        if (attrs.userid.match(reUserid) == null){
+            return "useridError"
+        }
+        // openbalance validation
+        //if (attrs.accounts[0].openbalance.match(reOpenbalance) == null){
+        //    return "openbalanceError"
+        //}
+        // creditcard validation
+        if (attrs.creditcard.match(reCreditcard) == null){
+            return "creditcardError"
+        }
+        // address validation
+        if (attrs.address.length < 3 || attrs.address.length > 100){
+            return "addressError"
+        }
     }
 });
 
@@ -143,7 +183,19 @@ nano.models.Holdings = Backbone.Collection.extend({
      */
     url: function() {
         return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+    },
+
+   /**
+    * Called by Backbone whenever a collection's models are returned by the server, in fetch. The function is 
+    * passed the raw response object, and should return the array of model attributes to be added to the collection
+    * @author Carlos Soto <carlos.soto@lognllc.com>
+    * @param Object response: whatever comes from the server
+    * @return array of that for the collection
+    */
+    parse: function(response) {
+        return response.results;
     }
+
 });
 
 /**
@@ -152,11 +204,13 @@ nano.models.Holdings = Backbone.Collection.extend({
  */
 nano.models.Order = Backbone.Model.extend({
     idAttribute: 'orderid',
-    urlRoot : nano.conf.urls.orders,
+    initialize: function(options) {
+        this.accountid = options.accountid;
+    },
+    urlRoot : nano.conf.urls.order,
     url: function() {
-        var url = this.urlRoot;
-        if (!this.isNew())
-        {
+        var url = this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+        if (!this.isNew()){
             url += '/' + this.id;
         }
         return url;
@@ -178,9 +232,39 @@ nano.models.Orders = Backbone.Collection.extend({
     /**
      * Builds the url to fetch the Collection
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @return string: Url for the Holdings Collection
+     * @return string: Url for the Orders Collection
      */
     url: function() {
         return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+    }
+});
+
+/**
+ * Model to interact with the Quote Object
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ */
+nano.models.Quote = Backbone.Model.extend({
+    idAttribute: 'quoteid',
+    //=================================================> There's no url for this object, we need to include one!
+});
+
+
+/**
+ * Collection to interact with the Orders Collection (list of Order Objects)
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ */
+nano.models.Quotes = Backbone.Collection.extend({
+    model : nano.models.Quote,
+    
+    initialize: function(options) {
+        this.quoteid = options.quoteid;
+    },
+    urlRoot : nano.conf.urls.quote,
+
+    url: function() {
+        var url = this.urlRoot;
+        url += '/' + this.quoteid;
+        
+        return url;
     }
 });

@@ -13,6 +13,7 @@ nano.views.Navbar = Backbone.View.extend({
         'click #nb-logo' : 'navigationClick',
         'click .nav-link' : 'navigationClick',
         'click #profile' : 'profile',
+        'click #help' : 'help',
         'click #admin' : 'admin'
     },
 
@@ -54,11 +55,15 @@ nano.views.Navbar = Backbone.View.extend({
         {
             var hash = nano.conf.hash.dashboard;
         }
-        this.$el.html(this.template(nano.session));
         if ( !this.$el.html() )
         {
             // Enable the dropdown for the User Profile options on the right
-            this.$('.dropdown-toggle').dropdown();
+            this.$('.dropdown-toggle').dropdown(); 
+
+            if( nano.utils.isMobile() )
+            {
+                this.collapsableMenu = this.$('#navbar-collapse');
+            }
 
             // Cache the containers of the links 
             // (for the "active" display when clicking on the link)
@@ -67,13 +72,17 @@ nano.views.Navbar = Backbone.View.extend({
             this.$('ul.nav.nav-top a.nav-link').each(function(i, ele){
                 that.linkContainers[ele.id] = $(ele.parentNode);
             });
+            this.username = $('#nb-username');
+        }
+        else
+        {
+            this.username.html(nano.session.username);
         }
         // Maps the different hash urls to the id of the link in the navbar
         var hashMap = {};
             hashMap[nano.conf.hash.dashboard] = this.ids.dashboard;
             hashMap[nano.conf.hash.portfolio] = this.ids.portfolio;
             hashMap[nano.conf.hash.trade] = this.ids.trade;
-            hashMap[nano.conf.hash.admin] = this.ids.admin;
         for (var i in this.linkContainers)
         {
             if (hashMap[hash] == i)
@@ -124,9 +133,6 @@ nano.views.Navbar = Backbone.View.extend({
             // Depending on the link clicked, render the corresponding page
             switch(id)
             {
-                case this.ids.admin:
-                    window.location = nano.conf.hash.admin;
-                    break;
                 case this.ids.portfolio:
                     window.location = nano.conf.hash.portfolio;
                     break;
@@ -143,6 +149,10 @@ nano.views.Navbar = Backbone.View.extend({
         {
             window.location = nano.conf.hash.dashboard;
         }
+        if( nano.utils.isMobile() )
+        {
+            this.collapsableMenu.collapse('hide');
+        }
     },
     
     /**
@@ -153,6 +163,20 @@ nano.views.Navbar = Backbone.View.extend({
     profile : function() {
         nano.utils.goTo( nano.conf.hash.profile );
     },
+    
+    /**
+     * Help Click Event
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @return void
+     */
+    help : function() {
+        nano.utils.goTo( nano.conf.hash.help );
+    },
+
+    /**
+     * Admin Click Event
+     * @return void
+     */
     admin : function() {
         nano.utils.goTo( nano.conf.hash.admin );
     }
