@@ -236,6 +236,17 @@ nano.models.Orders = Backbone.Collection.extend({
      */
     url: function() {
         return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+    },
+
+   /**
+    * Called by Backbone whenever a collection's models are returned by the server, in fetch. The function is 
+    * passed the raw response object, and should return the array of model attributes to be added to the collection
+    * @author Carlos Soto <carlos.soto@lognllc.com>
+    * @param Object response: whatever comes from the server
+    * @return array of that for the collection
+    */
+    parse: function(response) {
+        return response.results;
     }
 });
 

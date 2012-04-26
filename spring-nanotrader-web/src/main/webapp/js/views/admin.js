@@ -9,6 +9,9 @@ nano.views.Admin = Backbone.View.extend({
      */
     events : {
         'click #setUsersBtn' : 'setUsers',
+        'click #profile' : 'profile',
+        'click #overview' : 'overview',
+        'click #help' : 'help'
     },
     
     /**
@@ -35,14 +38,16 @@ nano.views.Admin = Backbone.View.extend({
      */
     render: function(errorKey) {
         
-        this.$el.html(this.template());
+        if ( !this.$el.html() )
+        {
+            this.$el.html(this.template());
+        }
         if (errorKey)
         {
              var adminError = this.$('#admin-error');
              adminError.find('p').html(translate(errorKey));
              adminError.removeClass('hide');
         }
-
         this.$el.show();
     },
     
@@ -63,6 +68,19 @@ nano.views.Admin = Backbone.View.extend({
                 adminError.removeClass('hide');
             }
             });
+    },
+
+    profile : function(){
+        window.location = nano.conf.hash.profile;
+    },
+
+    overview : function(){
+        window.location = nano.conf.hash.overview;
+    },
+    
+    help : function(){
+        window.location = nano.conf.hash.help;
     }
+    
     
 });
