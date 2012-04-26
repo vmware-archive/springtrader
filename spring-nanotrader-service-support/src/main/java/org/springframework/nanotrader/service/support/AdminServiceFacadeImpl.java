@@ -3,12 +3,10 @@
  */
 package org.springframework.nanotrader.service.support;
 
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -16,12 +14,8 @@ import javax.annotation.Resource;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.nanotrader.data.domain.Account;
 import org.springframework.nanotrader.data.domain.Accountprofile;
-import org.springframework.nanotrader.data.repository.AccountProfileRepository;
-import org.springframework.nanotrader.data.repository.AccountRepository;
-import org.springframework.nanotrader.data.repository.QuoteRepository;
 import org.springframework.nanotrader.data.service.TradingService;
 import org.springframework.nanotrader.service.domain.Order;
 import org.springframework.nanotrader.service.domain.Quote;
@@ -42,23 +36,13 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
 
-	@Autowired
-	private AccountProfileRepository accountProfileRepository;
-
-	@Autowired
-	private AccountRepository accountRepository;
-
-	@Autowired
-	private QuoteRepository quoteRepository;
-
 	@Resource
 	private Mapper mapper;
 
 	@Override
 	public void recreateData(int count) {
-		List<org.springframework.nanotrader.data.domain.Quote> quotesrepo = quoteRepository.findAll();
 		ArrayList<Quote> quotes = new ArrayList<Quote>();
-		for (org.springframework.nanotrader.data.domain.Quote q : quotesrepo) {
+		for (org.springframework.nanotrader.data.domain.Quote q : tradingService.findRandomQuotes(5)) {
 			Quote quote = new Quote();
 			mapper.map(q, quote);
 			quotes.add(quote);
@@ -87,8 +71,7 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			ap.setAccounts(accounts);
 			tradingService.saveAccountProfile(ap);
 			Order o = new Order();
-			o.setAccountid(accountRepository.findByProfileProfileid(accountProfileRepository.findByUserid(userid))
-					.getAccountid());
+			o.setAccountid((tradingService.findAccountByProfile(ap)).getAccountid());
 			o.setCompletiondate(creationdate);
 			o.setQuantity(new BigDecimal(1000));
 			o.setOrdertype("buy");
