@@ -93,8 +93,20 @@ nano.views.Orders = Backbone.View.extend({
             this.ordersControl = this.$('#orders-control');
             // Orders Pagination Control
             this.paginationControl = this.$('#pagination-control');
-            
-            
+
+            // For some reason, the div needs to be showing
+            // before doing the collapsing functions
+            this.$el.show();
+
+            //Prepare the view for collapsing sections
+            if ( nano.utils.isMobile() )
+            {
+                nano.utils.setCollapsable(this);
+            }
+        }
+        else
+        {
+            this.$el.show();
         }
         if (this.options.showToggle){
             this.toggleControl.removeClass('hide');
@@ -130,8 +142,6 @@ nano.views.Orders = Backbone.View.extend({
             this.next.removeClass('disabled');
         }
 
-        this.$el.show();
-
         if (this.pageCount > 0){
             this.paginators[page-1].className = 'g2p active';
             // Render the list
@@ -140,12 +150,6 @@ nano.views.Orders = Backbone.View.extend({
 
         // Store the current Page number 
         this.page = page;
-        
-        //Prepare the view for collapsing sections
-        if ( nano.utils.isMobile() )
-        {
-            nano.utils.setCollapsable(this);
-        }
     },
 
     /**

@@ -99,12 +99,23 @@ nano.views.Holdings = Backbone.View.extend({
                 this.previous = this.$('#lohp-previous');
                 this.next = this.$('#lohp-next');
 
+                // For some reason, the div needs to be showing
+                // before doing the collapsing functions
+                this.$el.show();
+
                 //Prepare the view for collapsing sections
                 if ( nano.utils.isMobile() )
                 {
                     nano.utils.setCollapsable(this);
                 }
             }
+            else
+            {
+                this.$el.show();
+            }
+
+            // Store the current Page number 
+            this.page = page;
 
             //Set the page number on the paginator
             this.paginators.removeClass('active');
@@ -126,35 +137,38 @@ nano.views.Holdings = Backbone.View.extend({
                 this.next.removeClass('disabled');
             }
 
-            this.$el.show();
-            
-            if (this.pageCount > 0){
+            if ( this.pageCount > 0 ) {
                 this.paginators[page-1].className = 'g2p active';
                 // Render the list
-                this.renderRows(page);
+                this.renderRows();
             }
-
-            // Store the current Page number 
-            this.page = page;
-
-            //0=-==============================================>> Not sure why I had to add this here
-            this.$('#loh-content').collapse('hide');
     },
 
     /**
      * Renders the List of holdings into the View
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param int page: page of the List of Holdings to display
      * @return void
      */
-    renderRows: function(page) {
+    renderRows: function() {
         this.tbody.html('');
-        var i = (page - 1) * nano.conf.itemsPerPage;
+        var i = (this.page - 1) * nano.conf.itemsPerPage;
         var next = i + nano.conf.itemsPerPage;
         var length = this.model.length;
-        for ( i; i < length && i < next; ++i )
+        if ( nano.utils.isMobile() )
         {
-            this.tbody.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
+            var holdings = [];
+            for ( i; i < length && i < next; ++i )
+            {
+                holdings.push(_.extend(this.model.at(i).toJSON(), {i:i}));
+            }
+            this.tbody.append( this.rowTemplate({holdings : holdings}) );
+        }
+        else
+        {
+            for ( i; i < length && i < next; ++i )
+            {
+                this.tbody.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
+            }
         }
     },
 
