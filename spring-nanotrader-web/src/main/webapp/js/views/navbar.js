@@ -32,8 +32,7 @@ nano.views.Navbar = Backbone.View.extend({
         this.ids = {
             dashboard : 'nb-dashboard',
             portfolio : 'nb-portfolio',
-            trade : 'nb-trade',
-            admin : 'nb-admin'
+            trade : 'nb-trade'
         };
     },
 
@@ -57,6 +56,7 @@ nano.views.Navbar = Backbone.View.extend({
         }
         if ( !this.$el.html() )
         {
+            this.$el.html(this.template(nano.session));
             // Enable the dropdown for the User Profile options on the right
             this.$('.dropdown-toggle').dropdown(); 
 

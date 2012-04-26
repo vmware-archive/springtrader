@@ -288,13 +288,9 @@ nano.utils.setCollapsable = function(view) {
 };
 nano.utils.setUsers = function(userCount, callbacks) {
         $.ajax({
-            url : nano.conf.urls.admin,
+            url : nano.conf.urls.admin + "?count=" + userCount,
             type : 'POST',
             headers : nano.utils.getHttpHeaders(),
-            dataType : 'json',
-            data : JSON.stringify({
-                count : userCount
-            }),
             success : function(data, textStatus, jqXHR){
                 //logout current user.
                 nano.utils.logout();
