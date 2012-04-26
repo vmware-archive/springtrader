@@ -6,7 +6,9 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
@@ -66,7 +68,7 @@
     </bean>
     <tx:annotation-driven  transaction-manager="transactionManager"/>
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
-        <property name="persistenceUnitName" value="persistenceUnit"/>
+        <property name="persistenceUnitName" value="#{dbPropertiesBean['persistenceUnitName']}"/>
         <property name="dataSource" ref="dataSource"/>
         <property name="persistenceUnitPostProcessors">
             <array>
@@ -86,6 +88,18 @@
 	<import resource="classpath:/META-INF/spring/integration/amqp-data-outbound-context.xml" />
 
 	<beans profile="default">
+		<util:properties id="dbPropertiesBean">
+			<prop key="persistenceUnitName">testPersistenceUnit</prop>
+		</util:properties>
+
+		<jdbc:embedded-database id="dataSource" type="H2" />
+	</beans>
+
+	<beans profile="postgresql">
+		<util:properties id="dbPropertiesBean">
+			<prop key="persistenceUnitName">persistenceUnit</prop>
+		</util:properties>
+
 	    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
 	        <property name="driverClassName" value="${database.driverClassName}"/>
 	        <property name="url" value="${database.url}"/>
@@ -115,6 +129,10 @@
 	</beans>
 
 	<beans profile="jndi">
+		<util:properties id="dbPropertiesBean">
+			<prop key="persistenceUnitName">persistenceUnit</prop>
+		</util:properties>
+
 		<jee:jndi-lookup id="dataSource" jndi-name="jdbc/nanodb" />
 	</beans>
 </beans>

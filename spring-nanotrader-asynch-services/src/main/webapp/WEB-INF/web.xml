@@ -8,10 +8,19 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>META-INF/spring/root-context.xml</param-value>
     </context-param>
+
     <context-param>
         <param-name>spring.profiles.active</param-name>
-        <param-value>default</param-value>
+
+        <!-- H2 -->
+<!--         <param-value>default</param-value> -->
+
+        <!-- postgreSQL -->
+        <param-value>postgresql</param-value>
+
+        <!-- JNDI -->
 <!--         <param-value>jndi</param-value> -->
+
     </context-param>
 	
 	  <!-- Creates the Spring Container shared by all Servlets and Filters -->
