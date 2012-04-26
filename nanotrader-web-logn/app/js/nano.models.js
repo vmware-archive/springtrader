@@ -256,26 +256,12 @@ nano.models.Orders = Backbone.Collection.extend({
  */
 nano.models.Quote = Backbone.Model.extend({
     idAttribute: 'quoteid',
-    //=================================================> There's no url for this object, we need to include one!
-});
-
-
-/**
- * Collection to interact with the Orders Collection (list of Order Objects)
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
- */
-nano.models.Quotes = Backbone.Collection.extend({
-    model : nano.models.Quote,
-    
-    initialize: function(options) {
-        this.quoteid = options.quoteid;
-    },
     urlRoot : nano.conf.urls.quote,
-
     url: function() {
         var url = this.urlRoot;
-        url += '/' + this.quoteid;
-        
+        if (!this.isNew()){
+            url += '/' + this.id;
+        }
         return url;
     }
 });

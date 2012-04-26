@@ -301,7 +301,7 @@ nano.Router = Backbone.Router.extend({
             this.trade();
         }
         else {
-            var model = new nano.models.Quotes({ quoteid : quote });
+            var model = new nano.models.Quote({ quoteid : quote });
             
             var onFetchSuccess = function() {
                 // Render the quotes list
