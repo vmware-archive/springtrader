@@ -41,6 +41,7 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 
 	@Override
 	public void recreateData(int count) {
+		tradingService.deleteAll();
 		ArrayList<Quote> quotes = new ArrayList<Quote>();
 		for (org.springframework.nanotrader.data.domain.Quote q : tradingService.findRandomQuotes(5)) {
 			Quote quote = new Quote();
