@@ -323,8 +323,14 @@ nano.Router = Backbone.Router.extend({
     profile: function() {
         if(nano.utils.loggedIn())
         {
-            nano.utils.hideAll(false);
             // Hide the Market Summary on the profile page
+            if ( !nano.utils.isMobile() ){
+                nano.utils.hideAll(false);
+            } else {
+                nano.utils.hideAll();
+            }
+            
+            // Render the Navigation bar
             nano.instances.navbar.render();
 
             // Set the Account profile model with the profileid of the current user
