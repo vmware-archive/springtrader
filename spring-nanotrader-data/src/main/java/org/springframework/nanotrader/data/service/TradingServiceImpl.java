@@ -488,8 +488,18 @@ public class TradingServiceImpl implements TradingService {
 	}
 	
 	@Override
+	public List<Quote> findRandomQuotes(Integer count){
+		return quoteRepository.findAll().subList(0, count.intValue());
+	}
+	
+	@Override
 	public Account findAccount(Integer accountId) {
 		return accountRepository.findOne(accountId);
+	}
+	
+	@Override
+	public Account findAccountByProfile(Accountprofile ap) {
+		return accountRepository.findByProfileProfileid(ap);
 	}
 	
 	@Override

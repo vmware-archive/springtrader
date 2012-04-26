@@ -3,7 +3,6 @@
  */
 package org.springframework.nanotrader.service.support;
 
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,23 +41,13 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
 
-	@Autowired
-	private AccountProfileRepository accountProfileRepository;
-
-	@Autowired
-	private AccountRepository accountRepository;
-
-	@Autowired
-	private QuoteRepository quoteRepository;
-
 	@Resource
 	private Mapper mapper;
 
 	@Override
 	public void recreateData(int count) {
-		List<org.springframework.nanotrader.data.domain.Quote> quotesrepo = quoteRepository.findAll();
 		ArrayList<Quote> quotes = new ArrayList<Quote>();
-		for (org.springframework.nanotrader.data.domain.Quote q : quotesrepo) {
+		for (org.springframework.nanotrader.data.domain.Quote q : tradingService.findRandomQuotes(5)) {
 			Quote quote = new Quote();
 			mapper.map(q, quote);
 			quotes.add(quote);
@@ -87,8 +76,7 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			ap.setAccounts(accounts);
 			tradingService.saveAccountProfile(ap);
 			Order o = new Order();
-			o.setAccountid(accountRepository.findByProfileProfileid(accountProfileRepository.findByUserid(userid))
-					.getAccountid());
+			o.setAccountid((tradingService.findAccountByProfile(ap)).getAccountid());
 			o.setCompletiondate(creationdate);
 			o.setQuantity(new BigDecimal(1000));
 			o.setOrdertype("buy");

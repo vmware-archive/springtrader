@@ -3,21 +3,17 @@ package org.springframework.nanotrader.web.configuration;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anySetOf;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +30,8 @@ import org.springframework.nanotrader.data.domain.Quote;
 import org.springframework.nanotrader.data.service.TradingService;
 import org.springframework.nanotrader.data.service.TradingServiceImpl;
 import org.springframework.nanotrader.data.util.FinancialUtils;
+import org.springframework.nanotrader.service.support.AdminServiceFacade;
+import org.springframework.nanotrader.service.support.AdminServiceFacadeImpl;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.nanotrader.service.support.TradingServiceFacadeImpl;
 
@@ -80,6 +78,7 @@ public class ServiceTestConfiguration  {
 	public static BigDecimal OPEN	=  new BigDecimal("40.11");
 	public static BigDecimal VOLUME	=  new BigDecimal("3000");
 	public static BigDecimal CURRENT_PRICE	=  new BigDecimal("48.44");
+	public static Integer RANDOM_QUOTES_COUNT = 5;
 	
 	//Account constants
 	public static BigDecimal ACCOUNT_OPEN_BALANCE	=  new BigDecimal("55.02");
@@ -126,13 +125,16 @@ public class ServiceTestConfiguration  {
 		when(tradingService.findOrdersByStatus(eq(ACCOUNT_ID), any(String.class), any(Integer.class), any(Integer.class))).thenReturn(orders());
 		when(tradingService.findOrders(eq(ACCOUNT_ID), any(Integer.class), any(Integer.class))).thenReturn(orders());
 		when(tradingService.findQuoteBySymbol(eq(SYMBOL))).thenReturn(quote());
+		when(tradingService.findRandomQuotes(RANDOM_QUOTES_COUNT)).thenReturn(quotes());
 		when(tradingService.findQuotesBySymbols(anySetOf(String.class))).thenReturn(quotes());
 		when(tradingService.findAccount(eq(ACCOUNT_ID))).thenReturn(account());
+		when(tradingService.findAccountByProfile(any(Accountprofile.class))).thenReturn(account());
 		when(tradingService.findPortfolioSummary(eq(ACCOUNT_ID))).thenReturn(portfolioSummary());
 		when(tradingService.findMarketSummary()).thenReturn(marketSummary());
 		when(tradingService.login(eq(USER_ID), eq(PASSWORD))).thenReturn(accountProfile());
 		when(tradingService.login(eq(BAD_USER_ID), eq(BAD_PASSWORD))).thenReturn(null);
 		when(tradingService.findHoldingSummary(eq(ACCOUNT_ID))).thenReturn(holdingSummary());
+
 		doNothing().when(tradingService).logout(any(String.class));
 		return tradingService;
 	}
@@ -140,6 +142,11 @@ public class ServiceTestConfiguration  {
 	@Bean
 	public TradingServiceFacade tradingServiceFacade() {
 		return new TradingServiceFacadeImpl();
+	}
+	
+	@Bean
+	public AdminServiceFacade adminServiceFacade() {
+		return new AdminServiceFacadeImpl();
 	}
 
 	@Bean 
