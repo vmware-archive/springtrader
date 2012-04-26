@@ -117,5 +117,6 @@ nano.strings = {
     creditcardError : 'Error! You got an Creditcard field validation error!',
     addressError : 'Error! You got an Address field validation error!',
     gainingMsg : 'This chart shows the top 4 gaining stocks in your portfolio',
-    portfolioMsg : 'This chart shows the cash balance and the portfolio value as a % of the total assets in your account'
+    portfolioMsg : 'This chart shows the cash balance and the portfolio value as a % of the total assets in your account',
+    loginPage : 'Login Page'
 };

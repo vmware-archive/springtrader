@@ -13,7 +13,7 @@ nano.conf.tpls = {
     portfolio : nano.conf.tplRoot + 'portfolio.mobile.tpl',
     positions : nano.conf.tplRoot + 'positions.tpl',
     userStatistics : nano.conf.tplRoot + 'userStatistics.mobile.tpl',
-    registration : nano.conf.tplRoot + 'registration.tpl',
+    registration : nano.conf.tplRoot + 'registration.mobile.tpl',
     profile : nano.conf.tplRoot + 'profile.tpl',
     trade : nano.conf.tplRoot + 'trade.mobile.tpl',
     contact : nano.conf.tplRoot + 'contact.tpl',
