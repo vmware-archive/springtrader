@@ -48,5 +48,11 @@
             [translate('portfolioValue'), (portfolioSummary.get('totalMarketValue') / totalAssets)]
         ];
         var plot1 = nano.utils.renderPieChart('ad-pie-chart', data);
+
+        //Prepare the view for collapsing sections
+        if ( nano.utils.isMobile() )
+        {
+            nano.utils.setCollapsable(this);
+        }
     }
 });
