@@ -70,4 +70,6 @@ public interface TradingService {
 	public abstract HoldingSummary findHoldingSummary(Integer accountId);
 
 	public Long findCountOfHoldingsByAccountId(Integer accountId);
+	
+	public abstract void deleteAll();
 }
