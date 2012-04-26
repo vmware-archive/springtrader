@@ -10,8 +10,16 @@
     </context-param>
    <context-param>
         <param-name>spring.profiles.active</param-name>
-        <param-value>production, default</param-value>
+
+        <!-- H2 -->
+<!--         <param-value>production, default</param-value> -->
+
+        <!-- postgreSQL -->
+        <param-value>production, postgresql</param-value>
+
+        <!-- JNDI -->
 <!--         <param-value>production, jndi</param-value>    -->
+
 	</context-param>
    
     <!-- Location of Java @Configuration classes that configure the components that makeup this application -->
