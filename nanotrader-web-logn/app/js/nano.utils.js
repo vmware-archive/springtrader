@@ -102,7 +102,23 @@ nano.utils.login = function(username, password, callbacks) {
  * @author Carlos Soto <carlos.soto@lognllc.com>
  * @return void
  */
-nano.utils.logout = function(){
+nano.utils.logout = function(callbacks){
+    $.ajax({
+        url : nano.conf.urls.logout,
+        type : 'GET',
+        headers : nano.utils.getHttpHeaders(),
+        dataType : 'json',
+        success : function(data, textStatus, jqXHR) {
+            if (_.isFunction(callbacks.success)) {
+                callbacks.success();
+            }
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+            if (_.isFunction(callbacks.error)) {
+                callbacks.error(jqXHR, textStatus, errorThrown);
+            }
+        }
+    });
     $.cookie( nano.conf.sessionCookieName, null);
 };
 

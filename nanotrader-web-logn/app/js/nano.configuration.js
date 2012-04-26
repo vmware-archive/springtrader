@@ -21,6 +21,7 @@ nano.conf = {
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.conf.urls = {
+    logout : nano.conf.urlRoot + 'logout',
     login : nano.conf.urlRoot + 'login',
     account : nano.conf.urlRoot + 'account',
     accountProfile : nano.conf.urlRoot + 'accountProfile',

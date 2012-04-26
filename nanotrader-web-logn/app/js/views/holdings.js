@@ -89,59 +89,23 @@ nano.views.Holdings = Backbone.View.extend({
                 data.totalGainLoss += holding.get( "gainLoss");
             });
 
-            // Render the List of Holdings container
-            if ( !this.$el.html() )
-            {
-                var tpl = this.template(data);
-                this.$el.html(tpl);
-                this.tbody = this.$('#list-of-holdings > tbody');
-                this.paginators = this.$('#loh-pagination > li.g2p');
-                this.previous = this.$('#lohp-previous');
-                this.next = this.$('#lohp-next');
+            var tpl = this.template(data);
+            this.$el.html(tpl);
+            this.tbody = this.$('#list-of-holdings > tbody');
 
-                // For some reason, the div needs to be showing
-                // before doing the collapsing functions
-                this.$el.show();
+            // For some reason, the div needs to be showing
+            // before doing the collapsing functions
+            this.$el.show();
 
-                //Prepare the view for collapsing sections
-                if ( nano.utils.isMobile() )
-                {
-                    nano.utils.setCollapsable(this);
-                }
-            }
-            else
+            //Prepare the view for collapsing sections
+            if ( nano.utils.isMobile() && !this.$el.html() )
             {
-                this.$el.show();
+                nano.utils.setCollapsable(this);
             }
 
             // Store the current Page number 
             this.page = page;
-
-            //Set the page number on the paginator
-            this.paginators.removeClass('active');
-
-            if (page == 1)
-            {
-                this.previous.addClass('disabled');
-            }
-            else
-            {
-                this.previous.removeClass('disabled');
-            }
-            if (page == this.pageCount)
-            {
-                this.next.addClass('disabled');
-            }
-            else
-            {
-                this.next.removeClass('disabled');
-            }
-
-            if ( this.pageCount > 0 ) {
-                this.paginators[page-1].className = 'g2p active';
-                // Render the list
-                this.renderRows();
-            }
+            this.renderRows();
     },
 
     /**
