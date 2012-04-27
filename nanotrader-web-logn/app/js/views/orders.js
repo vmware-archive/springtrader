@@ -65,49 +65,44 @@ nano.views.Orders = Backbone.View.extend({
             page = this.pageCount;
         }
 
-        // Render the List of Orders container
-        if ( !this.$el.html() ){
-            
-            var data = {
-                pageCount : this.pageCount,
-                currentPage : page
-            };
-            
-            this.$el.html(this.template(data));
-            
-            // check the device
-            if (nano.utils.isMobile()){
-                // Set a table variable for store the rows on a mobile device
-                this.table = this.$('#orders-content > table');
-            }
+        var data = {
+            pageCount : this.pageCount,
+            currentPage : page
+        };
+        
+        this.$el.html(this.template(data));
+        
+        // Check the device
+        if (nano.utils.isMobile()){
+            // Set a table variable for store the rows on a mobile device
+            this.table = this.$('#orders-content > table');
+        } else {
             // tbody variable used for store the rows on a computer device.
             this.tbody = this.$('#list-of-orders > tbody');
-            this.paginators = this.$('#loo-pagination > li.g2p');
-            this.previous = this.$('#loop-previous');
-            this.next = this.$('#loop-next');
-            
-            
-            // Toggle Control
-            this.toggleControl = this.$('#toggle-orders-control');
-            // Orders Control
-            this.ordersControl = this.$('#orders-control');
-            // Orders Pagination Control
-            this.paginationControl = this.$('#pagination-control');
-
-            // For some reason, the div needs to be showing
-            // before doing the collapsing functions
-            this.$el.show();
-
-            //Prepare the view for collapsing sections
-            if ( nano.utils.isMobile() )
-            {
-                nano.utils.setCollapsable(this);
-            }
         }
-        else
+        
+        // Paginator controls
+        this.paginators = this.$('#loo-pagination > li.g2p');
+        this.previous = this.$('#loop-previous');
+        this.next = this.$('#loop-next');
+            
+            
+        // Toggle Control
+        this.toggleControl = this.$('#toggle-orders-control');
+        // Orders Control
+        this.ordersControl = this.$('#orders-control');
+        // Orders Pagination Control
+        this.paginationControl = this.$('#pagination-control');
+
+        // For some reason, the div needs to be showing
+        // before doing the collapsing functions
+        this.$el.show();
+        //Prepare the view for collapsing sections
+        if ( nano.utils.isMobile() )
         {
-            this.$el.show();
+            nano.utils.setCollapsable(this);
         }
+        
         if (this.options.showToggle){
             this.toggleControl.removeClass('hide');
             this.$('#orders-control div.title').addClass('hide');
@@ -144,7 +139,7 @@ nano.views.Orders = Backbone.View.extend({
 
         if (this.pageCount > 0){
             this.paginators[page-1].className = 'g2p active';
-            // Render the list
+            // Render the list of orders
             this.renderRows(page);
         }
 

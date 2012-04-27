@@ -41,7 +41,27 @@ nano.views.Trade = Backbone.View.extend({
             this.model = model;
         }
         
-        this.$el.html(this.template());
+        if(typeof(Storage)!=="undefined"){
+            if(localStorage.getItem('quotes') == null){
+                // Put the array into storage
+                localStorage.setItem('quotes', JSON.stringify([]));
+            }
+        
+            var quotes = localStorage.getItem('quotes');
+            
+            var data = {
+                quoteLength: JSON.parse(quotes).length,
+                quoteItems: quotes
+            }
+        
+        } else {
+            var data = {
+                quoteLength: null,
+                quoteItems: null
+            }
+        }
+        // parse and render
+        this.$el.html(this.template(data));
         this.$el.show();
     },
     
@@ -55,7 +75,19 @@ nano.views.Trade = Backbone.View.extend({
         event.preventDefault();
         
         var quote = this.$('#quote-input').val();
-        quote = quote.toUpperCase();
+        quote = quote.toUpperCase();        
+        
+        if (localStorage.quotes){
+            // Retrieve the object from storage
+            var quotes = localStorage.getItem('quotes');
+            // Parse the object
+            quotes = JSON.parse(quotes);
+            // Check the localStorage array
+            if( _.indexOf(quotes, quote) == -1 ){
+                quotes[quotes.length] = quote;
+                localStorage.setItem('quotes', JSON.stringify(quotes));
+            }
+        }
         
         window.location = nano.conf.hash.tradeWithQuote.replace(nano.conf.quoteUrlKey, quote);
     },
