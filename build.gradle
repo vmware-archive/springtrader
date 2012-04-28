@@ -223,11 +223,7 @@ project('spring-nanotrader-services') {
 
 project('spring-nanotrader-web') {
 	apply plugin: 'war'
-
 	description = 'Spring Nanotrader Web'
-	dependencies {
-		compile project(":spring-nanotrader-service-support")
-        }
 }
 
 project('spring-nanotrader-asynch-services') {
