@@ -326,7 +326,7 @@ nano.utils.collectionSync = function(method, model, options) {
             options.data = {};
         }
         options.data.pageSize = nano.conf.pageSize;
-        options.data.page = options.data.page || this.page;
+        options.data.page = (options.data.page || this.page) -1;
     }
     return Backbone.sync(method, model, options);
 }
