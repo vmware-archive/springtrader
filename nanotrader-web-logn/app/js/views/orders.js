@@ -101,7 +101,7 @@ nano.views.Orders = Backbone.View.extend({
             nano.utils.setCollapsable(this);
         }
         
-        if (this.options.showToggle){
+        if (this.hash.indexOf('dashboard') != -1){
             this.toggleControl.removeClass('hide');
             this.$('#orders-control div.title').addClass('hide');
             
