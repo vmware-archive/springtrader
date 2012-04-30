@@ -23,7 +23,9 @@
             </form>
         </div>
     </div>
-
+    <div class="span9 columns">
+    	<div id="progress"></div>
+    </div>
     <div class="row">
         <div class="span12">
             <div class="hide span8 alert alert-block alert-error fade in">

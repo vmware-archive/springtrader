@@ -293,7 +293,17 @@ nano.utils.setUsers = function(userCount, callbacks) {
             headers : nano.utils.getHttpHeaders(),
             success : function(data, textStatus, jqXHR){
                 //logout current user.
+                $('#showprogress').remove();
+                $('#progress').append('<div class="well show-quote-box" id="showsuccess"> Data population complete ... </div>');
+                $('#showsuccess').fadeOut(slow, function() {
+                    $('#showsuccess').remove();
+                });
+                $('#progress').append('<div class="well show-quote-box" id="logoutuser"> Logging out... Please log back in with new user id</div>');
+                $('#logoutuser').fadeOut(slow, function() {
+                    $('#logoutuser').remove();
+                });
                 nano.utils.logout();
+                nano.utils.goTo( nano.conf.hash.login);
             },
             error : function(jqXHR, textStatus, errorThrown){
                 if (_.isFunction(callbacks.error))

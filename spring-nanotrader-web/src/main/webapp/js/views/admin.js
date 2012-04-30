@@ -59,9 +59,10 @@ nano.views.Admin = Backbone.View.extend({
         event.preventDefault();
         var count = this.$('#user-count').val();
         var adminError = this.$('#admin-error');
+        $('#progress').append('<div class="well show-quote-box" id="showprogress"> Pupulating data ... </div>');
         nano.utils.setUsers(count, {
             success : function(jqXHR, textStatus){
-                //User should be logged out on success
+                //handled success in nano.utils.setUsers
             },
             error : function(jqXHR, textStatus, errorThrown) {
                 adminError.find('p').html(translate('unknowError'));
@@ -81,6 +82,5 @@ nano.views.Admin = Backbone.View.extend({
     help : function(){
         window.location = nano.conf.hash.help;
     }
-    
     
 });
