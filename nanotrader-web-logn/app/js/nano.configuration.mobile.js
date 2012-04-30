@@ -1,5 +1,5 @@
 nano.conf.device = 'mobile';
-nano.conf.itemsPerPage = 2;
+nano.conf.pageSize = 2;
 nano.conf.tpls = {
     holdings : nano.conf.tplRoot + 'holdings.mobile.tpl',
     holdingRow : nano.conf.tplRoot + 'holdingRow.mobile.tpl',

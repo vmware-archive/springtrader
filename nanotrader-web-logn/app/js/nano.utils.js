@@ -312,6 +312,39 @@ nano.utils.isMobile = function() {
 };
 
 /**
+ * Sync function to be used by the Backbone.js Collections in order to include pagination of the results
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param string method: HTTP method
+ * @param object model: the model calling the request
+ * @param object options: request options
+ * @return boolean
+ */
+nano.utils.collectionSync = function(method, model, options) {
+    if ( method == 'read' )
+    {
+        if ( _.isUndefined(options.data) ) {
+            options.data = {};
+        }
+        options.data.pageSize = nano.conf.pageSize;
+        options.data.page = options.data.page || this.page;
+    }
+    return Backbone.sync(method, model, options);
+}
+
+/**
+ * Sync function to be used by the Backbone.js Collections in order to parse the response from the fetch calls
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param object response: result from the server
+ * @return object
+ */
+nano.utils.collectionParse = function(response) {
+    this.pageSize = response.pageSize;
+    this.totalRecords = response.totalRecords
+    this.page = response.page;
+    return response.results;
+}
+
+/**
  * Aliases for the functions used in the views to make them shorter
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */

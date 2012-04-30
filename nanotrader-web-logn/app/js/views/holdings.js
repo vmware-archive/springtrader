@@ -63,7 +63,7 @@ nano.views.Holdings = Backbone.View.extend({
             }
 
             // Store the total amount of pages
-            this.pageCount = Math.ceil(this.model.length / nano.conf.itemsPerPage);
+            this.pageCount = Math.ceil(this.model.totalRecords / this.model.pageSize);
 
             if (page > this.pageCount)
             {
@@ -115,13 +115,12 @@ nano.views.Holdings = Backbone.View.extend({
      */
     renderRows: function() {
         this.tbody.html('');
-        var i = (this.page - 1) * nano.conf.itemsPerPage;
-        var next = i + nano.conf.itemsPerPage;
+        var i = 0;
         var length = this.model.length;
         if ( nano.utils.isMobile() )
         {
             var holdings = [];
-            for ( i; i < length && i < next; ++i )
+            for ( i; i < length; ++i )
             {
                 holdings.push(_.extend(this.model.at(i).toJSON(), {i:i}));
             }
@@ -129,7 +128,7 @@ nano.views.Holdings = Backbone.View.extend({
         }
         else
         {
-            for ( i; i < length && i < next; ++i )
+            for ( i; i < length; ++i )
             {
                 this.tbody.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
             }

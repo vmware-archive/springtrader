@@ -196,7 +196,7 @@ nano.Router = Backbone.Router.extend({
             var models = {
                 account : new nano.models.Account({accountid : nano.session.accountid}),
                 portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
-                holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
+                holdings : new nano.models.Holdings({ accountid : nano.session.accountid, page:page })
             };
 
             var onFetchSuccess = function() {
@@ -235,14 +235,31 @@ nano.Router = Backbone.Router.extend({
         {
             page = 1;
         }
-        if (!nano.containers.holdings.html())
+        if ( !nano.containers.holdings.html() )
         {
             this.portfolio(page);
         }
         else
         {
-            // Render the List of Holdings View
-            nano.instances.holdings.render(null, page);
+            // Hide the loading Message
+            nano.containers.loading.show();
+            nano.containers.holdings.hide();
+
+            // Fetch the info for the Holdings page we need
+            var holdings = new nano.models.Holdings({ accountid : nano.session.accountid });
+            holdings.fetch({
+                data : {
+                    page : page
+                },
+                success : function(model, response){
+                    // Hide the loading Message
+                    nano.containers.loading.hide();
+
+                    // Render the Holdings with the newly fetched info
+                    nano.instances.holdings.render(model, page);
+                },
+                error : nano.utils.onApiError
+            });
         }
     },
 
@@ -291,8 +308,25 @@ nano.Router = Backbone.Router.extend({
             this.trade(page);
         }
         else {
-            // Render the List of Orders View
-            nano.instances.orders.render(null, page);
+            // Hide the loading Message
+            nano.containers.loading.show();
+            nano.containers.orders.hide();
+
+            // Fetch the info for the Orders page we need
+            var orders = new nano.models.Orders({ accountid : nano.session.accountid });
+            orders.fetch({
+                data : {
+                    page : page
+                },
+                success : function(model, response){
+                    // Hide the loading Message
+                    nano.containers.loading.hide();
+
+                    // Render the Orders with the newly fetched info
+                    nano.instances.orders.render(model, page);
+                },
+                error : nano.utils.onApiError
+            });
         }
     },
     

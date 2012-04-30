@@ -53,13 +53,13 @@ nano.views.Orders = Backbone.View.extend({
         if (model){
             this.model = model;
         }
-        
+
         if (hash){
             this.hash = hash;
         }
-        
+
         // Store the total amount of pages
-        this.pageCount = Math.ceil(this.model.length / nano.conf.itemsPerPage);
+        this.pageCount = Math.ceil(this.model.totalRecords / this.model.pageSize);
 
         if (page > this.pageCount){
             page = this.pageCount;
@@ -154,13 +154,12 @@ nano.views.Orders = Backbone.View.extend({
      * @return void
      */
     renderRows: function(page) {
-        var i = (page - 1) * nano.conf.itemsPerPage;
-        var next = i + nano.conf.itemsPerPage;
+        var i = 0;
         var length = this.model.length;
         
         if (nano.utils.isMobile()){
             var rows = this.table.html('');
-            
+
             var orderid = [translate("orderId")];
             var orderstatus = [translate("orderStatus")];
             var opendate = [translate("creationDate")];
@@ -171,7 +170,7 @@ nano.views.Orders = Backbone.View.extend({
             var quantity = [translate("quantity")];
             
  
-            for ( i; i < length && i < next; ++i ){
+            for ( i; i < length; ++i ){
                 orderid[orderid.length] = this.model.at(i).toJSON().orderid;
                 orderstatus[orderstatus.length] = this.model.at(i).toJSON().orderstatus;
                 opendate[opendate.length] = this.model.at(i).toJSON().opendate;
@@ -181,7 +180,6 @@ nano.views.Orders = Backbone.View.extend({
                 symbol[symbol.length] = this.model.at(i).toJSON().quote.symbol;
                 quantity[quantity.length] = this.model.at(i).toJSON().quantity;
             }
-            
             var data = {
                 orderid : orderid,
                 orderstatus : orderstatus,
@@ -192,14 +190,13 @@ nano.views.Orders = Backbone.View.extend({
                 symbol : symbol,
                 quantity : quantity
             }
-            
             rows.append(this.rowTemplate(data));
 
         }
-        else {
+        else
+        {
             var rows = this.tbody.html('');
-            
-            for ( i; i < length && i < next; ++i ){
+            for ( i; i < length; ++i ) {
                 rows.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
             }
         }
