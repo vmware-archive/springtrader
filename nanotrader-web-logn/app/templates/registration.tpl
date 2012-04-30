@@ -45,13 +45,13 @@
                         <div id="openbalance-control" class="control-group">
                             <label class="control-label"><%= translate("openingBalance") %>:</label>
                             <div class="controls">
-                                <input type="text" value="" id="openbalance-input" class="input-xlarge focused">
+                                <input type="number" value="" id="openbalance-input" class="input-xlarge focused">
                             </div>
                         </div>
                         <div id="creditcard-control" class="control-group">
                             <label class="control-label"><%= translate("creditCardNumber") %>:</label>
                             <div class="controls">
-                                <input type="text" value="" id="creditcard-input" class="input-xlarge focused">
+                                <input type="number" value="" id="creditcard-input" class="input-xlarge focused">
                             </div>
                         </div>
                         <div id="address-control" class="control-group">

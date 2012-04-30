@@ -9,6 +9,7 @@ nano.views.Quotes = Backbone.View.extend({
      */
     events : {
         'click #buyBtn' : 'buy',
+        'keypress [type=number]' : 'validateNumber'
     },
 
     /**
@@ -97,7 +98,16 @@ nano.views.Quotes = Backbone.View.extend({
         this.model = null;
         quoteResult.removeClass('hide');
     },
-    
+
+    /**
+     * Validates that the input can only receive digits
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return boolean
+     */
+    validateNumber : function(event){
+        return nano.utils.validateNumber(event);
+    },
+
     /**
      * Buy event
      * @author Jean Chassoul <jean.chassoul@lognllc.com>

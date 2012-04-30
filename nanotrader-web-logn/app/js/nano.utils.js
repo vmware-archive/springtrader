@@ -345,6 +345,32 @@ nano.utils.collectionParse = function(response) {
 }
 
 /**
+ * Validates that the input can only receive digits
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return boolean
+ */
+nano.utils.validateNumber = function(event) {
+    var allow = true;
+    var key = window.event ? event.keyCode : event.which;
+    
+    var keyCodes = {
+        8  : '?',
+        9  : 'tab',
+        35 : 'end',
+        36 : 'home',
+        37 : '?',
+        39 : '?',
+        46 : '?'
+    };
+
+    if ( !keyCodes[event.keyCode] && (key < 48 || key > 57) ) {
+        allow = false;
+    }
+
+    return allow;
+};
+
+/**
  * Aliases for the functions used in the views to make them shorter
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
