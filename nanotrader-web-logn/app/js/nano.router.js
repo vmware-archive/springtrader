@@ -304,8 +304,14 @@ nano.Router = Backbone.Router.extend({
         if (isNaN(page)){
             page = 1;
         }
-        if (!nano.containers.orders.html()){
-            this.trade(page);
+        
+        if (!nano.containers.orders.html() ){
+            if (location.hash.indexOf('trade') != -1){
+                this.trade(page);
+            }
+            if (location.hash.indexOf('dashboard') != -1){
+                this.dashboard(page);
+            }
         }
         else {
             // Hide the loading Message

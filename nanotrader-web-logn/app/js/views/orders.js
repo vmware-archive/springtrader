@@ -49,7 +49,6 @@ nano.views.Orders = Backbone.View.extend({
      * @return void
      */
     render: function(model, page, hash) {
-        // hash as a option??????
         if (model){
             this.model = model;
         }
@@ -85,7 +84,6 @@ nano.views.Orders = Backbone.View.extend({
         this.paginators = this.$('#loo-pagination > li.g2p');
         this.previous = this.$('#loop-previous');
         this.next = this.$('#loop-next');
-            
             
         // Toggle Control
         this.toggleControl = this.$('#toggle-orders-control');
@@ -160,38 +158,12 @@ nano.views.Orders = Backbone.View.extend({
         if (nano.utils.isMobile()){
             var rows = this.table.html('');
 
-            var orderid = [translate("orderId")];
-            var orderstatus = [translate("orderStatus")];
-            var opendate = [translate("creationDate")];
-            var completiondate = [translate("completionDate")];
-            var orderfee = [translate("transactionFee")];
-            var ordertype = [translate("transactionType")];
-            var symbol = [translate("symbol")];
-            var quantity = [translate("quantity")];
-            
- 
-            for ( i; i < length; ++i ){
-                orderid[orderid.length] = this.model.at(i).toJSON().orderid;
-                orderstatus[orderstatus.length] = this.model.at(i).toJSON().orderstatus;
-                opendate[opendate.length] = this.model.at(i).toJSON().opendate;
-                completiondate[completiondate.length] = this.model.at(i).toJSON().completiondate;
-                orderfee[orderfee.length] = this.model.at(i).toJSON().orderfee;
-                ordertype[ordertype.length] = this.model.at(i).toJSON().ordertype;
-                symbol[symbol.length] = this.model.at(i).toJSON().quote.symbol;
-                quantity[quantity.length] = this.model.at(i).toJSON().quantity;
+            var orders = [];
+            for ( i; i < length; ++i )
+            {
+                orders.push(_.extend(this.model.at(i).toJSON(), {i:i}));
             }
-            var data = {
-                orderid : orderid,
-                orderstatus : orderstatus,
-                opendate : opendate,
-                completiondate : completiondate,
-                orderfee : orderfee,
-                ordertype : ordertype,
-                symbol : symbol,
-                quantity : quantity
-            }
-            rows.append(this.rowTemplate(data));
-
+            rows.append( this.rowTemplate({orders : orders}) );
         }
         else
         {
