@@ -91,6 +91,10 @@
     color:#b7b7b7;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
+.navbar .nav.nav-top
+{
+    text-transform: lowercase;
+}
 .navbar-text .navbar .nav {
     float:none;
 }
@@ -642,13 +646,13 @@ table td input {
 
 /* @group footer 
 --------------------------------------*/
-#nc-footer {
+.footer {
     padding:15px 30px;
     color:#757575;
     font:normal 11px/14px Arial, sans-serif;
-}#nc-footer .nav {
+}.footer .nav {
     margin:0 0 0 20px;
-}#nc-footer .nav li, #nc-footer .nav li a{
+}.footer .nav li, .footer .nav li a{
     display:inline;
 }
 /* @group make responsive (max-width: 979px)

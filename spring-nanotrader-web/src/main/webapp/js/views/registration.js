@@ -123,15 +123,23 @@ nano.views.Registration = Backbone.View.extend({
                     }
                 });
             },
-            error : function() {
-                registrationError.find('p').html(translate('unknowError'));
-                registrationError.removeClass('hide');
+            error : function(model, error) {
+                if (error in nano.strings){
+                    registrationError.find('h4.alert-heading').html(translate(error));
+                    registrationError.find('p').html(translate('errorOcurred'));
+                    registrationError.removeClass('hide');
+                } else {
+                    registrationError.find('h4.alert-heading').html(translate('ohSnap'));
+                    registrationError.find('p').html(translate('unknowError'));
+                    registrationError.removeClass('hide');
+                }
+                
             }
         };
         
         if (emptyField == false){
             if(password == matchpasswd){
-                // Save the new account profile
+                // Save the new account profile                
                 this.model.save(
                     {
                         fullname: fullname,

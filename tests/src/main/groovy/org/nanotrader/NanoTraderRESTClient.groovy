@@ -239,7 +239,7 @@ def synchronized getAccountProfile(id, positive=true, responseCode=200) {
   }
 }
 
-def synchronized String createAccountProfile(user="user1", positive=true, responseCode=200, password="randompasswd", openbal=100.00) {
+def synchronized String createAccountProfile(user="user1", positive=true, responseCode=200, password="randompasswd", openbal=1000000.00) {
   def myUserName = ""
   try {
     def userName = ""
@@ -699,6 +699,9 @@ def verificationTests() {
   testAdvancedGetQuote()
   //testAdvancedCreateProfile()
   testAdvancedUpdateProfile()
+  testAdvancedCreateOrderWithNegativeQuantity()
+  testAdvancedCreateOrderWithZeroQuantity()
+  testAdvancedGetAccountWithoutEnoughBalance()
   testForNull()
 }
 
@@ -737,7 +740,7 @@ def testLogout() {
   try {
     getOrder(acctid, "all")
     logout()
-    getOrder(acctid, "all", false, "401")
+    getOrder(acctid, "all", false, 403)
     passCount++
     println "testLogout PASS"
   }
@@ -755,8 +758,8 @@ def testAdvancedCreateOrder() {
   totalCount++
   try {
     def accountid = acctid
-    def quantity1 = 9876
-    def quantity2 = 3456
+    def quantity1 = 987
+    def quantity2 = 345
     def symbol1 = 'AAPL'
     def symbol2 = 'GOOG'
 
@@ -781,6 +784,78 @@ def testAdvancedCreateOrder() {
     failCount++
     writeExceptionToFile(t)
     println "testAdvancedCreateOrder FAIL";
+  }
+}
+
+/*
+ * a new "buy" order with quantity < 0 will have 200 status response code
+ * and a 'cancelled' status and no corresponding holding
+ */
+def testAdvancedCreateOrderWithNegativeQuantity() {
+  totalCount++
+  try {
+    def accountid = acctid
+    def quantity = -10
+    def symbol = 'VMW'
+
+    def orderId = createOrder(accountid, quantity, 'buy', symbol)
+    def mydata = getOrder(acctid, orderId)
+
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    def holdingId = jsonObj.holdingid
+    def orderStatus = jsonObj.orderstatus
+
+    //println "mydata:" + mydata
+
+    if (holdingId == null && orderStatus == 'cancelled') {
+      passCount++
+      println "testAdvancedCreateOrderWithNegativeQuantity PASS"
+    }
+    else {
+      failCount++
+      println "testAdvancedCreateOrderWithNegativeQuantity FAIL"
+    }
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testAdvancedCreateOrderWithNegativeQuantity FAIL";
+  }
+}
+
+/*
+ * a new "buy" order with quantity 0 will have 200 status response code
+ * and a 'cancelled' status and no corresponding holding
+ */
+def testAdvancedCreateOrderWithZeroQuantity() {
+  totalCount++
+  try {
+    def accountid = acctid
+    def quantity = 0
+    def symbol = 'ORCL'
+
+    def orderId = createOrder(accountid, quantity, 'buy', symbol)
+    def mydata = getOrder(acctid, orderId)
+
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    def holdingId = jsonObj.holdingid
+    def orderStatus = jsonObj.orderstatus
+
+    //println "mydata:" + mydata
+
+    if (holdingId == null && orderStatus == 'cancelled') {
+      passCount++
+      println "testAdvancedCreateOrderWithZeroQuantity PASS"
+    }
+    else {
+      failCount++
+      println "testAdvancedCreateOrderWithZeroQuantity FAIL"
+    }
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testAdvancedCreateOrderWithZeroQuantity FAIL";
   }
 }
 
@@ -960,6 +1035,7 @@ def testAdvancedGetAccount() {
 
     //println "oldBalance:" + oldBalance
     //println "newBalance:" + newBalance
+    //println "acctid:" + acctid
 
     if (oldBalance == newBalance) {
       failCount++
@@ -974,6 +1050,49 @@ def testAdvancedGetAccount() {
     failCount++
     writeExceptionToFile(t)
     println "testAdvancedGetAccount FAIL";
+  }
+}
+
+/*
+ * a "buy" order should be rejected if it is not enough
+ */
+def testAdvancedGetAccountWithoutEnoughBalance() {
+  totalCount++
+  try {
+    def orderId = createOrder(acctid, 1, 'buy', 'AAPL')
+    def mydata = getOrder(acctid, orderId)
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    def holdingId = jsonObj.holdingid
+    def orderStatus = jsonObj.orderstatus
+
+    //println "mydata:" + mydata
+
+    /*
+    if (holdingId == null || orderStatus != 'closed') {
+      failCount++
+      println "testAdvancedCreateOrderWithoutEnoughBalance FAIL"
+      return
+    }*/
+    orderId = createOrder(acctid, 1000000, 'buy', 'AAPL')
+    mydata = getOrder(acctid, orderId)
+    jsonObj = new JsonSlurper().parseText(mydata)
+    holdingId = jsonObj.holdingid
+    orderStatus = jsonObj.orderstatus
+
+    if (holdingId == null && orderStatus == 'cancelled') {
+      passCount++
+      println "testAdvancedCreateOrderWithoutEnoughBalance PASS"
+    }
+    else {
+      failCount++
+      println "testAdvancedCreateOrderWithoutEnoughBalance FAIL"
+    }
+    //println "mydata:" + mydata
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testAdvancedGetAccountWithoutEnoughBalance FAIL";
   }
 }
 
@@ -1161,7 +1280,7 @@ def testGetAccount() {
 def testGetSpecificHoldingForAccount() {
   totalCount++
   try {
-    getSpecificHoldingForAccount(acctid, 1, true, 200)
+    //getSpecificHoldingForAccount(acctid, 1, true, 200)
     getSpecificHoldingForAccount(acctid, 12345678, false, 404)
 
     passCount++

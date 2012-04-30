@@ -38,5 +38,11 @@ nano.views.PortfolioSummary = Backbone.View.extend({
         var portfolioSummary = this.template(this.model.toJSON());
         this.$el.html(portfolioSummary);
         this.$el.show();
+
+        //Prepare the view for collapsing sections
+        if ( nano.utils.isMobile() )
+        {
+            nano.utils.setCollapsable(this);
+        }
     }
 });

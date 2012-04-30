@@ -8,7 +8,7 @@ nano.views.Trade = Backbone.View.extend({
      * Bind the events functions to the different HTML elements
      */
     events : {
-        'click #sendBtn' : 'send',
+        'click #getQuoteBtn' : 'quote',
     },
     
     /**
@@ -36,25 +36,38 @@ nano.views.Trade = Backbone.View.extend({
      * @param Object orders: Instance of nano.models.Orders
      * @return void
      */
-    render: function(orders) {
-        if (orders) {
-            this.orders = orders;
+    render: function(model, error) {
+        if (model) {
+            this.model = model;
         }
-        
-        alert(JSON.stringify(this.orders.toJSON()));
         
         this.$el.html(this.template());
         this.$el.show();
-        
     },
     
     /**
-     * Send event
+     * Quote event
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @return void
      */
-    send : function (event){
-        alert('send');
+    quote : function (event){
+        var quoteError = this.$('#quote-error');
+        event.preventDefault();
+        
+        var quote = this.$('#quote-input').val();
+        quote = quote.toUpperCase();
+        
+        window.location = nano.conf.hash.tradeWithQuote.replace(nano.conf.quoteUrlKey, quote);
+    },
+    
+    error : function(error){
+        var quoteError = this.$('#quote-error');
+        
+        if (error){
+            quoteError.removeClass('hide');
+        } else {
+            quoteError.addClass('hide');
+        }
     }
     
 });

@@ -40,19 +40,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class TradingServiceImpl implements TradingService {
-	
-	 
-	    
+
 	private static Logger log = LoggerFactory.getLogger(TradingServiceImpl.class);
 
 	public static BigDecimal DEFAULT_ORDER_FEE = BigDecimal.valueOf(1050, 2);
 
 	private static String OPEN_STATUS = "open";
-	
+
 	private static String CANCELLED_STATUS = "cancelled";
 
 	private static Integer TOP_N = 3;
-	
+
 	@Autowired
 	private AccountProfileRepository accountProfileRepository;
 
@@ -67,10 +65,10 @@ public class TradingServiceImpl implements TradingService {
 
 	@Autowired
 	private QuoteRepository quoteRepository;
-	
+
 	@Autowired
 	private PortfolioSummaryRepository portfolioSummaryRepository;
-	
+
 	@Autowired
 	private MarketSummaryRepository marketSummaryRepository;
 
@@ -79,15 +77,15 @@ public class TradingServiceImpl implements TradingService {
 
 	@Autowired
 	QuotePublisher quotePublisher;
-	
+
 	@Override
-	public Accountprofile login(String username, String password) { 
+	public Accountprofile login(String username, String password) {
 		Accountprofile accountProfile = accountProfileRepository.findByUseridAndPasswd(username, password);
-		if (accountProfile != null) { 
+		if (accountProfile != null) {
 			accountProfile.setAuthtoken(UUID.randomUUID().toString());
 			accountProfile = accountProfileRepository.save(accountProfile); // persist new auth token
 			Set<Account> accounts = accountProfile.getAccounts();
-			for (Account account: accounts) { 
+			for (Account account : accounts) {
 				account.setLogincount(account.getLogincount() + 1);
 				account.setLastlogin(new Date());
 				accountRepository.save(account);
@@ -96,21 +94,19 @@ public class TradingServiceImpl implements TradingService {
 		}
 		return null;
 	}
-	
-	
+
 	@Override
-	public void logout(String authtoken) { 
+	public void logout(String authtoken) {
 		Accountprofile accountProfile = accountProfileRepository.findByAuthtoken(authtoken);
-		accountProfile.setAuthtoken(null); //remove token
+		accountProfile.setAuthtoken(null); // remove token
 		accountProfileRepository.save(accountProfile);
 		Set<Account> accounts = accountProfile.getAccounts();
-		for (Account account: accounts) { 
+		for (Account account : accounts) {
 			account.setLogoutcount(account.getLogoutcount() + 1);
 			accountRepository.save(account);
 		}
 	}
-	
-	
+
 	@Override
 	public Accountprofile findAccountProfile(Integer id) {
 		if (log.isDebugEnabled()) {
@@ -153,8 +149,8 @@ public class TradingServiceImpl implements TradingService {
 	public Accountprofile updateAccountProfile(Accountprofile accountProfile, String username) {
 		Accountprofile accountProfileResponse = null;
 		Accountprofile acctProfile = accountProfileRepository.findByUserid(username);
-		//make sure that the primary key hasn't been altered
-		if (acctProfile != null ) { 
+		// make sure that the primary key hasn't been altered
+		if (acctProfile != null) {
 			accountProfile.setAuthtoken(acctProfile.getAuthtoken());
 			accountProfileResponse = accountProfileRepository.save(accountProfile);
 		}
@@ -166,13 +162,13 @@ public class TradingServiceImpl implements TradingService {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findHoldingsByAccountId: accountId=" + accountId);
 		}
-		Long  countOfHoldings = holdingRepository.findCountOfHoldings(accountId);
+		Long countOfHoldings = holdingRepository.findCountOfHoldings(accountId);
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findHoldingsByAccountId: completed successfully.");
 		}
 		return countOfHoldings;
 	}
-	
+
 	@Override
 	public List<Holding> findHoldingsByAccountId(Integer accountId, Integer page, Integer pageSize) {
 		if (log.isDebugEnabled()) {
@@ -184,7 +180,7 @@ public class TradingServiceImpl implements TradingService {
 		}
 		return holdings;
 	}
-	
+
 	@Override
 	public Holding findHolding(Integer id, Integer accountId) {
 		if (log.isDebugEnabled()) {
@@ -234,6 +230,7 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
+	@Transactional
 	public Order saveOrder(Order order) {
 		Order createdOrder = null;
 		if (log.isDebugEnabled()) {
@@ -241,10 +238,13 @@ public class TradingServiceImpl implements TradingService {
 		}
 		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
 			createdOrder = buy(order);
-		} else if (ORDER_TYPE_SELL.equals(order.getOrdertype())) {
+		}
+		else if (ORDER_TYPE_SELL.equals(order.getOrdertype())) {
 			createdOrder = sell(order);
-		} else {
-			throw new UnsupportedOperationException("Order type was not recognized. Valid order types are 'buy' or 'sell'");
+		}
+		else {
+			throw new UnsupportedOperationException(
+					"Order type was not recognized. Valid order types are 'buy' or 'sell'");
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.saveOrder: completed successfully.");
@@ -258,27 +258,32 @@ public class TradingServiceImpl implements TradingService {
 		Holding holding = null;
 		// create order and persist
 		Order createdOrder = null;
-		
-		if (order.getQuantity() != null && order.getQuantity().intValue() > 0) { //cannot buy 
+
+		if ((order.getQuantity() != null && order.getQuantity().intValue() > 0)
+				&& (account.getBalance().subtract(order.getQuantity().multiply(quote.getPrice())).doubleValue() >= 0)) { // cannot
+																															// buy
 			createdOrder = createOrder(order, account, holding, quote);
 			// Update account balance and create holding
 			completeOrder(createdOrder);
-		} else { 
+		}
+		else {
 			order.setQuantity(new BigDecimal(0));
 			createdOrder = createOrder(order, account, holding, quote);
-			//cancel order
+			// cancel order
+			createdOrder.setCompletiondate(new Date());
 			createdOrder.setOrderstatus(CANCELLED_STATUS);
 		}
-		
-		
+
 		return createdOrder;
 	}
-	
+
 	private Order sell(Order order) {
 		Account account = accountRepository.findOne(order.getAccountAccountid().getAccountid());
-		Holding holding = holdingRepository.findByHoldingidAndAccountAccountid(order.getHoldingHoldingid().getHoldingid(), account.getAccountid());
-		if (holding == null) { 
-			throw new DataRetrievalFailureException("Attempted to sell holding" + order.getHoldingHoldingid().getHoldingid() + " which is already sold.");
+		Holding holding = holdingRepository.findByHoldingidAndAccountAccountid(order.getHoldingHoldingid()
+				.getHoldingid(), account.getAccountid());
+		if (holding == null) {
+			throw new DataRetrievalFailureException("Attempted to sell holding"
+					+ order.getHoldingHoldingid().getHoldingid() + " which is already sold.");
 		}
 		Quote quote = quoteRepository.findBySymbol(holding.getQuoteSymbol());
 		// create order and persist
@@ -287,13 +292,12 @@ public class TradingServiceImpl implements TradingService {
 		completeOrder(createdOrder);
 		return createdOrder;
 	}
-	
 
 	private Order createOrder(Order order, Account account, Holding holding, Quote quote) {
 		Order createdOrder = null;
 		order.setAccountAccountid(account);
 		order.setQuote(quote);
-		if (order.getQuantity() == null) { 
+		if (order.getQuantity() == null) {
 			order.setQuantity(holding.getQuantity());
 		}
 		order.setOrderfee(DEFAULT_ORDER_FEE);
@@ -305,8 +309,7 @@ public class TradingServiceImpl implements TradingService {
 		return createdOrder;
 	}
 
-	
-	//TO DO: refactor this
+	// TO DO: refactor this
 	public Order completeOrder(Order order) {
 		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
 			if (order.getHoldingHoldingid() == null) {
@@ -323,17 +326,19 @@ public class TradingServiceImpl implements TradingService {
 				holdingRepository.save(holding);
 				updateAccount(order);
 			}
-		} else { 
+		}
+		else {
 			updateAccount(order);
 		}
 		order.setOrderstatus("closed");
 		order.setCompletiondate(new Date());
-		updateQuoteMarketData(order.getQuote().getSymbol(), FinancialUtils.getRandomPriceChangeFactor(), order.getQuantity());
+		updateQuoteMarketData(order.getQuote().getSymbol(), FinancialUtils.getRandomPriceChangeFactor(),
+				order.getQuantity());
 		return order;
 	}
-	
-	//TODO: Need to clean this up
-	private void updateAccount(Order order) { 
+
+	// TODO: Need to clean this up
+	private void updateAccount(Order order) {
 		// update account balance
 		Quote quote = order.getQuote();
 		Account account = order.getAccountAccountid();
@@ -344,15 +349,16 @@ public class TradingServiceImpl implements TradingService {
 		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
 			total = (order.getQuantity().multiply(price)).add(orderFee);
 			account.setBalance(balance.subtract(total));
-		} else { 
+		}
+		else {
 			total = (order.getQuantity().multiply(price)).subtract(orderFee);
 			account.setBalance(balance.add(total));
 			Set<Order> orders = order.getHoldingHoldingid().getOrders();
-			//Remove the holding id from the buy record
-			for (Order orderToDeleteHolding: orders) { 
+			// Remove the holding id from the buy record
+			for (Order orderToDeleteHolding : orders) {
 				orderToDeleteHolding.setHoldingHoldingid(null);
 			}
-			//remove the holding id from the sell record
+			// remove the holding id from the sell record
 			Integer holdingId = order.getHoldingHoldingid().getHoldingid();
 			order.setHoldingHoldingid(null);
 			holdingRepository.delete(holdingId);
@@ -360,48 +366,47 @@ public class TradingServiceImpl implements TradingService {
 		accountRepository.save(account);
 	}
 
-	
-	private void updateQuoteMarketData(String symbol, BigDecimal changeFactor, BigDecimal sharesTraded) { 
+	private void updateQuoteMarketData(String symbol, BigDecimal changeFactor, BigDecimal sharesTraded) {
 		Quote quote = quoteRepository.findBySymbol(symbol);
-		
+
 		BigDecimal oldPrice = quote.getPrice();
 		if (quote.getPrice().equals(FinancialUtils.PENNY_STOCK_PRICE)) {
-            changeFactor = FinancialUtils.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
-        }
-		
-        BigDecimal newPrice = changeFactor.multiply(oldPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
-        quote.setPrice(newPrice);
-        quote.setVolume(quote.getVolume().add(sharesTraded));
-        quote.setChange1(newPrice.subtract(quote.getOpen1()));
-        quoteRepository.save(quote);
-        this.quotePublisher.publishQuote(quote);
+			changeFactor = FinancialUtils.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
+		}
+
+		BigDecimal newPrice = changeFactor.multiply(oldPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
+		quote.setPrice(newPrice);
+		quote.setVolume(quote.getVolume().add(sharesTraded));
+		quote.setChange1(newPrice.subtract(quote.getOpen1()));
+		quoteRepository.save(quote);
+		this.quotePublisher.publishQuote(quote);
 	}
-	
+
 	@Override
 	public Order updateOrder(Order order) {
 		Order o = null;
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.updateOrder: order=" + order.toString());
 		}
-		//Ensure that customers can't update another customers order record
-		Order originalOrder = orderRepository.findByOrderidAndAccountAccountid(order.getOrderid(), order.getAccountAccountid().getAccountid());
-		
-		
-		if( !"completed".equals(originalOrder.getOrderstatus())) { 
-			if (originalOrder != null) { 
+		// Ensure that customers can't update another customers order record
+		Order originalOrder = orderRepository.findByOrderidAndAccountAccountid(order.getOrderid(), order
+				.getAccountAccountid().getAccountid());
+
+		if (!"completed".equals(originalOrder.getOrderstatus())) {
+			if (originalOrder != null) {
 				if (log.isDebugEnabled()) {
 					log.debug("TradingServices.updateOrder: An order in the respository matched the requested order id and account ");
 				}
 				originalOrder.setQuantity(order.getQuantity());
 				originalOrder.setOrdertype(order.getOrdertype());
 				o = orderRepository.save(originalOrder);
-			
+
 			}
-		} else { 
+		}
+		else {
 			throw new IncorrectUpdateSemanticsDataAccessException("Attempted to update a completed order");
 		}
-		
-		
+
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.updateOrder: completed successfully.");
 		}
@@ -410,47 +415,47 @@ public class TradingServiceImpl implements TradingService {
 
 	@Override
 	public Long findCountOfOrders(Integer accountId, String status) {
-		Long  countOfOrders = null;
+		Long countOfOrders = null;
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findCountOfHoldings: accountId=" + accountId + " status=" + status);
 		}
-		if (status != null) { 
+		if (status != null) {
 			countOfOrders = orderRepository.findCountOfOrders(accountId, status);
-		} else { 
+		}
+		else {
 			countOfOrders = orderRepository.findCountOfOrders(accountId);
 		}
-			
+
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findCountOfHoldings: completed successfully.");
 		}
 		return countOfOrders;
 	}
-	
+
 	@Override
 	public List<Order> findOrdersByStatus(Integer accountId, String status, Integer page, Integer pageSize) {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrdersByStatus: accountId=" + accountId + " status=" + status);
 		}
 		List<Order> orders = null;
-		
-			orders = orderRepository.findOrdersByStatus(accountId, status,  new PageRequest(page, pageSize));
-			if (orders != null && orders.size() > 0) {
-				// Loop over the orders to populate the lazy quote fields
-				for (Order order : orders) {
-					order.getQuote();
-				}
-				if ("closed".equals(status)) {
-					orderRepository.updateClosedOrders(accountId);
-				}
+
+		orders = orderRepository.findOrdersByStatus(accountId, status, new PageRequest(page, pageSize));
+		if (orders != null && orders.size() > 0) {
+			// Loop over the orders to populate the lazy quote fields
+			for (Order order : orders) {
+				order.getQuote();
 			}
-			if (log.isDebugEnabled()) {
-				log.debug("TradingServices.findOrdersByStatus: completed successfully.");
+			if ("closed".equals(status)) {
+				orderRepository.updateClosedOrders(accountId);
 			}
-	
+		}
+		if (log.isDebugEnabled()) {
+			log.debug("TradingServices.findOrdersByStatus: completed successfully.");
+		}
+
 		return orders;
 	}
 
-	
 	@Override
 	@Transactional
 	public List<Order> findOrders(Integer accountId, Integer page, Integer pageSize) {
@@ -459,18 +464,18 @@ public class TradingServiceImpl implements TradingService {
 			log.debug("TradingServices.findOrders: accountId=" + accountId);
 		}
 		orders = orderRepository.findOrdersByAccountAccountid_Accountid(accountId, new PageRequest(page, pageSize));
-		
+
 		if (orders != null && orders.size() > 0) {
 			// Loop over the orders to populate the lazy quote fields
 			for (Order order : orders) {
 				order.getQuote();
 			}
 		}
-		
+
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrders: completed successfully.");
 		}
-		
+
 		return orders;
 	}
 
@@ -478,38 +483,48 @@ public class TradingServiceImpl implements TradingService {
 	public Quote findQuoteBySymbol(String symbol) {
 		return quoteRepository.findBySymbol(symbol);
 	}
-	
+
 	@Override
 	public List<Quote> findQuotesBySymbols(Set<String> symbols) {
 		return quoteRepository.findBySymbolIn(symbols);
 	}
-	
+
+	@Override
+	public List<Quote> findRandomQuotes(Integer count) {
+		return quoteRepository.findAll().subList(0, count.intValue());
+	}
+
 	@Override
 	public Account findAccount(Integer accountId) {
 		return accountRepository.findOne(accountId);
 	}
-	
+
 	@Override
-	public PortfolioSummary findPortfolioSummary(Integer accountId) { 
+	public Account findAccountByProfile(Accountprofile ap) {
+		return accountRepository.findByProfileProfileid(ap);
+	}
+
+	@Override
+	public PortfolioSummary findPortfolioSummary(Integer accountId) {
 		PortfolioSummary portfolioSummary = portfolioSummaryRepository.findPortfolioSummary(accountId);
 		return portfolioSummary;
 	}
-	
-	//TODO: Defensive coding
-	public MarketSummary findMarketSummary() { 
+
+	// TODO: Defensive coding
+	public MarketSummary findMarketSummary() {
 		MarketSummary marketSummary = marketSummaryRepository.findMarketSummary();
-		//get top losing stocks
+		// get top losing stocks
 		Page<Quote> losers = quoteRepository.findAll(new PageRequest(0, TOP_N, new Sort(Direction.ASC, "change1")));
-		
-		//get top gaining stocks
+
+		// get top gaining stocks
 		Page<Quote> winners = quoteRepository.findAll(new PageRequest(0, TOP_N, new Sort(Direction.DESC, "change1")));
-		
+
 		List<Quote> topLosers = new ArrayList<Quote>(TOP_N);
-		for (Quote q: losers) { 
+		for (Quote q : losers) {
 			topLosers.add(q);
 		}
 		List<Quote> topGainers = new ArrayList<Quote>(TOP_N);
-		for (Quote q: winners) { 
+		for (Quote q : winners) {
 			topGainers.add(q);
 		}
 		marketSummary.setTopLosers(topLosers);
@@ -517,15 +532,13 @@ public class TradingServiceImpl implements TradingService {
 		marketSummary.setSummaryDate(new Date());
 		return marketSummary;
 	}
-	
+
 	@Override
 	public HoldingSummary findHoldingSummary(Integer accountId) {
 		HoldingSummary summary = holdingAggregateRepository.findHoldingAggregated(accountId);
 		return summary;
 	}
-	
-	
-	
+
 	@Override
 	public Accountprofile findAccountByUserId(String id) {
 		return accountProfileRepository.findByUserid(id);
@@ -536,15 +549,15 @@ public class TradingServiceImpl implements TradingService {
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findByAuthtoken: token=" + token);
 		}
-		
+
 		Accountprofile accountProfile = accountProfileRepository.findByAuthtoken(token);
-		if (accountProfile != null) { 
+		if (accountProfile != null) {
 			Set<Account> accounts = accountProfile.getAccounts();
 			accounts.iterator();
 			if (log.isDebugEnabled()) {
 				log.debug("TradingServices.findByAuthtoken: completed");
 			}
-			
+
 			return accountProfile;
 		}
 		if (log.isDebugEnabled()) {
@@ -552,7 +565,15 @@ public class TradingServiceImpl implements TradingService {
 		}
 		return null;
 	}
-	
+
+	@Override
+	public void deleteAll() {
+		orderRepository.deleteAll();
+		holdingRepository.deleteAll();
+		accountRepository.deleteAll();
+		accountProfileRepository.deleteAll();
+	}
+
 	public static interface QuotePublisher {
 
 		void publishQuote(Quote quote);

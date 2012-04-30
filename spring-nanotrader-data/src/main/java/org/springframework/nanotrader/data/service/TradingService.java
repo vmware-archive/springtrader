@@ -50,12 +50,16 @@ public interface TradingService {
 	public abstract List<Order> findOrders(Integer accountId, Integer page, Integer pageSize);
 
 	public abstract List<Holding> findHoldingsByAccountId(Integer accountId, Integer page, Integer pageSize);
+	
+	public abstract List<Quote> findRandomQuotes(Integer count);
 
 	public abstract Quote findQuoteBySymbol(String symbol);
 
 	public abstract List<Quote> findQuotesBySymbols(Set<String> symbols);
 
 	public abstract Account findAccount(Integer accountId);
+	
+	public abstract Account findAccountByProfile(Accountprofile accountProfile);
 
 	public abstract PortfolioSummary findPortfolioSummary(Integer accountId);
 	
@@ -66,4 +70,6 @@ public interface TradingService {
 	public abstract HoldingSummary findHoldingSummary(Integer accountId);
 
 	public Long findCountOfHoldingsByAccountId(Integer accountId);
+	
+	public abstract void deleteAll();
 }

@@ -5,9 +5,9 @@
         </div>
             <ul class="nav nav-tabs nav-stacked">
                 <li><a id="profile"><%= translate("profile") %></a></li>
+                <li><a id="overview"><%= translate("applicationOverview") %></a></li>
                 <li class="active"><a id="admin"><%= translate("admin") %></a></li>
-                <li><a href="help.html"><%= translate("help") %></a></li>
-            </ul>
+                <li><a id="help"><%= translate("help") %></a></li>
     </div>
     <div class="span9 columns">
         <div class="well show-quote-box">
