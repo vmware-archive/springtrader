@@ -34,11 +34,11 @@
     <div class="pagination pagination-right">
         <!-- The prefix "loh" stands for "List Of Holdings" -->
         <ul id="loh-pagination">
-            <li id="lohp-previous"><a>&laquo;</a></li>
+            <li id="lohp-previous" class="<%= ( currentPage == 1 ? "disabled" : "") %>"><a>&laquo;</a></li>
             <% for (var i = 1 ; i <= pageCount; ++i) { %>
             <li class="g2p <%= (i == currentPage ? "active" : "") %>"><a><%= i %></a></li>
             <% } %>
-            <li id="lohp-next"><a>&raquo;</a></li>
+            <li id="lohp-next" class="<%= ( currentPage == pageCount ? "disabled" : "") %>"><a>&raquo;</a></li>
         </ul>
     </div>
 </div>

@@ -1066,7 +1066,7 @@ table td input {
 	 }	
 	.navbar-fixed-top {
 		margin-left: -5px;
-		margin-right: -5px;
+		margin-right: 0;
 	}
 	.navbar .nav.nav-top > li > a, .navbar-text .nav a.dropdown-toggle {
 		padding:5px 20px;

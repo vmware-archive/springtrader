@@ -141,8 +141,6 @@ nano.Router = Backbone.Router.extend({
                         nano.instances.positions.render(models.holdingSummary);
                     }
 
-                    // Show the toggle control on the dashboard
-                    nano.instances.orders.options.showToggle = true;
                     // Render the Orders View
                     nano.instances.orders.render(models.orders, page, nano.conf.hash.dashboardWithPage);
                 }
@@ -196,7 +194,7 @@ nano.Router = Backbone.Router.extend({
             var models = {
                 account : new nano.models.Account({accountid : nano.session.accountid}),
                 portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
-                holdings : new nano.models.Holdings({ accountid : nano.session.accountid })
+                holdings : new nano.models.Holdings({ accountid : nano.session.accountid, page:page })
             };
 
             var onFetchSuccess = function() {
@@ -235,14 +233,31 @@ nano.Router = Backbone.Router.extend({
         {
             page = 1;
         }
-        if (!nano.containers.holdings.html())
+        if ( !nano.containers.holdings.html() )
         {
             this.portfolio(page);
         }
         else
         {
-            // Render the List of Holdings View
-            nano.instances.holdings.render(null, page);
+            // Hide the loading Message
+            nano.containers.loading.show();
+            nano.containers.holdings.hide();
+
+            // Fetch the info for the Holdings page we need
+            var holdings = new nano.models.Holdings({ accountid : nano.session.accountid });
+            holdings.fetch({
+                data : {
+                    page : page
+                },
+                success : function(model, response){
+                    // Hide the loading Message
+                    nano.containers.loading.hide();
+
+                    // Render the Holdings with the newly fetched info
+                    nano.instances.holdings.render(model, page);
+                },
+                error : nano.utils.onApiError
+            });
         }
     },
 
@@ -262,9 +277,6 @@ nano.Router = Backbone.Router.extend({
                 
                 // Render the trade view
                 nano.instances.trade.render(model);
-                
-                // Show the toggle control on the dashboard
-                nano.instances.orders.options.showToggle = false;
                 
                 // Render the List of Orders View
                 nano.instances.orders.render(model, page, nano.conf.hash.tradeWithPage);
@@ -287,12 +299,35 @@ nano.Router = Backbone.Router.extend({
         if (isNaN(page)){
             page = 1;
         }
-        if (!nano.containers.orders.html()){
-            this.trade(page);
+        
+        if (!nano.containers.orders.html() ){
+            if (location.hash.indexOf('trade') != -1){
+                this.trade(page);
+            }
+            if (location.hash.indexOf('dashboard') != -1){
+                this.dashboard(page);
+            }
         }
         else {
-            // Render the List of Orders View
-            nano.instances.orders.render(null, page);
+            // Hide the loading Message
+            nano.containers.loading.show();
+            nano.containers.orders.hide();
+
+            // Fetch the info for the Orders page we need
+            var orders = new nano.models.Orders({ accountid : nano.session.accountid });
+            orders.fetch({
+                data : {
+                    page : page
+                },
+                success : function(model, response){
+                    // Hide the loading Message
+                    nano.containers.loading.hide();
+
+                    // Render the Orders with the newly fetched info
+                    nano.instances.orders.render(model, page);
+                },
+                error : nano.utils.onApiError
+            });
         }
     },
     
@@ -301,7 +336,7 @@ nano.Router = Backbone.Router.extend({
             this.trade();
         }
         else {
-            var model = new nano.models.Quotes({ quoteid : quote });
+            var model = new nano.models.Quote({ quoteid : quote });
             
             var onFetchSuccess = function() {
                 // Render the quotes list
@@ -323,8 +358,14 @@ nano.Router = Backbone.Router.extend({
     profile: function() {
         if(nano.utils.loggedIn())
         {
-            nano.utils.hideAll(false);
             // Hide the Market Summary on the profile page
+            if ( !nano.utils.isMobile() ){
+                nano.utils.hideAll(false);
+            } else {
+                nano.utils.hideAll();
+            }
+            
+            // Render the Navigation bar
             nano.instances.navbar.render();
 
             // Set the Account profile model with the profileid of the current user
