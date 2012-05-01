@@ -105,6 +105,7 @@ nano.views.Orders = Backbone.View.extend({
             this.toggleControl.removeClass('hide');
             this.$('#orders-control div.title').addClass('hide');
             
+            
             if(this.toggleControl.hasClass('active')){
                 this.ordersControl.show();
                 this.paginationControl.show();
@@ -209,7 +210,6 @@ nano.views.Orders = Backbone.View.extend({
     
     toggle : function(event){
         if(this.toggleControl.hasClass('active')) {
-
             this.ordersControl.hide();
             this.paginationControl.hide();
             this.toggleControl.removeClass('active');
