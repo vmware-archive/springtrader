@@ -59,10 +59,9 @@ nano.views.Admin = Backbone.View.extend({
         event.preventDefault();
         var count = this.$('#user-count').val();
         var adminError = this.$('#admin-error');
-        $('#progress').append('<div class="well show-quote-box" id="showprogress"> Pupulating data ... </div>');
         nano.utils.setUsers(count, {
             success : function(jqXHR, textStatus){
-                //handled success in nano.utils.setUsers
+                //handle success in nano.utils.setUsers
             },
             error : function(jqXHR, textStatus, errorThrown) {
                 adminError.find('p').html(translate('unknowError'));
