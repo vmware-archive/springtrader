@@ -88,34 +88,39 @@ nano.models.AccountProfile = Backbone.Model.extend({
         reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/);
         reCreditcard = new RegExp(/^\b[\d]{16}\b$/);
         //reAddress = new RegExp();
+        var errors = [];
         
         // fullname validation
         if (attrs.fullname.match(reFullname) == null){
-            return "fullnameError"
+            errors.push("fullnameError");
         }
         // email validation
         if (attrs.email.match(reEmail) == null){
-            return "emailError"
+            errors.push("emailError");
         }
         // passwd validation
         if (attrs.passwd.length < 3 || attrs.passwd.length > 25){
-            return "passwdError"
+            errors.push("passwdError");
         }
         // userid validation
         if (attrs.userid.match(reUserid) == null){
-            return "useridError"
+            errors.push("useridError");
         }
         // openbalance validation
         //if (attrs.accounts[0].openbalance.match(reOpenbalance) == null){
-        //    return "openbalanceError"
+        //    errors.push("openbalanceError");
         //}
         // creditcard validation
         if (attrs.creditcard.match(reCreditcard) == null){
-            return "creditcardError"
+            errors.push("creditcardError");
         }
         // address validation
         if (attrs.address.length < 3 || attrs.address.length > 100){
-            return "addressError"
+            errors.push("addressError");
+        }
+        
+        if (errors.length > 0){
+            return errors
         }
     }
 });

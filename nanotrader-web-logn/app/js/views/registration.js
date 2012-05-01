@@ -59,12 +59,38 @@ nano.views.Registration = Backbone.View.extend({
      * @return void
      */
     registration : function(event){
+        // Form field control
         var matchpasswdControl = this.$('#matchpasswd-control');
-        var matchpasswdError = this.$('#matchpasswd-error');
+        var fullnameControl = this.$('#fullname-control');
+        var emailControl = this.$('#email-control');
+        var passwdControl = this.$('#password-control');
+        var usernameControl = this.$('#username-control');
+        var openbalanceControl = this.$('#openbalance-control');
+        var creditcardControl = this.$('#creditcard-control');
+        var addressControl = this.$('#address-control');
+        // General form error
         var registrationError = this.$('#registration-error');
+        // Registration form fields errors
+        var matchpasswdError = this.$('#matchpasswd-error');
+        var fullnameError = this.$('#fullnameError');
+        var emailError = this.$('#emailError');
+        var passwdError = this.$('#passwdError');
+        var usernameError = this.$('#usernameError');
+        var openbalanceError = this.$('#openbalanceError');
+        var creditcardError = this.$('#creditcardError');
+        var addressError = this.$('#fullnameError');
+        //matchpasswdControl.removeClass('error');
         
-        matchpasswdControl.removeClass('error');
+        // Hide the registration form erros
         matchpasswdError.addClass('hide');
+        fullnameError.addClass('hide');
+        emailError.addClass('hide');
+        passwdError.addClass('hide');
+        usernameError.addClass('hide');
+        openbalanceError.addClass('hide');
+        creditcardError.addClass('hide');
+        addressError.addClass('hide');
+        // General form error
         registrationError.addClass('hide');
         
         event.preventDefault();
@@ -124,6 +150,38 @@ nano.views.Registration = Backbone.View.extend({
                 });
             },
             error : function(model, error) {
+                for (x in error){
+                    
+                    if (error[x] == 'fullnameError'){
+                        fullnameError.removeClass('hide');
+                        fullnameControl.addClass('error');
+                    }
+                    if (error[x] == 'emailError'){
+                        emailError.removeClass('hide');
+                        emailControl.addClass('error');
+                    }
+                    if (error[x] == 'passwdError'){
+                        passwdError.removeClass('hide');
+                        passwdControl.addClass('error');
+                    }
+                    if (error[x] == 'useridError'){
+                        usernameError.removeClass('hide');
+                        usernameControl.addClass('error');
+                    }
+                    if (error[x] == 'openbalanceError'){
+                        openbalanceError.removeClass('hide');
+                        openbalanceControl.addClass('error');
+                    }
+                    if (error[x] == 'creditcardError'){
+                        creditcardError.removeClass('hide');
+                        creditcardControl.addClass('error');
+                    }
+                    if (error[x] == 'addressError'){
+                        addressError.removeClass('hide');
+                        addressControl.addClass('error');
+                    }
+                };
+                
                 if (error in nano.strings){
                     registrationError.find('h4.alert-heading').html(translate(error));
                     registrationError.find('p').html(translate('errorOcurred'));
