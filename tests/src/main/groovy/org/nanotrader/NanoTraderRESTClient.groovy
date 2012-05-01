@@ -688,11 +688,13 @@ def createOrder(count) {
 
 
 def loadTest() {
-  1000.times {
+  100.times {
     def th = Thread.start {
       nanotrader = new RESTClient(path)
-      createRandomAccountProfile(500)
-      createOrder(acctid, 1, "buy", "VMW", true, 201, testAuthToken)
+      createRandomAccountProfile(100)
+      100.times {
+        createOrder(acctid, 1, "buy", "VMW", true, 201, testAuthToken)
+      }
       //getAllHoldingsForAccount(acctid)
       //getRandomAccountProfile(200)
       //getQuoteLoop(200)
