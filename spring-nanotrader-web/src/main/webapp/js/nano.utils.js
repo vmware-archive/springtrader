@@ -287,23 +287,28 @@ nano.utils.setCollapsable = function(view) {
     });
 };
 nano.utils.setUsers = function(userCount, callbacks) {
+        $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPop') + '</div>');
         $.ajax({
-            url : nano.conf.urls.admin + "?count=" + userCount,
+            url : nano.conf.urls.admin,
             type : 'POST',
             headers : nano.utils.getHttpHeaders(),
+            dataType : 'json',
+            data : JSON.stringify({
+                usercount : userCount
+            }),
             success : function(data, textStatus, jqXHR){
                 //logout current user.
                 $('#showprogress').remove();
-                $('#progress').append('<div class="well show-quote-box" id="showsuccess"> Data population complete ... </div>');
-                $('#showsuccess').fadeOut(slow, function() {
-                    $('#showsuccess').remove();
+                $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPopComplete') + '</div>');
+                $('#showprogress').fadeOut(3000, function() {
+                    $('#showprogress').remove();
+                    $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('loggingOut') + '</div>');
+                    $('#showprogress').fadeOut(3000, function() {
+                       $('#showprogress').remove();
+                       nano.utils.logout();
+                       nano.utils.goTo( nano.conf.hash.login);
+                    });
                 });
-                $('#progress').append('<div class="well show-quote-box" id="logoutuser"> Logging out... Please log back in with new user id</div>');
-                $('#logoutuser').fadeOut(slow, function() {
-                    $('#logoutuser').remove();
-                });
-                nano.utils.logout();
-                nano.utils.goTo( nano.conf.hash.login);
             },
             error : function(jqXHR, textStatus, errorThrown){
                 if (_.isFunction(callbacks.error))
