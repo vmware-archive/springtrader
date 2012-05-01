@@ -1,7 +1,6 @@
 /**
  * View Class for the Navbar
  * @author Carlos Soto <carlos.soto@lognllc.com>
- * @author Kashyap Parikh
  */
 nano.views.Navbar = Backbone.View.extend({
 
@@ -13,8 +12,7 @@ nano.views.Navbar = Backbone.View.extend({
         'click #nb-logo' : 'navigationClick',
         'click .nav-link' : 'navigationClick',
         'click #profile' : 'profile',
-        'click #help' : 'help',
-        'click #admin' : 'admin'
+        'click #help' : 'help'
     },
 
     /**
@@ -54,9 +52,11 @@ nano.views.Navbar = Backbone.View.extend({
         {
             var hash = nano.conf.hash.dashboard;
         }
+    
         if ( !this.$el.html() )
         {
             this.$el.html(this.template(nano.session));
+
             // Enable the dropdown for the User Profile options on the right
             this.$('.dropdown-toggle').dropdown(); 
 
@@ -172,12 +172,4 @@ nano.views.Navbar = Backbone.View.extend({
     help : function() {
         nano.utils.goTo( nano.conf.hash.help );
     },
-
-    /**
-     * Admin Click Event
-     * @return void
-     */
-    admin : function() {
-        nano.utils.goTo( nano.conf.hash.admin );
-    }
 });

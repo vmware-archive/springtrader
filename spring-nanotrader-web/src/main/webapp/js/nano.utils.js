@@ -1,7 +1,6 @@
 /**
  * Nano namespace object
  * @author Carlos Soto <carlos.soto@lognllc.com>
- * @author Kashyap Parikh
  */
 var nano = {
     utils : {},
@@ -103,7 +102,23 @@ nano.utils.login = function(username, password, callbacks) {
  * @author Carlos Soto <carlos.soto@lognllc.com>
  * @return void
  */
-nano.utils.logout = function(){
+nano.utils.logout = function(callbacks){
+    $.ajax({
+        url : nano.conf.urls.logout,
+        type : 'GET',
+        headers : nano.utils.getHttpHeaders(),
+        dataType : 'json',
+        success : function(data, textStatus, jqXHR) {
+            if (_.isFunction(callbacks.success)) {
+                callbacks.success();
+            }
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+            if (_.isFunction(callbacks.error)) {
+                callbacks.error(jqXHR, textStatus, errorThrown);
+            }
+        }
+    });
     $.cookie( nano.conf.sessionCookieName, null);
 };
 
@@ -286,6 +301,80 @@ nano.utils.setCollapsable = function(view) {
         view.$('.title').addClass('active');
     });
 };
+
+/**
+ * Tells whether the viewer is using a mobile device or not
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return boolean
+ */
+nano.utils.isMobile = function() {
+    return nano.conf.device == 'mobile';
+};
+
+/**
+ * Sync function to be used by the Backbone.js Collections in order to include pagination of the results
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param string method: HTTP method
+ * @param object model: the model calling the request
+ * @param object options: request options
+ * @return boolean
+ */
+nano.utils.collectionSync = function(method, model, options) {
+    if ( method == 'read' )
+    {
+        if ( _.isUndefined(options.data) ) {
+            options.data = {};
+        }
+        options.data.pageSize = nano.conf.pageSize;
+        options.data.page = (options.data.page || this.page) -1;
+    }
+    return Backbone.sync(method, model, options);
+}
+
+/**
+ * Sync function to be used by the Backbone.js Collections in order to parse the response from the fetch calls
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param object response: result from the server
+ * @return object
+ */
+nano.utils.collectionParse = function(response) {
+    this.pageSize = response.pageSize;
+    this.totalRecords = response.totalRecords
+    this.page = response.page;
+    return response.results;
+}
+
+/**
+ * Validates that the input can only receive digits
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @return boolean
+ */
+nano.utils.validateNumber = function(event) {
+    var allow = true;
+    var key = window.event ? event.keyCode : event.which;
+    
+    var keyCodes = {
+        8  : '?',
+        9  : 'tab',
+        35 : 'end',
+        36 : 'home',
+        37 : '?',
+        39 : '?',
+        46 : '?'
+    };
+
+    if ( !keyCodes[event.keyCode] && (key < 48 || key > 57) ) {
+        allow = false;
+    }
+
+    return allow;
+};
+
+
+/**
+ * Whoever wrote this should document the code
+ * @author ??? (somebody at VMware)
+ */
 nano.utils.setUsers = function(userCount, callbacks) {
         $.ajax({
             url : nano.conf.urls.admin + "?count=" + userCount,
@@ -304,14 +393,6 @@ nano.utils.setUsers = function(userCount, callbacks) {
         });
 };
 
-/**
- * Tells whether the viewer is using a mobile device or not
- * @author Carlos Soto <carlos.soto@lognllc.com>
- * @return boolean
- */
-nano.utils.isMobile = function() {
-    return nano.conf.device == 'mobile';
-};
 
 /**
  * Aliases for the functions used in the views to make them shorter

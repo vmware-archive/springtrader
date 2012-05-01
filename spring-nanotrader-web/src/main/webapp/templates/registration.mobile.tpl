@@ -1,8 +1,14 @@
+<div class="row">
+    <h3>
+        <%= translate("registerUserName") %>
+        <span><%= translate("enterAccountDetails") %></span>
+    </h3>
+</div>
+
 <div class="row clearfix">
         <div class="span9 columns">
             <form class="form-horizontal">
                 <fieldset>
-                    <h3><%= translate("registerUserName") %><span><%= translate("enterAccountDetails") %></span></h3>
                     <div id="registration-error" class="hide span8 alert alert-block alert-error fade in">
                         <a data-dismiss="alert" class="close">x</a>
                         <h4 class="alert-heading"></h4>
@@ -45,19 +51,19 @@
                         <div id="openbalance-control" class="control-group">
                             <label class="control-label"><%= translate("openingBalance") %>:</label>
                             <div class="controls">
-                                <input type="number" value="" id="openbalance-input" class="input-xlarge focused">
+                                <input type="text" value="" id="openbalance-input" class="input-xlarge focused">
                             </div>
                         </div>
                         <div id="creditcard-control" class="control-group">
                             <label class="control-label"><%= translate("creditCardNumber") %>:</label>
                             <div class="controls">
-                                <input type="number" value="" id="creditcard-input" class="input-xlarge focused">
+                                <input type="text" value="" id="creditcard-input" class="input-xlarge focused">
                             </div>
                         </div>
                         <div id="address-control" class="control-group">
                             <label class="control-label"><%= translate("address") %>:</label>
                             <div class="controls">
-                                <input type="text" value="" id="address-input" class="input-xlarge focused">
+                                <textarea rows="3" id="address-input" class="input-xlarge"></textarea>
                             </div>
                         </div>
                     </div>
@@ -70,7 +76,7 @@
         <div class="span2 columns sidebar">
             <h3><%= translate("nanoTraderLogin") %></h3>
             <p><%= translate("alreadyRegistered") %></p>
-            <p><a id="showLoginBtn"><%= translate("visitLoginPage") %></a></p>
+            <p><a id="showLoginBtn" class="btn btn-inverse pull-right"><%= translate("loginPage") %></a></p>
         </div>
     </div>
 </div>
