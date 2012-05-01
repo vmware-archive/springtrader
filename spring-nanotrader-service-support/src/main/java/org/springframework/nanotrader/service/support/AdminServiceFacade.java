@@ -11,4 +11,6 @@ public interface AdminServiceFacade {
 
 	public abstract void recreateData(int count);
 	
+	public abstract Integer getProgressCount();
+	
 }

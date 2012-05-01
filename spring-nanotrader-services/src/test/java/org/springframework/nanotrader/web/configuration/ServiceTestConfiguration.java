@@ -30,6 +30,7 @@ import org.springframework.nanotrader.data.domain.Quote;
 import org.springframework.nanotrader.data.service.TradingService;
 import org.springframework.nanotrader.data.service.TradingServiceImpl;
 import org.springframework.nanotrader.data.util.FinancialUtils;
+import org.springframework.nanotrader.service.cache.DataCreationProgressCache;
 import org.springframework.nanotrader.service.support.AdminServiceFacade;
 import org.springframework.nanotrader.service.support.AdminServiceFacadeImpl;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
@@ -147,6 +148,11 @@ public class ServiceTestConfiguration  {
 	@Bean
 	public AdminServiceFacade adminServiceFacade() {
 		return new AdminServiceFacadeImpl();
+	}
+	
+	@Bean
+	public DataCreationProgressCache getProgressCache() {
+		return new DataCreationProgressCache();
 	}
 
 	@Bean 
