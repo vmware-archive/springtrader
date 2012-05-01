@@ -52,6 +52,7 @@ nano.views.Navbar = Backbone.View.extend({
         {
             var hash = nano.conf.hash.dashboard;
         }
+    
         if ( !this.$el.html() )
         {
             this.$el.html(this.template(nano.session));

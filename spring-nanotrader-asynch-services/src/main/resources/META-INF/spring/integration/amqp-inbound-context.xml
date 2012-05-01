@@ -9,20 +9,36 @@
 
 	<import resource="amqp-common-context.xml"/>
 
-	<int-amqp:inbound-channel-adapter channel="fromAmqpChannel"
+	<int-amqp:inbound-channel-adapter  channel="fromAmqpOrdersChannel"
 		queue-names="nanotrader.order.queue"
 		connection-factory="connectionFactory"/>
 
-	<int:channel id="fromAmqpChannel" />
+	<int:channel id="fromAmqpOrdersChannel" />
 
-	<int:json-to-object-transformer input-channel="fromAmqpChannel"
-		output-channel="toServiceChannel"
+	<int:json-to-object-transformer input-channel="fromAmqpOrdersChannel"
+		output-channel="toTradingServiceChannel"
 		type="org.springframework.nanotrader.service.domain.Order"/>
 
-	<int:channel id="toServiceChannel" />
+	<int:channel id="toTradingServiceChannel" />
 
-	<int:service-activator input-channel="toServiceChannel"
+	<int:service-activator input-channel="toTradingServiceChannel"
 		output-channel="nullChannel"
 		ref="tradingServiceFacadeImpl" method="saveOrderDirect"/>
+
+	<!-- Quotes -->
+
+	<int-amqp:inbound-channel-adapter channel="fromAmqpQuotesChannel"
+		queue-names="nanotrader.quote.queue"
+		connection-factory="connectionFactory"/>
+
+	<int:channel id="fromAmqpQuotesChannel" />
+
+	<int:json-to-object-transformer input-channel="fromAmqpQuotesChannel"
+		output-channel="toQuoteServiceChannel"
+		type="org.springframework.nanotrader.service.domain.Quote"/>
+
+	<int:channel id="toQuoteServiceChannel" />
+
+	<int:logging-channel-adapter channel="toQuoteServiceChannel" />
 
 </beans>

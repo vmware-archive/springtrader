@@ -32,7 +32,8 @@ nano.conf.urls = {
     sellHolding : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order',
     orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/orders', 
     order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order', 
-    quote : nano.conf.urlRoot + 'quote'
+    quote : nano.conf.urlRoot + 'quote',
+    admin : nano.conf.urlRoot + 'recreateData'
 };
 
 nano.conf.tpls = {
@@ -59,7 +60,8 @@ nano.conf.tpls = {
     quoteModal : nano.conf.tplRoot + 'quoteModal.tpl',
     warning : nano.conf.tplRoot + 'warning.tpl',
     help : nano.conf.tplRoot + 'help.tpl',
-    overview : nano.conf.tplRoot + 'overview.tpl'
+    overview : nano.conf.tplRoot + 'overview.tpl',
+    admin : nano.conf.tplRoot + 'admin.tpl',
 };
 
 /**
@@ -79,5 +81,6 @@ nano.conf.hash = {
     profile : '#profile',
     contact : '#contact',
     help : '#help',
-    overview : '#overview'
+    overview : '#overview',
+    admin : '#admin'
 };

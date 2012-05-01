@@ -15,15 +15,14 @@ import org.springframework.security.core.userdetails.User;
 
 @SuppressWarnings("serial")
 public class CustomUser extends User {
+	
+
 	private Integer accountId;
 	private Integer accountProfileId;
+	private String authToken;
 	
 	public Integer getAccountProfileId() {
 		return accountProfileId;
-	}
-
-	public void setAccountProfileId(Integer accountProfileId) {
-		this.accountProfileId = accountProfileId;
 	}
 
 	public void setAccountId(Integer accountId) {
@@ -31,16 +30,27 @@ public class CustomUser extends User {
 	}
 
 	public CustomUser(String username, String password,
-			Collection<? extends GrantedAuthority> authorities, Integer accountId, Integer accountProfileId) {
+			Collection<? extends GrantedAuthority> authorities, Integer accountId, Integer accountProfileId, String token) {
 		super(username, password, authorities);
 		this.accountId = accountId;
-		this.setAccountProfileId(accountProfileId);
+		this.accountProfileId = accountProfileId;
+		this.authToken = token;
+	}
+
+	
+	public String getAuthToken() {
+		return authToken;
 	}
 
 	public Integer getAccountId() {
 		return accountId;
 	}
 
+	@Override
+	public String toString() {
+		return "CustomUser [accountId=" + accountId + ", accountProfileId="
+				+ accountProfileId + ", authToken=" + authToken + "]";
+	}
 
 	
 }

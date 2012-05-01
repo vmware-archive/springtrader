@@ -9,7 +9,8 @@ nano.views.Registration = Backbone.View.extend({
      */
     events : {
         'click #registrationBtn' : 'registration',
-        'click #showLoginBtn' : 'login'
+        'click #showLoginBtn' : 'login',
+        'keypress [type=number]' : 'validateNumber'
     },
     
     /**
@@ -52,7 +53,16 @@ nano.views.Registration = Backbone.View.extend({
         }
         this.$el.show();
     },
-    
+
+    /**
+     * Validates that the input can only receive digits
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return boolean
+     */
+    validateNumber : function(event){
+        return nano.utils.validateNumber(event);
+    },
+
     /**
      * Registration event
      * @author Jean Chassoul <jean.chassoul@lognllc.com>

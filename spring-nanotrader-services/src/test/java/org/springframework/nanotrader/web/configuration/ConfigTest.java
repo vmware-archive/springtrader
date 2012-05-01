@@ -2,8 +2,7 @@ package org.springframework.nanotrader.web.configuration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.nanotrader.service.configuration.AppConfig;
-import org.springframework.nanotrader.web.configuration.ServiceConfig;
+import org.springframework.nanotrader.service.configuration.ServiceConfig;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -17,7 +16,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { AppConfig.class, ServiceConfig.class }, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = { ServiceConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class ConfigTest {
 	@Test
 	public final void springContextIsInstantiatedSuccessfully() { 

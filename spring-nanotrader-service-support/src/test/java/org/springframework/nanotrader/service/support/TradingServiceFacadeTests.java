@@ -25,8 +25,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.nanotrader.domain.test.OrderDataOnDemand;
-import org.springframework.nanotrader.service.TradingService;
+import org.springframework.nanotrader.data.domain.test.OrderDataOnDemand;
+import org.springframework.nanotrader.data.service.TradingService;
 import org.springframework.nanotrader.service.domain.Order;
 import org.springframework.nanotrader.service.domain.Quote;
 import org.springframework.test.context.ContextConfiguration;
@@ -37,10 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Gary Russell
  *
  */
-@ContextConfiguration(locations={
-		"classpath:/META-INF/spring/applicationContext.xml",
-		"classpath:/META-INF/spring/applicationContext-jpa.xml",
-		"classpath:/META-INF/spring/integration/amqp-outbound-context.xml"})
+@ContextConfiguration(locations={"classpath:/META-INF/spring/cache/spring-nanotrader-service-support.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 //@TransactionConfiguration(defaultRollback=false)
@@ -54,9 +51,8 @@ public class TradingServiceFacadeTests {
 
 	@Test
 	public void testSynch() {
-		org.springframework.nanotrader.domain.Order existingOrder = 
+		org.springframework.nanotrader.data.domain.Order existingOrder = 
 				orderDataOnDemand.getRandomOrder();
-		System.out.println("->" + existingOrder.getAccountAccountid());
 		Order orderRequest = new Order();
 		orderRequest.setAccountid(existingOrder.getAccountAccountid().getAccountid());
 		orderRequest.setOrdertype(TradingService.ORDER_TYPE_BUY);
@@ -71,7 +67,7 @@ public class TradingServiceFacadeTests {
 
 	@Test @Ignore
 	public void testASynch() {
-		org.springframework.nanotrader.domain.Order existingOrder = 
+		org.springframework.nanotrader.data.domain.Order existingOrder = 
 				orderDataOnDemand.getRandomOrder();
 		Order orderRequest = new Order();
 		orderRequest.setAccountid(existingOrder.getAccountAccountid().getAccountid());

@@ -26,13 +26,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class AbstractSecureControllerTest extends AbstractBaseControllerTest {
 	private static String API_ROLE = "API_USER";
 
-
-	
 	@Before
 	public  void login() { 
 		Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		grantedAuthorities.add(new SimpleGrantedAuthority(API_ROLE));		
-		UserDetails user = new CustomUser(ServiceTestConfiguration.USER_ID, ServiceTestConfiguration.PASSWORD, grantedAuthorities, ServiceTestConfiguration.ACCOUNT_ID, ServiceTestConfiguration.PROFILE_ID);
+		UserDetails user = new CustomUser(ServiceTestConfiguration.USER_ID, ServiceTestConfiguration.PASSWORD, grantedAuthorities, ServiceTestConfiguration.ACCOUNT_ID, ServiceTestConfiguration.PROFILE_ID, ServiceTestConfiguration.AUTH_TOKEN);
 		Authentication authentication = new TestingAuthenticationToken(user, ServiceTestConfiguration.PASSWORD, (List<GrantedAuthority>)grantedAuthorities );
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}

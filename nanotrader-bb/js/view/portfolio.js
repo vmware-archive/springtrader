@@ -31,7 +31,7 @@ HoldingListView = Backbone.View.extend({
 				this.template = _.template(tpl.get('holdinglist'));
 				this.holdings = new Holdings();
 				this.holdings.url = 'spring-nanotrader-services/api/account/'
-						+ account_id + '/holding';
+						+ account_id + '/holdings';
 				this.holdings.bind('add', this.render, this);
 				this.holdings.fetch();
 			},

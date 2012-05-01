@@ -3,10 +3,10 @@ package org.springframework.nanotrader.web.configuration;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anySetOf;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,20 +18,22 @@ import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.nanotrader.domain.Account;
-import org.springframework.nanotrader.domain.Accountprofile;
-import org.springframework.nanotrader.domain.Holding;
-import org.springframework.nanotrader.domain.HoldingAggregate;
-import org.springframework.nanotrader.domain.HoldingSummary;
-import org.springframework.nanotrader.domain.MarketSummary;
-import org.springframework.nanotrader.domain.Order;
-import org.springframework.nanotrader.domain.PortfolioSummary;
-import org.springframework.nanotrader.domain.Quote;
-import org.springframework.nanotrader.service.TradingService;
-import org.springframework.nanotrader.service.TradingServiceImpl;
+import org.springframework.nanotrader.data.domain.Account;
+import org.springframework.nanotrader.data.domain.Accountprofile;
+import org.springframework.nanotrader.data.domain.Holding;
+import org.springframework.nanotrader.data.domain.HoldingAggregate;
+import org.springframework.nanotrader.data.domain.HoldingSummary;
+import org.springframework.nanotrader.data.domain.MarketSummary;
+import org.springframework.nanotrader.data.domain.Order;
+import org.springframework.nanotrader.data.domain.PortfolioSummary;
+import org.springframework.nanotrader.data.domain.Quote;
+import org.springframework.nanotrader.data.service.TradingService;
+import org.springframework.nanotrader.data.service.TradingServiceImpl;
+import org.springframework.nanotrader.data.util.FinancialUtils;
+import org.springframework.nanotrader.service.support.AdminServiceFacade;
+import org.springframework.nanotrader.service.support.AdminServiceFacadeImpl;
 import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.nanotrader.service.support.TradingServiceFacadeImpl;
-import org.springframework.nanotrader.util.FinancialUtils;
 
 /**
  *  ServiceTestConfiguration provides test objects and mock service layer for unit tests.
@@ -46,9 +48,9 @@ public class ServiceTestConfiguration  {
 	//Holding constants
 	public static Integer HOLDING_ID = 100;
 	public static Integer ACCOUNT_ID = 500;
-	public static BigDecimal PURCHASE_PRICE = new BigDecimal(50000);
+	public static BigDecimal PURCHASE_PRICE = new BigDecimal("50000");
 	public static String SYMBOL = "VMW";
-	public static BigDecimal QUANTITY = new BigDecimal(200);
+	public static BigDecimal QUANTITY = new BigDecimal("200");
 	
 	//Account profile constants
 	public static Integer PROFILE_ID 	=  400;
@@ -72,14 +74,15 @@ public class ServiceTestConfiguration  {
 	//Quote constants
 	public static Integer QUOTE_ID = 1;
 	public static String COMPANY_NAME	=  "VMware";
-	public static BigDecimal HIGH	=  new BigDecimal(50.02);
-	public static BigDecimal OPEN	=  new BigDecimal(40.11);
-	public static BigDecimal VOLUME	=  new BigDecimal(3000);
-	public static BigDecimal CURRENT_PRICE	=  new BigDecimal(48.44);
+	public static BigDecimal HIGH	=  new BigDecimal("50.02");
+	public static BigDecimal OPEN	=  new BigDecimal("40.11");
+	public static BigDecimal VOLUME	=  new BigDecimal("3000");
+	public static BigDecimal CURRENT_PRICE	=  new BigDecimal("48.44");
+	public static Integer RANDOM_QUOTES_COUNT = 5;
 	
 	//Account constants
-	public static BigDecimal ACCOUNT_OPEN_BALANCE	=  new BigDecimal(55.02);
-	public static BigDecimal ACCOUNT_BALANCE	=  new BigDecimal(40.11);
+	public static BigDecimal ACCOUNT_OPEN_BALANCE	=  new BigDecimal("55.02");
+	public static BigDecimal ACCOUNT_BALANCE	=  new BigDecimal("40.11");
 	public static Integer LOGOUT_COUNT	=  new Integer(5);
 	public static Integer LOGIN_COUNT	=  new Integer(4);
 	public static String AUTH_TOKEN	=  "faef8649-280d-4ba4-bdf6-574e758a04a7";
@@ -87,25 +90,30 @@ public class ServiceTestConfiguration  {
 	
 	//Portfolio Summary
 	public static Integer HOLDING_COUNT	=  1;
-	public static BigDecimal BASIS =  new BigDecimal(150.25);
-	public static BigDecimal MARKET_VALUE =  new BigDecimal(300.10);
+	public static BigDecimal BASIS =  new BigDecimal("150.25");
+	public static BigDecimal MARKET_VALUE =  new BigDecimal("300.10");
 	
 	//Market Summary
-	public static BigDecimal MARKET_INDEX =  new BigDecimal(100.25);
-	public static BigDecimal MARKET_OPENING =  new BigDecimal(35.25);
-	public static BigDecimal MARKET_VOLUME =  new BigDecimal(40.45);
+	public static BigDecimal MARKET_INDEX =  new BigDecimal("100.25");
+	public static BigDecimal MARKET_OPENING =  new BigDecimal("35.25");
+	public static BigDecimal MARKET_VOLUME =  new BigDecimal("40.45");
 	
 	//Holding Summary
-	public static BigDecimal HOLDING_SUMMARY_GAINS =  new BigDecimal(1000.54);
-	public static BigDecimal GAIN1 =  new BigDecimal(600.54);
-	public static BigDecimal GAIN2 =  new BigDecimal(400.00);
+	public static BigDecimal HOLDING_SUMMARY_GAINS =  new BigDecimal("1000.54");
+	public static BigDecimal GAIN1 =  new BigDecimal("600.54");
+	public static BigDecimal GAIN2 =  new BigDecimal("400.00");
 	public static String SYMBOL2 = "OTHER";
-	
+	public static String PAGE_LABEL = "page";
+	public static String PAGE_SIZE = "pageSize";
+	public static String TOTAL_RECORDS = "totalRecords";
+	public static Long RESULT_COUNT  = new Long(1);
 	@Bean 
 	public TradingService tradingService() {
 		TradingService tradingService = Mockito.mock(TradingService.class);
 		when(tradingService.findHolding(eq(100), eq(ACCOUNT_ID))).thenReturn(holding());
 		when(tradingService.findHoldingsByAccountId(eq(ACCOUNT_ID),  any(Integer.class), any(Integer.class))).thenReturn(holdings());
+		when(tradingService.findCountOfHoldingsByAccountId(eq(ACCOUNT_ID))).thenReturn(RESULT_COUNT);
+		when(tradingService.findCountOfOrders(eq(ACCOUNT_ID) , any(String.class))).thenReturn(RESULT_COUNT);
 		when(tradingService.updateHolding(any(Holding.class))).thenReturn(holding());
 		when(tradingService.findAccountProfile(400)).thenReturn(accountProfile());
 		when(tradingService.findAccountProfile(NOT_A_VALID_PROFILE)).thenReturn(null);
@@ -114,22 +122,31 @@ public class ServiceTestConfiguration  {
 		when(tradingService.saveOrder(any(Order.class))).thenReturn(null);
 		when(tradingService.saveAccountProfile(any(Accountprofile.class))).thenReturn(accountProfile());
 		when(tradingService.updateOrder(any(Order.class))).thenReturn(null);
-		when(tradingService.findOrdersByStatus(eq(ACCOUNT_ID), any(String.class))).thenReturn(orders());
-		when(tradingService.findOrders(eq(ACCOUNT_ID))).thenReturn(orders());
+		when(tradingService.findOrdersByStatus(eq(ACCOUNT_ID), any(String.class), any(Integer.class), any(Integer.class))).thenReturn(orders());
+		when(tradingService.findOrders(eq(ACCOUNT_ID), any(Integer.class), any(Integer.class))).thenReturn(orders());
 		when(tradingService.findQuoteBySymbol(eq(SYMBOL))).thenReturn(quote());
+		when(tradingService.findRandomQuotes(RANDOM_QUOTES_COUNT)).thenReturn(quotes());
 		when(tradingService.findQuotesBySymbols(anySetOf(String.class))).thenReturn(quotes());
 		when(tradingService.findAccount(eq(ACCOUNT_ID))).thenReturn(account());
+		when(tradingService.findAccountByProfile(any(Accountprofile.class))).thenReturn(account());
 		when(tradingService.findPortfolioSummary(eq(ACCOUNT_ID))).thenReturn(portfolioSummary());
 		when(tradingService.findMarketSummary()).thenReturn(marketSummary());
 		when(tradingService.login(eq(USER_ID), eq(PASSWORD))).thenReturn(accountProfile());
 		when(tradingService.login(eq(BAD_USER_ID), eq(BAD_PASSWORD))).thenReturn(null);
 		when(tradingService.findHoldingSummary(eq(ACCOUNT_ID))).thenReturn(holdingSummary());
+
+		doNothing().when(tradingService).logout(any(String.class));
 		return tradingService;
 	}
 	
 	@Bean
 	public TradingServiceFacade tradingServiceFacade() {
 		return new TradingServiceFacadeImpl();
+	}
+	
+	@Bean
+	public AdminServiceFacade adminServiceFacade() {
+		return new AdminServiceFacadeImpl();
 	}
 
 	@Bean 
@@ -225,6 +242,7 @@ public class ServiceTestConfiguration  {
 		return holdings;
 	}
 	
+	
 	public PortfolioSummary portfolioSummary() {
 		PortfolioSummary portfolioSummary = new PortfolioSummary();
 		portfolioSummary.setNumberOfHoldings(HOLDING_COUNT);
@@ -266,5 +284,5 @@ public class ServiceTestConfiguration  {
 		return holdingSummary;
 	}
 	 
-	
+
 }

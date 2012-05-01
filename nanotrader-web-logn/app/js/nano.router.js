@@ -23,6 +23,7 @@ nano.Router = Backbone.Router.extend({
         "trade/q:quote" : "quotes", // #trade - list of quotes
         "profile"       : "profile", // #profile page
         "contact"       : "contact", // #contact page
+        "admin"         : "admin", // #admin page
         "overview"      : "overview" // #overview page
     },
 
@@ -45,6 +46,7 @@ nano.Router = Backbone.Router.extend({
         nano.instances.orders = new nano.views.Orders({el: '#nc-orders'});
         nano.instances.help = new nano.views.Help({el : '#nc-help'});
         nano.instances.overview = new nano.views.Overview({el: '#nc-overview'});
+        nano.instances.admin = new nano.views.Admin({el: '#nc-admin'});
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#nc-loading');
@@ -391,6 +393,17 @@ nano.Router = Backbone.Router.extend({
         else {
             nano.utils.hideAll();
             nano.instances.contact.render();
+        }
+    },
+
+    admin: function() {
+        if(nano.utils.loggedIn()) {
+            nano.utils.hideAll(false);
+            nano.instances.navbar.render();
+            nano.instances.admin.render();
+        }
+        else {
+            nano.utils.goTo( nano.conf.hash.login );
         }
     }
 });

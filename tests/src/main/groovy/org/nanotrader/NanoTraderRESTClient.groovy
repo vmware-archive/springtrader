@@ -53,6 +53,7 @@ def init() {
   acctid = jsonResponse.accountid
   //println "Test Auth Token:" + testAuthToken + "\n"
   //println "\nStarting tests...\n"
+  //println "accountid:" + acctid
 }
 
 def Object getAuthToken(username='jack', password='jack') {
@@ -91,6 +92,14 @@ def writeExceptionToFile(ex) {
   logFile.flush()
 }
 
+
+def void logout(authToken=testAuthToken) {
+  def logoutPath = "/spring-nanotrader-services/api/logout"
+  def resp = nanotrader.get(path:"${logoutPath}",
+                            headers:[API_TOKEN:authToken])
+  assert resp.status == 200
+}
+
 def String getOrder(int accountid, int orderid, authToken=testAuthToken) {
   def orderPath = "/spring-nanotrader-services/api/account/" + accountid + "/order/" + orderid
   def resp = nanotrader.get(path:"${orderPath}",
@@ -101,7 +110,7 @@ def String getOrder(int accountid, int orderid, authToken=testAuthToken) {
 def String getOrder(id, status, positive=true, responseCode=200, authToken=testAuthToken) {
   String data = ""
   try {
-    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order"
+    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/orders"
     def resp = null
     if (status == "all") {
       resp = nanotrader.get(path:"${orderPath}",
@@ -230,7 +239,7 @@ def synchronized getAccountProfile(id, positive=true, responseCode=200) {
   }
 }
 
-def synchronized String createAccountProfile(user="user1", positive=true, responseCode=200, password="randompasswd", openbal=100.00) {
+def synchronized String createAccountProfile(user="user1", positive=true, responseCode=200, password="randompasswd", openbal=1000000.00) {
   def myUserName = ""
   try {
     def userName = ""
@@ -371,7 +380,7 @@ def getSpecificHoldingForAccount(accountid, holdingid, positive=true, responseCo
 def String getAllHoldingsForAccount(accountid, positive=true, responseCode=200) {
   String data = ""
   try {
-    def holdingPath = "/spring-nanotrader-services/api/account/" + accountid + "/holding"
+    def holdingPath = "/spring-nanotrader-services/api/account/" + accountid + "/holdings"
     def resp = nanotrader.get(path:"${holdingPath}",
                               headers:[API_TOKEN:testAuthToken])
     if (positive) {
@@ -456,7 +465,7 @@ def createQuote(companyName='newcompany', symbol='NCPY', positive=true, response
 
 def getPortfolioSummary(accountid=1, positive=true, responseCode=200) {
   try {
-    def path = "/spring-nanotrader-services/api/account/" + accountid + "/portfolioSummary"
+    def path = "/spring-nanotrader-services/api/account/" + accountid + "/holdingSummary"
     def resp = nanotrader.get(path:"${path}",
                               headers:[API_TOKEN:testAuthToken])
     if (positive) {
@@ -584,7 +593,7 @@ def deleteAccountProfile(id=1, responseCode=405) {
 
 def deleteAllOrders(id=1, responseCode=405) {
   try {
-    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order"
+    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/orders"
     def resp = nanotrader.delete(path:"${orderPath}",
                                  headers:[API_TOKEN:testAuthToken])
     assert resp.status == responseCode
@@ -667,12 +676,12 @@ def loadTest() {
 }
 
 def basicVerificationTests() {
-  testGetOrder()
+  //testGetOrder()
   testCreateOrder()
-  testUpdateOrder()
+  //testUpdateOrder()
   testGetAccountProfile()
   testCreateAccountProfile()
-  //testUpdateAccountProfile()
+  testUpdateAccountProfile()
   testGetAccount()
   testGetSpecificHoldingForAccount()
   testGetAllHoldingsForAccount()
@@ -684,18 +693,22 @@ def basicVerificationTests() {
 
 def verificationTests() {
   testAdvancedCreateOrder()
-  testAdvancedUpdateOrder()
+  //testAdvancedUpdateOrder()
   testAdvancedSellOrder()
   testAdvancedGetAccount()
   testAdvancedGetQuote()
   //testAdvancedCreateProfile()
-  //testAdvancedUpdateProfile()
+  testAdvancedUpdateProfile()
+  testAdvancedCreateOrderWithNegativeQuantity()
+  testAdvancedCreateOrderWithZeroQuantity()
+  testAdvancedGetAccountWithoutEnoughBalance()
+  testForNull()
 }
 
 def unauthorizedVerificationTests() {
   testUnauthorizedGetOrder()
   testUnauthorizedCreateOrder()
-  testUnauthorizedUpdateOrder()
+  //testUnauthorizedUpdateOrder()
   testUnauthorizedGetAccountProfile()
   //testUnauthorizedUpdateAccountProfile()
   testUnauthorizedGetAccount()
@@ -718,6 +731,26 @@ def unsupportedVerificationTests() {
   testUnsupportedDeleteQuote()
 }
 
+def endTests() {
+  testLogout()
+}
+
+def testLogout() {
+  totalCount++
+  try {
+    getOrder(acctid, "all")
+    logout()
+    getOrder(acctid, "all", false, 403)
+    passCount++
+    println "testLogout PASS"
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testLogout FAIL";
+  }
+}
+
 /*
  * a new "buy" order should generate a new "holding" row
  */
@@ -725,8 +758,8 @@ def testAdvancedCreateOrder() {
   totalCount++
   try {
     def accountid = acctid
-    def quantity1 = 9876
-    def quantity2 = 3456
+    def quantity1 = 987
+    def quantity2 = 345
     def symbol1 = 'AAPL'
     def symbol2 = 'GOOG'
 
@@ -751,6 +784,78 @@ def testAdvancedCreateOrder() {
     failCount++
     writeExceptionToFile(t)
     println "testAdvancedCreateOrder FAIL";
+  }
+}
+
+/*
+ * a new "buy" order with quantity < 0 will have 200 status response code
+ * and a 'cancelled' status and no corresponding holding
+ */
+def testAdvancedCreateOrderWithNegativeQuantity() {
+  totalCount++
+  try {
+    def accountid = acctid
+    def quantity = -10
+    def symbol = 'VMW'
+
+    def orderId = createOrder(accountid, quantity, 'buy', symbol)
+    def mydata = getOrder(acctid, orderId)
+
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    def holdingId = jsonObj.holdingid
+    def orderStatus = jsonObj.orderstatus
+
+    //println "mydata:" + mydata
+
+    if (holdingId == null && orderStatus == 'cancelled') {
+      passCount++
+      println "testAdvancedCreateOrderWithNegativeQuantity PASS"
+    }
+    else {
+      failCount++
+      println "testAdvancedCreateOrderWithNegativeQuantity FAIL"
+    }
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testAdvancedCreateOrderWithNegativeQuantity FAIL";
+  }
+}
+
+/*
+ * a new "buy" order with quantity 0 will have 200 status response code
+ * and a 'cancelled' status and no corresponding holding
+ */
+def testAdvancedCreateOrderWithZeroQuantity() {
+  totalCount++
+  try {
+    def accountid = acctid
+    def quantity = 0
+    def symbol = 'ORCL'
+
+    def orderId = createOrder(accountid, quantity, 'buy', symbol)
+    def mydata = getOrder(acctid, orderId)
+
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    def holdingId = jsonObj.holdingid
+    def orderStatus = jsonObj.orderstatus
+
+    //println "mydata:" + mydata
+
+    if (holdingId == null && orderStatus == 'cancelled') {
+      passCount++
+      println "testAdvancedCreateOrderWithZeroQuantity PASS"
+    }
+    else {
+      failCount++
+      println "testAdvancedCreateOrderWithZeroQuantity FAIL"
+    }
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testAdvancedCreateOrderWithZeroQuantity FAIL";
   }
 }
 
@@ -791,7 +896,7 @@ def testAdvancedUpdateProfile() {
   totalCount++
   try {
     getAccount(acctid)
-    updateAccountProfile(acctid, dummyUser, 'DummyPassword', 'Dummy Address')
+    updateAccountProfile(acctid, 'jack', 'jack', 'Dummy Address')
     getAccount(acctid)
 
     passCount++
@@ -930,6 +1035,7 @@ def testAdvancedGetAccount() {
 
     //println "oldBalance:" + oldBalance
     //println "newBalance:" + newBalance
+    //println "acctid:" + acctid
 
     if (oldBalance == newBalance) {
       failCount++
@@ -944,6 +1050,49 @@ def testAdvancedGetAccount() {
     failCount++
     writeExceptionToFile(t)
     println "testAdvancedGetAccount FAIL";
+  }
+}
+
+/*
+ * a "buy" order should be rejected if it is not enough
+ */
+def testAdvancedGetAccountWithoutEnoughBalance() {
+  totalCount++
+  try {
+    def orderId = createOrder(acctid, 1, 'buy', 'AAPL')
+    def mydata = getOrder(acctid, orderId)
+    def jsonObj = new JsonSlurper().parseText(mydata)
+    def holdingId = jsonObj.holdingid
+    def orderStatus = jsonObj.orderstatus
+
+    //println "mydata:" + mydata
+
+    /*
+    if (holdingId == null || orderStatus != 'closed') {
+      failCount++
+      println "testAdvancedCreateOrderWithoutEnoughBalance FAIL"
+      return
+    }*/
+    orderId = createOrder(acctid, 1000000, 'buy', 'AAPL')
+    mydata = getOrder(acctid, orderId)
+    jsonObj = new JsonSlurper().parseText(mydata)
+    holdingId = jsonObj.holdingid
+    orderStatus = jsonObj.orderstatus
+
+    if (holdingId == null && orderStatus == 'cancelled') {
+      passCount++
+      println "testAdvancedCreateOrderWithoutEnoughBalance PASS"
+    }
+    else {
+      failCount++
+      println "testAdvancedCreateOrderWithoutEnoughBalance FAIL"
+    }
+    //println "mydata:" + mydata
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testAdvancedGetAccountWithoutEnoughBalance FAIL";
   }
 }
 
@@ -981,14 +1130,47 @@ def testAdvancedGetQuote() {
   }
 }
 
+/*
+ * For a newly created profile, orders, holdings, portfolioSummary should return empty 200 instead of 404
+ *
+ */
+def testForNull() {
+  totalCount++
+  try {
+    def now = Calendar.instance
+    def date = now.time
+    def millis = date.time
+    def testuser = "testuser"
+    testuser += millis
+    //println "testuser:" + testuser
+    createAccountProfile(testuser, false, 201, "testuser")
+    def jsonResponse = getAuthToken(testuser, "testuser")
+    testAuthToken = jsonResponse.authToken
+    acctid = jsonResponse.accountid
+    //println "authtoken:" + testAuthToken
+    //println "acctid:" + acctid
+    getOrder(acctid, "all")
+    getAllHoldingsForAccount(acctid)
+    getPortfolioSummary(acctid)
+
+    passCount++
+    println "testForNull PASS";
+  }
+  catch (Throwable t) {
+    failCount++
+    writeExceptionToFile(t)
+    println "testForNull FAIL";
+  }
+}
+
 def testGetOrder() {
   totalCount++
   try {
     getOrder(acctid, "all")
-    getOrder(acctid, "Open")
+    /*getOrder(acctid, "Open")
     getOrder(acctid, "Completed")
     getOrder(acctid, "Closed")
-    getOrder(acctid, "unknown", false, 404)
+    getOrder(acctid, "unknown", false, 404)*/
 
     passCount++
     println "testGetOrder PASS";
@@ -1005,6 +1187,8 @@ def testCreateOrder() {
   try {
     createOrder(acctid, 555, 'buy', 'AAPL')
     createOrder(acctid, 555, 'buy', 'invalid_quote', false, 400)
+
+    getOrder(acctid, "all")
 
     passCount++
     println "testCreateOrder PASS";
@@ -1050,7 +1234,7 @@ def testCreateAccountProfile() {
   totalCount++
   try {
     createAccountProfile()
-    createAccountProfile("jack", false, 400)
+    //createAccountProfile("jack", false, 400)
 
     passCount++
     println "testCreateAccountProfile PASS"
@@ -1065,8 +1249,8 @@ def testCreateAccountProfile() {
 def testUpdateAccountProfile() {
   totalCount++
   try {
-    updateAccountProfile(acctid, "NewAddress")
-    //updateAccountProfile(2, "invalid_user", false)
+    updateAccountProfile(acctid, "jack", "jack", "NewAddress")
+    updateAccountProfile(unauthorizedAcctId, "jack", "jack", "NewAddress", false, 401)
 
     passCount++
     println "testUpdateAccountProfile PASS"
@@ -1096,10 +1280,9 @@ def testGetAccount() {
 def testGetSpecificHoldingForAccount() {
   totalCount++
   try {
-    getSpecificHoldingForAccount(acctid, 1)
-    getSpecificHoldingForAccount(acctid, 2)
-    getSpecificHoldingForAccount(acctid, 3)
-   
+    //getSpecificHoldingForAccount(acctid, 1, true, 200)
+    getSpecificHoldingForAccount(acctid, 12345678, false, 404)
+
     passCount++
     println "testGetSpecificHoldingForAccount PASS"
   }
@@ -1159,7 +1342,7 @@ def testCreateQuote() {
 def testGetPortfolioSummary() {
   totalCount++
   try {
-    getPortfolioSummary()
+    getPortfolioSummary(acctid)
 
     passCount++
     println "testGetPortfolioSummary PASS"
@@ -1444,7 +1627,7 @@ def testUnsupportedDeleteOrder() {
 def testUnsupportedDeleteAllOrders() {
   totalCount++
   try {
-    deleteAllOrders()
+    deleteAllOrders(acctid)
 
     passCount++
     println "testUnsupportedDeleteAllOrders PASS"
@@ -1499,6 +1682,7 @@ static main(args) {
   inst.unauthorizedVerificationTests()
   inst.unsupportedVerificationTests()
   inst.verificationTests()
+  inst.endTests()
   inst.printSummary()
 }
 }

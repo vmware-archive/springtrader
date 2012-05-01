@@ -4,30 +4,47 @@
 
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %-5p  [%c{1}] %m %n" />
+			<param name="ConversionPattern" value="%d %-5p  [%c{1}] [%t] %m %n" />
 		</layout>
 	</appender>
+	
 	<!-- Loggers -->
 	<logger name="org.springframework">
-		<level value="debug" />
+		<level value="error" />
 	</logger>
 
-	<logger name="org.springframework.nanotrader.service">
-		<level value="debug" />
+	<logger name="org.springframework.nanotrader.data">
+		<level value="error" />
 	</logger>
 	
 	<logger name="org.springsource.nanotrader">
-		<level value="debug" />
+		<level value="error" />
+	</logger>
+	
+	<logger name="org.springframework.nanotrader.service.support">
+		<level value="error" />
+	</logger>
+	<logger name="org.springframework.nanotrader.web.security">
+		<level value="error" />
+	</logger>
+	
+	<logger name="net.minidev.json">
+		<level value="error" />
+	</logger>
+	
+	
+	<logger name="org.springframework.data.gemfire">
+		<level value="error" />
 	</logger>
 	
 	<logger name="org.hibernate">
-		<level value="info" />
+		<level value="error" />
 	</logger>
 
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="debug" />
+		<priority value="error" />
 		<appender-ref ref="console" />
 
 	</root>

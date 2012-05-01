@@ -100,5 +100,13 @@ public class Quote {
 	public void setQuoteid(Integer id) {
         this.quoteid = id;
     }
+
+	@Override
+	public String toString() {
+		return "Quote [quoteid=" + quoteid + ", low=" + low + ", open1="
+				+ open1 + ", volume=" + volume + ", price=" + price + ", high="
+				+ high + ", companyname=" + companyname + ", symbol=" + symbol
+				+ ", change1=" + change1 + "]";
+	}
 	
 }

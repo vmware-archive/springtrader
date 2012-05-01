@@ -8,6 +8,20 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>META-INF/spring/root-context.xml</param-value>
     </context-param>
+
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+
+        <!-- H2 -->
+<!--         <param-value>default</param-value> -->
+
+        <!-- postgreSQL -->
+        <param-value>postgresql</param-value>
+
+        <!-- JNDI -->
+<!--         <param-value>jndi</param-value> -->
+
+    </context-param>
 	
 	  <!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
@@ -15,25 +29,6 @@
     </listener>
 	
 	
-<!-- 	<servlet> -->
-<!-- 		<servlet-name>service</servlet-name> -->
-<!-- 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>contextClass</param-name> -->
-<!-- 			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value> -->
-<!-- 		</init-param> -->
-<!-- 		 <init-param> -->
-<!--             <param-name>contextConfigLocation</param-name> -->
-<!--             <param-value></param-value> -->
-<!--         </init-param> -->
-<!--         <load-on-startup>1</load-on-startup> -->
-
-<!-- 	</servlet> -->
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>service</servlet-name> -->
-<!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 	</servlet-mapping> -->
-
 	<!-- Disables servlet container welcome file handling. Needed for compatibility with Servlet 3.0 and Tomcat 7.0 -->
 	<welcome-file-list>
 		<welcome-file />

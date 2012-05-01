@@ -2,15 +2,11 @@ package org.springframework.nanotrader.web.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.nanotrader.service.domain.CollectionResult;
 import org.springframework.nanotrader.service.domain.Order;
-import org.springframework.nanotrader.service.support.TradingServiceFacade;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,29 +24,23 @@ import org.springframework.web.util.UriComponentsBuilder;
  *  @author
  */
 @Controller
-public class OrderController  extends BaseController {
-	private static Logger log = LoggerFactory.getLogger(OrderController.class);
-
-	@Resource
-	private TradingServiceFacade tradingServiceFacade;
-
-	@RequestMapping(value = "/account/{accountId}/order", method = RequestMethod.GET)
+public class OrderController extends BaseController {
+	
+	@RequestMapping(value = "/account/{accountId}/orders", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Order> findOrders(@PathVariable( "accountId" ) final Integer accountId, @RequestParam(value="status", required=false) final String status) {
+	public CollectionResult findOrders(@PathVariable( "accountId" ) final Integer accountId, @RequestParam(value="status", required=false) final String status,
+			 @RequestParam(value="page", required=false) Integer page, 
+			 @RequestParam(value="pageSize", required=false) Integer pageSize) {
 		this.getSecurityUtil().checkAccount(accountId); //verify that the account on the path is the same as the authenticated user
-		List<Order> responseOrders = tradingServiceFacade.findOrders(accountId, status);
-		return responseOrders;
+		return getTradingServiceFacade().findOrders(accountId, status, page, pageSize);
 	}
 
 	
 	@RequestMapping(value = "/account/{accountId}/order/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Order findOrder(@PathVariable( "accountId" ) final Integer accountId, @PathVariable( "id" ) final Integer orderId ) {
-		if (log.isDebugEnabled()) { 
-			log.debug("OrderController.findOrder: accountId=" + accountId + " orderId=" + orderId);
-		}
 		this.getSecurityUtil().checkAccount(accountId);
-		Order responseOrder = tradingServiceFacade.findOrder(orderId, accountId);
+		Order responseOrder =  getTradingServiceFacade().findOrder(orderId, accountId);
 		return responseOrder;
 	}
 	
@@ -61,7 +51,7 @@ public class OrderController  extends BaseController {
 										UriComponentsBuilder builder) {
 		this.getSecurityUtil().checkAccount(accountId);
 		orderRequest.setAccountid(accountId);
-		Integer orderId = tradingServiceFacade.saveOrder(orderRequest, true);
+		Integer orderId =  getTradingServiceFacade().saveOrder(orderRequest, true);
 		HttpHeaders responseHeaders = new HttpHeaders();   
 		responseHeaders.setLocation(builder.path("/account/"+ accountId + "/order/{id}").buildAndExpand(orderId).toUri());
 		return new ResponseEntity<String>(responseHeaders, HttpStatus.CREATED);
@@ -72,7 +62,7 @@ public class OrderController  extends BaseController {
 	@ResponseStatus( HttpStatus.ACCEPTED )
 	public void saveAsynch(@RequestBody Order orderRequest, @PathVariable( "accountId" ) final Integer accountId) {
 		orderRequest.setAccountid(accountId);
-		tradingServiceFacade.saveOrder(orderRequest, false);
+		 getTradingServiceFacade().saveOrder(orderRequest, false);
 	}
 	
 	@RequestMapping(value = "/account/{accountId}/order/{id}", method = RequestMethod.PUT)

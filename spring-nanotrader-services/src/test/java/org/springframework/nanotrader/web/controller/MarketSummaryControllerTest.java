@@ -5,17 +5,12 @@ import static org.springframework.test.web.server.result.MockMvcResultHandlers.p
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.server.setup.MockMvcBuilders.annotationConfigSetup;
 
 import java.math.BigDecimal;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.http.MediaType;
-import org.springframework.nanotrader.service.configuration.AppConfig;
 import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration;
-import org.springframework.nanotrader.web.configuration.WebConfig;
-import org.springframework.test.web.server.MockMvc;
 
 /**
  *  MarketSummaryControllerTest tests the MarketSummary REST api
@@ -23,17 +18,7 @@ import org.springframework.test.web.server.MockMvc;
  *  @author Brian Dussault 
  *  @author
  */
-public class MarketSummaryControllerTest {
-
-	private static MockMvc mockMvc;
-	
-	@BeforeClass
-	public static void setup() {
-		String warRootDir = "src/webapps";
-		boolean isClasspathRelative = false;
-		mockMvc = annotationConfigSetup(WebConfig.class, AppConfig.class, ServiceTestConfiguration.class)
-				.activateProfiles("test").configureWebAppRootDir(warRootDir, isClasspathRelative).build();
-	}
+public class MarketSummaryControllerTest extends AbstractBaseControllerTest {
 
 	@Test
 	public void getMarketSummaryJson() throws Exception {
