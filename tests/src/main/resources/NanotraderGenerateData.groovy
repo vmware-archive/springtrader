@@ -3,6 +3,7 @@ import groovy.json.JsonSlurper
 import org.codehays.groovy.runtime.*
 import org.nanotrader.*
 import au.com.bytecode.opencsv.CSVReader
+import groovy.sql.Sql
 
 /*
  userdata represents an array list
@@ -21,23 +22,43 @@ Example after populated at runtime:
    kashyap,passwd,e0480709-4063-416e-a3ce-361025d4fc61,101,ATVI:ADBE:AKAM:AMZN,2,500:501,100000.00
 
 */
-
-
 List userdata
+
 String host = "localhost"
 String port = "8080"
 String apiURL = "http://" + host + ":" + port
-
-def readArgs() {
-  if (args.length == 2) {
-    apiURL = "http://" + args[0] + ":" + args[1] 
-  } else if (args.length == 1)
-      apiURL = "http://" + args[0] + ":8080"
-  println "Populating data on : " + apiURL
+String dbHost = "localhost"
+String dbUser = "nanotrader"
+String dbPasswd = "nanotrader"
+// ref to properties
+def p
+ 
+def loadProps() {
+  def props = new Properties()
+  new File("nanotrader.properties").withInputStream { 
+    stream -> props.load(stream) 
+  }
+  p = new ConfigSlurper().parse(props)
+  apiURL = "http://" + p.appServerHost + ":" + p.appServerPort
 }
 
 def createQuotes() {
-  // populate quote table if not done already
+  def sql = Sql.newInstance("jdbc:postgresql://" + p.dbHost + ":" +
+       "5432/nanotrader", p.dbUser , p.dbPasswd, 
+       "org.postgresql.Driver")
+  query = "select count(*) from quote"
+  quoteCount = sql.firstRow(query)
+  if (quoteCount.count == 0) {
+    // populate quote table 
+    query = "insert into quote (quoteid, low, open1, volume, price, high, companyname, symbol, change1) " + 
+            "values (nextval('quote_sequence'),?,?,?,?,?,?,?,?)"
+    char seperator = ':'
+    CSVReader reader = new CSVReader(new FileReader("quote.csv"), seperator)
+    quoteData = reader.readAll()
+    quoteData.eachWithIndex() { o, i ->
+        sql.executeInsert query, o[0].toDouble(), o[1].toDouble(), o[2].toInteger(), o[3].toDouble(), o[4].toDouble(), o[5], o[6], o[7].toInteger()
+    }
+  }
 }
 
 def registerUsers() {
@@ -77,8 +98,8 @@ def getTokens() {
 }
 
 def buyOrders() {
-  println "Creating buy orders..."
   userdata.eachWithIndex() { obj, i ->
+    println "Creating buy orders for user -> " + obj[0]
     int acctid = obj[3].toInteger()
     authToken = obj[2]
     def client = new NanoTraderRESTClient(path: apiURL)
@@ -100,9 +121,8 @@ def buyOrders() {
 }
 
 def sellOrders() {
-  println "Creating sell orders..."
   userdata.eachWithIndex() { obj, i ->
-    println "For user -> " + obj[1]
+    println "Creating sell orders for user -> " + obj[0]
     int acctid = obj[3].toInteger()
     def authToken = obj[2]
     def orderArray = obj[6].split(":")
@@ -113,7 +133,7 @@ def sellOrders() {
     //println " Sell order for : " + obj[0] + "  " + obj[6]
     sellCount.times { 
       // Call sell api
-      println "   Selling  -> " + it
+      // println "   Selling  -> " + it
       def orderdetail = client.getOrder(acctid, orderArray[it].toInteger(), authToken)
       def holdingid = new JsonSlurper().parseText(orderdetail).holdingid
       client.createSellOrder(acctid, holdingid, true, 201, authToken)
@@ -121,10 +141,9 @@ def sellOrders() {
   } 
 }
 
-readArgs()
+loadProps()
+createQuotes()
 registerUsers()
 getTokens()
 buyOrders()
 sellOrders()
-
-

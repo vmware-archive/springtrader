@@ -9,6 +9,8 @@ configurations {
 }
 
 jar {
+    archiveName 'DataGenerator.zip'
+    fileMode 0755
     into('libs') {
         from configurations.compile
      }
@@ -34,4 +36,5 @@ dependencies {
     compile 'net.sourceforge.nekohtml:nekohtml:1.9.15'
     compile 'xerces:xercesImpl:2.10.0'
     compile 'net.sf.opencsv:opencsv:2.0'
+    compile 'postgresql:postgresql:9.1-901.jdbc4'
 }
