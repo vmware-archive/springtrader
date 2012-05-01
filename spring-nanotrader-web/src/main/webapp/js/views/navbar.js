@@ -12,7 +12,8 @@ nano.views.Navbar = Backbone.View.extend({
         'click #nb-logo' : 'navigationClick',
         'click .nav-link' : 'navigationClick',
         'click #profile' : 'profile',
-        'click #help' : 'help'
+        'click #help' : 'help',
+        'click #admin' : 'admin'
     },
 
     /**
@@ -172,4 +173,12 @@ nano.views.Navbar = Backbone.View.extend({
     help : function() {
         nano.utils.goTo( nano.conf.hash.help );
     },
+
+    /**
+     * Admin Click Event
+     * @return void
+     */
+    admin : function() {
+        nano.utils.goTo( nano.conf.hash.admin );
+    }
 });
