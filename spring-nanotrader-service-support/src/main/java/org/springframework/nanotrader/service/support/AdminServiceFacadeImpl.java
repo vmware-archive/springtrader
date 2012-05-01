@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.nanotrader.data.domain.Account;
 import org.springframework.nanotrader.data.domain.Accountprofile;
 import org.springframework.nanotrader.data.service.TradingService;
+import org.springframework.nanotrader.service.cache.DataCreationProgressCache;
 import org.springframework.nanotrader.service.domain.Order;
 import org.springframework.nanotrader.service.domain.Quote;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,9 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
+	
+	@Resource
+	private DataCreationProgressCache progressCache;
 
 	@Resource
 	private Mapper mapper;
@@ -86,6 +90,12 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			tradingServiceFacade.saveOrder(o, false);
 			o.setQuote(quotes.get(4));
 			tradingServiceFacade.saveOrder(o, false);
+			progressCache.setProgresscount(i);
 		}
+	}
+	
+	@Override
+	public Integer getProgressCount(){
+		return progressCache.getProgresscount();
 	}
 }
