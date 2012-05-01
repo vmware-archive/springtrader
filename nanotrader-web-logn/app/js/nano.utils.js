@@ -370,6 +370,30 @@ nano.utils.validateNumber = function(event) {
     return allow;
 };
 
+
+/**
+ * Whoever wrote this should document the code
+ * @author ??? (somebody at VMware)
+ */
+nano.utils.setUsers = function(userCount, callbacks) {
+        $.ajax({
+            url : nano.conf.urls.admin + "?count=" + userCount,
+            type : 'POST',
+            headers : nano.utils.getHttpHeaders(),
+            success : function(data, textStatus, jqXHR){
+                //logout current user.
+                nano.utils.logout();
+            },
+            error : function(jqXHR, textStatus, errorThrown){
+                if (_.isFunction(callbacks.error))
+                {
+                    callbacks.error(jqXHR, textStatus, errorThrown);
+                }
+            }
+        });
+};
+
+
 /**
  * Aliases for the functions used in the views to make them shorter
  * @author Carlos Soto <carlos.soto@lognllc.com>
