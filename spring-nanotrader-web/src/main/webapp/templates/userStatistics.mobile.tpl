@@ -22,7 +22,7 @@
                 <td><%= logincount %></td>
             </tr>
             <tr>
-                <td><%= translate("sessionCreatedDate") %></td>
+                <td><%= translate("sessionCreationDate") %></td>
                 <td><%= lastlogin %></td>
             </tr>
         </table>

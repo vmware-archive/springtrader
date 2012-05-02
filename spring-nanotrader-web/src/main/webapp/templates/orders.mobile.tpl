@@ -2,7 +2,7 @@
     <div class="title">
         <h3>
             <a data-toggle="collapse" class="btn-transaction" data-target="#orders-content">
-                <%= translate("recentOrders") %>
+                <%= translate("recentTransactions") %>
                 <span></span>
             </a>
         </h3>

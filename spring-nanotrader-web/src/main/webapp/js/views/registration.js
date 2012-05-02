@@ -88,7 +88,7 @@ nano.views.Registration = Backbone.View.extend({
         var usernameError = this.$('#usernameError');
         var openbalanceError = this.$('#openbalanceError');
         var creditcardError = this.$('#creditcardError');
-        var addressError = this.$('#fullnameError');
+        var addressError = this.$('#addressError');
         //matchpasswdControl.removeClass('error');
         
         // Hide the registration form erros
