@@ -63,7 +63,7 @@ nano.views.Holdings = Backbone.View.extend({
             }
 
             // Store the total amount of pages
-            this.pageCount = Math.ceil(this.model.length / nano.conf.itemsPerPage);
+            this.pageCount = Math.ceil(this.model.totalRecords / this.model.pageSize);
 
             if (page > this.pageCount)
             {
@@ -89,72 +89,62 @@ nano.views.Holdings = Backbone.View.extend({
                 data.totalGainLoss += holding.get( "gainLoss");
             });
 
-            // Render the List of Holdings container
-            if ( !this.$el.html() )
-            {
-                var tpl = this.template(data);
-                this.$el.html(tpl);
-                this.tbody = this.$('#list-of-holdings > tbody');
-                this.paginators = this.$('#loh-pagination > li.g2p');
-                this.previous = this.$('#lohp-previous');
-                this.next = this.$('#lohp-next');
+            var tpl = this.template(data);
+            this.$el.html(tpl);
+            this.tbody = this.$('#list-of-holdings > tbody');
 
-                //Prepare the view for collapsing sections
-                if ( nano.utils.isMobile() )
-                {
-                    nano.utils.setCollapsable(this);
-                }
-            }
-
-            //Set the page number on the paginator
-            this.paginators.removeClass('active');
-
-            if (page == 1)
-            {
-                this.previous.addClass('disabled');
-            }
-            else
-            {
-                this.previous.removeClass('disabled');
-            }
-            if (page == this.pageCount)
-            {
-                this.next.addClass('disabled');
-            }
-            else
-            {
-                this.next.removeClass('disabled');
-            }
-
+            // For some reason, the div needs to be showing
+            // before doing the collapsing functions
             this.$el.show();
-            
-            if (this.pageCount > 0){
-                this.paginators[page-1].className = 'g2p active';
-                // Render the list
-                this.renderRows(page);
+
+            //Prepare the view for collapsing sections
+            if ( nano.utils.isMobile() && !this.$el.html() )
+            {
+                nano.utils.setCollapsable(this);
             }
 
             // Store the current Page number 
             this.page = page;
-
-            //0=-==============================================>> Not sure why I had to add this here
-            this.$('#loh-content').collapse('hide');
+            
+            // Check the page count of orders
+            if (this.pageCount <= 0){
+                // Render a no data message if the page count is 0 or less.
+                this.noHoldings();
+                if (nano.utils.isMobile()){
+                    this.$('#list-of-holdings').hide();
+                } else {
+                    this.$('#list-of-holdings > tfoot').hide();
+                }
+                
+            }
+            
+            this.renderRows();
     },
 
     /**
      * Renders the List of holdings into the View
      * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param int page: page of the List of Holdings to display
      * @return void
      */
-    renderRows: function(page) {
+    renderRows: function() {
         this.tbody.html('');
-        var i = (page - 1) * nano.conf.itemsPerPage;
-        var next = i + nano.conf.itemsPerPage;
+        var i = 0;
         var length = this.model.length;
-        for ( i; i < length && i < next; ++i )
+        if ( nano.utils.isMobile() )
         {
-            this.tbody.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
+            var holdings = [];
+            for ( i; i < length; ++i )
+            {
+                holdings.push(_.extend(this.model.at(i).toJSON(), {i:i}));
+            }
+            this.tbody.append( this.rowTemplate({holdings : holdings}) );
+        }
+        else
+        {
+            for ( i; i < length; ++i )
+            {
+                this.tbody.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
+            }
         }
     },
 
@@ -223,5 +213,15 @@ nano.views.Holdings = Backbone.View.extend({
                 error : nano.utils.onApiError
             });
         });
+    },
+    
+    /**
+     * Renders a no holdings list message
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @return void
+     */
+    noHoldings : function(){
+        var htmlId = this.$('#no-holdings');
+        htmlId.html(_.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}) );
     }
 });

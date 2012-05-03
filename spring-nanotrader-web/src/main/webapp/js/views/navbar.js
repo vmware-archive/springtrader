@@ -1,7 +1,6 @@
 /**
  * View Class for the Navbar
  * @author Carlos Soto <carlos.soto@lognllc.com>
- * @author Kashyap Parikh
  */
 nano.views.Navbar = Backbone.View.extend({
 
@@ -54,9 +53,11 @@ nano.views.Navbar = Backbone.View.extend({
         {
             var hash = nano.conf.hash.dashboard;
         }
+    
         if ( !this.$el.html() )
         {
             this.$el.html(this.template(nano.session));
+
             // Enable the dropdown for the User Profile options on the right
             this.$('.dropdown-toggle').dropdown(); 
 
