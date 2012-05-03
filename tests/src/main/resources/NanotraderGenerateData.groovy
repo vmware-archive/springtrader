@@ -142,7 +142,7 @@ def sellOrders() {
 }
 
 loadProps()
-createQuotes()
+// createQuotes()
 registerUsers()
 getTokens()
 buyOrders()
