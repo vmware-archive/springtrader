@@ -105,6 +105,19 @@ nano.views.Holdings = Backbone.View.extend({
 
             // Store the current Page number 
             this.page = page;
+            
+            // Check the page count of orders
+            if (this.pageCount <= 0){
+                // Render a no data message if the page count is 0 or less.
+                this.noHoldings();
+                if (nano.utils.isMobile()){
+                    this.$('#list-of-holdings').hide();
+                } else {
+                    this.$('#list-of-holdings > tfoot').hide();
+                }
+                
+            }
+            
             this.renderRows();
     },
 
@@ -200,5 +213,15 @@ nano.views.Holdings = Backbone.View.extend({
                 error : nano.utils.onApiError
             });
         });
+    },
+    
+    /**
+     * Renders a no holdings list message
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @return void
+     */
+    noHoldings : function(){
+        var htmlId = this.$('#no-holdings');
+        htmlId.html(_.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}) );
     }
 });

@@ -9,6 +9,7 @@
     </div>
     <div id="orders-content" class="table-outer collapse in">
         <table class="table"></table>
+        <div id="no-orders"></div>
         <!-- The prefix "loop" stands for "List Of Orders Pagination" -->
         <div id="pagination-control" class="pagination pagination-centered">
             <!-- The prefix "loo" stands for "List Of Orders" -->

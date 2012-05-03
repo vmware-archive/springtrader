@@ -28,6 +28,7 @@
                     </tr>
                 </tfoot>
             </table>
+            <div id="no-holdings"></div>
         </div>
     </div>
     <!-- The prefix "lohp" stands for "List Of Holdings Pagination" -->
