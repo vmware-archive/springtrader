@@ -26,7 +26,8 @@
 		     This particular configuration redirects clients preferring the mobile site to 'm.testdomain'.
 		     NOTE: for this redirect to work testdomain.com and m.testdomain.com must be added to your hosts file when running the app -->
 		<beans:bean class="org.springframework.mobile.device.switcher.SiteSwitcherHandlerInterceptor" factory-method="mDot">
-			<beans:constructor-arg value="testdomain.com" />
+			<beans:constructor-arg index="0" value="testdomain.com" />
+		
 		</beans:bean>
 		
 	</interceptors>
