@@ -287,13 +287,28 @@ nano.utils.setCollapsable = function(view) {
     });
 };
 nano.utils.setUsers = function(userCount, callbacks) {
+        $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPop') + '</div>');
         $.ajax({
-            url : nano.conf.urls.admin + "?count=" + userCount,
+            url : nano.conf.urls.admin,
             type : 'POST',
             headers : nano.utils.getHttpHeaders(),
+            dataType : 'json',
+            data : JSON.stringify({
+                usercount : userCount
+            }),
             success : function(data, textStatus, jqXHR){
                 //logout current user.
-                nano.utils.logout();
+                $('#showprogress').remove();
+                $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPopComplete') + '</div>');
+                $('#showprogress').fadeOut(3000, function() {
+                    $('#showprogress').remove();
+                    $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('loggingOut') + '</div>');
+                    $('#showprogress').fadeOut(3000, function() {
+                       $('#showprogress').remove();
+                       nano.utils.logout();
+                       nano.utils.goTo( nano.conf.hash.login);
+                    });
+                });
             },
             error : function(jqXHR, textStatus, errorThrown){
                 if (_.isFunction(callbacks.error))

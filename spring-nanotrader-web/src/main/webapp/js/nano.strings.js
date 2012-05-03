@@ -123,5 +123,8 @@ nano.strings = {
     showWipeDBWarning : "Warning: This action is not recoverable. It will wipe your database.",
     showIntegerError : "Please enter a valid number",
     admin : "Admin",
-    createUsers : "Create Users"
+    createUsers : "Create Users",
+    dataPop : "Populating data ...",
+    dataPopComplete : "Data population complete ...",
+    loggingOut : "Logging out... Please log back in with new user id"
 };
