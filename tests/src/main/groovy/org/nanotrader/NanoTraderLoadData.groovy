@@ -14,7 +14,7 @@ import static groovyx.net.http.ContentType.URLENC
 import static groovyx.net.http.ContentType.JSON
 import static groovyx.net.http.ContentType.HTML
 
-public class NanoTraderGenerateData {
+public class NanoTraderLoadData {
 
 def path = "http://localhost:8080"
 def nanotrader = 0
@@ -141,7 +141,7 @@ def loadTest(numThreads=100, numUsers=100) {
 
 static main(args) {
   if (args.length > 1 || (args.length == 1 && args[0] == 'help')) {
-      println "groovy NanoTraderGenerateData.groovy [number_of_users]"
+      println "groovy NanoTraderLoadData.groovy [number_of_users]"
       return
   }
   int numThreads = 100
@@ -158,7 +158,7 @@ static main(args) {
   def now = Calendar.instance
   def date = now.time
   int millis = date.time
-  def inst = new NanoTraderGenerateData()
+  def inst = new NanoTraderLoadData()
   inst.init()
   inst.loadTest(numThreads, numUsers)
   inst.waitForCompletion(numThreads)
