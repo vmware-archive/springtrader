@@ -9,7 +9,7 @@ nano.conf.tpls = {
     navbar : nano.conf.tplRoot + 'navbar.tpl',
     accountSummary : nano.conf.tplRoot + 'accountSummary.mobile.tpl',
     footer : nano.conf.tplRoot + 'footer.tpl',
-    login : nano.conf.tplRoot + 'login.tpl',
+    login : nano.conf.tplRoot + 'login.mobile.tpl',
     portfolio : nano.conf.tplRoot + 'portfolio.mobile.tpl',
     positions : nano.conf.tplRoot + 'positions.tpl',
     userStatistics : nano.conf.tplRoot + 'userStatistics.mobile.tpl',
