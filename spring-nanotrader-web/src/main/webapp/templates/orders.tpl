@@ -8,7 +8,7 @@
     <!-- toggle -->
     
     <div id="orders-control" class="well show-well">
-        <div class="title"><h3><%= translate("recentOrders") %></h3></div>
+        <div class="title"><h3><%= translate("recentTransactions") %></h3></div>
         <table id="list-of-orders" class="table table-striped table-bordered table-condensed">
             <thead>
                 <tr>
@@ -25,6 +25,7 @@
             <tbody>
             </tbody>
         </table>
+        <div id="no-orders"></div>
     </div>
     <!-- The prefix "loop" stands for "List Of Orders Pagination" -->
     <div id="pagination-control" class="pagination pagination-right">

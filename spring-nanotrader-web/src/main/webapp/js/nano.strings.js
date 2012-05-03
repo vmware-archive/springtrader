@@ -1,7 +1,6 @@
 /**
  * Default internationalization object
  * @author Carlos Soto <carlos.soto@lognllc.com>
- * @author Kashyap Parikh
  */
 nano.strings = {
     noDataAvailable : 'No Data Available.',
@@ -32,8 +31,8 @@ nano.strings = {
     logout : 'Logout',
     copyright : 'Copyright &copy; 2012 VMWare, Inc. All rights reserved.',
     contactUs : 'Contact us',
-    daysGains : 'days gains',
-    daysLosses : 'days losses',
+    daysGains : "day's gains",
+    daysLosses : "day's losses",
     index : 'Index',
     volume : 'Volume',
     change : 'Change',
@@ -60,10 +59,10 @@ nano.strings = {
     holdingsTotal : 'Total of Holdings',
     currentGainLoss : 'Current Gain/Loss',
     userStatistics : 'User Statistics',
-    accountId : 'Account Id',
+    accountId : 'Account ID',
     accountCreationDate : 'Account Creation Date',
     totalLogins : 'Total Logins',
-    sessionCreatedDate : 'Session Created Date',
+    sessionCreationDate : 'Session Creation Date',
     sessionExpired : 'Your session has expired. Please login in to continue.',
     contactUs : 'Contact Us',
     registerUserName : 'Register New User',
@@ -75,9 +74,9 @@ nano.strings = {
     creditCardNumber : 'Credit Card Number',
     address : 'Address',
     register : 'Register',
-    alreadyRegistered : 'If you already registered enter your login and password on login page',
+    alreadyRegistered : 'If you have already registered, please enter your login and password on our login page.',
     visitLoginPage : 'Visit login page',
-    nanoTraderLogin : 'NanoTrader Login',
+    nanoTraderLogin : 'nanoTrader Login',
     emptyFieldError : 'Please complete all the registration fields.',
     newPassword : 'New Password',
     accountProfile : 'Account Profile',
@@ -111,20 +110,25 @@ nano.strings = {
     applicationOverview : 'Application Overview',    
     errorOcurred : 'An error has occurred.',
     fullnameError : 'Error! You got an Fullname field validation error!',
-    emailError : 'Error! You got an Email field validation error!',
-    passwdError : 'Error! You got an Password field validation error!',
-    useridError : 'Error! You got an Username field validation error!',
+    emailError : 'Error! You received an e-mail validation error.',
+    passwdError : 'Error! You entered invalid characters into the password field. Please re-enter your password.', 
+    useridError : 'Error! You got an Username field validation error!', //userid???
+    usernameError : 'Error! You got an Username field validation error!',
     openbalanceError : 'Error! You got an Open balance field validation error!',
-    creditcardError : 'Error! You got an Creditcard field validation error!',
+    creditcardError : 'Error! You received a credit card validation error.',
     addressError : 'Error! You got an Address field validation error!',
     gainingMsg : 'This chart shows the top 4 gaining stocks in your portfolio',
     portfolioMsg : 'This chart shows the cash balance and the portfolio value as a % of the total assets in your account',
-    enterNumUsers : "Please enter number of accounts you want to create",
-    showWipeDBWarning : "Warning: This action is not recoverable. It will wipe your database.",
-    showIntegerError : "Please enter a valid number",
-    admin : "Admin",
-    createUsers : "Create Users",
+    loginPage : 'Login Page',
+    enterNumUsers : 'Please enter number of accounts you want to create',
+    showWipeDBWarning : 'Warning: This action is not recoverable. It will wipe your database.',
+    showIntegerError : 'Please enter a valid number',
+    admin : 'Admin',
+    createUsers : 'Create Users',
     dataPop : "Populating data ...",
     dataPopComplete : "Data population complete ...",
     loggingOut : "Logging out... Please log back in with new user id"
+    error : 'Error!',
+    goToLoginPage : 'Go To Login Page',
+    recentTransactions : 'Recent Transactions'
 };

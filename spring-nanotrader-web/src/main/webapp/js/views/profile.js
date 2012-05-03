@@ -10,7 +10,6 @@ nano.views.Profile = Backbone.View.extend({
     events : {
         'click #updateBtn' : 'update',
         'click #overview' : 'overview',
-        'click #admin' : 'admin',
         'click #help' : 'help'
     },
     
@@ -68,13 +67,36 @@ nano.views.Profile = Backbone.View.extend({
      * @return void
      */
     update : function (event){
-        var matchpasswdControl = this.$('#matchpasswd-control');        
-        var matchpasswdError = this.$('#matchpasswd-error');
         var updateError = this.$('#update-error');
-        
-        matchpasswdControl.removeClass('error');
-        matchpasswdError.addClass('hide');
         updateError.addClass('hide');
+        
+        // Form field control
+        var matchpasswdControl = this.$('#matchpasswd-control');
+        var fullnameControl = this.$('#fullname-control');
+        var emailControl = this.$('#email-control');
+        var passwdControl = this.$('#password-control');
+        var usernameControl = this.$('#username-control');
+        var creditcardControl = this.$('#creditcard-control');
+        var addressControl = this.$('#address-control');
+
+        // Profile form fields errors
+        var matchpasswdError = this.$('#matchpasswd-error');
+        var fullnameError = this.$('#fullnameError');
+        var emailError = this.$('#emailError');
+        var passwdError = this.$('#passwdError');
+        var usernameError = this.$('#usernameError');
+        var creditcardError = this.$('#creditcardError');
+        var addressError = this.$('#fullnameError');
+        
+        // Hide the registration form erros
+        matchpasswdError.addClass('hide');
+        fullnameError.addClass('hide');
+        emailError.addClass('hide');
+        passwdError.addClass('hide');
+        usernameError.addClass('hide');
+        creditcardError.addClass('hide');
+        addressError.addClass('hide');
+        
         
         event.preventDefault();
         
@@ -110,6 +132,35 @@ nano.views.Profile = Backbone.View.extend({
                 nano.utils.goTo( nano.conf.hash.dashboard );
             },
             error : function(model, error) {
+                
+                for (x in error){
+                    
+                    if (error[x] == 'fullnameError'){
+                        fullnameError.removeClass('hide');
+                        fullnameControl.addClass('error');
+                    }
+                    if (error[x] == 'emailError'){
+                        emailError.removeClass('hide');
+                        emailControl.addClass('error');
+                    }
+                    if (error[x] == 'passwdError'){
+                        passwdError.removeClass('hide');
+                        passwdControl.addClass('error');
+                    }
+                    if (error[x] == 'useridError'){
+                        usernameError.removeClass('hide');
+                        usernameControl.addClass('error');
+                    }
+                    if (error[x] == 'creditcardError'){
+                        creditcardError.removeClass('hide');
+                        creditcardControl.addClass('error');
+                    }
+                    if (error[x] == 'addressError'){
+                        addressError.removeClass('hide');
+                        addressControl.addClass('error');
+                    }
+                };
+                
                 if (error in nano.strings){
                     updateError.find('h4.alert-heading').html(translate(error));
                     updateError.find('p').html(translate('errorOcurred'));
@@ -157,10 +208,6 @@ nano.views.Profile = Backbone.View.extend({
     
     overview : function(){
         window.location = nano.conf.hash.overview;
-    },
-
-    admin : function(){
-        window.location = nano.conf.hash.admin;
     },
     
     help : function(){

@@ -88,34 +88,39 @@ nano.models.AccountProfile = Backbone.Model.extend({
         reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/);
         reCreditcard = new RegExp(/^\b[\d]{16}\b$/);
         //reAddress = new RegExp();
+        var errors = [];
         
         // fullname validation
         if (attrs.fullname.match(reFullname) == null){
-            return "fullnameError"
+            errors.push("fullnameError");
         }
         // email validation
         if (attrs.email.match(reEmail) == null){
-            return "emailError"
+            errors.push("emailError");
         }
         // passwd validation
         if (attrs.passwd.length < 3 || attrs.passwd.length > 25){
-            return "passwdError"
+            errors.push("passwdError");
         }
         // userid validation
         if (attrs.userid.match(reUserid) == null){
-            return "useridError"
+            errors.push("useridError");
         }
         // openbalance validation
         //if (attrs.accounts[0].openbalance.match(reOpenbalance) == null){
-        //    return "openbalanceError"
+        //    errors.push("openbalanceError");
         //}
         // creditcard validation
         if (attrs.creditcard.match(reCreditcard) == null){
-            return "creditcardError"
+            errors.push("creditcardError");
         }
         // address validation
         if (attrs.address.length < 3 || attrs.address.length > 100){
-            return "addressError"
+            errors.push("addressError");
+        }
+        
+        if (errors.length > 0){
+            return errors
         }
     }
 });
@@ -166,14 +171,57 @@ nano.models.Holding = Backbone.Model.extend({
 });
 
 /**
+ * Model to interact with the Order Object
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ */
+nano.models.Order = Backbone.Model.extend({
+    idAttribute: 'orderid',
+    initialize: function(options) {
+        this.accountid = options.accountid;
+    },
+
+    urlRoot : nano.conf.urls.order,
+
+    url: function() {
+        var url = this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+        if (!this.isNew()){
+            url += '/' + this.id;
+        }
+        return url;
+    },
+});
+
+/**
+ * Model to interact with the Quote Object
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ */
+nano.models.Quote = Backbone.Model.extend({
+    idAttribute: 'quoteid',
+
+    urlRoot : nano.conf.urls.quote,
+
+    url: function() {
+        var url = this.urlRoot;
+        if (!this.isNew()){
+            url += '/' + this.id;
+        }
+        return url;
+    }
+});
+
+/**
  * Collection to interact with the Holdings Collection (list of Holding Objects)
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.models.Holdings = Backbone.Collection.extend({
+
     model : nano.models.Holding,
+
     initialize: function(options) {
         this.accountid = options.accountid;
+        this.page = options.page || 1;
     },
+
     urlRoot : nano.conf.urls.holdings,
 
     /**
@@ -186,35 +234,19 @@ nano.models.Holdings = Backbone.Collection.extend({
     },
 
    /**
+    * Overwrites the traditional Backbone.sync to include pagination for the collection
+    * @author Carlos Soto <carlos.soto@lognllc.com>
+    */
+    sync: nano.utils.collectionSync,
+
+   /**
     * Called by Backbone whenever a collection's models are returned by the server, in fetch. The function is 
     * passed the raw response object, and should return the array of model attributes to be added to the collection
     * @author Carlos Soto <carlos.soto@lognllc.com>
     * @param Object response: whatever comes from the server
     * @return array of that for the collection
     */
-    parse: function(response) {
-        return response.results;
-    }
-
-});
-
-/**
- * Model to interact with the Order Object
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
- */
-nano.models.Order = Backbone.Model.extend({
-    idAttribute: 'orderid',
-    initialize: function(options) {
-        this.accountid = options.accountid;
-    },
-    urlRoot : nano.conf.urls.order,
-    url: function() {
-        var url = this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
-        if (!this.isNew()){
-            url += '/' + this.id;
-        }
-        return url;
-    }
+    parse: nano.utils.collectionParse
 });
 
 /**
@@ -223,9 +255,10 @@ nano.models.Order = Backbone.Model.extend({
  */
 nano.models.Orders = Backbone.Collection.extend({
     model : nano.models.Order,
-    
+
     initialize: function(options) {
         this.accountid = options.accountid;
+        this.page = options.page || 1;
     },
     urlRoot : nano.conf.urls.orders,
 
@@ -238,6 +271,13 @@ nano.models.Orders = Backbone.Collection.extend({
         return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
     },
 
+
+   /**
+    * Overwrites the traditional Backbone.sync to include pagination for the collection
+    * @author Carlos Soto <carlos.soto@lognllc.com>
+    */
+    sync: nano.utils.collectionSync,
+
    /**
     * Called by Backbone whenever a collection's models are returned by the server, in fetch. The function is 
     * passed the raw response object, and should return the array of model attributes to be added to the collection
@@ -245,37 +285,5 @@ nano.models.Orders = Backbone.Collection.extend({
     * @param Object response: whatever comes from the server
     * @return array of that for the collection
     */
-    parse: function(response) {
-        return response.results;
-    }
-});
-
-/**
- * Model to interact with the Quote Object
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
- */
-nano.models.Quote = Backbone.Model.extend({
-    idAttribute: 'quoteid',
-    //=================================================> There's no url for this object, we need to include one!
-});
-
-
-/**
- * Collection to interact with the Orders Collection (list of Order Objects)
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
- */
-nano.models.Quotes = Backbone.Collection.extend({
-    model : nano.models.Quote,
-    
-    initialize: function(options) {
-        this.quoteid = options.quoteid;
-    },
-    urlRoot : nano.conf.urls.quote,
-
-    url: function() {
-        var url = this.urlRoot;
-        url += '/' + this.quoteid;
-        
-        return url;
-    }
+    parse: nano.utils.collectionParse
 });

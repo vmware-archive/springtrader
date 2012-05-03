@@ -9,8 +9,7 @@ nano.views.Help = Backbone.View.extend({
      */
     events : {
         'click #profile' : 'profile',
-        'click #overview' : 'overview',
-        'click #admin' : 'admin'        
+        'click #overview' : 'overview'
     },
     
     /**
@@ -51,9 +50,6 @@ nano.views.Help = Backbone.View.extend({
     
     overview : function(){
         window.location = nano.conf.hash.overview;
-    },
-
-    admin : function(){
-        window.location = nano.conf.hash.admin;
     }
+    
 });

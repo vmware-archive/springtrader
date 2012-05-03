@@ -9,6 +9,7 @@ nano.views.Quotes = Backbone.View.extend({
      */
     events : {
         'click #buyBtn' : 'buy',
+        'keypress [type=number]' : 'validateNumber'
     },
 
     /**
@@ -72,7 +73,7 @@ nano.views.Quotes = Backbone.View.extend({
         
         this.$el.show();
 
-        // Render the list
+        // Render the quote result
         if(this.model){
             this.renderRows();
         }
@@ -87,13 +88,26 @@ nano.views.Quotes = Backbone.View.extend({
     renderRows: function() {
         var quoteResult = this.$('#quote-result');
         this.tbody.html('');
-        for(var i = 0, j = this.model.length; i < j; i++) {
-            this.tbody.append(this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})));
-        }
+        
+        var data = {
+            symbol: this.model.get('symbol'),
+            price: this.model.get('price')
+        };
+        
+        this.tbody.append(this.rowTemplate(data));
         this.model = null;
         quoteResult.removeClass('hide');
     },
-    
+
+    /**
+     * Validates that the input can only receive digits
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return boolean
+     */
+    validateNumber : function(event){
+        return nano.utils.validateNumber(event);
+    },
+
     /**
      * Buy event
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
