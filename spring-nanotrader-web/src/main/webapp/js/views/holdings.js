@@ -92,6 +92,10 @@ nano.views.Holdings = Backbone.View.extend({
             var tpl = this.template(data);
             this.$el.html(tpl);
             this.tbody = this.$('#list-of-holdings > tbody');
+            
+            // Paginator controls
+            this.previous = this.$('#lohp-previous');
+            this.next = this.$('#lohp-next');
 
             // For some reason, the div needs to be showing
             // before doing the collapsing functions
@@ -110,6 +114,8 @@ nano.views.Holdings = Backbone.View.extend({
             if (this.pageCount <= 0){
                 // Render a no data message if the page count is 0 or less.
                 this.noHoldings();
+                this.next.addClass('disabled');
+                this.previous.addClass('disabled');
                 if (nano.utils.isMobile()){
                     this.$('#list-of-holdings').hide();
                 } else {
