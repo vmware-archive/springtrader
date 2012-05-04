@@ -1,6 +1,7 @@
 /**
  * Overview View
  * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Kashyap Parikh
  */
 nano.views.Overview = Backbone.View.extend({
     
@@ -9,7 +10,8 @@ nano.views.Overview = Backbone.View.extend({
      */
     events : {
         'click #profile' : 'profile',
-        'click #help' : 'help'
+        'click #help' : 'help',
+        'click #admin' : 'admin'
     },
     
     /**
@@ -50,5 +52,10 @@ nano.views.Overview = Backbone.View.extend({
     
     help : function(){
         window.location = nano.conf.hash.help;
+    },
+
+    admin : function(){
+        window.location = nano.conf.hash.admin;
     }
+
 });

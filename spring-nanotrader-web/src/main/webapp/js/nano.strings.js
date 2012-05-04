@@ -1,6 +1,7 @@
 /**
  * Default internationalization object
  * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Kashyap Parikh
  */
 nano.strings = {
     noDataAvailable : 'No Data Available.',
@@ -98,6 +99,8 @@ nano.strings = {
     symbol  : 'Symbol',
     quantity : 'Quantity',
     completed : 'Completed',
+    closed : 'Closed',
+    cancelled : 'Cancelled',
     orderConfirmation: 'Order Confirmation',
     ok : 'OK',
     cancel : 'Cancel',
@@ -127,7 +130,7 @@ nano.strings = {
     createUsers : 'Create Users',
     dataPop : "Populating data ...",
     dataPopComplete : "Data population complete ...",
-    loggingOut : "Logging out... Please log back in with new user id"
+    loggingOut : "Logging out... Please log back in with new user id",
     error : 'Error!',
     goToLoginPage : 'Go To Login Page',
     recentTransactions : 'Recent Transactions'
