@@ -1,6 +1,7 @@
 /**
  * Nano namespace object
  * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Kashyap Parikh
  */
 var nano = {
     utils : {},
@@ -372,8 +373,10 @@ nano.utils.validateNumber = function(event) {
 
 
 /**
- * Whoever wrote this should document the code
- * @author ??? (somebody at VMware)
+ * Function to handle admin service requests (recreateData)
+ * @param string userCount: Number of users to be created
+ * @param object callbacks: object with success and error callback
+ * 
  */
 nano.utils.setUsers = function(userCount, callbacks) {
         $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPop') + '</div>');
