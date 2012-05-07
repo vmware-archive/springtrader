@@ -21,6 +21,7 @@ nano.Router = Backbone.Router.extend({
         "trade"         : "trade", // #trade page
         "trade/p:page"  : "orders", // #trade - pagination of List of Orders
         "trade/q:quote" : "quotes", // #trade - list of quotes
+        "trade/q:quote/:random" : "quotes", // #trade - list of quotes
         "profile"       : "profile", // #profile page
         "contact"       : "contact", // #contact page
         "admin"         : "admin", // #admin page
@@ -334,7 +335,7 @@ nano.Router = Backbone.Router.extend({
     },
     
     quotes: function(quote) {
-        if (!nano.containers.quotes.html()){
+        if (!nano.containers.quotes.html()) {
             this.trade();
         }
         else {
