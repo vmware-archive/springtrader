@@ -92,6 +92,10 @@ nano.views.Holdings = Backbone.View.extend({
             var tpl = this.template(data);
             this.$el.html(tpl);
             this.tbody = this.$('#list-of-holdings > tbody');
+            
+            // Paginator controls
+            this.previous = this.$('#lohp-previous');
+            this.next = this.$('#lohp-next');
 
             // For some reason, the div needs to be showing
             // before doing the collapsing functions
@@ -105,6 +109,21 @@ nano.views.Holdings = Backbone.View.extend({
 
             // Store the current Page number 
             this.page = page;
+            
+            // Check the page count of orders
+            if (this.pageCount <= 0){
+                // Render a no data message if the page count is 0 or less.
+                this.noHoldings();
+                this.next.addClass('disabled');
+                this.previous.addClass('disabled');
+                if (nano.utils.isMobile()){
+                    this.$('#list-of-holdings').hide();
+                } else {
+                    this.$('#list-of-holdings > tfoot').hide();
+                }
+                
+            }
+            
             this.renderRows();
     },
 
@@ -200,5 +219,15 @@ nano.views.Holdings = Backbone.View.extend({
                 error : nano.utils.onApiError
             });
         });
+    },
+    
+    /**
+     * Renders a no holdings list message
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @return void
+     */
+    noHoldings : function(){
+        var htmlId = this.$('#no-holdings');
+        htmlId.html(_.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}) );
     }
 });

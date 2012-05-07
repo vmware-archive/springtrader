@@ -101,6 +101,7 @@ nano.views.Orders = Backbone.View.extend({
             nano.utils.setCollapsable(this);
         }
         
+        // Check the hast and enable or disable the toggle list functionality
         if (this.hash.indexOf('dashboard') != -1){
             this.toggleControl.removeClass('hide');
             this.$('#orders-control div.title').addClass('hide');
@@ -135,11 +136,17 @@ nano.views.Orders = Backbone.View.extend({
         else {
             this.next.removeClass('disabled');
         }
-
+        
+        // Check the page count of orders
         if (this.pageCount > 0){
             this.paginators[page-1].className = 'g2p active';
             // Render the list of orders
             this.renderRows(page);
+        } else {
+            // Render a no orders message
+            this.noOrders();
+            this.next.addClass('disabled');
+            this.previous.addClass('disabled');
         }
 
         // Store the current Page number 
@@ -208,6 +215,11 @@ nano.views.Orders = Backbone.View.extend({
         }
     },
     
+    /**
+     * Click event for the toggle button
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @return void
+     */
     toggle : function(event){
         if(this.toggleControl.hasClass('active')) {
             this.ordersControl.hide();
@@ -218,6 +230,16 @@ nano.views.Orders = Backbone.View.extend({
             this.paginationControl.show();
             this.toggleControl.addClass('active');
         }
+    },
+    
+    /**
+     * Renders a no orders list message
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @return void
+     */
+    noOrders : function(){
+        var htmlId = this.$('#no-orders');
+        htmlId.html(_.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}) );
     }
 });
 

@@ -13,6 +13,7 @@
                 <tbody>
                 </tbody>
             </table>
+            <div id="no-holdings"></div>
             <div class="pagination pagination-centered">
                 <!-- The prefix "loh" stands for "List Of Holdings" -->
                 <ul id="loh-pagination">

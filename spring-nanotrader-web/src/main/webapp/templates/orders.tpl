@@ -25,6 +25,7 @@
             <tbody>
             </tbody>
         </table>
+        <div id="no-orders"></div>
     </div>
     <!-- The prefix "loop" stands for "List Of Orders Pagination" -->
     <div id="pagination-control" class="pagination pagination-right">
