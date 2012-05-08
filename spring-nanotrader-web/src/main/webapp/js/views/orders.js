@@ -145,6 +145,8 @@ nano.views.Orders = Backbone.View.extend({
         } else {
             // Render a no orders message
             this.noOrders();
+            this.next.addClass('disabled');
+            this.previous.addClass('disabled');
         }
 
         // Store the current Page number 

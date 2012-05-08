@@ -14,7 +14,7 @@
                     <div class="control-group">
                         <label class="control-label"><%= translate("username") %>:</label>
                         <div class="controls">
-                            <input type="text" value="" id="username-input" class="input-xlarge focused" tabindex="1">
+                            <input type="text" autocapitalize="off" value="" id="username-input" class="input-xlarge focused" tabindex="1">
                         </div>
                     </div>
                     <div class="control-group">

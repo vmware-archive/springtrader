@@ -8,8 +8,9 @@ nano.conf = {
     urlRoot : '/spring-nanotrader-services/api/',   // Path to the API service
     tplRoot : './templates/',                       // Path to the Templates directory
     accountIdUrlKey : '{accountid}',                // Key in the api urls that's gonna be replaced with the actual accountid
-    pageUrlKey : '{page}',                          // Key in the api urls that's gonna be replaced with the actual accountid
-    quoteUrlKey : '{quote}',                        // Key in the api urls that's gonna be replaced with the actual accountid
+    pageUrlKey : '{page}',                          // Key in the api urls that's gonna be replaced with the page number
+    quoteUrlKey : '{quote}',                        // Key in the api urls that's gonna be replaced with the quote
+    randomUrlKey : '{random}',                        // Key in the api urls that's gonna be replaced with a random number
     marketSummaryUpdateMillisecs : 15000,           // Interval of milliseconds in which the Market Summary section updates
     currency : '$',                                 // Current currency is dollars
     pageSize: 5,                                    // Amount of items to be displayed on list views
@@ -76,7 +77,7 @@ nano.conf.hash = {
     portfolioWithPage : '#portfolio/p{page}',
     trade : '#trade',
     tradeWithPage : '#trade/p{page}',
-    tradeWithQuote : '#trade/q{quote}',
+    tradeWithQuote : '#trade/q{quote}/{random}',
     registration : '#registration',
     profile : '#profile',
     contact : '#contact',

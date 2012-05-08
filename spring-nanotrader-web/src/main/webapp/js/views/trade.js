@@ -63,6 +63,7 @@ nano.views.Trade = Backbone.View.extend({
         // parse and render
         this.$el.html(this.template(data));
         this.$el.show();
+        this.quoteInput = this.$('#quote-input');
     },
     
     /**
@@ -73,10 +74,10 @@ nano.views.Trade = Backbone.View.extend({
     quote : function (event){
         var quoteError = this.$('#quote-error');
         event.preventDefault();
-        
-        var quote = this.$('#quote-input').val();
-        quote = quote.toUpperCase();        
-        
+
+        var quote = this.quoteInput.val();
+        quote = quote.toUpperCase();
+
         if (localStorage.quotes){
             // Retrieve the object from storage
             var quotes = localStorage.getItem('quotes');
@@ -88,8 +89,9 @@ nano.views.Trade = Backbone.View.extend({
                 localStorage.setItem('quotes', JSON.stringify(quotes));
             }
         }
-        
-        window.location = nano.conf.hash.tradeWithQuote.replace(nano.conf.quoteUrlKey, quote);
+        //Get a random number from 0 to 99 so that the router will get executed
+        var random = Math.floor(Math.random()*100);
+        window.location = nano.conf.hash.tradeWithQuote.replace(nano.conf.quoteUrlKey, quote).replace(nano.conf.randomUrlKey, random);
     },
     
     error : function(error){
