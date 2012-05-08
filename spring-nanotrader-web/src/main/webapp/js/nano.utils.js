@@ -40,7 +40,14 @@ nano.utils.translate = function translate(key) {
  * @return Object: Session data
  */
 nano.utils.getSession = function() {
-    return $.cookie( nano.conf.sessionCookieName );
+    var session = null;
+
+    if ($.cookie)
+    {
+        session = $.cookie( nano.conf.sessionCookieName )
+    }
+
+    return session;
 };
 
 /**
