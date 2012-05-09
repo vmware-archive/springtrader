@@ -102,7 +102,7 @@ nano.views.Registration = Backbone.View.extend({
         addressError.addClass('hide');
         // General form error
         registrationError.addClass('hide');
-        
+
         event.preventDefault();
     
         var fullname = this.$('#fullname-input').val();

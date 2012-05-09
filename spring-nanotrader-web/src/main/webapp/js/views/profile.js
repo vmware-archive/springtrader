@@ -52,7 +52,7 @@ nano.views.Profile = Backbone.View.extend({
             }
             
             var data = this.model.toJSON()
-            data.creditcard = '************' + this.ccSlice;
+            data.creditcard = String('****************' + this.ccSlice).slice(-1 * data.creditcard.length);
             // template
             var profile = this.template(data);
             

@@ -120,7 +120,7 @@ nano.models.AccountProfile = Backbone.Model.extend({
         //rePasswd = new RegExp();
         reUserid = new RegExp(/^\b[\w\d]{3,25}\b$/);
         reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/);
-        reCreditcard = new RegExp(/^\b[\d]{16}\b$/);
+        reCreditcard = new RegExp(/^\b[\d]{15,16}\b$/);
         //reAddress = new RegExp();
         var errors = [];
         

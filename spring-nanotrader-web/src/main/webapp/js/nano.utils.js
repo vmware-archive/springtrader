@@ -116,12 +116,21 @@ nano.utils.logout = function(callbacks){
         headers : nano.utils.getHttpHeaders(),
         dataType : 'json',
         success : function(data, textStatus, jqXHR) {
-            if (_.isFunction(callbacks.success)) {
+
+            if (_.isObject(callbacks) && _.isFunction(callbacks.success)) {
                 callbacks.success();
+            }
+
+            // Clear the html from the containers
+            for (var i in nano.containers)
+            {
+                if( i !== 'login' && i !== 'marketSummary' ){
+                    nano.containers[i].empty();
+                }
             }
         },
         error : function(jqXHR, textStatus, errorThrown) {
-            if (_.isFunction(callbacks.error)) {
+            if (_.isObject(callbacks) && _.isFunction(callbacks.error)) {
                 callbacks.error(jqXHR, textStatus, errorThrown);
             }
         }
