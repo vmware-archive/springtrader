@@ -10,7 +10,6 @@ nano.views.Footer = Backbone.View.extend({
     events : {
         'click #contactUsBtn' : 'contact',
         'click #helpBtn' : 'help',
-        'click #logoutBtn' : 'logout'
     },
     
     /**
@@ -58,15 +57,5 @@ nano.views.Footer = Backbone.View.extend({
      */
     help: function() {
         window.location = nano.conf.hash.help;
-    },
-
-    /**
-     * Logout Click Event
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @return void
-     */
-    logout : function() {
-        nano.utils.logout();
-        nano.utils.goTo( nano.conf.hash.login );
     }
 });
