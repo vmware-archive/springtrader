@@ -113,37 +113,21 @@ nano.views.Quotes = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @return void
      */
-    buy : function (event){
-        tpl = this.modalTemplate;
+    buy : function (event) {
         var quantity = this.$('#quantity-input').val();
-        var model = new nano.models.Order({ accountid : nano.session.accountid });
         var view = this;
         
-        var onSuccess = function(){
-            // orders collection
-            orders = new nano.models.Orders({ accountid : nano.session.accountid });
-            
-            var onFetchSuccess = function() {
-                orders.comparator = function(model){
-                    return model.get('orderid');
-                }
-                orders.sort();
-                var last = _.last(orders.toJSON());
-                last.orderQuantity = quantity;
-
-                var popup = $( tpl(last) );
-                popup.modal();
-                view.$el.html('');
-                nano.instances.router.trade(view.page);
-            };
-                
-            orders.fetch({
-                success : onFetchSuccess,
-                error: nano.utils.onApiErreor
-            });
+        var onSuccess = function(model){
+            nano.instances.router.trade(view.page);
+            //var popup = $( view.modalTemplate(model.toJSON()) );
+            //popup.modal();
+            console.log( model.toJSON() );
+            view.$el.empty();
+            nano.instances.router.trade(view.page);
         };
-        
-        model.save({
+
+        var order = new nano.models.Order({ accountid : nano.session.accountid });
+        order.save({
             quantity : quantity,
             ordertype : 'buy',
             quote : {symbol: this.symbol}

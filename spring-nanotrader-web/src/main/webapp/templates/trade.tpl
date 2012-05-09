@@ -3,7 +3,7 @@
         <div id="quote-control" class="well show-quote-box">
             <form class="form-inline">
                 <label><%= translate("enterSymbol") %>:</label>
-                <input id="quote-input" type="text" maxlength="3" autocomplete="off" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="<%= quoteLength %>" data-source='<%= quoteItems %>'>
+                <input id="quote-input" type="text" maxlength="5" autocomplete="off" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="<%= quoteLength %>" data-source='<%= quoteItems %>'>
                 <button id="getQuoteBtn" class="btn btn-inverse"><%= translate("getQuote") %></button>
             </form>
         </div>
