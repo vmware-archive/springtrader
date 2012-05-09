@@ -194,8 +194,6 @@
 .sidebar {
     background:#edefef;
     padding:20px;
-    padding-bottom:5000px;
-    margin-bottom:-5000px;
 }
 .row.clearfix {
     overflow:hidden;
@@ -614,8 +612,6 @@ table td input {
     padding-right:0;
 }.container.profile-page .span2.columns.sidebar {
     width:200px;
-}.profile-header {
-    padding:0 20px;
 }.sidebar .nav-tabs.nav-stacked > li:first-child > a, .sidebar .nav-tabs.nav-stacked > li > a {
     border-radius:0;
     border-left:0;
