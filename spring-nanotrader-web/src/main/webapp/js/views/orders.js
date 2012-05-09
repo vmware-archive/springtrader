@@ -49,13 +49,16 @@ nano.views.Orders = Backbone.View.extend({
      * @return void
      */
     render: function(model, page, hash) {
-        if (model){
+
+        if (model) {
             this.model = model;
         }
 
-        if (hash){
+        if (hash) {
             this.hash = hash;
         }
+
+        var freshRender = this.$el.html() == '';
 
         // Store the total amount of pages
         this.pageCount = Math.ceil(this.model.totalRecords / this.model.pageSize);
@@ -68,29 +71,16 @@ nano.views.Orders = Backbone.View.extend({
             pageCount : this.pageCount,
             currentPage : page
         };
-        
+
         this.$el.html(this.template(data));
-        
-        // Check the device
-        if (nano.utils.isMobile()){
-            // Set a table variable for store the rows on a mobile device
-            this.table = this.$('#orders-content > table');
-        } else {
-            // tbody variable used for store the rows on a computer device.
-            this.tbody = this.$('#list-of-orders > tbody');
-        }
-        
-        // Paginator controls
-        this.paginators = this.$('#loo-pagination > li.g2p');
-        this.previous = this.$('#loop-previous');
-        this.next = this.$('#loop-next');
-            
-        // Toggle Control
-        this.toggleControl = this.$('#toggle-orders-control');
-        // Orders Control
-        this.ordersControl = this.$('#orders-control');
-        // Orders Pagination Control
-        this.paginationControl = this.$('#pagination-control');
+
+        this.tbody = this.$('#list-of-orders > tbody'); // tbody of the orders list
+        this.paginators = this.$('#loo-pagination > li.g2p'); // Paginator controls
+        this.previous = this.$('#loop-previous'); // "previous" link control
+        this.next = this.$('#loop-next'); // "next" link control 
+        this.toggleControl = this.$('#toggle-orders-control'); // Toggle Control
+        this.ordersControl = this.$('#orders-control'); // Orders Control
+        this.paginationControl = this.$('#pagination-control'); // Orders Pagination Control
 
         // For some reason, the div needs to be showing
         // before doing the collapsing functions
@@ -100,20 +90,19 @@ nano.views.Orders = Backbone.View.extend({
         {
             nano.utils.setCollapsable(this);
         }
-        
+
         // Check the hast and enable or disable the toggle list functionality
-        if (this.hash.indexOf('dashboard') != -1){
+        if ( this.hash == nano.conf.hash.dashboard || this.hash == nano.conf.hash.dashboardWithPage ) {
             this.toggleControl.removeClass('hide');
             this.$('#orders-control div.title').addClass('hide');
-            
-            
-            if(this.toggleControl.hasClass('active')){
-                this.ordersControl.show();
-                this.paginationControl.show();
-            } else {
+
+            // Collapse the toggle only if it's a fresh render
+            if( freshRender ){
+                this.toggleControl.addClass('active');
                 this.ordersControl.hide();
                 this.paginationControl.hide();
             }
+
         } else {
             this.toggleControl.addClass('hide');
             this.$('#orders-control div.title').removeClass('hide');
@@ -122,7 +111,7 @@ nano.views.Orders = Backbone.View.extend({
         }
 
         //Set the page number on the paginator
-        this.paginators.removeClass('active');        
+        this.paginators.removeClass('active');
 
         if (page == 1){
             this.previous.addClass('disabled');
@@ -164,7 +153,7 @@ nano.views.Orders = Backbone.View.extend({
         var length = this.model.length;
         
         if (nano.utils.isMobile()){
-            var rows = this.table.html('');
+            var rows = this.tbody.html('');
 
             var orders = [];
             for ( i; i < length; ++i )
@@ -215,21 +204,15 @@ nano.views.Orders = Backbone.View.extend({
         }
     },
     
-    /**
-     * Click event for the toggle button
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
-     * @return void
-     */
+   /**
+    * Click event for the toggle button
+    * @author Jean Chassoul <jean.chassoul@lognllc.com>
+    * @return void
+    */
     toggle : function(event){
-        if(this.toggleControl.hasClass('active')) {
-            this.ordersControl.hide();
-            this.paginationControl.hide();
-            this.toggleControl.removeClass('active');
-        } else {
-            this.ordersControl.show();
-            this.paginationControl.show();
-            this.toggleControl.addClass('active');
-        }
+        this.toggleControl.toggleClass('active');
+        this.ordersControl.toggle();
+        this.paginationControl.toggle();
     },
     
     /**
