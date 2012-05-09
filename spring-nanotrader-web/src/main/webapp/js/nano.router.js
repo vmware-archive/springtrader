@@ -52,9 +52,6 @@ nano.Router = Backbone.Router.extend({
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#nc-loading');
 
-        // Render the footer since it's always shown.
-        nano.instances.footer.render();
-
         // The first thing we need to do first is to render 
         // the Market Summary, since it's shown on every page.
         var marketSummary = new nano.models.MarketSummary();
@@ -92,6 +89,7 @@ nano.Router = Backbone.Router.extend({
             nano.utils.hideAll(false);
             nano.instances.help.render();
         }
+        nano.instances.footer.render();
     },
 
     overview: function() {
@@ -104,6 +102,7 @@ nano.Router = Backbone.Router.extend({
             nano.utils.hideAll(false);
             nano.instances.overview.render();
         }
+        nano.instances.footer.render();
     },
 
     dashboard: function(page) {
@@ -160,6 +159,7 @@ nano.Router = Backbone.Router.extend({
         {
             nano.utils.goTo( nano.conf.hash.login );
         }
+        nano.instances.footer.render();
     },
 
     login: function(error) {
@@ -170,6 +170,7 @@ nano.Router = Backbone.Router.extend({
             nano.utils.hideAll();
             nano.instances.login.render(error);
         }
+        nano.instances.footer.render();
     },
     
     registration: function(error){
@@ -180,6 +181,7 @@ nano.Router = Backbone.Router.extend({
             nano.utils.hideAll();
             nano.instances.registration.render(error);
         }
+        nano.instances.footer.render();
     },
 
     portfolio: function(page) {
@@ -229,6 +231,7 @@ nano.Router = Backbone.Router.extend({
         else {
             nano.utils.goTo( nano.conf.hash.login );
         }
+        nano.instances.footer.render();
     },
 
     holdings: function (page) {
@@ -262,6 +265,7 @@ nano.Router = Backbone.Router.extend({
                 error : nano.utils.onApiError
             });
         }
+        nano.instances.footer.render();
     },
 
     trade: function(page) {
@@ -296,6 +300,7 @@ nano.Router = Backbone.Router.extend({
         else {
             nano.utils.goTo( nano.conf.hash.login );
         }
+        nano.instances.footer.render();
     },
     
     orders: function(page) {
@@ -332,6 +337,7 @@ nano.Router = Backbone.Router.extend({
                 error : nano.utils.onApiError
             });
         }
+        nano.instances.footer.render();
     },
     
     quotes: function(quote) {
@@ -356,6 +362,7 @@ nano.Router = Backbone.Router.extend({
                 error: onError
             });
         }
+        nano.instances.footer.render();
     },
     
     profile: function() {
@@ -383,6 +390,7 @@ nano.Router = Backbone.Router.extend({
         else {
             nano.utils.goTo( nano.conf.hash.login );
         }
+        nano.instances.footer.render();
     },
     
     contact: function() {
@@ -395,6 +403,7 @@ nano.Router = Backbone.Router.extend({
             nano.utils.hideAll();
             nano.instances.contact.render();
         }
+        nano.instances.footer.render();
     },
 
     admin: function() {
@@ -406,6 +415,7 @@ nano.Router = Backbone.Router.extend({
         else {
             nano.utils.goTo( nano.conf.hash.login );
         }
+        nano.instances.footer.render();
     }
 });
 
