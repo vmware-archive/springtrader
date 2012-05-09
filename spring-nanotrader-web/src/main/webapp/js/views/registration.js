@@ -10,7 +10,8 @@ nano.views.Registration = Backbone.View.extend({
     events : {
         'click #registrationBtn' : 'registration',
         'click #showLoginBtn' : 'login',
-        'keypress [type=number]' : 'validateNumber'
+        'keypress [type=number]' : 'validateNumber',
+        'blur #matchpasswd-input' : 'validatePassword'
     },
     
     /**
@@ -39,17 +40,49 @@ nano.views.Registration = Backbone.View.extend({
      * @return void
      */
     render: function(errorKey) {
-        if ( !this.$el.html() )
-        {
-            var registration = this.template();
-            this.$el.html(registration);
-            
+
+        if( !this.$el.html() ){
+            this.$el.html(this.template());
+
             if (errorKey)
             {
                 var registrationError = this.$('#registration-error');
                 registrationError.find('p').html(translate(errorKey));
                 registrationError.removeClass('hide');
             }
+
+            //Cache all of the inputs
+            this.fullnameInput = this.$('#fullname-input');
+            this.emailInput = this.$('#email-input');
+            this.passwordInput = this.$('#password-input');
+            this.matchpasswdInput = this.$('#matchpasswd-input');
+            this.usernameInput = this.$('#username-input');
+            this.openbalanceInput = this.$('#openbalance-input');
+            this.creditcardInput = this.$('#creditcard-input');
+            this.addressInput = this.$('#address-input');
+
+            //Cache all of the controls
+            this.matchpasswdControl = this.$('#matchpasswd-control');
+            this.fullnameControl = this.$('#fullname-control');
+            this.emailControl = this.$('#email-control');
+            this.passwdControl = this.$('#password-control');
+            this.usernameControl = this.$('#username-control');
+            this.openbalanceControl = this.$('#openbalance-control');
+            this.creditcardControl = this.$('#creditcard-control');
+            this.addressControl = this.$('#address-control');
+
+            // General form error
+            this.registrationError = this.$('#registration-error');
+
+            // Registration form fields errors
+            this.matchpasswdError = this.$('#matchpasswd-error');
+            this.fullnameError = this.$('#fullnameError');
+            this.emailError = this.$('#emailError');
+            this.passwdError = this.$('#passwdError');
+            this.usernameError = this.$('#usernameError');
+            this.openbalanceError = this.$('#openbalanceError');
+            this.creditcardError = this.$('#creditcardError');
+            this.addressError = this.$('#addressError');
         }
         this.$el.show();
     },
@@ -64,64 +97,71 @@ nano.views.Registration = Backbone.View.extend({
     },
 
     /**
+     * Validates that the password and retype password match
+     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @return boolean
+     */
+    validatePassword : function(event){
+        if ( this.matchpasswdInput.val() != this.passwordInput.val() )
+        {
+            this.matchpasswdError.removeClass('hide');
+            this.matchpasswdControl.addClass('error');
+        }
+        else
+        {
+            this.matchpasswdError.addClass('hide');
+            this.matchpasswdControl.removeClass('error');
+        }
+    },
+
+    /**
      * Registration event
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @return void
      */
     registration : function(event){
-        // Form field control
-        var matchpasswdControl = this.$('#matchpasswd-control');
-        var fullnameControl = this.$('#fullname-control');
-        var emailControl = this.$('#email-control');
-        var passwdControl = this.$('#password-control');
-        var usernameControl = this.$('#username-control');
-        var openbalanceControl = this.$('#openbalance-control');
-        var creditcardControl = this.$('#creditcard-control');
-        var addressControl = this.$('#address-control');
-        // General form error
-        var registrationError = this.$('#registration-error');
-        // Registration form fields errors
-        var matchpasswdError = this.$('#matchpasswd-error');
-        var fullnameError = this.$('#fullnameError');
-        var emailError = this.$('#emailError');
-        var passwdError = this.$('#passwdError');
-        var usernameError = this.$('#usernameError');
-        var openbalanceError = this.$('#openbalanceError');
-        var creditcardError = this.$('#creditcardError');
-        var addressError = this.$('#addressError');
-        //matchpasswdControl.removeClass('error');
-        
+
+        //Remove the error class from the inputs
+        this.matchpasswdControl.removeClass('error');
+        this.fullnameControl.removeClass('error');
+        this.emailControl.removeClass('error');
+        this.passwdControl.removeClass('error');
+        this.usernameControl.removeClass('error');
+        this.openbalanceControl.removeClass('error');
+        this.creditcardControl.removeClass('error');
+        this.addressControl.removeClass('error');
+
         // Hide the registration form erros
-        matchpasswdError.addClass('hide');
-        fullnameError.addClass('hide');
-        emailError.addClass('hide');
-        passwdError.addClass('hide');
-        usernameError.addClass('hide');
-        openbalanceError.addClass('hide');
-        creditcardError.addClass('hide');
-        addressError.addClass('hide');
+        this.matchpasswdError.addClass('hide');
+        this.fullnameError.addClass('hide');
+        this.emailError.addClass('hide');
+        this.passwdError.addClass('hide');
+        this.usernameError.addClass('hide');
+        this.openbalanceError.addClass('hide');
+        this.creditcardError.addClass('hide');
+        this.addressError.addClass('hide');
         // General form error
-        registrationError.addClass('hide');
+        this.registrationError.addClass('hide');
 
         event.preventDefault();
-    
-        var fullname = this.$('#fullname-input').val();
-        var email = this.$('#email-input').val();
-        var password = this.$('#password-input').val();
-        var matchpasswd = this.$('#matchpasswd-input').val();
-        var username = this.$('#username-input').val();
-        var openbalance = this.$('#openbalance-input').val();
-        var creditcard = this.$('#creditcard-input').val();
-        var address = this.$('#address-input').val();
-        var view = this;
+
+        var fullname    = this.fullnameInput.val();
+        var email       = this.emailInput.val();
+        var password    = this.passwordInput.val();
+        var matchpasswd = this.matchpasswdInput.val();
+        var username    = this.usernameInput.val();
+        var openbalance = this.openbalanceInput.val();
+        var creditcard  = this.creditcardInput.val();
+        var address     = this.addressInput.val();
+        var view        = this;
         
         var inputArray = [fullname, email, password, matchpasswd, username, openbalance, creditcard, address];
         var emptyField = false;
         
         for(var i = 0, j = inputArray.length; i < j; i++) {
             if(inputArray[i] == ''){
-                registrationError.find('p').html(translate('emptyFieldError'));
-                registrationError.removeClass('hide');
+                this.registrationError.find('p').html(translate('emptyFieldError'));
+                this.registrationError.removeClass('hide');
                 emptyField = true;
                 break
             }
@@ -129,21 +169,22 @@ nano.views.Registration = Backbone.View.extend({
         
         // Set the Account Profile model
         this.model = new nano.models.AccountProfile();
-        
+
         // Registration callbacks
         var callbacks = {
             success : function() {
                 nano.utils.login(username, password, {
                     success : function(jqXHR, textStatus){
                         // Clear the credentials from the inputs
-                        view.$('#fullname-input').val('');
-                        view.$('#email-input').val('');
-                        view.$('#password-input').val('');
-                        view.$('#matchpasswd-input').val('');
-                        view.$('#username-input').val('');
-                        view.$('#openbalance-input').val('');
-                        view.$('#creditcard-input').val('');
-                        view.$('#address-input').val('');
+                        view.fullnameInput.val('');
+                        view.emailInput.val('');
+                        view.passwordInput.val('');
+                        view.matchpasswdInput.val('');
+                        view.usernameInput.val('');
+                        view.openbalanceInput.val('');
+                        view.creditcardInput.val('');
+                        view.addressInput.val('');
+
                         // Show the loading page and render the dashboard
                         nano.utils.goTo( nano.conf.hash.dashboard );
                     },
@@ -160,54 +201,56 @@ nano.views.Registration = Backbone.View.extend({
                 });
             },
             error : function(model, error) {
-                for (x in error){
-                    
-                    if (error[x] == 'fullnameError'){
-                        fullnameError.removeClass('hide');
-                        fullnameControl.addClass('error');
+                errorsStr = translate('unknowError');
+                if( _.isArray(error) ){
+                    errorsStr = '';
+                    for (var x in error){
+                        errorsStr += translate(error[x]) + '<br>';
+                        switch(error[x]) {
+                            case 'fullnameError':
+                                view.fullnameError.removeClass('hide');
+                                view.fullnameControl.addClass('error');
+                            break;
+                            case 'emailError':
+                                view.emailError.removeClass('hide');
+                                view.emailControl.addClass('error');
+                            break;
+                            case 'passwdError':
+                                view.passwdError.removeClass('hide');
+                                view.passwdControl.addClass('error');
+                            break;
+                            case 'useridError':
+                                view.usernameError.removeClass('hide');
+                                view.usernameControl.addClass('error');
+                            break;
+                            case 'openbalanceError':
+                                view.openbalanceError.removeClass('hide');
+                                view.openbalanceControl.addClass('error');
+                            break;
+                            case 'creditcardError':
+                                view.creditcardError.removeClass('hide');
+                                view.creditcardControl.addClass('error');
+                            break;
+                            case 'addressError':
+                                view.addressError.removeClass('hide');
+                                view.addressControl.addClass('error');
+                            break;
+                        }
                     }
-                    if (error[x] == 'emailError'){
-                        emailError.removeClass('hide');
-                        emailControl.addClass('error');
-                    }
-                    if (error[x] == 'passwdError'){
-                        passwdError.removeClass('hide');
-                        passwdControl.addClass('error');
-                    }
-                    if (error[x] == 'useridError'){
-                        usernameError.removeClass('hide');
-                        usernameControl.addClass('error');
-                    }
-                    if (error[x] == 'openbalanceError'){
-                        openbalanceError.removeClass('hide');
-                        openbalanceControl.addClass('error');
-                    }
-                    if (error[x] == 'creditcardError'){
-                        creditcardError.removeClass('hide');
-                        creditcardControl.addClass('error');
-                    }
-                    if (error[x] == 'addressError'){
-                        addressError.removeClass('hide');
-                        addressControl.addClass('error');
-                    }
-                };
-                
-                if (error in nano.strings){
-                    registrationError.find('h4.alert-heading').html(translate(error));
-                    registrationError.find('p').html(translate('errorOcurred'));
-                    registrationError.removeClass('hide');
-                } else {
-                    registrationError.find('h4.alert-heading').html(translate('ohSnap'));
-                    registrationError.find('p').html(translate('unknowError'));
-                    registrationError.removeClass('hide');
                 }
-                
+                else if (error.responseText)
+                {
+                    errorsStr = error.responseText;
+                }
+                view.registrationError.find('h4.alert-heading').html(translate('ohSnap'));
+                view.registrationError.find('p').html(errorsStr);
+                view.registrationError.removeClass('hide');
             }
         };
         
         if (emptyField == false){
             if(password == matchpasswd){
-                // Save the new account profile                
+                // Save the new account profile
                 this.model.save(
                     {
                         fullname: fullname,
@@ -222,8 +265,8 @@ nano.views.Registration = Backbone.View.extend({
                 );
             }
             else {
-                matchpasswdError.removeClass('hide');
-                matchpasswdControl.addClass('error');
+                view.matchpasswdError.removeClass('hide');
+                view.matchpasswdControl.addClass('error');
             }
         }
     },
