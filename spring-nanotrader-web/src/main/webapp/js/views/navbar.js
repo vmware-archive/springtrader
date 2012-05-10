@@ -1,6 +1,7 @@
 /**
  * View Class for the Navbar
  * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Kashyap Parikh
  */
 nano.views.Navbar = Backbone.View.extend({
 

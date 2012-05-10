@@ -1,5 +1,7 @@
 package org.springframework.nanotrader.mobile;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,11 @@ public class HomeController {
 	public String home(SitePreference sitePreference, Model model) {
 		if (sitePreference == SitePreference.MOBILE) {
 			return "home-mobile";
+			//return "redirect:http://m.testdomain.com:8080/spring-nanotrader-web" + request.getRequestURL();
 		} else {
 			return "home";
+			//return "redirect:http://testdomain.com:8080/spring-nanotrader-web"  + request.getRequestURL();
+			
 		}
 	}
 

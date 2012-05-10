@@ -9,7 +9,7 @@
     <% for(var i in orders) { %>
     <td>
         <span class="<%= (orders[i].orderstatus == 'closed' ? "completed" : "uncompleted") %>">
-            <%= (orders[i].orderstatus == 'closed' ? translate("completed") : translate("pending")) %>
+            <%= (orders[i].orderstatus == 'closed' ? translate("closed") : translate("cancelled")) %>
         </span>
     </td>
     <% } %>

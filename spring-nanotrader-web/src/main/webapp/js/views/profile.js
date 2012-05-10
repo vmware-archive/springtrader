@@ -1,6 +1,7 @@
 /**
  * View Class for Account Profile 
  * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Kashyap Parikh
  */
 nano.views.Profile = Backbone.View.extend({
     
@@ -10,7 +11,8 @@ nano.views.Profile = Backbone.View.extend({
     events : {
         'click #updateBtn' : 'update',
         'click #overview' : 'overview',
-        'click #help' : 'help'
+        'click #help' : 'help',
+        'click #admin' : 'admin'
     },
     
     /**
@@ -212,6 +214,9 @@ nano.views.Profile = Backbone.View.extend({
     
     help : function(){
         window.location = nano.conf.hash.help;
-    }
+    },
     
+    admin : function(){
+        window.location = nano.conf.hash.admin;
+    }
 });

@@ -56,7 +56,7 @@ def init() {
   //println "accountid:" + acctid
 }
 
-def Object getAuthToken(username='jack', password='jack') {
+def synchronized Object getAuthToken(username='jack', password='jack') {
   String authToken = ""
   int accountid = 1
   def user = username
@@ -121,6 +121,8 @@ def String getOrder(id, status, positive=true, responseCode=200, authToken=testA
                            query:[status:"${status}"],
                            headers:[API_TOKEN:authToken])
     }
+    //println "status:" + status
+    //println "resp.data:" + resp.data
     if (positive) {
       assert resp.status == 200
       //println "\n\n##################### ORDER DATA #####################"
@@ -386,6 +388,7 @@ def String getAllHoldingsForAccount(accountid, positive=true, responseCode=200) 
     if (positive) {
       assert resp.status == 200
       //println "\n\n##################### HOLDING DATA #####################"
+      //println "accountid:"+ accountid
       //println "DATA:" + resp.data + ":"
       data = resp.data
     }
@@ -466,8 +469,11 @@ def createQuote(companyName='newcompany', symbol='NCPY', positive=true, response
 def getPortfolioSummary(accountid=1, positive=true, responseCode=200) {
   try {
     def path = "/spring-nanotrader-services/api/account/" + accountid + "/holdingSummary"
+    println "path:" + path
     def resp = nanotrader.get(path:"${path}",
                               headers:[API_TOKEN:testAuthToken])
+    //println "portfoliosummary accountid:" + accountid
+    //println resp.data
     if (positive) {
       assert resp.status == 200
     }
@@ -490,6 +496,7 @@ def getMarketSummary(positive=true, responseCode=200) {
     def path = "/spring-nanotrader-services/api/marketSummary"
     def resp = nanotrader.get(path:"${path}",
                               headers:[API_TOKEN:testAuthToken])
+    //println resp.data
     if (positive) {
       assert resp.status == 200
     }
@@ -641,7 +648,22 @@ def deleteQuote(symbol='AAPL', responseCode=405) {
 
 def createRandomAccountProfile(count) {
   count.times {
-    createAccountProfile()
+    def now = Calendar.instance
+    def date = now.time
+    def millis = date.time
+    def testuser = "testuser"
+    testuser += millis
+    Random rand = new Random()
+    int range = 10000000
+    testuser += rand.nextInt(range)
+    println "testuser:" + testuser
+    createAccountProfile(testuser, false, 201, "testuser")
+    def jsonResponse = getAuthToken(testuser, "testuser")
+    testAuthToken = jsonResponse.authToken
+    acctid = jsonResponse.accountid
+    println "authtoken:" + testAuthToken
+    println "acctid:" + acctid
+    Thread.yield()
   }
 }
 
@@ -666,17 +688,22 @@ def createOrder(count) {
 
 
 def loadTest() {
-  500.times {
+  100.times {
     def th = Thread.start {
-      createRandomAccountProfile(200) 
-      getRandomAccountProfile(200)
-      getQuoteLoop(200)
+      nanotrader = new RESTClient(path)
+      createRandomAccountProfile(100)
+      100.times {
+        createOrder(acctid, 1, "buy", "VMW", true, 201, testAuthToken)
+      }
+      //getAllHoldingsForAccount(acctid)
+      //getRandomAccountProfile(200)
+      //getQuoteLoop(200)
     }
   }
 }
 
 def basicVerificationTests() {
-  //testGetOrder()
+  testGetOrder()
   testCreateOrder()
   //testUpdateOrder()
   testGetAccountProfile()
@@ -1185,10 +1212,15 @@ def testGetOrder() {
 def testCreateOrder() {
   totalCount++
   try {
-    createOrder(acctid, 555, 'buy', 'AAPL')
+    createOrder(acctid, 1, 'buy', 'AAPL')
     createOrder(acctid, 555, 'buy', 'invalid_quote', false, 400)
+    createOrder(acctid+1, 555, 'buy', 'AAPL', false, 401)
+    createOrder(acctid, 5, 'BOUGHT', 'AAPL', false, 400)
+    createOrder(acctid, 5000000, 'BUY', 'AAPL', false, 400)
 
     getOrder(acctid, "all")
+    getOrder(acctid, "closed")
+    getOrder(acctid, "cancelled")
 
     passCount++
     println "testCreateOrder PASS";
@@ -1678,13 +1710,18 @@ static main(args) {
   def inst = new NanoTraderRESTClient()
   inst.createFirstUser()
   inst.init()
+  //inst.loadTest()
+
   inst.basicVerificationTests()
   inst.unauthorizedVerificationTests()
   inst.unsupportedVerificationTests()
   inst.verificationTests()
   inst.endTests()
+
   inst.printSummary()
 }
+
+
 }
 
 
