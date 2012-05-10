@@ -434,21 +434,14 @@ public class TradingServiceImpl implements TradingService {
 
 	@Override
 	public List<Order> findOrdersByStatus(Integer accountId, String status, Integer page, Integer pageSize) {
+		List<Order> orders = null;
+
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrdersByStatus: accountId=" + accountId + " status=" + status);
 		}
-		List<Order> orders = null;
-
+		
 		orders = orderRepository.findOrdersByStatus(accountId, status, new PageRequest(page, pageSize));
-		if (orders != null && orders.size() > 0) {
-			// Loop over the orders to populate the lazy quote fields
-			for (Order order : orders) {
-				order.getQuote();
-			}
-			if ("closed".equals(status)) {
-				orderRepository.updateClosedOrders(accountId);
-			}
-		}
+		orders = processOrderResults(orders, accountId);
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrdersByStatus: completed successfully.");
 		}
@@ -464,13 +457,7 @@ public class TradingServiceImpl implements TradingService {
 			log.debug("TradingServices.findOrders: accountId=" + accountId);
 		}
 		orders = orderRepository.findOrdersByAccountAccountid_Accountid(accountId, new PageRequest(page, pageSize));
-
-		if (orders != null && orders.size() > 0) {
-			// Loop over the orders to populate the lazy quote fields
-			for (Order order : orders) {
-				order.getQuote();
-			}
-		}
+		orders = processOrderResults(orders, accountId);
 
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.findOrders: completed successfully.");
@@ -479,6 +466,17 @@ public class TradingServiceImpl implements TradingService {
 		return orders;
 	}
 
+	private List<Order> processOrderResults(List<Order> orders, Integer accountId) { 
+		if (orders != null && orders.size() > 0) {
+			// Loop over the orders to populate the lazy quote fields
+			for (Order order : orders) {
+				order.getQuote();
+			}
+			orderRepository.updateClosedOrders(accountId);
+		}
+		return orders;
+	}
+	
 	@Override
 	public Quote findQuoteBySymbol(String symbol) {
 		return quoteRepository.findBySymbol(symbol);
