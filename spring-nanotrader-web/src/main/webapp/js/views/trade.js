@@ -23,14 +23,6 @@ nano.views.Trade = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.trade)),
-    
-    /**
      * Renders the Trade View
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @param Object orders: Instance of nano.models.Orders
@@ -61,7 +53,7 @@ nano.views.Trade = Backbone.View.extend({
             }
         }
         // parse and render
-        this.$el.html(this.template(data));
+        this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.trade))(data));
         this.$el.show();
         this.quoteInput = this.$('#quote-input');
     },

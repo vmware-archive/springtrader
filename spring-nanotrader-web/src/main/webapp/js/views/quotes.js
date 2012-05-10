@@ -24,30 +24,6 @@ nano.views.Quotes = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.quotes)),
-
-    /**
-     * Templating function for the rows in the List of Orders
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    rowTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.quoteRow)),
-    
-    /**
-     * Templating function for the buy confirmation modal
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    modalTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal)),
-
-    /**
      * Renders the List Of Quotes View
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @param nano.models.Quotes model: Collection of quotes
@@ -64,7 +40,7 @@ nano.views.Quotes = Backbone.View.extend({
         
         // Render the List of Orders container
         if ( !this.$el.html() ){
-            this.$el.html(this.template());
+            this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.quotes))());
             this.tbody = this.$('#list-of-quotes > tbody');
         } else {
             var quoteResult = this.$('#quote-result');
@@ -94,7 +70,7 @@ nano.views.Quotes = Backbone.View.extend({
             price: this.model.get('price')
         };
         
-        this.tbody.append(this.rowTemplate(data));
+        this.tbody.append(_.template(nano.utils.getTemplate(nano.conf.tpls.quoteRow))(data));
         this.model = null;
         quoteResult.removeClass('hide');
     },
@@ -120,7 +96,7 @@ nano.views.Quotes = Backbone.View.extend({
         var onSuccess = function(model){
             nano.instances.router.trade(view.page);
             //--------------------------------------------------->>> Disabled the popup for now cause of defect: https://issuetracker.springsource.com/browse/NTR-45
-            //var popup = $( view.modalTemplate(model.toJSON()) );
+            //var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal))(model.toJSON()) );
             //popup.modal();
             view.$el.empty();
             nano.instances.router.trade(view.page);

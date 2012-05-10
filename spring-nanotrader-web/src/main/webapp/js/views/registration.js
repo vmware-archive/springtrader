@@ -26,14 +26,6 @@ nano.views.Registration = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.registration)),
-    
-    /**
      * Renders the Registration View
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
@@ -42,7 +34,7 @@ nano.views.Registration = Backbone.View.extend({
     render: function(errorKey) {
 
         if( !this.$el.html() ){
-            this.$el.html(this.template());
+            this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.registration))());
 
             if (errorKey)
             {

@@ -26,22 +26,6 @@ nano.views.Orders = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.orders)),
-
-    /**
-     * Templating function for the rows in the List of Orders
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    rowTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.orderRow)),
-
-    /**
      * Renders the List Of Orders View
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @param nano.models.Orders model: Collection of orders
@@ -72,7 +56,7 @@ nano.views.Orders = Backbone.View.extend({
             currentPage : page
         };
 
-        this.$el.html(this.template(data));
+        this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.orders))(data));
 
         this.tbody = this.$('#list-of-orders > tbody'); // tbody of the orders list
         this.paginators = this.$('#loo-pagination > li.g2p'); // Paginator controls
@@ -149,9 +133,10 @@ nano.views.Orders = Backbone.View.extend({
      * @return void
      */
     renderRows: function(page) {
+
         var i = 0;
         var length = this.model.length;
-        
+
         if (nano.utils.isMobile()){
             var rows = this.tbody.html('');
 
@@ -160,13 +145,13 @@ nano.views.Orders = Backbone.View.extend({
             {
                 orders.push(_.extend(this.model.at(i).toJSON(), {i:i}));
             }
-            rows.append( this.rowTemplate({orders : orders}) );
+            rows.append( _.template(nano.utils.getTemplate(nano.conf.tpls.orderRow))({orders : orders}) );
         }
         else
         {
             var rows = this.tbody.html('');
             for ( i; i < length; ++i ) {
-                rows.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
+                rows.append( _.template(nano.utils.getTemplate(nano.conf.tpls.orderRow))(_.extend(this.model.at(i).toJSON(), {i:i})) );
             }
         }
     },
@@ -220,7 +205,7 @@ nano.views.Orders = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @return void
      */
-    noOrders : function(){
+    noOrders : function() {
         var htmlId = this.$('#no-orders');
         htmlId.html(_.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}) );
     }

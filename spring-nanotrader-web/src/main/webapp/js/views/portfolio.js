@@ -16,14 +16,6 @@
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.portfolio)),
-
-    /**
      * Renders the Portfolio View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param Object account: Instance of nano.models.account
@@ -39,7 +31,7 @@
         {
             this.account = account;
         }
-        this.$el.html(this.template());
+        this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.portfolio))());
         this.$el.show();
 
         var totalAssets = portfolioSummary.get('totalMarketValue') + account.get('balance');

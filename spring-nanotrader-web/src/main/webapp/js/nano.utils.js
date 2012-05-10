@@ -12,7 +12,8 @@ var nano = {
     strings : {},
     conf : {},
     session : {},
-    device : 'computer'
+    device : 'computer',
+    cache : {tpls : {}},
 };
 
 /**
@@ -201,11 +202,14 @@ nano.utils.round = function (number, decimals) {
  * @return Object
  */
 nano.utils.getTemplate = function(url){
-    var response = $.ajax(url, {
-        async : false,
-        dataTypeString : 'html'
-    });
-    return response.responseText;
+    if ( !nano.cache.tpls[url] ) {
+        var response = $.ajax(url, {
+            async : false,
+            dataTypeString : 'html'
+        });
+        nano.cache.tpls[url] = response.responseText;
+    }
+    return nano.cache.tpls[url];
 };
 
 /**

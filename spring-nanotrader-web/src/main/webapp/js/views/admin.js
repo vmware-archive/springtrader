@@ -25,22 +25,15 @@ nano.views.Admin = Backbone.View.extend({
     },
 
     /**
-     * Templating function (injects data into an HTML Template)
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.admin)),
-    
-    /**
      * Renders the Admin View
      * @param Object orders: Instance of nano.models.Orders
      * @return void
      */
     render: function(errorKey) {
-        
+
         if ( !this.$el.html() )
         {
-            this.$el.html(this.template());
+            this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.admin))());
         }
         if (errorKey)
         {

@@ -17,14 +17,6 @@ nano.views.PortfolioSummary = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.portfolioSummary)),
-
-    /**
      * Renders the Portfolio Summary View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param Object model: Instance of nano.models.PortfolioSummary
@@ -35,7 +27,7 @@ nano.views.PortfolioSummary = Backbone.View.extend({
         {
             this.model = model;
         }
-        var portfolioSummary = this.template(this.model.toJSON());
+        var portfolioSummary = _.template(nano.utils.getTemplate(nano.conf.tpls.portfolioSummary))(this.model.toJSON());
         this.$el.html(portfolioSummary);
         this.$el.show();
 

@@ -17,14 +17,6 @@ nano.views.MarketSummary = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.marketSummary)),
-
-    /**
      * Renders the Market Summary View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param Object model: Instance of nano.models.MarketSummary
@@ -35,7 +27,7 @@ nano.views.MarketSummary = Backbone.View.extend({
         {
             this.model = model;
         }
-        var marketSummaryTpl = this.template(this.model.toJSON());
+        var marketSummaryTpl = _.template( nano.utils.getTemplate(nano.conf.tpls.marketSummary) )(this.model.toJSON());
         this.$el.html(marketSummaryTpl);
 
         //Cache the jQuery objects of the MS view

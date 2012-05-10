@@ -24,20 +24,12 @@ nano.views.Footer = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.footer)),
-
-    /**
      * Renders the Account Summary View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @return void
      */
     render: function() {
-            var footer = this.template();
+            var footer = _.template(nano.utils.getTemplate(nano.conf.tpls.footer))();
             this.$el.html(footer);
     },
 
