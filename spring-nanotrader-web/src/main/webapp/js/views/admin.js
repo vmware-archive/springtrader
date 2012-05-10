@@ -50,6 +50,7 @@ nano.views.Admin = Backbone.View.extend({
      */
     setUsers : function (event){
         event.preventDefault();
+        this.$('#setUsersBtn').attr("disabled", "disabled");
         var count = this.$('#user-count').val();
         var adminError = this.$('#admin-error');
         nano.utils.setUsers(count, {
