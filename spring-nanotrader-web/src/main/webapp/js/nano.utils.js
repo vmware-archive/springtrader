@@ -389,6 +389,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
                 usercount : userCount
             }),
             success : function(data, textStatus, jqXHR){
+                $('#setUsersBtn').removeAttr("disabled", "disabled");
                 //logout current user.
                 $('#showprogress').remove();
                 $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPopComplete') + '</div>');
