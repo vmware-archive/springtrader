@@ -9,7 +9,7 @@ nano.views.Quotes = Backbone.View.extend({
      */
     events : {
         'click #buyBtn' : 'buy',
-        'keypress [type=number]' : 'validateNumber'
+        'keypress [type=number]' : 'checkEnter'
     },
 
     /**
@@ -73,6 +73,16 @@ nano.views.Quotes = Backbone.View.extend({
         this.tbody.append(_.template(nano.utils.getTemplate(nano.conf.tpls.quoteRow))(data));
         this.model = null;
         quoteResult.removeClass('hide');
+    },
+
+    checkEnter : function(event) {
+      if (event.which == 13) {
+        $('#buyBtn').trigger('click');
+        return true;
+      }
+      else {
+        return nano.utils.validateNumber(event);
+      }
     },
 
     /**
