@@ -12,7 +12,8 @@ var nano = {
     strings : {},
     conf : {},
     session : {},
-    device : 'computer'
+    device : 'computer',
+    cache : {tpls : {}},
 };
 
 /**
@@ -41,7 +42,14 @@ nano.utils.translate = function translate(key) {
  * @return Object: Session data
  */
 nano.utils.getSession = function() {
-    return $.cookie( nano.conf.sessionCookieName );
+    var session = null;
+
+    if ($.cookie)
+    {
+        session = $.cookie( nano.conf.sessionCookieName )
+    }
+
+    return session;
 };
 
 /**
@@ -110,12 +118,21 @@ nano.utils.logout = function(callbacks){
         headers : nano.utils.getHttpHeaders(),
         dataType : 'json',
         success : function(data, textStatus, jqXHR) {
-            if (_.isFunction(callbacks.success)) {
+
+            if (_.isObject(callbacks) && _.isFunction(callbacks.success)) {
                 callbacks.success();
+            }
+
+            // Clear the html from the containers
+            for (var i in nano.containers)
+            {
+                if( i !== 'login' && i !== 'marketSummary' ){
+                    nano.containers[i].empty();
+                }
             }
         },
         error : function(jqXHR, textStatus, errorThrown) {
-            if (_.isFunction(callbacks.error)) {
+            if (_.isObject(callbacks) && _.isFunction(callbacks.error)) {
                 callbacks.error(jqXHR, textStatus, errorThrown);
             }
         }
@@ -185,11 +202,14 @@ nano.utils.round = function (number, decimals) {
  * @return Object
  */
 nano.utils.getTemplate = function(url){
-    var response = $.ajax(url, {
-        async : false,
-        dataTypeString : 'html'
-    });
-    return response.responseText;
+    if ( !nano.cache.tpls[url] ) {
+        var response = $.ajax(url, {
+            async : false,
+            dataTypeString : 'html'
+        });
+        nano.cache.tpls[url] = response.responseText;
+    }
+    return nano.cache.tpls[url];
 };
 
 /**

@@ -24,23 +24,16 @@ nano.views.Contact = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.contact)),
-    
-    /**
      * Renders the Contact View
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
      * @return void
      */
     render: function() {
+
         if ( !this.$el.html() )
         {
-            var contact = this.template();
+            var contact = _.template(nano.utils.getTemplate(nano.conf.tpls.contact))();
             this.$el.html(contact);
         }
         this.$el.show();

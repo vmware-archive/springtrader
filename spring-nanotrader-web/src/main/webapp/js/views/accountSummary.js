@@ -17,14 +17,6 @@ nano.views.AccountSummary = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.accountSummary)),
-
-    /**
      * Renders the Account Summary View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param Object account: Instance of nano.models.account
@@ -32,6 +24,8 @@ nano.views.AccountSummary = Backbone.View.extend({
      * @return void
      */
      render : function(account, portfolioSummary) {
+
+        // Set the models
         if (portfolioSummary)
         {
             this.portfolioSummary = portfolioSummary;
@@ -41,7 +35,8 @@ nano.views.AccountSummary = Backbone.View.extend({
             this.account = account;
         }
         var data = _.extend(portfolioSummary.toJSON(), account.toJSON());
-        var accountSummary = this.template(data);
+
+        var accountSummary = _.template(nano.utils.getTemplate(nano.conf.tpls.accountSummary))(data);
         this.$el.html(accountSummary);
         this.$el.show();
 

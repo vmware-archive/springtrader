@@ -27,14 +27,6 @@ nano.views.Profile = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.profile)),
-    
-    /**
      * Renders the Registration View
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
@@ -54,9 +46,9 @@ nano.views.Profile = Backbone.View.extend({
             }
             
             var data = this.model.toJSON()
-            data.creditcard = '************' + this.ccSlice;
+            data.creditcard = String('****************' + this.ccSlice).slice(-1 * data.creditcard.length);
             // template
-            var profile = this.template(data);
+            var profile = _.template(nano.utils.getTemplate(nano.conf.tpls.profile))(data);
             
             this.$el.html(profile);
         }

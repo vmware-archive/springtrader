@@ -26,22 +26,6 @@ nano.views.Orders = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.orders)),
-
-    /**
-     * Templating function for the rows in the List of Orders
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    rowTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.orderRow)),
-
-    /**
      * Renders the List Of Orders View
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @param nano.models.Orders model: Collection of orders
@@ -49,13 +33,16 @@ nano.views.Orders = Backbone.View.extend({
      * @return void
      */
     render: function(model, page, hash) {
-        if (model){
+
+        if (model) {
             this.model = model;
         }
 
-        if (hash){
+        if (hash) {
             this.hash = hash;
         }
+
+        var freshRender = this.$el.html() == '';
 
         // Store the total amount of pages
         this.pageCount = Math.ceil(this.model.totalRecords / this.model.pageSize);
@@ -68,29 +55,16 @@ nano.views.Orders = Backbone.View.extend({
             pageCount : this.pageCount,
             currentPage : page
         };
-        
-        this.$el.html(this.template(data));
-        
-        // Check the device
-        if (nano.utils.isMobile()){
-            // Set a table variable for store the rows on a mobile device
-            this.table = this.$('#orders-content > table');
-        } else {
-            // tbody variable used for store the rows on a computer device.
-            this.tbody = this.$('#list-of-orders > tbody');
-        }
-        
-        // Paginator controls
-        this.paginators = this.$('#loo-pagination > li.g2p');
-        this.previous = this.$('#loop-previous');
-        this.next = this.$('#loop-next');
-            
-        // Toggle Control
-        this.toggleControl = this.$('#toggle-orders-control');
-        // Orders Control
-        this.ordersControl = this.$('#orders-control');
-        // Orders Pagination Control
-        this.paginationControl = this.$('#pagination-control');
+
+        this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.orders))(data));
+
+        this.tbody = this.$('#list-of-orders > tbody'); // tbody of the orders list
+        this.paginators = this.$('#loo-pagination > li.g2p'); // Paginator controls
+        this.previous = this.$('#loop-previous'); // "previous" link control
+        this.next = this.$('#loop-next'); // "next" link control 
+        this.toggleControl = this.$('#toggle-orders-control'); // Toggle Control
+        this.ordersControl = this.$('#orders-control'); // Orders Control
+        this.paginationControl = this.$('#pagination-control'); // Orders Pagination Control
 
         // For some reason, the div needs to be showing
         // before doing the collapsing functions
@@ -100,20 +74,19 @@ nano.views.Orders = Backbone.View.extend({
         {
             nano.utils.setCollapsable(this);
         }
-        
+
         // Check the hast and enable or disable the toggle list functionality
-        if (this.hash.indexOf('dashboard') != -1){
+        if ( this.hash == nano.conf.hash.dashboard || this.hash == nano.conf.hash.dashboardWithPage ) {
             this.toggleControl.removeClass('hide');
             this.$('#orders-control div.title').addClass('hide');
-            
-            
-            if(this.toggleControl.hasClass('active')){
-                this.ordersControl.show();
-                this.paginationControl.show();
-            } else {
+
+            // Collapse the toggle only if it's a fresh render
+            if( freshRender ){
+                this.toggleControl.addClass('active');
                 this.ordersControl.hide();
                 this.paginationControl.hide();
             }
+
         } else {
             this.toggleControl.addClass('hide');
             this.$('#orders-control div.title').removeClass('hide');
@@ -122,7 +95,7 @@ nano.views.Orders = Backbone.View.extend({
         }
 
         //Set the page number on the paginator
-        this.paginators.removeClass('active');        
+        this.paginators.removeClass('active');
 
         if (page == 1){
             this.previous.addClass('disabled');
@@ -160,24 +133,25 @@ nano.views.Orders = Backbone.View.extend({
      * @return void
      */
     renderRows: function(page) {
+
         var i = 0;
         var length = this.model.length;
-        
+
         if (nano.utils.isMobile()){
-            var rows = this.table.html('');
+            var rows = this.tbody.html('');
 
             var orders = [];
             for ( i; i < length; ++i )
             {
                 orders.push(_.extend(this.model.at(i).toJSON(), {i:i}));
             }
-            rows.append( this.rowTemplate({orders : orders}) );
+            rows.append( _.template(nano.utils.getTemplate(nano.conf.tpls.orderRow))({orders : orders}) );
         }
         else
         {
             var rows = this.tbody.html('');
             for ( i; i < length; ++i ) {
-                rows.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
+                rows.append( _.template(nano.utils.getTemplate(nano.conf.tpls.orderRow))(_.extend(this.model.at(i).toJSON(), {i:i})) );
             }
         }
     },
@@ -215,21 +189,15 @@ nano.views.Orders = Backbone.View.extend({
         }
     },
     
-    /**
-     * Click event for the toggle button
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
-     * @return void
-     */
+   /**
+    * Click event for the toggle button
+    * @author Jean Chassoul <jean.chassoul@lognllc.com>
+    * @return void
+    */
     toggle : function(event){
-        if(this.toggleControl.hasClass('active')) {
-            this.ordersControl.hide();
-            this.paginationControl.hide();
-            this.toggleControl.removeClass('active');
-        } else {
-            this.ordersControl.show();
-            this.paginationControl.show();
-            this.toggleControl.addClass('active');
-        }
+        this.toggleControl.toggleClass('active');
+        this.ordersControl.toggle();
+        this.paginationControl.toggle();
     },
     
     /**
@@ -237,7 +205,7 @@ nano.views.Orders = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @return void
      */
-    noOrders : function(){
+    noOrders : function() {
         var htmlId = this.$('#no-orders');
         htmlId.html(_.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}) );
     }

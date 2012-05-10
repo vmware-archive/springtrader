@@ -37,19 +37,12 @@ nano.views.Navbar = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.navbar)),
-
-    /**
      * Renders the Nav Bar View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @return void
      */
      render : function(hash) {
+
         if (!hash)
         {
             var hash = nano.conf.hash.dashboard;
@@ -57,7 +50,7 @@ nano.views.Navbar = Backbone.View.extend({
     
         if ( !this.$el.html() )
         {
-            this.$el.html(this.template(nano.session));
+            this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.navbar))(nano.session));
 
             // Enable the dropdown for the User Profile options on the right
             this.$('.dropdown-toggle').dropdown(); 

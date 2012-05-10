@@ -52,7 +52,41 @@ Backbone.sync = function(method, model, options)
     options.headers = nano.utils.getHttpHeaders();
 
     return Backbone._sync_orig(method, model, options);
-}
+};
+
+/**
+ * Opposite to the Backbone.sycn function, we need to rewrite the function that will parse the
+ * Object with Javascript Date() objects into the format that the Nanotrader API is expecting
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ */
+Backbone.Model.prototype.toJSON = function()
+{
+    var attributes = _.clone(this.attributes);
+    for (var attr in attributes)
+    {
+        var value = attributes[attr];
+        if ( _.isDate(value) )
+        {
+            // Fetch the year, month and day
+            var date = {
+                year  : value.getFullYear().toString(),
+                month : value.getMonth().toString(),
+                day   : value.getDate().toString()
+            };
+            // Add a zero padding if it's a month or day with only one number: 1 => 01
+            for (var i in date)
+            {
+                if (date[i].length == 1)
+                {
+                       date[i] = '0' + date[i];
+                }
+            }
+            attributes[attr] = date.year + '-' + date.month + '-' + date.day;
+        }
+    }
+    return attributes;
+};
+
 
 /**
  * Model to interact with the Account Object
@@ -86,7 +120,7 @@ nano.models.AccountProfile = Backbone.Model.extend({
         //rePasswd = new RegExp();
         reUserid = new RegExp(/^\b[\w\d]{3,25}\b$/);
         reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/);
-        reCreditcard = new RegExp(/^\b[\d]{16}\b$/);
+        reCreditcard = new RegExp(/^\b[\d]{15,16}\b$/);
         //reAddress = new RegExp();
         var errors = [];
         
@@ -135,7 +169,12 @@ nano.models.PortfolioSummary = Backbone.Model.extend({
     },
     urlRoot : nano.conf.urls.portfolioSummary,
     url: function() {
-        return this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+        var url = this.urlRoot.replace(nano.conf.accountIdUrlKey, this.accountid);
+        if (!this.isNew())
+        {
+            url += '/' + this.id;
+        }
+        return url;
     }
 });
 

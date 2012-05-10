@@ -26,30 +26,6 @@ nano.views.Holdings = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.holdings)),
-
-    /**
-     * Templating function for the rows in the List of Holdings
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    rowTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow)),
-
-    /**
-     * Templating function for the rows in the List of Holdings
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    modalTemplate : _.template(nano.utils.getTemplate(nano.conf.tpls.holdingModal)),
-
-    /**
      * Renders the List Of Holdings View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param nano.models.Holdings model: Collection of holdings
@@ -89,7 +65,7 @@ nano.views.Holdings = Backbone.View.extend({
                 data.totalGainLoss += holding.get( "gainLoss");
             });
 
-            var tpl = this.template(data);
+            var tpl = _.template( nano.utils.getTemplate(nano.conf.tpls.holdings) )(data);
             this.$el.html(tpl);
             this.tbody = this.$('#list-of-holdings > tbody');
             
@@ -143,13 +119,13 @@ nano.views.Holdings = Backbone.View.extend({
             {
                 holdings.push(_.extend(this.model.at(i).toJSON(), {i:i}));
             }
-            this.tbody.append( this.rowTemplate({holdings : holdings}) );
+            this.tbody.append( _.template( nano.utils.getTemplate(nano.conf.tpls.holdingRow) )({holdings : holdings}) );
         }
         else
         {
             for ( i; i < length; ++i )
             {
-                this.tbody.append( this.rowTemplate(_.extend(this.model.at(i).toJSON(), {i:i})) );
+                this.tbody.append( _.template( nano.utils.getTemplate(nano.conf.tpls.holdingRow) )(_.extend(this.model.at(i).toJSON(), {i:i})) );
             }
         }
     },
@@ -197,7 +173,7 @@ nano.views.Holdings = Backbone.View.extend({
     showModal : function(evt){
         var i = $(evt.target).attr('index');
         var model = this.model.at(i);
-        var popup = $( this.modalTemplate(model.toJSON()) );
+        var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.holdingModal))(model.toJSON()) );
         var view = this;
         popup.modal();
         popup.find('#loh-sell').click(function(){

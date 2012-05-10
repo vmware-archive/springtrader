@@ -8,12 +8,12 @@
 <div class="row clearfix">
         <div class="span9 columns">
             <form class="form-horizontal">
+                <div id="registration-error" class="hide span3 alert alert-block alert-error fade in">
+                    <a data-dismiss="alert" class="close">x</a>
+                    <h4 class="alert-heading"></h4>
+                    <p></p>
+                </div>
                 <fieldset>
-                    <div id="registration-error" class="hide span8 alert alert-block alert-error fade in">
-                        <a data-dismiss="alert" class="close">x</a>
-                        <h4 class="alert-heading"></h4>
-                        <p></p>
-                    </div>
                     <div class="span4">
                         <div id="fullname-control" class="control-group">
                             <label for="fullname-input" class="control-label"><%= translate("fullName") %>:</label>
@@ -62,7 +62,7 @@
                         <div id="creditcard-control" class="control-group">
                             <label class="control-label"><%= translate("creditCardNumber") %>:</label>
                             <div class="controls">
-                                <input type="text" value="" id="creditcard-input" class="input-xlarge focused"><br/>
+                                <input type="text" value="" id="creditcard-input" class="input-xlarge focused" maxlength="16"><br/>
                                 <span id="creditcardError" class="help-inline hide"><%= translate("creditcardError") %></span>
                             </div>
                         </div>

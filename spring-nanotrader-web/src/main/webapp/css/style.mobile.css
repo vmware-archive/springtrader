@@ -213,8 +213,6 @@ body {
 .sidebar {
 	background:#edefef;
 	padding:20px;
-	padding-bottom:5000px;
-	margin-bottom:-5000px;
 }
 
 .row.clearfix {
@@ -836,10 +834,6 @@ table td input {
 
 .container.profile-page .span2.columns.sidebar {
 	width:200px;
-}
-
-.profile-header {
-	padding:0 20px;
 }
 
 .sidebar .nav-tabs.nav-stacked > li:first-child > a, .sidebar .nav-tabs.nav-stacked > li > a {

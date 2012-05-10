@@ -26,14 +26,6 @@ nano.views.Overview = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.overview)),
-    
-    /**
      * Renders the Overview View
      * @author Jean Chassoul <jean.chassoul@lognllc.com>
      * @return void
@@ -41,7 +33,7 @@ nano.views.Overview = Backbone.View.extend({
     render: function() {
         if ( !this.$el.html() )
         {
-            this.$el.html(this.template());
+            this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.overview))());
         }
         this.$el.show();
     },

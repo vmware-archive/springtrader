@@ -24,14 +24,6 @@ nano.views.Login = Backbone.View.extend({
     },
 
     /**
-     * Templating function (inyects data into an HTML Template)
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @param Object data: data to be replaced in the template
-     * @return string
-     */
-    template : _.template(nano.utils.getTemplate(nano.conf.tpls.login)),
-
-    /**
      * Renders the Login View
      * @author Carlos Soto <carlos.soto@lognllc.com>
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
@@ -40,7 +32,7 @@ nano.views.Login = Backbone.View.extend({
      render: function(errorKey) {
             if ( !this.$el.html() )
             {
-                var login = this.template();
+                var login = _.template( nano.utils.getTemplate(nano.conf.tpls.login) )();
                 this.$el.html(login);
                 if (errorKey)
                 {
