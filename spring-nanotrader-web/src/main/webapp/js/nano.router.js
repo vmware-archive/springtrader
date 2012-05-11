@@ -274,6 +274,7 @@ nano.Router = Backbone.Router.extend({
         }
         if(nano.utils.loggedIn()) {
             nano.utils.hideAll();
+            // Hide the loading Message
             nano.containers.loading.show();
             nano.instances.navbar.render(nano.conf.hash.trade);
             
@@ -292,7 +293,11 @@ nano.Router = Backbone.Router.extend({
                 nano.instances.quotes.render();
             };
             
+            // Fetch the info for the Orders page we need
             model.fetch({
+                data : {
+                    page : page
+                },
                 success : onFetchSuccess,
                 error: nano.utils.onApiErreor
             });
@@ -341,26 +346,27 @@ nano.Router = Backbone.Router.extend({
     },
     
     quotes: function(quote) {
-        if (!nano.containers.quotes.html()) {
-            this.trade();
-        }
-        else {
+        var renderQuote = function(quote){
+            // Fetch the info for the given quote symbol
             var model = new nano.models.Quote({ quoteid : quote });
             
-            var onFetchSuccess = function() {
-                // Render the quotes list
-                nano.instances.quotes.render(model, quote);
-                nano.instances.trade.error(false)
-            };
-        
-            var onError = function() {
-                nano.instances.trade.error(true)
-            };
-            
             model.fetch({
-                success : onFetchSuccess,
-                error: onError
+                success : function(model, response){
+                    // Render the quote
+                    nano.instances.quotes.render(model, quote);
+                    nano.instances.trade.error(false)
+                },
+                error: function(){
+                    nano.instances.trade.error(true);
+                }
             });
+        }
+        if (!nano.containers.quotes.html()) {
+            this.trade();
+            renderQuote(quote);
+        }
+        else {
+            renderQuote(quote);
         }
         nano.instances.footer.render();
     },

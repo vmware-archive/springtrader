@@ -228,6 +228,19 @@ nano.models.Order = Backbone.Model.extend({
         }
         return url;
     },
+    
+    // Order model validation
+    validate: function(attrs){
+        var errors = [];
+        
+        // quantity validation
+        if (attrs.quantity < 1){
+            errors.push("quantityError");
+        }
+        if (errors.length > 0){
+            return errors
+        }
+    }
 });
 
 /**
