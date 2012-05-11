@@ -1,8 +1,8 @@
 <tr>
     <td><%= orderid %></td>
     <td>
-        <span class="<%= (orderstatus == 'closed' ? "completed" : "uncompleted") %>">
-            <%= (orderstatus == 'closed' ? translate("closed") : translate("cancelled")) %>
+        <span class="<%= (orderstatus == 'completed' ? "completed" : "uncompleted") %>">
+            <%= (orderstatus == 'closed' ? translate("closed") : (orderstatus == 'completed' ? translate("completed") : translate("cancelled")) ) %>
         </span>
     </td>
     <td><%= opendate %></td>

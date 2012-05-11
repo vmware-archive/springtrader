@@ -403,6 +403,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
                 });
             },
             error : function(jqXHR, textStatus, errorThrown){
+                $('#showprogress').remove();
                 if (_.isFunction(callbacks.error))
                 {
                     callbacks.error(jqXHR, textStatus, errorThrown);
