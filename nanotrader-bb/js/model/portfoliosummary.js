@@ -1,1 +1,0 @@
-PortfolioSummary = Backbone.Model.extend({});
