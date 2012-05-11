@@ -12,8 +12,8 @@
             <tr>
                 <td><%= translate("orderStatus") %>:</td>
                 <td>
-                    <span class="<%= (orderstatus == 'closed' ? "completed" : "uncompleted") %>">
-                        <%= (orderstatus == 'closed' ? translate("closed") : translate("cancelled")) %>
+                    <span class="<%= (orderstatus == 'completed' ? "completed" : "uncompleted") %>">
+                        <%= (orderstatus == 'closed' ? translate("closed") : (orderstatus == 'completed' ? translate("completed") : translate("cancelled")) ) %>
                     </span>
                 </td>
             </tr>
