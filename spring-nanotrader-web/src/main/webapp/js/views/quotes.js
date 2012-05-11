@@ -9,7 +9,7 @@ nano.views.Quotes = Backbone.View.extend({
      */
     events : {
         'click #buyBtn' : 'buy',
-        'keypress [type=number]' : 'validateNumber'
+        'keypress [type=number]' : 'checkEnter'
     },
 
     /**
@@ -75,6 +75,16 @@ nano.views.Quotes = Backbone.View.extend({
         quoteResult.removeClass('hide');
     },
 
+    checkEnter : function(event) {
+      if (event.which == 13) {
+        $('#buyBtn').trigger('click');
+        return true;
+      }
+      else {
+        return nano.utils.validateNumber(event);
+      }
+    },
+
     /**
      * Validates that the input can only receive digits
      * @author Carlos Soto <carlos.soto@lognllc.com>
@@ -95,33 +105,10 @@ nano.views.Quotes = Backbone.View.extend({
         
         var onSuccess = function(model){
             nano.instances.router.trade(view.page);
-            //--------------------------------------------------->>> Disabled the popup for now cause of defect: https://issuetracker.springsource.com/browse/NTR-45
-            //var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal))(model.toJSON()) );
-            //popup.modal();
+            var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal))(model.toJSON()) );
+            popup.modal();
             view.$el.empty();
             nano.instances.router.trade(view.page);
-        };
-        
-        var onError = function(model, error){
-            //var buyError = this.$('#buy-error');
-            
-            errorsStr = translate('unknowError');
-            if( _.isArray(error) ){
-                errorsStr = '';
-                for (var x in error){
-                    errorsStr += translate(error[x]) + '<br>';
-                    switch(error[x]) {
-                        case 'quantityError':
-                            alert('quantityError!');
-                            //buyError.removeClass('hide');
-                            break;
-                        default:
-                            // Error Message!
-                            alert('An unknown error has occured, please try again later.');
-                            break;
-                    }
-                }
-            }
         };
 
         var order = new nano.models.Order({ accountid : nano.session.accountid });
@@ -131,8 +118,8 @@ nano.views.Quotes = Backbone.View.extend({
             quote : {symbol: this.symbol}
             },
             {
-                success: onSuccess,
-                error: onError
+                success: onSuccess, 
+                error: nano.utils.onApiErreor
             }
         );
     }
