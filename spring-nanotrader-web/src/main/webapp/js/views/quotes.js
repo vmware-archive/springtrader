@@ -105,9 +105,8 @@ nano.views.Quotes = Backbone.View.extend({
         
         var onSuccess = function(model){
             nano.instances.router.trade(view.page);
-            //--------------------------------------------------->>> Disabled the popup for now cause of defect: https://issuetracker.springsource.com/browse/NTR-45
-            //var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal))(model.toJSON()) );
-            //popup.modal();
+            var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal))(model.toJSON()) );
+            popup.modal();
             view.$el.empty();
             nano.instances.router.trade(view.page);
         };

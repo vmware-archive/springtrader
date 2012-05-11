@@ -288,6 +288,25 @@ nano.utils.printCurrency = function(amount, decimals) {
 }
 
 /**
+ * Prints a Date Javascript Objet into a nicer format
+ * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @param Object Date: Javascript Date object to print
+ * @param format: Date format: http://code.google.com/p/datejs/wiki/FormatSpecifiers
+ * @return Object
+ */
+nano.utils.printDate = function(date, format) {
+    format = format || "MM-dd-yyyy HH:mm:ss";
+    date = date || new Date();
+    var dateStr = 'NaD';
+    if (_.isDate(date))
+    {
+        dateStr = date.toString(format);
+    }
+    return dateStr;
+}
+
+
+/**
  * @author Carlos Soto <carlos.soto@lognllc.com>
  * Handles API errors
  * @param int amount: number to add the currency to
@@ -440,4 +459,5 @@ nano.utils.setUsers = function(userCount, callbacks) {
  */
 var translate = nano.utils.translate;
 var printCurrency = nano.utils.printCurrency;
+var printDate = nano.utils.printDate;
 var round = nano.utils.round;
