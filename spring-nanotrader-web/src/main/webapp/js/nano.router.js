@@ -268,7 +268,7 @@ nano.Router = Backbone.Router.extend({
         nano.instances.footer.render();
     },
 
-    trade: function(page) {
+    trade: function(page, quote) {
         if (isNaN(page)){
             page = 1;
         }
@@ -289,8 +289,28 @@ nano.Router = Backbone.Router.extend({
                 // Render the List of Orders View
                 nano.instances.orders.render(model, page, nano.conf.hash.tradeWithPage);
                 
-                // Render the List of Quotes View
-                nano.instances.quotes.render();
+                // Render the Quotes View
+                if (quote){
+
+                    nano.instances.quotes.render();
+                    
+
+                    // Fetch the info for the given quote symbol
+                    var quotes = new nano.models.Quote({ quoteid : quote });
+            
+                    quotes.fetch({
+                        success : function(quotes, response){
+                            // Render the quote
+                            nano.instances.quotes.render(quotes, quote);
+                            nano.instances.trade.error(true)
+                        },
+                        error: function(){
+                            nano.instances.trade.error(true);
+                        }
+                    });
+                } else {
+                    nano.instances.quotes.render();
+                }
             };
             
             // Fetch the info for the Orders page we need
@@ -362,8 +382,7 @@ nano.Router = Backbone.Router.extend({
             });
         }
         if (!nano.containers.quotes.html()) {
-            this.trade();
-            renderQuote(quote);
+            this.trade(1, quote);
         }
         else {
             renderQuote(quote);

@@ -14,3 +14,11 @@
         </table>
     </div>
 </div>
+
+<div class="span6">
+    <div id="buy-error" class="hide span6 alert alert-block alert-error fade in">
+        <a data-dismiss="alert" class="close">x</a>
+        <h4 class="alert-heading"></h4>
+        <p></p>
+    </div>
+</div>

@@ -101,6 +101,28 @@ nano.views.Quotes = Backbone.View.extend({
             view.$el.empty();
             nano.instances.router.trade(view.page);
         };
+        
+        var onError = function(model, error){
+            //var buyError = this.$('#buy-error');
+            
+            errorsStr = translate('unknowError');
+            if( _.isArray(error) ){
+                errorsStr = '';
+                for (var x in error){
+                    errorsStr += translate(error[x]) + '<br>';
+                    switch(error[x]) {
+                        case 'quantityError':
+                            alert('quantityError!');
+                            //buyError.removeClass('hide');
+                            break;
+                        default:
+                            // Error Message!
+                            alert('An unknown error has occured, please try again later.');
+                            break;
+                    }
+                }
+            }
+        };
 
         var order = new nano.models.Order({ accountid : nano.session.accountid });
         order.save({
@@ -109,8 +131,8 @@ nano.views.Quotes = Backbone.View.extend({
             quote : {symbol: this.symbol}
             },
             {
-                success: onSuccess, 
-                error: nano.utils.onApiErreor
+                success: onSuccess,
+                error: onError
             }
         );
     }
