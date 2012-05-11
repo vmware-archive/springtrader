@@ -13,6 +13,7 @@ update nanotrader.properties before running 'createSchema'
     dbAdminPassword=postgres
 
 You can also create nanoTrader database by running sql scripts in psql
+
     cd nanotrader/tests/src/main/resources
     psql -U postgres -f nanotrader-database.sql
     psql -U nanotrader -W nanotrader -f nanotrader-tables.ddl
