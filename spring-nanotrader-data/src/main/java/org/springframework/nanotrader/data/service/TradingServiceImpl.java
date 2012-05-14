@@ -98,12 +98,14 @@ public class TradingServiceImpl implements TradingService {
 	@Override
 	public void logout(String authtoken) {
 		Accountprofile accountProfile = accountProfileRepository.findByAuthtoken(authtoken);
-		accountProfile.setAuthtoken(null); // remove token
-		accountProfileRepository.save(accountProfile);
-		Set<Account> accounts = accountProfile.getAccounts();
-		for (Account account : accounts) {
-			account.setLogoutcount(account.getLogoutcount() + 1);
-			accountRepository.save(account);
+		if (accountProfile != null) {
+	 		accountProfile.setAuthtoken(null); // remove token
+			accountProfileRepository.save(accountProfile);
+			Set<Account> accounts = accountProfile.getAccounts();
+			for (Account account : accounts) {
+				account.setLogoutcount(account.getLogoutcount() + 1);
+				accountRepository.save(account);
+			}			
 		}
 	}
 
