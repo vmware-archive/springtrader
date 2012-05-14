@@ -134,5 +134,6 @@ nano.strings = {
     error : 'Error!',
     goToLoginPage : 'Go To Login Page',
     recentTransactions : 'Recent Transactions',
-    quantityError :  'Error! Quantity must be a positive number.'
+    quantityError :  'Error! Quantity must be a positive number.',
+    buyOrderMessage : 'Your order is submitted for processing...'
 };
