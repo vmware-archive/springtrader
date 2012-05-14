@@ -268,12 +268,13 @@ nano.Router = Backbone.Router.extend({
         nano.instances.footer.render();
     },
 
-    trade: function(page) {
+    trade: function(page, quote) {
         if (isNaN(page)){
             page = 1;
         }
         if(nano.utils.loggedIn()) {
             nano.utils.hideAll();
+            // Hide the loading Message
             nano.containers.loading.show();
             nano.instances.navbar.render(nano.conf.hash.trade);
             
@@ -288,11 +289,35 @@ nano.Router = Backbone.Router.extend({
                 // Render the List of Orders View
                 nano.instances.orders.render(model, page, nano.conf.hash.tradeWithPage);
                 
-                // Render the List of Quotes View
-                nano.instances.quotes.render();
+                // Render the Quotes View
+                if (quote){
+
+                    nano.instances.quotes.render();
+                    
+
+                    // Fetch the info for the given quote symbol
+                    var quotes = new nano.models.Quote({ quoteid : quote });
+            
+                    quotes.fetch({
+                        success : function(quotes, response){
+                            // Render the quote
+                            nano.instances.quotes.render(quotes, quote);
+                            nano.instances.trade.error(false)
+                        },
+                        error: function(){
+                            nano.instances.trade.error(true);
+                        }
+                    });
+                } else {
+                    nano.instances.quotes.render();
+                }
             };
             
+            // Fetch the info for the Orders page we need
             model.fetch({
+                data : {
+                    page : page
+                },
                 success : onFetchSuccess,
                 error: nano.utils.onApiErreor
             });
@@ -342,24 +367,21 @@ nano.Router = Backbone.Router.extend({
     
     quotes: function(quote) {
         if (!nano.containers.quotes.html()) {
-            this.trade();
+            this.trade(1, quote);
         }
         else {
+            // Fetch the info for the given quote symbol
             var model = new nano.models.Quote({ quoteid : quote });
             
-            var onFetchSuccess = function() {
-                // Render the quotes list
-                nano.instances.quotes.render(model, quote);
-                nano.instances.trade.error(false)
-            };
-        
-            var onError = function() {
-                nano.instances.trade.error(true)
-            };
-            
             model.fetch({
-                success : onFetchSuccess,
-                error: onError
+                success : function(model, response){
+                    // Render the quote
+                    nano.instances.quotes.render(model, quote);
+                    nano.instances.trade.error(false)
+                },
+                error: function(){
+                    nano.instances.trade.error(true);
+                }
             });
         }
         nano.instances.footer.render();
