@@ -133,5 +133,6 @@ nano.strings = {
     loggingOut : "Logging out... Please log back in with new user id",
     error : 'Error!',
     goToLoginPage : 'Go To Login Page',
-    recentTransactions : 'Recent Transactions'
+    recentTransactions : 'Recent Transactions',
+    quantityError :  'Error! Quantity must be a positive number.'
 };

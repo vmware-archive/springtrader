@@ -44,7 +44,9 @@ nano.views.Quotes = Backbone.View.extend({
             this.tbody = this.$('#list-of-quotes > tbody');
         } else {
             var quoteResult = this.$('#quote-result');
+            var buyError = this.$('#buy-error');
             quoteResult.addClass('hide');
+            buyError.addClass('hide');
         }
         
         this.$el.show();
@@ -110,7 +112,25 @@ nano.views.Quotes = Backbone.View.extend({
             view.$el.empty();
             nano.instances.router.trade(view.page);
         };
-
+        
+        var onError = function(model, error){
+            errorStr = translate('unknowError');
+            if( _.isArray(error)){
+                errorStr = '';
+                for (var x in error){
+                    errorStr += translate(error[x]) + '<br>';
+                    switch(error[x]) {
+                        case 'quantityError':
+                            nano.instances.quotes.error(true);
+                            break;
+                        default:
+                        alert('An unknown error has ocurred.');
+                        break
+                    }
+                }
+            }
+        }
+        
         var order = new nano.models.Order({ accountid : nano.session.accountid });
         order.save({
             quantity : quantity,
@@ -119,8 +139,18 @@ nano.views.Quotes = Backbone.View.extend({
             },
             {
                 success: onSuccess, 
-                error: nano.utils.onApiErreor
+                error: onError
             }
         );
+    },
+    
+    error : function(error) {
+        var buyError = this.$('#buy-error');
+        
+        if (error){
+            buyError.removeClass('hide');
+        } else {
+            buyError.addClass('hide');
+        }
     }
 });
