@@ -302,7 +302,7 @@ nano.Router = Backbone.Router.extend({
                         success : function(quotes, response){
                             // Render the quote
                             nano.instances.quotes.render(quotes, quote);
-                            nano.instances.trade.error(true)
+                            nano.instances.trade.error(false)
                         },
                         error: function(){
                             nano.instances.trade.error(true);
@@ -366,7 +366,10 @@ nano.Router = Backbone.Router.extend({
     },
     
     quotes: function(quote) {
-        var renderQuote = function(quote){
+        if (!nano.containers.quotes.html()) {
+            this.trade(1, quote);
+        }
+        else {
             // Fetch the info for the given quote symbol
             var model = new nano.models.Quote({ quoteid : quote });
             
@@ -380,12 +383,6 @@ nano.Router = Backbone.Router.extend({
                     nano.instances.trade.error(true);
                 }
             });
-        }
-        if (!nano.containers.quotes.html()) {
-            this.trade(1, quote);
-        }
-        else {
-            renderQuote(quote);
         }
         nano.instances.footer.render();
     },
