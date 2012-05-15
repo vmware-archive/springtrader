@@ -418,7 +418,28 @@ nano.utils.validateNumber = function(event) {
  * 
  */
 nano.utils.setUsers = function(userCount, callbacks) {
-        $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPop') + '</div>');
+	    $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPop') + '</div>');
+	    // Fetch the recreateData progress
+	    // Set the recreate data progress interval to 1 sec
+        var progress = window.setInterval(function(){
+    	 $.ajax({
+            url : nano.conf.urls.recreateData,
+            type : 'GET',
+            headers : nano.utils.getHttpHeaders(),
+            dataType : 'json',
+            success : function(data){
+            	$('#showprogress').remove();                
+            	$('#progress').append('<div class="well show-quote-box" id="showprogress">' + data.usercount + " " + translate('userCreationMessage') + '</div>');        	
+            },
+            error: function(){
+            	$('#setUsersBtn').removeAttr("disabled", "disabled");
+                $('#showprogress').remove();
+                if (_.isFunction(callbacks.error))
+                {
+                    callbacks.error(jqXHR, textStatus, errorThrown);
+                }
+            }
+          });}, 1000);
         $.ajax({
             url : nano.conf.urls.admin,
             type : 'POST',
@@ -428,9 +449,10 @@ nano.utils.setUsers = function(userCount, callbacks) {
                 usercount : userCount
             }),
             success : function(data, textStatus, jqXHR){
+            	window.clearInterval(progress);
                 $('#setUsersBtn').removeAttr("disabled", "disabled");
                 //logout current user.
-                $('#showprogress').remove();
+                $('#showprogress').remove();               	
                 $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPopComplete') + '</div>');
                 $('#showprogress').fadeOut(3000, function() {
                     $('#showprogress').remove();

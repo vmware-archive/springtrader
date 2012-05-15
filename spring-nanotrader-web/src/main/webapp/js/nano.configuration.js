@@ -27,6 +27,7 @@ nano.conf.urls = {
     account : nano.conf.urlRoot + 'account',
     accountProfile : nano.conf.urlRoot + 'accountProfile',
     marketSummary : nano.conf.urlRoot + 'marketSummary',
+    recreateData : nano.conf.urlRoot + 'recreateData',
     holdingSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdingSummary',
     portfolioSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/portfolioSummary',
     holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdings',

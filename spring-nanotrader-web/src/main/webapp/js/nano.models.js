@@ -186,6 +186,10 @@ nano.models.MarketSummary = Backbone.Model.extend({
     urlRoot : nano.conf.urls.marketSummary,
 });
 
+nano.models.RecreateData = Backbone.Model.extend({
+    urlRoot : nano.conf.urls.recreateData,
+});
+
 /**
  * Model to interact with the Holding Summary Object (Not really a REST based Object, but it works with Backbone.js)
  * @author Carlos Soto <carlos.soto@lognllc.com>
