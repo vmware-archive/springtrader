@@ -291,9 +291,7 @@ nano.Router = Backbone.Router.extend({
                 
                 // Render the Quotes View
                 if (quote){
-
                     nano.instances.quotes.render();
-                    
 
                     // Fetch the info for the given quote symbol
                     var quotes = new nano.models.Quote({ quoteid : quote });
@@ -319,7 +317,7 @@ nano.Router = Backbone.Router.extend({
                     page : page
                 },
                 success : onFetchSuccess,
-                error: nano.utils.onApiErreor
+                error: nano.utils.onApiError
             });
         }
         else {
