@@ -404,7 +404,7 @@ nano.Router = Backbone.Router.extend({
                 success : function() {
                 nano.instances.profile.render(model);
             },
-                error : nano.utils.onApiErreor
+                error : nano.utils.onApiError
             });
         }
         else {
