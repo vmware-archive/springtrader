@@ -98,6 +98,8 @@ nano.Router = Backbone.Router.extend({
             });
             
             nano.utils.hideAll(false);
+            // Render the navbar
+            nano.instances.navbar.render();
         } else {
             nano.utils.hideAll(false);
             nano.instances.leftnavbar.render();
