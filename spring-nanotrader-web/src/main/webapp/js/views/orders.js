@@ -192,9 +192,6 @@ nano.views.Orders = Backbone.View.extend({
         if ( this.page > 1 ){
             window.location = this.hash.replace( nano.conf.pageUrlKey, (this.page-1) );
         }
-        //if (nano.utils.isMobile()){
-        //    this.$('#orders-content').collapse('hide');
-        //}
     },
 
     /**
@@ -206,9 +203,6 @@ nano.views.Orders = Backbone.View.extend({
         if ( this.page < this.pageCount ){
             window.location = this.hash.replace( nano.conf.pageUrlKey, (parseInt(this.page)+1) );
         }
-        //if (nano.utils.isMobile()){
-        //    this.$('#orders-content').collapse('show');
-        //}
     },
     
    /**

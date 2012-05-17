@@ -48,6 +48,8 @@ nano.Router = Backbone.Router.extend({
         nano.instances.help = new nano.views.Help({el : '#nc-help'});
         nano.instances.overview = new nano.views.Overview({el: '#nc-overview'});
         nano.instances.admin = new nano.views.Admin({el: '#nc-admin'});
+        // Left navbar for profile, overview, help and admin
+        nano.instances.leftnavbar = new nano.views.Leftnavbar({el : '#nc-leftnavbar'});
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#nc-loading');
@@ -81,27 +83,58 @@ nano.Router = Backbone.Router.extend({
 
     help: function() {
         if(nano.utils.loggedIn()){
+            // Set the Account profile model with the profileid of the current user
+            var profile = new nano.models.AccountProfile({ profileid : nano.session.profileid })
+            profile.fetch({
+                success : function() {
+                    // Render the leftnavbar
+                    var data = {
+                        fullname : profile.get('fullname'),
+                        email : profile.get('email')
+                    }
+                    nano.instances.leftnavbar.render(data);
+                },
+                error : nano.utils.onApiError
+            });
+            
             nano.utils.hideAll(false);
-            // Render the navbar
-            nano.instances.navbar.render();
-            nano.instances.help.render();
         } else {
             nano.utils.hideAll(false);
-            nano.instances.help.render();
+            nano.instances.leftnavbar.render();
         }
+        // Render the Help view
+        nano.instances.help.render();
+        // Render the footer
         nano.instances.footer.render();
     },
 
     overview: function() {
         if(nano.utils.loggedIn()){
+            // Set the Account profile model with the profileid of the current user
+            var profile = new nano.models.AccountProfile({ profileid : nano.session.profileid })
+            profile.fetch({
+                success : function() {
+                    // Render the leftnavbar
+                    var data = {
+                        fullname : profile.get('fullname'),
+                        email : profile.get('email')
+                    }
+                    nano.instances.leftnavbar.render(data);
+                },
+                error : nano.utils.onApiError
+            });
+            
             nano.utils.hideAll(false);
             // Render the navbar
             nano.instances.navbar.render();
-            nano.instances.overview.render();
         } else {
             nano.utils.hideAll(false);
-            nano.instances.overview.render();
+            nano.instances.leftnavbar.render();
         }
+        
+        // Render the Application Overview
+        nano.instances.overview.render();
+        // Render the footer
         nano.instances.footer.render();
     },
 
@@ -402,8 +435,13 @@ nano.Router = Backbone.Router.extend({
             var model = new nano.models.AccountProfile({ profileid : nano.session.profileid })
             model.fetch({
                 success : function() {
-                nano.instances.profile.render(model);
-            },
+                    var data = {
+                        fullname : model.get('fullname'),
+                        email : model.get('email')
+                    }
+                    nano.instances.leftnavbar.render(data);
+                    nano.instances.profile.render(model);
+                },
                 error : nano.utils.onApiError
             });
         }

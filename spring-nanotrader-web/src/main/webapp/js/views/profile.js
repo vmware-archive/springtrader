@@ -149,6 +149,39 @@ nano.views.Profile = Backbone.View.extend({
                 nano.utils.goTo( nano.conf.hash.dashboard );
             },
             error : function(model, error) {
+                errorsStr = translate('unknowError');
+                if(_.isArray(error)){
+                    errorsStr = '';
+                    for (var x in error){
+                        errorsStr += translate(error[x]) + '<br>';
+                        switch(error[x]) {
+                            case 'fullnameError':
+                                view.fullnameError.removeClass('hide');
+                                view.fullnameControl.addClass('error');
+                            break;
+                            case 'emailError':
+                                view.emailError.removeClass('hide');
+                                view.emailControl.addClass('error');
+                            break;
+                            case 'passwdError':
+                                view.passwdError.removeClass('hide');
+                                view.passwdControl.addClass('error');
+                            break;
+                            case 'useridError':
+                                view.usernameError.removeClass('hide');
+                                view.usernameControl.addClass('error');
+                            break;
+                            case 'creditcardError':
+                                view.creditcardError.removeClass('hide');
+                                view.creditcardControl.addClass('error');
+                            break;
+                            case 'addressError':
+                                view.addressError.removeClass('hide');
+                                view.addressControl.addClass('error');
+                            break;
+                        }
+                    }
+                }
                 
                 for (x in error){
                     
@@ -177,17 +210,10 @@ nano.views.Profile = Backbone.View.extend({
                         view.addressControl.addClass('error');
                     }
                 };
-                
-                if (error in nano.strings){
-                    view.updateError.find('h4.alert-heading').html(translate(error));
-                    view.updateError.find('p').html(translate('errorOcurred'));
-                    view.updateError.removeClass('hide');
-                } else {
-                    view.updateError.find('h4.alert-heading').html(translate('ohSnap'));
-                    view.updateError.find('p').html(translate('unknowError'));
-                    view.updateError.removeClass('hide');
-                }
-                
+
+                view.updateError.find('h4.alert-heading').html(translate('ohSnap'));
+                view.updateError.find('p').html(errorsStr);
+                view.updateError.removeClass('hide');
             }
         };
         
@@ -201,7 +227,7 @@ nano.views.Profile = Backbone.View.extend({
                 }
             }
             
-            // update profile attrs
+            // Update the account profile attrs
             var attrs = {
                 fullname: fullname,
                 email: email,

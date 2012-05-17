@@ -143,7 +143,13 @@ nano.views.Quotes = Backbone.View.extend({
             }
         );
     },
-    
+
+    /**
+     * Quotes error
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @param error: Boolean
+     * @return void
+     */
     error : function(error) {
         var buyError = this.$('#buy-error');
         
