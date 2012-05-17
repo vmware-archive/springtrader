@@ -468,6 +468,20 @@ nano.Router = Backbone.Router.extend({
 
     admin: function() {
         if(nano.utils.loggedIn()) {
+            // Set the Account profile model with the profileid of the current user
+            var profile = new nano.models.AccountProfile({ profileid : nano.session.profileid })
+            profile.fetch({
+                success : function() {
+                    // Render the leftnavbar
+                    var data = {
+                        fullname : profile.get('fullname'),
+                        email : profile.get('email')
+                    }
+                    nano.instances.leftnavbar.render(data);
+                },
+                error : nano.utils.onApiError
+            });
+            
             nano.utils.hideAll(false);
             nano.instances.navbar.render();
             nano.instances.admin.render();
