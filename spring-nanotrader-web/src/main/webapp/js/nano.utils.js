@@ -465,6 +465,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
                 });
             },
             error : function(jqXHR, textStatus, errorThrown){
+            	window.clearInterval(progress);
                 $('#setUsersBtn').removeAttr("disabled", "disabled");
                 $('#showprogress').remove();
                 if (_.isFunction(callbacks.error))
