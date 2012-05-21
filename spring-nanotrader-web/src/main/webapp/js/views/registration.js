@@ -234,7 +234,7 @@ nano.views.Registration = Backbone.View.extend({
                 {
                     errorsStr = error.responseText;
                 }
-                view.registrationError.find('h4.alert-heading').html(translate('ohSnap'));
+                view.registrationError.find('h4.alert-heading').html(translate('anError'));
                 view.registrationError.find('p').html(errorsStr);
                 view.registrationError.removeClass('hide');
             }

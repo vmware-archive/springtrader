@@ -125,7 +125,7 @@ nano.views.Profile = Backbone.View.extend({
         
         for(var i = 0, j = inputArray.length; i < j; i++) {
             if(inputArray[i] == ''){
-                this.updateError.find('h4.alert-heading').html(translate('ohSnap'));
+                this.updateError.find('h4.alert-heading').html(translate('anError'));
                 this.updateError.find('p').html(translate('emptyFieldError'));
                 this.updateError.removeClass('hide');
                 emptyField = true;
@@ -146,7 +146,7 @@ nano.views.Profile = Backbone.View.extend({
                 view.addressInput.val('');
                 
                 // Show the loading page and render the dashboard
-                nano.utils.goTo( nano.conf.hash.dashboard );
+                nano.utils.goTo( nano.conf.hash.profile );
             },
             error : function(model, error) {
                 errorsStr = translate('unknowError');
@@ -211,7 +211,7 @@ nano.views.Profile = Backbone.View.extend({
                     }
                 };
 
-                view.updateError.find('h4.alert-heading').html(translate('ohSnap'));
+                view.updateError.find('h4.alert-heading').html(translate('anError'));
                 view.updateError.find('p').html(errorsStr);
                 view.updateError.removeClass('hide');
             }
