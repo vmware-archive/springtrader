@@ -144,9 +144,8 @@ nano.views.Profile = Backbone.View.extend({
                 view.usernameInput.val('');
                 view.creditcardInput.val('');
                 view.addressInput.val('');
-                
-                // Show the loading page and render the dashboard
-                nano.utils.goTo( nano.conf.hash.profile );
+                // Profile reload
+                window.location.reload();
             },
             error : function(model, error) {
                 errorsStr = translate('unknowError');
