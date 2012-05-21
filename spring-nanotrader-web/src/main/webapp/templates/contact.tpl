@@ -11,19 +11,19 @@
                 <div class="control-group">
                     <label for="name-input" class="control-label"><%= translate("name") %></h3>:</label>
                     <div class="controls">
-                        <input type="text" value="" id="name-input" class="input-xlarge focused">
+                        <input type="text" value="" id="name-input" class="input-xlarge focused" maxlength="100">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"><%= translate("email") %></h3>:</label>
                     <div class="controls">
-                        <input type="text" value="" id="email-input" class="input-xlarge focused">
+                        <input type="text" value="" id="email-input" class="input-xlarge focused" maxlength="100">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"><%= translate("phone") %>:</label>
                     <div class="controls">
-                        <input type="text" value="" id="phone-input" class="input-xlarge focused">
+                        <input type="text" value="" id="phone-input" class="input-xlarge focused" maxlength="100">
                     </div>
                 </div>
                 <div class="control-group">
