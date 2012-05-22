@@ -33,6 +33,7 @@
         var holdingRollups = model.get('holdingRollups');
         for (var i in holdingRollups)
         {
+        	if (holdingRollups[i].percent != 0)
             data.push([holdingRollups[i].symbol, holdingRollups[i].percent]);
         }
         var plot1 = nano.utils.renderPieChart('dtg-pie-chart', data);

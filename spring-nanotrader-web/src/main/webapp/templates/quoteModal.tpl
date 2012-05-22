@@ -17,6 +17,11 @@
                 <td><%= translate("creationDate") %>:</td>
                 <td><%= printDate() %></td>
             </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td colspan="2"><%= translate("buyOrderMessage") %></td>
+            </tr>
         </table>
     </div>
     <div class="modal-footer">

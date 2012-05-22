@@ -27,12 +27,13 @@ nano.conf.urls = {
     account : nano.conf.urlRoot + 'account',
     accountProfile : nano.conf.urlRoot + 'accountProfile',
     marketSummary : nano.conf.urlRoot + 'marketSummary',
+    recreateData : nano.conf.urlRoot + 'recreateData',
     holdingSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdingSummary',
     portfolioSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/portfolioSummary',
     holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdings',
     sellHolding : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order',
     orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/orders', 
-    order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order', 
+    order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order/asynch', 
     quote : nano.conf.urlRoot + 'quote',
     admin : nano.conf.urlRoot + 'recreateData'
 };

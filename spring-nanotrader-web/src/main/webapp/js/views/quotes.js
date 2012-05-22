@@ -110,7 +110,7 @@ nano.views.Quotes = Backbone.View.extend({
             var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal))(model.toJSON()) );
             popup.modal();
             view.$el.empty();
-            nano.instances.router.trade(view.page);
+            //nano.instances.router.trade(view.page);
         };
         
         var onError = function(model, error){
