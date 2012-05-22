@@ -753,7 +753,7 @@ def unsupportedVerificationTests() {
   testUnsupportedDeleteAccount()
   testUnsupportedDeleteAccountProfile()
   testUnsupportedDeleteOrder()
-  testUnsupportedDeleteAllOrders()
+  //testUnsupportedDeleteAllOrders()
   testUnsupportedUpdateQuote()
   testUnsupportedDeleteQuote()
 }
