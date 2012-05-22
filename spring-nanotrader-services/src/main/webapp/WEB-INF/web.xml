@@ -15,7 +15,7 @@
 <!--         <param-value>production, default</param-value> -->
 
         <!-- postgreSQL -->
-        <param-value>production, postgresql</param-value>
+        <param-value>production, sqlfire</param-value>
 
         <!-- JNDI -->
 <!--         <param-value>production, jndi</param-value>    -->
