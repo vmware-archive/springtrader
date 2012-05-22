@@ -18,7 +18,7 @@
                     <p></p>
                 </div>
                 <label><%= translate("enterNumUsers") %>:</label>
-                <input type="text" id="user-count" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" >
+                <input type="number" id="user-count" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" maxlength="10">
                 <button id="setUsersBtn" class="btn btn-inverse"><%= translate("createUsers") %></button>
             </form>
         </div>
