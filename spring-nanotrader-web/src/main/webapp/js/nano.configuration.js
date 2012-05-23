@@ -33,7 +33,8 @@ nano.conf.urls = {
     holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdings',
     sellHolding : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order',
     orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/orders', 
-    order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order/asynch', 
+    //order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order/asynch',
+    order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order',
     quote : nano.conf.urlRoot + 'quote',
     admin : nano.conf.urlRoot + 'recreateData'
 };
