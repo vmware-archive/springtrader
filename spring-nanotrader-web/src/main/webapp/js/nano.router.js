@@ -401,9 +401,17 @@ nano.Router = Backbone.Router.extend({
             nano.instances.navbar.render();
 
             // Set the Account profile model with the profileid of the current user
-            var model = new nano.models.AccountProfile({ profileid : nano.session.profileid })
+            var model = new nano.models.AccountProfile({ profileid : nano.session.profileid });
+            var accountModel = new nano.models.Account({accountid : nano.session.accountid});
+            accountModel.fetch({
+                success : function(accountModel, response){
+                },
+                error: function(){
+                }
+            });
             model.fetch({
                 success : function() {
+                model.lastlogin = accountModel.get('lastlogin');
                 nano.instances.profile.render(model);
             },
                 error : nano.utils.onApiErreor
