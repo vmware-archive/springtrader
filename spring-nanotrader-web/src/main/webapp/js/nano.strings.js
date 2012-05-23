@@ -51,7 +51,7 @@ nano.strings = {
     username : 'Username',
     invalidUser : 'Invaild Username and/or Password. Please try again.',
     ohSnap : 'Oh snap! You got an error!',
-    unknowError : 'An unknown error has occurred. Please try again alter.',
+    unknowError : 'An unknown error has occurred. Please try again later.',
     accountSummary : 'Account Summary',
     currentBalance : 'Current Balance',
     openingBalance : 'Opening Balance',
