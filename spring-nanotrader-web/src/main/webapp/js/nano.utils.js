@@ -271,21 +271,25 @@ nano.utils.renderPieChart = function(htmlId, data) {
 };
 
 /**
- * Prints an amount with it's currency in proper format
- * @author Carlos Soto <carlos.soto@lognllc.com>
- * @param int amount: number to add the currency to
+ * Prints a numeric as a currency in proper format
+ * @author <samhardy@vmware.com>
+ * @param number amount: number to add the currency to
+ * @param int decimalDigits: number of decimal digits to retain, default=2
  * @return Object
  */
-nano.utils.printCurrency = function(amount, decimals) {
-    var value = '';
-    if (amount < 0)
-    {
-        value += '-';
-        amount = Math.sqrt(Math.pow(amount, 2)); //Turn it into a positive value.
-    }
-    value += nano.conf.currency + nano.utils.round(amount, decimals);
-    return value;
-}
+nano.utils.printCurrency = function(amount, decimalDigits)
+{
+    var dDigits = isNaN(decimalDigits = Math.abs(decimalDigits)) ? 2 : decimalDigits;
+    var dSep = nano.conf.decimalSep == undefined ? "." : nano.conf.decimalSep;
+    var tSep = nano.conf.thousandsSep == undefined ? "," : nano.conf.thousandsSep;
+    var sign = amount < 0 ? "-" : "";
+    var intPart = parseInt(amount = Math.abs(+amount || 0).toFixed(dDigits)) + "";
+    var firstDigitsLen = (firstDigitsLen = intPart.length) > 3 ? firstDigitsLen % 3 : 0;
+    return sign + nano.conf.currency
+                + (firstDigitsLen ? intPart.substr(0, firstDigitsLen) + tSep : "")
+                + intPart.substr(firstDigitsLen).replace(/(\d{3})(?=\d)/g, "$1" + tSep)
+                + (dDigits ? dSep + Math.abs(amount - intPart).toFixed(dDigits).slice(2) : "");
+};
 
 /**
  * Prints a Date Javascript Objet into a nicer format

@@ -29,7 +29,7 @@
 <tr>
     <td><%= translate("transactionFee") %></td>
     <% for(var i in orders) { %>
-    <td><%= orders[i].orderfee %></td>
+    <td><%= printCurrency(orders[i].orderfee) %></td>
     <% } %>
 </tr>
 <tr>

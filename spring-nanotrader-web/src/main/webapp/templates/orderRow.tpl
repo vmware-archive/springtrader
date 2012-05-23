@@ -7,7 +7,7 @@
     </td>
     <td><%= opendate %></td>
     <td><%= completiondate %></td>
-    <td><%= orderfee %></td>
+    <td><%= printCurrency(orderfee) %></td>
     <td><%= translate(ordertype) %></td>
     <td><%= quote.symbol %></td>
     <td><%= quantity %></td>
