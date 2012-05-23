@@ -94,7 +94,7 @@ public class MarketSummary {
 				+ tradeStockIndexVolume + ", tradeStockIndexOpenAverage="
 				+ tradeStockIndexOpenAverage + ", topLosers=" + topLosers
 				+ ", topGainers=" + topGainers + ", summaryDate=" + summaryDate
-				+ ", percentGain=" + percentGain + "]";
+				+ ", percentGain=" + getPercentGain() + "]";
 	}
 	
 
