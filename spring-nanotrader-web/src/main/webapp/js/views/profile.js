@@ -37,7 +37,7 @@ nano.views.Profile = Backbone.View.extend({
         {
             // Set the Account Profile model
             this.model = model;
-
+            this.lastlogin = model.lastlogin;
             if (!this.creditcard){
                 // Set the real creditcard number
                 this.creditcard = this.model.toJSON().creditcard;
@@ -46,6 +46,7 @@ nano.views.Profile = Backbone.View.extend({
             }
             
             var data = this.model.toJSON()
+            data.lastlogin = this.lastlogin;
             data.creditcard = String('****************' + this.ccSlice).slice(-1 * data.creditcard.length);
             // template
             var profile = _.template(nano.utils.getTemplate(nano.conf.tpls.profile))(data);

@@ -3,7 +3,8 @@
         <div>
             <h3><%= fullname %></h3>
             <p><%= email %></p>
-        </div>
+            <p><i>last login: <%= lastlogin %></i></p>
+</div>
         <ul class="nav nav-tabs nav-stacked">
             <li class="active"><a id="profile"><%= translate("profile") %></a></li>
             <li><a id="overview"><%= translate("applicationOverview") %></a></li>
