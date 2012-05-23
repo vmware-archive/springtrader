@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
  *  UserDetailsServiceImpl provides authentication lookup service which validates the http header token
  *  
  *  @author Brian Dussault 
- *  @author
  */
 
 @Service 

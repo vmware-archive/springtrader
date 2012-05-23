@@ -21,7 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
  *  Provides JSON based REST api to Order repository
  *  
  *  @author Brian Dussault 
- *  @author
  */
 @Controller
 public class OrderController extends BaseController {

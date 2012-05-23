@@ -5,7 +5,6 @@ import java.util.Date;
 /**
  *  Order
  *  @author Brian Dussault 
- *  @author
  */
 public class Order {
 

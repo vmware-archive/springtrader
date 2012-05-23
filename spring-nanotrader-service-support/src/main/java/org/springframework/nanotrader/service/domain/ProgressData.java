@@ -5,9 +5,9 @@ import java.io.Serializable;
 /**
  * 
  * @author Ilayaperumal Gopinathan
- * @author
  */
 
+@SuppressWarnings("serial")
 public class ProgressData implements Serializable {
 
 	private Integer usercount;

@@ -8,10 +8,10 @@ import java.util.Set;
 /**
  *  Account Profile
  *  @author Brian Dussault 
- *  @author
  */
 
 
+@SuppressWarnings("serial")
 public class Accountprofile implements Serializable{
 
 	private Integer profileid;
