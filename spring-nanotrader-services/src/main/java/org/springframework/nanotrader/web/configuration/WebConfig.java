@@ -27,7 +27,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * 
  * 
  * @author Brian Dussault
- * @author
  */
 
 @Configuration

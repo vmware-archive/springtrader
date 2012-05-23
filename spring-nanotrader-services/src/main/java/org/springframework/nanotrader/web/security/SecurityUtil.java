@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * Provides utilities to work with SecurityContext
  * 
  * @author Brian Dussault
- * @author
  */
 public class SecurityUtil {
 

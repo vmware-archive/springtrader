@@ -17,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
  * Provides JSON based REST api to Accountprofile repository
  * 
  * @author Brian Dussault
- * @author
  */
 
 @Controller

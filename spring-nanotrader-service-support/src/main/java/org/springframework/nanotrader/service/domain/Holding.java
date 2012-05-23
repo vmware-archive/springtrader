@@ -7,7 +7,6 @@ import java.util.Set;
 /**
  *  Holding
  *  @author Brian Dussault 
- *  @author
  */
 
 public class Holding {

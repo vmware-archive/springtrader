@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *  Provides JSON based REST api to Portfolio Summary
  *  
  *  @author Brian Dussault 
- *  @author
  */
 @Controller
 public class PortfolioSummaryController extends BaseController {

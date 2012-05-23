@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Profile;
  * Java configuration for the application's spring managed beans
  * 
  * @author Brian Dussault
- * @author
  */
 
 @Configuration

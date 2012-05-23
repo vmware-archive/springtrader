@@ -35,8 +35,8 @@ subprojects { subproject ->
 	apply plugin:'eclipse-wtp'
 
 	// ensure JDK 6 compatibility (GRADLE-18; INT-1578)
-	ext.sourceCompatibility=1.6
-	ext.targetCompatibility=1.6
+	sourceCompatibility=1.6
+	targetCompatibility=1.6
 
 	ext.aspectjVersion = '1.6.12.M2'
 	ext.cglibVersion = '2.2'
@@ -116,12 +116,12 @@ subprojects { subproject ->
 	}
 
 	task sourcesJar(type: Jar) {
-		ext.classifier = 'sources'
+		classifier = 'sources'
 		from sourceSets.main.allJava
 	}
 
 	task javadocJar(type: Jar) {
-		ext.classifier = 'javadoc'
+		classifier = 'javadoc'
 		from javadoc
 	}
 
@@ -291,8 +291,8 @@ sonar {
 
 task api(type: Javadoc) {
 	group = 'Documentation'
-	ext.description = 'Generates aggregated Javadoc API documentation.'
-	ext.title = "${rootProject.description} ${version} API"
+	description = 'Generates aggregated Javadoc API documentation.'
+	title = "${rootProject.description} ${version} API"
 	options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
 	options.author = true
 	options.header = rootProject.description

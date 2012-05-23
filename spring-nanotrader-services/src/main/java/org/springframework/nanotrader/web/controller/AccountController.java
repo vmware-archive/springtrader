@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Provides JSON based REST api to Account repository
  * 
  * @author Brian Dussault
- * @author
  */
 
 @Controller
