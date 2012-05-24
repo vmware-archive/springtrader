@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE cache PUBLIC
+    "-//GemStone Systems, Inc.//GemFire Declarative Caching 6.5//EN"
+    "http://www.gemstone.com/dtd/cache6_5.dtd">
+
+<cache>
+    #{@this.source("classpath:com/springsource/insight/repo/gemfire-cache-stores.xml")}
+    <!-- Override any disk-stores manually here -->
+
+    #{@this.source("classpath:com/springsource/insight/repo/gemfire-cache-defaults.xml")}
+    <!-- Override any region-attributes manually here -->
+
+    #{@this.source("classpath:com/springsource/insight/repo/gemfire-cache-regions.xml")}
+</cache>

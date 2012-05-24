@@ -9,13 +9,14 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.nanotrader.data.domain.Holding;
 import org.springframework.nanotrader.data.repository.HoldingRepository;
-import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.stereotype.Component;
 
 

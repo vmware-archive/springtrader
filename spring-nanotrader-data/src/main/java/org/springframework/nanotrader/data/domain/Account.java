@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,121 +26,121 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Account implements Serializable {
 
 	@OneToMany(mappedBy = "accountAccountid")
-    private Set<Order> orders;
+	private Set<Order> orders;
 
 	@ManyToOne
-    @JoinColumn(name = "profile_profileid", referencedColumnName = "profileid")
-    private Accountprofile profileProfileid;
+	@JoinColumn(name = "profile_profileid", referencedColumnName = "profileid")
+	private Accountprofile profileProfileid;
 
 	@Column(name = "creationdate")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "M-")
-    private Date creationdate;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style = "M-")
+	private Date creationdate;
 
 	@Column(name = "openbalance", precision = 14, scale = 2)
-    private BigDecimal openbalance;
+	private BigDecimal openbalance;
 
 	@Column(name = "logoutcount")
-    @NotNull
-    private Integer logoutcount;
+	@NotNull
+	private Integer logoutcount;
 
 	@Column(name = "balance", precision = 14, scale = 2)
-    private BigDecimal balance;
+	private BigDecimal balance;
 
 	@Column(name = "lastlogin")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "M-")
-    private Date lastlogin;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style = "M-")
+	private Date lastlogin;
 
 	@Column(name = "logincount")
-    @NotNull
-    private Integer logincount;
+	@NotNull
+	private Integer logincount;
 
 	public Set<Order> getOrders() {
-        return orders;
-    }
-
-	public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-
-	public Accountprofile getProfileProfileid() {
-        return profileProfileid;
-    }
-
-	public void setProfileProfileid(Accountprofile profileProfileid) {
-        this.profileProfileid = profileProfileid;
-    }
-
-	public Date getCreationdate() {
-        return creationdate;
-    }
-
-	public void setCreationdate(Date creationdate) {
-        this.creationdate = creationdate;
-    }
-
-	public BigDecimal getOpenbalance() {
-        return openbalance;
-    }
-
-	public void setOpenbalance(BigDecimal openbalance) {
-        this.openbalance = openbalance;
-    }
-
-	public Integer getLogoutcount() {
-        return logoutcount;
-    }
-
-	public void setLogoutcount(Integer logoutcount) {
-        this.logoutcount = logoutcount;
-    }
-
-	public BigDecimal getBalance() {
-        return balance;
-    }
-
-	public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-	public Date getLastlogin() {
-        return lastlogin;
-    }
-
-	public void setLastlogin(Date lastlogin) {
-        this.lastlogin = lastlogin;
-    }
-
-	public Integer getLogincount() {
-        return logincount;
-    }
-
-	public void setLogincount(Integer logincount) {
-        this.logincount = logincount;
-    }
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE) //, generator="ACCOUNT_SEQ")
-  //  @SequenceGenerator(name="ACCOUNT_SEQ", sequenceName="ACCOUNT_SEQUENCE")
-    @Column(name = "accountid")
-    private Integer accountid;
-
-	public Integer getAccountid() {
-        return this.accountid;
-    }
-
-	public void setAccountid(Integer id) {
-        this.accountid = id;
-    }
-	
-	
-	@Override
-	public String toString() {
-		return "Account [creationdate=" + creationdate + ", openbalance=" + openbalance + ", logoutcount="
-				+ logoutcount + ", balance=" + balance + ", lastlogin=" + lastlogin + ", logincount=" + logincount
-				+ ", accountid=" + accountid + "]";
+		return orders;
 	}
 
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+
+	public Accountprofile getProfileProfileid() {
+		return profileProfileid;
+	}
+
+	public void setProfileProfileid(Accountprofile profileProfileid) {
+		this.profileProfileid = profileProfileid;
+	}
+
+	public Date getCreationdate() {
+		return creationdate;
+	}
+
+	public void setCreationdate(Date creationdate) {
+		this.creationdate = creationdate;
+	}
+
+	public BigDecimal getOpenbalance() {
+		return openbalance;
+	}
+
+	public void setOpenbalance(BigDecimal openbalance) {
+		this.openbalance = openbalance;
+	}
+
+	public Integer getLogoutcount() {
+		return logoutcount;
+	}
+
+	public void setLogoutcount(Integer logoutcount) {
+		this.logoutcount = logoutcount;
+	}
+
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public Date getLastlogin() {
+		return lastlogin;
+	}
+
+	public void setLastlogin(Date lastlogin) {
+		this.lastlogin = lastlogin;
+	}
+
+	public Integer getLogincount() {
+		return logincount;
+	}
+
+	public void setLogincount(Integer logincount) {
+		this.logincount = logincount;
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	// , generator="ACCOUNT_SEQ")
+	// @SequenceGenerator(name="ACCOUNT_SEQ", sequenceName="ACCOUNT_SEQUENCE")
+	@Column(name = "accountid")
+	private Integer accountid;
+
+	public Integer getAccountid() {
+		return this.accountid;
+	}
+
+	public void setAccountid(Integer id) {
+		this.accountid = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [creationdate=" + creationdate + ", openbalance="
+				+ openbalance + ", logoutcount=" + logoutcount + ", balance="
+				+ balance + ", lastlogin=" + lastlogin + ", logincount="
+				+ logincount + ", accountid=" + accountid + "]";
+	}
 
 }

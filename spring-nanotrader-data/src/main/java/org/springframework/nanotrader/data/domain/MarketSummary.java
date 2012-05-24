@@ -20,8 +20,6 @@ public class MarketSummary {
 	private List<Quote> topGainers;
 
 	private Date summaryDate;
-	
-	private BigDecimal percentGain;
 
 	private BigDecimal change;
 	

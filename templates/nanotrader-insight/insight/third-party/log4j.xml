@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOGGER" "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- Appenders -->
+    <appender name="insight" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${insight.logs}/insight.log" />
+        <param name="MaxFileSize" value="20MB"/>
+        <param name="MaxBackupIndex" value="5"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p [%c][%t] - %m%n" />
+        </layout>
+    </appender>
+
+    <!-- Custom log levels -->
+    <logger name="org.apache.tiles.impl.BasicTilesContainer">
+        <level value="error" />
+    </logger>
+
+    <!-- Debug log levels -->
+    <!--
+    <logger name="com.springsource.insight.dashboard">
+        <level value="debug" />
+    </logger>
+
+    <logger name="com.springsource.insight">
+        <level value="debug" />
+    </logger>
+
+    <logger name="com.springsource.insight.command">
+        <level value="debug" />
+    </logger>
+
+    <logger name="com.springsource.insight.repo.event">
+        <level value="debug" />
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="debug" />
+    </logger>
+
+    <logger name="org.apache.activemq">
+        <level value="debug" />
+    </logger>
+    -->
+
+    <logger name="liquibase">
+        <level value="info"/>
+    </logger>
+
+    <logger name="com.springsource.insight.repo.purge">
+        <level value="info"/>
+    </logger>
+
+    <!-- Root Logger -->
+    <root>
+        <priority value="warn" />
+        <appender-ref ref="insight" />
+    </root>
+
+</log4j:configuration>

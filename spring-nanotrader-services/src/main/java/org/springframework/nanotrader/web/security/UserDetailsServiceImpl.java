@@ -48,9 +48,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("UserDetailsServiceImpl.loadUserByUsername(): User not found with token:" + token);
 		}
 		
+		@SuppressWarnings("rawtypes")
 		Set<Map> accounts = accountProfile.getAccounts();
 		Integer accountId = null;
-		for(Map account: accounts ) { 
+		for(Map<?, ?> account: accounts ) { 
 			accountId = (Integer)account.get("accountid");
 		}
 		
