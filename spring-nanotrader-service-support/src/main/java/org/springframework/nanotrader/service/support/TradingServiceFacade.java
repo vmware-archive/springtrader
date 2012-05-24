@@ -15,7 +15,6 @@
  */
 package org.springframework.nanotrader.service.support;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.nanotrader.data.service.TradingService;

@@ -388,13 +388,17 @@ public class TradingServiceImpl implements TradingService {
 	public Order updateOrder(Order order) {
 		Order o = null;
 		if (log.isDebugEnabled()) {
-			log.debug("TradingServices.updateOrder: order=" + order.toString());
+			if (order != null ) { 
+				log.debug("TradingServices.updateOrder: order=" + order.toString());
+			} else { 
+				log.debug("TradingServices.updateOrder: order= null" );
+			}
+			
 		}
 		// Ensure that customers can't update another customers order record
-		Order originalOrder = orderRepository.findByOrderidAndAccountAccountid(order.getOrderid(), order
-				.getAccountAccountid().getAccountid());
+		Order originalOrder = orderRepository.findByOrderidAndAccountAccountid(order.getOrderid(), order.getAccountAccountid().getAccountid());
 
-		if (!"completed".equals(originalOrder.getOrderstatus())) {
+		if (originalOrder!= null && !"completed".equals(originalOrder.getOrderstatus())) {
 			if (originalOrder != null) {
 				if (log.isDebugEnabled()) {
 					log.debug("TradingServices.updateOrder: An order in the respository matched the requested order id and account ");

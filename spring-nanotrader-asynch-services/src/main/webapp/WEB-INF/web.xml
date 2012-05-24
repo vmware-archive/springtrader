@@ -16,7 +16,7 @@
 <!--         <param-value>default</param-value> -->
 
         <!-- postgreSQL -->
-        <param-value>postgresql</param-value>
+        <param-value>sqlfire</param-value>
 
         <!-- JNDI -->
 <!--         <param-value>jndi</param-value> -->

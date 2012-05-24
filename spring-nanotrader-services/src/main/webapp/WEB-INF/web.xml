@@ -8,19 +8,19 @@
         <param-name>contextClass</param-name>
         <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
     </context-param>
-   <context-param>
-        <param-name>spring.profiles.active</param-name>
+<!--    <context-param> -->
+<!--         <param-name>spring.profiles.active</param-name> -->
 
-        <!-- H2 -->
-<!--         <param-value>production, default</param-value> -->
+<!--         H2 -->
+ <!--         <param-value>production, default</param-value> --> 
 
-        <!-- postgreSQL -->
-        <param-value>production, postgresql</param-value>
+<!--         postgreSQL -->
+<!--         <param-value>production, sqlfire</param-value> -->
 
-        <!-- JNDI -->
-<!--         <param-value>production, jndi</param-value>    -->
+<!--         JNDI -->
+<!--          <param-value>production, jndi</param-value>    -->
 
-	</context-param>
+<!-- 	</context-param> -->
    
     <!-- Location of Java @Configuration classes that configure the components that makeup this application -->
     <context-param>
@@ -57,10 +57,17 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<resource-ref>
+	  <description>Nanotrader Datasource</description>
+	  <res-ref-name>jdbc/nanodb</res-ref-name>
+	  <res-type>javax.sql.DataSource</res-type>
+	  <res-auth>Container</res-auth>
+	</resource-ref>
 
 	<!-- Disables servlet container welcome file handling. Needed for compatibility with Servlet 3.0 and Tomcat 7.0 -->
 	<welcome-file-list>
 		<welcome-file />
 	</welcome-file-list>
+	
 
 </web-app>

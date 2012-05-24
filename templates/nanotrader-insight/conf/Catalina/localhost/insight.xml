@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+
+    <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.0\.0\.1|0\:0\:0\:0\:0\:0\:0\:1(\%\d*)?" />
+
+</Context>

@@ -66,10 +66,6 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
 @Transactional
 public class TradingServiceTests {
-
-	
-	@Autowired
-    private QuoteDataOnDemand dod;
 	
 	@Autowired
 	private AccountDataOnDemand accountDataOnDemand;
