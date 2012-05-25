@@ -14,6 +14,7 @@ nano.views.Registration = Backbone.View.extend({
         'blur #matchpasswd-input' : 'validatePassword'
     },
     
+    
     /**
      * Class constructor
      * @author Carlos Soto <carlos.soto@lognllc.com>
