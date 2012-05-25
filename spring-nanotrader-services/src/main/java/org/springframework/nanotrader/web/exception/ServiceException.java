@@ -4,7 +4,6 @@ package org.springframework.nanotrader.web.exception;
  *  ServiceException provides a simple representation for exceptions
  *  
  *  @author Brian Dussault 
- *  @author
  */
 public class ServiceException  {
 

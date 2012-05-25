@@ -2,6 +2,7 @@ package org.springframework.nanotrader.domain;
 
 import java.math.BigDecimal;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +12,6 @@ import org.springframework.nanotrader.data.domain.Account;
 import org.springframework.nanotrader.data.domain.test.AccountDataOnDemand;
 import org.springframework.nanotrader.data.repository.AccountRepository;
 import org.springframework.nanotrader.data.service.AccountService;
-import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;

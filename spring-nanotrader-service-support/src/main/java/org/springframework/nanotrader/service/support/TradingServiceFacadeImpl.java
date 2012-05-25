@@ -18,7 +18,6 @@ package org.springframework.nanotrader.service.support;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,8 +28,8 @@ import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.nanotrader.data.service.TradingService;
 import org.springframework.nanotrader.service.domain.Account;
 import org.springframework.nanotrader.service.domain.Accountprofile;
@@ -76,12 +75,6 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
     private static Integer DEFAULT_PAGE = 0;
     
     private static Integer DEFAULT_PAGE_SIZE = 24;
-    
-    private static final String RECORD_COUNT_LABEL = "totalRecords";
-    
-    private static final String PAGE_LABEL = "page";
-    
-    private static final String PAGE_SIZE_LABEL = "pageSize";
     
     @Resource
     private TradingService tradingService;

@@ -20,8 +20,6 @@ public class MarketSummary {
 	private List<Quote> topGainers;
 
 	private Date summaryDate;
-	
-	private BigDecimal percentGain;
 
 	private BigDecimal change;
 	
@@ -94,7 +92,7 @@ public class MarketSummary {
 				+ tradeStockIndexVolume + ", tradeStockIndexOpenAverage="
 				+ tradeStockIndexOpenAverage + ", topLosers=" + topLosers
 				+ ", topGainers=" + topGainers + ", summaryDate=" + summaryDate
-				+ ", percentGain=" + percentGain + "]";
+				+ ", percentGain=" + getPercentGain() + "]";
 	}
 	
 

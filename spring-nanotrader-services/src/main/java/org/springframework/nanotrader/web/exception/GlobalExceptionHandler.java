@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *  nanotraders REST based API
  *  
  *  @author Brian Dussault 
- *  @author
  */
 
 public class GlobalExceptionHandler {

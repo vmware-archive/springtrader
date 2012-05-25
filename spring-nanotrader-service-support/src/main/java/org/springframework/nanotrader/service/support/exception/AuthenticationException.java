@@ -5,8 +5,8 @@ package org.springframework.nanotrader.service.support.exception;
  * find the user
  * 
  * @author Brian Dussault
- * @author
  */
+
 @SuppressWarnings("serial")
 public class AuthenticationException extends RuntimeException {
 	public AuthenticationException() {

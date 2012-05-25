@@ -24,16 +24,17 @@ public class HoldingAggregateRepositoryImpl implements HoldingAggregateRepositor
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public HoldingSummary findHoldingAggregated(Integer accountId) {
 	
 		HoldingSummary holdingSummary = new HoldingSummary();
 		List<HoldingAggregate> holdingRollups = new ArrayList<HoldingAggregate>();
 		// Filter out the losers (gains =< 0)
-		Query query = em.createQuery("SELECT  h.quoteSymbol, sum(q.price * h.quantity) - SUM(h.purchaseprice * h.quantity) as gain FROM Holding h, Quote q Where h.accountAccountid =:accountId and h.quoteSymbol=q.symbol GROUP BY  h.quoteSymbol HAVING  SUM(q.price * h.quantity) - SUM(h.purchaseprice * h.quantity) >= 0 ORDER BY gain desc");
+		Query query = em.createQuery("SELECT  h.quoteSymbol, sum(q.price * h.quantity) - SUM(h.purchaseprice * h.quantity) as gain FROM Holding h, Quote q Where h.accountAccountid =:accountId and h.quoteSymbol=q.symbol GROUP BY  h.quoteSymbol HAVING  SUM(q.price * h.quantity) - SUM(h.purchaseprice * h.quantity) > 0 ORDER BY gain desc");
 		query.setParameter("accountId", accountId);
 		BigDecimal totalGains = new BigDecimal(0 );
-		totalGains.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND);
+		totalGains = totalGains.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND);
 		List<Object[]> result = query.getResultList();
 		int counter = 0;
 		// Need to loop over all the aggregated symbols to calculate the totalGain of all the stocks
@@ -42,7 +43,7 @@ public class HoldingAggregateRepositoryImpl implements HoldingAggregateRepositor
 			HoldingAggregate summary = new HoldingAggregate();
 			String symbol = (String) o[0];
 			BigDecimal gain = (BigDecimal) o[1];
-			gain.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND);
+			gain = gain.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND);
 			totalGains = totalGains.add(gain);
 			if (counter < TOP_N) { 
 				summary.setSymbol(symbol);

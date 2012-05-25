@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 /**
  *  Quote
  *  @author Brian Dussault 
- *  @author
  */
 
 public class Quote {

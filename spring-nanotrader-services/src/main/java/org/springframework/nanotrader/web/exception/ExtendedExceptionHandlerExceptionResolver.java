@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHan
  *  invocation of global exception handlers.
  *  
  *  @author Brian Dussault 
- *  @author
  */
 
 public class ExtendedExceptionHandlerExceptionResolver extends ExceptionHandlerExceptionResolver {

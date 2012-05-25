@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.User;
  *  Custom user object that includes accountId
  *  
  *  @author Brian Dussault 
- *  @author
  */
 
 @SuppressWarnings("serial")

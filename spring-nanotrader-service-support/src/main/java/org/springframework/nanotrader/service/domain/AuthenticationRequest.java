@@ -3,7 +3,6 @@ package org.springframework.nanotrader.service.domain;
 /**
  *  AuthenticationRequest
  *  @author Brian Dussault 
- *  @author
  */
 public class AuthenticationRequest {
 	private String username;

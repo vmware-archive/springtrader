@@ -6,6 +6,9 @@
         <% if(email) { %>
         <p><%= email %></p>
         <% } %>
+        <% if(lastlogin) { %>
+        <p><%= lastlogin %></p>
+        <% } %>
     </div>
     <ul class="nav nav-tabs nav-stacked">
         <li><a id="lnb-profile"><%= translate("profile") %></a></li>

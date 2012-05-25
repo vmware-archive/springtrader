@@ -8,9 +8,9 @@ import java.util.Date;
 /**
  *  Account
  *  @author Brian Dussault 
- *  @author
  */
 
+@SuppressWarnings("serial")
 public class Account implements Serializable {
 
     private Date creationdate;

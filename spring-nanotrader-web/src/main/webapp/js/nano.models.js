@@ -1,4 +1,3 @@
-
 /**
  * Since we're using Backbone.js to handle all of the communication between our code 
  * and the REST api, we're overwriting the default sync function used by Backbone to 

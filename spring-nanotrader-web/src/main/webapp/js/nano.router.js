@@ -90,7 +90,8 @@ nano.Router = Backbone.Router.extend({
                     // Render the leftnavbar
                     var data = {
                         fullname : profile.get('fullname'),
-                        email : profile.get('email')
+                        email : profile.get('email'),
+                        lastlogin : profile.get('lastlogin')
                     }
                     nano.instances.leftnavbar.render(data);
                 },
@@ -119,7 +120,8 @@ nano.Router = Backbone.Router.extend({
                     // Render the leftnavbar
                     var data = {
                         fullname : profile.get('fullname'),
-                        email : profile.get('email')
+                        email : profile.get('email'),
+                        lastlogin : profile.get('lastlogin')
                     }
                     nano.instances.leftnavbar.render(data);
                 },
@@ -434,12 +436,20 @@ nano.Router = Backbone.Router.extend({
             nano.instances.navbar.render();
 
             // Set the Account profile model with the profileid of the current user
-            var model = new nano.models.AccountProfile({ profileid : nano.session.profileid })
+            var model = new nano.models.AccountProfile({ profileid : nano.session.profileid });
+            var accountModel = new nano.models.Account({accountid : nano.session.accountid});
+            accountModel.fetch({
+                success : function(accountModel, response){
+                },
+                error: function(){
+                }
+            });
             model.fetch({
                 success : function() {
                     var data = {
                         fullname : model.get('fullname'),
-                        email : model.get('email')
+                        email : model.get('email'),
+                        lastlogin : model.get('lastlogin')
                     }
                     nano.instances.leftnavbar.render(data);
                     nano.instances.profile.render(model);
@@ -475,7 +485,8 @@ nano.Router = Backbone.Router.extend({
                     // Render the leftnavbar
                     var data = {
                         fullname : profile.get('fullname'),
-                        email : profile.get('email')
+                        email : profile.get('email'),
+                        lastlogin : profile.get('lastlogin')
                     }
                     nano.instances.leftnavbar.render(data);
                 },

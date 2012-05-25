@@ -103,7 +103,7 @@ nano.views.MarketSummary = Backbone.View.extend({
         {
                 this.elements.topGainers[i].symbol.html( topGainers[i].symbol );
                 this.elements.topGainers[i].symbol.attr('title', topGainers[i].companyname );
-                this.elements.topGainers[i].price.html( topGainers[i].price );
+                this.elements.topGainers[i].price.html( topGainers[i].price.toFixed(2) );
                 this.elements.topGainers[i].change.html( topGainers[i].change1 );
         }
 
@@ -112,7 +112,7 @@ nano.views.MarketSummary = Backbone.View.extend({
         {
                 this.elements.topLosers[i].symbol.html( topLosers[i].symbol );
                 this.elements.topLosers[i].symbol.attr('title', topLosers[i].companyname );
-                this.elements.topLosers[i].price.html( topLosers[i].price );
+                this.elements.topLosers[i].price.html( topLosers[i].price.toFixed(2) );
                 this.elements.topLosers[i].change.html( topLosers[i].change1 );
         }
     }

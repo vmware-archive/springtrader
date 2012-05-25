@@ -1,3 +1,4 @@
+
 package org.springframework.nanotrader.data.util;
 
 import java.math.BigDecimal;
@@ -102,3 +103,6 @@ public class FinancialUtils {
 		return percent;
 	}
 }
+
+
+

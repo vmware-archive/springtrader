@@ -11,7 +11,8 @@ nano.views.Admin = Backbone.View.extend({
         'click #setUsersBtn' : 'setUsers',
         'click #profile' : 'profile',
         'click #overview' : 'overview',
-        'click #help' : 'help'
+        'click #help' : 'help',
+        'keypress [type=number]' : 'checkEnter'
     },
     
     /**
@@ -43,7 +44,21 @@ nano.views.Admin = Backbone.View.extend({
         }
         this.$el.show();
     },
-    
+
+    checkEnter : function(event) {
+        if (event.which == 13) {
+          $('#setUsersBtn').trigger('click');
+          return true;
+        }
+        else {
+          return nano.utils.validateNumber(event);
+        }
+    },
+
+    validateNumber : function(event){
+      return nano.utils.validateNumber(event);
+    },
+
     /**
      * Send user count to server
      * @return void

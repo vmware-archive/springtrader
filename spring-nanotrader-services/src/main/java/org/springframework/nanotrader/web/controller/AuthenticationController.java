@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Provides JSON based REST api to nanotrader login and logout services
  * 
  * @author Brian Dussault
- * @author
  */
 
 @Controller
