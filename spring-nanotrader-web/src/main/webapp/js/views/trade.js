@@ -52,10 +52,13 @@ nano.views.Trade = Backbone.View.extend({
                 quoteItems: null
             }
         }
-        // parse and render
+        // Parse the storage quotes and render the trade view
         this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.trade))(data));
         this.$el.show();
+        // Cache the quote input
         this.quoteInput = this.$('#quote-input');
+        // Cache the error control
+        this.quoteError = this.$('#quote-error');
     },
     
     /**
@@ -64,7 +67,7 @@ nano.views.Trade = Backbone.View.extend({
      * @return void
      */
     quote : function (event){
-        var quoteError = this.$('#quote-error');
+        var quoteError = this.quoteError;
         event.preventDefault();
 
         var quote = this.quoteInput.val();
@@ -87,9 +90,15 @@ nano.views.Trade = Backbone.View.extend({
             window.location = nano.conf.hash.tradeWithQuote.replace(nano.conf.quoteUrlKey, quote).replace(nano.conf.randomUrlKey, random);
         }
     },
-    
+
+    /**
+     * Trade error
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @param error: Boolean
+     * @return void
+     */
     error : function(error){
-        var quoteError = this.$('#quote-error');
+        var quoteError = this.quoteError;
         
         if (error){
             quoteError.removeClass('hide');

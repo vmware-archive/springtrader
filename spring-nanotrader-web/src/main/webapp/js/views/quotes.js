@@ -106,11 +106,12 @@ nano.views.Quotes = Backbone.View.extend({
         var view = this;
         
         var onSuccess = function(model){
-            nano.instances.router.trade(view.page);
+            //nano.instances.router.trade(view.page);
             var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal))(model.toJSON()) );
             popup.modal();
+            
             view.$el.empty();
-            //nano.instances.router.trade(view.page);
+
         };
         
         var onError = function(model, error){
@@ -143,7 +144,13 @@ nano.views.Quotes = Backbone.View.extend({
             }
         );
     },
-    
+
+    /**
+     * Quotes error
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @param error: Boolean
+     * @return void
+     */
     error : function(error) {
         var buyError = this.$('#buy-error');
         

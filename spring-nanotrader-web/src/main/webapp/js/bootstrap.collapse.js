@@ -55,8 +55,9 @@
 
       this.$element[dimension](0)
       this.transition('addClass', 'show', 'shown')
-      this.$element[dimension](this.$element[0][scroll])
-
+      //this.$element[dimension](this.$element[0][scroll])
+      // Fix for NTR-70 and NTR-73
+      $.support.transition && this.$element[dimension](this.$element[0][scroll])
     }
 
   , hide: function () {

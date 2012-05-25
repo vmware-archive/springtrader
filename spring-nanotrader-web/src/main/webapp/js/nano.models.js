@@ -1,4 +1,3 @@
-
 /**
  * Since we're using Backbone.js to handle all of the communication between our code 
  * and the REST api, we're overwriting the default sync function used by Backbone to 
@@ -99,6 +98,7 @@ nano.models.Account = Backbone.Model.extend({
 
 /**
  * Model to interact with the Account Profile Object
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.models.AccountProfile = Backbone.Model.extend({
@@ -117,11 +117,8 @@ nano.models.AccountProfile = Backbone.Model.extend({
         // RegExp attrs validation
         reFullname = new RegExp(/^\b[\w\d\s]{2,25}\b$/);
         reEmail = new RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
-        //rePasswd = new RegExp();
         reUserid = new RegExp(/^\b[\w\d]{3,25}\b$/);
-        reOpenbalance = new RegExp(/^\b[\d]{3,100}\b$/);
         reCreditcard = new RegExp(/^\b[\d]{15,16}\b$/);
-        //reAddress = new RegExp();
         var errors = [];
         
         // fullname validation
@@ -141,9 +138,9 @@ nano.models.AccountProfile = Backbone.Model.extend({
             errors.push("useridError");
         }
         // openbalance validation
-        //if (attrs.accounts[0].openbalance.match(reOpenbalance) == null){
-        //    errors.push("openbalanceError");
-        //}
+        if (attrs.accounts[0].openbalance.length < 3 || attrs.accounts[0].openbalance.length > 100){
+            errors.push("openbalanceError");
+        }
         // creditcard validation
         if (attrs.creditcard.match(reCreditcard) == null){
             errors.push("creditcardError");

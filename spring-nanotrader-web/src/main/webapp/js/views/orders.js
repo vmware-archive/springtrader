@@ -62,36 +62,52 @@ nano.views.Orders = Backbone.View.extend({
         this.paginators = this.$('#loo-pagination > li.g2p'); // Paginator controls
         this.previous = this.$('#loop-previous'); // "previous" link control
         this.next = this.$('#loop-next'); // "next" link control 
-        this.toggleControl = this.$('#toggle-orders-control'); // Toggle Control
-        this.ordersControl = this.$('#orders-control'); // Orders Control
         this.paginationControl = this.$('#pagination-control'); // Orders Pagination Control
 
         // For some reason, the div needs to be showing
         // before doing the collapsing functions
         this.$el.show();
         //Prepare the view for collapsing sections
-        if ( nano.utils.isMobile() )
-        {
+        if ( nano.utils.isMobile() ){
+            this.ordersContent = this.$('#orders-content'); // Orders List Content
+            
             nano.utils.setCollapsable(this);
-        }
 
-        // Check the hast and enable or disable the toggle list functionality
-        if ( this.hash == nano.conf.hash.dashboard || this.hash == nano.conf.hash.dashboardWithPage ) {
-            this.toggleControl.removeClass('hide');
-            this.$('#orders-control div.title').addClass('hide');
+            // Check the hash and enable or desable the toggle funtionality on mobile
+            if (this.hash == nano.conf.hash.dashboardWithPage || this.hash == nano.conf.hash.tradeWithPage){
+                if (!freshRender ){
+                    this.ordersContent.collapse('show');
+                } else {
+                    this.ordersContent.collapse('hide');
+                }
+            }
 
-            // Collapse the toggle only if it's a fresh render
-            if( freshRender ){
-                this.toggleControl.addClass('active');
-                this.ordersControl.hide();
-                this.paginationControl.hide();
+            if (location.hash == nano.conf.hash.dashboard || location.hash == nano.conf.hash.trade){
+                this.ordersContent.collapse('hide');
             }
 
         } else {
-            this.toggleControl.addClass('hide');
-            this.$('#orders-control div.title').removeClass('hide');
-            this.ordersControl.show();
-            this.paginationControl.show();
+            this.toggleControl = this.$('#toggle-orders-control'); // Toggle Control
+            this.ordersControl = this.$('#orders-control'); // Orders Control
+            
+            // Check the hash and enable or disable the toggle list functionality
+            if ( location.hash == nano.conf.hash.dashboard || this.hash == nano.conf.hash.dashboardWithPage ) {
+                this.toggleControl.removeClass('hide');
+                this.$('#orders-control div.title').addClass('hide');
+
+                // Collapse the toggle only if it's a fresh render
+                if( freshRender ){
+                    this.toggleControl.addClass('active');
+                    this.ordersControl.hide();
+                    this.paginationControl.hide();
+                }
+
+            } else {
+                this.toggleControl.addClass('hide');
+                this.$('#orders-control div.title').removeClass('hide');
+                this.ordersControl.show();
+                this.paginationControl.show();
+            }
         }
 
         //Set the page number on the paginator
@@ -209,6 +225,7 @@ nano.views.Orders = Backbone.View.extend({
         var htmlId = this.$('#no-orders');
         htmlId.html(_.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}) );
     }
+    
 });
 
 

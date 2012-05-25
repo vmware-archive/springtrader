@@ -24,5 +24,6 @@ nano.conf.tpls = {
     quoteModal : nano.conf.tplRoot + 'quoteModal.tpl',
     warning : nano.conf.tplRoot + 'warning.tpl',
     help : nano.conf.tplRoot + 'help.tpl',
-    overview : nano.conf.tplRoot + 'overview.tpl'
+    overview : nano.conf.tplRoot + 'overview.tpl',
+    leftnavbar : nano.conf.tplRoot + 'leftnavbar.tpl'
 };

@@ -7,7 +7,7 @@
             </a>
         </h3>
     </div>
-    <div id="orders-content" class="table-outer collapse in">
+    <div id="orders-content" class="table-outer collapse">
         <table id="list-of-orders" class="table"><tbody></tbody></table>
         <div id="no-orders"></div>
         <!-- The prefix "loop" stands for "List Of Orders Pagination" -->
@@ -21,5 +21,6 @@
                 <li id="loop-next" class="<%= ( currentPage == pageCount ? "disabled" : "") %>"><a>&raquo;</a></li>
             </ul>
         </div>
+        <br>
     </div>
 </div>
