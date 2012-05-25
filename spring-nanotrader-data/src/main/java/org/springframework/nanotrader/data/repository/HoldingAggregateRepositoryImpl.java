@@ -53,7 +53,8 @@ public class HoldingAggregateRepositoryImpl implements HoldingAggregateRepositor
 			counter++;
 		}
 		holdingSummary.setHoldingsTotalGains(totalGains);
-		return calculatePercentages(holdingSummary, holdingRollups);
+		HoldingSummary summary = calculatePercentages(holdingSummary, holdingRollups);
+		return summary;
 	}
 	
 	private HoldingSummary calculatePercentages(HoldingSummary holdingSummary, List<HoldingAggregate> holdingRollups) { 
