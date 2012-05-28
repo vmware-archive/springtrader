@@ -8,7 +8,7 @@ nano.views.Trade = Backbone.View.extend({
      * Bind the events functions to the different HTML elements
      */
     events : {
-        'click #getQuoteBtn' : 'quote',
+        'click #getQuoteBtn' : 'quote'
     },
     
     /**

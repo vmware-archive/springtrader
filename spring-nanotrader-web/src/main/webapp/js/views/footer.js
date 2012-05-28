@@ -9,7 +9,7 @@ nano.views.Footer = Backbone.View.extend({
      */
     events : {
         'click #contactUsBtn' : 'contact',
-        'click #helpBtn' : 'help',
+        'click #helpBtn' : 'help'
     },
     
     /**

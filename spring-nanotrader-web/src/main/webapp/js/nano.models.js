@@ -180,11 +180,11 @@ nano.models.PortfolioSummary = Backbone.Model.extend({
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.models.MarketSummary = Backbone.Model.extend({
-    urlRoot : nano.conf.urls.marketSummary,
+    urlRoot : nano.conf.urls.marketSummary
 });
 
 nano.models.RecreateData = Backbone.Model.extend({
-    urlRoot : nano.conf.urls.recreateData,
+    urlRoot : nano.conf.urls.recreateData
 });
 
 /**
@@ -206,7 +206,7 @@ nano.models.HoldingSummary = Backbone.Model.extend({
  * @author Carlos Soto <carlos.soto@lognllc.com>
  */
 nano.models.Holding = Backbone.Model.extend({
-    idAttribute: 'holdingid',
+    idAttribute: 'holdingid'
     //=================================================> There's no url for this object, we need to include one!
 });
 
