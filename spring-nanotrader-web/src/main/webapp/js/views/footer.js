@@ -10,6 +10,7 @@ nano.views.Footer = Backbone.View.extend({
     events : {
         'click #contactUsBtn' : 'contact',
         'click #helpBtn' : 'help',
+        'click #switchViewBtn' : 'switchView'
     },
     
     /**
@@ -24,13 +25,25 @@ nano.views.Footer = Backbone.View.extend({
     },
 
     /**
-     * Renders the Account Summary View
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * Renders the Footer View
+     * @author Winston Koh <wkoh@vmware.com>
      * @return void
      */
     render: function() {
-            var footer = _.template(nano.utils.getTemplate(nano.conf.tpls.footer))();
-            this.$el.html(footer);
+        var viewMode = nano.utils.getViewPrefCookie();
+        var viewModeString = 'Mobile View';
+        // toggling from mobile -> full or full -> mobile
+        if (viewMode == null || "fullView" == viewMode) {
+            viewModeString = 'Mobile View';
+        }
+        else if ("mobileView" == viewMode) {
+            viewModeString = 'Full View';
+        }
+        var data = {
+            switchView : viewModeString
+        };
+        var footer = _.template(nano.utils.getTemplate(nano.conf.tpls.footer))(data);
+        this.$el.html(footer);
     },
 
     /**
@@ -49,5 +62,23 @@ nano.views.Footer = Backbone.View.extend({
      */
     help: function() {
         window.location = nano.conf.hash.help;
+    },
+    
+    /**
+     * Switch view link click event
+     * @author Winston Koh <wkoh@vmware.com>
+     * @return void
+     */
+    switchView: function() {
+      var viewMode = nano.utils.getViewPrefCookie();
+      // toggling from mobile -> full or full -> mobile
+      if ("mobileView" == viewMode) {
+        nano.utils.setViewPrefCookie("fullView");
+        location.replace('index.html');
+      }
+      else if (viewMode == null || "fullView" == viewMode) {
+        nano.utils.setViewPrefCookie("mobileView");
+        location.replace('mobile.html');
+      }
     }
 });
