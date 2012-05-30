@@ -156,4 +156,14 @@
 		</util:properties>
 		<jee:jndi-lookup id="dataSource" jndi-name="jdbc/nanodb" />
 	</beans>
+
+    <beans profile="jndiPostgresql">
+        <util:properties id="dbPropertiesBean">
+            <prop key="use_scrollable_resultset">true</prop>
+            <prop key="dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+            <prop key="hb2ddl.auto">validate</prop>
+        </util:properties>
+        <jee:jndi-lookup id="dataSource" jndi-name="jdbc/nanodb" />
+    </beans>
+
 </beans>
