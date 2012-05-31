@@ -47,9 +47,9 @@ nano.views.Registration = Backbone.View.extend({
             //Cache all of the inputs
             this.fullnameInput = this.$('#fullname-input');
             this.emailInput = this.$('#email-input');
-            this.passwordInput = this.$('#password-input');
+            this.passwordInput = this.$('#reg-password-input');
             this.matchpasswdInput = this.$('#matchpasswd-input');
-            this.usernameInput = this.$('#username-input');
+            this.usernameInput = this.$('#reg-username-input');
             this.openbalanceInput = this.$('#openbalance-input');
             this.creditcardInput = this.$('#creditcard-input');
             this.addressInput = this.$('#address-input');
