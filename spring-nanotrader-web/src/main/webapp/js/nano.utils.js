@@ -487,8 +487,10 @@ nano.utils.setUsers = function(userCount, callbacks) {
             headers : nano.utils.getHttpHeaders(),
             dataType : 'json',
             success : function(data){
-            	$('#showprogress').remove();                
-            	$('#progress').append('<div class="well show-quote-box" id="showprogress">' + data.usercount + " " + translate('userCreationMessage') + '</div>');        	
+            	if (data.usercount != null){
+            	  $('#showprogress').remove();                
+            	  $('#progress').append('<div class="well show-quote-box" id="showprogress">' + data.usercount + " " + translate('userCreationMessage') + '</div>');
+            	}
             },
             error: function(){
             	$('#setUsersBtn').removeAttr("disabled", "disabled");

@@ -26,7 +26,7 @@
                         <div id="password-control" class="control-group">
                             <label class="control-label"><%= translate("password") %>:</label>
                             <div class="controls">
-                                <input type="password" value="" id="password-input" class="input-xlarge focused"><br/>
+                                <input type="password" value="" id="reg-password-input" class="input-xlarge focused"><br/>
                                 <span id="passwdError" class="help-inline hide"><%= translate("passwdError") %></span>
                             </div>
                         </div>
@@ -40,9 +40,9 @@
                     </div>
                     <div class="span4">
                         <div id="username-control" class="control-group">
-                            <label for="username-input" class="control-label"><%= translate("username") %>:</label>
+                            <label for="reg-username-input" class="control-label"><%= translate("username") %>:</label>
                             <div class="controls">
-                                <input type="text" value="" id="username-input" class="input-xlarge focused"><br/>
+                                <input type="text" value="" id="reg-username-input" class="input-xlarge focused"><br/>
                                 <span id="usernameError" class="help-inline hide"><%= translate("usernameError") %></span>
                             </div>
                         </div>
