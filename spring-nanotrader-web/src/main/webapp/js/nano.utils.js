@@ -481,6 +481,22 @@ nano.utils.setUsers = function(userCount, callbacks) {
         });
 };
 
+/**
+ * Function to calculate and get the start and end point of pagination results
+ */
+nano.utils.getPaginationInterval = function(currentPage, pageCount) {
+    var currentPage = Number(currentPage);
+    var halfEntries = Math.ceil(nano.conf.pageCountSize/2);
+    var pageCount = pageCount;
+    var upperLimit = pageCount - nano.conf.pageCountSize;
+    
+    var interval = {
+        start : currentPage > halfEntries ? Math.max(Math.min(currentPage - halfEntries, upperLimit), 0):0,
+        end   : currentPage > halfEntries ? Math.min(currentPage + halfEntries, pageCount):Math.min(nano.conf.pageCountSize, pageCount)
+    };
+    
+    return interval;
+};
 
 /**
  * Aliases for the functions used in the views to make them shorter

@@ -46,11 +46,15 @@ nano.views.Holdings = Backbone.View.extend({
                 page = this.pageCount;
             }
 
+            // The interval start and end pages to render on the pagination
+            this.interval = nano.utils.getPaginationInterval(page, this.pageCount);
+
             var data = {
                 totalPurchaseBasis : 0,
                 totalMarketValue : 0, 
                 totalGainLoss : 0,
                 pageCount : this.pageCount,
+                interval : this.interval,
                 currentPage : page
             };
 
