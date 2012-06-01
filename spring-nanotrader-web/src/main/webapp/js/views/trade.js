@@ -8,7 +8,8 @@ nano.views.Trade = Backbone.View.extend({
      * Bind the events functions to the different HTML elements
      */
     events : {
-        'click #getQuoteBtn' : 'quote'
+        'click #getQuoteBtn' : 'quote',
+        'keypress' : 'checkEnter'
     },
     
     /**
@@ -59,6 +60,17 @@ nano.views.Trade = Backbone.View.extend({
         this.quoteInput = this.$('#quote-input');
         // Cache the error control
         this.quoteError = this.$('#quote-error');
+    },
+
+    /**
+     * check enter key on IE7+
+     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     */
+    checkEnter : function(event) {
+        if (event.which == 13) {
+            $('#getQuoteBtn').trigger('click');
+            return false;
+        }
     },
     
     /**

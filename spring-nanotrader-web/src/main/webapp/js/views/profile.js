@@ -124,7 +124,7 @@ nano.views.Profile = Backbone.View.extend({
                 view.$('#matchpasswd-input').val('');
                 view.$('#creditcard-input').val('************' + creditcard.slice(-4))
                 // Show the loading page and render the dashboard
-                nano.utils.goTo( nano.conf.hash.dashboard );
+                nano.utils.goTo( nano.conf.hash.profile );
             },
             error : function(model, error) {
                 

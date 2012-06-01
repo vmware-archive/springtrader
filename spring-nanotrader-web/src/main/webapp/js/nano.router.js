@@ -283,8 +283,8 @@ nano.Router = Backbone.Router.extend({
         else
         {
             // Hide the loading Message
-            nano.containers.loading.show();
-            nano.containers.holdings.hide();
+            //nano.containers.loading.show();
+            //nano.containers.holdings.hide();
 
             // Fetch the info for the Holdings page we need
             var holdings = new nano.models.Holdings({ accountid : nano.session.accountid });
