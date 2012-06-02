@@ -469,6 +469,28 @@ nano.utils.validateNumber = function(event) {
     return allow;
 };
 
+/**
+ * Function to fetch all quotes from server and save
+ * Symbols data from quote in localStorage.
+ * Symbols from localStorage is used to autocomplete
+ * quote input field on trage page
+ */
+nano.utils.loadSymbols = function() {
+    if(typeof(Storage)!=="undefined") {
+        var storageLength = 0
+        if (localStorage.getItem('quotes') != null)
+          var storageLength = JSON.parse(localStorage.quotes).length;
+        if(storageLength < 10){
+            var allQuotes = new nano.models.Quotes();
+                allQuotes.fetch({
+                    success : function() {
+                        var symbols = allQuotes.pluck("symbol")
+                        localStorage.setItem('quotes', JSON.stringify(symbols));
+                    }
+                });
+        }
+    }
+};
 
 /**
  * Function to handle admin service requests (recreateData)

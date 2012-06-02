@@ -1,6 +1,7 @@
 /**
  * View Class for the List Of Quotes
  * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Kashyap Parikh
  */
 nano.views.Quotes = Backbone.View.extend({
 
