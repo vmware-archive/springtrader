@@ -499,6 +499,11 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
+	public List<Quote> findAllQuotes() {
+		return quoteRepository.findAll();
+	}
+
+	@Override
 	public Account findAccount(Integer accountId) {
 		return accountRepository.findOne(accountId);
 	}

@@ -63,6 +63,8 @@ public interface TradingServiceFacade {
 
 	Quote findQuoteBySymbol(String symbol);
 
+	CollectionResult findQuotes();
+
 	Account findAccount(Integer id);
 
 	PortfolioSummary findPortfolioSummary(Integer accountId);

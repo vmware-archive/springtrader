@@ -37,6 +37,7 @@ nano.conf.urls = {
     //order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order/asynch',
     order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order',
     quote : nano.conf.urlRoot + 'quote',
+    quotes : nano.conf.urlRoot + 'quotes',
     admin : nano.conf.urlRoot + 'recreateData'
 };
 

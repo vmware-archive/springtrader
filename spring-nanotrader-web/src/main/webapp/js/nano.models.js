@@ -262,6 +262,16 @@ nano.models.Quote = Backbone.Model.extend({
     }
 });
 
+nano.models.Quotes = Backbone.Collection.extend({
+    model : nano.models.Quote,
+    urlRoot : nano.conf.urls.quotes,
+    url : function() {
+        return this.urlRoot;
+    },
+    parse: nano.utils.collectionParse
+
+});
+
 /**
  * Collection to interact with the Holdings Collection (list of Holding Objects)
  * @author Carlos Soto <carlos.soto@lognllc.com>

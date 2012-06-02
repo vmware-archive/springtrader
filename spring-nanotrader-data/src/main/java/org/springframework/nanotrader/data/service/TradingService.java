@@ -53,6 +53,8 @@ public interface TradingService {
 	
 	public abstract List<Quote> findRandomQuotes(Integer count);
 
+	public abstract List<Quote> findAllQuotes();
+
 	public abstract Quote findQuoteBySymbol(String symbol);
 
 	public abstract List<Quote> findQuotesBySymbols(Set<String> symbols);
