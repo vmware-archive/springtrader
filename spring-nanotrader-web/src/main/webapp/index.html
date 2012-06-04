@@ -67,6 +67,16 @@
         <script src="js/nano.router.js"></script>
         <link rel="shortcut icon" href="ico/favicon.ico">
     </head>
+    <script>
+      var viewMode = nano.utils.getViewPrefCookie();
+      if (viewMode == 'mobileView') {
+          nano.utils.setViewPrefCookie("mobileView");
+          location.replace('mobile.html');
+      }
+      else {
+          nano.utils.setViewPrefCookie("fullView");
+      }
+    </script>
     <body>
         <!-- The prefix "nc" stands for "nano container"-->
         <div id="nc-navbar"></div>

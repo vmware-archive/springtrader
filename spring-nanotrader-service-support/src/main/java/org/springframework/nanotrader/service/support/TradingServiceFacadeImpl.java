@@ -50,6 +50,7 @@ import org.springframework.stereotype.Service;
 * and option for synch/asynch processing is provided.
 * @author Gary Russell
 * @author Brian Dussault
+* @author Kashyap Parikh
 */
 @Service
 public class TradingServiceFacadeImpl implements TradingServiceFacade {
@@ -331,6 +332,27 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
         return collectionResults;
     }
     
+    public CollectionResult findQuotes() {
+        if (log.isDebugEnabled()) {
+            log.debug("TradingServiceFacade: findQuotes");
+        }
+        CollectionResult  collectionResults = new CollectionResult();
+        List<org.springframework.nanotrader.data.domain.Quote> quotes = null;
+        Long totalRecords = new Long(tradingService.findAllQuotes().size());
+        collectionResults.setTotalRecords(totalRecords);
+        quotes = tradingService.findAllQuotes(); //get all quotes
+        List<Quote> responseQuotes = new ArrayList<Quote>();
+        if (quotes != null && quotes.size() > 0 ) {
+            for(org.springframework.nanotrader.data.domain.Quote o: quotes) {
+                Quote quote = new Quote();
+                mapper.map(o, quote, QUOTE_MAPPING);
+                responseQuotes.add(quote);
+            }
+        }
+        collectionResults.setResults(responseQuotes);
+        return collectionResults;
+    }
+
     public Account findAccount(Integer id) {
         if (log.isDebugEnabled()) {
             log.debug("TradingServiceFacade.findAccount: id=" + id);
@@ -380,7 +402,6 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
         return responseQuote;
     }
 
-    
     public PortfolioSummary findPortfolioSummary(Integer accountId) { 
         if (log.isDebugEnabled()) {
             log.debug("TradingServiceFacade.findPortfolioSummary: accountId=" + accountId);

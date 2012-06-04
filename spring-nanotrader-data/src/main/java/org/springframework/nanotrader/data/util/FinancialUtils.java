@@ -95,13 +95,12 @@ public class FinancialUtils {
 
 	public static BigDecimal calculateGainPercentage(BigDecimal gain, BigDecimal totalGains) { 
 		BigDecimal percent = new BigDecimal(0);
-		if (percent.intValue() != 0){
-		  percent = gain.divide(totalGains, 4, RoundingMode.HALF_UP);
-		  percent = percent.multiply(new BigDecimal(100),
+		percent = gain.divide(totalGains, 4, RoundingMode.HALF_UP);
+		percent = percent.multiply(new BigDecimal(100),
 					new MathContext(4, RoundingMode.HALF_UP));
-		}
 		return percent;
 	}
+	
 }
 
 

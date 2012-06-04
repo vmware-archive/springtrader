@@ -5,30 +5,23 @@
 	
     <!-- Location of Java @Configuration classes that configure the components that makeup this application -->
     <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>META-INF/spring/root-context.xml</param-value>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
     </context-param>
 
-    <context-param>
-        <param-name>spring.profiles.active</param-name>
-
-        <!-- H2 -->
-<!--         <param-value>default</param-value> -->
-
-        <!-- postgreSQL -->
-        <param-value>sqlfire</param-value>
-
-        <!-- JNDI -->
-<!--         <param-value>jndi</param-value> -->
-
-    </context-param>
 	
 	  <!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 	
-	
+    <resource-ref>
+      <description>Nanotrader Datasource</description>
+      <res-ref-name>jdbc/nanodb</res-ref-name>
+      <res-type>javax.sql.DataSource</res-type>
+      <res-auth>Container</res-auth>
+    </resource-ref>
+    	
 	<!-- Disables servlet container welcome file handling. Needed for compatibility with Servlet 3.0 and Tomcat 7.0 -->
 	<welcome-file-list>
 		<welcome-file />

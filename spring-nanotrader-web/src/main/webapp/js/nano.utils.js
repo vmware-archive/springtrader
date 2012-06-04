@@ -17,6 +17,24 @@ var nano = {
 };
 
 /**
+ * Detect if user is coming from mobile browser
+ * @author Winston Koh <wkoh@vmware.com>
+ * @return boolean
+ */
+nano.utils.detectMobileBrowser = function(event) {
+    var isMobile = false;
+    if(navigator.userAgent.match(/iPhone/i)
+       || navigator.userAgent.match(/iPad/i)
+       || navigator.userAgent.match(/iPod/i)
+       || navigator.userAgent.match(/Android/i)
+       || navigator.userAgent.match(/webOS/i)
+       || navigator.userAgent.match(/BlackBerry/i)) {
+      isMobile = true;
+    }
+    return isMobile;
+};
+
+/**
 * Checks on the strings object for the specified key. If the value doesn't exist the key is returned
 * @author Carlos Soto <carlos.soto@lognllc.com>
 * @param string key for the translation requested
@@ -35,6 +53,43 @@ nano.utils.translate = function translate(key) {
 
     return value;
 }
+
+
+/**
+ * Fetches user view preferences cookie
+ * @author Winston Koh <wkoh@vmware.com>
+ * @return Object: User view mode
+ */
+nano.utils.getViewPrefCookie = function() {
+    var viewMode = null;
+
+    if ($.cookie)
+    {
+        viewMode = $.cookie('userViewPref');
+        if (viewMode == null) {
+            var isMobile = nano.utils.detectMobileBrowser();
+            if (isMobile) {
+                $.cookie('userViewPref', 'mobileView');
+            }
+            else {
+                $.cookie('userViewPref', 'fullView');
+            }
+            viewMode = $.cookie('userViewPref');
+        }
+    }
+
+    return viewMode;
+};
+
+/**
+ * set user view preferences cookie
+ * @author Winston Koh <wkoh@vmware.com>
+ */
+nano.utils.setViewPrefCookie = function(value) {
+    if ($.cookie) {
+        $.cookie('userViewPref', value);
+    }
+};
 
 /**
  * Fetches the session from it's container (cookie)
