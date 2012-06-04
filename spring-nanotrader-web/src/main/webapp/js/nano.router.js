@@ -1,6 +1,7 @@
 /** 
  * Router class for the application: http://documentcloud.github.com/backbone/#Router
  * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Kashyap Parikh
  */
 nano.Router = Backbone.Router.extend({
 
@@ -50,19 +51,10 @@ nano.Router = Backbone.Router.extend({
         nano.instances.admin = new nano.views.Admin({el: '#nc-admin'});
         // Left navbar for profile, overview, help and admin
         nano.instances.leftnavbar = new nano.views.Leftnavbar({el : '#nc-leftnavbar'});
-        var allQuotes = new nano.models.Quotes();
-        allQuotes.fetch({
-            success : function() {
-                var storageLength = JSON.parse(localStorage.quotes).length;
-                if(typeof(Storage)!=="undefined"){
-                    if(storageLength < 10){
-                        var symbols = allQuotes.pluck("symbol")
-                            localStorage.setItem('quotes', JSON.stringify(symbols));
-                    }
-                }
-            }
-        });
-
+        // Load all quote Symbols in localstorage
+        // Symbols from localStorage is used on trade page to autocomplete
+        // the quote input field
+        nano.utils.loadSymbols();
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#nc-loading');
@@ -210,6 +202,10 @@ nano.Router = Backbone.Router.extend({
             nano.utils.goTo( nano.conf.hash.login );
         }
         nano.instances.footer.render();
+        // Load all quote Symbols in localstorage
+        // Symbols from localStorage is used on trade page to autocomplete
+        // the quote input field
+        nano.utils.loadSymbols();
     },
 
     login: function(error) {

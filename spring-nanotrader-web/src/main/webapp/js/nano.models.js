@@ -6,6 +6,7 @@
  * with the problem of parsing the response into Date Objects that they can use.
  * We're also including the Nanaotrader headers here so we don't have to add them on every call.
  * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Kashyap Parikh
  */
 Backbone._sync_orig = Backbone.sync;
 Backbone.sync = function(method, model, options)
