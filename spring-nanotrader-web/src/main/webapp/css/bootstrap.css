@@ -2047,6 +2047,15 @@ table .span24 {
   -moz-box-shadow: none;
   box-shadow: none;
 }
+.btn-large-fixed {
+  padding: 9px 14px;
+  font-size: 15px;
+  line-height: normal;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 200px;
+}
 .btn-large {
   padding: 9px 14px;
   font-size: 15px;
@@ -2412,6 +2421,13 @@ input[type="submit"].btn.btn-mini {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid #000000;
+}
+.btn-large-fixed .caret {
+  margin-top: 6px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000000;
+  width: 200px;
 }
 .btn-primary .caret,
 .btn-warning .caret,
