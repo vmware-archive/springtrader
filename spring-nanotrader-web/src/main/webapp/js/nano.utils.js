@@ -559,6 +559,52 @@ nano.utils.setUsers = function(userCount, callbacks) {
         });
 };
 
+/**
+ * Function to kill TCServer
+ * @author Winston Koh <wkoh@vmware.com>
+ * @return void
+ *
+ */
+nano.utils.killTCServer = function() {
+    $('#progress').append('<div class="well show-quote-box" id="waitkilltcserverstatus">' + translate('waitKillTCServerStatus') + '</div>');
+    $('#progress').fadeOut(3000, function() {
+        $('#crashcompleted').append('<div class="well show-quote-box" id="killtcserverstatus">' + translate('killTCServerStatus') + '</div>');
+    });
+    $.ajax({
+         url : nano.conf.urls.killTCServer,
+         type : 'GET',
+         headers : nano.utils.getHttpHeaders(),
+         dataType : 'json',
+         success : function(){
+         },
+         error : function(){
+         }
+     });
+};
+
+/**
+ * Function to crash TCServer
+ * @author Winston Koh <wkoh@vmware.com>
+ * @return void
+ *
+ */
+nano.utils.crashTCServer = function() {
+    $('#progress').append('<div class="well show-quote-box" id="waitcrashtcserverstatus">' + translate('waitCrashTCServerStatus') + '</div>');
+    $('#progress').fadeOut(60000, function() {
+        $('#crashcompleted').append('<div class="well show-quote-box" id="crashtcserverstatus">' + translate('crashTCServerStatus') + '</div>');
+    });
+    $.ajax({
+         url : nano.conf.urls.crashTCServer,
+         type : 'GET',
+         headers : nano.utils.getHttpHeaders(),
+         dataType : 'json',
+         success : function(){
+         },
+         error : function(){
+         }
+     });
+};
+
 
 /**
  * Aliases for the functions used in the views to make them shorter

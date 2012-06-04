@@ -137,5 +137,15 @@ nano.strings = {
     goToLoginPage : 'Go To Login Page',
     recentTransactions : 'Recent Transactions',
     quantityError :  'Error! Quantity must be a positive number.',
-    buyOrderMessage : 'Your order is submitted for processing...'
+    buyOrderMessage : 'Your order is submitted for processing...',
+    killTCServer : 'Kill TCServer',
+    crashTCServer : 'Crash TCServer',
+    killRabbitMQ : 'Kill RabbitMQ',
+    stopRabbitMQ : 'Stop RabbitMQ',
+    killSQLFire : 'Kill SQLFire',
+    stopSQLFire : 'Stop SQLFire',
+    waitKillTCServerStatus : 'Waiting for TC Server to be killed...',
+    killTCServerStatus : 'TC Server killed successfully',
+    waitCrashTCServerStatus : 'Waiting for TC Server to crash...',
+    crashTCServerStatus : 'TC Server crashed successfully'
 };

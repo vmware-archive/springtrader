@@ -38,7 +38,9 @@ nano.conf.urls = {
     order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order',
     quote : nano.conf.urlRoot + 'quote',
     quotes : nano.conf.urlRoot + 'quotes',
-    admin : nano.conf.urlRoot + 'recreateData'
+    admin : nano.conf.urlRoot + 'recreateData',
+    killTCServer : nano.conf.urlRoot + 'chaos/kill',
+    crashTCServer : nano.conf.urlRoot + 'chaos/oom'
 };
 
 nano.conf.tpls = {
