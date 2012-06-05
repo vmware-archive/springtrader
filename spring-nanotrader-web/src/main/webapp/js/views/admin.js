@@ -12,7 +12,11 @@ nano.views.Admin = Backbone.View.extend({
         'click #profile' : 'profile',
         'click #overview' : 'overview',
         'click #help' : 'help',
-        'keypress [type=number]' : 'checkEnter'
+        'keypress [type=number]' : 'checkEnter',
+        'click #killTCServerBtn' : 'killTCServer',
+        'click #crashTCServerBtn' : 'crashTCServer',
+        'click #killRabbitMQBtn' : 'killRabbitMQ',
+        'click #stopRabbitMQBtn' : 'stopRabbitMQ'
     },
     
     /**
@@ -77,6 +81,63 @@ nano.views.Admin = Backbone.View.extend({
                 adminError.removeClass('hide');
             }
             });
+    },
+
+    /**
+     * Kill TCServer
+     * @return void
+     */
+    killTCServer : function (event){
+        event.preventDefault();
+        nano.utils.killTCServer({
+            success : function(){
+            },
+            error : function() {}
+            });
+    },
+
+    /**
+     * crash TCServer
+     * @return void
+     */
+    crashTCServer : function (event){
+        event.preventDefault();
+        nano.utils.crashTCServer({
+            success : function(){
+            },
+            error : function() {
+            }
+            });
+    },
+
+    /**
+     * Kill RabbitMQ
+     * @return void
+     */
+    killRabbitMQ : function (event){
+        /*
+        event.preventDefault();
+        nano.utils.killRabbitMQ({
+            success : function(jqXHR, textStatus){
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            }
+            });*/
+    },
+
+    /**
+     * Stop RabbitMQ
+     * @return void
+     */
+    stopRabbitMQ : function (event){
+        /*
+        event.preventDefault();
+        nano.utils.setUsers(count, {
+            success : function(jqXHR, textStatus){
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+            }
+            });*/
     },
 
     profile : function(){
