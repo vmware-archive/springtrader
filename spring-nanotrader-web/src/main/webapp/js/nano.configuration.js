@@ -14,9 +14,10 @@ nano.conf = {
     marketSummaryUpdateMillisecs : 15000,           // Interval of milliseconds in which the Market Summary section updates
     currency : '$',                                 // Current currency is dollars
     thousandsSep : ',',                             // separator char for currency thousands/millions
-    pageSize: 5,                                    // Amount of items to be displayed on list views
+    pageSize : 5,                                   // Amount of items to be displayed on list views
     successCss : 'alert alert-block alert-success', // CSS Class to show success message (or Positive Balance)
-    errorCss : 'alert alert-block alert-error'      // CSS Class to show error message (or Negative Balance)
+    errorCss : 'alert alert-block alert-error',     // CSS Class to show error message (or Negative Balance)
+    pageCountSize : 10                              // Amount of pages to be displayed on the pagination
 };
 /**
  * API urls

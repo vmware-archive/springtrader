@@ -162,7 +162,7 @@ nano.Router = Backbone.Router.extend({
                 account : new nano.models.Account({accountid : nano.session.accountid}),
                 holdingSummary : new nano.models.HoldingSummary({ accountid : nano.session.accountid }),
                 portfolioSummary : new nano.models.PortfolioSummary({ accountid : nano.session.accountid }),
-                orders : new nano.models.Orders({ accountid : nano.session.accountid }),
+                orders : new nano.models.Orders({ accountid : nano.session.accountid })
             };
 
             var onFetchSuccess = function() {
@@ -292,8 +292,8 @@ nano.Router = Backbone.Router.extend({
         else
         {
             // Hide the loading Message
-            nano.containers.loading.show();
-            nano.containers.holdings.hide();
+            //nano.containers.loading.show();
+            //nano.containers.holdings.hide();
 
             // Fetch the info for the Holdings page we need
             var holdings = new nano.models.Holdings({ accountid : nano.session.accountid });
@@ -387,8 +387,8 @@ nano.Router = Backbone.Router.extend({
         }
         else {
             // Hide the loading Message
-            nano.containers.loading.show();
-            nano.containers.orders.hide();
+            //nano.containers.loading.show();
+            //nano.containers.orders.hide();
 
             // Fetch the info for the Orders page we need
             var orders = new nano.models.Orders({ accountid : nano.session.accountid });

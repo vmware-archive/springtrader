@@ -13,7 +13,7 @@ var nano = {
     conf : {},
     session : {},
     device : 'computer',
-    cache : {tpls : {}},
+    cache : {tpls : {}}
 };
 
 /**
@@ -499,30 +499,29 @@ nano.utils.loadSymbols = function() {
  * 
  */
 nano.utils.setUsers = function(userCount, callbacks) {
-	    $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPop') + '</div>');
-	    // Fetch the recreateData progress
-	    // Set the recreate data progress interval to 1 sec
+    $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('dataPop') + '</div>');
+        // Fetch the recreateData progress
+        // Set the recreate data progress interval to 1 sec
         var progress = window.setInterval(function(){
-    	 $.ajax({
-            url : nano.conf.urls.recreateData,
-            type : 'GET',
-            headers : nano.utils.getHttpHeaders(),
-            dataType : 'json',
-            success : function(data){
-            	if (data.usercount != null){
-            	  $('#showprogress').remove();                
-            	  $('#progress').append('<div class="well show-quote-box" id="showprogress">' + data.usercount + " " + translate('userCreationMessage') + '</div>');
-            	}
-            },
-            error: function(){
-            	$('#setUsersBtn').removeAttr("disabled", "disabled");
-                $('#showprogress').remove();
-                if (_.isFunction(callbacks.error))
-                {
-                    callbacks.error(jqXHR, textStatus, errorThrown);
+            $.ajax({
+                url : nano.conf.urls.recreateData,
+                type : 'GET',
+                headers : nano.utils.getHttpHeaders(),
+                dataType : 'json',
+                success : function(data){
+                    $('#showprogress').remove();                
+                    $('#progress').append('<div class="well show-quote-box" id="showprogress">' + data.usercount + " " + translate('userCreationMessage') + '</div>');        	
+                },
+                error: function(){
+                    $('#setUsersBtn').removeAttr("disabled", "disabled");
+                    $('#showprogress').remove();
+                    if (_.isFunction(callbacks.error))
+                    {
+                        callbacks.error(jqXHR, textStatus, errorThrown);
+                    }
                 }
-            }
-          });}, 1000);
+            });
+        }, 1000);
         $.ajax({
             url : nano.conf.urls.admin,
             type : 'POST',
@@ -532,7 +531,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
                 usercount : userCount
             }),
             success : function(data, textStatus, jqXHR){
-            	window.clearInterval(progress);
+                window.clearInterval(progress);
                 $('#setUsersBtn').removeAttr("disabled", "disabled");
                 //logout current user.
                 $('#showprogress').remove();               	
@@ -548,7 +547,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
                 });
             },
             error : function(jqXHR, textStatus, errorThrown){
-            	window.clearInterval(progress);
+                window.clearInterval(progress);
                 $('#setUsersBtn').removeAttr("disabled", "disabled");
                 $('#showprogress').remove();
                 if (_.isFunction(callbacks.error))
@@ -605,6 +604,24 @@ nano.utils.crashTCServer = function() {
      });
 };
 
+/**
+ * Function to calculate and get the start and end point of pagination results
+ * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @return a js object with the start and end pagination interval
+ */
+nano.utils.getPaginationInterval = function(currentPage, pageCount) {
+    var currentPage = Number(currentPage);
+    var halfEntries = Math.ceil(nano.conf.pageCountSize/2);
+    var pageCount = pageCount;
+    var upperLimit = pageCount - nano.conf.pageCountSize;
+    
+    var interval = {
+        start : currentPage > halfEntries ? Math.max(Math.min(currentPage - halfEntries, upperLimit), 0):0,
+        end   : currentPage > halfEntries ? Math.min(currentPage + halfEntries, pageCount):Math.min(nano.conf.pageCountSize, pageCount)
+    };
+    
+    return interval;
+};
 
 /**
  * Aliases for the functions used in the views to make them shorter

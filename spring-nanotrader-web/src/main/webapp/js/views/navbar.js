@@ -32,7 +32,9 @@ nano.views.Navbar = Backbone.View.extend({
         this.ids = {
             dashboard : 'nb-dashboard',
             portfolio : 'nb-portfolio',
-            trade : 'nb-trade'
+            portfolioIcon : 'nb-portfolio-icon',
+            trade : 'nb-trade',
+            tradeIcon : 'nb-trade-icon'
         };
     },
 
@@ -113,6 +115,7 @@ nano.views.Navbar = Backbone.View.extend({
             // Mark the proper link container as "active" and
             // remove the active display on the other links
             var id = evt.target.id;
+            
             for (var i in this.linkContainers)
             {
                 if (i == id)
@@ -131,7 +134,13 @@ nano.views.Navbar = Backbone.View.extend({
                 case this.ids.portfolio:
                     window.location = nano.conf.hash.portfolio;
                     break;
+                case this.ids.portfolioIcon:
+                    window.location = nano.conf.hash.portfolio;
+                    break;
                 case this.ids.trade:
+                    window.location = nano.conf.hash.trade;
+                    break;
+                case this.ids.tradeIcon:
                     window.location = nano.conf.hash.trade;
                     break;
                 case this.ids.dashboard:

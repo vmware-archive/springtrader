@@ -32,8 +32,8 @@
         <!-- The prefix "loo" stands for "List Of Orders" -->
         <ul id="loo-pagination">
             <li id="loop-previous"><a>&laquo;</a></li>
-            <% for (var i = 1 ; i <= pageCount; ++i) { %>
-            <li class="g2p <%= (i == currentPage ? "active" : "") %>"><a><%= i %></a></li>
+            <% for (var i = interval.start; i < interval.end; ++i) { %>
+            <li class="g2p <%= (i+1 == currentPage ? "active" : "") %>"><a><%= i+1 %></a></li>
             <% } %>
             <li id="loop-next"><a>&raquo;</a></li>
         </ul>

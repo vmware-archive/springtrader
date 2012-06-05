@@ -10,11 +10,11 @@
           <div id="navbar-collapse" class="nav-collapse">
               <ul class="nav nav-top">
                   <li class="divider-vertical"></li>
-                  <li><a id="nb-dashboard" class="nav-link"><span class="icon-home icon-white"></span><%= translate("dashboard") %></a></li>
+                  <li><a id="nb-dashboard" class="nav-link"><span id="nb-icon-dashboard" class="icon-home icon-white"></span><%= translate("dashboard") %></a></li>
                   <li class="divider-vertical"></li>
-                  <li><a id="nb-portfolio" class="nav-link"><span class="icon-custom icon-portfolio"></span><%= translate("portfolio") %></a></li>
+                  <li><a id="nb-portfolio" class="nav-link"><span id="nb-portfolio-icon" class="icon-custom icon-portfolio"></span><%= translate("portfolio") %></a></li>
                   <li class="divider-vertical"></li>
-                  <li><a id="nb-trade" class="nav-link"><span class="icon-custom icon-trade"></span><%= translate("trade") %></a></li>
+                  <li><a id="nb-trade" class="nav-link"><span id="nb-trade-icon" class="icon-custom icon-trade"></span><%= translate("trade") %></a></li>
                   <li class="divider-vertical"></li>
               </ul>
               <div class="navbar-text pull-right">

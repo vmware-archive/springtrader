@@ -51,8 +51,12 @@ nano.views.Orders = Backbone.View.extend({
             page = this.pageCount;
         }
 
+        // The interval start and end pages to render on the pagination
+        this.interval = nano.utils.getPaginationInterval(page, this.pageCount);
+        
         var data = {
             pageCount : this.pageCount,
+            interval : this.interval,
             currentPage : page
         };
 
@@ -110,9 +114,7 @@ nano.views.Orders = Backbone.View.extend({
             }
         }
 
-        //Set the page number on the paginator
-        this.paginators.removeClass('active');
-
+        // Enable/disable the pagination next and previous controls
         if (page == 1){
             this.previous.addClass('disabled');
         }
@@ -128,7 +130,6 @@ nano.views.Orders = Backbone.View.extend({
         
         // Check the page count of orders
         if (this.pageCount > 0){
-            this.paginators[page-1].className = 'g2p active';
             // Render the list of orders
             this.renderRows(page);
         } else {
