@@ -1,7 +1,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
       <div class="container">
-          <a data-target="div#navbar-collapse" data-toggle="collapse" class="btn btn-navbar">
+          <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
