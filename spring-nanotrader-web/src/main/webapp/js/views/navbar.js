@@ -155,7 +155,7 @@ nano.views.Navbar = Backbone.View.extend({
         }
         if( nano.utils.isMobile() )
         {
-            this.collapsableMenu.collapse('hide');
+            this.collapsableMenu.collapse('toggle');
         }
     },
     
@@ -166,6 +166,10 @@ nano.views.Navbar = Backbone.View.extend({
      */
     profile : function() {
         nano.utils.goTo( nano.conf.hash.profile );
+        if( nano.utils.isMobile() )
+        {
+            this.collapsableMenu.collapse('toggle');
+        }
     },
     
     /**
@@ -175,6 +179,10 @@ nano.views.Navbar = Backbone.View.extend({
      */
     help : function() {
         nano.utils.goTo( nano.conf.hash.help );
+        if( nano.utils.isMobile() )
+        {
+            this.collapsableMenu.collapse('toggle');
+        }
     },
 
     /**
@@ -183,5 +191,9 @@ nano.views.Navbar = Backbone.View.extend({
      */
     admin : function() {
         nano.utils.goTo( nano.conf.hash.admin );
+        if( nano.utils.isMobile() )
+        {
+            this.collapsableMenu.collapse('toggle');
+        }
     }
 });
