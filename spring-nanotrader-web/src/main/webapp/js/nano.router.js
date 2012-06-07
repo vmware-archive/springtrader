@@ -169,44 +169,21 @@ nano.Router = Backbone.Router.extend({
                 if (++modelCount == _.keys(models).length)
                 {
                     nano.containers.loading.hide();
-
                      // Render the Account Summary View
-
                     nano.instances.accountSummary.render(models.account, models.portfolioSummary);
-
-
                     nano.instances.orders.render(models.orders, page, nano.conf.hash.dashboardWithPage);
-
                      if ( !nano.utils.isMobile() )
-
                      {
-
-                         // Render the Positions View
-
+                    	 // Render the Positions View
                      	nano.instances.userStatistics.render(models.account);
-
-
-
                          // Render the Account Summary View
-
                         nano.instances.accountSummary.render(models.account, models.portfolioSummary);
-
-
-
                          // Render the Portfolio View
-
                         nano.instances.portfolio.render(models.account, models.portfolioSummary);
-
-
-
                         nano.instances.positions.render(models.holdingSummary);
-
                      }
-
                      else
-
-                         nano.instances.accountSummary.render_mobile(models.account,models.portfolioSummary,models.holdingSummary);
-
+                    nano.instances.accountSummary.render_mobile(models.account,models.portfolioSummary,models.holdingSummary);
                     // Render the Orders View
                     nano.instances.orders.render(models.orders, page, nano.conf.hash.dashboardWithPage);
                 }
@@ -275,31 +252,18 @@ nano.Router = Backbone.Router.extend({
                 if (++modelCount == _.keys(models).length)
                 {
                     nano.containers.loading.hide();
-
 					if (nano.utils.isMobile()) {
-
 						// Render the Portfolio View
-
 						nano.instances.portfolioSummary.render_mobile(models.portfolioSummary, models.account,models.portfolioSummary);
-
 					}
-
 					else
-
 					{
-
 						nano.instances.portfolio.render(models.account,models.portfolioSummary);
-
 						// Render the Portfolio Summary View
-
 						nano.instances.portfolioSummary.render(models.portfolioSummary);
-
 						// Render the List of Holdings View
-
 					}
-
 					nano.instances.holdings.render(models.holdings, page);
-
 				}
 
 			};
