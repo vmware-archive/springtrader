@@ -37,6 +37,12 @@ nano.views.Navbar = Backbone.View.extend({
             tradeIcon : 'nb-trade-icon'
         };
     },
+    render_login:function(hash)
+    {
+         this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.navbar_login))());
+         this.$el.show();
+         this.visited=false;
+    },
 
     /**
      * Renders the Nav Bar View

@@ -3868,6 +3868,9 @@ a.thumbnail:hover {
   border-bottom: 0;
 }
 .accordion-heading .accordion-toggle {
+  color:#666666;
+  font: 18px/20px Tahoma,Helvetica,Arial,sans-serif;
+  margin-left: 0;
   display: block;
   padding: 8px 15px;
 }

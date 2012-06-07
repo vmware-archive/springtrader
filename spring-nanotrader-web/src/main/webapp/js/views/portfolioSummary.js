@@ -15,6 +15,32 @@ nano.views.PortfolioSummary = Backbone.View.extend({
     initialize : function(options) {
         nano.containers.portfolioSummary = this.$el;
     },
+    render_mobile: function(model,account,portfolioSummary)
+    {
+    	
+    	 if (model)
+         {
+             this.model = model;
+         }
+         if (portfolioSummary)
+         {
+             this.portfolioSummary = portfolioSummary;
+         }
+         if (account)
+         {
+             this.account = account;
+         }
+         var portfolioSummary1 = _.template(nano.utils.getTemplate(nano.conf.tpls.portfolioSummary))(this.model.toJSON());
+         this.$el.html(portfolioSummary1);
+         this.$el.show();
+         var totalAssets = portfolioSummary.get('totalMarketValue') + account.get('balance');
+         var data = [
+             [translate('cashBalance'), (account.get('balance') / totalAssets)],
+             [translate('portfolioValue'), (portfolioSummary.get('totalMarketValue') / totalAssets)]
+         ];
+         var plot1 = nano.utils.renderPieChart('ad-pie-chart', data);
+    },
+
 
     /**
      * Renders the Portfolio Summary View

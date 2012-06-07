@@ -1,4 +1,3 @@
-<div class="span12">
     <div class="well show-well">
         <div class="title">
             <h3>
@@ -24,31 +23,6 @@
                     <li id="lohp-next" class="<%= ( currentPage == pageCount ? "disabled" : "") %>"><a>&raquo;</a></li>
                 </ul>
             </div>
-            <table class="table show-table-total">
-                <tbody>
-                    <tr>
-                        <th colspan="2"><%= translate("totalOfHoldings") %></th>
-                    </tr>
-                    <tr>
-                        <td><%= translate("purchaseBasis") %></td>
-                        <td class="<%= (totalPurchaseBasis > 0 ? nano.conf.successCss : nano.conf.errorCss ) %> large-size">
-                            <%= printCurrency(totalPurchaseBasis) %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><%= translate("marketValue") %></td>
-                        <td class="<%= (totalMarketValue > 0 ? nano.conf.successCss : nano.conf.errorCss ) %> large-size">
-                            <%= printCurrency(totalMarketValue) %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><%= translate("totalGainLoss") %></td>
-                        <td class="<%= (totalGainLoss > 0 ? nano.conf.successCss : nano.conf.errorCss ) %> large-size">
-                            <%= printCurrency(totalGainLoss) %>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
         </div>
     </div>
-</div>

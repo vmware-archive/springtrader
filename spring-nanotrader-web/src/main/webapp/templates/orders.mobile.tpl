@@ -7,7 +7,7 @@
             </a>
         </h3>
     </div>
-    <div id="orders-content" class="table-outer collapse">
+    <div id="orders-content" class="table-outer collapse in">
         <table id="list-of-orders" class="table"><tbody></tbody></table>
         <div id="no-orders"></div>
         <!-- The prefix "loop" stands for "List Of Orders Pagination" -->
