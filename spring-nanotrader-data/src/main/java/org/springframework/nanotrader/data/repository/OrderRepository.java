@@ -16,7 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpeci
 		
 	@Modifying 
 	@Transactional
-	@Query(value="UPDATE Order o SET o.orderstatus = 'completed' WHERE  o.orderid IN (SELECT o2 FROM Order o2 WHERE o2.orderstatus = 'closed' AND o2.accountAccountid.accountid  = ?1)")
+	@Query(value="UPDATE Order o SET o.orderstatus = 'completed' WHERE o.accountAccountid.accountid  = ?1 AND o.orderid IN (SELECT o2 FROM Order o2 WHERE o2.orderstatus = 'closed' AND o2.accountAccountid.accountid  = ?1)")
 	public int updateClosedOrders(Integer accountId);
 	
 	@Query("SELECT o FROM Order o WHERE o.orderstatus = ?2 AND o.accountAccountid.accountid  = ?1 order by orderid DESC")
