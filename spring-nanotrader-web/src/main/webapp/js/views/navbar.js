@@ -26,7 +26,7 @@ nano.views.Navbar = Backbone.View.extend({
      */
     initialize : function(options) {
         nano.containers.navbar = this.$el;
-
+        this.visited = false;
         // Array that maps the ids of the links of
         // the navigation bar to the name of the page
         this.ids = {
@@ -36,6 +36,12 @@ nano.views.Navbar = Backbone.View.extend({
             trade : 'nb-trade',
             tradeIcon : 'nb-trade-icon'
         };
+    },
+    render_login:function(hash)
+    {
+         this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.navbar_login))());
+         this.$el.show();
+         this.visited=false;
     },
 
     /**
@@ -50,8 +56,9 @@ nano.views.Navbar = Backbone.View.extend({
             var hash = nano.conf.hash.dashboard;
         }
     
-        if ( !this.$el.html() )
+        if ( !this.$el.html() || this.visited==false)
         {
+        	this.visited=true;
             this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.navbar))(nano.session));
 
             // Enable the dropdown for the User Profile options on the right
