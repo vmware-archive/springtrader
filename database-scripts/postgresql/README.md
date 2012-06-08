@@ -1,13 +1,13 @@
 To create nanoTrader schema follow these steps:
 
-    cd nanotrader/tests
+    cd nanotrader/tools
     ./gradlew build
     cd build/libs
     unzip GenerateData.zip
     ./createSchema
 
 # Note
-If you postgresql database admin username/password is not postgres/postgres
+If your postgresql database admin username/password is not postgres/postgres
 update nanotrader.properties before running 'createSchema'
     dbAdminUser=postgres
     dbAdminPassword=postgres

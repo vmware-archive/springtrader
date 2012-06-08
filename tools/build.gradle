@@ -2,6 +2,7 @@ apply plugin: 'groovy'
 
 repositories {
     mavenCentral()
+    maven { url  'http://dist.gemstone.com/maven/release' }
 }
 
 configurations {
@@ -38,4 +39,5 @@ dependencies {
     compile 'net.sf.opencsv:opencsv:2.0'
     compile 'postgresql:postgresql:9.1-901.jdbc4'
     compile 'org.apache.ant:ant:1.8.3'
+    compile 'com.vmware.sqlfire:sqlfireclient:1.0.2'
 }
