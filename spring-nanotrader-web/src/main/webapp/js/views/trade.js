@@ -56,7 +56,9 @@ nano.views.Trade = Backbone.View.extend({
         // Parse the storage quotes and render the trade view
         this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.trade))(data));
         this.$el.show();
+        if (nano.utils.isMobile()){
         nano.instances.quotes = new nano.views.Quotes({el : '#nc-quotes'});
+        }
         // Cache the quote input
         this.quoteInput = this.$('#quote-input');
         // Cache the error control
