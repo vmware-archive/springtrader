@@ -44,7 +44,7 @@
 		Edition annotations in your classes without needing to do any special configuration. 
 		The most commonly used annotation is @Autowired, which instructs Spring to 
 		dependency inject an object into your class. -->
-	<context:component-scan base-package="org.springframework.nanotrader">
+	<context:component-scan base-package="org.springframework.nanotrader.data">
 		<context:exclude-filter expression=".*_Roo_.*"
 			type="regex" />
 		<context:exclude-filter expression="org.springframework.stereotype.Controller"
@@ -84,7 +84,7 @@
 	</bean>
 
 
-	<beans profile="default">
+	<beans profile="default,test">
 		<util:properties id="dbPropertiesBean">
 			<prop key="use_scrollable_resultset">false</prop>
 			<prop key="dialect">org.hibernate.dialect.H2Dialect</prop>
@@ -154,7 +154,7 @@
 			<prop key="dialect">org.hibernate.dialect.DerbyDialect</prop>
 			<prop key="hb2ddl.auto">validate</prop>
 		</util:properties>
-		<jee:jndi-lookup id="dataSource" jndi-name="jdbc/nanodb" />
+		<jee:jndi-lookup id="dataSource"  jndi-name="jdbc/nanodb" />
 	</beans>
 
     <beans profile="jndiPostgresql">
@@ -163,7 +163,7 @@
             <prop key="dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
             <prop key="hb2ddl.auto">validate</prop>
         </util:properties>
-        <jee:jndi-lookup id="dataSource" jndi-name="jdbc/nanodb" />
+        <jee:jndi-lookup id="dataSource"  jndi-name="jdbc/nanodb" />
     </beans>
 
 </beans>

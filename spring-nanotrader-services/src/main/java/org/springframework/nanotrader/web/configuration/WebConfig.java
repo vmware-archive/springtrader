@@ -30,7 +30,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  */
 
 @Configuration
-@ComponentScan(basePackages = { "org.springframework.nanotrader.web"})
+@ComponentScan(basePackages = { "org.springframework.nanotrader.web" })
 @Import (ServiceConfig.class)
 public class WebConfig extends WebMvcConfigurationSupport {
 
