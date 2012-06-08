@@ -39,6 +39,6 @@
 
 	<int:channel id="toQuoteServiceChannel" />
 
-	<int:logging-channel-adapter channel="toQuoteServiceChannel" />
+	<int:logging-channel-adapter  logger-name="org.springframework.nanotrader.asynch.quoteLogger" channel="toQuoteServiceChannel" level="INFO" />
 
 </beans>

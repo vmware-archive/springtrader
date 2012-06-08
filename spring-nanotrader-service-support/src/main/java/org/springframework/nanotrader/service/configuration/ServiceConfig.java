@@ -1,5 +1,6 @@
 package org.springframework.nanotrader.service.configuration;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 @ImportResource({"classpath:/META-INF/spring/cache/spring-nanotrader-service-support.xml"})
 @Profile("production")
+@ComponentScan ({ "org.springframework.nanotrader.service"})
 public class ServiceConfig   {
 	
 	
