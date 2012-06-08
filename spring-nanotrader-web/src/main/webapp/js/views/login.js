@@ -80,6 +80,11 @@ nano.views.Login = Backbone.View.extend({
                 view.$('#username-input').val('');
                 view.$('#password-input').val('');
 
+                //Clear any previous error
+                loginError.hide();
+                loginControl.removeClass('error');
+                passwordControl.removeClass('error');
+
                 //Show the loading page, hide the login page and render the dashboard
                 nano.utils.goTo( nano.conf.hash.dashboard );
             },
