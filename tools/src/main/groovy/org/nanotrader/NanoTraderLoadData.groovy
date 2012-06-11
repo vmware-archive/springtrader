@@ -21,6 +21,8 @@ def nanotrader = 0
 def BIG_TEN = ['VMW', 'ORCL', 'MSFT', 'NFLX', 'GOOG', 'INTC', 'EBAY', 'DELL', 'AAPL', 'YHOO']
 def numOfThreads = 100
 Thread[] threads = new Thread[numOfThreads];
+def testUserAuthToken = 0
+def testUserAcctid = 0
 
 def disableLogger() {
   Handler[] handlers = Logger.getLogger("").getHandlers()
@@ -32,6 +34,23 @@ def disableLogger() {
 def init() {
   disableLogger()
   nanotrader = new RESTClient(path)
+}
+
+def createTestUser() {
+  def now = Calendar.instance
+  def date = now.time
+  def millis = date.time
+  def testuser = "testuser"
+  testuser += millis
+  Random rand = new Random()
+  int range = 10000000
+  testuser += rand.nextInt(range)
+  println "testuser:" + testuser
+
+  createAccountProfile(testuser, "testuser")
+  def jsonResponse = getAuthToken(testuser, "testuser")
+  testUserAuthToken = jsonResponse.authToken
+  testUserAcctid = jsonResponse.accountid
 }
 
 def waitForCompletion(numOfThreads=100) {
@@ -67,16 +86,18 @@ def synchronized Object getAuthToken(username='jack', password='jack') {
 def synchronized int createOrder(id, quantity=1, orderType="buy", symbol="VMW", authToken) {
   int orderId = 0
   try {
-    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order"
+    def orderPath = "/spring-nanotrader-services/api/account/" + id + "/order/asynch"
+    //def nanotrader = new RESTClient(path)
     def resp = nanotrader.post(path:"${orderPath}",
                                body:[quantity:quantity, ordertype:orderType, quote:[symbol:symbol]],
                                requestContentType:JSON,
                                headers:[API_TOKEN:authToken])
-    assert resp.status == 201
-    def new_id = resp.getFirstHeader('location').getValue()
+    //assert resp.status == 201
+    assert resp.status == 202
+    /*def new_id = resp.getFirstHeader('location').getValue()
     def i = new_id.lastIndexOf("/")
     new_id = new_id.substring(i+1)
-    orderId = Integer.parseInt(new_id)
+    orderId = Integer.parseInt(new_id)*/
   }
   catch(ex) {
     ex.printStackTrace()
@@ -104,6 +125,15 @@ def synchronized createAccountProfile(user="user1", password="randompasswd", ope
   }
 }
 
+def generateFixedOrders(count) {
+  count.times {
+    def orderId = createOrder(testUserAcctid, 1, "buy", "VMW", testUserAuthToken)
+    println "order id:" + orderId
+    //print "."
+    Thread.yield()
+  }
+}
+
 def generateOrders(count) {
   count.times {
     def now = Calendar.instance
@@ -114,6 +144,7 @@ def generateOrders(count) {
     Random rand = new Random()
     int range = 10000000
     testuser += rand.nextInt(range)
+    println "testuser:" + testuser
     createAccountProfile(testuser, "testuser")
     def jsonResponse = getAuthToken(testuser, "testuser")
     def testAuthToken = jsonResponse.authToken
@@ -132,6 +163,23 @@ def loadTest(numThreads=100, numUsers=100) {
     def th = Thread.start {
       nanotrader = new RESTClient(path)
       generateOrders(numUsers)
+    }
+    //println "i:" + i
+    //println "th:" + th
+    threads[i] = th
+  }
+}
+
+/*
+ * Continuously generating buy orders for the same quote under the same account
+ *
+ */
+def sqlFireTest(numThreads=100, numUsers=100) {
+  createTestUser()
+  nanotrader = new RESTClient(path)
+  numThreads.times { i ->
+    def th = Thread.start {
+      generateFixedOrders(numUsers)
     }
     //println "i:" + i
     //println "th:" + th
@@ -160,7 +208,8 @@ static main(args) {
   int millis = date.time
   def inst = new NanoTraderLoadData()
   inst.init()
-  inst.loadTest(numThreads, numUsers)
+  //inst.loadTest(numThreads, numUsers)
+  inst.sqlFireTest(numThreads, numUsers)
   inst.waitForCompletion(numThreads)
   now = Calendar.instance
   date = now.time
