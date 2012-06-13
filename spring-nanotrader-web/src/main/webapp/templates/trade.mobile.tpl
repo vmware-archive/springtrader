@@ -38,7 +38,7 @@
               <div id="collapsetradeTwo" class="accordion-body collapse">
                 <div class="accordion-inner">
               
-            <div id="nc-holdings">
+            <div id="td-holdings">
             </div>
                 </div>
                 </div>

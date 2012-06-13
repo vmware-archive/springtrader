@@ -333,6 +333,23 @@ nano.Router = Backbone.Router.extend({
                 // Render the trade view
                 nano.instances.trade.render(model);
                 
+                // Render the holdings
+                // Fetch the info for the Holdings page we need
+                var holdings = new nano.models.Holdings({ accountid : nano.session.accountid });
+                holdings.fetch({
+                    data : {
+                        page : page
+                    },
+                    success : function(model, response){
+                        // Hide the loading Message
+                        nano.containers.loading.hide();
+
+                        // Render the Holdings with the newly fetched info
+                        nano.instances.holdings.render(model, page);
+                    },
+                    error : nano.utils.onApiError
+                });
+                
                 // Render the List of Orders View
                 nano.instances.orders.render(model, page, nano.conf.hash.tradeWithPage);
                 
