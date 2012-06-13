@@ -36,7 +36,7 @@
 	</logger>
 	
 	<logger name="org.springframework.nanotrader.asynch.quoteLogger">
-		<level value="info" />
+		<level value=error" />
 	</logger>
 	
 
@@ -44,7 +44,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="info" />
+		<priority value="error" />
 		<appender-ref ref="console" />
 
 	</root>
