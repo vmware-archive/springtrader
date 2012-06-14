@@ -469,7 +469,7 @@ def createQuote(companyName='newcompany', symbol='NCPY', positive=true, response
 def getPortfolioSummary(accountid=1, positive=true, responseCode=200) {
   try {
     def path = "/spring-nanotrader-services/api/account/" + accountid + "/holdingSummary"
-    println "path:" + path
+    //println "path:" + path
     def resp = nanotrader.get(path:"${path}",
                               headers:[API_TOKEN:testAuthToken])
     //println "portfoliosummary accountid:" + accountid
