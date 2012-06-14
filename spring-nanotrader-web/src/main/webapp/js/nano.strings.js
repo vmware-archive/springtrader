@@ -124,7 +124,7 @@ nano.strings = {
     gainingMsg : 'This chart shows the top 4 gaining stocks in your portfolio',
     portfolioMsg : 'This chart shows the cash balance and the portfolio value as a % of the total assets in your account',
     loginPage : 'Login Page',
-    enterNumUsers : 'Please enter the number of accounts you want to create',
+    enterNumUsers : 'Please enter the number of accounts to create',
     showWipeDBWarning : 'Warning: This action is not recoverable. It will wipe your database.',
     showIntegerError : 'Please enter a valid number',
     admin : 'Admin',

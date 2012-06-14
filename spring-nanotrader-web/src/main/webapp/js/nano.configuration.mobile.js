@@ -18,6 +18,7 @@ nano.conf.tpls = {
     profile : nano.conf.tplRoot + 'profile.mobile.tpl',
     trade : nano.conf.tplRoot + 'trade.mobile.tpl',
     contact : nano.conf.tplRoot + 'contact.tpl',
+    admin : nano.conf.tplRoot + 'admin.tpl',
     orders : nano.conf.tplRoot + 'orders.mobile.tpl',
     orderRow : nano.conf.tplRoot + 'orderRow.mobile.tpl',
     quotes : nano.conf.tplRoot + 'quotes.tpl',
