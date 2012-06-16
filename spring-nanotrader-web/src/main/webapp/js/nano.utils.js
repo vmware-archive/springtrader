@@ -512,6 +512,8 @@ nano.utils.setUsers = function(userCount, callbacks) {
                 	$('#showprogress').remove();  
                 	if (data.usercount != null) {
                       $('#progress').append('<div class="well show-quote-box" id="showprogress">' + data.usercount + " " + translate('userCreationMessage') + '</div>');  
+                	} else {
+                	  $('#progress').append('<div class="well show-quote-box" id="showprogress">' + translate('userCreationProgressMsg') + '</div>');
                 	}
                 },
                 error: function(){

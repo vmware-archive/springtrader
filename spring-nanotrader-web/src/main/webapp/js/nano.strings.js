@@ -130,6 +130,7 @@ nano.strings = {
     admin : 'Admin',
     createUsers : 'Create Users',
     dataPop : "Populating data ...",
+    userCreationProgressMsg : "Creating users ...",
     userCreationMessage : "Users Created ...",
     dataPopComplete : "Data population complete ...",
     loggingOut : "Logging out... Please log back in with new user id",

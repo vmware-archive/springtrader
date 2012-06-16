@@ -195,6 +195,7 @@ nano.views.Holdings = Backbone.View.extend({
                     // re-rendered and all of the values get recalculated
                     view.$el.html('');
                     nano.instances.router.portfolio(view.page);
+                    nano.utils.goTo( nano.conf.hash.portfolio );
                 },
                 error : nano.utils.onApiError
             });
