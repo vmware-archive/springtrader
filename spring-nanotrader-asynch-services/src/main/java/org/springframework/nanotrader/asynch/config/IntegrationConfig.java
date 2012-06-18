@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.nanotrader.service.configuration.ServiceConfig;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
  * Java configuration for the application's spring managed beans
@@ -21,12 +24,12 @@ import org.springframework.nanotrader.service.configuration.ServiceConfig;
  * files in this configuration with @ImportResource.
  */
 
+
 @Configuration
-@ComponentScan(basePackages="org.springframework.nanotrader.service", excludeFilters=@Filter(type=FilterType.ASSIGNABLE_TYPE, value=ServiceConfig.class) )
+@ComponentScan(basePackages="org.springframework.nanotrader.service", excludeFilters={@Filter(type=FilterType.ASSIGNABLE_TYPE, value=ServiceConfig.class)} )
 @ImportResource({ "classpath:/META-INF/spring/applicationContext.xml",
 		"classpath:/META-INF/spring/applicationContext-jpa.xml",
 		"classpath:/META-INF/spring/integration/amqp-inbound-context.xml" })
-
-public class IntegrationConfig {
+public class IntegrationConfig   {
 
 }

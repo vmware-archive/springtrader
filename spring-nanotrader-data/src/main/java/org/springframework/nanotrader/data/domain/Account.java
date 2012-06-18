@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -56,6 +57,13 @@ public class Account implements Serializable {
 	@NotNull
 	private Integer logincount;
 
+	@Version
+    @Column(name = "version")
+    private int version = 0;
+	public int getVersion() {
+        return version;
+    }
+	
 	public Set<Order> getOrders() {
 		return orders;
 	}
