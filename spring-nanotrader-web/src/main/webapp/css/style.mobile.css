@@ -493,7 +493,7 @@ label, input, button, select, textarea {
 	color:#7bb941;
 }
 
-.show-table .span4:last-child tr:last-child td, .show-table .span4:last-child th, .red-color, table tr td.jqplot-table-legend.red-color,
+.show-table .span4:last-child tr:last-child td, .show-table .span4:last-child th, .red-color, .modal .table td.red-color, table tr td.jqplot-table-legend.red-color,
 .span6 .well.show-well table tr td:nth-child(2n+1).red-color { 
 	color:#d23b1b;
 }
