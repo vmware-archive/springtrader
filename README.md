@@ -1,3 +1,10 @@
+NanoTrader documents are available in the docs subdirectory
+===========================================================
+
+* See the GettingStarted.pdf file
+
+
+
 Nanotrader now uses Gradle to Build
 ===================================
 
