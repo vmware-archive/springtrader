@@ -9,17 +9,23 @@
 	</appender>
 	
 	<!-- Loggers -->
-	<logger name="org.springframework.integration.">
+	
+	<logger name="org.springframework">
 		<level value="error" />
 	</logger>
-
-	<logger name="org.springframework.nanotrader.data">
+	
+	<logger name="org.springframework.integration">
 		<level value="error" />
 	</logger>
 	
 	<logger name="org.springsource.nanotrader">
 		<level value="error" />
 	</logger>
+	
+	<logger name="org.springframework.nanotrader.data">
+		<level value="error" />
+	</logger>
+
 	
 	<logger name="org.springframework.nanotrader.service.support">
 		<level value="error" />
