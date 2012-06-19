@@ -164,8 +164,6 @@ def loadTest(numThreads=100, numUsers=100) {
       nanotrader = new RESTClient(path)
       generateOrders(numUsers)
     }
-    //println "i:" + i
-    //println "th:" + th
     threads[i] = th
   }
 }
@@ -181,21 +179,22 @@ def sqlFireTest(numThreads=100, numUsers=100) {
     def th = Thread.start {
       generateFixedOrders(numUsers)
     }
-    //println "i:" + i
-    //println "th:" + th
     threads[i] = th
   }
 }
 
 static main(args) {
-  if (args.length > 1 || (args.length == 1 && args[0] == 'help')) {
-      println "groovy NanoTraderLoadData.groovy [number_of_users]"
+  if (args.length > 2 || (args.length == 1 && args[0] == 'help')) {
+      println "groovy NanoTraderLoadData.groovy [number_of_users] [sqlf]"
       return
   }
   int numThreads = 100
   int numUsers = 100
-  if (args.length == 1) {
+  def isSQLF = false
+  if (args.length >= 1) {
     int users = Integer.parseInt(args[0])
+    if (args.length == 2)
+        isSQLF = true
     if (users < 100) {
       println "Please specify no less than 100 users"
       return
@@ -208,8 +207,10 @@ static main(args) {
   int millis = date.time
   def inst = new NanoTraderLoadData()
   inst.init()
-  //inst.loadTest(numThreads, numUsers)
-  inst.sqlFireTest(numThreads, numUsers)
+  if (isSQLF) 
+    inst.sqlFireTest(numThreads, numUsers)
+  else
+    inst.loadTest(numThreads, numUsers)
   inst.waitForCompletion(numThreads)
   now = Calendar.instance
   date = now.time
