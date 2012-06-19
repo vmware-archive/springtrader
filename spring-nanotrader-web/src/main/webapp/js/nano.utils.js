@@ -617,6 +617,10 @@ nano.utils.getPaginationInterval = function(currentPage, pageCount) {
     var currentPage = Number(currentPage);
     var halfEntries = Math.ceil(nano.conf.pageCountSize/2);
     var pageCount = pageCount;
+    // Restrict page count size to '5' in case mobile view
+    if(nano.utils.isMobile()) {
+        nano.conf.pageCountSize = 5;
+    }
     var upperLimit = pageCount - nano.conf.pageCountSize;
     
     var interval = {
