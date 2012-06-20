@@ -7,6 +7,10 @@ import java.math.BigDecimal;
  *  @author Brian Dussault 
  */
 
+/**
+ * @author dussab
+ *
+ */
 public class Quote {
 
 
@@ -26,8 +30,19 @@ public class Quote {
 
     private String symbol;
 
-
     private BigDecimal change1;
+
+    private int version;
+    
+   	public int getVersion() {
+           return version;
+     }
+   	
+   	
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 
 	public BigDecimal getLow() {
         return low;

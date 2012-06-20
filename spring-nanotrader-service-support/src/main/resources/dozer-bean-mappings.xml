@@ -11,6 +11,7 @@
 			<a>orders</a>
 			<b>orders</b>
 		</field-exclude>
+		
 	</mapping>
 
 	<!-- Start Account profile mappings -->
@@ -82,6 +83,7 @@
 	<mapping map-id="quote">
 		<class-a>org.springframework.nanotrader.data.domain.Quote</class-a>
 		<class-b>org.springframework.nanotrader.service.domain.Quote</class-b>
+		
 	</mapping>
 
 	<mapping map-id="portfolioSummary">

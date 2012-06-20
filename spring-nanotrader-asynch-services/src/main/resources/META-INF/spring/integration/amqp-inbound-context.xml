@@ -11,7 +11,7 @@
 
 	<int-amqp:inbound-channel-adapter  channel="fromAmqpOrdersChannel"
 		queue-names="nanotrader.order.queue"
-		connection-factory="connectionFactory"/>
+		connection-factory="connectionFactory" error-channel="quoteErrorChannel"/>
 
 	<int:channel id="fromAmqpOrdersChannel" />
 
@@ -29,16 +29,31 @@
 
 	<int-amqp:inbound-channel-adapter channel="fromAmqpQuotesChannel"
 		queue-names="nanotrader.quote.queue"
-		connection-factory="connectionFactory"/>
+		connection-factory="connectionFactory"  />
+
 
 	<int:channel id="fromAmqpQuotesChannel" />
 
-	<int:json-to-object-transformer input-channel="fromAmqpQuotesChannel"
+	<int:json-to-object-transformer input-channel="fromAmqpQuotesChannel" 
 		output-channel="toQuoteServiceChannel"
 		type="org.springframework.nanotrader.service.domain.Quote"/>
 
 	<int:channel id="toQuoteServiceChannel" />
 
-	<int:logging-channel-adapter  logger-name="org.springframework.nanotrader.asynch.quoteLogger" channel="toQuoteServiceChannel" level="INFO" />
+	<int:channel id="quoteErrorChannel" >
+		<int:interceptors>
+			<int:wire-tap channel="toQuoteErrorLoggerChannel" />
+		</int:interceptors>
+	</int:channel>
+	
+	<int:channel id="toQuoteErrorLoggerChannel"/>
+		
+	<bean id="quoteLoggingServiceActivator" class="org.springframework.nanotrader.asynch.common.ExceptionHandler" />
+		
+	<int:service-activator input-channel="quoteErrorChannel" ref="quoteLoggingServiceActivator"/>
+	
+	<int:logging-channel-adapter  logger-name="org.springframework.nanotrader.asynch.quoteLogger" channel="toQuoteServiceChannel" level="ERROR" />
+	
+	<int:logging-channel-adapter  logger-name="org.springframework.nanotrader.asynch.orderErrorLogger" channel="toQuoteErrorLoggerChannel" level="ERROR"   />
 
 </beans>
