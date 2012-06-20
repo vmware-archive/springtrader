@@ -40,7 +40,7 @@
 		<level value="error" />
 	</logger>
 	
-	<logger name="org.springframework.nanotrader.asynch.quoteLogger">
+	<logger name="org.springframework.nanotrader.asynch">
 		<level value="info" />
 	</logger>
 	

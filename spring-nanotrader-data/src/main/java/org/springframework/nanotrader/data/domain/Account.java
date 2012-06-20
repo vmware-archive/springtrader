@@ -24,6 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "ACCOUNT")
+@org.hibernate.annotations.Entity(dynamicUpdate=true)
 public class Account implements Serializable {
 
 	@OneToMany(mappedBy = "accountAccountid")
