@@ -1,12 +1,12 @@
 <div class="span9 columns">
-    <div class="tabbable">
+    <div class="tabbable" id="tabs-header">
        <ul class="nav nav-tabs">
          <li class="active"><a href="#tab1" data-toggle="tab">UserData</a></li>
          <li><a href="#tab2" data-toggle="tab">tc Server</a></li>
          <li><a href="#tab3" data-toggle="tab">RabbitMQ</a></li>
          <li><a href="#tab4" data-toggle="tab">SQLFire</a></li>
        </ul>
-    <div class="tab-content">
+    <div class="tab-content" id="tabs-admin">
     <div class="tab-pane active" id="tab1">
         <form class="form-inline">
             <div id="admin-error" class="hide span8 alert alert-block alert-error fade in">
