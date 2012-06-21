@@ -43,6 +43,10 @@ nano.views.Leftnavbar = Backbone.View.extend({
         this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.leftnavbar))(data));
         
         this.$el.show();
+        if(nano.session.username!="admin")
+        	$('#lnb-admin').remove();
+        else
+        	$('#lnb-admin').show();
     },
     
     /**

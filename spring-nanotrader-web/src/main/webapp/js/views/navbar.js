@@ -77,6 +77,10 @@ nano.views.Navbar = Backbone.View.extend({
                 that.linkContainers[ele.id] = $(ele.parentNode);
             });
             this.username = $('#nb-username');
+            if(nano.session.username!="admin")
+            	$('#admin').remove();
+            else
+            	$('#admin').show();
         }
         else
         {

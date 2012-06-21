@@ -47,6 +47,11 @@ nano.views.Admin = Backbone.View.extend({
              adminError.removeClass('hide');
         }
         this.$el.show();
+        if(nano.session.username!="admin")
+        	$('#admin-div').remove();
+        else
+        	$('#admin-div').show();
+        
     },
 
     checkEnter : function(event) {
