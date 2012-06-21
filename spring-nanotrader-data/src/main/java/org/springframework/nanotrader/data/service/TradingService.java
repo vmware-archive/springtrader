@@ -12,7 +12,11 @@ import org.springframework.nanotrader.data.domain.Order;
 import org.springframework.nanotrader.data.domain.PortfolioSummary;
 import org.springframework.nanotrader.data.domain.Quote;
 
-
+/**
+ * @author Brian Dussault
+ * @author Gary Russell
+ *
+ */
 public interface TradingService {
 
 	public static final String ORDER_TYPE_BUY = "buy";

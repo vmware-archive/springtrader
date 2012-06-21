@@ -8,6 +8,11 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.nanotrader.data.domain.Quote;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author Gary Russell
+ * @author Brian Dussault
+ */
+
 @Repository
 public interface QuoteRepository extends JpaSpecificationExecutor<Quote>, JpaRepository<Quote, Integer> {
 	

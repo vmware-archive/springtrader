@@ -10,6 +10,10 @@ import javax.persistence.Query;
 import org.springframework.nanotrader.data.domain.PortfolioSummary;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author Brian Dussault
+ *
+ */
 @Repository
 public class PortfolioSummaryRepositoryImpl implements PortfolioSummaryRepository {
 

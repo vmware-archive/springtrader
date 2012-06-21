@@ -24,8 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @org.hibernate.annotations.Entity(dynamicUpdate=true)
 public class Order implements Serializable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE) //, generator="ORDER_SEQ")
-   // @SequenceGenerator(name="ORDER_SEQ", sequenceName="ORDER_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.TABLE) 
     @Column(name = "orderid")
     private Integer orderid;
 

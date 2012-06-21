@@ -11,6 +11,11 @@ import org.springframework.nanotrader.data.domain.Order;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author Gary Russell
+ * @author Brian Dussault
+ */
+
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpecificationExecutor<Order> {
 		

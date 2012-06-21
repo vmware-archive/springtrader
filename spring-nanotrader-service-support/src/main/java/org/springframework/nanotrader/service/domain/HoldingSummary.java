@@ -3,6 +3,11 @@ package org.springframework.nanotrader.service.domain;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * @author Brian Dussault
+ *
+ */
+
 public class HoldingSummary {
 	private BigDecimal holdingsTotalGains;
 	private List<HoldingAggregate> holdingRollups;

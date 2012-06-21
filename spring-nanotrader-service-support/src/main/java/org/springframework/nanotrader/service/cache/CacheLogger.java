@@ -6,6 +6,11 @@ import org.slf4j.LoggerFactory;
 import com.gemstone.gemfire.cache.EntryEvent;
 import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
 
+/**
+ * @author Brian Dussault
+ *
+ */
+
 public class CacheLogger extends CacheListenerAdapter<Object, Object> {
 
 	private static Logger log = LoggerFactory.getLogger(CacheLogger.class);

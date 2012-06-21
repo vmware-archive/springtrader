@@ -9,6 +9,11 @@ import java.util.Random;
 
 import org.springframework.nanotrader.data.domain.Holding;
 
+/**
+ * @author Brian Dussault
+ * Code was borrowed from original Day Trader application
+ */
+
 public class FinancialUtils {
 	//TO DO: Get rid of nasty static mess
 	public final static int ROUND = BigDecimal.ROUND_HALF_UP;

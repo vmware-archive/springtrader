@@ -8,7 +8,10 @@ import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
+/**
+ * @author Brian Dussault
+ *
+ */
 @Configuration
 public class MappingConfig {
 		@Bean
