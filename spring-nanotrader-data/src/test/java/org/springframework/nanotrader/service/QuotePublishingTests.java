@@ -41,6 +41,7 @@ import org.springframework.util.ReflectionUtils.MethodCallback;
  */
 @ContextConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
+
 public class QuotePublishingTests {
 
 	@Autowired
@@ -56,6 +57,7 @@ public class QuotePublishingTests {
 		quote.setPrice(BigDecimal.valueOf(120.0));
 		quote.setVolume(BigDecimal.valueOf(1000));
 		quote.setOpen1(BigDecimal.valueOf(115.0));
+		
 		Mockito.when(quoteRepository.findBySymbol("VMW")).thenReturn(quote);
 	}
 
