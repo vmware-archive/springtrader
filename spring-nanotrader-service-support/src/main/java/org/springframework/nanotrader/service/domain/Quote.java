@@ -7,10 +7,6 @@ import java.math.BigDecimal;
  *  @author Brian Dussault 
  */
 
-/**
- * @author dussab
- *
- */
 public class Quote {
 
 

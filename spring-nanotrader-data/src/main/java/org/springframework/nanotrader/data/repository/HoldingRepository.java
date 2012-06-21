@@ -9,6 +9,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.nanotrader.data.domain.Holding;
 import org.springframework.stereotype.Repository;
 
+/**
+ *  @author Gary Russell
+ * 	@author Brian Dussault
+ */
+
 @Repository
 public interface HoldingRepository extends JpaSpecificationExecutor<Holding>, JpaRepository<Holding, Integer> {
 	

@@ -7,7 +7,7 @@ import java.util.Date;
 ;
 
 /**
- * Utility class which logs chaos messages
+ * Utility class which logs chaos messages and prints mascot
  * 
  * @author Brian Dussault
  */

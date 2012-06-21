@@ -38,6 +38,12 @@ import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author Brian Dussault
+ * @author Gary Russell
+ *
+ */
+
 @Service
 @Transactional
 public class TradingServiceImpl implements TradingService {

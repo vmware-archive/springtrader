@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 public class Accountprofile implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    //@SequenceGenerator(name="ACCOUNTPROFILE_SEQ", sequenceName="ACCOUNTPROFILE_SEQUENCE")
     @Column(name = "profileid")
     private Integer profileid;
 

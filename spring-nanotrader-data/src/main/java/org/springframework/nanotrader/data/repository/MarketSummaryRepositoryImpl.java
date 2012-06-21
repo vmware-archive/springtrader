@@ -11,6 +11,10 @@ import org.springframework.nanotrader.data.domain.MarketSummary;
 import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author Brian Dussault
+ *
+ */
 @Repository
 public class MarketSummaryRepositoryImpl implements MarketSummaryRepository {
 	@PersistenceContext

@@ -6,6 +6,12 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+/**
+ * Chaos monkey repository - SQLFire Java stored procedure
+ * which terminates SQLFire JVM
+ * 
+ * @author Brian Dussault
+ */
 
 @Repository
 public class ChaosProceduresRepositoryImpl implements ChaosProceduresRepository {

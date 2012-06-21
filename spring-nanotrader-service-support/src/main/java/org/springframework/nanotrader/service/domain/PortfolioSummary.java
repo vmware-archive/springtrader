@@ -2,6 +2,10 @@ package org.springframework.nanotrader.service.domain;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Brian Dussault
+ *
+ */
 public class PortfolioSummary {
 	private Integer numberOfHoldings = 0;
 	private BigDecimal totalBasis = new BigDecimal(0.0);

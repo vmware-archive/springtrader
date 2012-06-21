@@ -17,8 +17,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "quote")
 public class Quote implements Serializable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE) //, generator="QUOTE_SEQ")
-   // @SequenceGenerator(name="QUOTE_SEQ", sequenceName="QUOTE_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "quoteid")
     private Integer quoteid;
 
