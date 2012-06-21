@@ -50,12 +50,12 @@ nano.views.Admin = Backbone.View.extend({
         if(nano.session.username!="admin")
     	{
     	$('#tabs-admin').remove();
-    	$('#tab-header').remove();
+    	$('#tabs-header').remove();
     	}      	
     else
     	{
     	$('#tabs-admin').show();
-    	$('#tab-header').show();
+    	$('#tabs-header').show();
     	}
     },
 
