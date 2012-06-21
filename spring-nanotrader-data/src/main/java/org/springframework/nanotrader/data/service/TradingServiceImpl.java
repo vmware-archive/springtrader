@@ -27,6 +27,7 @@ import org.springframework.nanotrader.data.domain.PortfolioSummary;
 import org.springframework.nanotrader.data.domain.Quote;
 import org.springframework.nanotrader.data.repository.AccountProfileRepository;
 import org.springframework.nanotrader.data.repository.AccountRepository;
+import org.springframework.nanotrader.data.repository.ChaosProceduresRepository;
 import org.springframework.nanotrader.data.repository.HoldingAggregateRepository;
 import org.springframework.nanotrader.data.repository.HoldingRepository;
 import org.springframework.nanotrader.data.repository.MarketSummaryRepository;
@@ -75,6 +76,9 @@ public class TradingServiceImpl implements TradingService {
 	@Autowired
 	private HoldingAggregateRepository holdingAggregateRepository;
 
+	@Autowired 
+	ChaosProceduresRepository chaosProceduresRepository;
+	
 	@Autowired
 	QuotePublisher quotePublisher;
 
@@ -583,6 +587,9 @@ public class TradingServiceImpl implements TradingService {
 		accountProfileRepository.deleteAll();
 	}
 
+	public void killServer() { 
+		chaosProceduresRepository.killServer();
+	}
 	public static interface QuotePublisher {
 
 		void publishQuote(Quote quote);

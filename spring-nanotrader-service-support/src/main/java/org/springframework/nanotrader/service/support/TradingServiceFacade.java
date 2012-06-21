@@ -77,4 +77,6 @@ public interface TradingServiceFacade {
 	HoldingSummary findHoldingSummary(Integer accountId);
 	
 	void setTradingService(TradingService tradingService);
+	
+	void killServer();
 }

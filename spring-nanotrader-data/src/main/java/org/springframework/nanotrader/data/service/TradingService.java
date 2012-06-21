@@ -74,4 +74,6 @@ public interface TradingService {
 	public Long findCountOfHoldingsByAccountId(Integer accountId);
 	
 	public abstract void deleteAll();
+	
+	public abstract void killServer(); 
 }

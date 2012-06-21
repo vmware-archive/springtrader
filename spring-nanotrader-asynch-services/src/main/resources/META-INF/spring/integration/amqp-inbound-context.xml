@@ -52,7 +52,7 @@
 		
 	<int:service-activator input-channel="quoteErrorChannel" ref="quoteLoggingServiceActivator"/>
 	
-	<int:logging-channel-adapter  logger-name="org.springframework.nanotrader.asynch.quoteLogger" channel="toQuoteServiceChannel" level="ERROR" />
+	<int:logging-channel-adapter  logger-name="org.springframework.nanotrader.asynch.quoteLogger" channel="toQuoteServiceChannel" level="INFO" />
 	
 	<int:logging-channel-adapter  logger-name="org.springframework.nanotrader.asynch.orderErrorLogger" channel="toQuoteErrorLoggerChannel" level="ERROR"   />
 

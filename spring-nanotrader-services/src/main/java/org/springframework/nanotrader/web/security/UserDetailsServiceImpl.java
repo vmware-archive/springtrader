@@ -55,8 +55,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			accountId = (Integer)account.get("accountid");
 		}
 		
+		
 	
-		User user = new CustomUser(accountProfile.getUserid(), accountProfile.getPasswd(), getAuthorities(), accountId, accountProfile.getProfileid(), token);
+		User user = new CustomUser(accountProfile.getUserid(), accountProfile.getPasswd(), getAuthorities(accountProfile.getUserid()), accountId, accountProfile.getProfileid(), token);
 		if (log.isDebugEnabled()) { 
 			log.debug("UserDetailsServiceImpl.loadUserByUsername(): user=" + user  + " username::token" + token);
 		}
@@ -64,9 +65,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return user;
 	}
 
-	private List<GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>(1);
-        authList.add(new SimpleGrantedAuthority("ROLE_API_USER"));
+	private List<GrantedAuthority> getAuthorities(String userId) {
+		List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>(1);
+		if ("admin".equals(userId)) { 
+			authList.add(new SimpleGrantedAuthority("ROLE_API_ADMIN"));
+		} else { 
+			authList.add(new SimpleGrantedAuthority("ROLE_API_USER"));
+		}
+        
+        
         return authList;
     }
 	

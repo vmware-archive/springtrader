@@ -137,6 +137,11 @@ subprojects { subproject ->
 }
 
 
+project('spring-nanotrader-chaos') {
+	description = 'Spring Nanotrader Chaos Utilities'
+
+}
+
 project('spring-nanotrader-service-support') {
 	description = 'Spring Nanotrader Data Service Support'
 
@@ -203,6 +208,7 @@ project('spring-nanotrader-services') {
 	description = 'Spring Nanotrader Services'
 	dependencies {
 		compile project(":spring-nanotrader-service-support")
+		compile project(":spring-nanotrader-chaos")
 		compile "org.springframework:spring-webmvc:$springVersion"
 		providedCompile  ("javax.servlet:servlet-api:$servletApiVersion")
 		compile "com.jayway.jsonpath:json-path:0.5.5"

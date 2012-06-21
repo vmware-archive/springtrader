@@ -441,6 +441,10 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
         return holdingSummaryResponse;
     }
     
+    public void killServer() { 
+    	tradingService.killServer();
+    }
+    
     private Integer getPageSize(Integer pageSize) { 
         if (pageSize == null) { 
             return DEFAULT_PAGE_SIZE;
