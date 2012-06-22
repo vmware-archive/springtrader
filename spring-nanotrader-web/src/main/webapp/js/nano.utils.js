@@ -493,7 +493,7 @@ nano.utils.loadSymbols = function() {
 };
 
 /**
- * Function to handle admin service requests (recreateData)
+ * Function to handle admin service requests (userData)
  * @param string userCount: Number of users to be created
  * @param object callbacks: object with success and error callback
  * 
@@ -504,7 +504,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
         // Set the recreate data progress interval to 1 sec
         var progress = window.setInterval(function(){
             $.ajax({
-                url : nano.conf.urls.recreateData,
+                url : nano.conf.urls.adminUserData,
                 type : 'GET',
                 headers : nano.utils.getHttpHeaders(),
                 dataType : 'json',
@@ -527,7 +527,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
             });
         }, 1000);
         $.ajax({
-            url : nano.conf.urls.admin,
+            url : nano.conf.urls.adminUserData,
             type : 'POST',
             headers : nano.utils.getHttpHeaders(),
             dataType : 'json',

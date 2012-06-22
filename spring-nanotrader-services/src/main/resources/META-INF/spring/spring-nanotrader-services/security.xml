@@ -18,6 +18,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 	<!-- Protect all the nanotrader services -->
 	<http create-session="stateless" entry-point-ref="entryPoint">
 		<intercept-url pattern="/api/chaos/*" access="ROLE_API_ADMIN" />
+		<intercept-url pattern="/api/admin/*" access="ROLE_API_ADMIN" />
 		<intercept-url pattern="/api/**" access="ROLE_API_USER,ROLE_API_ADMIN" />
 		<custom-filter ref="restPreauthFilter" position="PRE_AUTH_FILTER" />
 	</http>

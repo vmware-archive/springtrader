@@ -32,14 +32,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class AdminController extends BaseController {
 
-	@RequestMapping(value = "/recreateData", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/userdata", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void recreateData(@RequestBody
 	RecreateData recreateDataRequest) {
 		this.getAdminServiceFacade().recreateData(Integer.parseInt(recreateDataRequest.getUsercount()));
 	}
 
-	@RequestMapping(value = "/recreateData", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/userdata", method = RequestMethod.GET)
 	@ResponseBody
 	public ProgressData getProgress() {
 		ProgressData progress = new ProgressData();

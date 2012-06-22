@@ -29,7 +29,6 @@ nano.conf.urls = {
     account : nano.conf.urlRoot + 'account',
     accountProfile : nano.conf.urlRoot + 'accountProfile',
     marketSummary : nano.conf.urlRoot + 'marketSummary',
-    recreateData : nano.conf.urlRoot + 'recreateData',
     holdingSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdingSummary',
     portfolioSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/portfolioSummary',
     holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdings',
@@ -38,7 +37,7 @@ nano.conf.urls = {
     order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order/asynch',
     quote : nano.conf.urlRoot + 'quote',
     quotes : nano.conf.urlRoot + 'quotes',
-    admin : nano.conf.urlRoot + 'recreateData',
+    adminUserData : nano.conf.urlRoot + 'admin/userdata',
     killTCServer : nano.conf.urlRoot + 'chaos/kill',
     crashTCServer : nano.conf.urlRoot + 'chaos/oom'
 };
