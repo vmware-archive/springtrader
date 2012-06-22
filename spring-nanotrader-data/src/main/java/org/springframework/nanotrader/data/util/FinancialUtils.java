@@ -26,6 +26,7 @@ import org.springframework.nanotrader.data.domain.Holding;
 /**
  * @author Brian Dussault
  * Code was borrowed from original Day Trader application
+ * http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/javaee6/modules/web/src/main/java/org/apache/geronimo/daytrader/javaee6/core/direct/FinancialUtils.java
  */
 
 public class FinancialUtils {
@@ -44,11 +45,11 @@ public class FinancialUtils {
 	public static BigDecimal PENNY_STOCK_PRICE;
 	public static BigDecimal PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
 	static {
-		PENNY_STOCK_PRICE = new BigDecimal(0.01);
+		PENNY_STOCK_PRICE = BigDecimal.valueOf(0.01);
 		PENNY_STOCK_PRICE = PENNY_STOCK_PRICE.setScale(2,
 				BigDecimal.ROUND_HALF_UP);
 		PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER = new BigDecimal(600.0);
-		PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER.setScale(2,
+		PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER = PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER.setScale(2,
 				BigDecimal.ROUND_HALF_UP);
 	}
 
@@ -56,9 +57,9 @@ public class FinancialUtils {
 	public static BigDecimal MAXIMUM_STOCK_SPLIT_MULTIPLIER;
 	static {
 		MAXIMUM_STOCK_PRICE = new BigDecimal(400);
-		MAXIMUM_STOCK_PRICE.setScale(2, BigDecimal.ROUND_HALF_UP);
+		MAXIMUM_STOCK_PRICE = MAXIMUM_STOCK_PRICE.setScale(2, BigDecimal.ROUND_HALF_UP);
 		MAXIMUM_STOCK_SPLIT_MULTIPLIER = new BigDecimal(0.5);
-		MAXIMUM_STOCK_SPLIT_MULTIPLIER.setScale(2, BigDecimal.ROUND_HALF_UP);
+		MAXIMUM_STOCK_SPLIT_MULTIPLIER = MAXIMUM_STOCK_SPLIT_MULTIPLIER.setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 
 	public static BigDecimal computeGain(BigDecimal currentBalance,
