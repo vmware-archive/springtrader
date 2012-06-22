@@ -52,6 +52,7 @@ import org.springframework.nanotrader.data.repository.QuoteRepository;
 import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 /**
  * @author Brian Dussault
@@ -411,6 +412,7 @@ public class TradingServiceImpl implements TradingService {
 
 	@Override
 	public Order updateOrder(Order order) {
+
 		Order o = null;
 		if (log.isDebugEnabled()) {
 			if (order != null ) { 
