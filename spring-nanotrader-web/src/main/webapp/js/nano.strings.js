@@ -148,5 +148,7 @@ nano.strings = {
     waitKillTCServerStatus : 'Waiting for TC Server to be killed...',
     killTCServerStatus : 'TC Server killed successfully',
     waitCrashTCServerStatus : 'Waiting for TC Server to crash...',
-    crashTCServerStatus : 'TC Server crashed successfully'
+    crashTCServerStatus : 'TC Server crashed successfully',
+    waitSQLFireStatus  : 'Waiting for SQLFire server to be killed...',
+    killSqlFireServerStatus : 'SQLFire Server killed successfully'
 };

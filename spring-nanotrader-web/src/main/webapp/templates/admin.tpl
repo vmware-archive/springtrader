@@ -52,10 +52,7 @@
                 <h4 class="alert-heading"><%= translate("ohSnap") %></h4>
                 <p></p>
             </div>
-            <button id="stopSQLFireBtn" class="btn btn-large-fixed"><%= translate("stopSQLFire") %></button>
-            <p>
-            <button id="killSQLFireBtn" class="btn btn-large-fixed"><%= translate("killSQLFire") %></button>
-            <p>
+            <button id="killSqlFireBtn" class="btn btn-large-fixed"><%= translate("killSQLFire") %></button>
         </form>
     </div>
   </div>

@@ -609,6 +609,28 @@ nano.utils.crashTCServer = function() {
 };
 
 /**
+ * Function to kill SQLFire
+ * @return void
+ *
+ */
+nano.utils.killSqlFireServer = function() {
+    $('#progress').append('<div class="well show-quote-box" id="waitcrashtcserverstatus">' + translate('waitSQLFireStatus') + '</div>');
+    $('#progress').fadeOut(60000, function() {
+        $('#crashcompleted').append('<div class="well show-quote-box" id="crashtcserverstatus">' + translate('killSqlFireServerStatus') + '</div>');
+    });
+    $.ajax({
+         url : nano.conf.urls.killSqlFireServer,
+         type : 'GET',
+         headers : nano.utils.getHttpHeaders(),
+         dataType : 'json',
+         success : function(){
+         },
+         error : function(){
+         }
+     });
+};
+
+/**
  * Function to calculate and get the start and end point of pagination results
  * @author Jean Chassoul <jean.chassoul@lognllc.com>
  * @return a js object with the start and end pagination interval
