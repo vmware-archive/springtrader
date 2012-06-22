@@ -64,8 +64,13 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			mapper.map(q, quote);
 			quotes.add(quote);
 		}
-		for (int i = 1; i <= count; i++) {
-			String userid = "user" + i;
+		for (int i = 0; i <= count; i++) {
+			String userid;
+			if(i == 0){
+			 userid = "admin";
+			} else {
+			 userid = "user" + i;
+			}
 			BigDecimal balance = new BigDecimal("1000000.00");
 			Account ac = new Account();
 			ac.setBalance(balance);
