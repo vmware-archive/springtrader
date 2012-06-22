@@ -26,12 +26,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
+ * Provides JSON based REST API to user data creation
  * @author Ilayaperumal Gopinathan
  * 
  */
 @Controller
 public class AdminController extends BaseController {
 
+	/**
+	 * Creates users & buy orders for the (usercount) number of users
+	 * @param recreateDataRequest
+	 */
 	@RequestMapping(value = "/admin/userdata", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void recreateData(@RequestBody
@@ -39,6 +44,10 @@ public class AdminController extends BaseController {
 		this.getAdminServiceFacade().recreateData(Integer.parseInt(recreateDataRequest.getUsercount()));
 	}
 
+	/**
+	 * Get the number of users created at the time of request
+	 * @return ProgressData
+	 */
 	@RequestMapping(value = "/admin/userdata", method = RequestMethod.GET)
 	@ResponseBody
 	public ProgressData getProgress() {

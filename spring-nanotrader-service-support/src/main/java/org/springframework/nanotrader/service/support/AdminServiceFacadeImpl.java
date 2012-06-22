@@ -64,9 +64,11 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			mapper.map(q, quote);
 			quotes.add(quote);
 		}
+		log.debug("Creating "+ count + " users");
 		for (int i = 0; i <= count; i++) {
 			String userid;
 			if(i == 0){
+				log.debug("Creating admin user");
 			 userid = "admin";
 			} else {
 			 userid = "user" + i;
@@ -109,6 +111,7 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			tradingServiceFacade.saveOrder(o, false);
 			progressCache.setProgresscount(i);
 		}
+		log.debug("User data creation completed");
 	}
 	
 	@Override

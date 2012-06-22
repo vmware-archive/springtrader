@@ -18,7 +18,7 @@ package org.springframework.nanotrader.service.domain;
 import java.io.Serializable;
 
 /**
- * 
+ * Response body wrapper for userdata creation progress 
  * @author Ilayaperumal Gopinathan
  */
 
