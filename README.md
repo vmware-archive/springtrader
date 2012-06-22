@@ -31,6 +31,8 @@ Import nanotrader in Springsource Tool Suite (STS):
     `spring-nanotrader-services`
     `spring-nanotrader-service-support`
     `spring-nanotrader-web`
+    `spring-nanotrader-chaos`
+
   
 * From STS main menu click Projects -> Build Automatically
 
