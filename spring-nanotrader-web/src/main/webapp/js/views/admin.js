@@ -15,6 +15,7 @@ nano.views.Admin = Backbone.View.extend({
         'keypress [type=number]' : 'checkEnter',
         'click #killTCServerBtn' : 'killTCServer',
         'click #crashTCServerBtn' : 'crashTCServer',
+        'click #killSqlFireBtn'  : 'killSqlFireServer',
         'click #killRabbitMQBtn' : 'killRabbitMQ',
         'click #stopRabbitMQBtn' : 'stopRabbitMQ'
     },
@@ -120,6 +121,15 @@ nano.views.Admin = Backbone.View.extend({
             });
     },
 
+    /**
+     * Kill SQLFire
+     * @return void
+     */
+    killSqlFireServer : function (event){
+        event.preventDefault();
+        nano.utils.killSqlFireServer();
+    },
+    
     /**
      * Kill RabbitMQ
      * @return void
