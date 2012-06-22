@@ -44,6 +44,12 @@ DROP TABLE ACCOUNTPROFILE;
 DROP TABLE ACCOUNT;
 
 -- ----------------------------------------------------------------------- 
+-- PROCEDURE CHAOSFUNCTION 
+-- ----------------------------------------------------------------------- 
+
+DROP PROCEDURE CHAOSFUNCTION;
+
+-- ----------------------------------------------------------------------- 
 -- ACCOUNT 
 -- ----------------------------------------------------------------------- 
 
@@ -172,3 +178,11 @@ ALTER TABLE ORDERS
 
 ALTER TABLE ORDERS
     ADD CONSTRAINT FKC3DF62E5D2E54D7A FOREIGN KEY (HOLDING_HOLDINGID) REFERENCES HOLDING (HOLDINGID);
+    
+    
+CREATE PROCEDURE CHAOSFUNCTION ()
+    
+    LANGUAGE JAVA 
+    PARAMETER STYLE JAVA 
+    READS SQL DATA 
+EXTERNAL NAME 'org.springframework.nanotrader.chaos.sqlfire.ChaosFunction.killProcess';
