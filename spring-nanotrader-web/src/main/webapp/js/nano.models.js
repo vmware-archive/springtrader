@@ -97,6 +97,12 @@ nano.models.Account = Backbone.Model.extend({
     urlRoot : nano.conf.urls.account
 });
 
+nano.models.Contact = Backbone.Model.extend({
+	url: function() {
+		var url = "/spring-nanotrader-web/data/VMwareLocations.json";
+		return url;
+	} 
+});
 /**
  * Model to interact with the Account Profile Object
  * @author Jean Chassoul <jean.chassoul@lognllc.com>

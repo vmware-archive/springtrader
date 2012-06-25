@@ -58,7 +58,7 @@ nano.Router = Backbone.Router.extend({
 
         //Store the dom Object for the loading message div.
         nano.containers.loading = $('#nc-loading');
-
+        
         // The first thing we need to do first is to render 
         // the Market Summary, since it's shown on every page.
         var marketSummary = new nano.models.MarketSummary();
@@ -491,14 +491,57 @@ nano.Router = Backbone.Router.extend({
     },
     
     contact: function() {
+    	var contact = new nano.models.Contact();
+        contact.fetch({
+        	success : function(){
+        		var jsonObj=contact.toJSON();
+        		if (navigator.geolocation) 
+        		{
+        			navigator.geolocation.getCurrentPosition( 
+        		 
+        				function (position) {  
+        					var minDistance=Number.POSITIVE_INFINITY;
+        			          var nearestOffice;
+        			          for(i=0;i<jsonObj.locations.length;i++)
+        			      	{
+
+        			              var distance = nano.utils.calculateDistance(position.coords.latitude,jsonObj.locations[i].latitude,position.coords.longitude,jsonObj.locations[i].longitude);
+        			              if(minDistance>distance)
+        			      		{
+        			                  minDistance=distance;
+        			                  nearestOffice=jsonObj.locations[i].address;
+        			      		}
+        			      	}
+        			          var str=nearestOffice;
+        			          
+        			         nano.strings.location=str;
+        		             nano.instances.contact.render();
+        				}, 
+        				function (error)
+        				{
+        					nano.instances.contact.render();
+        				}
+        				);
+        			}
+        		else
+        			{
+        			nano.instances.contact.render();
+        			}
+        		},
+        		error : function()
+        		{
+        			nano.instances.contact.render();
+        		}
+        	});
         if(nano.utils.loggedIn()) {
             nano.utils.hideAll();
             nano.instances.navbar.render();
-            nano.instances.contact.render();
+            
+            
         }
         else {
             nano.utils.hideAll();
-            nano.instances.contact.render();
+            
         }
         nano.instances.footer.render();
     },

@@ -30,10 +30,11 @@ nano.views.Contact = Backbone.View.extend({
      * @return void
      */
     render: function() {
-
+    	
         if ( !this.$el.html() )
         {
-            var contact = _.template(nano.utils.getTemplate(nano.conf.tpls.contact))();
+        	var data={location: nano.strings.location};
+            var contact = _.template(nano.utils.getTemplate(nano.conf.tpls.contact))(data);
             this.$el.html(contact);
         }
         this.$el.show();

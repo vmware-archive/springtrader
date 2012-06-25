@@ -34,6 +34,28 @@ nano.utils.detectMobileBrowser = function(event) {
     return isMobile;
 };
 
+nano.utils.calculateDistance = function(lat1,lat2,lon1,lon2)
+{
+	var R = 6371;
+	var dLat = nano.utils.toRad(lat2-lat1);
+	var dLon = nano.utils.toRad(lon2-lon1);
+	var lat1 = nano.utils.toRad(lat1);
+	var lat2 = nano.utils.toRad(lat2);
+    
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	var d = R * c;
+	return d;
+};
+
+nano.utils.toRad = function(Value)
+{
+    var value= Value * Math.PI / 180;
+    return value;
+};
+
+
 /**
 * Checks on the strings object for the specified key. If the value doesn't exist the key is returned
 * @author Carlos Soto <carlos.soto@lognllc.com>

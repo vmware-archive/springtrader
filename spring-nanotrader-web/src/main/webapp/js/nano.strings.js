@@ -4,6 +4,7 @@
  * @author Kashyap Parikh
  */
 nano.strings = {
+	location : '3401 Hillview Ave Palo Alto, CA 94304 USA',
     noDataAvailable : 'No Data Available.',
     warning : 'Warning!',
     totalOfHoldings : 'Total Of Holdings',
