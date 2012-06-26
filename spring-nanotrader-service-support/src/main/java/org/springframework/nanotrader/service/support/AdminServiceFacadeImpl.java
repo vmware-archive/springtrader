@@ -118,4 +118,9 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 	public Integer getProgressCount(){
 		return progressCache.getProgresscount();
 	}
+	
+	@Override
+	public void deleteUserAccount(String userId){
+		tradingService.deleteAccountByUserid(userId);
+	}
 }
