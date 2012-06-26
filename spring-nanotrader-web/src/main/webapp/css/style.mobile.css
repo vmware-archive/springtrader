@@ -465,6 +465,7 @@ label, input, button, select, textarea {
 .well.show-well .title h3{ 
 	color:#656565;
 	font:normal 20px/45px Arial, sans-serif;
+	margin-left:20px;
 }
 
 .well.show-well table{ 

@@ -1,13 +1,8 @@
 <div class="well show-well">
     <div class="title">
-        <h3>
-            <a data-toggle="collapse" class="btn-transaction" data-target="#orders-content">
-                <%= translate("recentTransactions") %>
-                <span></span>
-            </a>
-        </h3>
+        <h3><%= translate("recentTransactions") %></h3>
     </div>
-    <div id="orders-content" class="table-outer collapse in">
+    <div class="table-outer">
         <table id="list-of-orders" class="table"><tbody></tbody></table>
         <div id="no-orders"></div>
         <!-- The prefix "loop" stands for "List Of Orders Pagination" -->
