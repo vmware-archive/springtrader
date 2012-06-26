@@ -255,6 +255,8 @@ nano.Router = Backbone.Router.extend({
 					if (nano.utils.isMobile()) {
 						// Render the Portfolio View
 						nano.instances.portfolioSummary.render_mobile(models.portfolioSummary, models.account,models.portfolioSummary);
+						// Set the holdings element again in case trade page has already set to 'td-holdings'
+						nano.instances.holdings = new nano.views.Holdings({el : '#nc-holdings'});
 					}
 					else
 					{
