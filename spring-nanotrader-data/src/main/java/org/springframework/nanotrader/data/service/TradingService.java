@@ -94,5 +94,7 @@ public interface TradingService {
 	
 	public abstract void deleteAll();
 	
+	public abstract void deleteAccountByUserid(String userId);
+	
 	public abstract void killServer(); 
 }

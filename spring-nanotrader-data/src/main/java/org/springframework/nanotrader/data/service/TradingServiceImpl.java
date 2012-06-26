@@ -52,7 +52,6 @@ import org.springframework.nanotrader.data.repository.QuoteRepository;
 import org.springframework.nanotrader.data.util.FinancialUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 /**
  * @author Brian Dussault
@@ -608,6 +607,20 @@ public class TradingServiceImpl implements TradingService {
 		holdingRepository.deleteAll();
 		accountRepository.deleteAll();
 		accountProfileRepository.deleteAll();
+	}
+	
+	@Override
+	@Transactional
+	public void deleteAccountByUserid(String userId) {
+		Accountprofile ap = findAccountByUserId(userId);
+		Account ac = findAccountByProfile(ap);
+		// Fix maximum number 10000 to page size 
+		List<Holding> holdings = findHoldingsByAccountId(ac.getAccountid(), 0, 10000);
+		List<Order> orders = findOrders(ac.getAccountid(), 0, 10000);
+		orderRepository.delete(orders);
+		holdingRepository.delete(holdings);
+		accountRepository.delete(ac);
+		accountProfileRepository.delete(ap);
 	}
 
 	public void killServer() { 

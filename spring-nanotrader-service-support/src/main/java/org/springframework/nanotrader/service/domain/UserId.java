@@ -13,23 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.nanotrader.service.domain;
 
-
-/**
- * Admin Service responsible for generating user driven data  
- */
-package org.springframework.nanotrader.service.support;
+import java.io.Serializable;
 
 /**
+ * Userid
  * @author Ilayaperumal Gopinathan
- *
  */
-public interface AdminServiceFacade {
+@SuppressWarnings("serial")
+public class UserId implements Serializable {
+	
+	private String userid;
 
-	public abstract void recreateData(int count);
-	
-	public abstract Integer getProgressCount();
-	
-	public abstract void deleteUserAccount(String userid);
-	
+	public String getUserid() {
+		return this.userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
 }

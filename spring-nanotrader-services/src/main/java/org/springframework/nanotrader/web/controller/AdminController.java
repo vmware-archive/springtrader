@@ -18,6 +18,7 @@ package org.springframework.nanotrader.web.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.nanotrader.service.domain.ProgressData;
 import org.springframework.nanotrader.service.domain.RecreateData;
+import org.springframework.nanotrader.service.domain.UserId;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,5 +55,15 @@ public class AdminController extends BaseController {
 		ProgressData progress = new ProgressData();
 		progress.setUsercount(this.getAdminServiceFacade().getProgressCount());
 		return progress;
+	}
+
+	/**
+	 * Delete the account associated by the given userid
+	 */
+	@RequestMapping(value = "/admin/deleteaccount", method = RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.OK)
+	public void deleteAccount(@RequestBody
+	UserId userNameRequest) {
+		this.getAdminServiceFacade().deleteUserAccount(userNameRequest.getUserid());
 	}
 }
