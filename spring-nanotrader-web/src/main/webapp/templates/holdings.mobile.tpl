@@ -1,13 +1,8 @@
     <div class="well show-well">
         <div class="title">
-            <h3>
-                <a data-target="#loh-content" data-toggle="collapse" class="btn-transaction">
-                    <%= translate("listOfHoldings") %>
-                    <span></span>
-                </a>
-            </h3>
+            <h3><%= translate("listOfHoldings") %></h3>
         </div>
-        <div id="loh-content" class="table-outer collapse in">
+        <div class="table-outer">
             <table id="list-of-holdings" class="table">
                 <tbody>
                 </tbody>
