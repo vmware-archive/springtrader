@@ -23,6 +23,8 @@ def numOfThreads = 100
 Thread[] threads = new Thread[numOfThreads];
 def testUserAuthToken = 0
 def testUserAcctid = 0
+def adminUserAuthToken = 0
+def adminUserAcctid  = 0
 
 def disableLogger() {
   Handler[] handlers = Logger.getLogger("").getHandlers()
@@ -36,17 +38,16 @@ def init() {
   nanotrader = new RESTClient(path)
 }
 
-def createTestUser() {
-  def now = Calendar.instance
-  def date = now.time
-  def millis = date.time
-  def testuser = "testuser"
-  testuser += millis
-  Random rand = new Random()
-  int range = 10000000
-  testuser += rand.nextInt(range)
-  println "testuser:" + testuser
+def createAdminUser() {
+  createAccountProfile("admin", "admin")
+  def jsonResponse = getAuthToken("admin", "admin")
+  adminUserAuthToken = jsonResponse.authToken
+  adminUserAcctid = jsonResponse.accountid
+}
 
+def createTestUser() {
+  def testuser = getRandomUsername()
+  println "testuser:" + testuser
   createAccountProfile(testuser, "testuser")
   def jsonResponse = getAuthToken(testuser, "testuser")
   testUserAuthToken = jsonResponse.authToken
@@ -125,39 +126,59 @@ def synchronized createAccountProfile(user="user1", password="randompasswd", ope
   }
 }
 
+/*
+ * Purpose: same quantity of shares for the same symbol under the same account
+ *
+ */
 def generateFixedOrders(count) {
   count.times {
     def orderId = createOrder(testUserAcctid, 1, "buy", "VMW", testUserAuthToken)
-    println "order id:" + orderId
+    //println "order id:" + orderId
     //print "."
     Thread.yield()
   }
 }
 
+def String getRandomUsername() {
+  def now = Calendar.instance
+  def date = now.time
+  def millis = date.time
+  def testuser = "testuser"
+  testuser += millis
+  Random rand = new Random()
+  int range = 10000000
+  testuser += rand.nextInt(range)
+  println "testuser:" + testuser
+  return testuser
+}
+
+/*
+ * Purpose: each loop does two things:
+ *          - create a random account
+ *          - do a random stock buy 50 times under that newly created random account
+ *
+ */
 def generateOrders(count) {
   count.times {
-    def now = Calendar.instance
-    def date = now.time
-    def millis = date.time
-    def testuser = "testuser"
-    testuser += millis
-    Random rand = new Random()
-    int range = 10000000
-    testuser += rand.nextInt(range)
-    println "testuser:" + testuser
+    def testuser = getRandomUsername()
     createAccountProfile(testuser, "testuser")
     def jsonResponse = getAuthToken(testuser, "testuser")
     def testAuthToken = jsonResponse.authToken
     def acctid = jsonResponse.accountid
-    rand = new Random()
-    range = 10
-    def companyQuoteIndex = rand.nextInt(range)
-    createOrder(acctid, 10, "buy", BIG_TEN[companyQuoteIndex], testAuthToken)
-    //print "."
+    5.times {
+      10.times { i ->
+        createOrder(acctid, 1, "buy", BIG_TEN[i], testAuthToken)
+        //print "."
+      }
+    }
     Thread.yield()
   }
 }
 
+/*
+ * Purpose: Continuously generating buy orders for a specified number of randomly created accounts
+ *
+ */
 def loadTest(numThreads=100, numUsers=100) {
   numThreads.times { i ->
     def th = Thread.start {
