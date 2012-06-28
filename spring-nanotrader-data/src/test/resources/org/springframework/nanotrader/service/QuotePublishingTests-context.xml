@@ -34,11 +34,11 @@
 	</bean>
 
 	<bean id="mockHARepo" class="org.mockito.Mockito" factory-method="mock">
-		<constructor-arg value="org.springframework.nanotrader.data.repository.ChaosProceduresRepository"/>
+		<constructor-arg value="org.springframework.nanotrader.data.repository.HoldingAggregateRepository"/>
 	</bean>
 	
 	<bean id="mockChaosRepo" class="org.mockito.Mockito" factory-method="mock">
-		<constructor-arg value="org.springframework.nanotrader.data.repository.HoldingAggregateRepository"/>
+		<constructor-arg value="org.springframework.nanotrader.data.repository.ChaosProceduresRepository"/>
 	</bean>
 
 	<bean id="tradingService" class="org.springframework.nanotrader.data.service.TradingServiceImpl" />
