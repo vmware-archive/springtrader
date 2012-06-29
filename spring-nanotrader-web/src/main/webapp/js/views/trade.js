@@ -58,7 +58,8 @@ nano.views.Trade = Backbone.View.extend({
         this.$el.show();
         if (nano.utils.isMobile()){
         nano.instances.quotes = new nano.views.Quotes({el : '#nc-quotes'});
-        nano.instances.holdings = new nano.views.Holdings({el : '#td-holdings'});
+        // Set new tag element for holdings view
+        nano.instances.holdings.setElement("#td-holdings");
         }
         // Cache the quote input
         this.quoteInput = this.$('#quote-input');

@@ -240,7 +240,9 @@ nano.Router = Backbone.Router.extend({
             nano.utils.hideAll();
             nano.containers.loading.show();
             nano.instances.navbar.render(nano.conf.hash.portfolio);
-
+            // Change the tag element to 'nc-holdings' in case it was changed at the trade page
+            nano.instances.holdings.setElement("#nc-holdings");
+            
             var modelCount = 0;
             var models = {
                 account : new nano.models.Account({accountid : nano.session.accountid}),
@@ -255,8 +257,6 @@ nano.Router = Backbone.Router.extend({
 					if (nano.utils.isMobile()) {
 						// Render the Portfolio View
 						nano.instances.portfolioSummary.render_mobile(models.portfolioSummary, models.account,models.portfolioSummary);
-						// Set the holdings element again in case trade page has already set to 'td-holdings'
-						nano.instances.holdings = new nano.views.Holdings({el : '#nc-holdings'});
 					}
 					else
 					{
