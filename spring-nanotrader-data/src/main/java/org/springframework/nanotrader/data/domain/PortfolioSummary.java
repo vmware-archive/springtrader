@@ -21,9 +21,9 @@ public class PortfolioSummary {
 
 	private Integer numberOfHoldings = 0;
 
-	private BigDecimal totalBasis = new BigDecimal("0.0");
+	private BigDecimal totalBasis =  BigDecimal.ZERO;
 
-	private BigDecimal totalMarketValue = new BigDecimal("0.0");
+	private BigDecimal totalMarketValue = BigDecimal.ZERO;
 
 	public Integer getNumberOfHoldings() {
 		return numberOfHoldings;

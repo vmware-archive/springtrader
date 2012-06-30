@@ -48,7 +48,7 @@ public class HoldingAggregateRepositoryImpl implements HoldingAggregateRepositor
 		// Filter out the losers (gains =< 0)
 		Query query = em.createQuery("SELECT  h.quoteSymbol, sum(q.price * h.quantity) - SUM(h.purchaseprice * h.quantity) as gain FROM Holding h, Quote q Where h.accountAccountid =:accountId and h.quoteSymbol=q.symbol GROUP BY  h.quoteSymbol HAVING  SUM(q.price * h.quantity) - SUM(h.purchaseprice * h.quantity) > 0 ORDER BY gain desc");
 		query.setParameter("accountId", accountId);
-		BigDecimal totalGains = new BigDecimal(0 );
+		BigDecimal totalGains = BigDecimal.ZERO;
 		totalGains = totalGains.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND);
 		List<Object[]> result = query.getResultList();
 		int counter = 0;
@@ -88,7 +88,7 @@ public class HoldingAggregateRepositoryImpl implements HoldingAggregateRepositor
 		if (hundredPercent > 1 && hundredPercent != 100) {
 			HoldingAggregate summary = new HoldingAggregate();
 			summary.setSymbol("Other");
-			summary.setPercent(new BigDecimal(hundredPercent));
+			summary.setPercent(BigDecimal.valueOf(hundredPercent));
 			summary.setGain(gainsRemainder);
 			holdingRollups.add(summary);
 		}

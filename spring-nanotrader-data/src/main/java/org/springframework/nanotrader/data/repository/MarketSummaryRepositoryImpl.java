@@ -48,10 +48,10 @@ public class MarketSummaryRepositoryImpl implements MarketSummaryRepository {
 						+ "SUM(q) as cnt , "
 						+ "SUM(q.change1)"
 						+ "FROM Quote q");
-		marketSummary.setTradeStockIndexAverage(new BigDecimal("0.00").setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
-		marketSummary.setTradeStockIndexOpenAverage(new BigDecimal("0.00").setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
-		marketSummary.setTradeStockIndexVolume(new BigDecimal("0.00").setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
-		marketSummary.setChange(new BigDecimal("0.00").setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
+		marketSummary.setTradeStockIndexAverage(BigDecimal.ZERO.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
+		marketSummary.setTradeStockIndexOpenAverage(BigDecimal.ZERO.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
+		marketSummary.setTradeStockIndexVolume(BigDecimal.ZERO.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
+		marketSummary.setChange(BigDecimal.ZERO.setScale(FinancialUtils.SCALE, FinancialUtils.ROUND));
 		@SuppressWarnings("unchecked")
 		List<Object[]> result = query.getResultList();
 		for (Object[] o : result) {
