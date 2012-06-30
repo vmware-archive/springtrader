@@ -73,7 +73,7 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			} else {
 			 userid = "user" + i;
 			}
-			BigDecimal balance = new BigDecimal("1000000.00");
+			BigDecimal balance =  BigDecimal.valueOf(1000000.00);
 			Account ac = new Account();
 			ac.setBalance(balance);
 			Date creationdate = new Date();

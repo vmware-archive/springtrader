@@ -33,10 +33,10 @@ public class FinancialUtils {
 	//TO DO: Get rid of nasty static mess
 	public final static int ROUND = BigDecimal.ROUND_HALF_UP;
 	public final static int SCALE = 2;
-	public final static BigDecimal ZERO = (new BigDecimal(0.00))
+	public final static BigDecimal ZERO = ( BigDecimal.valueOf(0.00))
 			.setScale(SCALE);
-	public final static BigDecimal ONE = (new BigDecimal(1.00)).setScale(SCALE);
-	public final static BigDecimal HUNDRED = (new BigDecimal(100.00))
+	public final static BigDecimal ONE = ( BigDecimal.valueOf(1.00)).setScale(SCALE);
+	public final static BigDecimal HUNDRED = ( BigDecimal.valueOf(100.00))
 			.setScale(SCALE);
 
 	private static Random r0 = new Random(System.currentTimeMillis());
@@ -48,7 +48,7 @@ public class FinancialUtils {
 		PENNY_STOCK_PRICE = BigDecimal.valueOf(0.01);
 		PENNY_STOCK_PRICE = PENNY_STOCK_PRICE.setScale(2,
 				BigDecimal.ROUND_HALF_UP);
-		PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER = new BigDecimal(600.0);
+		PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER = BigDecimal.valueOf(600.0);
 		PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER = PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER.setScale(2,
 				BigDecimal.ROUND_HALF_UP);
 	}
@@ -56,9 +56,9 @@ public class FinancialUtils {
 	public static BigDecimal MAXIMUM_STOCK_PRICE;
 	public static BigDecimal MAXIMUM_STOCK_SPLIT_MULTIPLIER;
 	static {
-		MAXIMUM_STOCK_PRICE = new BigDecimal(400);
+		MAXIMUM_STOCK_PRICE =  BigDecimal.valueOf(400);
 		MAXIMUM_STOCK_PRICE = MAXIMUM_STOCK_PRICE.setScale(2, BigDecimal.ROUND_HALF_UP);
-		MAXIMUM_STOCK_SPLIT_MULTIPLIER = new BigDecimal(0.5);
+		MAXIMUM_STOCK_SPLIT_MULTIPLIER = BigDecimal.valueOf(0.5);
 		MAXIMUM_STOCK_SPLIT_MULTIPLIER = MAXIMUM_STOCK_SPLIT_MULTIPLIER.setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 
@@ -77,7 +77,7 @@ public class FinancialUtils {
 	}
 
 	public static BigDecimal computeHoldingsTotal(Collection<Holding> holdings) {
-		BigDecimal holdingsTotal = new BigDecimal(0.0).setScale(SCALE);
+		BigDecimal holdingsTotal =  BigDecimal.valueOf(0.0).setScale(SCALE);
 		if (holdings == null) {
 			return holdingsTotal;
 		}
@@ -97,7 +97,7 @@ public class FinancialUtils {
 		percentGain += 1;
 
 		// change factor is between +/- 20%
-		BigDecimal percentGainBD = (new BigDecimal(percentGain)).setScale(2,
+		BigDecimal percentGainBD = ( BigDecimal.valueOf(percentGain)).setScale(2,
 				BigDecimal.ROUND_HALF_UP);
 		if (percentGainBD.doubleValue() <= 0.0)
 			percentGainBD = ONE;
@@ -114,9 +114,9 @@ public class FinancialUtils {
 	}
 
 	public static BigDecimal calculateGainPercentage(BigDecimal gain, BigDecimal totalGains) { 
-		BigDecimal percent = new BigDecimal(0);
+		BigDecimal percent =  BigDecimal.valueOf(0);
 		percent = gain.divide(totalGains, 4, RoundingMode.HALF_UP);
-		percent = percent.multiply(new BigDecimal(100),
+		percent = percent.multiply( BigDecimal.valueOf(100),
 					new MathContext(4, RoundingMode.HALF_UP));
 		return percent;
 	}

@@ -181,9 +181,9 @@ public class TradingServiceTests {
 		entityManager.clear(); // force reload
         Quote quote = new Quote();
         quote.setSymbol("quoteSymbol_100");
-        quote.setPrice(new BigDecimal(50.00));
-        quote.setChange1(new BigDecimal(5.00));
-        quote.setVolume(new BigDecimal(50000));
+        quote.setPrice(BigDecimal.valueOf(50.00));
+        quote.setChange1(BigDecimal.valueOf(5.00));
+        quote.setVolume( BigDecimal.valueOf(50000));
         quoteService.saveQuote(quote);
         entityManager.flush();
 		entityManager.clear(); // force reload
@@ -232,21 +232,21 @@ public class TradingServiceTests {
 		
         Quote quote = new Quote();
         quote.setSymbol("symbol1");
-        quote.setPrice(new BigDecimal(50.00));
-        quote.setChange1(new BigDecimal(5.00));
-        quote.setVolume(new BigDecimal(50000));
-        quote.setChange1(new BigDecimal(4.00));
-        quote.setOpen1(new BigDecimal(49.00));
+        quote.setPrice(BigDecimal.valueOf(50.01) );
+        quote.setChange1( BigDecimal.valueOf(5.00));
+        quote.setVolume( BigDecimal.valueOf(50000));
+        quote.setChange1( BigDecimal.valueOf(4.00));
+        quote.setOpen1( BigDecimal.valueOf(49.00));
         quoteService.saveQuote(quote);
 		entityManager.flush();
 		entityManager.clear(); // force reload
         Quote quote2 = new Quote();
         quote2.setSymbol("symbol2");
-        quote2.setPrice(new BigDecimal(150.00));
-        quote2.setChange1(new BigDecimal(15.00));
-        quote2.setVolume(new BigDecimal(150000));
-        quote2.setChange1(new BigDecimal(4.00));
-        quote2.setOpen1(new BigDecimal(120.00));
+        quote2.setPrice(BigDecimal.valueOf(150.00));
+        quote2.setChange1(BigDecimal.valueOf(15.00));
+        quote2.setVolume(BigDecimal.valueOf(150000));
+        quote2.setChange1(BigDecimal.valueOf(4.00));
+        quote2.setOpen1(BigDecimal.valueOf(120.00));
         quoteService.saveQuote(quote2);
         entityManager.flush();
 		entityManager.clear(); // force reload
