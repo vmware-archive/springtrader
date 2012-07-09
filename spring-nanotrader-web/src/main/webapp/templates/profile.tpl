@@ -2,6 +2,7 @@
     <form class="form-horizontal">
         <fieldset>
             <h3><%= translate("accountProfile") %></h3>
+            <div id="update-successful" class="columns sidebar hide fade in"> </div>
             <div id="update-error" class="hide span8 alert alert-block alert-error fade in">
                 <a data-dismiss="alert" class="close">x</a>
                 <h4 class="alert-heading"></h4>
@@ -25,14 +26,14 @@
                 <div id="password-control" class="control-group">
                     <label for="password-input" class="control-label"><%= translate("newPassword") %>:</label>
                     <div class="controls">
-                        <input type="password" value="" id="password-input" class="input-xlarge focused" maxlength="20"><br/>
+                        <input type="password" value="<%=passwd %>" id="password-input" class="input-xlarge focused" maxlength="20"><br/>
                         <span id="passwdError" class="help-inline hide"><%= translate("passwdError") %></span>  
                     </div>
                 </div>
                 <div id="matchpasswd-control" class="control-group">
                     <label for="matchpasswd-input" class="control-label"><%= translate("passwordConfirmation") %>:</label>
                     <div class="controls">
-                        <input type="password" id="matchpasswd-input" class="input-xlarge focused" maxlength="20"><br/>
+                        <input type="password" value="<%=passwd %>" id="matchpasswd-input" class="input-xlarge focused" maxlength="20"><br/>
                         <span id="matchpasswd-error" class="help-inline hide"><%= translate("passwordMatching") %></span>
                     </div>
                 </div>
