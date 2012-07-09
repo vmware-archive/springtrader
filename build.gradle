@@ -266,7 +266,24 @@ project('spring-nanotrader-asynch-services') {
 
 }
 
+project('vfabric-hqapi-services') {
+        apply plugin: 'war'
+        description = 'vFabric HQApi Integration'
 
+        dependencies {
+                compile "org.springframework:spring-webmvc:$springVersion"
+                providedCompile  ("javax.servlet:servlet-api:$servletApiVersion")
+                compile "cglib:cglib-nodep:$cglibVersion"
+                //compile "org.aspectj:aspectjweaver:$aspectjVersion"
+                compile "org.springframework:spring-aspects:$springVersion"
+                compile files("../lib/hqapi1-5.0.0.jar")
+                compile "org.apache.httpcomponents:httpclient:4.1.1"
+                compile "org.apache.httpcomponents:httpmime:4.1.1"
+                compile "commons-logging:commons-logging:1.0.4"
+                compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
+                compile "log4j:log4j:1.2.14"
+        }
+}
 
 
 apply plugin: 'docbook-reference'
