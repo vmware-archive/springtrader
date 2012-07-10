@@ -40,4 +40,9 @@ public class HQApiRequest implements Serializable {
 	public String getPwd(){
 		return pwd;
 	}
+	
+	 @Override
+	 public String toString(){
+		 return "Request = [ user= "+ user + "]";
+	 }
 }
