@@ -3,10 +3,23 @@ description = 'Spring Nanotrader'
 apply plugin: 'base'
 apply plugin: 'idea'
 
+
 buildscript {
-	repositories { maven { url 'https://repo.springsource.org/plugins-snapshot' } }
-	dependencies { classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.1.2-SNAPSHOT' }
+
+   repositories {
+
+       maven { url 'http://repo.springsource.org/plugins-release' }
+
+   }
+
+   dependencies {
+
+       classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.1.5'
+
+   }
+
 }
+
 
 allprojects {
 	group = 'org.springframework.nanotrader'
