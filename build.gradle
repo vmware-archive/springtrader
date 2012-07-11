@@ -3,6 +3,7 @@ description = 'Spring Nanotrader'
 apply plugin: 'base'
 apply plugin: 'idea'
 
+
 buildscript {
 
    repositories {
