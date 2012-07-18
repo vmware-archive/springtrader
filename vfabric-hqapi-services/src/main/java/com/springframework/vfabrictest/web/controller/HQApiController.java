@@ -3,6 +3,9 @@
  */
 package com.springframework.vfabrictest.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hyperic.hq.hqapi1.HQApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.springframework.vfabrictest.hqapi.service.HQApiService;
-import com.springframework.vfabrictest.hqapi.service.domain.ControlAction;
 import com.springframework.vfabrictest.hqapi.service.domain.HQApiRequest;
-import com.springframework.vfabrictest.hqapi.service.domain.HQApiResponse;
+import com.springframework.vfabrictest.hqapi.service.domain.HQApiServersResponse;
 
 /**
  * @author Ilayaperumal Gopinathan
@@ -29,26 +31,58 @@ public class HQApiController {
      @Autowired
      private HQApiService hqapiService;
      
+     /**
+ 	 * Returns all the vfabric server instances list
+ 	 */
+ 	@RequestMapping(value = "/vfabric-servers/list", method = RequestMethod.POST)
+ 	@ResponseStatus(HttpStatus.OK)
+ 	@ResponseBody
+ 	public HQApiServersResponse getVFabricServers(@RequestBody HQApiRequest request) {
+ 		HQApi api = new HQApi(request.getHost(), 7080, false, request.getUser(), request.getPwd());
+ 		List<String> resourceTypes = new ArrayList<String>();
+ 		resourceTypes.add("SpringSource tc Runtime 6.0");
+ 		resourceTypes.add("SpringSource tc Runtime 7.0");
+ 		resourceTypes.add("RabbitMQ");
+ 		return hqapiService.getServersByResourceTypes(api, resourceTypes);
+ 	}
+     
 	/**
 	 * Returns the tc server instances list
 	 */
 	@RequestMapping(value = "/tcs/list", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public HQApiResponse getTCServerInstances(@RequestBody HQApiRequest request) {
+	public HQApiServersResponse getTCServers(@RequestBody HQApiRequest request) {
 		HQApi api = new HQApi(request.getHost(), 7080, false, request.getUser(), request.getPwd());
-		return hqapiService.getTcs(api);
+		List<String> resourceTypes = new ArrayList<String>();
+		resourceTypes.add("SpringSource tc Runtime 6.0");
+		resourceTypes.add("SpringSource tc Runtime 7.0");
+		return hqapiService.getServersByResourceTypes(api, resourceTypes);
+	}
+	
+	/**
+	 * @param HQApiRequest containing HQ host, username/password.
+	 * @return list of RabbitMQServers
+	 */
+	@RequestMapping(value = "/rabbitmq/list", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public HQApiServersResponse getRabbitMQs(@RequestBody HQApiRequest request) {
+		HQApi api = new HQApi(request.getHost(), 7080, false, request.getUser(), request.getPwd());
+		List<String> resourceTypes = new ArrayList<String>();
+		resourceTypes.add("RabbitMQ");
+		return hqapiService.getServersByResourceTypes(api, resourceTypes);
 	}
 
 	/**
 	 * Control actions on the given tc Server
 	 */
-	@RequestMapping(value = "/tcs/control", method = RequestMethod.POST)
+	@RequestMapping(value = "/controlaction", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@ResponseBody
-	public String controlTCServer(@RequestBody ControlAction action) {
-		HQApi api = new HQApi(action.getHost(), 7080, false, action.getUser(), action.getPwd());
-		return hqapiService.controlTcs(api, action);
+	public String controlTCServer(@RequestBody HQApiRequest request) {
+		HQApi api = new HQApi(request.getHost(), 7080, false, request.getUser(), request.getPwd());
+		return hqapiService.controlServer(api, request.getResourceId(), request.getAction());
 	}
 
 }

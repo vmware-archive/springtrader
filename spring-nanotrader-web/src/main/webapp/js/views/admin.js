@@ -1,6 +1,7 @@
 /**
  * View class for Admin
  * @author Kashyap Parikh
+ * @author Ilayaperumal Gopinathan
  */
 nano.views.Admin = Backbone.View.extend({
     
@@ -17,7 +18,11 @@ nano.views.Admin = Backbone.View.extend({
         'click #crashTCServerBtn' : 'crashTCServer',
         'click #killSqlFireBtn'  : 'killSqlFireServer',
         'click #killRabbitMQBtn' : 'killRabbitMQ',
-        'click #stopRabbitMQBtn' : 'stopRabbitMQ'
+        'click #stopRabbitMQBtn' : 'stopRabbitMQ',
+        'click #hypericonnect'   : 'connectHyperic',
+        'click .control-actions' : 'controlActions',
+        'click #perf-next'  : 'perfNext',
+        'click #perf-action' : 'perfAction'
     },
     
     /**
@@ -158,6 +163,96 @@ nano.views.Admin = Backbone.View.extend({
             error : function(jqXHR, textStatus, errorThrown) {
             }
             });*/
+    },
+    
+    /*
+     * Connect Hyperic Server
+     */
+    connectHyperic : function (){
+    	var host = this.$('#hyperic-host').val();
+    	var user = this.$('#hyperic-user').val();
+    	var pwd = this.$('#hyperic-pwd').val();
+    	var hqPage = this.$el.find('#hq-interface').html(_.template(nano.utils.getTemplate(nano.conf.tpls.vfabricServers)));
+    	var rows = this.$('#list-of-servers > tbody').html('');
+    	var servers;
+    	$.ajax({
+            url : "/vfabric-hqapi-services/hqapi/vfabric-servers/list",
+            type : 'POST',
+            headers : nano.utils.getHttpHeaders(),
+            dataType : 'json',
+            timeout: 10000,
+            data : JSON.stringify({
+                host : host,
+                user : user,
+                pwd : pwd
+            }),
+            success : function(data, textStatus, jqXHR){
+               servers = data.servers;         
+           	   $.each(servers, function(i, val){
+            	   rows.append(_.template(nano.utils.getTemplate(nano.conf.tpls.vfabricServerRow))(val));
+            	   var actionColumn = $('#list-of-servers tr td#'+val.id);
+            	   for (j=0; j< val.actionSize; j++){
+            		   actionColumn.append("<button id=\""+ val.id + "_" + val["action"+j] +"\" class=\"btn btn-inverse control-actions\">"+ val["action"+j] +"</button>");
+            	   }
+               });
+               hqPage.show();
+            },
+            error : function(data, textStatus, jqXHR){
+            	if (textStatus == "timeout") {
+            		alert("Connection to Hyperic timed out")
+            	} else {
+            		nano.utils.onApiError;
+            	}
+            }
+        });
+    },
+    
+    controlActions : function (event){
+    	var host = this.$('#hyperic-host').val();
+    	var user = this.$('#hyperic-user').val();
+    	var pwd = this.$('#hyperic-pwd').val();
+    	var buttonId = event.target.id;
+    	var index = buttonId.indexOf('_');
+    	var resourceId = buttonId.substring(0,index);
+    	var action = buttonId.substring(index+1);
+    	$.ajax({
+            url : "/vfabric-hqapi-services/hqapi/controlaction",
+            type : 'POST',
+            headers : nano.utils.getHttpHeaders(),
+            dataType : 'json',
+            data : JSON.stringify({
+                resourceId : resourceId,
+                action : action,
+                host : host,
+                user : user,
+                pwd : pwd
+            }),
+            success : function(data, textStatus, jqXHR){
+            	this.$(buttonId).attr('class','btn btn-success control-actions');
+            },
+            error : nano.utils.onApiError
+        });
+    },
+    
+    perfNext : function(event) {
+    	// Hide 'Next' button
+    	$(event.target).hide();
+    	// Create client VMs & credential form
+    	var vms = this.$('#perf-vms').val();
+    	this.$('#performance-testing > form').append("<label> Enter client VMs and credentials</label><p/>");
+    	for (i=1; i<= vms; i++){
+    		this.$('#performance-testing > form').append("<input id=\"perf-vmname"+i+"\" type=\"text\" placeholder=\"Client VM "+ i + "\" />");
+    		this.$('#performance-testing > form').append("<input id=\"perf-vmuser"+i+"\" type=\"text\" placeholder=\"UserName\" />");
+    		this.$('#performance-testing > form').append("<input id=\"perf-vmpwd"+i+"\" type=\"text\" placeholder=\"Password\" />");
+    	}
+    	this.$('#performance-testing > form').append("<p/><input id=\"perf-action\" class=\"btn btn-inverse\" type=\"button\" value=\"Run Test\" />");
+    	//this.$('#performance-testing').show();
+    },
+    
+    perfAction : function(event) {
+    	var users = this.$('#perf-users').val();
+    	var buys = this.$('#perf-buys').val();
+    	var vms = this.$('#perf-vms').val();
     },
 
     profile : function(){
