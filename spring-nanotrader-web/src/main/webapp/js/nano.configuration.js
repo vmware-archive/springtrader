@@ -70,7 +70,9 @@ nano.conf.tpls = {
     help : nano.conf.tplRoot + 'help.tpl',
     overview : nano.conf.tplRoot + 'overview.tpl',
     admin : nano.conf.tplRoot + 'admin.tpl',
-    leftnavbar : nano.conf.tplRoot + 'leftnavbar.tpl'
+    leftnavbar : nano.conf.tplRoot + 'leftnavbar.tpl',
+    vfabricServers : nano.conf.tplRoot + 'vfabricServers.tpl',
+    vfabricServerRow : nano.conf.tplRoot + 'vfabricServerRow.tpl'
 };
 
 /**

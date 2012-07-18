@@ -10,9 +10,10 @@ import java.util.List;
  * @author Ilayaperumal Gopinathan
  *
  */
+@SuppressWarnings("serial")
 public class HQApiResponse implements Serializable {
 	
-	private List<?> results = null;
+	protected List<?> results = null;
 	
 	public List<?> getResults(){
 		return results;
