@@ -124,7 +124,10 @@ nano.views.Profile = Backbone.View.extend({
                 view.$('#matchpasswd-input').val('');
                 view.$('#creditcard-input').val('************' + creditcard.slice(-4))
                 // Show the loading page and render the dashboard
-                nano.utils.goTo( nano.conf.hash.profile );
+                $('#update-successful').html("Successfully Updated");
+                $('#update-successful').show();
+                setTimeout(function() { $("#update-successful").hide(); }, 2000);
+                
             },
             error : function(model, error) {
                 
