@@ -28,42 +28,6 @@
         <!--[if lt IE 9]>
             <script language="javascript" type="text/javascript" src="js/json2.js"></script>
         <![endif]-->
-        
- <script src="https://d1fxtkz8shb9d2.cloudfront.net/sockjs-0.3.js"></script>
-<script src="js/jquery.atmosphere.js"></script>
-<script>
-    /* var sock = new SockJS("http://localhost:9999/socks");
-
-      sock.onmessage = function(data) {
-      alert(data);
-      };*/
-      var socket = $.atmosphere;
-          var request = { url:  'localhost:8080/spring-nanotrader-services/api/chat',
-                           contentType : "application/json",
-                          logLevel : 'debug',
-                           transport : 'websocket' ,
-                           fallbackTransport: 'long-polling'};
-       
-       
-           request.onOpen = function(response) {
-               content.html($('<p>', { text: 'Atmosphere connected using ' + response.transport }));
-               input.removeAttr('disabled').focus();
-               status.text('Choose name:');
-           };
-       
-           request.onMessage = function (response) {
-               var message = response.responseBody;
-               try {
-                   alert(message);
-               } catch (e) {
-                   console.log('This doesnt look like a valid JSON: ', message.data);
-                   return;
-               }
-           }
-           var subSocket = socket.subscribe(request);
-           subSocket.push("hello");
-
-  </script>
         <script src="js/jquery.json.js"></script>
         <script src="js/jquery.cookie.js"></script>
         <script src="js/jquery.date.js"></script>
