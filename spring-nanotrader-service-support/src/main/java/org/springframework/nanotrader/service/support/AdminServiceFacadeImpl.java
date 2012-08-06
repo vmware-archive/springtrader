@@ -31,8 +31,11 @@ import org.springframework.nanotrader.data.domain.Accountprofile;
 import org.springframework.nanotrader.data.service.TradingService;
 import org.springframework.nanotrader.service.cache.DataCreationProgressCache;
 import org.springframework.nanotrader.service.domain.Order;
+import org.springframework.nanotrader.service.domain.PerfTestData;
 import org.springframework.nanotrader.service.domain.Quote;
 import org.springframework.stereotype.Service;
+
+
 
 /**
  * @author Ilayaperumal Gopinathan
@@ -48,7 +51,7 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 
 	@Resource
 	private TradingServiceFacade tradingServiceFacade;
-	
+
 	@Resource
 	private DataCreationProgressCache progressCache;
 
@@ -64,16 +67,17 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 			mapper.map(q, quote);
 			quotes.add(quote);
 		}
-		log.debug("Creating "+ count + " users");
+		log.debug("Creating " + count + " users");
 		for (int i = 0; i <= count; i++) {
 			String userid;
-			if(i == 0){
+			if (i == 0) {
 				log.debug("Creating admin user");
-			 userid = "admin";
-			} else {
-			 userid = "user" + i;
+				userid = "admin";
 			}
-			BigDecimal balance =  BigDecimal.valueOf(1000000.00);
+			else {
+				userid = "user" + i;
+			}
+			BigDecimal balance = BigDecimal.valueOf(1000000.00);
 			Account ac = new Account();
 			ac.setBalance(balance);
 			Date creationdate = new Date();
@@ -113,14 +117,24 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 		}
 		log.debug("User data creation completed");
 	}
-	
+
 	@Override
-	public Integer getProgressCount(){
+	public Integer getProgressCount() {
 		return progressCache.getProgresscount();
 	}
-	
+
 	@Override
-	public void deleteUserAccount(String userId){
+	public void deleteUserAccount(String userId) {
 		tradingService.deleteAccountByUserid(userId);
 	}
+
+	@Override
+	public void runPerfTest(PerfTestData perfTestData, String serverUrl) {
+        Integer vmCount = Integer.parseInt(perfTestData.getVmcount());
+        for (int i = 0; i < vmCount; i++){
+        	new Thread(new PerformanceRunner(perfTestData.getUsercount(), perfTestData.getdb(), perfTestData.getVmnames()[i], perfTestData.getUsernames()[i], perfTestData.getPasswords()[i], serverUrl)).start();
+        }
+	}
+	
+	
 }

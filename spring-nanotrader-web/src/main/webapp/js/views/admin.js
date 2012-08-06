@@ -228,9 +228,15 @@ nano.views.Admin = Backbone.View.extend({
                 pwd : pwd
             }),
             success : function(data, textStatus, jqXHR){
-            	this.$(buttonId).attr('class','btn btn-success control-actions');
+            	alert('Control Action: '+ action + ' executed successfully');
             },
-            error : nano.utils.onApiError
+            error : function(data, textStatus, jqXHR){
+            	if (textStatus == "timeout") {
+            		alert("Connection to Hyperic timed out")
+            	} else {
+            		nano.utils.onApiError;
+            	}
+            }
         });
     },
     
@@ -239,11 +245,11 @@ nano.views.Admin = Backbone.View.extend({
     	$(event.target).hide();
     	// Create client VMs & credential form
     	var vms = this.$('#perf-vms').val();
-    	this.$('#performance-testing > form').append("<label> Enter client VMs and credentials</label><p/>");
+    	this.$('#performance-testing > form').append("<label> Enter client VMs and credentials (Make sure groovy is installed/updated via System PATH or .bash_profile) </label><p/>");
     	for (i=1; i<= vms; i++){
     		this.$('#performance-testing > form').append("<input id=\"perf-vmname"+i+"\" type=\"text\" placeholder=\"Client VM "+ i + "\" />");
     		this.$('#performance-testing > form').append("<input id=\"perf-vmuser"+i+"\" type=\"text\" placeholder=\"UserName\" />");
-    		this.$('#performance-testing > form').append("<input id=\"perf-vmpwd"+i+"\" type=\"text\" placeholder=\"Password\" />");
+    		this.$('#performance-testing > form').append("<input id=\"perf-vmpwd"+i+"\" type=\"password\" placeholder=\"Password\" />");
     	}
     	this.$('#performance-testing > form').append("<p/><input id=\"perf-action\" class=\"btn btn-inverse\" type=\"button\" value=\"Run Test\" />");
     	//this.$('#performance-testing').show();
@@ -251,8 +257,34 @@ nano.views.Admin = Backbone.View.extend({
     
     perfAction : function(event) {
     	var users = this.$('#perf-users').val();
-    	var buys = this.$('#perf-buys').val();
     	var vms = this.$('#perf-vms').val();
+    	var db = this.$('#perf-db').val();
+    	var vmnames = new Array();
+    	var usernames = new Array();
+    	var passwords = new Array();
+    	for (i=1; i<=vms; i++){
+           vmnames[i-1] = this.$('#perf-vmname'+i).val();
+           usernames[i-1] = this.$('#perf-vmuser'+i).val();
+           passwords[i-1] = this.$('#perf-vmpwd'+i).val();
+    	}
+    	$.ajax({
+            url : nano.conf.urls.perfTest,
+            type : 'POST',
+            headers : nano.utils.getHttpHeaders(),
+            dataType : 'json',
+            data : JSON.stringify({
+                usercount : users,
+                vmcount : vms,
+                db : db,
+                vmnames : vmnames,
+                usernames : usernames,
+                passwords : passwords 
+            }),
+            success : function(data, textStatus, jqXHR){
+            	alert('Started running the scripts on the VMs')
+            },
+            error : nano.utils.onApiError
+        });
     },
 
     profile : function(){

@@ -15,7 +15,13 @@
  */
 package org.springframework.nanotrader.web.controller;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.nanotrader.service.domain.PerfTestData;
 import org.springframework.nanotrader.service.domain.ProgressData;
 import org.springframework.nanotrader.service.domain.RecreateData;
 import org.springframework.nanotrader.service.domain.UserId;
@@ -65,5 +71,26 @@ public class AdminController extends BaseController {
 	public void deleteAccount(@RequestBody
 	UserId userNameRequest) {
 		this.getAdminServiceFacade().deleteUserAccount(userNameRequest.getUserid());
+	}
+	
+	/**
+	 * Run performance test
+	 */
+	@RequestMapping(value = "/admin/perftest", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.OK)
+	public void runPerfTest(@RequestBody PerfTestData perfRequest, HttpServletRequest servletRequest) {
+		String serverName = servletRequest.getServerName();
+		Integer serverPort = servletRequest.getServerPort();
+		String ipAddress = "localhost";
+		if (serverName.equalsIgnoreCase("localhost")){
+			try {
+			InetAddress addr = InetAddress.getLocalHost();
+			ipAddress = addr.getHostAddress();
+			} catch (UnknownHostException e){
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+		String serverUrl = "http://"+ipAddress+":"+serverPort;
+		this.getAdminServiceFacade().runPerfTest(perfRequest, serverUrl);
 	}
 }

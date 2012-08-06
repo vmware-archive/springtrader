@@ -40,7 +40,8 @@ nano.conf.urls = {
     adminUserData : nano.conf.urlRoot + 'admin/userdata',
     killTCServer : nano.conf.urlRoot + 'chaos/kill',
     crashTCServer : nano.conf.urlRoot + 'chaos/oom',
-    killSqlFireServer: nano.conf.urlRoot + '/chaos/killsql'
+    killSqlFireServer: nano.conf.urlRoot + '/chaos/killsql',
+    perfTest : nano.conf.urlRoot + 'admin/perftest'
 };
 
 nano.conf.tpls = {

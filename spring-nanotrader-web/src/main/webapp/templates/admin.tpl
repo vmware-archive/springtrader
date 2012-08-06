@@ -6,7 +6,7 @@
          <li><a href="#tab3" data-toggle="tab">RabbitMQ</a></li>
          <li><a href="#tab4" data-toggle="tab">SQLFire</a></li>
          <li><a href="#tab5" data-toggle="tab">Hyperic Interface</a></li>
-         <li><a href="#tab6" data-toggle="tab">Performance Testing</a></li>
+         <li><a href="#tab6" data-toggle="tab">Performance Data</a></li>
        </ul>
     <div class="tab-content" id="tabs-admin">
     <div class="tab-pane active" id="tab1">
@@ -71,11 +71,14 @@
     <div class="tab-pane" id="tab6">
       <div id="performance-testing">
        <form class="form-inline">
-          <label><%= translate("enterNumUsers") %></label>
+          <label><%= translate("enterNumPerfUsers") %></label>
           <input type="text" id="perf-users" class="span2">
           <p/>
-          <label><%= translate("enterNumBuyOrders") %></label>
-          <input type="text" id="perf-buys" class="span2">
+          <label><%= translate("selectDatabase") %></label>
+          <select id="perf-db">
+            <option value="sqlf">SQLFire</option>
+            <option value="nosqlf">Postgres</option>
+          </select>
           <p/>
           <label><%= translate("enterNumVMs") %></label>
           <input type="text" id="perf-vms" class="span2">

@@ -126,6 +126,8 @@ nano.strings = {
     portfolioMsg : 'This chart shows the cash balance and the portfolio value as a % of the total assets in your account',
     loginPage : 'Login Page',
     enterNumUsers : 'Number of accounts to create',
+    enterNumPerfUsers : 'Number of accounts to create (minimum 100)',
+    selectDatabase : 'Select the DB you are using',
     enterNumBuyOrders : 'Number of buy orders for each user',
     enterNumVMs : 'Number of client VMs to connect',
     showWipeDBWarning : 'Warning: This action is not recoverable. It will wipe your database.',

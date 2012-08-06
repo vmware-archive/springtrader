@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.springframework.vfabrictest.hqapi.service.HQApiService;
+import com.springframework.vfabrictest.hqapi.service.domain.HQApiControlResponse;
 import com.springframework.vfabrictest.hqapi.service.domain.HQApiRequest;
 import com.springframework.vfabrictest.hqapi.service.domain.HQApiServersResponse;
 
@@ -80,7 +81,7 @@ public class HQApiController {
 	@RequestMapping(value = "/controlaction", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@ResponseBody
-	public String controlTCServer(@RequestBody HQApiRequest request) {
+	public HQApiControlResponse controlTCServer(@RequestBody HQApiRequest request) {
 		HQApi api = new HQApi(request.getHost(), 7080, false, request.getUser(), request.getPwd());
 		return hqapiService.controlServer(api, request.getResourceId(), request.getAction());
 	}

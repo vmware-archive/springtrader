@@ -166,7 +166,8 @@ project('spring-nanotrader-service-support') {
 		compile  "joda-time:joda-time:1.6"
 		compile "com.gemstone.gemfire:gemfire:6.6.2"	
 		compile  "org.springframework.data:spring-data-gemfire:1.1.1.RELEASE"
-	}
+	        compile "net.schmizz:sshj:0.8.1"
+        }
 }
 
 project('spring-nanotrader-data') {
@@ -233,9 +234,6 @@ project('spring-nanotrader-services') {
 		compile "net.sf.dozer:dozer:$dozerVersion"
 		testCompile "org.springframework:spring-test-mvc:1.0.0.BUILD-SNAPSHOT"
 		compile "org.aspectj:aspectjweaver:$aspectjVersion"
-		
-			
-		
 	}
 
 }

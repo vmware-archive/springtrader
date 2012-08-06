@@ -17,6 +17,7 @@ import org.hyperic.hq.hqapi1.types.ResponseStatus;
 import org.hyperic.hq.hqapi1.types.User;
 import org.springframework.stereotype.Service;
 
+import com.springframework.vfabrictest.hqapi.service.domain.HQApiControlResponse;
 import com.springframework.vfabrictest.hqapi.service.domain.HQApiResponse;
 import com.springframework.vfabrictest.hqapi.service.domain.HQApiServersResponse;
 
@@ -89,16 +90,18 @@ public class HQApiServiceImpl implements HQApiService {
 	}
 
 	@Override
-	public String controlServer(HQApi api, String resourceId, String action) {
+	public HQApiControlResponse controlServer(HQApi api, String resourceId, String action) {
+		HQApiControlResponse resp = new HQApiControlResponse();
 		String status = "";
 		try {
 			Resource res = api.getResourceApi().getResource(Integer.parseInt(resourceId), false, false).getResource();
 			status = api.getControlApi().executeAction(res, action, new String[0]).getStatus().name();
+			resp.setStatus(status);
 		}
 		catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
-		return status;
+		return resp;
 	}
 
 }

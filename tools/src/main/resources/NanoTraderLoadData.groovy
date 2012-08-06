@@ -16,7 +16,6 @@ import static groovyx.net.http.ContentType.HTML
 
 public class NanoTraderLoadData {
 
-def path = "http://localhost:8080"
 def nanotrader = 0
 def BIG_TEN = ['VMW', 'ORCL', 'MSFT', 'NFLX', 'GOOG', 'INTC', 'EBAY', 'DELL', 'AAPL', 'YHOO']
 def numOfThreads = 100
@@ -25,6 +24,7 @@ def testUserAuthToken = 0
 def testUserAcctid = 0
 def adminUserAuthToken = 0
 def adminUserAcctid  = 0
+def path = "http://localhost:8080"
 
 def disableLogger() {
   Handler[] handlers = Logger.getLogger("").getHandlers()
@@ -33,9 +33,10 @@ def disableLogger() {
   }
 }
 
-def init() {
+def init(serverUrl) {
   disableLogger()
-  nanotrader = new RESTClient(path)
+  nanotrader = new RESTClient(serverUrl)
+  path = serverUrl
 }
 
 def createAdminUser() {
@@ -205,29 +206,34 @@ def sqlFireTest(numThreads=100, numUsers=100) {
 }
 
 static main(args) {
-  if (args.length > 2 || (args.length == 1 && args[0] == 'help')) {
-      println "groovy NanoTraderLoadData.groovy [number_of_users] [sqlf]"
+  if (args.length > 4 || (args.length == 1 && args[0] == 'help')) {
+      println "groovy NanoTraderLoadData.groovy [number_of_users] [sqlf/nosqlf] [serverName] [port]"
       return
   }
   int numThreads = 100
   int numUsers = 100
   def isSQLF = false
+  def serverUrl = "http://localhost:8080"
   if (args.length >= 1) {
     int users = Integer.parseInt(args[0])
-    if (args.length == 2)
-        isSQLF = true
+    if (args[1].equals("sqlf")){    
+      isSQLF = true
+    }
     if (users < 100) {
       println "Please specify no less than 100 users"
       return
     }
     numUsers = users/numThreads
+    if (args.length == 3) {
+      serverUrl = args[2] 
+    }
   }
   println "creating " + (numUsers * numThreads) + " users using " + numThreads + " threads"
   def now = Calendar.instance
   def date = now.time
   int millis = date.time
   def inst = new NanoTraderLoadData()
-  inst.init()
+  inst.init(serverUrl)
   if (isSQLF) 
     inst.sqlFireTest(numThreads, numUsers)
   else
