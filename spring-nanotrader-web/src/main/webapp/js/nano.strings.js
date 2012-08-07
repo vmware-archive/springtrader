@@ -125,7 +125,11 @@ nano.strings = {
     gainingMsg : 'This chart shows the top 4 gaining stocks in your portfolio',
     portfolioMsg : 'This chart shows the cash balance and the portfolio value as a % of the total assets in your account',
     loginPage : 'Login Page',
-    enterNumUsers : 'Please enter the number of accounts to create',
+    enterNumUsers : 'Number of accounts to create',
+    enterNumPerfUsers : 'Number of accounts to create (minimum 100)',
+    selectDatabase : 'Select the DB you are using',
+    enterNumBuyOrders : 'Number of buy orders for each user',
+    enterNumVMs : 'Number of client VMs to connect',
     showWipeDBWarning : 'Warning: This action is not recoverable. It will wipe your database.',
     showIntegerError : 'Please enter a valid number',
     admin : 'Admin',
@@ -151,5 +155,9 @@ nano.strings = {
     waitCrashTCServerStatus : 'Waiting for TC Server to crash...',
     crashTCServerStatus : 'TC Server crashed successfully',
     waitSQLFireStatus  : 'Waiting for SQLFire server to be killed...',
-    killSqlFireServerStatus : 'SQLFire Server killed successfully'
+    killSqlFireServerStatus : 'SQLFire Server killed successfully',
+    resourceId : 'Resource Id',
+    serverName : 'Server Name',
+    serverType : 'Server Type',
+    control : 'Control Actions'
 };

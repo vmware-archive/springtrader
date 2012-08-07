@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+    <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes" value="application/json" />
+    	<property name="objectMapper">
+          <bean class="org.codehaus.jackson.map.ObjectMapper">
+            <property name="serializationInclusion" value="NON_NULL"/>
+          </bean>
+        </property>
+        
+    </bean>
+        
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+  		<list>
+    		<ref bean="jacksonMessageConverter"/>
+  		</list>
+		</property>
+	 </bean>
+    
+</beans>

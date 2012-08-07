@@ -5,6 +5,8 @@
          <li><a href="#tab2" data-toggle="tab">tc Server</a></li>
          <li><a href="#tab3" data-toggle="tab">RabbitMQ</a></li>
          <li><a href="#tab4" data-toggle="tab">SQLFire</a></li>
+         <li><a href="#tab5" data-toggle="tab">Hyperic Interface</a></li>
+         <li><a href="#tab6" data-toggle="tab">Performance Data</a></li>
        </ul>
     <div class="tab-content" id="tabs-admin">
     <div class="tab-pane active" id="tab1">
@@ -54,6 +56,36 @@
             </div>
             <button id="killSqlFireBtn" class="btn btn-large-fixed"><%= translate("killSQLFire") %></button>
         </form>
+    </div>
+    <div class="tab-pane" id="tab5">
+      <div id="hq-login">
+       <form class="form-inline">
+          <input type="text" id="hyperic-host" placeholder="Hyperic Host">
+		  <input type="text" id="hyperic-user" placeholder="Hyperic user">
+		  <input type="text" id="hyperic-pwd" placeholder="Hyperic password">
+		  <button id="hypericonnect" type="submit" class="btn btn-inverse">Connect</button>
+        </form>
+       </div>
+       <div id="hq-interface"></div>
+    </div>
+    <div class="tab-pane" id="tab6">
+      <div id="performance-testing">
+       <form class="form-inline">
+          <label><%= translate("enterNumPerfUsers") %></label>
+          <input type="text" id="perf-users" class="span2">
+          <p/>
+          <label><%= translate("selectDatabase") %></label>
+          <select id="perf-db">
+            <option value="sqlf">SQLFire</option>
+            <option value="nosqlf">Postgres</option>
+          </select>
+          <p/>
+          <label><%= translate("enterNumVMs") %></label>
+          <input type="text" id="perf-vms" class="span2">
+          <p/>
+          <button id="perf-next" type="submit" class="btn">Next</button>
+       </form>
+      </div>
     </div>
   </div>
 </div>

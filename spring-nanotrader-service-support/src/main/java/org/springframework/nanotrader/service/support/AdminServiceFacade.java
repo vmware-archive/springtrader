@@ -20,6 +20,8 @@
  */
 package org.springframework.nanotrader.service.support;
 
+import org.springframework.nanotrader.service.domain.PerfTestData;
+
 /**
  * @author Ilayaperumal Gopinathan
  *
@@ -31,5 +33,7 @@ public interface AdminServiceFacade {
 	public abstract Integer getProgressCount();
 	
 	public abstract void deleteUserAccount(String userid);
+	
+	public abstract void runPerfTest(PerfTestData perfTestData, String serverUrl);
 	
 }
