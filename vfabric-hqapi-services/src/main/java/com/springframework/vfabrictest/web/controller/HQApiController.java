@@ -44,6 +44,7 @@ public class HQApiController {
  		resourceTypes.add("SpringSource tc Runtime 6.0");
  		resourceTypes.add("SpringSource tc Runtime 7.0");
  		resourceTypes.add("RabbitMQ");
+ 		resourceTypes.add("PostgreSQL 9.0");
  		return hqapiService.getServersByResourceTypes(api, resourceTypes);
  	}
      
