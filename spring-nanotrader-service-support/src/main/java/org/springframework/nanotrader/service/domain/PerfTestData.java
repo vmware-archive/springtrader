@@ -36,6 +36,8 @@ public class PerfTestData implements Serializable {
 	private String[] usernames;
 	
 	private String[] passwords;
+	
+	private String[] installopts;
 
 	public String getUsercount() {
 		return this.usercount;
@@ -60,6 +62,11 @@ public class PerfTestData implements Serializable {
 	public String[] getPasswords() {
 		return this.passwords;
 	}
+	
+	public String[] getInstallopts() {
+		return this.installopts;
+	}
+	
 
 	public void setUsercount(String usercount) {
 		this.usercount = usercount;
@@ -83,6 +90,10 @@ public class PerfTestData implements Serializable {
 	
 	public void setPasswords(String[] passwords) {
 		this.passwords = passwords;
+	}
+	
+	public void setInstallopts(String[] installopts) {
+		this.installopts = installopts;
 	}
 	
 	

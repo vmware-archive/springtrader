@@ -205,6 +205,9 @@ nano.views.Admin = Backbone.View.extend({
             	}
             }
         });
+    	this.$('#hyperic-host').val('');
+    	this.$('#hyperic-user').val('');
+    	this.$('#hyperic-pwd').val('');
     },
     
     controlActions : function (event){
@@ -245,11 +248,14 @@ nano.views.Admin = Backbone.View.extend({
     	$(event.target).hide();
     	// Create client VMs & credential form
     	var vms = this.$('#perf-vms').val();
-    	this.$('#performance-testing > form').append("<label> Enter client VMs and credentials (Make sure groovy is installed/updated via System PATH or .bash_profile) </label><p/>");
+    	this.$('#performance-testing > form').append("<div id=\"perf-formlabel\"><label> Enter client VMs and credentials " +
+    			"(Make sure groovy is installed/updated via System PATH or .bash_profile) </label><p/></div>");
     	for (i=1; i<= vms; i++){
-    		this.$('#performance-testing > form').append("<input id=\"perf-vmname"+i+"\" type=\"text\" placeholder=\"Client VM "+ i + "\" />");
-    		this.$('#performance-testing > form').append("<input id=\"perf-vmuser"+i+"\" type=\"text\" placeholder=\"UserName\" />");
-    		this.$('#performance-testing > form').append("<input id=\"perf-vmpwd"+i+"\" type=\"password\" placeholder=\"Password\" />");
+    		this.$('#performance-testing > form').append("<input class=\"span2\" id=\"perf-vmname"+i+"\" type=\"text\" placeholder=\"Client VM "+ i + "\" />");
+    		this.$('#performance-testing > form').append("<input class=\"span2\" id=\"perf-vmuser"+i+"\" type=\"text\" placeholder=\"UserName\" />");
+    		this.$('#performance-testing > form').append("<input class=\"span2\" id=\"perf-vmpwd"+i+"\" type=\"password\" placeholder=\"Password\" />");
+    		this.$('#performance-testing > form').append(" <input id=\"perf-installopt"+i+"\" type=\"checkbox\" value=\"re-install\"  /> " +
+    				"<label for=\"perf-installopt"+i+"\">Re-install/first-time install perf code</label>");
     	}
     	this.$('#performance-testing > form').append("<p/><input id=\"perf-action\" class=\"btn btn-inverse\" type=\"button\" value=\"Run Test\" />");
     	//this.$('#performance-testing').show();
@@ -262,10 +268,12 @@ nano.views.Admin = Backbone.View.extend({
     	var vmnames = new Array();
     	var usernames = new Array();
     	var passwords = new Array();
+    	var installopts = new Array();
     	for (i=1; i<=vms; i++){
            vmnames[i-1] = this.$('#perf-vmname'+i).val();
            usernames[i-1] = this.$('#perf-vmuser'+i).val();
            passwords[i-1] = this.$('#perf-vmpwd'+i).val();
+           installopts[i-1] = this.$('#perf-installopt'+i).is(':checked');
     	}
     	$.ajax({
             url : nano.conf.urls.perfTest,
@@ -278,13 +286,26 @@ nano.views.Admin = Backbone.View.extend({
                 db : db,
                 vmnames : vmnames,
                 usernames : usernames,
-                passwords : passwords 
+                passwords : passwords,
+                installopts : installopts
             }),
             success : function(data, textStatus, jqXHR){
             	alert('Started running the scripts on the VMs')
             },
             error : nano.utils.onApiError
         });
+        this.$('#perf-users').val('');
+    	this.$('#perf-vms').val('');
+    	this.$('#perf-formlabel').hide();
+    	for (i=1; i<=vms; i++){
+            this.$('#perf-vmname'+i).hide();
+            this.$('#perf-vmuser'+i).hide();
+            this.$('#perf-vmpwd'+i).hide();
+            this.$('#perf-installopt'+i).hide();
+            this.$("#performance-testing > form label[for=\'perf-installopt"+i+"\']").hide();
+     	}
+    	this.$('#perf-action').hide();
+    	this.$('#perf-next').show();
     },
 
     profile : function(){

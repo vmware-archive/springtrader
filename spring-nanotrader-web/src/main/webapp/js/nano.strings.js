@@ -126,6 +126,7 @@ nano.strings = {
     portfolioMsg : 'This chart shows the cash balance and the portfolio value as a % of the total assets in your account',
     loginPage : 'Login Page',
     enterNumUsers : 'Number of accounts to create',
+    userRecreateHelp : 'Note: This will delete existing user accounts, associated data and recreate them - excluding admin user',
     enterNumPerfUsers : 'Number of accounts to create (minimum 100)',
     selectDatabase : 'Select the DB you are using',
     enterNumBuyOrders : 'Number of buy orders for each user',
