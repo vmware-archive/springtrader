@@ -603,10 +603,10 @@ public class TradingServiceImpl implements TradingService {
 
 	@Override
 	public void deleteAll() {
-		orderRepository.deleteAll();
-		holdingRepository.deleteAll();
-		accountRepository.deleteAll();
-		accountProfileRepository.deleteAll();
+		orderRepository.deleteAllInBatch();
+		holdingRepository.deleteAllInBatch();
+		accountRepository.deleteAllInBatch();
+		accountProfileRepository.deleteAllInBatch();
 	}
 	
 	@Override

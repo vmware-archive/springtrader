@@ -45,7 +45,7 @@ public class FinancialUtils {
 	public static BigDecimal PENNY_STOCK_PRICE;
 	public static BigDecimal PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
 	static {
-		PENNY_STOCK_PRICE = BigDecimal.valueOf(0.01);
+		PENNY_STOCK_PRICE = BigDecimal.valueOf(0.02);
 		PENNY_STOCK_PRICE = PENNY_STOCK_PRICE.setScale(2,
 				BigDecimal.ROUND_HALF_UP);
 		PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER = BigDecimal.valueOf(600.0);

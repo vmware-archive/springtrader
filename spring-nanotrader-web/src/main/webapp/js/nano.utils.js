@@ -675,6 +675,15 @@ nano.utils.getPaginationInterval = function(currentPage, pageCount) {
     return interval;
 };
 
+/*
+ * Reset form
+ * @author Ilayaperumal Gopinathan
+ * @return void
+ */
+nano.utils.resetForm = function($form){
+	$form.find('input:text, input:password, input:file, select, textarea').val('');
+}
+
 /**
  * Aliases for the functions used in the views to make them shorter
  * @author Carlos Soto <carlos.soto@lognllc.com>

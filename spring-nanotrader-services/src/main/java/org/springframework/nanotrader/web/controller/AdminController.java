@@ -72,25 +72,27 @@ public class AdminController extends BaseController {
 	UserId userNameRequest) {
 		this.getAdminServiceFacade().deleteUserAccount(userNameRequest.getUserid());
 	}
-	
+
 	/**
 	 * Run performance test
 	 */
 	@RequestMapping(value = "/admin/perftest", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
-	public void runPerfTest(@RequestBody PerfTestData perfRequest, HttpServletRequest servletRequest) {
-		String serverName = servletRequest.getServerName();
-		Integer serverPort = servletRequest.getServerPort();
-		String ipAddress = "localhost";
-		if (serverName.equalsIgnoreCase("localhost")){
+	public void runPerfTest(@RequestBody
+	PerfTestData perfRequest, HttpServletRequest servletRequest) {
+		String requestUrl = servletRequest.getRequestURL().toString();
+		String serverPort = String.valueOf(servletRequest.getServerPort());
+		String serverUrl = requestUrl.substring(0, requestUrl.lastIndexOf(":") + 1) + serverPort ;
+		if (serverUrl.contains("localhost")) {
 			try {
-			InetAddress addr = InetAddress.getLocalHost();
-			ipAddress = addr.getHostAddress();
-			} catch (UnknownHostException e){
+				InetAddress addr = InetAddress.getLocalHost();
+				String ipAddress = addr.getHostAddress();
+				serverUrl = "http://" + ipAddress + ":" + serverPort;
+			}
+			catch (UnknownHostException e) {
 				throw new RuntimeException(e.getMessage());
 			}
 		}
-		String serverUrl = "http://"+ipAddress+":"+serverPort;
 		this.getAdminServiceFacade().runPerfTest(perfRequest, serverUrl);
 	}
 }
