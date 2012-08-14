@@ -15,8 +15,11 @@
  */
 package org.springframework.nanotrader.web.controller;
 
+import java.net.Inet4Address;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -82,14 +85,27 @@ public class AdminController extends BaseController {
 	PerfTestData perfRequest, HttpServletRequest servletRequest) {
 		String requestUrl = servletRequest.getRequestURL().toString();
 		String serverPort = String.valueOf(servletRequest.getServerPort());
-		String serverUrl = requestUrl.substring(0, requestUrl.lastIndexOf(":") + 1) + serverPort ;
+		String serverUrl = requestUrl.substring(0, requestUrl.lastIndexOf(":") + 1) + serverPort;
+		String ipAddress = "localhost";
 		if (serverUrl.contains("localhost")) {
 			try {
-				InetAddress addr = InetAddress.getLocalHost();
-				String ipAddress = addr.getHostAddress();
+				Enumeration<NetworkInterface> nif = NetworkInterface.getNetworkInterfaces();
+				while (nif.hasMoreElements()) {
+					Enumeration<InetAddress> inetaddr = nif.nextElement().getInetAddresses();
+					while (inetaddr.hasMoreElements()) {
+						InetAddress addr = inetaddr.nextElement();
+						if (addr instanceof Inet4Address) {
+							String ip = addr.getHostAddress();
+							if (!ip.equals("127.0.0.1") && !ip.startsWith("192")) {
+								ipAddress = ip;
+							}
+						}
+					}
+				}
+				// String ipAddress = addr.getHostAddress();
 				serverUrl = "http://" + ipAddress + ":" + serverPort;
 			}
-			catch (UnknownHostException e) {
+			catch (SocketException e) {
 				throw new RuntimeException(e.getMessage());
 			}
 		}
