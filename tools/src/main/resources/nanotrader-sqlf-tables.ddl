@@ -99,8 +99,10 @@ CREATE TABLE HIBERNATE_SEQUENCES
 (
     SEQUENCE_NAME VARCHAR(255),
     SEQUENCE_NEXT_HI_VALUE INTEGER
-)PERSISTENT SYNCHRONOUS ;
+)
 REDUNDANCY 1
+PERSISTENT SYNCHRONOUS ;
+
 -- ----------------------------------------------------------------------- 
 -- HOLDING 
 -- ----------------------------------------------------------------------- 
