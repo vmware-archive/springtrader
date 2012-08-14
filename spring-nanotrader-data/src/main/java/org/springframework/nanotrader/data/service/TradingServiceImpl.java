@@ -397,7 +397,7 @@ public class TradingServiceImpl implements TradingService {
 		Quote quote = quoteRepository.findBySymbol(symbol);
 
 		BigDecimal oldPrice = quote.getPrice();
-		if (quote.getPrice().equals(FinancialUtils.PENNY_STOCK_PRICE)) {
+		if (quote.getPrice().compareTo(FinancialUtils.PENNY_STOCK_PRICE) <= 0) {
 			changeFactor = FinancialUtils.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
 		}
 
