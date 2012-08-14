@@ -2,9 +2,8 @@
     <div class="tabbable" id="tabs-header">
        <ul class="nav nav-tabs">
          <li class="active"><a href="#userdata" data-toggle="tab">UserData</a></li>
-         <li><a href="#tab2" data-toggle="tab">tc Server</a></li>
-         <li><a href="#tab3" data-toggle="tab">RabbitMQ</a></li>
-         <li><a href="#tab4" data-toggle="tab">SQLFire</a></li>
+         <li><a href="#tcs" data-toggle="tab">tc Server</a></li>
+         <li><a href="#sqlfire" data-toggle="tab">SQLFire</a></li>
          <li><a href="#hyperic" data-toggle="tab">Hyperic Interface</a></li>
          <li><a href="#perfdata" data-toggle="tab">Performance Data</a></li>
        </ul>
@@ -23,7 +22,7 @@
             <span class="help-inline">(<%= translate("userRecreateHelp") %>)</span>
          </form>
     </div>
-    <div class="tab-pane" id="tab2">
+    <div class="tab-pane" id="tcs">
        <form class="form-inline">
             <div id="admin-error" class="hide span8 alert alert-block alert-error fade in">
                 <a data-dismiss="alert" class="close">x</a>
@@ -36,20 +35,7 @@
             <p>
         </form>
     </div>
-    <div class="tab-pane" id="tab3">
-       <form class="form-inline">
-            <div id="admin-error" class="hide span8 alert alert-block alert-error fade in">
-                <a data-dismiss="alert" class="close">x</a>
-                <h4 class="alert-heading"><%= translate("ohSnap") %></h4>
-                <p></p>
-            </div>
-            <button id="killRabbitMQBtn" class="btn btn-large-fixed"><%= translate("killRabbitMQ") %></button>
-            <p>
-            <button id="stopRabbitMQBtn" class="btn btn-large-fixed"><%= translate("stopRabbitMQ") %></button>
-            <p>
-        </form>
-    </div>
-    <div class="tab-pane" id="tab4">
+    <div class="tab-pane" id="sqlfire">
        <form class="form-inline">
             <div id="admin-error" class="hide span8 alert alert-block alert-error fade in">
                 <a data-dismiss="alert" class="close">x</a>
