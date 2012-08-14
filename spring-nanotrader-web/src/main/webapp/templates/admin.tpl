@@ -9,6 +9,11 @@
        </ul>
     <div class="tab-content" id="tabs-admin">
     <div class="tab-pane active" id="userdata">
+        <div id="userdata-headsup" class="alert alert-block">
+          <a data-dismiss="alert" class="close">x</a>
+          <h4 class="alert-heading"><%= translate("userdataHeadsUp") %></h4>
+          <p></p>
+        </div>
         <form class="form-inline">
             <div id="admin-error" class="hide span8 alert alert-block alert-error fade in">
                 <a data-dismiss="alert" class="close">x</a>
@@ -18,8 +23,6 @@
             <label><%= translate("enterNumUsers") %>:</label>
             <input type="number" id="user-count" class="span1" maxlength="10">
             <button id="setUsersBtn" class="btn btn-inverse"><%= translate("createUsers") %></button>
-            </p>
-            <span class="help-inline">(<%= translate("userRecreateHelp") %>)</span>
          </form>
     </div>
     <div class="tab-pane" id="tcs">
@@ -57,6 +60,11 @@
        <div id="hq-interface"></div>
     </div>
     <div class="tab-pane" id="perfdata">
+       <div id="perf-headsup" class="alert alert-info">
+          <a data-dismiss="alert" class="close">x</a>
+          <h4 class="alert-heading"><%= translate("perfHeadsUp") %></h4>
+          <p></p>
+      </div>
       <div id="performance-testing">
        <form class="form-inline">
           <label><%= translate("enterNumPerfUsers") %></label>

@@ -592,7 +592,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
  */
 nano.utils.killTCServer = function() {
     $('#progress').append('<div class="well show-quote-box" id="waitkilltcserverstatus">' + translate('waitKillTCServerStatus') + '</div>');
-    $('#progress').fadeOut(3000, function() {
+    $('#waitkilltcserverstatus').fadeOut(3000, function() {
         $('#crashcompleted').append('<div class="well show-quote-box" id="killtcserverstatus">' + translate('killTCServerStatus') + '</div>');
     });
     $.ajax({
@@ -605,6 +605,7 @@ nano.utils.killTCServer = function() {
          error : function(){
          }
      });
+    $('#crashcompleted').fadeOut(3000);
 };
 
 /**
@@ -615,7 +616,7 @@ nano.utils.killTCServer = function() {
  */
 nano.utils.crashTCServer = function() {
     $('#progress').append('<div class="well show-quote-box" id="waitcrashtcserverstatus">' + translate('waitCrashTCServerStatus') + '</div>');
-    $('#progress').fadeOut(60000, function() {
+    $('#waitcrashtcserverstatus').fadeOut(3000, function() {
         $('#crashcompleted').append('<div class="well show-quote-box" id="crashtcserverstatus">' + translate('crashTCServerStatus') + '</div>');
     });
     $.ajax({
@@ -628,6 +629,7 @@ nano.utils.crashTCServer = function() {
          error : function(){
          }
      });
+    $('#crashcompleted').fadeOut(3000);
 };
 
 /**
@@ -637,7 +639,7 @@ nano.utils.crashTCServer = function() {
  */
 nano.utils.killSqlFireServer = function() {
     $('#progress').append('<div class="well show-quote-box" id="waitcrashtcserverstatus">' + translate('waitSQLFireStatus') + '</div>');
-    $('#progress').fadeOut(60000, function() {
+    $('#waitcrashtcserverstatus').fadeOut(3000, function() {
         $('#crashcompleted').append('<div class="well show-quote-box" id="crashtcserverstatus">' + translate('killSqlFireServerStatus') + '</div>');
     });
     $.ajax({
@@ -650,6 +652,7 @@ nano.utils.killSqlFireServer = function() {
          error : function(){
          }
      });
+    $('#crashcompleted').fadeOut(3000);
 };
 
 /**
