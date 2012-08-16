@@ -67,14 +67,15 @@
       </div>
       <div id="performance-testing">
        <form class="form-inline">
-          <label><%= translate("enterNumPerfUsers") %></label>
-          <input type="text" id="perf-users" class="span2">
-          <p/>
-          <label><%= translate("selectDatabase") %></label>
-          <select id="perf-db">
-            <option value="sqlf">SQLFire</option>
-            <option value="nosqlf">Postgres</option>
+       <label><%= translate("selectPerfType") %></label>
+          <select id="perf-type" class="span3">
+            <option value="fixed"><%= translate("fixedOrderLoadMsg") %></option>
+            <option value="multi"><%= translate("multiOrdersLoadMsg") %></option>
           </select>
+          <p/>
+          <div id="perf-orderlabel"><label><%= translate("enterNumPerfOrders") %></label>
+          <input type="text" id="perf-count" class="span2">
+          </div>
           <p/>
           <label><%= translate("enterNumVMs") %></label>
           <input type="text" id="perf-vms" class="span2">

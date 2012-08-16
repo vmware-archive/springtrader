@@ -22,19 +22,21 @@ public class PerformanceRunner implements Runnable {
 
 	private String serverUrl;
 
-	private String numUsers;
+	// Count can be number of orders or users depending on the type
+	private String count;
 
-	private String db;
+	// Type can be single user/fixed order or multi-users/random orders
+	private String type;
 
-	PerformanceRunner(String numUsers, String db, String vmName, String vmUser, String vmPwd, String installOpts,
+	PerformanceRunner(String count, String type, String vmName, String vmUser, String vmPwd, String installOpts,
 			String serverUrl) {
 		this.vmName = vmName;
 		this.vmUser = vmUser;
 		this.vmPwd = vmPwd;
 		this.installOpts = installOpts;
 		this.serverUrl = serverUrl;
-		this.numUsers = numUsers;
-		this.db = db;
+		this.count = count;
+		this.type = type;
 	}
 
 	@Override
@@ -49,7 +51,7 @@ public class PerformanceRunner implements Runnable {
 				exec("wget " + serverUrl + "/spring-nanotrader-web/files/performanceTest.sh");
 				exec("chmod 755 ~/performanceTest.sh");
 			}
-			exec("~/performanceTest.sh " + numUsers + " " + db + " " + serverUrl);
+			exec("~/performanceTest.sh " + count + " " + type + " " + serverUrl);
 		}
 		catch (IOException e) {
 			System.out.println(e.getMessage());

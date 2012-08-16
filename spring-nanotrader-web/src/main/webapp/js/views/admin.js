@@ -21,6 +21,7 @@ nano.views.Admin = Backbone.View.extend({
         'click #stopRabbitMQBtn' : 'stopRabbitMQ',
         'click #hypericonnect'   : 'connectHyperic',
         'click .control-actions' : 'controlActions',
+        'change #perf-type' : 'perfTypeEvent',
         'click #perf-next'  : 'perfNext',
         'click #perf-action' : 'perfAction'
     },
@@ -243,13 +244,23 @@ nano.views.Admin = Backbone.View.extend({
         });
     },
     
+    perfTypeEvent : function(event) {
+    	var perfType = $(event.target).val();
+    	if (perfType === 'multi') {
+            $('#perf-orderlabel').html('<label> Number of accounts to create (minimum 100) </label> <input type="text" id="perf-count" class="span2">');
+    	} else {
+    		$('#perf-orderlabel').html('<label> Number of stock orders to create (minimum 100) </label> <input type="text" id="perf-count" class="span2">');
+    	}
+    },
+    
     perfNext : function(event) {
     	// Hide 'Next' button
     	$(event.target).hide();
     	// Create client VMs & credential form
     	var vms = this.$('#perf-vms').val();
-    	this.$('#performance-testing > form').append("<div id=\"perf-formlabel\"><label> Enter client VMs and credentials " +
-    			"(Make sure groovy is installed/updated via System PATH or .bash_profile) </label><p/></div>");
+    	this.$('#performance-testing > form').append("<div id=\"perf-formlabel\" class=\"alert alert-block\"><a data-dismiss=\"alert\" class=\"close\">x</a>" +
+    			"<h4 class=\"alert-heading\"><label> Enter client VMs and credentials " +
+    			"(Make sure groovy is installed/updated via System PATH or .bash_profile on the VM) </label></h4></div>");
     	for (i=1; i<= vms; i++){
     		this.$('#performance-testing > form').append("<input class=\"span2\" id=\"perf-vmname"+i+"\" type=\"text\" placeholder=\"Client VM "+ i + "\" />");
     		this.$('#performance-testing > form').append("<input class=\"span2\" id=\"perf-vmuser"+i+"\" type=\"text\" placeholder=\"UserName\" />");
@@ -258,13 +269,12 @@ nano.views.Admin = Backbone.View.extend({
     				"<label for=\"perf-installopt"+i+"\">Re-install/first-time install perf code</label>");
     	}
     	this.$('#performance-testing > form').append("<p/><input id=\"perf-action\" class=\"btn btn-inverse\" type=\"button\" value=\"Run Test\" />");
-    	//this.$('#performance-testing').show();
     },
     
     perfAction : function(event) {
-    	var users = this.$('#perf-users').val();
+    	var count = this.$('#perf-count').val();
     	var vms = this.$('#perf-vms').val();
-    	var db = this.$('#perf-db').val();
+    	var type = this.$('#perf-type').val();
     	var vmnames = new Array();
     	var usernames = new Array();
     	var passwords = new Array();
@@ -281,20 +291,20 @@ nano.views.Admin = Backbone.View.extend({
             headers : nano.utils.getHttpHeaders(),
             dataType : 'json',
             data : JSON.stringify({
-                usercount : users,
+                count : count,
                 vmcount : vms,
-                db : db,
+                type : type,
                 vmnames : vmnames,
                 usernames : usernames,
                 passwords : passwords,
                 installopts : installopts
             }),
             success : function(data, textStatus, jqXHR){
-            	alert('Started running the scripts on the VMs')
+            	alert('Started running the scripts on the VMs. Please refer server log')
             },
             error : nano.utils.onApiError
         });
-        this.$('#perf-users').val('');
+        this.$('#perf-count').val('');
     	this.$('#perf-vms').val('');
     	this.$('#perf-formlabel').hide();
     	for (i=1; i<=vms; i++){
