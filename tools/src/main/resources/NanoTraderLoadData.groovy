@@ -207,17 +207,17 @@ def sqlFireTest(numThreads=100, numUsers=100) {
 
 static main(args) {
   if (args.length > 4 || (args.length == 1 && args[0] == 'help')) {
-      println "groovy NanoTraderLoadData.groovy [number_of_users] [sqlf/nosqlf] [serverName] [port]"
+      println "groovy NanoTraderLoadData.groovy [number_of_users] [fixed/multi] [serverName] [port]"
       return
   }
   int numThreads = 100
   int numUsers = 100
-  def isSQLF = false
+  def isFixed = false
   def serverUrl = "http://localhost:8080"
   if (args.length >= 1) {
     int users = Integer.parseInt(args[0])
-    if (args[1].equals("sqlf")){    
-      isSQLF = true
+    if (args[1].equals("fixed")){    
+      isFixed = true
     }
     if (users < 100) {
       println "Please specify no less than 100 users"
@@ -234,7 +234,7 @@ static main(args) {
   int millis = date.time
   def inst = new NanoTraderLoadData()
   inst.init(serverUrl)
-  if (isSQLF) 
+  if (isFixed) 
     inst.sqlFireTest(numThreads, numUsers)
   else
     inst.loadTest(numThreads, numUsers)

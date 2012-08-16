@@ -132,7 +132,7 @@ public class AdminServiceFacadeImpl implements AdminServiceFacade {
 	public void runPerfTest(PerfTestData perfTestData, String serverUrl) {
         Integer vmCount = Integer.parseInt(perfTestData.getVmcount());
         for (int i = 0; i < vmCount; i++){
-        	new Thread(new PerformanceRunner(perfTestData.getUsercount(), perfTestData.getdb(), perfTestData.getVmnames()[i], perfTestData.getUsernames()[i], perfTestData.getPasswords()[i], perfTestData.getInstallopts()[i], serverUrl)).start();
+        	new Thread(new PerformanceRunner(perfTestData.getCount(), perfTestData.getType(), perfTestData.getVmnames()[i], perfTestData.getUsernames()[i], perfTestData.getPasswords()[i], perfTestData.getInstallopts()[i], serverUrl)).start();
         }
 	}
 	

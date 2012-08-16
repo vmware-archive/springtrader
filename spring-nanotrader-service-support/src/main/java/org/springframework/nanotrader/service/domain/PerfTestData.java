@@ -25,11 +25,11 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class PerfTestData implements Serializable {
 
-	private String usercount;
+	private String count;
 	
 	private String vmcount;
 	
-	private String db;
+	private String type;
 	
 	private String[] vmnames;
 	
@@ -39,16 +39,16 @@ public class PerfTestData implements Serializable {
 	
 	private String[] installopts;
 
-	public String getUsercount() {
-		return this.usercount;
+	public String getCount() {
+		return this.count;
 	}
 	
 	public String getVmcount() {
 		return this.vmcount;
 	}
 	
-	public String getdb() {
-		return this.db;
+	public String getType() {
+		return this.type;
 	}
 	
 	public String[] getVmnames() {
@@ -68,16 +68,16 @@ public class PerfTestData implements Serializable {
 	}
 	
 
-	public void setUsercount(String usercount) {
-		this.usercount = usercount;
+	public void setCount(String count) {
+		this.count = count;
 	}
 	
 	public void setVmcount(String vmcount) {
 		this.vmcount = vmcount;
 	}
 	
-	public void setDb(String db) {
-		this.db = db;
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	public void setVmnames(String[] vmnames) {
