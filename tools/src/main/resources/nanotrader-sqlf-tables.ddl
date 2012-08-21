@@ -32,22 +32,47 @@ DROP TABLE HOLDING;
 DROP TABLE HIBERNATE_SEQUENCES;
 
 -- ----------------------------------------------------------------------- 
--- ACCOUNTPROFILE 
--- ----------------------------------------------------------------------- 
-
-DROP TABLE ACCOUNTPROFILE;
-
--- ----------------------------------------------------------------------- 
 -- ACCOUNT 
 -- ----------------------------------------------------------------------- 
 
 DROP TABLE ACCOUNT;
 
 -- ----------------------------------------------------------------------- 
+-- ACCOUNTPROFILE 
+-- ----------------------------------------------------------------------- 
+
+DROP TABLE ACCOUNTPROFILE;
+
+
+-- ----------------------------------------------------------------------- 
 -- PROCEDURE CHAOSFUNCTION 
 -- ----------------------------------------------------------------------- 
 
 DROP PROCEDURE CHAOSFUNCTION;
+
+-- ----------------------------------------------------------------------- 
+-- ACCOUNTPROFILE 
+-- ----------------------------------------------------------------------- 
+
+CREATE TABLE ACCOUNTPROFILE
+(
+    PROFILEID INTEGER NOT NULL,
+    ADDRESS VARCHAR(250),
+    AUTHTOKEN VARCHAR(100),
+    CREDITCARD VARCHAR(250),
+    EMAIL VARCHAR(250),
+    FULLNAME VARCHAR(250),
+    PASSWD VARCHAR(250),
+    USERID VARCHAR(250) NOT NULL,
+    PRIMARY KEY (PROFILEID)
+)
+REDUNDANCY 1
+PERSISTENT SYNCHRONOUS
+PARTITION BY PRIMARY KEY;
+
+CREATE UNIQUE INDEX ACCOUNTPROFILE_USERID_KEY ON ACCOUNTPROFILE (USERID);
+
+
 
 -- ----------------------------------------------------------------------- 
 -- ACCOUNT 
@@ -68,28 +93,9 @@ CREATE TABLE ACCOUNT
 )
 PERSISTENT SYNCHRONOUS
 REDUNDANCY 1
-PARTITION BY PRIMARY KEY;
+PARTITION BY COLUMN (PROFILE_PROFILEID)
+COLOCATE WITH (ACCOUNTPROFILE);
 
--- ----------------------------------------------------------------------- 
--- ACCOUNTPROFILE 
--- ----------------------------------------------------------------------- 
-
-CREATE TABLE ACCOUNTPROFILE
-(
-    PROFILEID INTEGER NOT NULL,
-    ADDRESS VARCHAR(250),
-    AUTHTOKEN VARCHAR(100),
-    CREDITCARD VARCHAR(250),
-    EMAIL VARCHAR(250),
-    FULLNAME VARCHAR(250),
-    PASSWD VARCHAR(250),
-    USERID VARCHAR(250) NOT NULL,
-    PRIMARY KEY (PROFILEID)
-)
-REDUNDANCY 1
-PERSISTENT SYNCHRONOUS;
-
-CREATE UNIQUE INDEX ACCOUNTPROFILE_USERID_KEY ON ACCOUNTPROFILE (USERID);
 
 -- ----------------------------------------------------------------------- 
 -- HIBERNATE_SEQUENCES 
@@ -100,7 +106,7 @@ CREATE TABLE HIBERNATE_SEQUENCES
     SEQUENCE_NAME VARCHAR(255),
     SEQUENCE_NEXT_HI_VALUE INTEGER
 )
-REDUNDANCY 1
+REPLICATE
 PERSISTENT SYNCHRONOUS ;
 
 -- ----------------------------------------------------------------------- 
@@ -165,7 +171,7 @@ CREATE TABLE QUOTE
     PRIMARY KEY (QUOTEID)
 )
 PERSISTENT SYNCHRONOUS
-REDUNDANCY 1;
+REPLICATE;
 --PARTITION BY COLUMN (SYMBOL);
 --PARTITION BY RANGE (SYMBOL)
 --(
