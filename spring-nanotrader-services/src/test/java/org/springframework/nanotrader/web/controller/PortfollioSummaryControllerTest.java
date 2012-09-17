@@ -40,7 +40,7 @@ public class PortfollioSummaryControllerTest extends AbstractSecureControllerTes
 	public void getPortfolioSummaryJson() throws Exception {
 		mockMvc.perform(get("/account/"+ ServiceTestConfiguration.ACCOUNT_ID + "/portfolioSummary").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(content().type(MediaType.APPLICATION_JSON))
+				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.numberOfHoldings").value(ServiceTestConfiguration.HOLDING_COUNT))
 				.andExpect(jsonPath("$.totalBasis").value(ServiceTestConfiguration.BASIS.doubleValue()))
 				.andExpect(jsonPath("$.totalMarketValue").value(ServiceTestConfiguration.MARKET_VALUE.doubleValue()))

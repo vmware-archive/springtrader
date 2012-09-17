@@ -39,7 +39,7 @@ public class MarketSummaryControllerTest extends AbstractBaseControllerTest {
 	public void getMarketSummaryJson() throws Exception {
 		mockMvc.perform(get("/marketSummary").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(content().type(MediaType.APPLICATION_JSON))
+				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.tradeStockIndexAverage").value(ServiceTestConfiguration.MARKET_INDEX.doubleValue()))
 				.andExpect(jsonPath("$.tradeStockIndexOpenAverage").value(ServiceTestConfiguration.MARKET_OPENING.doubleValue()))
 				.andExpect(jsonPath("$.tradeStockIndexVolume").value(ServiceTestConfiguration.MARKET_VOLUME.doubleValue()))
