@@ -42,7 +42,7 @@ public class AccountProfileControllerTest extends AbstractSecureControllerTest {
 	public void getAccountProfileByIdJson() throws Exception {
 		mockMvc.perform(get("/accountProfile/400").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(content().type(MediaType.APPLICATION_JSON))
+				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.userid").value(ServiceTestConfiguration.USER_ID))
 				.andExpect(jsonPath("$.profileid").value(ServiceTestConfiguration.PROFILE_ID))
 				.andExpect(jsonPath("$.email").value(ServiceTestConfiguration.EMAIL))

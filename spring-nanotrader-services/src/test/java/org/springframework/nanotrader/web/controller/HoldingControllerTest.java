@@ -42,7 +42,7 @@ public class HoldingControllerTest extends AbstractSecureControllerTest {
 	@Test
 	public void getHoldingByIdJson() throws Exception {
 		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/holding/100").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(content().type(MediaType.APPLICATION_JSON))
+				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.holdingid").value(ServiceTestConfiguration.HOLDING_ID))
 				.andExpect(jsonPath("$.accountAccountid").value(ServiceTestConfiguration.ACCOUNT_ID))
 				.andExpect(jsonPath("$.purchasedate").value(PURCHASE_DATE))
@@ -55,19 +55,19 @@ public class HoldingControllerTest extends AbstractSecureControllerTest {
 	@Test
 	public void getHoldingByAccountIdNoRecordsFoundJson() throws Exception {
 		mockMvc.perform(get("/account/600/holdings").accept(MediaType.APPLICATION_JSON)).andExpect(status().isUnauthorized())
-				.andExpect(content().type(MediaType.APPLICATION_JSON)).andDo(print());
+				.andExpect(content().mimeType(MediaType.APPLICATION_JSON)).andDo(print());
 	}
 	
 	@Test
 	public void getHoldingByHoldingIdIdNoRecordsFoundJson() throws Exception {
 		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/holding/300").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound())
-				.andExpect(content().type(MediaType.APPLICATION_JSON)).andDo(print());
+				.andExpect(content().mimeType(MediaType.APPLICATION_JSON)).andDo(print());
 	}
 	
 	@Test
 	public void getHoldingsByAccountIdJson() throws Exception {
 		mockMvc.perform(get("/account/" + ServiceTestConfiguration.ACCOUNT_ID + "/holdings").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(content().type(MediaType.APPLICATION_JSON))
+				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.results.[0].holdingid").value(ServiceTestConfiguration.HOLDING_ID))
 				.andExpect(jsonPath("$.results.[0].accountAccountid").value(ServiceTestConfiguration.ACCOUNT_ID))
 				.andExpect(jsonPath("$.results.[0].purchasedate").value(PURCHASE_DATE))

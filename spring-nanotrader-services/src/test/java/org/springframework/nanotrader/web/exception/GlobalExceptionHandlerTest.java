@@ -43,7 +43,7 @@ public class GlobalExceptionHandlerTest extends AbstractSecureControllerTest {
 		mockMvc.perform(get("/accountProfile/not-a-number"))
 		.andExpect(status()
 		.isBadRequest())
-		.andExpect(content().type(MediaType.APPLICATION_JSON))
+		.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 		.andExpect(jsonPath("$.detail", containsString("An error has occured while processing the request: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'")) )
 		.andDo(print());
 	}	
@@ -52,7 +52,7 @@ public class GlobalExceptionHandlerTest extends AbstractSecureControllerTest {
 	public void getAccountProfileByIdJsonNoRecordFound() throws Exception {
 		mockMvc.perform(get("/accountProfile/900" + ServiceTestConfiguration.NOT_A_VALID_PROFILE).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isUnauthorized())
-				.andExpect(content().type(MediaType.APPLICATION_JSON))
+				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andDo(print());
 	}
 	
