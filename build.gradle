@@ -209,7 +209,7 @@ project('spring-nanotrader-services') {
 		compile project(":spring-nanotrader-chaos")
 		compile "org.springframework:spring-webmvc:$springVersion"
 		providedCompile  ("javax.servlet:servlet-api:$servletApiVersion")
-		compile "com.jayway.jsonpath:json-path:0.5.5"
+		compile "com.jayway.jsonpath:json-path:0.8.1"
 		compile "cglib:cglib-nodep:$cglibVersion"
 		compile "org.springframework.security:spring-security-web:$springSecurityVersion" 
 		compile "org.springframework.security:spring-security-config:$springSecurityVersion" 
