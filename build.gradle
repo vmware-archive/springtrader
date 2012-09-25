@@ -237,7 +237,7 @@ project('spring-nanotrader-asynch-services') {
 		compile project(":spring-nanotrader-service-support")
 		compile "org.springframework:spring-webmvc:$springVersion"
 		providedCompile  ("javax.servlet:servlet-api:$servletApiVersion")
-		compile "com.jayway.jsonpath:json-path:0.5.5"
+		compile "com.jayway.jsonpath:json-path:0.8.1"
 		compile "cglib:cglib-nodep:$cglibVersion"
 		compile "org.codehaus.jackson:jackson-mapper-asl:1.8.5"
 		compile "javax.inject:javax.inject:$javaxInjectVersion"
