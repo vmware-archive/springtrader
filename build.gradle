@@ -3,7 +3,6 @@ description = 'Spring Nanotrader'
 apply plugin: 'base'
 apply plugin: 'idea'
 
-
 buildscript {
 
    repositories {
@@ -20,12 +19,10 @@ buildscript {
 
 }
 
-
 allprojects {
 	group = 'org.springframework.nanotrader'
 
 	repositories {
-	
 		maven { url  'http://repo.springsource.org' }
 		maven { url  'http://dist.gemstone.com/maven/release' }
 		maven { url  'http://maven.springframework.org/release' }
@@ -34,12 +31,8 @@ allprojects {
 		mavenCentral()
 		maven { url 'http://maven.springframework.org/snapshot' }
 	 	flatDir dirs: ["${gradle.gradleHomeDir}/lib"]
-
-
 	}
 }
-
-
 
 subprojects { subproject ->
 
@@ -86,8 +79,6 @@ subprojects { subproject ->
 		buildCommand 'org.eclipse.wst.common.project.facet.core.builder'
 		buildCommand 'org.eclipse.wst.validation.validationbuilder'
 	}
-
-	
 
 	sourceSets {
 		test {
@@ -151,10 +142,13 @@ subprojects { subproject ->
 
 }
 
+task cleanDist(type: Delete)  {
+   description "Deletes $rootDir/dist directory"
+   delete file("$rootDir/dist")
+}
 
 project('spring-nanotrader-chaos') {
 	description = 'Spring Nanotrader Chaos Utilities'
-
 }
 
 project('spring-nanotrader-service-support') {
@@ -189,16 +183,60 @@ project('spring-nanotrader-data') {
 		compile "org.hibernate:hibernate-entitymanager:3.6.8.Final"
 		compile "postgresql:postgresql:9.0-801.jdbc3"
 		compile "com.vmware.sqlfire:sqlfireclient:1.0.2"
-	
 		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 		compile "com.h2database:h2:$h2Version"
 
 	}
 }
 
+project('tools') {
+	apply plugin: 'groovy'
 
+	repositories {
+	    mavenCentral()
+	}
 
+	configurations {
+	 compile
+	}
 
+	jar {
+	    archiveName 'DataGenerator.zip'
+	    fileMode 0755
+	    into('libs') {
+	        from configurations.compile
+	     }
+	}
+
+	task release(idependsOn: assemble) << {
+	    copy {
+                description "Copy artifacts to $rootDir/dist"
+	        from file("build/libs")
+	        into file("$rootDir/dist")
+                include '*.zip'
+	    }
+	}
+
+	dependencies {
+	    groovy localGroovy()
+	    compile 'org.apache.commons:commons-lang3:3.1'
+	    compile 'commons-beanutils:commons-beanutils-core:1.8.3'
+	    compile 'commons-codec:commons-codec:1.4'
+	    compile 'commons-collections:commons-collections:3.2.1'
+	    compile 'commons-logging:commons-logging:1.1.1'
+	    compile 'net.sf.ezmorph:ezmorph:1.0.6'
+	    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.5.2'
+	    compile 'org.apache.httpcomponents:httpclient:4.1.3'
+	    compile 'org.apache.httpcomponents:httpcore:4.1.4'
+	    compile 'net.sf.json-lib:json-lib:2.3:jdk15@jar'
+	    compile 'net.sourceforge.nekohtml:nekohtml:1.9.15'
+	    compile 'xerces:xercesImpl:2.10.0'
+	    compile 'net.sf.opencsv:opencsv:2.0'
+	    compile 'postgresql:postgresql:9.1-901.jdbc4'
+	    compile 'org.apache.ant:ant:1.8.3'
+	    compile 'com.vmware.sqlfire:sqlfireclient:1.0.2'
+	}
+}
 
 project('spring-nanotrader-services') {
 	apply plugin: 'war'
@@ -220,13 +258,36 @@ project('spring-nanotrader-services') {
 		testCompile "org.hamcrest:hamcrest-all:1.1"
 		compile "org.aspectj:aspectjweaver:$aspectjVersion"
 	}
-
+        task release(dependsOn: assemble) << {
+            copy {
+                description "Copy artifacts to $rootDir/dist"
+                from war.archivePath
+                into file("$rootDir/dist") 
+            }
+        }
 }
 
 project('spring-nanotrader-web') {
 	apply plugin: 'war'
 	description = 'Spring Nanotrader Web'
+	task tar(type: Tar) {
+	  from 'src/main/webapp'
+	  compression = Compression.GZIP
+          destinationDir = file("build/libs")
+	}
+	artifacts {
+	    archives tar
+	}
+        task release(dependsOn: assemble) << {
+            copy {
+                description "Copy artifacts to $rootDir/dist"
+                from war.archivePath
+                from tar.archivePath
+                into file("$rootDir/dist") 
+            }
+        }
 }
+
 
 project('spring-nanotrader-asynch-services') {
 	apply plugin: 'war'
@@ -246,8 +307,15 @@ project('spring-nanotrader-asynch-services') {
 		compile "org.aspectj:aspectjweaver:$aspectjVersion"
 
 	}
-
+        task release(dependsOn: assemble) << {
+            copy {
+                description "Copy artifacts to $rootDir/dist"
+                from war.archivePath
+                into file("$rootDir/dist") 
+            }
+        }
 }
+
 
 project('vfabric-hqapi-services') {
         apply plugin: 'war'
@@ -265,6 +333,13 @@ project('vfabric-hqapi-services') {
                 compile "commons-logging:commons-logging:1.0.4"
                 compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
                 compile "log4j:log4j:1.2.14"
+        }
+        task release(dependsOn: assemble) << {
+            copy {
+                description "Copy artifacts to $rootDir/dist"
+                from war.archivePath
+                into file("$rootDir/dist") 
+            }
         }
 }
 
