@@ -1,8 +1,7 @@
-NanoTrader documents are available in the docs subdirectory
-===========================================================
+NanoTrader getting started guild is avaiable under github wiki
+==============================================================
 
-* See the GettingStarted.pdf file
-
+* See [Getting Started Guide](https://github.com/SpringSource/nanotrader/wiki/Getting-Started-Guide)
 
 
 Nanotrader now uses Gradle to Build
@@ -12,7 +11,7 @@ Either re-clone, or shut down STS after deleting projects and remove all Eclipse
 
 Commands:
 
-* ./gradlew build
+* ./gradlew build release
 * ./gradlew cleanEclipse (deletes eclipse metadata files)
 * ./gradlew eclipse (created metadata files)
 * ./gradlew install - installs jars/poms in local maven repo
