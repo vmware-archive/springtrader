@@ -62,7 +62,7 @@
                         <div id="creditcard-control" class="control-group">
                             <label class="control-label"><%= translate("creditCardNumber") %>:</label>
                             <div class="controls">
-                                <input type="text" value="" id="creditcard-input" class="input-xlarge focused" maxlength="16"><br/>
+                                <input type="text" readonly="" value="1234123412341234" id="creditcard-input" class="input-xlarge focused" maxlength="16"><br/>
                                 <span id="creditcardError" class="help-inline hide"><%= translate("creditcardError") %></span>
                             </div>
                         </div>
