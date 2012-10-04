@@ -68,7 +68,7 @@ nano.strings = {
     sessionExpired : 'Your session has expired. Please login in to continue.',
     contactUs : 'Contact Us',
     registerUserName : 'Register New User',
-    enterAccountDetails : 'Please enter your account details',
+    enterAccountDetails : 'Please enter test data for creating the account',
     fullName : 'Full name',
     passwordConfirmation : 'Password Confirmation',
     passwordMatching : 'Please make sure Password fields are matching',
