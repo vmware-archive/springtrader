@@ -1,0 +1,11 @@
+target
+.project
+.classpath
+.settings
+.springBeans
+build
+.gradle
+bin
+vf.gf.dmn-events.txt
+vf.gf.dmn-license.cfg
+dist

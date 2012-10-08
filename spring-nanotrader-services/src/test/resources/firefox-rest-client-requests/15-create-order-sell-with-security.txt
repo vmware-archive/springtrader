@@ -1,0 +1,1 @@
+{"requestUrl":"http://localhost:8080/spring-nanotrader-services/api/account/1/order","requestMethod":"POST","requestBody":"{\"holdingid\": 8851,\"ordertype\":\"sell\"}","headers":["API_TOKEN","7aaf81a7-e6b3-4853-b4e8-f32c5b9ac7fc","Content-Type","application/json"]}

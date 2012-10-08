@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Context>
+	<add:ResourceLink type="javax.sql.DataSource"
+                  name="jdbc/nanodb"
+                  global="jdbc/nanodb"/>
+</Context>

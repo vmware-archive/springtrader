@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="amqp-common-context.xml"/>
+
+	<int:gateway service-interface="org.springframework.nanotrader.service.support.TradingServiceFacadeImpl$OrderGateway"
+		default-request-channel="toJsonChannel"/>
+
+	<int:channel id="toJsonChannel" />
+
+	<int:object-to-json-transformer input-channel="toJsonChannel"
+		output-channel="toAmqpChannel"/>
+
+	<int:channel id="toAmqpChannel" />
+
+	<int-amqp:outbound-channel-adapter channel="toAmqpChannel"
+		amqp-template="amqpTemplate"
+		exchange-name="nanotrader.exchange"
+		routing-key="nanotrader.order.binding"/>
+
+</beans>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<bean id="mockQuoteRepo" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.nanotrader.data.repository.QuoteRepository"/>
+	</bean>
+
+	<bean id="mockARRepo" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.nanotrader.data.repository.AccountProfileRepository"/>
+	</bean>
+
+	<bean id="mockOrderRepo" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.nanotrader.data.repository.OrderRepository"/>
+	</bean>
+
+	<bean id="mockAccountRepo" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.nanotrader.data.repository.AccountRepository"/>
+	</bean>
+
+	<bean id="mockHoldingRepo" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.nanotrader.data.repository.HoldingRepository"/>
+	</bean>
+
+	<bean id="mockPSRepo" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.nanotrader.data.repository.PortfolioSummaryRepository"/>
+	</bean>
+
+	<bean id="mockMSRepo" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.nanotrader.data.repository.MarketSummaryRepository"/>
+	</bean>
+
+	<bean id="mockHARepo" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.nanotrader.data.repository.HoldingAggregateRepository"/>
+	</bean>
+	
+	<bean id="mockChaosRepo" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="org.springframework.nanotrader.data.repository.ChaosProceduresRepository"/>
+	</bean>
+
+	<bean id="tradingService" class="org.springframework.nanotrader.data.service.TradingServiceImpl" />
+
+	<import resource="classpath:/META-INF/spring/integration/amqp-data-outbound-context.xml" />
+
+    <context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
+
+</beans>

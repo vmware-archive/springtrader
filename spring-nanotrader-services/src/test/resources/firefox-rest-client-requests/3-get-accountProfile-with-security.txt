@@ -1,0 +1,1 @@
+{"requestUrl":"http://localhost:8080/spring-nanotrader-services/api/accountProfile/8150","requestMethod":"GET","requestBody":"\n","headers":["API_TOKEN","5dc0f967-61bd-4986-96b8-593526cf7cff","Content-Type","application/json"]}

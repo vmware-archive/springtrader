@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping map-id="account">
+		<class-a>org.springframework.nanotrader.data.domain.Account</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Account
+		</class-b>
+		<field-exclude>
+			<a>orders</a>
+			<b>orders</b>
+		</field-exclude>
+		
+	</mapping>
+
+	<!-- Start Account profile mappings -->
+	<mapping map-id="accountProfile">
+		<class-a>org.springframework.nanotrader.data.domain.Accountprofile
+		</class-a>
+		<class-b map-null="false">org.springframework.nanotrader.service.domain.Accountprofile
+		</class-b>
+		<field map-id="accountProfile.account">
+			<a>accounts</a>
+			<b>accounts</b>
+		</field>
+
+	</mapping>
+	<mapping map-id="accountProfile.account">
+		<class-a map-null="false">org.springframework.nanotrader.data.domain.Account
+		</class-a>
+		<class-b map-null="false">java.util.Map</class-b>
+		<field-exclude>
+			<a>orders</a>
+			<b>orders</b>
+		</field-exclude>
+		<field-exclude>
+			<a>profileProfileid</a>
+			<b>profileProfileid</b>
+		</field-exclude>
+	</mapping>
+	
+	<mapping map-id="accountProfile-no-accounts">
+		<class-a>org.springframework.nanotrader.data.domain.Accountprofile
+		</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Accountprofile
+		</class-b>
+	<field-exclude>
+			<a>accounts</a>
+			<b>accounts</b>
+		</field-exclude>
+
+	</mapping>
+	
+	<!-- End Account profile mappings -->
+	<mapping map-id="holding">
+		<class-a>org.springframework.nanotrader.data.domain.Holding</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Holding
+		</class-b>
+		<field>
+			<a>quoteSymbol</a>
+			<b>quote.symbol</b>
+		</field>
+		<field-exclude>
+			<a>orders</a>
+			<b>orders</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping map-id="order">
+		<class-a>org.springframework.nanotrader.data.domain.Order</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Order</class-b>
+		<field>
+			<a>accountAccountid.accountid</a>
+			<b>accountid</b>
+		</field>
+		<field>
+			<a>holdingHoldingid.holdingid</a>
+			<b>holdingid</b>
+		</field>
+	</mapping>
+
+	<mapping map-id="quote">
+		<class-a>org.springframework.nanotrader.data.domain.Quote</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.Quote</class-b>
+		
+	</mapping>
+
+	<mapping map-id="portfolioSummary">
+		<class-a>org.springframework.nanotrader.data.domain.PortfolioSummary</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.PortfolioSummary
+		</class-b>
+	</mapping>
+	
+	<mapping map-id="marketSummary">
+		<class-a>org.springframework.nanotrader.data.domain.MarketSummary</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.MarketSummary</class-b>
+	</mapping>
+	
+	<mapping map-id="holdingSummary">
+		<class-a>org.springframework.nanotrader.data.domain.HoldingSummary</class-a>
+		<class-b>org.springframework.nanotrader.service.domain.HoldingSummary</class-b>
+	</mapping>
+	
+</mappings>

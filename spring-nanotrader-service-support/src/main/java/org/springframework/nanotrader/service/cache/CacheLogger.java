@@ -1,0 +1,58 @@
+/*
+ * Copyright 2002-2012 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.springframework.nanotrader.service.cache;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.gemstone.gemfire.cache.EntryEvent;
+import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
+
+/**
+ * @author Brian Dussault
+ *
+ */
+
+public class CacheLogger extends CacheListenerAdapter<Object, Object> {
+
+	private static Logger log = LoggerFactory.getLogger(CacheLogger.class);
+
+	@Override
+	public void afterCreate(EntryEvent<Object, Object> event) {
+		log.debug("CacheLogger.afterCreate(): Added " + messageLog(event) + " to the cache");
+	}
+
+	@Override
+	public void afterDestroy(EntryEvent<Object, Object> event) {
+		log.debug("CacheLogger.afterDestroy(): Removed " + messageLog(event) + " from the cache");
+	}
+
+	@Override
+	public void afterUpdate(EntryEvent<Object, Object> event) {
+		log.debug("CacheLogger.afterUpdate(): Updated " + messageLog(event) + " in the cache");
+	}
+
+	private String messageLog(EntryEvent<Object, Object> event) {
+		Object key = event.getKey();
+		Object value = event.getNewValue();
+
+		if (event.getOperation().isUpdate()) {
+			return "[" + key + "] from [" + event.getOldValue() + "] to ["
+					+ event.getNewValue() + "]";
+		}
+		return "[" + key + "=" + value + "]";
+	}
+}

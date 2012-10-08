@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataModel hibernateIDGeneratorMethodDefault="native" encrypted="false" encoding="UTF-8" elementFormDefault="Qualified" attributeFormDefault="Unqualified" IOversion="3.1.0" version="0.0.1" name="create-holding.dod">
+    <classification name="File">
+        <type>
+            <complexType specifyStructure="true" specialisation="Generic complex" processAsBatch="false" excludeFromDatabase="false" contentModel="Sequence" abstract="false" name="create-holding">
+                <element identifier="false" typeRef="Records/Row" min="1" max="1" name="Row"/>
+            </complexType>
+        </type>
+        <element identifier="false" typeRef="File/create-holding" min="1" max="1" name="create-holding"/>
+    </classification>
+    <classification name="Records">
+        <type>
+            <complexType specifyStructure="true" specialisation="Generic complex" processAsBatch="false" excludeFromDatabase="false" contentModel="Sequence" abstract="false" name="Row">
+                <facet facetType="delimiter">
+                    <value>Infix|true|3a!22</value>
+                </facet>
+                <facet facetType="format_type">
+                    <value>Delimited</value>
+                </facet>
+                <element identifier="false" min="1" max="1" name="String 1">
+                    <type>
+                        <atomicSimpleType baseType="#string" name="String 1">
+                            <facet facetType="min_length">
+<value>0</value>
+                            </facet>
+                        </atomicSimpleType>
+                    </type>
+                </element>
+                <element identifier="false" min="1" max="1" name="String 2">
+                    <type>
+                        <atomicSimpleType baseType="#string" name="String 2">
+                            <facet facetType="min_length">
+<value>0</value>
+                            </facet>
+                        </atomicSimpleType>
+                    </type>
+                </element>
+                <element identifier="false" min="1" max="1" name="String 3">
+                    <type>
+                        <atomicSimpleType baseType="#string" name="String 3">
+                            <facet facetType="min_length">
+<value>0</value>
+                            </facet>
+                        </atomicSimpleType>
+                    </type>
+                </element>
+                <element identifier="false" min="1" max="1" name="String 4">
+                    <type>
+                        <atomicSimpleType baseType="#string" name="String 4">
+                            <facet facetType="min_length">
+<value>0</value>
+                            </facet>
+                        </atomicSimpleType>
+                    </type>
+                </element>
+                <element identifier="false" min="1" max="1" name="String 5">
+                    <type>
+                        <atomicSimpleType baseType="#string" name="String 5">
+                            <facet facetType="min_length">
+<value>0</value>
+                            </facet>
+                        </atomicSimpleType>
+                    </type>
+                </element>
+                <element identifier="false" min="1" max="1" name="String 6">
+                    <type>
+                        <atomicSimpleType baseType="#string" name="String 6">
+                            <facet facetType="min_length">
+<value>0</value>
+                            </facet>
+                        </atomicSimpleType>
+                    </type>
+                </element>
+                <element identifier="false" min="1" max="1" name="String 7">
+                    <type>
+                        <atomicSimpleType baseType="#string" name="String 7">
+                            <facet facetType="min_length">
+<value>0</value>
+                            </facet>
+                        </atomicSimpleType>
+                    </type>
+                </element>
+            </complexType>
+        </type>
+    </classification>
+</dataModel>

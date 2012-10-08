@@ -1,0 +1,1 @@
+{"requestUrl":"http://localhost:8080/spring-nanotrader-services/api/account/1/holdingSummary","requestMethod":"GET","requestBody":"","headers":["API_TOKEN","9e9a90df-a2a8-4016-aca3-91775e79e7de","Content-Type","application/json"]}
