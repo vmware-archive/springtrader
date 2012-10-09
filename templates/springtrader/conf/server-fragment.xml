@@ -2,7 +2,7 @@
 <Server>
     <GlobalNamingResources>
         <add:Resource auth="Container"
-                      driverClassName="${nanotrader.driverClassName}"
+                      driverClassName="${springtrader.driverClassName}"
                       initialSize="10"
                       jmxEnabled="true"
                       logAbandoned="true"
@@ -11,7 +11,7 @@
                       maxWait="-1"
                       minEvictableIdleTimeMillis="30000"
                       name="jdbc/nanodb"
-                      password="${nanotrader.password}"
+                      password="${springtrader.password}"
                       removeAbandoned="true"
                       removeAbandonedTimeout="60"
                       testOnBorrow="true"
@@ -19,9 +19,9 @@
                       testWhileIdle="true"
                       timeBetweenEvictionRunsMillis="5000"
                       type="javax.sql.DataSource"
-                      url="${nanotrader.url}"
-                      username="${nanotrader.username}"
+                      url="${springtrader.url}"
+                      username="${springtrader.username}"
                       validationInterval="30000"
-                      validationQuery="${nanotrader.validationQuery}"/>
+                      validationQuery="${springtrader.validationQuery}"/>
     </GlobalNamingResources>
 </Server>
