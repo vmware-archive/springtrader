@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<Context>
-    <add:Loader loaderClass="com.springsource.insight.collection.tcserver.ltw.TomcatWeavingInsightClassLoader" />
-    <add:Listener className="com.springsource.insight.collection.tcserver.lifecycle.ApplicationLifecycleCollectionListener" />
-    <add:ResourceLink type="javax.sql.DataSource" name="jdbc/nanodb" global="jdbc/nanodb" />       
-</Context>

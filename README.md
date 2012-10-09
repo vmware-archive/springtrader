@@ -1,10 +1,10 @@
-NanoTrader getting started guild is avaiable under github wiki
+SpringTrader getting started guild is avaiable under github wiki
 ==============================================================
 
-* See [Getting Started Guide](https://github.com/SpringSource/nanotrader/wiki/Getting-Started-Guide)
+* See [Getting Started Guide](https://github.com/vFabric/springtrader/wiki/Getting-Started-Guide)
 
 
-Nanotrader now uses Gradle to Build
+SpringTrader uses Gradle to Build
 ===================================
 
 Either re-clone, or shut down STS after deleting projects and remove all Eclipse metadata files (.project, .classpath, .settings) - or see cleanEclipse below - but it's important to do it the first time.
@@ -16,12 +16,12 @@ Commands:
 * ./gradlew eclipse (created metadata files)
 * ./gradlew install - installs jars/poms in local maven repo
 
-Import nanotrader in Springsource Tool Suite (STS):
+Import springtrader in Springsource Tool Suite (STS):
 ---
 
 * Right click in Project Explorer and select Import -> Import...
 * Choose Existing Project into Workspace
-* Set root directory to full path of nanotrader
+* Set root directory to full path of springtrader
 * Select all Projects and click Finish
 * You should see following projects in STS
 
@@ -35,7 +35,7 @@ Import nanotrader in Springsource Tool Suite (STS):
   
 * From STS main menu click Projects -> Build Automatically
 
-Deploy nanotrader to tc Server in STS:
+Deploy springtrader to tc Server in STS:
 ---
 
 * Right click spring-nanotrader-services and select Run As -> Run On Server
