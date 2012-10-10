@@ -1,6 +1,6 @@
 /**
  * Default internationalization object
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @author Kashyap Parikh
  */
 nano.strings = {
@@ -23,7 +23,7 @@ nano.strings = {
     marketValue : 'Market Value',
     totalGainLoss : 'Total Gain/Loss',
     dailyTopGains : 'Daily Top Gains',
-    nanotrader : 'NanoTrader',
+    nanotrader : 'SpringTrader',
     dashboard : 'Dashboard',
     portfolio : 'Portfolio',
     trade : 'Trade',
@@ -45,7 +45,7 @@ nano.strings = {
     password : 'Password',
     forgotPassword : 'Forgot password?',
     registration : 'Registration',
-    dontHaveNanotrader : 'Don\'t have a nanoTrader account yet?',
+    dontHaveNanotrader : 'Don\'t have a SpringTrader account yet?',
     createOneNow : 'Create one now!',
     pleaseRegister : 'Please Register me now',
     price : 'Price',
@@ -78,7 +78,7 @@ nano.strings = {
     register : 'Register',
     alreadyRegistered : 'If you have already registered, please enter your login and password on our login page.',
     visitLoginPage : 'Visit login page',
-    nanoTraderLogin : 'nanoTrader Login',
+    nanoTraderLogin : 'SpringTrader Login',
     emptyFieldError : 'Please complete all the registration fields.',
     newPassword : 'New Password',
     accountProfile : 'Account Profile',

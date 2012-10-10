@@ -1,6 +1,6 @@
 /**
  * View Class for the List Of Quotes
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  * @author Kashyap Parikh
  */
 nano.views.Quotes = Backbone.View.extend({
@@ -15,7 +15,7 @@ nano.views.Quotes = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -26,7 +26,7 @@ nano.views.Quotes = Backbone.View.extend({
 
     /**
      * Renders the List Of Quotes View
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param nano.models.Quotes model: Collection of quotes
      * @return void
      */
@@ -60,7 +60,7 @@ nano.views.Quotes = Backbone.View.extend({
     
     /**
      * Renders the List of orders into the View
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param int page: page of the List of Orders to display
      * @return void
      */
@@ -90,7 +90,7 @@ nano.views.Quotes = Backbone.View.extend({
 
     /**
      * Validates that the input can only receive digits
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return boolean
      */
     validateNumber : function(event){
@@ -99,7 +99,7 @@ nano.views.Quotes = Backbone.View.extend({
 
     /**
      * Buy event
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     buy : function (event) {
@@ -149,7 +149,7 @@ nano.views.Quotes = Backbone.View.extend({
 
     /**
      * Quotes error
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param error: Boolean
      * @return void
      */

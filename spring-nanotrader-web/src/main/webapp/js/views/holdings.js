@@ -1,6 +1,6 @@
 /**
  * View Class for the List Of Holdings
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.views.Holdings = Backbone.View.extend({
 
@@ -16,7 +16,7 @@ nano.views.Holdings = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -27,7 +27,7 @@ nano.views.Holdings = Backbone.View.extend({
 
     /**
      * Renders the List Of Holdings View
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param nano.models.Holdings model: Collection of holdings
      * @param int page: page of the List of Holdings to display
      * @return void
@@ -109,7 +109,7 @@ nano.views.Holdings = Backbone.View.extend({
 
     /**
      * Renders the List of holdings into the View
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     renderRows: function() {
@@ -136,7 +136,7 @@ nano.views.Holdings = Backbone.View.extend({
 
     /**
      * Click event for the pagination buttons: 1, 2, 3... N
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param objet evt: Event Object
      * @return void
      */
@@ -147,7 +147,7 @@ nano.views.Holdings = Backbone.View.extend({
 
     /**
      * Click event for the previous button
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     previousPage : function() {
@@ -159,7 +159,7 @@ nano.views.Holdings = Backbone.View.extend({
 
     /**
      * Click event for the next button
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     nextPage : function(evt) {
@@ -171,7 +171,7 @@ nano.views.Holdings = Backbone.View.extend({
 
     /**
      * Click event for the "sell" buttons: displays the 
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     showModal : function(evt){
@@ -204,7 +204,7 @@ nano.views.Holdings = Backbone.View.extend({
     
     /**
      * Renders a no holdings list message
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     noHoldings : function(){

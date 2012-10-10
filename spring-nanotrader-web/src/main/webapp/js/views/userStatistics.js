@@ -1,12 +1,12 @@
 /**
  * View Class for the User Statistics
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.views.UserStatistics = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * - model: nano.models.Account instance
@@ -18,7 +18,7 @@ nano.views.UserStatistics = Backbone.View.extend({
 
     /**
      * Renders the Portfolio View
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object model: Instance of nano.models.UserStatistics
      * @return void
      */

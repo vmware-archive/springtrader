@@ -1,6 +1,6 @@
 /**
  * View class for the Footer
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.views.Footer = Backbone.View.extend({
     
@@ -15,7 +15,7 @@ nano.views.Footer = Backbone.View.extend({
     
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -48,7 +48,7 @@ nano.views.Footer = Backbone.View.extend({
 
     /**
      * Contact link click event
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     contact: function() {
@@ -57,7 +57,7 @@ nano.views.Footer = Backbone.View.extend({
 
     /**
      * Help link click event
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     help: function() {

@@ -1,12 +1,12 @@
 /**
  * View Class for the Portfolio Summary
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.views.PortfolioSummary = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * - model: nano.models.PortfolioSummary instance
@@ -44,7 +44,7 @@ nano.views.PortfolioSummary = Backbone.View.extend({
 
     /**
      * Renders the Portfolio Summary View
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object model: Instance of nano.models.PortfolioSummary
      * @return void
      */

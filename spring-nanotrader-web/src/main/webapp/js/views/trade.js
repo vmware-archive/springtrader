@@ -1,6 +1,6 @@
 /**
  * View Class for trade
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  */
 nano.views.Trade = Backbone.View.extend({
     
@@ -14,7 +14,7 @@ nano.views.Trade = Backbone.View.extend({
     
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -25,7 +25,7 @@ nano.views.Trade = Backbone.View.extend({
 
     /**
      * Renders the Trade View
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param Object orders: Instance of nano.models.Orders
      * @return void
      */
@@ -69,7 +69,7 @@ nano.views.Trade = Backbone.View.extend({
 
     /**
      * check enter key on IE7+
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      */
     checkEnter : function(event) {
         if (event.which == 13) {
@@ -80,7 +80,7 @@ nano.views.Trade = Backbone.View.extend({
     
     /**
      * Quote event
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     quote : function (event){
@@ -110,7 +110,7 @@ nano.views.Trade = Backbone.View.extend({
 
     /**
      * Trade error
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param error: Boolean
      * @return void
      */

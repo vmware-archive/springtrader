@@ -1,6 +1,6 @@
 /**
  * View Class for the List Of Orders
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  */
 nano.views.Orders = Backbone.View.extend({
 
@@ -16,7 +16,7 @@ nano.views.Orders = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -27,7 +27,7 @@ nano.views.Orders = Backbone.View.extend({
 
     /**
      * Renders the List Of Orders View
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param nano.models.Orders model: Collection of orders
      * @param int page: page of the List of Orders to display
      * @return void
@@ -145,7 +145,7 @@ nano.views.Orders = Backbone.View.extend({
 
     /**
      * Renders the List of orders into the View
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param int page: page of the List of Orders to display
      * @return void
      */
@@ -175,7 +175,7 @@ nano.views.Orders = Backbone.View.extend({
 
     /**
      * Click event for the pagination buttons: 1, 2, 3... N
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param objet event: Event Object
      * @return void
      */
@@ -186,7 +186,7 @@ nano.views.Orders = Backbone.View.extend({
 
     /**
      * Click event for the previous button
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     previousPage : function() {
@@ -197,7 +197,7 @@ nano.views.Orders = Backbone.View.extend({
 
     /**
      * Click event for the next button
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     nextPage : function(event) {
@@ -208,7 +208,7 @@ nano.views.Orders = Backbone.View.extend({
     
    /**
     * Click event for the toggle button
-    * @author Jean Chassoul <jean.chassoul@lognllc.com>
+    * @author Jean Chassoul <jean.chassoul>
     * @return void
     */
     toggle : function(event){
@@ -219,7 +219,7 @@ nano.views.Orders = Backbone.View.extend({
     
     /**
      * Renders a no orders list message
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     noOrders : function() {

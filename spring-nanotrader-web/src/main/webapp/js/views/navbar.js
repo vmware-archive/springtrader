@@ -1,6 +1,6 @@
 /**
  * View Class for the Navbar
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @author Kashyap Parikh
  */
 nano.views.Navbar = Backbone.View.extend({
@@ -19,7 +19,7 @@ nano.views.Navbar = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -46,7 +46,7 @@ nano.views.Navbar = Backbone.View.extend({
 
     /**
      * Renders the Nav Bar View
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
      render : function(hash) {
@@ -107,7 +107,7 @@ nano.views.Navbar = Backbone.View.extend({
 
     /**
      * Logout Click Event
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     logout : function() {
@@ -117,7 +117,7 @@ nano.views.Navbar = Backbone.View.extend({
 
     /**
      * Navigation Link Click Event
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     navigationClick : function(evt) {
@@ -172,7 +172,7 @@ nano.views.Navbar = Backbone.View.extend({
     
     /**
      * Profile Click Event
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     profile : function() {
@@ -185,7 +185,7 @@ nano.views.Navbar = Backbone.View.extend({
     
     /**
      * Help Click Event
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     help : function() {

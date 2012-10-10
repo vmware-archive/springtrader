@@ -1,12 +1,12 @@
 /**
  * View Class for the Positions
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
  nano.views.Positions = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -17,7 +17,7 @@
 
     /**
      * Renders the Positions View
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object model: Instance of nano.models.holdingSummary
      * @return void
      */

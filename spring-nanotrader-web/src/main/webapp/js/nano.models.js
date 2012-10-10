@@ -5,7 +5,7 @@
  * Javascript Date() objects... This way, the models used later won't have to deal 
  * with the problem of parsing the response into Date Objects that they can use.
  * We're also including the Nanaotrader headers here so we don't have to add them on every call.
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @author Kashyap Parikh
  */
 Backbone._sync_orig = Backbone.sync;
@@ -57,7 +57,7 @@ Backbone.sync = function(method, model, options)
 /**
  * Opposite to the Backbone.sycn function, we need to rewrite the function that will parse the
  * Object with Javascript Date() objects into the format that the Nanotrader API is expecting
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 Backbone.Model.prototype.toJSON = function()
 {
@@ -90,7 +90,7 @@ Backbone.Model.prototype.toJSON = function()
 
 /**
  * Model to interact with the Account Object
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.models.Account = Backbone.Model.extend({
     idAttribute: 'accountid',
@@ -105,8 +105,8 @@ nano.models.Contact = Backbone.Model.extend({
 });
 /**
  * Model to interact with the Account Profile Object
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.models.AccountProfile = Backbone.Model.extend({
     idAttribute: 'profileid',
@@ -165,7 +165,7 @@ nano.models.AccountProfile = Backbone.Model.extend({
 
 /**
  * Model to interact with the Account Profile Object
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.models.PortfolioSummary = Backbone.Model.extend({
     initialize: function(options) {
@@ -184,7 +184,7 @@ nano.models.PortfolioSummary = Backbone.Model.extend({
 
 /**
  * Model to interact with the Market Summary Object (Not really a REST based Object, but it works with Backbone.js)
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.models.MarketSummary = Backbone.Model.extend({
     urlRoot : nano.conf.urls.marketSummary
@@ -196,7 +196,7 @@ nano.models.RecreateData = Backbone.Model.extend({
 
 /**
  * Model to interact with the Holding Summary Object (Not really a REST based Object, but it works with Backbone.js)
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.models.HoldingSummary = Backbone.Model.extend({
     initialize: function(options) {
@@ -210,7 +210,7 @@ nano.models.HoldingSummary = Backbone.Model.extend({
 
 /**
  * Model to interact with the Holding Object
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.models.Holding = Backbone.Model.extend({
     idAttribute: 'holdingid'
@@ -219,7 +219,7 @@ nano.models.Holding = Backbone.Model.extend({
 
 /**
  * Model to interact with the Order Object
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  */
 nano.models.Order = Backbone.Model.extend({
     idAttribute: 'orderid',
@@ -253,7 +253,7 @@ nano.models.Order = Backbone.Model.extend({
 
 /**
  * Model to interact with the Quote Object
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  */
 nano.models.Quote = Backbone.Model.extend({
     idAttribute: 'quoteid',
@@ -281,7 +281,7 @@ nano.models.Quotes = Backbone.Collection.extend({
 
 /**
  * Collection to interact with the Holdings Collection (list of Holding Objects)
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.models.Holdings = Backbone.Collection.extend({
 
@@ -296,7 +296,7 @@ nano.models.Holdings = Backbone.Collection.extend({
 
     /**
      * Builds the url to fetch the Collection
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return string: Url for the Holdings Collection
      */
     url: function() {
@@ -305,14 +305,14 @@ nano.models.Holdings = Backbone.Collection.extend({
 
    /**
     * Overwrites the traditional Backbone.sync to include pagination for the collection
-    * @author Carlos Soto <carlos.soto@lognllc.com>
+    * @author Carlos Soto <carlos.soto>
     */
     sync: nano.utils.collectionSync,
 
    /**
     * Called by Backbone whenever a collection's models are returned by the server, in fetch. The function is 
     * passed the raw response object, and should return the array of model attributes to be added to the collection
-    * @author Carlos Soto <carlos.soto@lognllc.com>
+    * @author Carlos Soto <carlos.soto>
     * @param Object response: whatever comes from the server
     * @return array of that for the collection
     */
@@ -321,7 +321,7 @@ nano.models.Holdings = Backbone.Collection.extend({
 
 /**
  * Collection to interact with the Orders Collection (list of Order Objects)
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  */
 nano.models.Orders = Backbone.Collection.extend({
     model : nano.models.Order,
@@ -334,7 +334,7 @@ nano.models.Orders = Backbone.Collection.extend({
 
     /**
      * Builds the url to fetch the Collection
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return string: Url for the Orders Collection
      */
     url: function() {
@@ -344,14 +344,14 @@ nano.models.Orders = Backbone.Collection.extend({
 
    /**
     * Overwrites the traditional Backbone.sync to include pagination for the collection
-    * @author Carlos Soto <carlos.soto@lognllc.com>
+    * @author Carlos Soto <carlos.soto>
     */
     sync: nano.utils.collectionSync,
 
    /**
     * Called by Backbone whenever a collection's models are returned by the server, in fetch. The function is 
     * passed the raw response object, and should return the array of model attributes to be added to the collection
-    * @author Carlos Soto <carlos.soto@lognllc.com>
+    * @author Carlos Soto <carlos.soto>
     * @param Object response: whatever comes from the server
     * @return array of that for the collection
     */

@@ -1,6 +1,6 @@
 /**
  * Default Configuration Object
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.conf = {
     device : 'computer',                            // Device rendering the application (changes to "mobile" depending on the user agent)
@@ -21,7 +21,7 @@ nano.conf = {
 };
 /**
  * API urls
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.conf.urls = {
     logout : nano.conf.urlRoot + 'logout',
@@ -78,7 +78,7 @@ nano.conf.tpls = {
 
 /**
  * Hash tags to use on the code for the different application routes of the Backbone.Router
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.conf.hash = {
     login  : '#login',

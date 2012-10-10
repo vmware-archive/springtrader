@@ -1,6 +1,6 @@
 /**
  * View Class for the Login
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.views.Login = Backbone.View.extend({
 
@@ -14,7 +14,7 @@ nano.views.Login = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -25,7 +25,7 @@ nano.views.Login = Backbone.View.extend({
 
     /**
      * Renders the Login View
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
      * @return void
      */
@@ -46,7 +46,7 @@ nano.views.Login = Backbone.View.extend({
 
     /**
      * Registration event
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     registration : function() {
@@ -55,7 +55,7 @@ nano.views.Login = Backbone.View.extend({
 
     /**
      * Login event
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @return void
      */
     login : function(event){

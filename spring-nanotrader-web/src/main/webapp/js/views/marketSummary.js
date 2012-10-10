@@ -1,12 +1,12 @@
 /**
  * View Class for the Market Summary
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 nano.views.MarketSummary = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * - model: nano.models.MarketSummary instance
@@ -18,7 +18,7 @@ nano.views.MarketSummary = Backbone.View.extend({
 
     /**
      * Renders the Market Summary View
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object model: Instance of nano.models.MarketSummary
      * @return void
      */
@@ -62,7 +62,7 @@ nano.views.MarketSummary = Backbone.View.extend({
 
     /**
      * Updates the Market Summary View with a new model
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object model: Instance of nano.models.MarketSummary
      * @return void
      */
