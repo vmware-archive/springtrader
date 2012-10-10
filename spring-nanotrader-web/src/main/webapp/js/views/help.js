@@ -1,6 +1,6 @@
 /**
  * Help View
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  * @author Kashyap Parikh
  */
 nano.views.Help = Backbone.View.extend({
@@ -16,7 +16,7 @@ nano.views.Help = Backbone.View.extend({
     
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -27,7 +27,7 @@ nano.views.Help = Backbone.View.extend({
 
     /**
      * Renders the Help View
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     render: function() {

@@ -1,6 +1,6 @@
 /**
  * View Class for the Left Navbar
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  */
 nano.views.Leftnavbar = Backbone.View.extend({
 
@@ -16,8 +16,8 @@ nano.views.Leftnavbar = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
-     * @author Jean Chassoul <jean.chassooul@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
+     * @author Jean Chassoul <jean.chassooul>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -28,7 +28,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
 
     /**
      * Renders the Left Nav Bar View
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
      render : function(data) {
@@ -51,7 +51,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
     
     /**
      * Profile Click Event
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     profile : function() {
@@ -60,7 +60,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
 
     /**
      * Overview Click Event
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     overview : function() {
@@ -69,7 +69,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
     
     /**
      * Help Click Event
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     help : function() {

@@ -1,13 +1,13 @@
 /** 
  * Router class for the application: http://documentcloud.github.com/backbone/#Router
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @author Kashyap Parikh
  */
 nano.Router = Backbone.Router.extend({
 
     /** 
      * Maps the functions to the urls
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      */
     routes: {
         "help"          : "help",    // #help

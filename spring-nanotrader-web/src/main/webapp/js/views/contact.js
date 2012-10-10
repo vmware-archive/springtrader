@@ -1,6 +1,6 @@
 /**
  * View Class for Contact
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  */
 nano.views.Contact = Backbone.View.extend({
     
@@ -14,7 +14,7 @@ nano.views.Contact = Backbone.View.extend({
     
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto@lognllc.com>
+     * @author Carlos Soto <carlos.soto>
      * @param Object options:
      * - el: selector for the container
      * @return void
@@ -25,7 +25,7 @@ nano.views.Contact = Backbone.View.extend({
 
     /**
      * Renders the Contact View
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
      * @return void
      */
@@ -42,7 +42,7 @@ nano.views.Contact = Backbone.View.extend({
     
     /**
      * Send event
-     * @author Jean Chassoul <jean.chassoul@lognllc.com>
+     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
     send : function (event){

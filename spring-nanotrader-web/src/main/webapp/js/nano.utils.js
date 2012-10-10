@@ -1,6 +1,6 @@
 /**
  * Nano namespace object
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @author Kashyap Parikh
  */
 var nano = {
@@ -58,7 +58,7 @@ nano.utils.toRad = function(Value)
 
 /**
 * Checks on the strings object for the specified key. If the value doesn't exist the key is returned
-* @author Carlos Soto <carlos.soto@lognllc.com>
+* @author Carlos Soto <carlos.soto>
 * @param string key for the translation requested
 * @return mixed The translated value for that key
 */
@@ -115,7 +115,7 @@ nano.utils.setViewPrefCookie = function(value) {
 
 /**
  * Fetches the session from it's container (cookie)
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @return Object: Session data
  */
 nano.utils.getSession = function() {
@@ -131,7 +131,7 @@ nano.utils.getSession = function() {
 
 /**
  * Tells whether the session has been created or not.
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @return boolean
  */
 nano.utils.loggedIn = function() {
@@ -142,7 +142,7 @@ nano.utils.loggedIn = function() {
 
 /**
  * Logs the user into the system
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @param string username: username to log in
  * @param string password: user's password
  * @param object callbacks: object with success and error callback
@@ -185,7 +185,7 @@ nano.utils.login = function(username, password, callbacks) {
 
 /**
  * Logouts the user (deletes the cookie)
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @return void
  */
 nano.utils.logout = function(callbacks){
@@ -219,7 +219,7 @@ nano.utils.logout = function(callbacks){
 
 /**
  * Builds the HTTP headers array for the api calls. Includes the session token.
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @return Object
  */
 nano.utils.getHttpHeaders = function(){
@@ -236,7 +236,7 @@ nano.utils.getHttpHeaders = function(){
 
 /**
  * Hides all of the different UI components fon the User except from the Footer and the Market Summary
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @param boolean showMarketSummary: tells whether to show the Market Summary section or not
  * @return Object
  */
@@ -261,7 +261,7 @@ nano.utils.hideAll = function(showMarketSummary) {
 
 /**
  * Rounds up a number. Default decimals are two.
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @return Object
  */
 nano.utils.round = function (number, decimals) {
@@ -275,7 +275,7 @@ nano.utils.round = function (number, decimals) {
 
 /**
  * Fetches an html template synchronously
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @return Object
  */
 nano.utils.getTemplate = function(url){
@@ -291,7 +291,7 @@ nano.utils.getTemplate = function(url){
 
 /**
  * Redirects to a different url/application widget
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @param string url: new location to go to
  * @return Object
  */
@@ -301,7 +301,7 @@ nano.utils.goTo = function(url) {
 
 /**
  * Renders a pie chart on the desired html id
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @param string htmlId: id of the container (div) for the pie chart
  * @param array data: info to be rendered, array of array pairs of label and value
  * @return Object: plotter object.
@@ -370,7 +370,7 @@ nano.utils.printCurrency = function(amount, decimalDigits)
 
 /**
  * Prints a Date Javascript Objet into a nicer format
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @param Object Date: Javascript Date object to print
  * @param format: Date format: http://code.google.com/p/datejs/wiki/FormatSpecifiers
  * @return Object
@@ -388,7 +388,7 @@ nano.utils.printDate = function(date, format) {
 
 
 /**
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * Handles API errors
  * @param int amount: number to add the currency to
  * @return Object
@@ -409,7 +409,7 @@ nano.utils.onApiError = function(model, error){
 
 /**
  * Sets the right collapsable properties to a view's content
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @param object view: Backbone View Object
  * @return void
  */
@@ -425,7 +425,7 @@ nano.utils.setCollapsable = function(view) {
 
 /**
  * Tells whether the viewer is using a mobile device or not
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @return boolean
  */
 nano.utils.isMobile = function() {
@@ -434,7 +434,7 @@ nano.utils.isMobile = function() {
 
 /**
  * Sync function to be used by the Backbone.js Collections in order to include pagination of the results
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @param string method: HTTP method
  * @param object model: the model calling the request
  * @param object options: request options
@@ -454,7 +454,7 @@ nano.utils.collectionSync = function(method, model, options) {
 
 /**
  * Sync function to be used by the Backbone.js Collections in order to parse the response from the fetch calls
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @param object response: result from the server
  * @return object
  */
@@ -467,7 +467,7 @@ nano.utils.collectionParse = function(response) {
 
 /**
  * Validates that the input can only receive digits
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  * @return boolean
  */
 nano.utils.validateNumber = function(event) {
@@ -657,7 +657,7 @@ nano.utils.killSqlFireServer = function() {
 
 /**
  * Function to calculate and get the start and end point of pagination results
- * @author Jean Chassoul <jean.chassoul@lognllc.com>
+ * @author Jean Chassoul <jean.chassoul>
  * @return a js object with the start and end pagination interval
  */
 nano.utils.getPaginationInterval = function(currentPage, pageCount) {
@@ -689,7 +689,7 @@ nano.utils.resetForm = function($form){
 
 /**
  * Aliases for the functions used in the views to make them shorter
- * @author Carlos Soto <carlos.soto@lognllc.com>
+ * @author Carlos Soto <carlos.soto>
  */
 var translate = nano.utils.translate;
 var printCurrency = nano.utils.printCurrency;
