@@ -23,14 +23,13 @@ allprojects {
 	group = 'org.springframework.nanotrader'
 
 	repositories {
-		maven { url  'http://repo.springsource.org' }
-		maven { url  'http://dist.gemstone.com/maven/release' }
+		flatDir dirs: ["${gradle.gradleHomeDir}/lib"]
+                maven { url  'http://repo.springsource.org' }
 		maven { url  'http://maven.springframework.org/release' }
 		maven { url  'http://repo.springsource.org/libs-milestone' }
 		maven { url  'http://spring-roo-repository.springsource.org/release' }
 		mavenCentral()
 		maven { url 'http://maven.springframework.org/snapshot' }
-	 	flatDir dirs: ["${gradle.gradleHomeDir}/lib"]
 	}
 }
 
@@ -160,7 +159,7 @@ project('spring-nanotrader-service-support') {
 		compile "net.sf.dozer:dozer:$dozerVersion"
 		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 		compile  "joda-time:joda-time:1.6"
-		compile "com.gemstone.gemfire:gemfire:6.6.2"	
+		compile "com.gemstone.gemfire:gemfire:6.6.3"	
 		compile  "org.springframework.data:spring-data-gemfire:1.1.1.RELEASE"
 	        compile "net.schmizz:sshj:0.8.1"
         }
@@ -182,8 +181,8 @@ project('spring-nanotrader-data') {
 		compile "org.hibernate:hibernate-core:3.6.8.Final"
 		compile "org.hibernate:hibernate-entitymanager:3.6.8.Final"
 		compile "postgresql:postgresql:9.0-801.jdbc3"
-		compile "com.vmware.sqlfire:sqlfireclient:1.0.2"
-		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
+		compile files("../lib/sqlfireclient-1.0.3.jar")
+                compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 		compile "com.h2database:h2:$h2Version"
 
 	}
@@ -234,7 +233,7 @@ project('tools') {
 	    compile 'net.sf.opencsv:opencsv:2.0'
 	    compile 'postgresql:postgresql:9.1-901.jdbc4'
 	    compile 'org.apache.ant:ant:1.8.3'
-	    compile 'com.vmware.sqlfire:sqlfireclient:1.0.2'
+            compile files("../lib/sqlfireclient-1.0.3.jar")
 	}
 }
 
@@ -307,33 +306,6 @@ project('spring-nanotrader-asynch-services') {
 		compile "org.aspectj:aspectjweaver:$aspectjVersion"
 
 	}
-        task release(dependsOn: assemble) << {
-            copy {
-                description "Copy artifacts to $rootDir/dist"
-                from war.archivePath
-                into file("$rootDir/dist") 
-            }
-        }
-}
-
-
-project('vfabric-hqapi-services') {
-        apply plugin: 'war'
-        description = 'vFabric HQApi Integration'
-
-        dependencies {
-                compile "org.springframework:spring-webmvc:$springVersion"
-                providedCompile  ("javax.servlet:servlet-api:$servletApiVersion")
-                compile "cglib:cglib-nodep:$cglibVersion"
-                //compile "org.aspectj:aspectjweaver:$aspectjVersion"
-                compile "org.springframework:spring-aspects:$springVersion"
-                compile files("../lib/hqapi1-5.0.0.jar")
-                compile "org.apache.httpcomponents:httpclient:4.1.1"
-                compile "org.apache.httpcomponents:httpmime:4.1.1"
-                compile "commons-logging:commons-logging:1.0.4"
-                compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
-                compile "log4j:log4j:1.2.14"
-        }
         task release(dependsOn: assemble) << {
             copy {
                 description "Copy artifacts to $rootDir/dist"
