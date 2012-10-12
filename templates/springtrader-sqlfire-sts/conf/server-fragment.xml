@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Server>
+    <GlobalNamingResources>
+   	<add:Resource auth="Container" 
+                      driverClassName="com.vmware.sqlfire.jdbc.ClientDriver" 
+                      initialSize="10" 
+                      jmxEnabled="true" 
+                      logAbandoned="true" 
+                      maxActive="20" 
+                      maxIdle="10" 
+                      maxWait="-1" 
+                      minEvictableIdleTimeMillis="30000" 
+                      name="jdbc/nanodb" 
+                      password="nanotrader" 
+                      removeAbandoned="true" 
+                      removeAbandonedTimeout="60" 
+                      testOnBorrow="true" 
+                      testOnReturn="false" 
+                      testWhileIdle="true" 
+                      timeBetweenEvictionRunsMillis="5000" 
+                      type="javax.sql.DataSource" 
+                      url="jdbc:sqlfire://nanodbserver:1527/" 
+                      username="nanotrader"
+                      validationInterval="30000" 
+                      validationQuery="select 1 from nanotrader.hibernate_sequences where sequence_name='ACCOUNT'"/>
+    </GlobalNamingResources>
+</Server>
