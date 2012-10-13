@@ -1,4 +1,9 @@
-By downloading, installing, or using the Spring Trader software, you (the individual or legal entity) agree to be bound by the terms of the below license agreement
+
+
+License Agreement
+===================================
+By downloading, installing, or using the Spring Trader software, you (the individual or legal entity) agree to be bound by the terms of the license agreement at the following URL.
+[License Agreement](https://github.com/vFabric/springtrader/raw/master/license-agreement.pdf)
 
 SpringTrader getting started guild is avaiable under github wiki
 ==============================================================
