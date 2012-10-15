@@ -11,6 +11,7 @@ public class ChaosFunction {
 	
 
 	public static void killProcess() {
-		MonkeyUtils.killProcess();
+		System.out.println("Chaos Function: Not yet implemented");
+		//MonkeyUtils.killProcess();
 	}
 }
