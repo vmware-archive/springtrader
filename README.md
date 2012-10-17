@@ -1,6 +1,5 @@
 
-
-SpringTrader getting started guild is avaiable under github wiki
+SpringTrader getting started guide is avaiable under github wiki
 ==============================================================
 By downloading, installing, or using the Spring Trader software, you (the individual or legal entity) agree to be bound by the terms of the following license agreement:
 [License Agreement](https://github.com/vFabric/springtrader/raw/master/license-agreement.pdf)
