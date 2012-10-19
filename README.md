@@ -3,9 +3,9 @@ SpringTrader getting started guide is avaiable under github wiki
 By downloading, installing, or using the Spring Trader software, you (the individual or legal entity) agree to be bound by the terms of the following license agreement:
 [License Agreement](https://github.com/vFabric/springtrader/raw/master/license-agreement.pdf)
 
-![Spring Trader Screenshot](https://raw.github.com/vFabric/springtrader/master/wiki/springtrader.png)
 * See [Getting Started Guide](https://github.com/vFabric/springtrader/wiki/Getting-Started-Guide)
 
+![Spring Trader Screenshot](https://raw.github.com/vFabric/springtrader/master/wiki/springtrader.png)
 
 SpringTrader uses Gradle to Build
 ===================================
