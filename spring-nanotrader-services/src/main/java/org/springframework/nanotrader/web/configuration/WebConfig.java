@@ -46,7 +46,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 @Configuration
 @ComponentScan(basePackages = { "org.springframework.nanotrader.web" })
-@Import (ServiceConfig.class)
+@Import(ServiceConfig.class)
 public class WebConfig extends WebMvcConfigurationSupport {
 
 	@Override
@@ -59,9 +59,12 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		mappingJacksonHttpMessageConverter.getObjectMapper().configure(
 				Feature.WRITE_DATES_AS_TIMESTAMPS, true);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		// There is no need to set the timezone as Jackson uses GMT and not the local time zone (which is exactly what you want)
-		// Note: While SimpleDateFormat is not threadsafe, Jackson Marshaller's StdSerializerProvider clones the configured formatter for each thread
-		mappingJacksonHttpMessageConverter.getObjectMapper().setDateFormat(format);
+		// There is no need to set the timezone as Jackson uses GMT and not the
+		// local time zone (which is exactly what you want)
+		// Note: While SimpleDateFormat is not threadsafe, Jackson Marshaller's
+		// StdSerializerProvider clones the configured formatter for each thread
+		mappingJacksonHttpMessageConverter.getObjectMapper().setDateFormat(
+				format);
 		mappingJacksonHttpMessageConverter.getObjectMapper().configure(
 				Feature.INDENT_OUTPUT, true);
 		// mappingJacksonHttpMessageConverter.getObjectMapper().getSerializationConfig().setSerializationInclusion(Inclusion.NON_NULL);

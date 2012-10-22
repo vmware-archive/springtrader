@@ -24,6 +24,7 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.nanotrader.service.domain.PerfTestData;
 import org.springframework.nanotrader.service.domain.ProgressData;
 import org.springframework.nanotrader.service.domain.RecreateData;
@@ -32,7 +33,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
@@ -59,11 +59,12 @@ public class AdminController extends BaseController {
 	 * @return ProgressData
 	 */
 	@RequestMapping(value = "/admin/userdata", method = RequestMethod.GET)
-	@ResponseBody
-	public ProgressData getProgress() {
+	public ResponseEntity<ProgressData> getProgress() {
 		ProgressData progress = new ProgressData();
 		progress.setUsercount(this.getAdminServiceFacade().getProgressCount());
-		return progress;
+		return new ResponseEntity<ProgressData>(progress, getNoCacheHeaders(),
+				HttpStatus.OK);
+
 	}
 
 	/**
