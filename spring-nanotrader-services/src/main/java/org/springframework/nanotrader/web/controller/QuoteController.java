@@ -16,6 +16,7 @@
 package org.springframework.nanotrader.web.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.nanotrader.service.domain.CollectionResult;
 import org.springframework.nanotrader.service.domain.Quote;
 import org.springframework.stereotype.Controller;
@@ -34,12 +35,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class QuoteController extends BaseController {
 	@RequestMapping(value = "/quote/{symbol}", method = RequestMethod.GET)
-	@ResponseBody
-	public Quote findQuote(@PathVariable("symbol") final String symbol) {
-		Quote responseQuote = getTradingServiceFacade().findQuoteBySymbol(symbol);
-		return responseQuote;
+	public ResponseEntity<Quote> findQuote(
+			@PathVariable("symbol") final String symbol) {
+		Quote responseQuote = getTradingServiceFacade().findQuoteBySymbol(
+				symbol);
+		return new ResponseEntity<Quote>(responseQuote, getNoCacheHeaders(),
+				HttpStatus.OK);
+
 	}
-	
+
 	@RequestMapping(value = "/quotes", method = RequestMethod.GET)
 	@ResponseBody
 	public CollectionResult findQuotes() {
@@ -47,20 +51,20 @@ public class QuoteController extends BaseController {
 	}
 
 	@RequestMapping(value = "/quote", method = RequestMethod.POST)
-	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
 	public void post() {
 	}
-	
+
 	@RequestMapping(value = "/quote/{symbol}", method = RequestMethod.PUT)
-	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
 	public void put() {
-		
+
 	}
-	
+
 	@RequestMapping(value = "/quote/{symbol}", method = RequestMethod.DELETE)
-	@ResponseStatus( HttpStatus.METHOD_NOT_ALLOWED )
+	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
 	public void delete() {
-		
+
 	}
-	
+
 }
