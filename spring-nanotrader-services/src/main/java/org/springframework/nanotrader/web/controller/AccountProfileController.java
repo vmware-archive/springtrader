@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -38,11 +37,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class AccountProfileController extends BaseController {
 
 	@RequestMapping(value = "/accountProfile/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public Accountprofile find(@PathVariable("id") final Integer id) {
+	public  ResponseEntity<Accountprofile> find(@PathVariable("id") final Integer id) {
 		this.getSecurityUtil().checkAccountProfile(id);
 		Accountprofile accountProfile = getTradingServiceFacade().findAccountProfile(id);
-		return accountProfile;
+		return new ResponseEntity<Accountprofile>(accountProfile, getNoCacheHeaders(),
+				HttpStatus.OK);
+		
 	}
 	
 	@RequestMapping(value = "/accountProfile", method = RequestMethod.POST)
