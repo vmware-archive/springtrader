@@ -3,6 +3,8 @@ description = 'Spring Nanotrader'
 apply plugin: 'base'
 apply plugin: 'idea'
 
+
+
 buildscript {
 
    repositories {
@@ -21,7 +23,7 @@ buildscript {
 
 allprojects {
 	group = 'org.springframework.nanotrader'
-
+	
 	repositories {
 		flatDir dirs: ["${gradle.gradleHomeDir}/lib"]
                 maven { url  'http://repo.springsource.org' }
@@ -33,6 +35,7 @@ allprojects {
 	}
 }
 
+
 subprojects { subproject ->
 
 	apply plugin: 'java'
@@ -40,11 +43,10 @@ subprojects { subproject ->
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
 	apply plugin:'eclipse-wtp'
-
+	
 	// ensure JDK 6 compatibility (GRADLE-18; INT-1578)
 	sourceCompatibility=1.6
 	targetCompatibility=1.6
-
 	ext.aspectjVersion = '1.6.12.M2'
 	ext.cglibVersion = '2.2'
 	ext.commonsNetVersion = '3.0.1'
@@ -110,8 +112,7 @@ subprojects { subproject ->
 	}
 
 	// enable all compiler warnings; individual projects may customize further
-	ext.xLintArg = '-Xlint:all'
-	[compileJava, compileTestJava]*.options*.compilerArgs = [xLintArg]
+	[compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:-options']
 
 	test {
 		// suppress all console output during testing unless running `gradle -i`
@@ -428,6 +429,10 @@ task wrapper(type: Wrapper) {
 	jarFile = '.wrapper/gradle-wrapper.jar'
 }
 
+
+
+    
+    
 def customizePom(def pom, def gradleProject) {
 	pom.whenConfigured { generatedPom ->
 		// respect 'optional' and 'provided' dependencies
