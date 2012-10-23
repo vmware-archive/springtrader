@@ -18,7 +18,6 @@ package org.springframework.nanotrader.web.security;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -64,7 +63,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 		
 		@SuppressWarnings("rawtypes")
-		Set<Map> accounts = accountProfile.getAccounts();
+		List<Map> accounts = accountProfile.getAccounts();
 		Integer accountId = null;
 		for(Map<?, ?> account: accounts ) { 
 			accountId = (Integer)account.get("accountid");

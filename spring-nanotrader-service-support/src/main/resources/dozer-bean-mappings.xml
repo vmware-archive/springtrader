@@ -30,6 +30,7 @@
 		<class-a map-null="false">org.springframework.nanotrader.data.domain.Account
 		</class-a>
 		<class-b map-null="false">java.util.Map</class-b>
+
 		<field-exclude>
 			<a>orders</a>
 			<b>orders</b>
