@@ -7,7 +7,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
     /**
      * Bind the events functions to the different HTML elements
      */
-    events : {
+    events: {
         'click #lnb-profile' : 'profile',
         'click #lnb-overview' : 'overview',
         'click #lnb-admin' : 'admin',
@@ -16,13 +16,13 @@ nano.views.Leftnavbar = Backbone.View.extend({
 
     /**
      * Class constructor
-     * @author Carlos Soto <carlos.soto>
      * @author Jean Chassoul <jean.chassooul>
      * @param Object options:
      * - el: selector for the container
      * @return void
      */
-    initialize : function(options) {
+    initialize: function (options) {
+        'use strict';
         nano.containers.leftnavbar = this.$el;
     },
 
@@ -31,22 +31,23 @@ nano.views.Leftnavbar = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
-     render : function(data) {
-
-        if (!data){
-            var data = {
+     render: function (data) {
+        'use strict';
+        if (!data) {
+            data = {
                 fullname : false,
                 email : false
             }
         }
         
-        this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.leftnavbar))(data));
-        
+        this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.leftnavbar))(data));        
         this.$el.show();
-        if(nano.session.username!="admin")
+        
+        if (nano.session.username !== "admin") {
         	$('#lnb-admin').remove();
-        else
+        } else {
         	$('#lnb-admin').show();
+        }
     },
     
     /**
@@ -54,7 +55,8 @@ nano.views.Leftnavbar = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
-    profile : function() {
+    profile: function () {
+        'use strict';
         nano.utils.goTo( nano.conf.hash.profile );
     },
 
@@ -63,7 +65,8 @@ nano.views.Leftnavbar = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
-    overview : function() {
+    overview: function () {
+        'use strict';
         nano.utils.goTo( nano.conf.hash.overview );
     },
     
@@ -72,7 +75,8 @@ nano.views.Leftnavbar = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
-    help : function() {
+    help: function () {
+        'use strict';
         nano.utils.goTo( nano.conf.hash.help );
     },
 
@@ -80,7 +84,8 @@ nano.views.Leftnavbar = Backbone.View.extend({
      * Admin Click Event
      * @return void
      */
-    admin : function() {
+    admin: function () {
+        'use strict';
         nano.utils.goTo( nano.conf.hash.admin );
     }
 });

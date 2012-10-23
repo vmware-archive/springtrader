@@ -4,13 +4,13 @@
  * @author Kashyap Parikh
  */
 nano.views.Quotes = Backbone.View.extend({
-
     /**
      * Bind the events functions to the different HTML elements
      */
-    events : {
-        'click #buyBtn' : 'buy',
-        'keypress [type=number]' : 'checkEnter'
+    events: {
+        'click #buyBtn': 'buy',
+        'keypress [type=number]': 'checkEnter',
+        'click #getQuoteBtn': 'getQuote'
     },
 
     /**
@@ -20,131 +20,109 @@ nano.views.Quotes = Backbone.View.extend({
      * - el: selector for the container
      * @return void
      */
-    initialize : function(options) {
+    initialize: function (options) {
         nano.containers.quotes = this.$el;
     },
 
     /**
      * Renders the List Of Quotes View
      * @author Jean Chassoul <jean.chassoul>
-     * @param nano.models.Quotes model: Collection of quotes
+     * @param nano.models.Quotes model: Quote model
      * @return void
      */
-    render: function(model, symbol) {
-        if (model){
-            this.model = model;
-        }
+    render: function (model) {
+        'use strict';
+        var data = {
+            quoteLength: null,
+            quoteItems: null
+        },
+        quotes;
         
-        if (symbol){
-            this.symbol = symbol;
+        if (typeof(Storage) !== "undefined") {
+            if (localStorage.getItem('quotes') === null) {
+                // Put the array into storage
+                localStorage.setItem('quotes', JSON.stringify([]));
+            }        
+            quotes = localStorage.getItem('quotes');            
+            data = {
+                quoteLength: JSON.parse(quotes).length,
+                quoteItems: quotes
+            }
         }
-        
-        // Render the List of Orders container
-        if ( !this.$el.html() ){
-            this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.quotes))());
-            this.tbody = this.$('#list-of-quotes > tbody');
-        } else {
-            var quoteResult = this.$('#quote-result');
-            var buyError = this.$('#buy-error');
-            quoteResult.addClass('hide');
-            buyError.addClass('hide');
-        }
-        
-        this.$el.show();
 
-        // Render the quote result
-        if(this.model){
-            this.renderRows();
+        this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.quotes))(data));
+        this.$el.show();
+        this.qrtbody = this.$('#list-of-quotes > tbody');
+        this.quoteInput = this.$('#quote-input');
+        this.quoteError = this.$('#quote-error');
+        this.quoteResult = this.$('#quote-result');        
+        this.symbol = model? model.get('symbol') : '';
+        
+        if (model) {
+            this.renderQuote(model);
         }
     },
     
     /**
-     * Renders the List of orders into the View
+     * Renders the Quote in the View
      * @author Jean Chassoul <jean.chassoul>
      * @param int page: page of the List of Orders to display
      * @return void
      */
-    renderRows: function() {
-        var quoteResult = this.$('#quote-result');
-        this.tbody.html('');
-        
-        var data = {
-            symbol: this.model.get('symbol'),
-            price: this.model.get('price')
-        };
-        
-        this.tbody.append(_.template(nano.utils.getTemplate(nano.conf.tpls.quoteRow))(data));
-        this.model = null;
-        quoteResult.removeClass('hide');
+    renderQuote: function (model) {
+        'use strict';               
+        this.qrtbody.html(_.template(nano.utils.getTemplate(nano.conf.tpls.quoteRow))(model.toJSON()));
+        this.quoteResult.removeClass('hide');
     },
 
-    checkEnter : function(event) {
-      if (event.which == 13) {
-        $('#buyBtn').trigger('click');
-        return true;
-      }
-      else {
-        return nano.utils.validateNumber(event);
-      }
-    },
-
-    /**
-     * Validates that the input can only receive digits
-     * @author Carlos Soto <carlos.soto>
-     * @return boolean
-     */
-    validateNumber : function(event){
-        return nano.utils.validateNumber(event);
+    checkEnter: function (event) {
+        'use strict';
+        if (event.which === 13) {
+          $('#buyBtn').trigger('click');
+          return true;
+        } else {
+          return nano.utils.validateNumber(event);
+        }
     },
 
     /**
      * Buy event
-     * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
-    buy : function (event) {
-        var quantity = this.$('#quantity-input').val();
-        var view = this;
-        
-        var onSuccess = function(model){
-           
-            var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal))(model.toJSON()) );
-            popup.modal();
-            
-            view.$el.empty();
-            nano.instances.router.trade(view.page);
-
-        };
-        
-        var onError = function(model, error){
-            errorStr = translate('unknowError');
-            if( _.isArray(error)){
-                errorStr = '';
-                for (var x in error){
-                    errorStr += translate(error[x]) + '<br>';
-                    switch(error[x]) {
-                        case 'quantityError':
-                            nano.instances.quotes.error(true);
-                            break;
-                        default:
-                        alert('An unknown error has ocurred.');
-                        break
+    buy: function (event) {
+        'use strict';
+        var quantity = this.$('#quantity-input').val(),
+            order = new nano.models.Order({ accountid : nano.session.accountid });
+        order.save({
+            quantity: parseInt(quantity),
+            ordertype: 'buy',
+            quote: {symbol: this.symbol}
+        },
+        {
+            success: _.bind(function (model) {
+                var popup = $(_.template(nano.utils.getTemplate(nano.conf.tpls.quoteModal))(model.toJSON()));
+                popup.modal();
+                nano.instances.router.trade(this.page);
+            }, this), 
+            error: _.bind(function (model, error) {
+                var x,
+                    errorStr = translate('unknowError');
+                if (_.isArray(error)) {
+                    errorStr = '';
+                    for (x in error) {
+                        errorStr += translate(error[x]) + '<br>';
+                        switch (error[x]) {
+                            case 'quantityError':
+                                this.buyError(true);
+                                break;
+                            default:
+                                alert('An unknown error has ocurred.');
+                                break;
+                        }
                     }
                 }
-            }
-        }
-        
-        var order = new nano.models.Order({ accountid : nano.session.accountid });
-        order.save({
-            quantity : quantity,
-            ordertype : 'buy',
-            quote : {symbol: this.symbol}
-            },
-            {
-                success: onSuccess, 
-                error: onError
-            }
-        );
+            }, this)
+        });
     },
 
     /**
@@ -153,13 +131,69 @@ nano.views.Quotes = Backbone.View.extend({
      * @param error: Boolean
      * @return void
      */
-    error : function(error) {
-        var buyError = this.$('#buy-error');
-        
+    buyError : function (error) {
+        'use strict';
         if (error){
-            buyError.removeClass('hide');
+            this.$('#buy-error').removeClass('hide');
         } else {
-            buyError.addClass('hide');
+            this.$('#buy-error').addClass('hide');
+        }
+    },
+    
+    /**
+     * Trade error
+     * @param error: Boolean
+     * @return void
+     */
+    quoteErrorMsg : function (error) {
+        'use strict';
+        if (error) {
+            this.quoteError.removeClass('hide');
+        } else {
+            this.quoteError.addClass('hide');
+        }
+    },
+    
+    /**
+     * Fetches the quote input by the user
+     * @author Carlos Soto
+     * @return void
+     */
+    getQuote : function (evt) {
+        'use strict';
+        evt.preventDefault();
+        var symbol = this.quoteInput.val().toUpperCase(),
+            quotes,
+            model;
+
+        if(symbol !== '') {
+            
+            // fetch the Quote (if there's any) and render it
+            model = new nano.models.Quote({ quoteid : symbol });
+            model.fetch({
+                success: _.bind(function () {
+                    if (localStorage.quotes) {
+                        // Retrieve the object from storage and parse it
+                        quotes = JSON.parse(localStorage.getItem('quotes'));
+                        
+                        // Check the localStorage array
+                        if (_.indexOf(quotes, symbol) === -1) {
+                            quotes[quotes.length] = symbol;
+                            localStorage.setItem('quotes', JSON.stringify(quotes));
+                        }
+                    }
+                    
+                    // Change the url with the Trade Quote, store the symbol, hide the quote error
+                    // message and render the quote in the results table
+                    nano.instances.router.navigate(nano.conf.hash.tradeWithQuote.replace(nano.conf.quoteUrlKey, symbol), false);
+                    this.symbol = symbol;
+                    this.quoteErrorMsg(false);
+                    this.renderQuote(model);        
+                }, this),
+                error: _.bind(function () {
+                    this.quoteErrorMsg(true);
+                }, this)
+            });
         }
     }
 });

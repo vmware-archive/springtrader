@@ -12,7 +12,8 @@ nano.views.UserStatistics = Backbone.View.extend({
      * - model: nano.models.Account instance
      * @return void
      */
-    initialize : function(options) {
+    initialize : function (options) {
+        'use strict';
         nano.containers.userStatistics = this.$el;
     },
 
@@ -22,18 +23,9 @@ nano.views.UserStatistics = Backbone.View.extend({
      * @param Object model: Instance of nano.models.UserStatistics
      * @return void
      */
-     render : function(model) {
-        if (model)
-        {
-            this.model = model;
-        }
-        this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.userStatistics))(this.model.toJSON()));
+     render : function (model) {
+        'use strict';
+        this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.userStatistics))(model.toJSON()));
         this.$el.show();
-
-        //Prepare the view for collapsing sections
-        if ( nano.utils.isMobile() )
-        {
-            nano.utils.setCollapsable(this);
-        }
     }
 });

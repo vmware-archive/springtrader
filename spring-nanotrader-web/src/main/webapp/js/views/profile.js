@@ -8,7 +8,7 @@ nano.views.Profile = Backbone.View.extend({
     /**
      * Bind the events functions to the different HTML elements
      */
-    events : {
+    events: {
         'click #updateBtn' : 'update',
         'click #overview' : 'overview',
         'click #help' : 'help',
@@ -18,11 +18,11 @@ nano.views.Profile = Backbone.View.extend({
     /**
      * Class constructor
      * @author Carlos Soto <carlos.soto>
-     * @param Object options:
-     * - el: selector for the container
+     * @param Object options
      * @return void
      */
-    initialize : function(options) {
+    initialize: function (options) {
+        'use strict';
         nano.containers.profile = this.$el;
     },
 
@@ -32,9 +32,9 @@ nano.views.Profile = Backbone.View.extend({
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
      * @return void
      */
-    render: function(model) {
-        if ( !this.$el.html() )
-        {
+    render: function (model) {
+        'use strict';
+        if (!this.$el.html()) {
             // Set the Account Profile model
             this.model = model;
             this.lastlogin = model.lastlogin;

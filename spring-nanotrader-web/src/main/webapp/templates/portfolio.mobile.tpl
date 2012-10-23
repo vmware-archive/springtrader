@@ -1,13 +1,10 @@
-<div class="well show-well">
+<div class="accordion-heading">
     <div class="title">
-        <h3>
-            <a data-target="#ad-content" data-toggle="collapse" class="btn-transaction" data-toggle="collapse">
-                <%= translate('assetDistribution') %>
-                <span></span>
-            </a>
-        </h3>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#portfolioAccordion"><%= translate('assetDistribution') %></a>
     </div>
-    <div id="ad-content" class="table-indent collapse in">
+</div>
+<div id="portfolioAccordion" class="accordion-body collapse">
+    <div class="accordion-inner">
         <div id="ad-pie-chart" class="jqplot-target"></div>
     </div>
 </div>
