@@ -30,23 +30,26 @@ nano.views.Help = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
-    render: function() {
-        if ( !this.$el.html() )
-        {
-            this.$el.html(_.template( nano.utils.getTemplate(nano.conf.tpls.help) ));
+    render: function () {
+        'use strict';
+        if (!this.$el.html()) {
+            this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.help)));
         }
         this.$el.show();
     },
     
-    profile : function(){
+    profile : function () {
+        'use strict';
         window.location = nano.conf.hash.profile;
     },
     
-    overview : function(){
+    overview : function () {
+        'use strict';
         window.location = nano.conf.hash.overview;
     },
 
-    admin : function(){
+    admin : function () {
+        'use strict';
         window.location = nano.conf.hash.admin;
     }
 });

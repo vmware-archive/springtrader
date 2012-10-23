@@ -7,11 +7,11 @@
     /**
      * Class constructor
      * @author Carlos Soto <carlos.soto>
-     * @param Object options:
-     * - el: selector for the container
+     * @param Object options
      * @return void
      */
-    initialize : function(options) {
+    initialize: function (options) {
+        'use strict';
         nano.containers.positions = this.$el;
     },
 
@@ -21,21 +21,20 @@
      * @param Object model: Instance of nano.models.holdingSummary
      * @return void
      */
-     render : function(model) {
-        if (model)
-        {
-            this.model = model;
-        }
+     render: function (model) {
+        'use strict';
+        var i,
+            plot1,
+            data = [],
+            holdingRollups = model.get('holdingRollups');
+            
         this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.positions))());
         this.$el.show();
 
-        var data = [];
-        var holdingRollups = model.get('holdingRollups');
-        for (var i in holdingRollups)
-        {
+        for (i in holdingRollups) {
         	if (holdingRollups[i].percent != 0)
             data.push([holdingRollups[i].symbol, holdingRollups[i].percent]);
         }
-        var plot1 = nano.utils.renderPieChart('dtg-pie-chart', data);
+        plot1 = nano.utils.renderPieChart('dtg-pie-chart', data);
     }
 });

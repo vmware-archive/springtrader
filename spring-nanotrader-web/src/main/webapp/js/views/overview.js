@@ -8,12 +8,12 @@ nano.views.Overview = Backbone.View.extend({
     /**
      * Bind the events functions to the different HTML elements
      */
-    events : {
+    events: {
         'click #profile' : 'profile',
         'click #help' : 'help',
         'click #admin' : 'admin'
     },
-    
+
     /**
      * Class constructor
      * @author Carlos Soto <carlos.soto>
@@ -30,23 +30,26 @@ nano.views.Overview = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
-    render: function() {
-        if ( !this.$el.html() )
-        {
+    render: function () {
+        'use strict';
+        if (!this.$el.html()) {
             this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.overview))());
         }
         this.$el.show();
     },
     
-    profile : function(){
+    profile: function () {
+        'use strict';
         window.location = nano.conf.hash.profile;
     },
     
-    help : function(){
+    help: function () {
+        'use strict';
         window.location = nano.conf.hash.help;
     },
 
-    admin : function(){
+    admin: function () {
+        'use strict';
         window.location = nano.conf.hash.admin;
     }
 

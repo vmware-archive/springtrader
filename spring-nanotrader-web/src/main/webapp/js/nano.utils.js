@@ -39,8 +39,8 @@ nano.utils.calculateDistance = function(lat1,lat2,lon1,lon2)
 	var R = 6371;
 	var dLat = nano.utils.toRad(lat2-lat1);
 	var dLon = nano.utils.toRad(lon2-lon1);
-	var lat1 = nano.utils.toRad(lat1);
-	var lat2 = nano.utils.toRad(lat2);
+	lat1 = nano.utils.toRad(lat1);
+	lat2 = nano.utils.toRad(lat2);
     
 	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
     Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
@@ -49,9 +49,9 @@ nano.utils.calculateDistance = function(lat1,lat2,lon1,lon2)
 	return d;
 };
 
-nano.utils.toRad = function(Value)
-{
-    var value= Value * Math.PI / 180;
+nano.utils.toRad = function (val) {
+    'use strict';
+    var value = val * Math.PI / 180;
     return value;
 };
 
@@ -62,44 +62,40 @@ nano.utils.toRad = function(Value)
 * @param string key for the translation requested
 * @return mixed The translated value for that key
 */
-nano.utils.translate = function translate(key) {
+nano.utils.translate = function translate (key) {
+    'use strict';
     var value = key;
     if (typeof nano.strings[key] != 'undefined') {
         value = nano.strings[key];
     }
-
     // replace the rest of the arguments into the string
-    for( var i = 1; i < arguments.length; i++) {
+    for (var i = 1; i < arguments.length; i++) {
         value = value.replace('%' + i + '$s', args[i]);
     }
-
     return value;
 }
-
 
 /**
  * Fetches user view preferences cookie
  * @author Winston Koh <wkoh@vmware.com>
  * @return Object: User view mode
  */
-nano.utils.getViewPrefCookie = function() {
-    var viewMode = null;
-
-    if ($.cookie)
-    {
+nano.utils.getViewPrefCookie = function () {
+    'use strict';
+    var viewMode = null,
+	isMobile = nano.utils.detectMobileBrowser();
+	
+    if ($.cookie) {
         viewMode = $.cookie('userViewPref');
-        if (viewMode == null) {
-            var isMobile = nano.utils.detectMobileBrowser();
+        if (viewMode === null) {
             if (isMobile) {
                 $.cookie('userViewPref', 'mobileView');
-            }
-            else {
+            } else {
                 $.cookie('userViewPref', 'fullView');
             }
             viewMode = $.cookie('userViewPref');
         }
     }
-
     return viewMode;
 };
 
@@ -108,6 +104,7 @@ nano.utils.getViewPrefCookie = function() {
  * @author Winston Koh <wkoh@vmware.com>
  */
 nano.utils.setViewPrefCookie = function(value) {
+    'use strict';
     if ($.cookie) {
         $.cookie('userViewPref', value);
     }
@@ -118,14 +115,12 @@ nano.utils.setViewPrefCookie = function(value) {
  * @author Carlos Soto <carlos.soto>
  * @return Object: Session data
  */
-nano.utils.getSession = function() {
+nano.utils.getSession = function () {
+    'use strict';
     var session = null;
-
-    if ($.cookie)
-    {
+    if ($.cookie) {
         session = $.cookie( nano.conf.sessionCookieName )
     }
-
     return session;
 };
 
@@ -241,17 +236,14 @@ nano.utils.getHttpHeaders = function(){
  * @return Object
  */
 nano.utils.hideAll = function(showMarketSummary) {
-    if ( !_.isBoolean(showMarketSummary) )
-    {
-        var showMarketSummary = true;
+    'use strict'
+    if (!_.isBoolean(showMarketSummary)) {
+        showMarketSummary = true;
     }
-
     if( showMarketSummary ) {
         nano.containers['marketSummary'].show();
     }
-
-    for (var i in nano.containers)
-    {
+    for (var i in nano.containers) {
         if ( i != 'footer' && (i != 'marketSummary' || (i == 'marketSummary'&& !showMarketSummary)) )
         {
             nano.containers[i].hide();
@@ -265,10 +257,10 @@ nano.utils.hideAll = function(showMarketSummary) {
  * @return Object
  */
 nano.utils.round = function (number, decimals) {
-  if (typeof decimals == 'undefined')
-  {
-      var decimals = 2;
-  }
+  'use strict';
+  if (typeof decimals == 'undefined') {
+      decimals = 2;
+    }
   var newNumber = Math.round(number*Math.pow(10,decimals))/Math.pow(10,decimals);
   return parseFloat(newNumber);
 }
@@ -660,21 +652,15 @@ nano.utils.killSqlFireServer = function() {
  * @author Jean Chassoul <jean.chassoul>
  * @return a js object with the start and end pagination interval
  */
-nano.utils.getPaginationInterval = function(currentPage, pageCount) {
-	// Restrict page count size to '6' in case mobile view
-    if(nano.utils.isMobile()) {
-        nano.conf.pageCountSize = 6;
-    }
-    var currentPage = Number(currentPage);
-    var halfEntries = Math.ceil(nano.conf.pageCountSize/2);
-    var pageCount = pageCount;
-    var upperLimit = pageCount - nano.conf.pageCountSize;
-    
-    var interval = {
-        start : currentPage > halfEntries ? Math.max(Math.min(currentPage - halfEntries, upperLimit), 0):0,
-        end   : currentPage > halfEntries ? Math.min(currentPage + halfEntries, pageCount):Math.min(nano.conf.pageCountSize, pageCount)
+nano.utils.getPaginationInterval = function (currentPage, pageCount) {
+    'use strict';
+    currentPage = Number(currentPage);
+    var halfEntries = Math.ceil(nano.conf.pageCountSize/2),
+	upperLimit = pageCount - nano.conf.pageCountSize,
+	interval = {
+        start : currentPage > halfEntries ? Math.max(Math.min(currentPage - halfEntries, upperLimit), 0) : 0,
+        end   : currentPage > halfEntries ? Math.min(currentPage + halfEntries, pageCount) : Math.min(nano.conf.pageCountSize, pageCount)
     };
-    
     return interval;
 };
 

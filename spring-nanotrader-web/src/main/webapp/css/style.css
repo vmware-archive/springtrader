@@ -8,7 +8,8 @@
          url('../fonts/colabreg-webfont.svg#ColaborateRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-}@font-face {
+}
+@font-face {
     font-family: 'ColaborateMediumRegular';
     src: url('../fonts/colaborate-medium-webfont.eot');
     src: url('../fonts/colaborate-medium-webfont.eot?#iefix') format('embedded-opentype'),
@@ -17,7 +18,8 @@
          url('../fonts/colaborate-medium-webfont.svg#ColaborateMediumRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-}@font-face {
+}
+@font-face {
     font-family: 'ColaborateBoldRegular';
     src: url('../fonts/colaborate-bold-webfont.eot');
     src: url('../fonts/colaborate-bold-webfont.eot?#iefix') format('embedded-opentype'),
@@ -26,7 +28,8 @@
          url('../fonts/colaborate-bold-webfont.svg#ColaborateBoldRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-}@font-face {
+}
+@font-face {
     font-family: 'ColaborateThinRegular';
     src: url('../fonts/colabthi-webfont.eot');
     src: url('../fonts/colabthi-webfont.eot?#iefix') format('embedded-opentype'),
@@ -35,7 +38,8 @@
          url('../fonts/colabthi-webfont.svg#ColaborateThinRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-}@font-face {
+}
+@font-face {
     font-family: 'ColaborateLightRegular';
     src: url('../fonts/colaborate-light-webfont.eot');
     src: url('../fonts/colaborate-light-webfont.eot?#iefix') format('embedded-opentype'),
@@ -44,18 +48,21 @@
          url('../fonts/colaborate-light-webfont.svg#ColaborateLightRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-}a {
+}
+a {
     cursor: pointer;
-}body {
+}
+body {
     background:url(../images/bg.gif);
     padding-top:110px;
-}#nc-loading .logo, #nc-loading .loading
-{
+}
+#nc-loading .logo, #nc-loading .loading {
     margin: auto;
-}#nc-loading .loading{
+}
+#nc-loading .loading {
     margin-top: 20px;
-}.loading
-{
+}
+.loading {
     background:url(../images/loading.gif) no-repeat;
     width: 32px;
     height: 32px;
@@ -63,19 +70,6 @@
 /* @group of top navigation
 -------------------------------------*/
 
-.navbar-fixed-top .navbar-inner {
-    box-shadow:none;
-    background-color: #2c2c2c;
-    background-image: -moz-linear-gradient(top, #515151, #010101);
-    background-image: -ms-linear-gradient(top, #515151, #010101);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#515151), to(#010101));
-    background-image: -webkit-linear-gradient(top, #515151, #010101);
-    background-image: -o-linear-gradient(top, #515151, #010101);
-    background-image: linear-gradient(top, #515151, #010101);
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#515151', endColorstr='#010101', GradientType=0);
-    border-bottom:1px solid #fbfbfb;
-}
 .logo.brand {
     background:url(../images/logo.png) no-repeat;
     width:148px;
@@ -84,6 +78,26 @@
     padding:0;
     margin:5px 20px;
 }
+.navbar-inner {
+  min-height: 40px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: #2c2c2c;
+  background-image: -moz-linear-gradient(top, #333333, #222222);
+  background-image: -ms-linear-gradient(top, #333333, #222222);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#333333), to(#222222));
+  background-image: -webkit-linear-gradient(top, #333333, #222222);
+  background-image: -o-linear-gradient(top, #333333, #222222);
+  background-image: linear-gradient(top, #333333, #222222);
+  background-repeat: repeat-x;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
 .navbar .nav.nav-top > li > a, .navbar-text .nav a.dropdown-toggle {
     padding:15px 20px;
     font: 16px/18px 'ColaborateRegular', Arial, sans-serif;
@@ -91,8 +105,7 @@
     color:#b7b7b7;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
-.navbar .nav.nav-top
-{
+.navbar .nav.nav-top {
     text-transform: lowercase;
 }
 .navbar-text .navbar .nav {
@@ -120,7 +133,8 @@
 }
 .navbar-text .divider-vertical, .navbar .nav > li.divider-vertical {
     background-color: #1b1b1b;
-    border-right: 1px solid #636363;
+    border-left: 1px solid #636363;
+    border-right: 0px;
     height: 47px;
     overflow: hidden;
     width: 1px;
@@ -136,25 +150,17 @@
     bottom: -6px;
     left: 47%;
 }
-.navbar-text .dropdown-menu:after {
-    left:auto;
-    right:13px;
-}.navbar-text .dropdown-menu:before {
-    border:0;
-}
 .nav-top [class^="icon-"], .navbar-text [class^="icon-"] { 
     margin-right:7px;
 }
-.navbar .nav.nav-top > li > a:hover .icon-portfolio, .navbar .nav.nav-top > li.active > a .icon-portfolio{
-    background-image: url("../images/glyphicons-halflings-white.png");
-    background-position: -48px -48px;
+.navbar-text .dropdown-menu:after {
+    left:auto;
+    right:13px;
 }
-
-.navbar .nav.nav-top > li > a:hover .icon-trade, .navbar .nav.nav-top > li.active > a .icon-trade {
-    background-image: url("../images/glyphicons-halflings-white.png");
-    background-position: -408px 0;
+.navbar-text .dropdown-menu:before {
+    border:0;
 }
-.icon-down-arrow{
+.icon-down-arrow {
     background:url('../images/icon-arrow.png') no-repeat;
     width:7px;
     height:7px;
@@ -162,15 +168,20 @@
     position: relative;
     top: 5px;
 }
-.navbar-fixed-top .dropdown .dropdown-menu {
-    padding:20px 39px;
+.navbar .nav.nav-top > li > a:hover .icon-portfolio, .navbar .nav.nav-top > li.active > a .icon-portfolio {
+    background-image: url("../images/glyphicons-halflings-white.png");
+    background-position: -48px -48px;
+}
+.navbar .nav.nav-top > li > a:hover .icon-trade, .navbar .nav.nav-top > li.active > a .icon-trade {
+    background-image: url("../images/glyphicons-halflings-white.png");
+    background-position: -408px 0;
 }
 .navbar .dropdown-menu{
     background:#ffffff;
 }
-.navbar-fixed-top .dropdown .dropdown-menu ul {
+.dropdown-menu ul {
     margin:0;
-    list-style:none;
+    list-style: none;
 }
 .dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
     background:none;
@@ -199,22 +210,19 @@
     overflow:hidden;
     position:relative;
 }
-/* @end of top navigation
--------------------------------------*/
 
 /* @group styles of forms 
 ------------------------------------*/
 h3 {
     font:normal 18px/20px Tahoma, Helvetica, Arial, sans-serif;
     color:#666666;
-    margin-left:30px;
+    margin: 0px 0px 0px 30px;
 }
-h3 span{
+h3 span {
     display:block;
     font-size:12px;
     margin:10px 0 20px;
 } 
-
 .form-horizontal .control-label {
     float:none;
     text-align:left;
@@ -232,8 +240,6 @@ h3 span{
 .forgot-password {
     margin-left:30px;
 }
-/* @end styles of forms 
-------------------------------------*/
 
 
 /* @group custom icons
@@ -288,13 +294,8 @@ h3 span{
     background-position: -3px -41px;
     margin:3px 7px 0 0;	
 }
-/* @end custom icons
--------------------------------------*/
-
-
 /* @group of common pages
 -------------------------------------*/
-
 .page {
     border:1px solid #d1d1d1;
     border-radius:7px;
@@ -310,7 +311,7 @@ h3 span{
     background:#ffffff;
     box-shadow:none;
 }
-.well.show-well .title{ 
+.well.show-well .title { 
     height:45px;
     padding:0 19px;
     background-color: #bbbbbb;
@@ -325,7 +326,7 @@ h3 span{
     border-bottom:1px solid #aeadad;
     position:relative;
 }
-.well.show-well .title .tooltip-question{
+.well.show-well .title .tooltip-question {
     position:absolute;
     display:block;
     width:27px;
@@ -337,7 +338,7 @@ h3 span{
 .well.show-well .title .tooltip-question:hover {
     background-position:0 -31px;
 }
-.well.show-well .title h3{ 
+.well.show-well .title h3 { 
     color:#656565;
     font:normal 18px/45px Arial, sans-serif;
     text-shadow:0 1px 1px #e1e1e1;
@@ -387,7 +388,7 @@ h3 span{
     margin:-30px 0 30px;
     position:relative;
 }
-.row.show-table table td{ 
+.row.show-table table td { 
     text-align:center;
 }
 .row.show-table table th{ 
@@ -433,11 +434,6 @@ table tbody tr.summary td,
 }
 .average {
     font:bold 18px/20px Arial, sans-serif;
-}
-.gray-background
-{
-  background-color: #f9f9f9;
-
 }
 .span12 .table-bordered {
     border:0;	
@@ -600,35 +596,46 @@ table td input {
 }
 .container.profile-page .sidebar {
     border-radius:7px 0;
-}.container.profile-page .span9.columns h3{ 
+}
+.container.profile-page .span9.columns h3{ 
     margin:20px 0 10px 30px;
-}.container.profile-page .sidebar h3{
+}
+.container.profile-page .sidebar h3{
     color:#757575;
     font-size:14px;
     font-weight:bold;
     margin-bottom:0px;
-}.container.profile-page .sidebar {
+}
+.container.profile-page .sidebar {
     padding-left:0;
     padding-right:0;
-}.container.profile-page .span2.columns.sidebar {
+}
+.container.profile-page .span2.columns.sidebar {
     width:200px;
-}.sidebar .nav-tabs.nav-stacked > li:first-child > a, .sidebar .nav-tabs.nav-stacked > li > a {
+}
+.sidebar .nav-tabs.nav-stacked > li:first-child > a, .sidebar .nav-tabs.nav-stacked > li > a {
     border-radius:0;
     border-left:0;
     border-right:0;
-}.sidebar .nav-tabs.nav-stacked > li > a:hover {
+}
+.sidebar .nav-tabs.nav-stacked > li > a:hover {
     background-color:#ffffff;
-}.span9.columns {
+}
+.span9.columns {
     position:relative;
-}.corner {
+}
+.corner {
     position:absolute;
     bottom:0;
     left:-230px;
-}.contact-page .span9 .form-horizontal .control-group, .contact-page .span9 .form-horizontal .form-actions{
+}
+.contact-page .span9 .form-horizontal .control-group, .contact-page .span9 .form-horizontal .form-actions{
     margin-left:30px;
-}.contact-page .span9 .form-horizontal .form-actions{
+}
+.contact-page .span9 .form-horizontal .form-actions{
     text-align:left;
-}.contact-page .span9 h3 {
+}
+.contact-page .span9 h3 {
     margin-bottom:20px;
 }
 .logo-table{
@@ -637,8 +644,6 @@ table td input {
     height: 43px;
     margin: auto;
 }
-/* @end of common pages
--------------------------------------*/
 
 /* @group footer 
 --------------------------------------*/
@@ -646,10 +651,9 @@ table td input {
     padding:15px 30px;
     color:#757575;
     font:normal 11px/14px Arial, sans-serif;
-}.footer .nav {
+}
+.footer .nav {
     margin:0 0 0 20px;
-}.footer .nav li, .footer .nav li a{
-    display:inline;
 }
 /* @group make responsive (max-width: 979px)
 -------------------------------------*/

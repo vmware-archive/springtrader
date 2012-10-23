@@ -31,15 +31,5 @@
             <div id="no-holdings"></div>
         </div>
     </div>
-    <!-- The prefix "lohp" stands for "List Of Holdings Pagination" -->
-    <div class="pagination pagination-right">
-        <!-- The prefix "loh" stands for "List Of Holdings" -->
-        <ul id="loh-pagination">
-            <li id="lohp-previous" class="<%= ( currentPage == 1 ? "disabled" : "") %>"><a>&laquo;</a></li>
-            <% for (var i = interval.start; i < interval.end; ++i) { %>
-            <li class="g2p <%= (i+1 == currentPage ? "active" : "") %>"><a><%= i+1 %></a></li>
-            <% } %>
-            <li id="lohp-next" class="<%= ( currentPage == pageCount ? "disabled" : "") %>"><a>&raquo;</a></li>
-        </ul>
-    </div>
+    <div class="pagination-container"/>
 </div>
