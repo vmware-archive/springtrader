@@ -17,8 +17,8 @@ package org.springframework.nanotrader.service.domain;
 
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  *  Account Profile
@@ -43,13 +43,16 @@ public class Accountprofile implements Serializable{
 
     private String fullname;
 
-	private Set<Map> accounts;
+	@SuppressWarnings("rawtypes")
+	private List<Map> accounts;
 	
-	public Set<Map> getAccounts() {
+	@SuppressWarnings("rawtypes")
+	public List<Map> getAccounts() {
         return accounts;
     }
 
-	public void setAccounts(Set<Map> accounts) {
+	@SuppressWarnings("rawtypes")
+	public void setAccounts(List<Map> accounts) {
         this.accounts = accounts;
     }
 
