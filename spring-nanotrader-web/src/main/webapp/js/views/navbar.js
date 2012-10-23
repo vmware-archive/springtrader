@@ -9,12 +9,10 @@ nano.views.Navbar = Backbone.View.extend({
      * Bind the events functions to the different HTML elements
      */
     events: {
-        'click #logout' : 'logout',
-        'click #nb-logo' : 'navigationClick',
-        'click .nav-link' : 'navigationClick',
-        'click #profile' : 'profile',
-        'click #help' : 'help',
-        'click #admin' : 'admin'
+        'click #logout': 'logout',
+        'click #nb-logo': 'navigationClick',
+        'click .nav-link': 'navigationClick',
+        'click .nav-top a, .dropdown-nav a': 'linkClick'
     },
 
     /**
@@ -53,37 +51,35 @@ nano.views.Navbar = Backbone.View.extend({
      */
      render: function (hash) {
         'use strict';
-        var hashMap = {};
+        var hashMap = {},
+            i;
+            
         if (!hash) {
             hash = nano.conf.hash.dashboard;
         }    
         if (!this.$el.html() || this.visited === false) {
         	this.visited = true;
             this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.navbar))(nano.session));
+            this.$('.dropdown-toggle').dropdown(); // Enable the dropdown for the User Profile options on the right
+            this.username = this.$('#nb-username');
+            this.collapsableMenu = this.$('.nav-collapse');
 
-            // Enable the dropdown for the User Profile options on the right
-            this.$('.dropdown-toggle').dropdown(); 
-
-            if (nano.utils.isMobile()) {
-                this.collapsableMenu = this.$('#navbar-collapse');
-            }
-
+            // --------------------
             // Cache the containers of the links 
             // (for the "active" display when clicking on the link)
             this.linkContainers = {};
-            var that = this;
-            this.$('ul.nav.nav-top a.nav-link').each(function(i, ele){
-                that.linkContainers[ele.id] = $(ele.parentNode);
-            });
-            this.username = $('#nb-username');
+            this.$('ul.nav.nav-top a.nav-link').each(_.bind(function(i, ele){
+                this.linkContainers[ele.id] = $(ele.parentNode);
+            }, this));
         } else {
             this.username.html(nano.session.username);
         }
+        
         // Maps the different hash urls to the id of the link in the navbar
         hashMap[nano.conf.hash.dashboard] = this.ids.dashboard;
         hashMap[nano.conf.hash.portfolio] = this.ids.portfolio;
         hashMap[nano.conf.hash.trade] = this.ids.trade;
-        for (var i in this.linkContainers) {
+        for (i in this.linkContainers) {
             if (hashMap[hash] === i) {
                 this.linkContainers[i].addClass('active');
             } else {
@@ -101,7 +97,19 @@ nano.views.Navbar = Backbone.View.extend({
     logout: function () {
         'use strict';
         nano.utils.logout();
-        nano.utils.goTo( nano.conf.hash.login );
+    },
+
+    /**
+     * Click event for all of the links on the navigation bar
+     * @author Carlos Soto <carlos.soto>
+     * @return void
+     */    
+    linkClick: function () {
+        'use strict';
+        // Manually hide the collapsable menu, collapse('hide') function from
+        // Bootstrap messes up the whole nav on Mobile devices, makes it stop working
+        this.collapsableMenu.removeClass('in');
+        this.collapsableMenu.css('height', '0px');
     },
 
     /**
@@ -111,80 +119,35 @@ nano.views.Navbar = Backbone.View.extend({
      */
     navigationClick: function (evt) {
         'use strict';
-        var id, i;
-        if (evt) {
+        var id = evt.target.id,
+            i;
             // Mark the proper link container as "active" and
             // remove the active display on the other links
-            id = evt.target.id;            
-            for (i in this.linkContainers) {
-                if (i === id) {
-                    this.linkContainers[i].addClass('active');
-                } else {
-                    this.linkContainers[i].removeClass('active');
-                }
+        for (i in this.linkContainers) {
+            if (i === id) {
+                this.linkContainers[i].addClass('active');
+            } else {
+                this.linkContainers[i].removeClass('active');
             }
-            // Depending on the link clicked, render the corresponding page
-            switch (id) {
-                case this.ids.portfolio:
-                    window.location = nano.conf.hash.portfolio;
-                    break;
-                case this.ids.portfolioIcon:
-                    window.location = nano.conf.hash.portfolio;
-                    break;
-                case this.ids.trade:
-                    window.location = nano.conf.hash.trade;
-                    break;
-                case this.ids.tradeIcon:
-                    window.location = nano.conf.hash.trade;
-                    break;
-                case this.ids.dashboard:
-                default:
-                    window.location = nano.conf.hash.dashboard;
-                    break;
-            }
-        } else {
-            window.location = nano.conf.hash.dashboard;
         }
-        if (nano.utils.isMobile()) {
-            this.collapsableMenu.collapse('toggle');
-        }
-    },
-    
-    /**
-     * Profile Click Event
-     * @author Jean Chassoul <jean.chassoul>
-     * @return void
-     */
-    profile: function () {
-        'use strict';
-        nano.utils.goTo( nano.conf.hash.profile );
-        if(nano.utils.isMobile()) {
-            this.collapsableMenu.collapse('toggle');
-        }
-    },
-    
-    /**
-     * Help Click Event
-     * @author Jean Chassoul <jean.chassoul>
-     * @return void
-     */
-    help: function () {
-        'use strict';
-        nano.utils.goTo( nano.conf.hash.help );
-        if (nano.utils.isMobile()) {
-            this.collapsableMenu.collapse('toggle');
-        }
-    },
-
-    /**
-     * Admin Click Event
-     * @return void
-     */
-    admin: function () {
-        'use strict';
-        nano.utils.goTo( nano.conf.hash.admin );
-        if(nano.utils.isMobile()) {
-            this.collapsableMenu.collapse('toggle');
+        // Depending on the link clicked, render the corresponding page
+        switch (id) {
+            case this.ids.portfolio:
+                window.location = nano.conf.hash.portfolio;
+                break;
+            case this.ids.portfolioIcon:
+                window.location = nano.conf.hash.portfolio;
+                break;
+            case this.ids.trade:
+                window.location = nano.conf.hash.trade;
+                break;
+            case this.ids.tradeIcon:
+                window.location = nano.conf.hash.trade;
+                break;
+            case this.ids.dashboard:
+            default:
+                window.location = nano.conf.hash.dashboard;
+                break;
         }
     }
 });
