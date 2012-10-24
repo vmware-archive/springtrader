@@ -298,17 +298,25 @@ nano.utils.goTo = function(url) {
  * @param array data: info to be rendered, array of array pairs of label and value
  * @return Object: plotter object.
  */
-nano.utils.renderPieChart = function(htmlId, data) {
-
-    var error = false;
-    if (data.length < 1)
-    {
+nano.utils.renderPieChart = function (htmlId, data) {
+    'use strict';
+    var error = false,
+        container = $('#' + htmlId),
+        i;
+    if (data.length < 1) {
         error = true;
-        $('#' + htmlId).html( _.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}) );
+        container.html(_.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}));
     }
-
-    if (!error)
-    {
+    // If it's the mobile version, round up to 
+    // integer values and add it to them to the legend
+    if (nano.utils.isMobile()) {
+        for(var i in data) {
+            data[i][1] = Math.round(data[i][1] * 10)/10;
+            data[i][0] += ' (' + data[i][1] + '%)';
+        }        
+    }
+    
+    if (!error) {
         // Options: http://www.jqplot.com/docs/files/jqPlotOptions-txt.html
         var plot = $.jqplot(htmlId, [data], {
             /**
@@ -333,8 +341,14 @@ nano.utils.renderPieChart = function(htmlId, data) {
                 },
                 trendline:{ show: false }
             },
-            legend: { show:true, location: 'e' }
+            legend: { show:true, location: nano.utils.isMobile() ? 's' : 'e' }
         });
+    }
+    
+    // Remove the percentages from the
+    // pie chart if it's a mobile version
+    if (nano.utils.isMobile()) {
+        container.find('.jqplot-data-label').remove();
     }
     return plot;
 };
