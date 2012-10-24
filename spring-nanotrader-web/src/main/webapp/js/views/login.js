@@ -7,7 +7,7 @@ nano.views.Login = Backbone.View.extend({
     /**
      * Bind the events functions to the different HTML elements
      */
-    events : {
+    events: {
         'click #loginBtn' : 'login',
         'click #showRegistrationBtn' : 'registration'
     },
@@ -15,11 +15,11 @@ nano.views.Login = Backbone.View.extend({
     /**
      * Class constructor
      * @author Carlos Soto <carlos.soto>
-     * @param Object options:
-     * - el: selector for the container
+     * @param Object options
      * @return void
      */
-    initialize : function(options) {
+    initialize: function (options) {
+        'use strict';
         nano.containers.login = this.$el;
     },
 
@@ -29,19 +29,18 @@ nano.views.Login = Backbone.View.extend({
      * @param mixed errorKey: Name of an error key from nano.strings to be displayed. It can be null (no error show on render)
      * @return void
      */
-     render: function(errorKey) {
-            if ( !this.$el.html() )
-            {
-                var login = _.template( nano.utils.getTemplate(nano.conf.tpls.login) )();
-                this.$el.html(login);
-                if (errorKey)
-                {
-                    var loginError = this.$('#login-error');
-                    loginError.find('p').html(translate(errorKey));
-                    loginError.show();
-                }
+     render: function (errorKey) {
+        'use strict';
+        var loginError;
+        if (!this.$el.html()) {
+            this.$el.html(_.template( nano.utils.getTemplate(nano.conf.tpls.login) )());
+            if (errorKey) {
+                loginError = this.$('#login-error');
+                loginError.find('p').html(translate(errorKey));
+                loginError.show();
             }
-            this.$el.show();
+        }
+        this.$el.show();
     },
 
     /**
@@ -49,7 +48,8 @@ nano.views.Login = Backbone.View.extend({
      * @author Carlos Soto <carlos.soto>
      * @return void
      */
-    registration : function() {
+    registration: function () {
+        'use strict';
         window.location = nano.conf.hash.registration;
     },
 
@@ -58,24 +58,18 @@ nano.views.Login = Backbone.View.extend({
      * @author Carlos Soto <carlos.soto>
      * @return void
      */
-    login : function(event){
-
-        // Cache the login and password controls for performance
-        var loginControl = this.$('#login-control');
-        var passwordControl = this.$('#password-control');
-        var loginError = this.$('#login-error');
-
-        //loginError.show();
-        //loginControl.removeClass('error');
-        //passwordControl.removeClass('error');
-
+    login: function (event) {
+        'use strict';
         event.preventDefault();
-        var username = this.$('#username-input').val();
-        var password = this.$('#password-input').val();
-        var view = this;
-        nano.utils.login(username, password, {
-            success : function(jqXHR, textStatus){
-
+        // Cache the login and password controls for performance
+        var loginControl = this.$('#login-control'),
+            passwordControl = this.$('#password-control'),
+            loginError = this.$('#login-error'),
+            username = this.$('#username-input').val(),
+            password = this.$('#password-input').val(),
+            view = this;
+        nano.utils.login (username, password, {
+            success : function (jqXHR, textStatus) {
                 //Clear the credentials from the inputs
                 view.$('#username-input').val('');
                 view.$('#password-input').val('');
@@ -88,9 +82,9 @@ nano.views.Login = Backbone.View.extend({
                 //Show the loading page, hide the login page and render the dashboard
                 nano.utils.goTo( nano.conf.hash.dashboard );
             },
-            error : function(jqXHR, textStatus, errorThrown) {
+            error : function (jqXHR, textStatus, errorThrown) {
                 loginError.show();
-                switch(jqXHR.status) {
+                switch (jqXHR.status) {
                     case 401:
                         loginControl.addClass('error');
                         passwordControl.addClass('error');

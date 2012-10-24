@@ -1,16 +1,11 @@
-<div class="well show-well">
-<div class="accordion" id="accordion3">
-            <div class="accordion-group">
-              <div class="accordion-heading">
-              <div class="title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseportfolioOne">
-                  Portfolio Summary
-                </a>
-                </div>
-              </div>
-              <div id="collapseportfolioOne" class="accordion-body collapse in">
-                <div class="accordion-inner">
-                 <table class="table">
+<div class="accordion-heading">
+    <div class="title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#portfolioSummaryAccordion"><%= translate("portfolioSummary") %></a>
+    </div>
+</div>
+<div id="portfolioSummaryAccordion" class="accordion-body collapse">
+    <div class="accordion-inner">
+        <table class="table">
             <tbody>
                 <tr>
                     <td><%= translate("numberOfHoldings") %></td>
@@ -30,26 +25,5 @@
                 </tr>
             </tbody>
         </table>
-                </div>
-
-              </div>
-            </div>
-<div class="accordion-group">
-              <div class="accordion-heading">
-                <div class="title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseportfolioTwo">
-                 Asset Distribution
-                </a>
-                </div>
-              </div>
-              <div id="collapseportfolioTwo" class="accordion-body collapse">
-
-                <div class="accordion-inner">
-    <div id="ad-pie-chart" class="jqplot-target">
     </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-          </div>
+</div>

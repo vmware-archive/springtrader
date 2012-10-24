@@ -1,8 +1,8 @@
 <div class="footer container clearfix">
     <p class="pull-left"><%= translate("copyright") %></p>
-    <ul class="nav pull-left">
-        <li><a id="contactUsBtn"><%= translate("contactUs") %></a> <span class="divider">|</span></li>
-        <li><a id="helpBtn" class="help"><%= translate("help") %></a> <span class="divider">|</span></li>
-        <li><a id="switchViewBtn"><%= switchView %></a> <span class="divider"></span></li>
-    </ul>
+    <div class="nav pull-left">
+        <a id="contactUsBtn"><%= translate("contactUs") %></a> <span class="divider">|</span>
+        <a id="helpBtn" class="help"><%= translate("help") %></a> <span class="divider">|</span>
+        <a id="switchViewBtn"><%= switchView %></a>
+    </div>
 </div>

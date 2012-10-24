@@ -1,13 +1,14 @@
 <div class="navbar">
   <div class="navbar-inner">
       <div class="container">
-          <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+        <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+        <!--a class="btn btn-navbar"-->
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </a>
-          <a id="nb-logo" class="logo brand"><%= translate("nanotrader") %></a>
-          <div id="navbar-collapse" class="nav-collapse">
+        </a>
+          <a href="<%= nano.conf.hash.dashboard %>"class="logo brand"><%= translate("nanotrader") %></a>
+          <div class="nav-collapse">
               <ul class="nav nav-top">
                   <li class="divider-vertical"></li>
                   <li><a id="nb-dashboard" class="nav-link"><span id="nb-icon-dashboard" class="icon-home icon-white"></span><%= translate("dashboard") %></a></li>
@@ -27,11 +28,13 @@
                           </a>
                           <div class="dropdown-menu">
                               <ul class="dropdown-nav">
-                                  <li><a id="profile"><%= translate("profile") %></a></li>
-                                  <li><a id="admin"><%= translate("admin") %></a></li>
-                                  <li><a id="help"><%= translate("help") %></a></li>
+                                  <li><a id="profile" href="<%= nano.conf.hash.profile %>"><%= translate("profile") %></a></li>
+                                  <% if (nano.session.username === "admin") { %>
+                                  <li><a id="admin" href="<%= nano.conf.hash.admin %>"><%= translate("admin") %></a></li>
+                                  <% } %>
+                                  <li><a id="help" href="<%= nano.conf.hash.help %>"><%= translate("help") %></a></li>
                                   <li class="divider"></li>
-                                  <li><a id="logout"><%= translate("logout") %></a></li>
+                                  <li><a id="logout" href="nano.conf.hash.login"><%= translate("logout") %></a></li>
                               </ul>
                           </div>
                       </li>

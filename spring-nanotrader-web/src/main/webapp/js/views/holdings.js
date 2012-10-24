@@ -8,9 +8,6 @@ nano.views.Holdings = Backbone.View.extend({
      * Bind the events functions to the different HTML elements
      */
     events : {
-        'click #loh-pagination > li.g2p' : 'go2page',
-        'click #lohp-previous' : 'previousPage',
-        'click #lohp-next' : 'nextPage',
         'click #list-of-holdings a.sell' : 'showModal'
     },
 
@@ -21,44 +18,80 @@ nano.views.Holdings = Backbone.View.extend({
      * - el: selector for the container
      * @return void
      */
-    initialize : function(options) {
+    initialize : function (options) {
+        'use strict';
         nano.containers.holdings = this.$el;
     },
 
     /**
      * Renders the List Of Holdings View
      * @author Carlos Soto <carlos.soto>
-     * @param nano.models.Holdings model: Collection of holdings
+     * @param nano.collections.Holdings collection: Collection of holdings
      * @param int page: page of the List of Holdings to display
      * @return void
      */
-     render: function(model, page) {
-            if (model)
-            {
-                this.model = model;
+     render: function(collection, page) {
+            'use strict';
+            var paginator,            
+                pageCount = Math.ceil(collection.totalRecords / collection.pageSize),
+                data = {
+                    totalPurchaseBasis : 0,
+                    totalMarketValue : 0, 
+                    totalGainLoss : 0
+                };
+                
+            if (collection) {
+                this.collection = collection;
             }
-
-            // Store the total amount of pages
-            this.pageCount = Math.ceil(this.model.totalRecords / this.model.pageSize);
-
-            if (page > this.pageCount)
-            {
-                page = this.pageCount;
+            if (page > pageCount) {
+                page = pageCount;
             }
+            paginator = new nano.views.Paginator({
+                pageCount: pageCount,            
+                page: page,
+                hash: nano.conf.hash.portfolioWithPage,
+                interval: nano.utils.getPaginationInterval(page, pageCount),
+                onPageChange: _.bind(function(page) {
+                    this.collection.fetch({
+                        data : { page : page},
+                        success : _.bind(function (collection, response) {
+                            this.collection = this.setTotals(collection, data);
+                            this.renderRows(this.collection);
+                        }, this),
+                        error : nano.utils.onApiError
+                    });    
+                }, this)
+            });
 
-            // The interval start and end pages to render on the pagination
-            this.interval = nano.utils.getPaginationInterval(page, this.pageCount);
+            this.collection = this.setTotals(collection, data);
+            this.$el.html(_.template( nano.utils.getTemplate(nano.conf.tpls.holdings) )(data));
+            this.$el.find('.pagination-container').html(paginator.render());
+            this.tbody = this.$('#list-of-holdings > tbody');
+            this.$el.show();
 
-            var data = {
-                totalPurchaseBasis : 0,
-                totalMarketValue : 0, 
-                totalGainLoss : 0,
-                pageCount : this.pageCount,
-                interval : this.interval,
-                currentPage : page
-            };
-
-            this.model.each(function(holding) {
+            // Check the page count of orders
+            if (pageCount <= 0) {
+                // Render a no data message if the page count is 0 or less.
+                this.noHoldings();
+                if (nano.utils.isMobile()) {
+                    this.$('#list-of-holdings').hide();
+                } else {
+                    this.$('#list-of-holdings > tfoot').hide();
+                }
+                
+            }  
+            this.renderRows(this.collection);
+    },
+    
+    /**
+     * Sets the Total Puchase Basis, Market Value and Gain/Loss for every holding
+     * @author Carlos Soto <carlos.soto>
+     * @param Holdings Collection: Backbone collection
+     * @return Holdings: same collection with the new variables
+     */
+    setTotals: function (collection, data) {
+        'use strict';
+        collection.each(function(holding) {
                 var quote = holding.get('quote');
                 holding.set( "purchaseBasis", holding.get('quantity') * holding.get('purchaseprice') );
                 holding.set( "marketValue", holding.get('quantity') * quote.price );
@@ -68,43 +101,7 @@ nano.views.Holdings = Backbone.View.extend({
                 data.totalMarketValue += holding.get( "marketValue");
                 data.totalGainLoss += holding.get( "gainLoss");
             });
-
-            var tpl = _.template( nano.utils.getTemplate(nano.conf.tpls.holdings) )(data);
-            this.$el.html(tpl);
-            this.tbody = this.$('#list-of-holdings > tbody');
-            
-            // Paginator controls
-            this.previous = this.$('#lohp-previous');
-            this.next = this.$('#lohp-next');
-
-            // For some reason, the div needs to be showing
-            // before doing the collapsing functions
-            this.$el.show();
-
-            //Prepare the view for collapsing sections
-            if ( nano.utils.isMobile() && !this.$el.html() )
-            {
-                nano.utils.setCollapsable(this);
-            }
-
-            // Store the current Page number 
-            this.page = page;
-            
-            // Check the page count of orders
-            if (this.pageCount <= 0){
-                // Render a no data message if the page count is 0 or less.
-                this.noHoldings();
-                this.next.addClass('disabled');
-                this.previous.addClass('disabled');
-                if (nano.utils.isMobile()){
-                    this.$('#list-of-holdings').hide();
-                } else {
-                    this.$('#list-of-holdings > tfoot').hide();
-                }
-                
-            }
-            
-            this.renderRows();
+        return collection;
     },
 
     /**
@@ -112,61 +109,23 @@ nano.views.Holdings = Backbone.View.extend({
      * @author Carlos Soto <carlos.soto>
      * @return void
      */
-    renderRows: function() {
-        this.tbody.html('');
-        var i = 0;
-        var length = this.model.length;
-        if ( nano.utils.isMobile() )
-        {
-            var holdings = [];
-            for ( i; i < length; ++i )
-            {
-                holdings.push(_.extend(this.model.at(i).toJSON(), {i:i}));
+    renderRows: function (collection) {
+        'use strict';
+        var i = 0,
+            length = collection.length,
+            holdings = [], // Used only for Mobile only
+            rows = '';
+        if (nano.utils.isMobile()) {
+             for ( i; i < length; ++i ) {
+                holdings.push(_.extend(collection.at(i).toJSON(), {i:i}));
             }
-            this.tbody.append( _.template( nano.utils.getTemplate(nano.conf.tpls.holdingRow) )({holdings : holdings}) );
-        }
-        else
-        {
-            for ( i; i < length; ++i )
-            {
-                this.tbody.append( _.template( nano.utils.getTemplate(nano.conf.tpls.holdingRow) )(_.extend(this.model.at(i).toJSON(), {i:i})) );
+            rows =  _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow))({holdings : holdings});
+        } else {
+            for ( i; i < length; ++i ) {
+                rows += _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow))(_.extend(collection.at(i).toJSON(), {i:i}));
             }
         }
-    },
-
-    /**
-     * Click event for the pagination buttons: 1, 2, 3... N
-     * @author Carlos Soto <carlos.soto>
-     * @param objet evt: Event Object
-     * @return void
-     */
-    go2page : function(evt) {
-        var pageNumber = evt.target.innerHTML;
-        window.location = nano.conf.hash.portfolioWithPage.replace(nano.conf.pageUrlKey, pageNumber);
-    },
-
-    /**
-     * Click event for the previous button
-     * @author Carlos Soto <carlos.soto>
-     * @return void
-     */
-    previousPage : function() {
-        if ( this.page > 1 )
-        {
-            window.location = nano.conf.hash.portfolioWithPage.replace( nano.conf.pageUrlKey, (this.page-1) );
-        }
-    },
-
-    /**
-     * Click event for the next button
-     * @author Carlos Soto <carlos.soto>
-     * @return void
-     */
-    nextPage : function(evt) {
-        if ( this.page < this.pageCount )
-        {
-            window.location = nano.conf.hash.portfolioWithPage.replace( nano.conf.pageUrlKey, (parseInt(this.page)+1) );
-        }
+        this.tbody.html(rows);
     },
 
     /**
@@ -174,13 +133,14 @@ nano.views.Holdings = Backbone.View.extend({
      * @author Carlos Soto <carlos.soto>
      * @return void
      */
-    showModal : function(evt){
-        var i = $(evt.target).attr('index');
-        var model = this.model.at(i);
-        var popup = $( _.template(nano.utils.getTemplate(nano.conf.tpls.holdingModal))(model.toJSON()) );
-        var view = this;
+    showModal : function (evt) {
+        'use strict';
+        var i = $(evt.target).attr('index'),
+            model = this.collection.at(i),
+            popup = $(_.template(nano.utils.getTemplate(nano.conf.tpls.holdingModal))(model.toJSON())),
+            view = this;
         popup.modal();
-        popup.find('#loh-sell').click(function(){
+        popup.find('#loh-sell').click(function () {
             $.ajax({
                 url : nano.conf.urls.sellHolding.replace(nano.conf.accountIdUrlKey, nano.session.accountid),
                 type : 'POST',
@@ -191,11 +151,8 @@ nano.views.Holdings = Backbone.View.extend({
                     ordertype : 'sell'
                 }),
                 success : function(data, textStatus, jqXHR){
-                    // Clear the HTML of the View so that it gets 
-                    // re-rendered and all of the values get recalculated
-                    view.$el.html('');
                     nano.instances.router.portfolio(view.page);
-                    nano.utils.goTo( nano.conf.hash.portfolio );
+                    nano.utils.goTo(nano.conf.hash.portfolio);
                 },
                 error : nano.utils.onApiError
             });
@@ -207,7 +164,8 @@ nano.views.Holdings = Backbone.View.extend({
      * @author Jean Chassoul <jean.chassoul>
      * @return void
      */
-    noHoldings : function(){
+    noHoldings : function () {
+        'use strict';
         var htmlId = this.$('#no-holdings');
         htmlId.html(_.template(nano.utils.getTemplate(nano.conf.tpls.warning))({msg:'noDataAvailable'}) );
     }

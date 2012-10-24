@@ -16,11 +16,11 @@ nano.views.Footer = Backbone.View.extend({
     /**
      * Class constructor
      * @author Carlos Soto <carlos.soto>
-     * @param Object options:
-     * - el: selector for the container
+     * @param Object options: options for the view
      * @return void
      */
-    initialize : function(options) {
+    initialize : function (options) {
+        'use strict';
         nano.containers.footer = this.$el;
     },
 
@@ -30,19 +30,19 @@ nano.views.Footer = Backbone.View.extend({
      * @return void
      */
     render: function() {
-        var viewMode = nano.utils.getViewPrefCookie();
-        var viewModeString = 'Mobile View';
+        'use strict';
+        var viewMode = nano.utils.getViewPrefCookie(),
+            viewModeString = 'Mobile View',
+            footer = '';
         // toggling from mobile -> full or full -> mobile
-        if (viewMode == null || "fullView" == viewMode) {
+        if (viewMode === null || "fullView" === viewMode) {
             viewModeString = 'Mobile View';
-        }
-        else if ("mobileView" == viewMode) {
+        } else if ("mobileView" === viewMode) {
             viewModeString = 'Full View';
         }
-        var data = {
+        footer = _.template(nano.utils.getTemplate(nano.conf.tpls.footer))({
             switchView : viewModeString
-        };
-        var footer = _.template(nano.utils.getTemplate(nano.conf.tpls.footer))(data);
+        });
         this.$el.html(footer);
     },
 
@@ -51,7 +51,8 @@ nano.views.Footer = Backbone.View.extend({
      * @author Carlos Soto <carlos.soto>
      * @return void
      */
-    contact: function() {
+    contact: function () {
+        'use strict';
         window.location = nano.conf.hash.contact;
     },
 
@@ -60,7 +61,8 @@ nano.views.Footer = Backbone.View.extend({
      * @author Carlos Soto <carlos.soto>
      * @return void
      */
-    help: function() {
+    help: function () {
+        'use strict';
         window.location = nano.conf.hash.help;
     },
     
@@ -69,16 +71,17 @@ nano.views.Footer = Backbone.View.extend({
      * @author Winston Koh <wkoh@vmware.com>
      * @return void
      */
-    switchView: function() {
-      var viewMode = nano.utils.getViewPrefCookie();
-      // toggling from mobile -> full or full -> mobile
-      if ("mobileView" == viewMode) {
-        nano.utils.setViewPrefCookie("fullView");
-        location.replace('index.html');
-      }
-      else if (viewMode == null || "fullView" == viewMode) {
-        nano.utils.setViewPrefCookie("mobileView");
-        location.replace('mobile.html');
-      }
+    switchView: function () {
+        'use strict';
+        var viewMode = nano.utils.getViewPrefCookie();
+        // toggling from mobile -> full or full -> mobile
+        if ("mobileView" === viewMode) {
+            nano.utils.setViewPrefCookie("fullView");
+            location.replace('index.html');
+        }
+        else if (viewMode === null || "fullView" === viewMode) {
+            nano.utils.setViewPrefCookie("mobileView");
+            location.replace('mobile.html');
+        }
     }
 });
