@@ -29,7 +29,14 @@
             [translate('cashBalance'), (account.get('balance') / totalAssets)],
             [translate('portfolioValue'), (portfolioSummary.get('totalMarketValue') / totalAssets)]
         ],
-        plot1;
+        plot1,
+        i;
+        
+        // Multiply by 100 so that they all belong numbers greater
+        // than zero. This is required for showing better percentages in the mobile version
+        for (i in data) {
+            data[i][1] *= 100;     
+        }
         
         this.$el.html(_.template(nano.utils.getTemplate(nano.conf.tpls.portfolio))());
         this.$el.show();
