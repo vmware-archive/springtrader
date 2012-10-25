@@ -1,7 +1,5 @@
 SpringTrader getting started guide is available under github wiki
 ==============================================================
-By downloading, installing, or using the Spring Trader software, you (the individual or legal entity) agree to be bound by the terms of the following license agreement:
-[License Agreement](https://github.com/vFabric/springtrader/raw/master/license-agreement.pdf)
 
 * See [Application Overview](https://github.com/vFabric/springtrader/wiki/Application-Overview)
 * See [Getting Started Guide](https://github.com/vFabric/springtrader/wiki/Getting-Started-Guide)
@@ -52,3 +50,7 @@ Deploy springtrader to tc Server in STS:
 
 * Click Finish
 * Wait for server to start and then browse to http://localhost:8080/spring-nanotrader-web
+
+-----
+By downloading, installing, or using the Spring Trader software, you (the individual or legal entity) agree to be bound by the terms of the following license agreement:
+[License Agreement](https://github.com/vFabric/springtrader/raw/master/license-agreement.pdf)
