@@ -1,5 +1,7 @@
 SpringTrader getting started guide is available under github wiki
 ==============================================================
+vFabric’s Reference Application, SpringTrader (previously named Nanotrader), provides customers with an end-to-end solution for developing, provisioning, and managing a distributed application in a cloud environment. The reference application and architecture provide customers and partners with a blueprint for development, infrastructure, and operations teams.
+
 By downloading, installing, or using the Spring Trader software, you (the individual or legal entity) agree to be bound by the terms of the following license agreement:
 [License Agreement](https://github.com/vFabric/springtrader/raw/master/license-agreement.pdf)
 
