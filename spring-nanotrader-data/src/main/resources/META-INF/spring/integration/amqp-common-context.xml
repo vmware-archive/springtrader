@@ -4,24 +4,87 @@
 	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
 	xsi:schemaLocation="http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--#################################################################### 
+	Rabbit connecton factory "addresses" attribute can be configured with 
+	one or more broker host/ports to enable client side fail over. The 
+	default is to use a single host running locally at the default rabbit 
+	port. To configure multiple hosts, edit the catalina.properties 
+	and add the NANO_RABBIT_HOST property with a value that lists the 
+	host/ports of the servers in the cluster. 
+	Example: NANO_RABBIT_HOST=host-one:5672,host-two:5672. 
+	Note: If you change the property within STS, right click the server 
+	and select "clean" from the menu to reload.
+	#################################################################### -->
+	
 
-    <rabbit:connection-factory  id="connectionFactory"
-		host="${NANO_RABBIT_HOST:localhost}"
-		port="${NANO_RABBIT_PORT:5672}"/>
-
-    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" />
+		
+	<rabbit:connection-factory id="connectionFactory"
+			host="${NANO_RABBIT_HOST:localhost}"
+			port="${NANO_RABBIT_PORT:5672}"/>
+	
+	<!--  Enable clustered rabbit brokers by adding "clusteredRabbit" 
+		  to the catalina.properties property spring.active.profiles. 
+		  If enabled, this will override the connectionFactory bean above.
+	 -->
+	<beans profile="clusteredRabbit">
+	  
+	    <rabbit:connection-factory  id="connectionFactory" 
+    			addresses="${NANO_RABBIT_HOSTS:localhost:5679}"/>
+	</beans>
+	
+	<beans >
+    
+<!--#################################################################### 
+    Using the rabbit template with json message converter. This simplifies 
+    the integration flow as there is no need to configure object-to-json or
+    json-to-object transformers. The outbound adapter will place the
+    "content-type"="application/json" and "__TypeId__"=	
+    "org.springframework.nanotrader.service.domain.Orderinto the amqp message"
+    into the message header which will be used by the amqp inbound adapter
+	#################################################################### -->
+    <bean id="jsonConverter" class="org.springframework.amqp.support.converter.JsonMessageConverter"/>
+    
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" message-converter="jsonConverter"  />
 
     <rabbit:admin connection-factory="connectionFactory" />
+    
+<!--#################################################################### 
+	Order Queue:
+	The order queue needs to have a higher QoS. Orders will remain in 
+	the queue indefinitely.
+	#################################################################### -->
+	
+    <rabbit:queue name="nanotrader.order.queue"  >
+	    <rabbit:queue-arguments>
+			<entry key="x-ha-policy" value="all" />
+		</rabbit:queue-arguments>
+    </rabbit:queue>
+    
+<!--#################################################################### 
+	Quote Queue:
+	Expire quotes that sit longer than 30 seconds, as they are of no value
+	#################################################################### -->
+	
+    <rabbit:queue name="nanotrader.quote.queue" >
+	    <rabbit:queue-arguments >
+	    <entry key="x-message-ttl">
+			<value type="java.lang.Long">30000</value>
+		</entry>
+		<entry key="x-ha-policy" value="all" />
+		</rabbit:queue-arguments>
+		
+	
+    </rabbit:queue>
 
-    <rabbit:queue name="nanotrader.order.queue" />
-
-    <rabbit:queue name="nanotrader.quote.queue" />
-
+<!--#################################################################### 
+	Exchange and bindings
+	#################################################################### -->
+	
     <rabbit:direct-exchange name="nanotrader.exchange">
         <rabbit:bindings>
             <rabbit:binding queue="nanotrader.order.queue" key="nanotrader.order.binding" />
             <rabbit:binding queue="nanotrader.quote.queue" key="nanotrader.quote.binding" />
         </rabbit:bindings>
     </rabbit:direct-exchange>
-
+	</beans>
 </beans>

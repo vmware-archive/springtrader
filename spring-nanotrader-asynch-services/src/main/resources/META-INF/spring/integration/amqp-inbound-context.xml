@@ -1,59 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
 	xmlns:int="http://www.springframework.org/schema/integration"
 	xsi:schemaLocation="http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<import resource="amqp-common-context.xml"/>
+	<import resource="amqp-common-context.xml" />
 
-	<int-amqp:inbound-channel-adapter  channel="fromAmqpOrdersChannel"
-		queue-names="nanotrader.order.queue"
-		connection-factory="connectionFactory" error-channel="quoteErrorChannel"/>
+<!--#################################################################### 
+	Order Processing:
+	a) Receives the order
+	b) Creates an order record (inside the service activator)
+	c) Creates a holding
+	d) Updates the account balance
+	c) Publishes a quote with an updated price
+	#################################################################### -->
+	
+	<int-amqp:inbound-channel-adapter
+		mapped-request-headers="uniqueId" channel="toTradingServiceChannel"
+		message-converter="jsonConverter" queue-names="nanotrader.order.queue"
+		connection-factory="connectionFactory" />
 
-	<int:channel id="fromAmqpOrdersChannel" />
-
-	<int:json-to-object-transformer input-channel="fromAmqpOrdersChannel"
-		output-channel="toTradingServiceChannel"
-		type="org.springframework.nanotrader.service.domain.Order"/>
-
-	<int:channel id="toTradingServiceChannel" />
-
-	<int:service-activator input-channel="toTradingServiceChannel"
-		output-channel="nullChannel"
-		ref="tradingServiceFacadeImpl" method="saveOrderDirect"/>
-
-	<!-- Quotes -->
-
-	<int-amqp:inbound-channel-adapter channel="fromAmqpQuotesChannel"
-		queue-names="nanotrader.quote.queue"
-		connection-factory="connectionFactory"  />
-
-
-	<int:channel id="fromAmqpQuotesChannel" />
-
-	<int:json-to-object-transformer input-channel="fromAmqpQuotesChannel" 
-		output-channel="toQuoteServiceChannel"
-		type="org.springframework.nanotrader.service.domain.Quote"/>
-
-	<int:channel id="toQuoteServiceChannel" />
-
-	<int:channel id="quoteErrorChannel" >
+	<int:channel id="toTradingServiceChannel">
 		<int:interceptors>
-			<int:wire-tap channel="toQuoteErrorLoggerChannel" />
+			<int:wire-tap channel="toGeneralloggingChannel" />
 		</int:interceptors>
 	</int:channel>
-	
-	<int:channel id="toQuoteErrorLoggerChannel"/>
-		
-	<bean id="quoteLoggingServiceActivator" class="org.springframework.nanotrader.asynch.common.ExceptionHandler" />
-		
-	<int:service-activator input-channel="quoteErrorChannel" ref="quoteLoggingServiceActivator"/>
-	
-	<int:logging-channel-adapter  logger-name="org.springframework.nanotrader.asynch.quoteLogger" channel="toQuoteServiceChannel" level="INFO" />
-	
-	<int:logging-channel-adapter  logger-name="org.springframework.nanotrader.asynch.orderErrorLogger" channel="toQuoteErrorLoggerChannel" level="ERROR"   />
 
+	<int:service-activator input-channel="toTradingServiceChannel"
+		output-channel="nullChannel" ref="tradingServiceFacadeImpl" method="saveOrderDirect">
+		<int:request-handler-advice-chain>
+			<ref bean="retryAdvice" />
+		</int:request-handler-advice-chain>
+	</int:service-activator>
+
+
+<!--#################################################################### 
+	Quote Processing: Receive it and log it to file
+	#################################################################### -->
+
+	<int-amqp:inbound-channel-adapter
+		channel="toGeneralloggingChannel" message-converter="jsonConverter"
+		queue-names="nanotrader.quote.queue" connection-factory="connectionFactory" />
+
+
+<!--#################################################################### 
+	Retry Handling: 
+	#################################################################### -->
+	
+	<bean id="retryAdvice" class="org.springframework.integration.handler.advice.RequestHandlerRetryAdvice">
+		<property name="retryStateGenerator">
+			<bean class="org.springframework.integration.handler.advice.SpelExpressionRetryStateGenerator">
+				<constructor-arg value="headers['uniqueId']" />
+			</bean>
+		</property>
+		<property name="recoveryCallback">
+			<bean class="org.springframework.integration.handler.advice.ErrorMessageSendingRecoverer">
+				<constructor-arg ref="toRecoveryHandlerChannel" />
+			</bean>
+		</property>
+	</bean>
+
+	<int:channel id="toRecoveryHandlerChannel" />
+	
+	<int:chain input-channel="failedChannel">
+		<int:transformer expression="'Retries exceeded: permanently failed:' + payload.failedMessage.payload + ' handled by recovery'" />
+		<int:logging-channel-adapter
+			logger-name="org.springframework.nanotrader.asynch.generalLogger"
+			level="INFO" />
+	</int:chain>
+	
+<!--#################################################################### 
+	General Logging: 
+	#################################################################### -->
+		
+	<int:channel id="toGeneralloggingChannel" />
+
+	<int:logging-channel-adapter
+		logger-name="org.springframework.nanotrader.asynch.generalLogger"
+		channel="toGeneralloggingChannel" expression="'Received Payload: ' + payload " level="INFO" />
+		
 </beans>
