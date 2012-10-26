@@ -10,18 +10,20 @@
 	<import resource="amqp-common-context.xml"/>
 
 	<int:gateway service-interface="org.springframework.nanotrader.service.support.TradingServiceFacadeImpl$OrderGateway"
-		default-request-channel="toJsonChannel"/>
-
-	<int:channel id="toJsonChannel" />
-
-	<int:object-to-json-transformer input-channel="toJsonChannel"
-		output-channel="toAmqpChannel"/>
+		default-request-channel="toAmqpChannel"/>
 
 	<int:channel id="toAmqpChannel" />
-
-	<int-amqp:outbound-channel-adapter channel="toAmqpChannel"
-		amqp-template="amqpTemplate"
-		exchange-name="nanotrader.exchange"
-		routing-key="nanotrader.order.binding"/>
+	
+ 	<int:chain input-channel="toAmqpChannel" >
+     	<int:header-enricher>
+    	 	<int:header name="uniqueId" expression="T(System).nanoTime()"/>
+     	</int:header-enricher>
+     	<int-amqp:outbound-channel-adapter
+     		mapped-request-headers="uniqueId" 
+			amqp-template="amqpTemplate"
+			exchange-name="nanotrader.exchange"
+			routing-key="nanotrader.order.binding"/>
+    </int:chain>
+    
 
 </beans>
