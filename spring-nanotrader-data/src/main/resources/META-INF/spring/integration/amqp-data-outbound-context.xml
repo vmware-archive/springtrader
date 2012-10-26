@@ -11,25 +11,31 @@
 
 	<import resource="amqp-common-context.xml"/>
 
-	<int:gateway default-request-channel="quoteToJsonChannel"
+<!--#################################################################### 
+	Get message into Spring Integration via the gateway and 
+	send Quote to RabbitMQ. 
+	#################################################################### -->
+	
+	<int:gateway default-request-channel="quoteToAmqpChannel"
 		service-interface="org.springframework.nanotrader.data.service.TradingServiceImpl$QuotePublisher"
 		error-channel="quoteErrors"/>
 
-	<int:channel id="quoteToJsonChannel" />
-
-	<int:object-to-json-transformer input-channel="quoteToJsonChannel"
-		output-channel="quoteToAmqpChannel"/>
-
 	<int:channel id="quoteToAmqpChannel" />
 
-	<int-amqp:outbound-channel-adapter channel="quoteToAmqpChannel"
+    <int-amqp:outbound-channel-adapter 
+		channel="quoteToAmqpChannel"
 		amqp-template="amqpTemplate"
 		exchange-name="nanotrader.exchange"
 		routing-key="nanotrader.quote.binding"/>
-
+		
+<!--#################################################################### 
+	Error Logging: 
+	#################################################################### -->
+	
 	<int:channel id="quoteErrors" />
-
-	<int:logging-channel-adapter channel="quoteErrors"
-		level="ERROR" />
+	
+	<int:logging-channel-adapter
+		logger-name="org.springframework.nanotrader.asynch.quoteErrorLogger"
+		channel="quoteErrors" expression="'Failed to publish quote: ' + payload.failedMessage.payload " level="ERROR" />
 
 </beans>

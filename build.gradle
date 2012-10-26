@@ -59,14 +59,14 @@ subprojects { subproject ->
 	ext.log4jVersion = '1.2.12'
 	ext.mockitoVersion = '1.9.0'
 	ext.springVersion = '3.1.2.RELEASE'
-	ext.springAmqpVersion = '1.0.0.RELEASE'
+	ext.springAmqpVersion = '1.1.0.RELEASE'
 	ext.springDataMongoVersion = '1.0.0.RELEASE'
 	ext.springDataRedisVersion = '1.0.0.RELEASE'
 	ext.springGemfireVersion = '1.1.0.RELEASE'
 	ext.springSecurityVersion = '3.1.0.RELEASE'
 	ext.springSocialTwitterVersion = '1.0.1.RELEASE'
 	ext.springWsVersion = '2.0.3.RELEASE'
-	ext.springIntegrationVersion = '2.1.0.RELEASE'
+	ext.springIntegrationVersion = '2.2.0.RC2'
 	ext.springRooVersion = '1.2.0.RELEASE'
 	ext.javaxInjectVersion = '1'
 	ext.servletApiVersion = '2.5'
@@ -156,7 +156,7 @@ project('spring-nanotrader-service-support') {
 
 	dependencies {
 		compile project(":spring-nanotrader-data")
-		compile "org.springframework.integration:spring-integration-amqp:$springIntegrationVersion"
+		compile "org.springframework.integration:spring-integration-amqp:$springIntegrationVersion" 
 		compile "net.sf.dozer:dozer:$dozerVersion"
 		compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 		compile  "joda-time:joda-time:1.6"
