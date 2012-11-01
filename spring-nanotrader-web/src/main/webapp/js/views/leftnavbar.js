@@ -57,7 +57,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
      */
     profile: function () {
         'use strict';
-        nano.utils.goTo( nano.conf.hash.profile );
+        nano.instances.router.navigate( nano.conf.hash.profile );
     },
 
     /**
@@ -67,7 +67,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
      */
     overview: function () {
         'use strict';
-        nano.utils.goTo( nano.conf.hash.overview );
+        nano.instances.router.navigate( nano.conf.hash.overview );
     },
     
     /**
@@ -77,7 +77,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
      */
     help: function () {
         'use strict';
-        nano.utils.goTo( nano.conf.hash.help );
+        nano.instances.router.navigate( nano.conf.hash.help );
     },
 
     /**
@@ -86,6 +86,6 @@ nano.views.Leftnavbar = Backbone.View.extend({
      */
     admin: function () {
         'use strict';
-        nano.utils.goTo( nano.conf.hash.admin );
+        nano.instances.router.navigate( nano.conf.hash.admin );
     }
 });

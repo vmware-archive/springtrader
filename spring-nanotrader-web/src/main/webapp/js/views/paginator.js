@@ -84,7 +84,9 @@ nano.views.Paginator = Backbone.View.extend({
     refreshUI: function (btn) {
         'use strict';
         this.options.onPageChange(this.options.page);
-        this.setPage(btn);
+        if (btn) {
+            this.setPage(btn);
+        }
         nano.instances.router.navigate(this.options.hash.replace(nano.conf.pageUrlKey, this.options.page), false);
     },
 

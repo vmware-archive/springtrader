@@ -77,7 +77,7 @@ nano.views.Contact = Backbone.View.extend({
                 view.$('#phone-input').val('');
                 view.$('#message-input').val('');
                 // Show the loading page and render the dashboard
-                nano.utils.goTo( nano.conf.hash.dashboard );
+                nano.instances.router.navigate( nano.conf.hash.dashboard );
             },
             error : function() {
                 updateError.find('p').html(translate('unknowError'));

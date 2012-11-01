@@ -17,12 +17,13 @@ nano.Router = Backbone.Router.extend({
 
 	// Portfolio Page
 	"portfolio": "portfolio",
-        "portfolio/p:page": "portfolio",
+    "portfolio/p:page": "portfolio",
+    "portfolio/r:random": "portfolio",
 
 	// Trade Page
 	"trade/p:page": "trade",
-        "trade/q:quote": "quotes",
-        "trade/q:quote/:random": "quotes",
+    "trade/q:quote": "trade",
+    "trade/q:quote/p:page": "trade",
 	
 	// Login Page
         "login/:error": "login",
@@ -196,27 +197,27 @@ nano.Router = Backbone.Router.extend({
 					});
 				}
 		} else {
-			nano.utils.goTo( nano.conf.hash.login );
+			nano.instances.router.navigate(nano.conf.hash.login);
 		}
     },
 
-    login: function(error) {
-        if(nano.utils.loggedIn()) {
-            nano.utils.goTo( nano.conf.hash.dashboard );
-        }
-        else {
+    login: function (error) {
+        'use strict';
+        if (nano.utils.loggedIn()) {
+            nano.instances.router.navigate(nano.conf.hash.dashboard);
+        } else {
             nano.utils.hideAll();
             nano.instances.login.render(error);
             nano.instances.navbar.renderLogin();
         }
         nano.instances.footer.render();
     },
-    
-    registration: function(error){
-        if(nano.utils.loggedIn()) {
-            nano.utils.goTo( nano.conf.hash.dashboard );
-        }
-        else {
+
+    registration: function (error) {
+        'use strict';
+        if (nano.utils.loggedIn()) {
+            nano.instances.router.navigate(nano.conf.hash.dashboard);
+        } else {
             nano.utils.hideAll();
             nano.instances.registration.render(error);
         }
@@ -226,7 +227,7 @@ nano.Router = Backbone.Router.extend({
     portfolio: function (page) {
 		'use strict';
 		var modelCount = 0,
-			models =  [],
+			models =  {},
 			onFetchSuccess = function() {
 			if (++modelCount === _.keys(models).length)
 			{
@@ -258,39 +259,30 @@ nano.Router = Backbone.Router.extend({
                 });
             }
         } else {
-            nano.utils.goTo( nano.conf.hash.login );
+            nano.instances.router.navigate( nano.conf.hash.login );
         }
     },
 
     holdings: function (page) {
-        if (isNaN(page))
-        {
+        'use strict';
+        if (isNaN(page)) {
             page = 1;
         }
-        if ( !nano.containers.holdings.html() )
-        {
+        if (!nano.containers.holdings.html()) {
             this.portfolio(page);
-        }
-        else
-        {
-            // Hide the loading Message
-            //nano.containers.loading.show();
-            //nano.containers.holdings.hide();
-
+        } else {
             // Fetch the info for the Holdings page we need
             var holdings = new nano.models.Holdings({ accountid : nano.session.accountid });
             holdings.fetch({
-                data : {
-                    page : page
-                },
-                success : function(model, response){
+                data: {page: page},
+                success: function (model, response) {
                     // Hide the loading Message
                     nano.containers.loading.hide();
-
+                    
                     // Render the Holdings with the newly fetched info
                     nano.instances.holdings.render(model, page);
                 },
-                error : nano.utils.onApiError
+                error: nano.utils.onApiError
             });
         }
         nano.instances.footer.render();
@@ -341,7 +333,8 @@ nano.Router = Backbone.Router.extend({
                 });
             }
 		} else {
-			nano.instances.router.navigate(nano.conf.hash.login);
+            // "reload" the current view by adding a random number to trigger a refresh
+			nano.instances.router.navigate(window.location + '?r=' + Math.floor(Math.random()*101));
 		}
     },	
 
@@ -403,7 +396,7 @@ nano.Router = Backbone.Router.extend({
             });
         }
         else {
-            nano.utils.goTo( nano.conf.hash.login );
+            nano.instances.router.navigate( nano.conf.hash.login );
         }
         nano.instances.footer.render();
     },
@@ -486,7 +479,7 @@ nano.Router = Backbone.Router.extend({
             nano.instances.admin.render();
         }
         else {
-            nano.utils.goTo( nano.conf.hash.login );
+            nano.instances.router.navigate( nano.conf.hash.login );
         }
         nano.instances.footer.render();
     }
