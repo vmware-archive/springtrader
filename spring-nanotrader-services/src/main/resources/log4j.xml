@@ -18,7 +18,7 @@
 	</logger>
 	
 	<logger name="org.springsource.nanotrader">
-		<level value="error" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="org.springframework.nanotrader.service.support">

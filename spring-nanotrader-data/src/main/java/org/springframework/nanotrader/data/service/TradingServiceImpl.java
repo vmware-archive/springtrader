@@ -257,7 +257,7 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional 
 	public Order saveOrder(Order order) {
 		Order createdOrder = null;
 		if (log.isDebugEnabled()) {
@@ -265,17 +265,18 @@ public class TradingServiceImpl implements TradingService {
 		}
 		if (ORDER_TYPE_BUY.equals(order.getOrdertype())) {
 			createdOrder = buy(order);
-		}
-		else if (ORDER_TYPE_SELL.equals(order.getOrdertype())) {
+		} else if (ORDER_TYPE_SELL.equals(order.getOrdertype())) {
 			createdOrder = sell(order);
-		}
-		else {
+		} else {
 			throw new UnsupportedOperationException(
 					"Order type was not recognized. Valid order types are 'buy' or 'sell'");
 		}
+		
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.saveOrder: completed successfully.");
 		}
+		
+		
 		return createdOrder;
 	}
 
@@ -359,8 +360,11 @@ public class TradingServiceImpl implements TradingService {
 		}
 		order.setOrderstatus("closed");
 		order.setCompletiondate(new Date());
-		updateQuoteMarketData(order.getQuote().getSymbol(), FinancialUtils.getRandomPriceChangeFactor(),
-				order.getQuantity());
+
+			
+		updateQuoteMarketData(order.getQuote().getSymbol(), FinancialUtils.getRandomPriceChangeFactor(), order.getQuantity());
+	
+		
 		return order;
 	}
 
@@ -393,22 +397,44 @@ public class TradingServiceImpl implements TradingService {
 		accountRepository.save(account);
 	}
 
-	private void updateQuoteMarketData(String symbol, BigDecimal changeFactor, BigDecimal sharesTraded) {
-		Quote quote = quoteRepository.findBySymbol(symbol);
+	public void updateQuoteMarketData(String symbol, BigDecimal changeFactor, BigDecimal sharesTraded) {
 
-		BigDecimal oldPrice = quote.getPrice();
-		if (quote.getPrice().compareTo(FinancialUtils.PENNY_STOCK_PRICE) <= 0) {
-			changeFactor = FinancialUtils.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
-		}
-
-		BigDecimal newPrice = changeFactor.multiply(oldPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
-		quote.setPrice(newPrice);
-		quote.setVolume(quote.getVolume().add(sharesTraded));
-		quote.setChange1(newPrice.subtract(quote.getOpen1()));
-		quoteRepository.save(quote);
-		this.quotePublisher.publishQuote(quote);
+			Quote quote = quoteRepository.findBySymbol(symbol);
+			Quote quoteToPublish = new Quote();
+			quoteToPublish.setCompanyname(quote.getCompanyname());
+			quoteToPublish.setQuoteid(quote.getQuoteid());
+			quoteToPublish.setSymbol(quote.getSymbol());
+			quoteToPublish.setOpen1(quote.getOpen1());
+			quoteToPublish.setVersion(quote.getVersion());
+			BigDecimal oldPrice = quote.getPrice();
+			if (quote.getPrice().compareTo(FinancialUtils.PENNY_STOCK_PRICE) <= 0) {
+				changeFactor = FinancialUtils.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
+			}
+			if (quote.getPrice().compareTo(quote.getLow()) <= 0) { 
+				quoteToPublish.setLow(quote.getPrice());
+			} else { 
+				quoteToPublish.setLow(quote.getLow());
+			}
+			
+			if (quote.getPrice().compareTo(quote.getHigh()) > 0) { 
+				quoteToPublish.setHigh(quote.getPrice());
+			} else { 
+				quoteToPublish.setHigh(quote.getHigh());
+			}
+			
+			BigDecimal newPrice = changeFactor.multiply(oldPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
+			quoteToPublish.setPrice(newPrice);
+			quoteToPublish.setVolume(quote.getVolume().add(sharesTraded));
+			quoteToPublish.setChange1(newPrice.subtract(quote.getOpen1()));
+			this.quotePublisher.publishQuote(quoteToPublish);
 	}
-
+	
+	@Transactional
+	public void updateQuote(Quote quote) { 
+		System.out.println("-->Updating quote");
+		quoteRepository.save(quote);
+	}
+	
 	@Override
 	public Order updateOrder(Order order) {
 

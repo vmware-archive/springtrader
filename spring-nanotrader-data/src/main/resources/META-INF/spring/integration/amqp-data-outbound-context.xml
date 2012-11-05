@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
 	xmlns:int="http://www.springframework.org/schema/integration"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
@@ -9,33 +8,39 @@
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<import resource="amqp-common-context.xml"/>
+	<import resource="amqp-common-context.xml" />
 
-<!--#################################################################### 
-	Get message into Spring Integration via the gateway and 
-	send Quote to RabbitMQ. 
-	#################################################################### -->
-	
+	<!--#################################################################### 
+		Get message into Spring Integration via the gateway and send Quote to RabbitMQ. 
+		#################################################################### -->
+
 	<int:gateway default-request-channel="quoteToAmqpChannel"
 		service-interface="org.springframework.nanotrader.data.service.TradingServiceImpl$QuotePublisher"
-		error-channel="quoteErrors"/>
+		error-channel="quoteErrors" />
 
 	<int:channel id="quoteToAmqpChannel" />
 
-    <int-amqp:outbound-channel-adapter 
-		channel="quoteToAmqpChannel"
-		amqp-template="amqpTemplate"
-		exchange-name="nanotrader.exchange"
-		routing-key="nanotrader.quote.binding"/>
-		
-<!--#################################################################### 
-	Error Logging: 
-	#################################################################### -->
-	
+	<int:chain input-channel="quoteToAmqpChannel">
+		<int:header-enricher>
+			<int:header name="uniqueId" expression="T(System).nanoTime()" />
+		</int:header-enricher>
+		<int-amqp:outbound-channel-adapter
+			mapped-request-headers="uniqueId" amqp-template="amqpTemplate"
+			exchange-name="nanotrader.exchange" routing-key="nanotrader.quote.binding" />
+
+
+	</int:chain>
+
+
+
+	<!--#################################################################### 
+		Error Logging: #################################################################### -->
+
 	<int:channel id="quoteErrors" />
-	
+
 	<int:logging-channel-adapter
 		logger-name="org.springframework.nanotrader.asynch.quoteErrorLogger"
-		channel="quoteErrors" expression="'Failed to publish quote: ' + payload.failedMessage.payload " level="ERROR" />
+		channel="quoteErrors" expression="'Failed to publish quote: ' + payload.failedMessage.payload "
+		level="ERROR" />
 
 </beans>
