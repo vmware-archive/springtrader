@@ -399,6 +399,7 @@ public class TradingServiceImpl implements TradingService {
 
 	public void updateQuoteMarketData(String symbol, BigDecimal changeFactor, BigDecimal sharesTraded) {
 
+			System.out.println("Invoked......");
 			Quote quote = quoteRepository.findBySymbol(symbol);
 			Quote quoteToPublish = new Quote();
 			quoteToPublish.setCompanyname(quote.getCompanyname());
