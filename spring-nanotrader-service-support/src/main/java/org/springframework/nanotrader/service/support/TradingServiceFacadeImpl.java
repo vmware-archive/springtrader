@@ -260,12 +260,15 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
     
     public Integer saveOrder(Order orderRequest, boolean synch) {
         if (synch) {
-            return saveOrderDirect(orderRequest);
+            
+        	return saveOrderDirect(orderRequest);
         }
         else {
             orderGateway.sendOrder(orderRequest);
+          
             return null;
         }
+        
     }
 
     public Integer saveOrderDirect(Order orderRequest) {
@@ -275,8 +278,7 @@ public class TradingServiceFacadeImpl implements TradingServiceFacade {
         return order.getOrderid();
     }
 
-    
-
+   
     public Order findOrder(Integer orderId, Integer accountId) {
         if (log.isDebugEnabled()) {
             log.debug("TradingServiceFacade.findOrder: orderId=" + orderId + " accountId=" + accountId);

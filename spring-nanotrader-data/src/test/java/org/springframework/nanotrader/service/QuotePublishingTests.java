@@ -57,7 +57,8 @@ public class QuotePublishingTests {
 		quote.setPrice(BigDecimal.valueOf(120.0));
 		quote.setVolume(BigDecimal.valueOf(1000));
 		quote.setOpen1(BigDecimal.valueOf(115.0));
-		
+		quote.setHigh(BigDecimal.valueOf(130.0));
+		quote.setLow(BigDecimal.valueOf(1.0));
 		Mockito.when(quoteRepository.findBySymbol("VMW")).thenReturn(quote);
 	}
 

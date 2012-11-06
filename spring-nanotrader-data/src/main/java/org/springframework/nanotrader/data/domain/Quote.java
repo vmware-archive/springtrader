@@ -43,6 +43,10 @@ public class Quote implements Serializable {
         return version;
     }
 	
+	public void setVersion(int version) { 
+		this.version = version;
+	}
+	
 	public Integer getQuoteid() {
         return this.quoteid;
     }

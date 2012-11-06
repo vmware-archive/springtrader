@@ -15,6 +15,7 @@
  */
 package org.springframework.nanotrader.data.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -97,4 +98,6 @@ public interface TradingService {
 	public abstract void deleteAccountByUserid(String userId);
 	
 	public abstract void killServer(); 
+	
+	public void updateQuote(Quote quote);
 }
