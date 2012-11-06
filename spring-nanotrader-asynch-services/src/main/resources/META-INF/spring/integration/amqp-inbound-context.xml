@@ -37,13 +37,26 @@
 
 
 <!--#################################################################### 
-	Quote Processing: Receive it and log it to file
+	Quote Processing: Receive it, Update it and log it to file
 	#################################################################### -->
 
 	<int-amqp:inbound-channel-adapter
-		channel="toGeneralloggingChannel" message-converter="jsonConverter"
+		channel="toTradingServiceQuoteChannel" message-converter="jsonConverter"
 		queue-names="nanotrader.quote.queue" connection-factory="connectionFactory" />
+	
+	<int:channel id="toTradingServiceQuoteChannel">
+		<int:interceptors>
+			<int:wire-tap channel="toGeneralloggingChannel" />
+		</int:interceptors>
+	</int:channel>
 
+	<int:service-activator input-channel="toTradingServiceQuoteChannel"
+		output-channel="nullChannel" ref="tradingServiceImpl" method="updateQuote">
+		<int:request-handler-advice-chain>
+			<ref bean="retryAdvice" />
+		</int:request-handler-advice-chain>
+	</int:service-activator>
+	
 
 <!--#################################################################### 
 	Retry Handling: 
