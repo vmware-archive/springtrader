@@ -70,7 +70,7 @@ PERSISTENT SYNCHRONOUS
 REPLICATE;
 
 CREATE UNIQUE INDEX ACCOUNTPROFILE_USERID_KEY ON ACCOUNTPROFILE (USERID);
-
+CREATE INDEX ACCOUNTPROFILE_AUTHTOKEN_KEY ON ACCOUNTPROFILE (AUTHTOKEN);
 
 
 -- ----------------------------------------------------------------------- 
@@ -94,7 +94,7 @@ PERSISTENT SYNCHRONOUS
 REDUNDANCY 1
 PARTITION BY PRIMARY KEY;
 
-
+CREATE UNIQUE INDEX ACCOUNT_PROFILE_PROFILEID_KEY ON ACCOUNT (PROFILE_PROFILEID);
 -- ----------------------------------------------------------------------- 
 -- HIBERNATE_SEQUENCES 
 -- ----------------------------------------------------------------------- 
@@ -126,6 +126,7 @@ PERSISTENT SYNCHRONOUS
 PARTITION BY COLUMN (ACCOUNT_ACCOUNTID)
 COLOCATE WITH (ACCOUNT);
 
+CREATE INDEX HOLDING_ACCOUNT_ACCOUNTID_KEY ON HOLDING (ACCOUNT_ACCOUNTID);
 -- ----------------------------------------------------------------------- 
 -- ORDERS 
 -- ----------------------------------------------------------------------- 
@@ -149,6 +150,8 @@ REDUNDANCY 1
 PERSISTENT SYNCHRONOUS
 PARTITION BY COLUMN (ACCOUNT_ACCOUNTID)
 COLOCATE WITH (ACCOUNT);
+
+CREATE INDEX ORDERS_HOLDING_HOLDINGID_KEY ON ORDERS (HOLDING_HOLDINGID);
 
 -- ----------------------------------------------------------------------- 
 -- QUOTE 
