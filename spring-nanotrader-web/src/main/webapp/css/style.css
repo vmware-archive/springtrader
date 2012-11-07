@@ -586,7 +586,7 @@ span.border-bg {
     padding-left:0;
     padding-right:160px;
 }
-table td input {
+table td input[type="number"] {
     margin-bottom:0;
 }
 .modal {
