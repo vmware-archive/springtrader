@@ -7,12 +7,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
     /**
      * Bind the events functions to the different HTML elements
      */
-    events: {
-        'click #lnb-profile' : 'profile',
-        'click #lnb-overview' : 'overview',
-        'click #lnb-admin' : 'admin',
-        'click #lnb-help' : 'help'
-    },
+    events: {},
 
     /**
      * Class constructor
@@ -44,48 +39,7 @@ nano.views.Leftnavbar = Backbone.View.extend({
         this.$el.show();
         
         if (nano.session.username !== "admin") {
-        	$('#lnb-admin').remove();
-        } else {
-        	$('#lnb-admin').show();
+        	this.$('#lnb-admin').remove();
         }
     },
-    
-    /**
-     * Profile Click Event
-     * @author Jean Chassoul <jean.chassoul>
-     * @return void
-     */
-    profile: function () {
-        'use strict';
-        nano.utils.goTo( nano.conf.hash.profile );
-    },
-
-    /**
-     * Overview Click Event
-     * @author Jean Chassoul <jean.chassoul>
-     * @return void
-     */
-    overview: function () {
-        'use strict';
-        nano.utils.goTo( nano.conf.hash.overview );
-    },
-    
-    /**
-     * Help Click Event
-     * @author Jean Chassoul <jean.chassoul>
-     * @return void
-     */
-    help: function () {
-        'use strict';
-        nano.utils.goTo( nano.conf.hash.help );
-    },
-
-    /**
-     * Admin Click Event
-     * @return void
-     */
-    admin: function () {
-        'use strict';
-        nano.utils.goTo( nano.conf.hash.admin );
-    }
 });

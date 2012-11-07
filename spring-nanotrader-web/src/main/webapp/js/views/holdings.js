@@ -30,14 +30,13 @@ nano.views.Holdings = Backbone.View.extend({
      * @param int page: page of the List of Holdings to display
      * @return void
      */
-     render: function(collection, page) {
+     render: function (collection, page) {
             'use strict';
-            var paginator,            
-                pageCount = Math.ceil(collection.totalRecords / collection.pageSize),
+            var pageCount = Math.ceil(collection.totalRecords / collection.pageSize),
                 data = {
-                    totalPurchaseBasis : 0,
-                    totalMarketValue : 0, 
-                    totalGainLoss : 0
+                    totalPurchaseBasis: 0,
+                    totalMarketValue: 0, 
+                    totalGainLoss: 0
                 };
                 
             if (collection) {
@@ -46,7 +45,7 @@ nano.views.Holdings = Backbone.View.extend({
             if (page > pageCount) {
                 page = pageCount;
             }
-            paginator = new nano.views.Paginator({
+            this.paginator = new nano.views.Paginator({
                 pageCount: pageCount,            
                 page: page,
                 hash: nano.conf.hash.portfolioWithPage,
@@ -65,7 +64,7 @@ nano.views.Holdings = Backbone.View.extend({
 
             this.collection = this.setTotals(collection, data);
             this.$el.html(_.template( nano.utils.getTemplate(nano.conf.tpls.holdings) )(data));
-            this.$el.find('.pagination-container').html(paginator.render());
+            this.$el.find('.pagination-container').html(this.paginator.render());
             this.tbody = this.$('#list-of-holdings > tbody');
             this.$el.show();
 
@@ -140,23 +139,22 @@ nano.views.Holdings = Backbone.View.extend({
             popup = $(_.template(nano.utils.getTemplate(nano.conf.tpls.holdingModal))(model.toJSON())),
             view = this;
         popup.modal();
-        popup.find('#loh-sell').click(function () {
+        popup.find('#loh-sell').click(_.bind(function () {
             $.ajax({
-                url : nano.conf.urls.sellHolding.replace(nano.conf.accountIdUrlKey, nano.session.accountid),
-                type : 'POST',
-                headers : nano.utils.getHttpHeaders(),
-                dataType : 'json',
-                data : JSON.stringify({
+                url: nano.conf.urls.sellHolding.replace(nano.conf.accountIdUrlKey, nano.session.accountid),
+                type: 'POST',
+                headers: nano.utils.getHttpHeaders(),
+                dataType: 'json',
+                data: JSON.stringify({
                     holdingid : model.get('holdingid'),
                     ordertype : 'sell'
                 }),
-                success : function(data, textStatus, jqXHR){
-                    nano.instances.router.portfolio(view.page);
-                    nano.utils.goTo(nano.conf.hash.portfolio);
-                },
-                error : nano.utils.onApiError
+                success: _.bind(function (data, textStatus, jqXHR) {
+                    Backbone.history.loadUrl(Backbone.history.fragment);
+                }, this),
+                error: nano.utils.onApiError
             });
-        });
+        }, this));
     },
     
     /**
