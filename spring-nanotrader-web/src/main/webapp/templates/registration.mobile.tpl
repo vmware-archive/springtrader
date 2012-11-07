@@ -83,7 +83,7 @@
         <div class="span2 columns sidebar">
             <h3><%= translate("nanoTraderLogin") %></h3>
             <p><%= translate("alreadyRegistered") %></p>
-            <p><a id="showLoginBtn" class="btn btn-inverse pull-right"><%= translate("loginPage") %></a></p>
+            <div class="pagination-right"><a id="showLoginBtn" class="btn btn-inverse"><%= translate("loginPage") %></a></div>
         </div>
     </div>
 </div>
