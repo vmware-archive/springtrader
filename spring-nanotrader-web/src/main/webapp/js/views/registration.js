@@ -179,7 +179,7 @@ nano.views.Registration = Backbone.View.extend({
                         view.addressInput.val('');
 
                         // Show the loading page and render the dashboard
-                        nano.instances.router.navigate( nano.conf.hash.dashboard );
+                        nano.instances.router.navigate(nano.conf.hash.dashboard, true);
                     },
                     error : function(jqXHR, textStatus, errorThrown) {
                         switch(jqXHR.status) {

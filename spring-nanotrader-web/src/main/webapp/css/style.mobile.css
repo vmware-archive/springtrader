@@ -570,4 +570,10 @@ div.jqplot-table-legend-swatch {
 .jqplot-table-legend {
 	background:none !important;
 	border:0 !important;
-}	
+}
+
+
+.modal.fade.in {
+    margin-top: -25%;
+    top: 50%;
+}

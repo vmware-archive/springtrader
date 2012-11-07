@@ -34,7 +34,7 @@
                                   <% } %>
                                   <li><a id="help" href="<%= nano.conf.hash.help %>"><%= translate("help") %></a></li>
                                   <li class="divider"></li>
-                                  <li><a id="logout" href="nano.conf.hash.login"><%= translate("logout") %></a></li>
+                                  <li><a id="logout" href="<%= nano.conf.hash.login %>"><%= translate("logout") %></a></li>
                               </ul>
                           </div>
                       </li>

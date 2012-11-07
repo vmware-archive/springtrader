@@ -41,7 +41,7 @@ nano.Router = Backbone.Router.extend({
 
     initialize: function () {
 	'use strict';
-	var marketSummary = new nano.models.MarketSummary();
+        var marketSummary = new nano.models.MarketSummary();
 
         nano.instances.navbar = new nano.views.Navbar({el : '#nc-navbar'});
         nano.instances.footer = new nano.views.Footer({el : '#nc-footer'});
@@ -197,14 +197,14 @@ nano.Router = Backbone.Router.extend({
 					});
 				}
 		} else {
-			nano.instances.router.navigate(nano.conf.hash.login);
+			nano.instances.router.navigate(nano.conf.hash.login, true);
 		}
     },
 
     login: function (error) {
         'use strict';
         if (nano.utils.loggedIn()) {
-            nano.instances.router.navigate(nano.conf.hash.dashboard);
+            nano.instances.router.navigate(nano.conf.hash.dashboard, true);
         } else {
             nano.utils.hideAll();
             nano.instances.login.render(error);
@@ -216,7 +216,7 @@ nano.Router = Backbone.Router.extend({
     registration: function (error) {
         'use strict';
         if (nano.utils.loggedIn()) {
-            nano.instances.router.navigate(nano.conf.hash.dashboard);
+            nano.instances.router.navigate(nano.conf.hash.dashboard, true);
         } else {
             nano.utils.hideAll();
             nano.instances.registration.render(error);
@@ -259,7 +259,7 @@ nano.Router = Backbone.Router.extend({
                 });
             }
         } else {
-            nano.instances.router.navigate( nano.conf.hash.login );
+            nano.instances.router.navigate(nano.conf.hash.login, true);
         }
     },
 
@@ -334,7 +334,7 @@ nano.Router = Backbone.Router.extend({
             }
 		} else {
             // "reload" the current view by adding a random number to trigger a refresh
-			nano.instances.router.navigate(window.location + '?r=' + Math.floor(Math.random()*101));
+			nano.instances.router.navigate(window.location + '?r=' + Math.floor(Math.random()*101), true);
 		}
     },	
 
@@ -396,63 +396,49 @@ nano.Router = Backbone.Router.extend({
             });
         }
         else {
-            nano.instances.router.navigate( nano.conf.hash.login );
+            nano.instances.router.navigate(nano.conf.hash.login, true);
         }
         nano.instances.footer.render();
     },
-    
-    contact: function() {
+
+    contact: function () {
+        'use strict';
     	var contact = new nano.models.Contact();
         contact.fetch({
-        	success : function(){
-        		var jsonObj=contact.toJSON();
-        		if (navigator.geolocation) 
-        		{
-        			navigator.geolocation.getCurrentPosition( 
-        		 
-        				function (position) {  
-        					var minDistance=Number.POSITIVE_INFINITY;
-        			          var nearestOffice;
-        			          for(i=0;i<jsonObj.locations.length;i++)
-        			      	{
-
-        			              var distance = nano.utils.calculateDistance(position.coords.latitude,jsonObj.locations[i].latitude,position.coords.longitude,jsonObj.locations[i].longitude);
-        			              if(minDistance>distance)
-        			      		{
-        			                  minDistance=distance;
-        			                  nearestOffice=jsonObj.locations[i].address;
+        	success : function () {
+        		var jsonObj = contact.toJSON();
+        		if (navigator.geolocation) {
+        			navigator.geolocation.getCurrentPosition( function (position) {
+        					var minDistance = Number.POSITIVE_INFINITY,
+                                nearestOffice,
+                                i,
+                                distance;
+        			        for (i=0; i < jsonObj.locations.length; i++) {
+        			              distance = nano.utils.calculateDistance(position.coords.latitude,jsonObj.locations[i].latitude,position.coords.longitude,jsonObj.locations[i].longitude);
+        			              if (minDistance > distance) {
+        			                  minDistance = distance;
+        			                  nearestOffice = jsonObj.locations[i].address;
         			      		}
         			      	}
-        			          var str=nearestOffice;
-        			          
-        			         nano.strings.location=str;
-        		             nano.instances.contact.render();
-        				}, 
-        				function (error)
-        				{
+        			        nano.strings.location = nearestOffice;
+        		            nano.instances.contact.render();
+        				},
+        				function (error) {
         					nano.instances.contact.render();
-        				}
-        				);
-        			}
-        		else
-        			{
-        			nano.instances.contact.render();
+                        });
+        			} else {
+                        nano.instances.contact.render();
         			}
         		},
-        		error : function()
-        		{
+        		error : function () {
         			nano.instances.contact.render();
         		}
         	});
-        if(nano.utils.loggedIn()) {
+        if (nano.utils.loggedIn()) {
             nano.utils.hideAll();
             nano.instances.navbar.render();
-            
-            
-        }
-        else {
+        } else {
             nano.utils.hideAll();
-            
         }
         nano.instances.footer.render();
     },
@@ -479,7 +465,7 @@ nano.Router = Backbone.Router.extend({
             nano.instances.admin.render();
         }
         else {
-            nano.instances.router.navigate( nano.conf.hash.login );
+            nano.instances.router.navigate(nano.conf.hash.login, true);
         }
         nano.instances.footer.render();
     }

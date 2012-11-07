@@ -394,7 +394,7 @@ nano.utils.onApiError = function(model, error){
     switch( error.status ) {
         case 403:
             nano.utils.logout();
-            nano.instances.router.navigate( nano.conf.hash.login + '/sessionExpired' );
+            nano.instances.router.navigate(nano.conf.hash.login + '/sessionExpired', true);
             break;
         default:
             // Error Message!
@@ -564,7 +564,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
                     $('#showprogress').fadeOut(3000, function() {
                        $('#showprogress').remove();
                        nano.utils.logout();
-                       nano.instances.router.navigate( nano.conf.hash.login);
+                       nano.instances.router.navigate(nano.conf.hash.login, true);
                     });
                 });
             },

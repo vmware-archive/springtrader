@@ -1,4 +1,4 @@
-<div class="modal hide fade myModal" id="myModal" style="display: none;">
+<div class="modal hide myModal" id="myModal" style="display: none;">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
         <h3><%= translate("orderConfirmation") %></h3>

@@ -80,7 +80,7 @@ nano.views.Login = Backbone.View.extend({
                 passwordControl.removeClass('error');
 
                 //Show the loading page, hide the login page and render the dashboard
-                nano.instances.router.navigate( nano.conf.hash.dashboard );
+                nano.instances.router.navigate(nano.conf.hash.dashboard, true);
             },
             error : function (jqXHR, textStatus, errorThrown) {
                 loginError.show();
