@@ -577,3 +577,6 @@ div.jqplot-table-legend-swatch {
     margin-top: -25%;
     top: 50%;
 }
+.typeahead.dropdown-menu .active > a {
+    color:#39C;
+}
