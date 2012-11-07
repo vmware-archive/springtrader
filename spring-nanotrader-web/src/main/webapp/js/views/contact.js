@@ -30,11 +30,10 @@ nano.views.Contact = Backbone.View.extend({
      * @return void
      */
     render: function() {
-    	
-        if ( !this.$el.html() )
-        {
-        	var data={location: nano.strings.location};
-            var contact = _.template(nano.utils.getTemplate(nano.conf.tpls.contact))(data);
+        'use strict';
+        if (!this.$el.html()) {
+        	var data = {location: nano.strings.location},
+                contact = _.template(nano.utils.getTemplate(nano.conf.tpls.contact))(data);
             this.$el.html(contact);
         }
         this.$el.show();
@@ -77,7 +76,7 @@ nano.views.Contact = Backbone.View.extend({
                 view.$('#phone-input').val('');
                 view.$('#message-input').val('');
                 // Show the loading page and render the dashboard
-                nano.utils.goTo( nano.conf.hash.dashboard );
+                nano.instances.router.navigate(nano.conf.hash.dashboard, true);
             },
             error : function() {
                 updateError.find('p').html(translate('unknowError'));

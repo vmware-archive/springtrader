@@ -38,13 +38,15 @@
             </fieldset>
         </form>
     </div>
- <div class="span2 sidebar">
-    <h3><%= translate("Nearest VMware location") %></h3>
-    <p><%= translate(location) %></p>
+    <div class="span2 sidebar">
+        <h3><%= translate('nearestLocation') %></h3>
+        <p><%= location %></p>
     </div>
-    <div class="span2 columns sidebar">
+    <% if (!nano.utils.loggedIn()) { %>
+     <div class="span2 columns sidebar">
         <h3><%= translate("nanoTraderLogin") %></h3>
         <p><%= translate("alreadyRegistered") %></p>
         <p><a id="showLoginBtn"><%= translate("goToLoginPage") %></a></p>
     </div>
+    <% } %>
 </div>

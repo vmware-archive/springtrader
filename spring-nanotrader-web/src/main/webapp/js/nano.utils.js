@@ -282,16 +282,6 @@ nano.utils.getTemplate = function(url){
 };
 
 /**
- * Redirects to a different url/application widget
- * @author Carlos Soto <carlos.soto>
- * @param string url: new location to go to
- * @return Object
- */
-nano.utils.goTo = function(url) {
-    window.location = url;
-}
-
-/**
  * Renders a pie chart on the desired html id
  * @author Carlos Soto <carlos.soto>
  * @param string htmlId: id of the container (div) for the pie chart
@@ -404,7 +394,7 @@ nano.utils.onApiError = function(model, error){
     switch( error.status ) {
         case 403:
             nano.utils.logout();
-            nano.utils.goTo( nano.conf.hash.login + '/sessionExpired' );
+            nano.instances.router.navigate(nano.conf.hash.login + '/sessionExpired', true);
             break;
         default:
             // Error Message!
@@ -574,7 +564,7 @@ nano.utils.setUsers = function(userCount, callbacks) {
                     $('#showprogress').fadeOut(3000, function() {
                        $('#showprogress').remove();
                        nano.utils.logout();
-                       nano.utils.goTo( nano.conf.hash.login);
+                       nano.instances.router.navigate(nano.conf.hash.login, true);
                     });
                 });
             },

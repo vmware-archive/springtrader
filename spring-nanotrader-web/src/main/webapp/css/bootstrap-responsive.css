@@ -862,9 +862,6 @@
     width: auto;
     margin: 0;
   }
-  .modal.fade.in {
-    top: auto;
-  }
 }
 
 @media (max-width: 480px) {
