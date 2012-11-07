@@ -432,7 +432,6 @@ public class TradingServiceImpl implements TradingService {
 	
 	@Transactional
 	public void updateQuote(Quote quote) { 
-		System.out.println("-->Updating quote");
 		quoteRepository.save(quote);
 	}
 	
