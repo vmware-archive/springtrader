@@ -124,7 +124,7 @@ body {
     color:#ffffff;
     text-decoration:none;
 }
-.nav-collapse.in a.dropdown-toggle{
+.nav-collapse.in a.dropdown-toggle, .navbar .nav > li > a:hover, navbar .nav > li > a:focus {
     color:#ffffff;
 }
 .navbar .nav.nav-top .active > a, .navbar .nav.nav-top .active > a:hover, .navbar-text .dropdown.open > a.dropdown-toggle, .navbar-text .dropdown.open > a.dropdown-toggle:hover,
