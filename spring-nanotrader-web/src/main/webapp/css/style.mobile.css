@@ -162,6 +162,9 @@ table tbody tr.summary td,
 	width:285px;
 	margin:-250px 0 0;
 }
+.container.page {
+    padding: 5px;
+}
 .container.sub-page .span9.columns {
 	background:#ffffff;
 	border-top:1px solid #bbbdbf;
@@ -172,7 +175,7 @@ table tbody tr.summary td,
 	color:#000000;
 	font-size:20px;
 	font-weight:bold;
-	margin:0 0 10px 20px;
+	margin:0;
 }
 .container.sub-page h3 span{ 
 	color:#656565;
@@ -314,22 +317,7 @@ table tbody tr.summary td,
 	.span12 .well.show-well table .form-inline .btn{
 		margin:5px 0 0;
 	}
-	
-	.form-horizontal .span4 {
-		float:none;
-	}
-	
-	.form-horizontal .form-actions {
-		text-align:center;
-		padding-left:0;
-		padding-right:50px;
-	}
-
-	h3 {
-		margin-left:20px;
-	}
-	
-	.sidebar {
+    .sidebar {
 		padding-bottom:20px;
 		margin-bottom:0;
 	}
@@ -345,19 +333,9 @@ table tbody tr.summary td,
 	.show-table .span4:first-child {
 		margin-left:0;
 	}
-	.form-horizontal .form-actions {
-		padding-right:20px;
-		text-align:right;
-	}
-	h3 {
-		margin-left:0;
-	}
 }
 
 @media (min-width: 1007px) and (max-width: 1136px) { 
-	.form-horizontal .form-actions {
-		padding-right:80px;
-	}
 }
 
 @media (min-width: 979px) { 
@@ -379,14 +357,8 @@ table tbody tr.summary td,
 	.sub-page .span2.columns.sidebar {
 		margin-top:0;
 	}
-	.form-horizontal .form-actions {
-		padding-right:90px;
-	}
 	.container.sub-page h3 {	
 		margin:0 0 10px 60px;
-	}
-	.registration-page .form-horizontal .form-actions {
-		padding-right:160px;
 	}
 }
 
