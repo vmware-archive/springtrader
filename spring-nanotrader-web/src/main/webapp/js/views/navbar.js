@@ -33,7 +33,8 @@ nano.views.Navbar = Backbone.View.extend({
             portfolio : 'nb-portfolio',
             portfolioIcon : 'nb-portfolio-icon',
             trade : 'nb-trade',
-            tradeIcon : 'nb-trade-icon'
+            tradeIcon : 'nb-trade-icon',
+            profile : 'fat-menu'
         };
     },
     
@@ -71,6 +72,9 @@ nano.views.Navbar = Backbone.View.extend({
             this.$('ul.nav.nav-top a.nav-link').each(_.bind(function(i, ele){
                 this.linkContainers[ele.id] = $(ele.parentNode);
             }, this));
+            this.$('div.navbar-text ul.nav a.dropdown-toggle').each(_.bind(function(i, ele){
+                this.linkContainers[ele.parentNode.id] = $(ele.parentNode);
+            }, this));
         } else {
             this.username.html(nano.session.username);
         }
@@ -79,6 +83,7 @@ nano.views.Navbar = Backbone.View.extend({
         hashMap[nano.conf.hash.dashboard] = this.ids.dashboard;
         hashMap[nano.conf.hash.portfolio] = this.ids.portfolio;
         hashMap[nano.conf.hash.trade] = this.ids.trade;
+        hashMap[nano.conf.hash.profile] = this.ids.profile;
         for (i in this.linkContainers) {
             if (hashMap[hash] === i) {
                 this.linkContainers[i].addClass('active');

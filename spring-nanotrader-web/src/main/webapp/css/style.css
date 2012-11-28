@@ -131,6 +131,12 @@ body {
 .navbar-text.dropdown.active > a, .navbar-text .dropdown.active > a.dropdown-toggle:hover {
     background-color: #070707;
 }
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  color: #FFF;
+  background-color: transparent;
+}
 .navbar-text .divider-vertical, .navbar .nav > li.divider-vertical {
     background-color: #1b1b1b;
     border-left: 1px solid #636363;
