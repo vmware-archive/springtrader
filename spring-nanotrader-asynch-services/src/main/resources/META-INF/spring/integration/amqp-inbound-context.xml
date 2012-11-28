@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
 	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<import resource="amqp-common-context.xml" />
@@ -18,6 +21,7 @@
 	#################################################################### -->
 	
 	<int-amqp:inbound-channel-adapter
+		concurrent-consumers="10"
 		mapped-request-headers="uniqueId" channel="toTradingServiceChannel"
 		message-converter="jsonConverter" queue-names="nanotrader.order.queue"
 		connection-factory="connectionFactory" />
@@ -28,6 +32,7 @@
 		</int:interceptors>
 	</int:channel>
 
+	
 	<int:service-activator input-channel="toTradingServiceChannel"
 		output-channel="nullChannel" ref="tradingServiceFacadeImpl" method="saveOrderDirect">
 		<int:request-handler-advice-chain>
@@ -35,21 +40,46 @@
 		</int:request-handler-advice-chain>
 	</int:service-activator>
 
-
 <!--#################################################################### 
 	Quote Processing: Receive it, Update it and log it to file
 	#################################################################### -->
 
 	<int-amqp:inbound-channel-adapter
-		channel="toTradingServiceQuoteChannel" message-converter="jsonConverter"
+		channel="toTradingServiceQuoteAggregatorChannel" message-converter="jsonConverter"
 		queue-names="nanotrader.quote.queue" connection-factory="connectionFactory" />
 	
-	<int:channel id="toTradingServiceQuoteChannel">
+	<int:channel id="toTradingServiceQuoteAggregatorChannel">
 		<int:interceptors>
 			<int:wire-tap channel="toGeneralloggingChannel" />
 		</int:interceptors>
 	</int:channel>
+	
+	<int:aggregator input-channel="toTradingServiceQuoteAggregatorChannel" output-channel="toTradingServiceQuoteChannel"
+            ref="customAggregator"
+            release-strategy-expression="size() == 20"
+            correlation-strategy-expression="payload.symbol"
+            message-store="messageStore"
+            send-partial-result-on-expiry="true"
+            expire-groups-upon-completion="true"/>
+        
+    <bean id="customAggregator" class="org.springframework.nanotrader.asynch.aggregator.QuoteAggregator"/>
 
+    <bean id="messageStore" class="org.springframework.integration.store.SimpleMessageStore" />
+      
+    <int:channel id="toTradingServiceQuoteChannel" />
+		
+    <bean id="reaper" class="org.springframework.integration.store.MessageGroupStoreReaper">
+        <property name="messageGroupStore" ref="messageStore"/>
+        <property name="timeout" value="12000"/>
+    </bean>
+    
+    <!--  Run reaper every 1 sec -->
+    <task:scheduled-tasks scheduler="scheduler" >
+        <task:scheduled ref="reaper"  method="run" fixed-rate="1000"/>
+    </task:scheduled-tasks>
+
+    <task:scheduler id="scheduler" pool-size="10"/>
+    
 	<int:service-activator input-channel="toTradingServiceQuoteChannel"
 		output-channel="nullChannel" ref="tradingServiceImpl" method="updateQuote">
 		<int:request-handler-advice-chain>
@@ -77,8 +107,8 @@
 
 	<int:channel id="toRecoveryHandlerChannel" />
 	
-	<int:chain input-channel="failedChannel">
-		<int:transformer expression="'Retries exceeded: permanently failed:' + payload.failedMessage.payload + ' handled by recovery'" />
+	<int:chain input-channel="toRecoveryHandlerChannel">
+		<int:transformer expression="'Retries exceeded: permanently failed:' + payload.failedMessage + ' handled by recovery. Error Message: ' + payload.cause.message" />
 		<int:logging-channel-adapter
 			logger-name="org.springframework.nanotrader.asynch.generalLogger"
 			level="INFO" />
@@ -87,11 +117,10 @@
 <!--#################################################################### 
 	General Logging: 
 	#################################################################### -->
-		
 	<int:channel id="toGeneralloggingChannel" />
 
-	<int:logging-channel-adapter
+	<int:logging-channel-adapter 
 		logger-name="org.springframework.nanotrader.asynch.generalLogger"
-		channel="toGeneralloggingChannel" expression="'Received Payload: ' + payload " level="INFO" />
-		
+		channel="toGeneralloggingChannel" log-full-message="true"  level="INFO" />
+
 </beans>

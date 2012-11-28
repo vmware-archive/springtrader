@@ -258,7 +258,7 @@ public class TradingServiceImpl implements TradingService {
 
 	@Override
 	@Transactional 
-	public Order saveOrder(Order order) {
+	public Order saveOrder(Order order)  {
 		Order createdOrder = null;
 		if (log.isDebugEnabled()) {
 			log.debug("TradingServices.saveOrder: order=" + order.toString());
@@ -281,6 +281,7 @@ public class TradingServiceImpl implements TradingService {
 	}
 
 	private Order buy(Order order) {
+		
 		Account account = accountRepository.findOne(order.getAccountAccountid().getAccountid());
 		Quote quote = quoteRepository.findBySymbol(order.getQuote().getSymbol());
 		Holding holding = null;
@@ -315,6 +316,7 @@ public class TradingServiceImpl implements TradingService {
 		}
 		Quote quote = quoteRepository.findBySymbol(holding.getQuoteSymbol());
 		// create order and persist
+		
 		Order createdOrder = createOrder(order, account, holding, quote);
 		// Update account balance and create holding
 		completeOrder(createdOrder);
@@ -399,14 +401,13 @@ public class TradingServiceImpl implements TradingService {
 
 	public void updateQuoteMarketData(String symbol, BigDecimal changeFactor, BigDecimal sharesTraded) {
 
-
+		
 			Quote quote = quoteRepository.findBySymbol(symbol);
 			Quote quoteToPublish = new Quote();
 			quoteToPublish.setCompanyname(quote.getCompanyname());
 			quoteToPublish.setQuoteid(quote.getQuoteid());
 			quoteToPublish.setSymbol(quote.getSymbol());
 			quoteToPublish.setOpen1(quote.getOpen1());
-			quoteToPublish.setVersion(quote.getVersion());
 			BigDecimal oldPrice = quote.getPrice();
 			if (quote.getPrice().compareTo(FinancialUtils.PENNY_STOCK_PRICE) <= 0) {
 				changeFactor = FinancialUtils.PENNY_STOCK_RECOVERY_MIRACLE_MULTIPLIER;
