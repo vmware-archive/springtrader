@@ -439,6 +439,7 @@ nano.Router = Backbone.Router.extend({
             nano.instances.navbar.render();
         } else {
             nano.utils.hideAll();
+            nano.instances.navbar.renderLogin();
         }
         nano.instances.footer.render();
     },
