@@ -502,7 +502,6 @@ table tbody tr.summary td,
     }
 }
 
-
 /* @end 
 -------------------------------------*/
 
@@ -515,6 +514,12 @@ table tbody tr.summary td,
 
 .ie7 .show-table .span4:first-child {
 	margin-left:2px;	
+}
+
+/* paginator 
+------------*/
+.pagination-container {
+    display: inline-table;
 }
 
 /* jqplot-target (Pie and Donut charts)
