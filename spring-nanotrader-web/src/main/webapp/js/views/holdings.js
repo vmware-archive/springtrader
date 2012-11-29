@@ -121,6 +121,10 @@ nano.views.Holdings = Backbone.View.extend({
             rows =  _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow))({holdings : holdings});
         } else {
             for ( i; i < length; ++i ) {
+                if (collection.at(i).id == nano.conf.lastSellOrderId) {
+                    // this order was submitted for sell, lets not show it in holding table
+                    continue;
+                }
                 rows += _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow))(_.extend(collection.at(i).toJSON(), {i:i}));
             }
         }
@@ -151,6 +155,10 @@ nano.views.Holdings = Backbone.View.extend({
                 }),
                 success: _.bind(function (data, textStatus, jqXHR) {
                     Backbone.history.loadUrl(Backbone.history.fragment);
+                    // Save holding id for this sell order
+                    // In case server is still processing the sell order and 
+                    // returns it as a holding we use this id and hide it from holding table
+                    nano.conf.lastSellOrderId = model.get('holdingid');
                 }, this),
                 error: nano.utils.onApiError
             });
