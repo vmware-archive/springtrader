@@ -371,7 +371,7 @@ nano.Router = Backbone.Router.extend({
             }
             
             // Render the Navigation bar
-            nano.instances.navbar.render();
+            nano.instances.navbar.render(nano.conf.hash.profile);
 
             // Set the Account profile model with the profileid of the current user
             var model = new nano.models.AccountProfile({ profileid : nano.session.profileid });
@@ -439,6 +439,7 @@ nano.Router = Backbone.Router.extend({
             nano.instances.navbar.render();
         } else {
             nano.utils.hideAll();
+            nano.instances.navbar.renderLogin();
         }
         nano.instances.footer.render();
     },
