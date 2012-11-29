@@ -17,7 +17,8 @@ nano.conf = {
     pageSize : 5,                                   // Amount of items to be displayed on list views
     successCss : 'alert alert-block alert-success', // CSS Class to show success message (or Positive Balance)
     errorCss : 'alert alert-block alert-error',     // CSS Class to show error message (or Negative Balance)
-    pageCountSize : 10                              // Amount of pages to be displayed on the pagination
+    pageCountSize : 10,                             // Amount of pages to be displayed on the pagination
+    lastSellOrderId : -1                            // Order id of last sold quote
 };
 /**
  * API urls
@@ -32,7 +33,7 @@ nano.conf.urls = {
     holdingSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdingSummary',
     portfolioSummary : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/portfolioSummary',
     holdings : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/holdings',
-    sellHolding : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order',
+    sellHolding : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order/asynch',
     orders : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/orders', 
     order : nano.conf.urlRoot + 'account/' + nano.conf.accountIdUrlKey + '/order/asynch',
     quote : nano.conf.urlRoot + 'quote',
