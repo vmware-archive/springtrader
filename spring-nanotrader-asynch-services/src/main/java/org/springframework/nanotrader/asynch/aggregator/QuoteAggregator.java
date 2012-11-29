@@ -27,7 +27,6 @@
 
 package org.springframework.nanotrader.asynch.aggregator;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -44,35 +43,11 @@ public class QuoteAggregator {
 	 
 	public Message<Quote> aggregate(List<Message<?>> messages) {
 		log.info("Aggregator released " + messages.size() + " message(s) at: " + new Date(System.currentTimeMillis()));
-		Quote releasedQuote = new Quote();
-		for (Message<?> message : messages) {
-				Quote quote = (Quote) message.getPayload();
-				if (releasedQuote.getSymbol() == null) {
-					releasedQuote.setQuoteid(quote.getQuoteid());
-					releasedQuote.setCompanyname(quote.getCompanyname());
-					releasedQuote.setSymbol(quote.getSymbol());
-					releasedQuote.setOpen1(quote.getOpen1());
-					releasedQuote.setVolume(BigDecimal.ZERO);
-					releasedQuote.setPrice(BigDecimal.ZERO);
-					releasedQuote.setLow(quote.getLow());
-					releasedQuote.setHigh(quote.getHigh());
-				}
-				
-				releasedQuote.setPrice(releasedQuote.getPrice().add(quote.getPrice()));			
-				releasedQuote.setVolume(quote.getVolume());
-				if (quote.getLow().compareTo(releasedQuote.getLow()) == -1 ) { 
-					releasedQuote.setLow(quote.getLow());
-				}
-				
-				if (quote.getHigh().compareTo(releasedQuote.getHigh()) >= 1 ) { 
-					releasedQuote.setHigh(quote.getLow());
-				}
-		}
-		releasedQuote.setPrice(releasedQuote.getPrice().divide(new BigDecimal(messages.size())));
-		releasedQuote.setChange1(releasedQuote.getPrice().subtract(releasedQuote.getOpen1()));
-		Message<Quote> aggregatedMessage = MessageBuilder.withPayload(releasedQuote).build();
+		//Just use the last message in the List of Messages
+		Quote quote = (Quote) messages.get(messages.size() -1).getPayload();
+		Message<Quote> aggregatedMessage = MessageBuilder.withPayload(quote).build();
 		if (log.isDebugEnabled()) { 
-			log.debug("QuoteAggregator.aggregate() released aggregate quote = " + releasedQuote);
+			log.debug("QuoteAggregator.aggregate() released aggregate quote = " + quote);
 		}
 		return aggregatedMessage;
 	}
