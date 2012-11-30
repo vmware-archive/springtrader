@@ -116,6 +116,10 @@ nano.views.Holdings = Backbone.View.extend({
             rows = '';
         if (nano.utils.isMobile()) {
              for ( i; i < length; ++i ) {
+                if (collection.at(i).id == nano.conf.lastSellOrderId) {
+                    // this order was submitted for sell, lets not show it in holding table
+                	continue;
+                }
                 holdings.push(_.extend(collection.at(i).toJSON(), {i:i}));
             }
             rows =  _.template(nano.utils.getTemplate(nano.conf.tpls.holdingRow))({holdings : holdings});
