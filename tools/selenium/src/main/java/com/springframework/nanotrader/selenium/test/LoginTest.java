@@ -3,18 +3,21 @@
  */
 package com.springframework.nanotrader.selenium.test;
 
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver;
 
 /**
  * @author Ilayaperumal Gopinathan
  * 
  */
 public class LoginTest extends TestBase {
+	
+	public LoginTest(String baseUrl, WebDriver driver){
+		super(baseUrl, driver);
+	}
 
 	public void register(String username) {
 		try {
-			// Go to login page
-			driver.get(BASE_URL + "/#login");
+			driver.get(baseUrl);
 			// Click create new registration
 			clickElementById(SHOW_REGISTRATION);
 			// Fill up registration form
@@ -31,10 +34,7 @@ public class LoginTest extends TestBase {
 			clickElementById(REGISTER);
 			// Logout
 			// Explicit wait for 5 seconds
-			WebElement userNameNav = waitForElementById(NAVBAR_USERNAME);
-			userNameNav.click();
-			clickElementById(LOGOUT);
-
+			logout();
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
