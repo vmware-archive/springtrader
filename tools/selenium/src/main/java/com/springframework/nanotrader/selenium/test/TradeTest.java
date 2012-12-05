@@ -3,6 +3,7 @@
  */
 package com.springframework.nanotrader.selenium.test;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -10,9 +11,14 @@ import org.openqa.selenium.WebElement;
  * 
  */
 public class TradeTest extends TestBase {
+	
+	public TradeTest(String baseUrl, WebDriver driver){
+		super(baseUrl, driver);
+	}
+	
 
 	public WebElement getQuote(String symbol) {
-		waitForElementById(NAVBAR_TRADE);
+		//waitForElementById(NAVBAR_TRADE);
 		clickElementById(NAVBAR_TRADE);
 		waitForElementById(TRD_QUOTE_INPUT);
 		typeTextById(TRD_QUOTE_INPUT, symbol);
@@ -28,9 +34,9 @@ public class TradeTest extends TestBase {
 	}
 
 	public void sellStock() {
-		waitForElementById(NAVBAR_PORTFOLIO);
+		//waitForElementById(NAVBAR_PORTFOLIO);
 		clickElementById(NAVBAR_PORTFOLIO);
-		waitForElementByXpath(SELL_FIRST_PORTFOLIO);
+		//waitForElementByXpath(SELL_FIRST_PORTFOLIO);
 		clickElementByXpath(SELL_FIRST_PORTFOLIO);
 		waitForElementById(SELL_ORDER_OK);
 		//waitForElementByXpath(SELL_ORDER_CANCEL);
