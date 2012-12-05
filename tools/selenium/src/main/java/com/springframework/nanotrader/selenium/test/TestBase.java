@@ -6,7 +6,6 @@ package com.springframework.nanotrader.selenium.test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,14 +21,19 @@ import com.springframework.nanotrader.selenium.model.UserElement;
  */
 public class TestBase implements LoginElement, UserElement, TradeElement, PortfolioElement, DashboardElement {
 
-	public String BASE_URL = "http://localhost:8080/spring-nanotrader-web";
+	protected String baseUrl;
+	
+	protected WebDriver driver;
 
-	public WebDriver driver = new FirefoxDriver();
+	public TestBase(String baseUrl, WebDriver driver){
+		this.baseUrl = baseUrl;
+		this.driver = driver;
+	}
 
 	public void login(String username, String password) {
 		try {
 			// Go to login page
-			driver.get(BASE_URL + "/#login");
+			driver.get(baseUrl + "/#login");
 			// Fill in username & password
 			typeTextById(USERNAME, username);
 			typeTextById(PASSWORD, password);
@@ -39,6 +43,12 @@ public class TestBase implements LoginElement, UserElement, TradeElement, Portfo
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public void logout(){
+		WebElement userNameNav = waitForElementById(NAVBAR_USERNAME);
+		userNameNav.click();
+		clickElementById(LOGOUT);
 	}
 
 	public void typeTextById(String idLocator, String value) {
