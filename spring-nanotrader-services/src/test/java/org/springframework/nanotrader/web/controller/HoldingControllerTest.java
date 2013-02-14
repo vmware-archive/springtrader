@@ -36,7 +36,6 @@ import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration
 
 public class HoldingControllerTest extends AbstractSecureControllerTest {
 	private static Integer PURCHASE_PRICE = 50000;
-	private static String PURCHASE_DATE = "2012-02-20";
 	private static Integer QUANTITY = 200;
 
 	@Test
@@ -45,7 +44,7 @@ public class HoldingControllerTest extends AbstractSecureControllerTest {
 				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.holdingid").value(ServiceTestConfiguration.HOLDING_ID))
 				.andExpect(jsonPath("$.accountAccountid").value(ServiceTestConfiguration.ACCOUNT_ID))
-				.andExpect(jsonPath("$.purchasedate").value(PURCHASE_DATE))
+				.andExpect(jsonPath("$.purchasedate").value(ServiceTestConfiguration.DATE))
 				.andExpect(jsonPath("$.quote.symbol").value(ServiceTestConfiguration.SYMBOL))
 				.andExpect(jsonPath("$.purchaseprice").value(PURCHASE_PRICE))
 				.andExpect(jsonPath("$.quantity").value(QUANTITY))
@@ -70,7 +69,7 @@ public class HoldingControllerTest extends AbstractSecureControllerTest {
 				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.results.[0].holdingid").value(ServiceTestConfiguration.HOLDING_ID))
 				.andExpect(jsonPath("$.results.[0].accountAccountid").value(ServiceTestConfiguration.ACCOUNT_ID))
-				.andExpect(jsonPath("$.results.[0].purchasedate").value(PURCHASE_DATE))
+				.andExpect(jsonPath("$.results.[0].purchasedate").value(ServiceTestConfiguration.DATE))
 				.andExpect(jsonPath("$.results.[0].quote.symbol").value(ServiceTestConfiguration.SYMBOL))
 				.andExpect(jsonPath("$.results.[0].purchaseprice").value(PURCHASE_PRICE))
 				.andExpect(jsonPath("$.results.[0].quantity").value(QUANTITY)).andDo(print());
