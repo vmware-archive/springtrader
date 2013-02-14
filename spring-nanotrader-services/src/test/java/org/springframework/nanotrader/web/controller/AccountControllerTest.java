@@ -33,7 +33,6 @@ import org.springframework.nanotrader.web.configuration.ServiceTestConfiguration
  */
 
 public class AccountControllerTest extends AbstractSecureControllerTest {
-	private static String DATE = "2012-02-20";
 	
 	@Test
 	public void getQuoteBySymbolJson() throws Exception {
@@ -41,11 +40,11 @@ public class AccountControllerTest extends AbstractSecureControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.accountid").value(ServiceTestConfiguration.ACCOUNT_ID))
-				.andExpect(jsonPath("$.creationdate").value(DATE))
+				.andExpect(jsonPath("$.creationdate").value(ServiceTestConfiguration.DATE))
 				.andExpect(jsonPath("$.openbalance").value(ServiceTestConfiguration.ACCOUNT_OPEN_BALANCE.doubleValue()))
 				.andExpect(jsonPath("$.logoutcount").value(ServiceTestConfiguration.LOGOUT_COUNT.intValue()))
 				.andExpect(jsonPath("$.balance").value(ServiceTestConfiguration.ACCOUNT_BALANCE.doubleValue()))
-				.andExpect(jsonPath("$.lastlogin").value(DATE))
+				.andExpect(jsonPath("$.lastlogin").value(ServiceTestConfiguration.DATE))
 				.andExpect(jsonPath("$.logincount").value(ServiceTestConfiguration.LOGIN_COUNT))
 				.andDo(print());
 	}
