@@ -40,7 +40,6 @@ import org.springframework.util.FileCopyUtils;
 
 
 public class OrderControllerTest extends AbstractSecureControllerTest {
-	private static String PURCHASE_DATE = "2012-02-20";
 
 	@Test
 	public void getOrderByIdJson() throws Exception {
@@ -48,8 +47,8 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.orderid").value(ServiceTestConfiguration.ORDER_ID))
-				.andExpect(jsonPath("$.completiondate").value(PURCHASE_DATE))
-				.andExpect(jsonPath("$.opendate").value(PURCHASE_DATE))
+				.andExpect(jsonPath("$.completiondate").value(ServiceTestConfiguration.DATE))
+				.andExpect(jsonPath("$.opendate").value(ServiceTestConfiguration.DATE))
 				.andExpect(jsonPath("$.orderfee").value(TradingServiceImpl.DEFAULT_ORDER_FEE.doubleValue()))
 				.andExpect(jsonPath("$.price").value(ServiceTestConfiguration.ORDER_PRICE.intValue()))
 				.andExpect(jsonPath("$.quantity").value(ServiceTestConfiguration.ORDER_QUANTITY.intValue()))
@@ -73,8 +72,8 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.results.[0].orderid").value(ServiceTestConfiguration.ORDER_ID))
-				.andExpect(jsonPath("$.results.[0].completiondate").value(PURCHASE_DATE))
-				.andExpect(jsonPath("$.results.[0].opendate").value(PURCHASE_DATE))
+				.andExpect(jsonPath("$.results.[0].completiondate").value(ServiceTestConfiguration.DATE))
+				.andExpect(jsonPath("$.results.[0].opendate").value(ServiceTestConfiguration.DATE))
 				.andExpect(jsonPath("$.results.[0].orderfee").value(TradingServiceImpl.DEFAULT_ORDER_FEE.doubleValue()))
 				.andExpect(jsonPath("$.results.[0].price").value(ServiceTestConfiguration.ORDER_PRICE.intValue()))
 				.andExpect(jsonPath("$.results.[0].quantity").value(ServiceTestConfiguration.ORDER_QUANTITY.intValue()))
@@ -99,8 +98,8 @@ public class OrderControllerTest extends AbstractSecureControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().mimeType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.results.[0].orderid").value(ServiceTestConfiguration.ORDER_ID))
-				.andExpect(jsonPath("$.results.[0].completiondate").value(PURCHASE_DATE))
-				.andExpect(jsonPath("$.results.[0].opendate").value(PURCHASE_DATE))
+				.andExpect(jsonPath("$.results.[0].completiondate").value(ServiceTestConfiguration.DATE))
+				.andExpect(jsonPath("$.results.[0].opendate").value(ServiceTestConfiguration.DATE))
 				.andExpect(jsonPath("$.results.[0].orderfee").value(TradingServiceImpl.DEFAULT_ORDER_FEE.doubleValue()))
 				.andExpect(jsonPath("$.results.[0].price").value(ServiceTestConfiguration.ORDER_PRICE.intValue()))
 				.andExpect(jsonPath("$.results.[0].quantity").value(ServiceTestConfiguration.ORDER_QUANTITY.intValue()))

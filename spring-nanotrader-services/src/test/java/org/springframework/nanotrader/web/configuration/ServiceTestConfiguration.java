@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -79,7 +80,6 @@ public class ServiceTestConfiguration  {
 	public static String PASSWORD = "password";
 	public static String BAD_USER_ID  = "NA";
 	public static String BAD_PASSWORD  = "NA";
-	
 	//Order constants
 	public static Integer ORDER_ID 	=  555;
 	public static BigDecimal ORDER_PRICE = BigDecimal.valueOf(100);
@@ -123,6 +123,8 @@ public class ServiceTestConfiguration  {
 	public static String PAGE_SIZE = "pageSize";
 	public static String TOTAL_RECORDS = "totalRecords";
 	public static Long RESULT_COUNT  = new Long(1);
+	public static String DATE = new SimpleDateFormat("yyyy-MM-dd").format(new Date(1329759342904l));
+	
 	@Bean 
 	public TradingService tradingService() {
 		TradingService tradingService = Mockito.mock(TradingService.class);
