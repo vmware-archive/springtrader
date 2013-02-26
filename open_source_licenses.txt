@@ -2,21 +2,32 @@ open_source_license.txt
 
 Spring Trader 1.0.0 GA
 
+Copyright (c) 2012 VMware, Inc. All Rights Reserved.
 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE."
+
+This product includes a number of subcomponents with
+separate copyright notices and license terms.  The product that 
+includes this file does not necessarily use all the open source 
+subcomponents referred to below. Your use of these subcomponents 
+is subject to the terms and conditions of the following licenses. 
 ===========================================================================
-
-The following copyright statements and licenses apply to various open
-source software components (or portions thereof) that are distributed with
-this VMware software products.
-
-The VMware Product may also include other VMware components, which may contain additional open 
-source software packages. One or more such open_source_licenses.txt files may therefore 
-accompany this VMware Product. 
-
-The VMware product that includes this file does not necessarily use all the
-open source software components referred to below and may also only use
-portions of a given component.
-
 
 =============== TABLE OF CONTENTS =============================
 
@@ -3459,4 +3470,4 @@ years from the date you acquired this Software product. Alternatively,
 the Source Files may accompany the VMware product.
 
 
-[VFNANOTRADER100GAKR100512]
+[VFNANOTRADER100GAKV021413]
