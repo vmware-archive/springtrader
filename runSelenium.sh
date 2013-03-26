@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 cd tools/selenium
-./gradlew build
+./gradlew clean build
 cd build/libs
+unzip selenium.zip
 ./runSeleniumTest
