@@ -11,3 +11,6 @@ vf.gf.dmn-license.cfg
 dist
 sqlfireclient-1.0.3.jar
 config/lobot.yml
+.architect
+*.xds
+metadata/
