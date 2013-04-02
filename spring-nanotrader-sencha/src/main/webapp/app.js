@@ -16,12 +16,12 @@
 //<debug>
 Ext.Loader.setPath({
     'Ext': 'touch/src',
-    'springtrader': 'app'
+    'SpringTrader': 'app'
 });
 //</debug>
 
 Ext.application({
-    name: 'springtrader',
+    name: 'SpringTrader',
 
     requires: [
         'Ext.MessageBox'
@@ -54,7 +54,7 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('springtrader.view.Main'));
+        Ext.Viewport.add(Ext.create('SpringTrader.view.Main'));
     },
 
     onUpdated: function() {
