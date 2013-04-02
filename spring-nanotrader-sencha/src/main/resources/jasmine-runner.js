@@ -1,4 +1,11 @@
 var page = require("webpage").create();
+var system = require('system');
+var url;
+
+if (system.args.length != 2) {
+	console.log('Usage: jasmine-runner.js <URL>');
+	phantom.exit(127);
+}
 
 // Handle window.console.log(msg);
 page.onConsoleMessage = function() {
@@ -11,4 +18,5 @@ page.onConsoleMessage = function() {
     }
 };
 
-page.open('http://localhost:8080/spring-nanotrader-sencha/jasmine/SpecRunnerPhantomJS.html');
+console.log("Opening: " + system.args[1]);
+page.open(system.args[1]);
