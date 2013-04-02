@@ -1,4 +1,4 @@
-Ext.define('springtrader.view.Main', {
+Ext.define('SpringTrader.view.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'main',
     requires: [

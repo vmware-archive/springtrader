@@ -2,7 +2,7 @@
     /**
      * The application's namespace, used by Sencha Command to generate classes
      */
-    "name": "springtrader",
+    "name": "SpringTrader",
 
     /**
      * The file path to this application's front HTML document, relative to this app.json file
