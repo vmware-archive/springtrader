@@ -24,7 +24,7 @@ Ext.application({
     ],
 
     launch: function() {
-		jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
+		jasmine.getEnv().addReporter(new jasmine.ConsoleReporter());
 		jasmine.getEnv().execute();
     }
 });

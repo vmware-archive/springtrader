@@ -1,177 +1,104 @@
-jasmine.ConsoleReporter = function(print, doneCallback, showColors) {
-  //inspired by mhevery's jasmine-node reporter
-  //https://github.com/mhevery/jasmine-node
+/**
+ Jasmine Reporter that outputs test results to the browser console. 
+ Useful for running in a headless environment such as PhantomJs, ZombieJs etc.
 
-  doneCallback = doneCallback || function() {};
+ Usage:
+ // From your html file that loads jasmine:  
+ jasmine.getEnv().addReporter(new jasmine.ConsoleReporter());
+ jasmine.getEnv().execute();
+*/
 
-  var ansi = {
-      green: '\033[32m',
-      red: '\033[31m',
-      yellow: '\033[33m',
-      none: '\033[0m'
-    },
-    language = {
-      spec: "spec",
-      failure: "failure"
-    };
-
-  function coloredStr(color, str) {
-    return showColors ? (ansi[color] + str + ansi.none) : str;
+(function(jasmine) {
+  if (!jasmine) {
+    throw "jasmine library isn't loaded!";
   }
 
-  function greenStr(str) {
-    return coloredStr("green", str);
+  var ANSI = {}
+  ANSI.color_map = {
+      "green" : 32,
+      "red"   : 31
   }
 
-  function redStr(str) {
-    return coloredStr("red", str);
+  ANSI.colorize_text = function(text, color) {
+    var color_code = this.color_map[color];
+    return "\033[" + color_code + "m" + text + "\033[0m";
   }
-
-  function yellowStr(str) {
-    return coloredStr("yellow", str);
-  }
-
-  function newline() {
-    print("\n");
-  }
-
-  function started() {
-    print("Started");
-    newline();
-  }
-
-  function greenDot() {
-    print(greenStr("."));
-  }
-
-  function redF() {
-    print(redStr("F"));
-  }
-
-  function yellowStar() {
-    print(yellowStr("*"));
-  }
-
-  function plural(str, count) {
-    return count == 1 ? str : str + "s";
-  }
-
-  function repeat(thing, times) {
-    var arr = [];
-    for (var i = 0; i < times; i++) {
-      arr.push(thing);
-    }
-    return arr;
-  }
-
-  function indent(str, spaces) {
-    var lines = (str || '').split("\n");
-    var newArr = [];
-    for (var i = 0; i < lines.length; i++) {
-      newArr.push(repeat(" ", spaces).join("") + lines[i]);
-    }
-    return newArr.join("\n");
-  }
-
-  function specFailureDetails(suiteDescription, specDescription, stackTraces) {
-    newline();
-    print(suiteDescription + " " + specDescription);
-    newline();
-    for (var i = 0; i < stackTraces.length; i++) {
-      print(indent(stackTraces[i], 2));
-      newline();
-    }
-  }
-
-  function finished(elapsed) {
-    newline();
-    print("Finished in " + elapsed / 1000 + " seconds");
-  }
-
-  function summary(colorF, specs, failed) {
-    newline();
-    print(colorF(specs + " " + plural(language.spec, specs) + ", " +
-      failed + " " + plural(language.failure, failed)));
-    newline();
-    newline();
-  }
-
-  function greenSummary(specs, failed) {
-    summary(greenStr, specs, failed);
-  }
-
-  function redSummary(specs, failed) {
-    summary(redStr, specs, failed);
-  }
-
-  function fullSuiteDescription(suite) {
-    var fullDescription = suite.description;
-    if (suite.parentSuite) fullDescription = fullSuiteDescription(suite.parentSuite) + " " + fullDescription;
-    return fullDescription;
-  }
-
-  this.now = function() {
-    return new Date().getTime();
+  
+  var ConsoleReporter = function() {
+    if (!console || !console.log) { throw "console isn't present!"; }
+    this.status = this.statuses.stopped;
   };
 
-  this.reportRunnerStarting = function() {
-    this.runnerStartTime = this.now();
-    started();
+  var proto = ConsoleReporter.prototype;
+  proto.statuses = {
+    stopped : "stopped",
+    running : "running",
+    fail    : "fail",
+    success : "success"
   };
 
-  this.reportSpecStarting = function() { /* do nothing */
+  proto.reportRunnerStarting = function(runner) {
+    this.status = this.statuses.running;
+    this.start_time = (new Date()).getTime();
+    this.executed_specs = 0;
+    this.passed_specs = 0;
+    this.log("Starting...");
   };
 
-  this.reportSpecResults = function(spec) {
-    var results = spec.results();
-    if (results.skipped) {
-      yellowStar();
-    } else if (results.passed()) {
-      greenDot();
-    } else {
-      redF();
+  proto.reportRunnerResults = function(runner) {
+    var failed = this.executed_specs - this.passed_specs;
+    var spec_str = this.executed_specs + (this.executed_specs === 1 ? " spec, " : " specs, ");
+    var fail_str = failed + (failed === 1 ? " failure in " : " failures in ");
+    var color = (failed > 0)? "red" : "green";
+    var dur = (new Date()).getTime() - this.start_time;
+
+    this.log("");
+    this.log("Finished");
+    this.log("-----------------");
+    this.log(spec_str + fail_str + (dur/1000) + "s.", color);
+
+    this.status = (failed > 0)? this.statuses.fail : this.statuses.success;
+
+    /* Print something that signals that testing is over so that headless browsers
+       like PhantomJs know when to terminate. */
+    this.log("");
+    this.log("ConsoleReporter finished: " + this.status);
+  };
+
+
+  proto.reportSpecStarting = function(spec) {
+    this.executed_specs++;
+  };
+
+  proto.reportSpecResults = function(spec) {
+    if (spec.results().passed()) {
+      this.passed_specs++;
+      return;
+    }
+
+    var resultText = spec.suite.description + " : " + spec.description;
+    this.log(resultText, "red");
+
+    var items = spec.results().getItems()
+    for (var i = 0; i < items.length; i++) {
+      var trace = items[i].trace.stack || items[i].trace;
+      this.log(trace, "red");
     }
   };
 
-  this.suiteResults = [];
-
-  this.reportSuiteResults = function(suite) {
-    var suiteResult = {
-      description: fullSuiteDescription(suite),
-      failedSpecResults: []
-    };
-
-    suite.results().items_.forEach(function(spec) {
-      if (spec.failedCount > 0 && spec.description) suiteResult.failedSpecResults.push(spec);
-    });
-
-    this.suiteResults.push(suiteResult);
+  proto.reportSuiteResults = function(suite) {
+    if (!suite.parentSuite) { return; }
+    var results = suite.results();
+    var failed = results.totalCount - results.passedCount;
+    var color = (failed > 0)? "red" : "green";
+    this.log(suite.getFullName() + ": " + results.passedCount + " of " + results.totalCount + " passed.", color);
   };
 
-  function eachSpecFailure(suiteResults, callback) {
-    for (var i = 0; i < suiteResults.length; i++) {
-      var suiteResult = suiteResults[i];
-      for (var j = 0; j < suiteResult.failedSpecResults.length; j++) {
-        var failedSpecResult = suiteResult.failedSpecResults[j];
-        var stackTraces = [];
-        for (var k = 0; k < failedSpecResult.items_.length; k++) stackTraces.push(failedSpecResult.items_[k].trace.stack);
-        callback(suiteResult.description, failedSpecResult.description, stackTraces);
-      }
-    }
-  }
-
-  this.reportRunnerResults = function(runner) {
-    newline();
-
-    eachSpecFailure(this.suiteResults, function(suiteDescription, specDescription, stackTraces) {
-      specFailureDetails(suiteDescription, specDescription, stackTraces);
-    });
-
-    finished(this.now() - this.runnerStartTime);
-
-    var results = runner.results();
-    var summaryFunction = results.failedCount === 0 ? greenSummary : redSummary;
-    summaryFunction(runner.specs().length, results.failedCount);
-    doneCallback(runner);
+  proto.log = function(str, color) {
+    var text = (color != undefined)? ANSI.colorize_text(str, color) : str;
+    console.log(text)
   };
-};
+
+  jasmine.ConsoleReporter = ConsoleReporter;
+})(jasmine);
+
