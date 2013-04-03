@@ -1,0 +1,55 @@
+/* Borrowed from Twitter Bootstrap CSS */
+/* line 3, ../sass/spring-trader.scss */
+dl {
+  margin-bottom: 20px;
+}
+
+/* line 8, ../sass/spring-trader.scss */
+dt,
+dd {
+  line-height: 20px;
+}
+
+/* line 12, ../sass/spring-trader.scss */
+dt {
+  font-weight: bold;
+}
+
+/* line 16, ../sass/spring-trader.scss */
+dd {
+  margin-left: 10px;
+}
+
+/* line 20, ../sass/spring-trader.scss */
+.dl-horizontal {
+  *zoom: 1;
+}
+
+/* line 25, ../sass/spring-trader.scss */
+.dl-horizontal:before,
+.dl-horizontal:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+/* line 31, ../sass/spring-trader.scss */
+.dl-horizontal:after {
+  clear: both;
+}
+
+/* line 35, ../sass/spring-trader.scss */
+.dl-horizontal dt {
+  float: left;
+  width: 160px;
+  overflow: hidden;
+  clear: left;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* line 45, ../sass/spring-trader.scss */
+.dl-horizontal dd {
+  margin-left: 180px;
+}

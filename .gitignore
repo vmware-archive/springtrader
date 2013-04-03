@@ -14,3 +14,4 @@ config/lobot.yml
 .architect
 *.xds
 metadata/
+.sass-cache/
