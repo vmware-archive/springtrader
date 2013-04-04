@@ -1,39 +1,14 @@
-// Main View for the SpringTrader Reference Application
-
 Ext.define('SpringTrader.view.Main', {
-	extend : 'Ext.tab.Panel',
-	xtype : 'main',
-	requires : [ 'Ext.TitleBar' ],
-	config : {
-		tabBarPosition : 'bottom',
+	extend: 'Ext.tab.Panel',
+	config: {
+		tabBarPosition: 'bottom',
 
-		items : [ {
-			title : 'Dashboard',
-			iconCls : 'home',
-
-			styleHtmlContent : true,
-			scrollable : true,
-
-			items : [ {
-				docked : 'top',
-				xtype : 'marketsummary'
-			} ]
-
+		items: [{
+			xtype: 'dashboardPage'
 		}, {
-			title : 'Portfolio',
-			iconCls : 'user',
-
-			items : [ {
-				docked : 'top',
-				xtype : 'marketsummary'
-			} ]
+			xtype: 'portfolioPage'
 		}, {
-			title : 'Trade',
-			iconCls : 'compose',
-			items : [ {
-				docked : 'top',
-				xtype : 'marketsummary'
-			} ]
-		} ]
+			xtype: 'tradePage'
+		}]
 	}
 });

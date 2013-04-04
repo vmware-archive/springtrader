@@ -4,13 +4,13 @@
  */
 
 Ext.define('SpringTrader.model.MarketSummary', {
-  extend: 'Ext.data.Model',
+	extend: 'Ext.data.Model',
 
-  config: {
-	       fields: [
-	               {name: 'index', type: 'string'},
-	               {name: 'volume', type: 'string'},
-	               {name: 'change', type: 'string'}
-	       ]
-  }
+	config: {
+		fields: ['tradeStockIndexAverage', 'tradeStockIndexVolume', 'change'],
+		proxy: {
+			type: 'ajax',
+			url: 'spring-nanotrader-services/api/marketSummary'
+		}
+	}
 });

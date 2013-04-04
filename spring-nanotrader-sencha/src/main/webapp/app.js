@@ -27,14 +27,9 @@ Ext.application({
         'Ext.MessageBox'
     ],
 
-	models: [
-		'MarketSummary'
-	],
-
-    views: [
-        'Main',
-		'MarketSummary'
-    ],
+	views: ['Main'],
+	
+	controllers: ['Main'],
 
     icon: {
         '57': 'resources/icons/Icon.png',
