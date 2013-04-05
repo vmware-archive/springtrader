@@ -11,7 +11,21 @@
 
   <!-- include source files here... -->
   <script type="text/javascript" src="../touch/sencha-touch-all-debug.js"></script>
-  <script type="text/javascript" src="src/appTest.js"></script>
+  <script type="text/javascript">
+	Ext.Loader.setPath({
+	    'Ext': '../touch/src',
+	    'SpringTrader': '../app'
+	});
+
+	Ext.application({
+	    name: 'SpringTrader',
+
+	    launch: function() {
+			jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
+			jasmine.getEnv().execute();
+	    }
+	});
+  </script>
 
   <!-- include spec files here... -->
   <script type="text/javascript" src="spec/SpecHelper.js"></script>
