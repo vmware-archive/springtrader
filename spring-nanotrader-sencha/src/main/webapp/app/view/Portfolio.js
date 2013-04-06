@@ -3,12 +3,6 @@ Ext.define('SpringTrader.view.Portfolio', {
 	xtype: 'portfolioPage',
 	config: {
 		title : 'Portfolio',
-		iconCls : 'user',
-
-		items : [ {
-			docked : 'top',
-			xtype : 'marketsummary'
-		} ]
-		
+		iconCls : 'user'		
 	}
 });

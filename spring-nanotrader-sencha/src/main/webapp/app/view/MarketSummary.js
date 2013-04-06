@@ -1,19 +1,40 @@
 Ext.define('SpringTrader.view.MarketSummary', {
-	extend: 'Ext.Container',
+	extend: 'Ext.form.Panel',
 	xtype: 'marketsummary',
+	initialize: function() {
+		this.callParent(arguments);
+		var marketSummary = Ext.create('SpringTrader.model.MarketSummary', {
+			tradeStockIndexAverage: '1234', tradeStockIndexVolume: '1,234,567', change: '-12.23'
+		});
+		this.setRecord(marketSummary);
+	},
 	config: {
-		defaults: {
-			margin: 10
-		},
-		tpl: Ext.create('Ext.Template', 
-		       '<div>',
-		         '<dl class="dl-horizontal">',
-		            '<dt>Index</dt><dd>{index}</dd>',
-		            '<dt>Volume</dt><dd>{volume}</dd>',
-		            '<dt>Change</dt><dd>{change}</dd>',
-		          '</dl>',
-		       '</div>'
-		),
-		data: { index: '-', volume: '-', change: '-'}
+		id: 'market-summary',
+		title : 'Market',
+		iconCls: 'home',
+		items: [{
+			xtype: 'fieldset',
+			title: 'Market Summary',
+			items: [{
+				xtype: 'textfield',
+				name: 'tradeStockIndexAverage',
+				label: 'Index',
+				disabled: true
+			},
+			{
+				xtype: 'textfield',
+				name: 'tradeStockIndexVolume',
+				label: 'Volume',
+				disabled: true
+			},
+			{
+				xtype: 'textfield',
+				name: 'change',
+				label: 'Change',
+				disabled: true
+			}
+			]
+		}]
+
 	}
 });

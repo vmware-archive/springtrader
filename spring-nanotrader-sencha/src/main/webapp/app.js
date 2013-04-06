@@ -28,7 +28,7 @@ Ext.application({
     ],
 
 	views: ['Main'],
-	
+
 	controllers: ['Main'],
 
     icon: {

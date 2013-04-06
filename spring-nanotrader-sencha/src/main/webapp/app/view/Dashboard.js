@@ -7,11 +7,6 @@ Ext.define('SpringTrader.view.Dashboard',{
 
 		styleHtmlContent : true,
 		scrollable : true,
-
-		items : [ {
-			docked : 'top',
-			xtype : 'marketsummary'
-		} ]		
 	}
 
 });

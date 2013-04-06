@@ -3,11 +3,6 @@ Ext.define('SpringTrader.view.Trade', {
 	xtype: 'tradePage',
 	config: {
 		title: 'Trade',
-		iconCls: 'compose',
-		items: [{
-			docked: 'top',
-			xtype: 'marketsummary'
-		}]
-
+		iconCls: 'compose'
 	}
 });

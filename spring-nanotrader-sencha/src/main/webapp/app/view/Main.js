@@ -4,7 +4,7 @@ Ext.define('SpringTrader.view.Main', {
 		tabBarPosition: 'bottom',
 
 		items: [{
-			xtype: 'dashboardPage'
+			xtype: 'marketsummary'
 		}, {
 			xtype: 'portfolioPage'
 		}, {
