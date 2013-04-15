@@ -1,8 +1,9 @@
 Ext.define('SpringTrader.view.Trade', {
-	extend: 'Ext.Panel',
+	extend: 'Ext.Container',
 	xtype: 'tradePage',
 	config: {
 		title: 'Trade',
-		iconCls: 'compose'
+		iconCls: 'compose',
+        html: 'Trade Page'
 	}
 });

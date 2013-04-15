@@ -1,8 +1,9 @@
 Ext.define('SpringTrader.view.Portfolio', {
-	extend: 'Ext.Panel',
+	extend: 'Ext.Container',
 	xtype: 'portfolioPage',
 	config: {
 		title : 'Portfolio',
-		iconCls : 'user'		
+		iconCls : 'user',
+        html: 'Portfolio Page'
 	}
 });

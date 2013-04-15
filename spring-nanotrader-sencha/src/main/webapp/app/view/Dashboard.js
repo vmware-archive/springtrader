@@ -1,12 +1,17 @@
 Ext.define('SpringTrader.view.Dashboard',{
-	extend: 'Ext.Panel',
+	extend: 'Ext.Container',
 	xtype: 'dashboardPage',
+    requires: ['Ext.layout.VBox', 'Ext.dataview.DataView'],
 	config: {
 		title : 'Dashboard',
 		iconCls : 'home',
-
-		styleHtmlContent : true,
-		scrollable : true,
+        items: [
+            {
+                xtype: 'component',
+                scrollable: true,
+                html: 'Dashboard Page here'
+            }
+        ]
 	}
 
 });
