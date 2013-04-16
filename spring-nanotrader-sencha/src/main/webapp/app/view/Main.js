@@ -10,11 +10,6 @@ Ext.define('SpringTrader.view.Main', {
                 docked: 'top'
             },
             {
-                xtype: 'marketsummary',
-                style: "backgroundColor:#ccc",
-                docked: 'top'
-            },
-            {
                 xtype: 'dashboardPage'
             },
             {
