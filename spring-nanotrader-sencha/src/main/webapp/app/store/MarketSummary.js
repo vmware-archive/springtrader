@@ -8,7 +8,10 @@ Ext.define('SpringTrader.store.MarketSummary', {
         proxy: {
             type: 'ajax',
             url: '/spring-nanotrader-services/api/marketSummary',
-            noCache: false
+            noCache: false,
+            pageParam: false,
+            startParam: false,
+            limitParam: false
         }
     }
 });

@@ -138,12 +138,15 @@ jasmine.Ajax = {
   },
 
   installMock: function() {
-    if (typeof jQuery != 'undefined') {
+    if (typeof Ext != 'undefined') {
+      jasmine.Ajax.installExt();
+    }
+    else if (typeof jQuery != 'undefined') {
       jasmine.Ajax.installJquery();
     } else if (typeof Prototype != 'undefined') {
       jasmine.Ajax.installPrototype();
     } else {
-      throw new Error("jasmine.Ajax currently only supports jQuery and Prototype");
+      throw new Error("jasmine.Ajax currently only supports Ext, jQuery and Prototype");
     }
     jasmine.Ajax.installed = true;
   },
@@ -162,12 +165,21 @@ jasmine.Ajax = {
     Ajax.getTransport = jasmine.Ajax.prototypeMock;
   },
 
+  installExt: function() {
+    jasmine.Ajax.mode = 'Ext';
+    jasmine.Ajax.real = Ext.Ajax.getXhrInstance;
+
+    Ext.Ajax.getXhrInstance = jasmine.Ajax.extMock;
+  },
+
   uninstallMock: function() {
     jasmine.Ajax.assertInstalled();
     if (jasmine.Ajax.mode == 'jQuery') {
       jQuery.ajaxSettings.xhr = jasmine.Ajax.real;
     } else if (jasmine.Ajax.mode == 'Prototype') {
       Ajax.getTransport = jasmine.Ajax.real;
+    } else if (jasmine.Ajax.mode === 'Ext') {
+        Ext.Ajax.getXhrInstance = jasmine.Ajax.real;
     }
     jasmine.Ajax.reset();
   },
@@ -176,6 +188,12 @@ jasmine.Ajax = {
     jasmine.Ajax.installed = false;
     jasmine.Ajax.mode = null;
     jasmine.Ajax.real = null;
+  },
+
+  extMock: function() {
+    var newXhr = new FakeXMLHttpRequest();
+    ajaxRequests.push(newXhr);
+    return newXhr;
   },
 
   jQueryMock: function() {
