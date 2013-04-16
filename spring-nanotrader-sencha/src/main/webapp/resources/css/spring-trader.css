@@ -1,4 +1,19 @@
 /* line 1, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.market-summary .table {
+  margin-bottom: 0;
+}
+
+/* line 5, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .table td.right {
   text-align: right;
+}
+
+/* line 9, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.table td.centered {
+  text-align: center;
+}
+
+/* line 13, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+h2.centered {
+  text-align: center;
 }
