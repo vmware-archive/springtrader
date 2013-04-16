@@ -49,7 +49,7 @@ Ext.define('SpringTrader.view.MarketSummary', {
 '</div>'
 ],
         emptyText: 'No market data',
-        loadingText: 'Loading...',
+        loadingText: false,
         store: 'marketsummary'
     }
 });

@@ -4,6 +4,7 @@ Ext.define('SpringTrader.controller.Main', {
         this.user = {
             authenticated: function() { return false; }
         };
+        setInterval(function() { Ext.getStore('marketsummary').load()}, 15000);
     },
 	config: {
 		views: ['MarketSummary', 'Dashboard', 'Portfolio', 'Trade', 'SignupButton'],
