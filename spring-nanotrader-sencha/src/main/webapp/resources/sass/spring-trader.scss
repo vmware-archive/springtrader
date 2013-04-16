@@ -10,6 +10,14 @@
   text-align: center;
 }
 
-h2.centered {
+.centered {
   text-align: center;
 }
+
+.x-docked-top .logo {
+  background: inline-image('icons/logo.png') left top no-repeat;
+  display: inline-block;
+  height: 46px;
+  width: 150px;
+}
+

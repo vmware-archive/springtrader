@@ -612,7 +612,7 @@ input, textarea {
 
 /* line 170, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/core/_core.scss */
 .x-panel-list {
-  background-color: #eaf6fe;
+  background-color: #bea7a7;
 }
 
 /* line 175, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/core/_core.scss */
@@ -7052,14 +7052,14 @@ audio {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 0.2em 0.6em;
   box-shadow: rgba(0, 0, 0, 0.8) 0 0.2em 0.6em;
   background-image: none;
-  background-color: #03111a;
+  background-color: black;
 }
 /* line 21, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_panel.scss */
 .x-panel.x-floating.x-floating-light,
 .x-msgbox.x-floating-light,
 .x-form.x-floating.x-floating-light {
   background-image: none;
-  background-color: #1985d0;
+  background-color: #333333;
 }
 /* line 26, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_panel.scss */
 .x-panel.x-floating .x-panel-inner,
@@ -7101,7 +7101,7 @@ audio {
   height: 0.7em;
   -webkit-mask: 0 0 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAPCAYAAABut3YUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPZJREFUeNpi/PX7LwOFwAyIG6HseiA+Ra5BjBQ6xg+IVwAxJ5T/HYgjgHgTOYYxUeCQUiBeh+QQBih7HVSOLiHDDMSTgTiTgLrpQJwLxH9p5RhOaLT4EakeFF3RQPyF2o6RhkaBGYkheRmIPYH4KbXSjC4QnyTDIch6danhGCcgPgwNGXKBNNQMb0ocEwXE24GYn4FyADJjI76Ej88x7UC8FIjZGKgHQDlxGtRsZmISMMjy+dBQoSXYBC0gv+NyDD80xzgx0AeAqg4fIH6NHk0qQHyMjg6B1WvHYDkNFjIgwS1ALMowMOAjEAeBHINe2Q0U+AUQYACQ10C2QNhRogAAAABJRU5ErkJggg==') no-repeat;
   -webkit-mask-size: 1.631em 0.7em;
-  background-color: #03111a;
+  background-color: black;
 }
 /* line 63, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_panel.scss */
 .x-anchor.x-anchor-bottom {
@@ -7110,7 +7110,7 @@ audio {
   height: 0.7em;
   -webkit-mask: 0 0 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAPCAYAAABut3YUAAAEJGlDQ1BJQ0MgUHJvZmlsZQAAOBGFVd9v21QUPolvUqQWPyBYR4eKxa9VU1u5GxqtxgZJk6XtShal6dgqJOQ6N4mpGwfb6baqT3uBNwb8AUDZAw9IPCENBmJ72fbAtElThyqqSUh76MQPISbtBVXhu3ZiJ1PEXPX6yznfOec7517bRD1fabWaGVWIlquunc8klZOnFpSeTYrSs9RLA9Sr6U4tkcvNEi7BFffO6+EdigjL7ZHu/k72I796i9zRiSJPwG4VHX0Z+AxRzNRrtksUvwf7+Gm3BtzzHPDTNgQCqwKXfZwSeNHHJz1OIT8JjtAq6xWtCLwGPLzYZi+3YV8DGMiT4VVuG7oiZpGzrZJhcs/hL49xtzH/Dy6bdfTsXYNY+5yluWO4D4neK/ZUvok/17X0HPBLsF+vuUlhfwX4j/rSfAJ4H1H0qZJ9dN7nR19frRTeBt4Fe9FwpwtN+2p1MXscGLHR9SXrmMgjONd1ZxKzpBeA71b4tNhj6JGoyFNp4GHgwUp9qplfmnFW5oTdy7NamcwCI49kv6fN5IAHgD+0rbyoBc3SOjczohbyS1drbq6pQdqumllRC/0ymTtej8gpbbuVwpQfyw66dqEZyxZKxtHpJn+tZnpnEdrYBbueF9qQn93S7HQGGHnYP7w6L+YGHNtd1FJitqPAR+hERCNOFi1i1alKO6RQnjKUxL1GNjwlMsiEhcPLYTEiT9ISbN15OY/jx4SMshe9LaJRpTvHr3C/ybFYP1PZAfwfYrPsMBtnE6SwN9ib7AhLwTrBDgUKcm06FSrTfSj187xPdVQWOk5Q8vxAfSiIUc7Z7xr6zY/+hpqwSyv0I0/QMTRb7RMgBxNodTfSPqdraz/sDjzKBrv4zu2+a2t0/HHzjd2Lbcc2sG7GtsL42K+xLfxtUgI7YHqKlqHK8HbCCXgjHT1cAdMlDetv4FnQ2lLasaOl6vmB0CMmwT/IPszSueHQqv6i/qluqF+oF9TfO2qEGTumJH0qfSv9KH0nfS/9TIp0Wboi/SRdlb6RLgU5u++9nyXYe69fYRPdil1o1WufNSdTTsp75BfllPy8/LI8G7AUuV8ek6fkvfDsCfbNDP0dvRh0CrNqTbV7LfEEGDQPJQadBtfGVMWEq3QWWdufk6ZSNsjG2PQjp3ZcnOWWing6noonSInvi0/Ex+IzAreevPhe+CawpgP1/pMTMDo64G0sTCXIM+KdOnFWRfQKdJvQzV1+Bt8OokmrdtY2yhVX2a+qrykJfMq4Ml3VR4cVzTQVz+UoNne4vcKLoyS+gyKO6EHe+75Fdt0Mbe5bRIf/wjvrVmhbqBN97RD1vxrahvBOfOYzoosH9bq94uejSOQGkVM6sN/7HelL4t10t9F4gPdVzydEOx83Gv+uNxo7XyL/FtFl8z9ZAHF4bBsrEwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAY9JREFUSA3FVbFKA0EQfbOXuzMgpLLyG2wVBEHSBSRFSvMNltZi5x9Y2kmqFKLY+QFpBStbK6uAJJe92xt3DkM2yV1yOYg5WG7nzcybx+wOS1GUtElRD+A6dvqRJmZGHMfHKbxnAh/sRg8NU0o7Sor7vj9Aqk4B+vh/MfQJVmd7tdpb1hlHQGMSmz4BTQfb5nagfe9iH/iWIllnnGrD0Pda1n50sO1sGU+B751PhUiRRTGCaRvUBdOdGFv5LHcQeB3LPXb5F4/J9UFrcwmiBztpwZyjskGGgavQV/d5FCvFSEKUJE3Fqm8FNfIIymM05JS7Yei9FOWsFSOJWuOIkb4S8WER0Sqcmb4IqhUEeF8Vl3dnluKFJDXqxDoGS861AGW564QITanOOPXq9h71QGg7WPFWJiawwwD8FAfNPKU6MwvHWKaAQbkX0ImDxPxNTCkhWa48B1VWFJvriTbJRCc8v0wiviqclYRMC8kjawWNZmLMSLCpf9P/pnfGPYlsL48ss7oVgyi9yd65pahywC+kjlEYVbHNjwAAAABJRU5ErkJggg==') no-repeat;
   -webkit-mask-size: 1.631em 0.7em;
-  background-color: #03111a;
+  background-color: black;
 }
 /* line 72, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_panel.scss */
 .x-anchor.x-anchor-left {
@@ -7120,7 +7120,7 @@ audio {
   width: 0.7em;
   -webkit-mask: 0 0 url('data:image/png;base64,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') no-repeat;
   -webkit-mask-size: 0.7em 1.631em;
-  background-color: #03111a;
+  background-color: black;
 }
 /* line 82, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_panel.scss */
 .x-anchor.x-anchor-right {
@@ -7129,12 +7129,12 @@ audio {
   width: 0.7em;
   -webkit-mask: 0 0 url('data:image/png;base64,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') no-repeat;
   -webkit-mask-size: 0.7em 1.631em;
-  background-color: #03111a;
+  background-color: black;
 }
 
 /* line 93, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_panel.scss */
 .x-floating.x-panel-light:after {
-  background-color: #1985d0;
+  background-color: #333333;
 }
 
 /* line 52, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_buttons.scss */
@@ -7168,17 +7168,17 @@ audio {
 .x-button, .x-button.x-button-back:after, .x-button.x-button-forward:after, .x-toolbar .x-button, .x-toolbar .x-button.x-button-back:after, .x-toolbar .x-button.x-button-forward:after {
   background-image: none;
   background-color: #cccccc;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f2f2f2), color-stop(3%, #d9d9d9), color-stop(100%, #bfbfbf));
-  background-image: -webkit-linear-gradient(top, #f2f2f2, #d9d9d9 3%, #bfbfbf);
-  background-image: linear-gradient(top, #f2f2f2, #d9d9d9 3%, #bfbfbf);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f2f2f2), color-stop(50%, #d9d9d9), color-stop(51%, #cccccc), color-stop(100%, #bfbfbf));
+  background-image: -webkit-linear-gradient(top, #f2f2f2, #d9d9d9 50%, #cccccc 51%, #bfbfbf);
+  background-image: linear-gradient(top, #f2f2f2, #d9d9d9 50%, #cccccc 51%, #bfbfbf);
 }
 /* line 45, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button .x-button-icon.x-icon-mask, .x-toolbar .x-button .x-button-icon.x-icon-mask {
   background-image: none;
   background-color: black;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(3%, #0d0d0d), color-stop(100%, #000000));
-  background-image: -webkit-linear-gradient(top, #262626, #0d0d0d 3%, #000000);
-  background-image: linear-gradient(top, #262626, #0d0d0d 3%, #000000);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(50%, #0d0d0d), color-stop(51%, #000000), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
+  background-image: linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
 }
 /* line 50, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-pressing, .x-button.x-button-pressing:after, .x-button.x-button-pressed, .x-button.x-button-pressed:after, .x-button.x-button-active, .x-button.x-button-active:after, .x-toolbar .x-button.x-button-pressing, .x-toolbar .x-button.x-button-pressing:after, .x-toolbar .x-button.x-button-pressed, .x-toolbar .x-button.x-button-pressed:after, .x-toolbar .x-button.x-button-active, .x-toolbar .x-button.x-button-active:after {
@@ -7398,9 +7398,9 @@ audio {
 .x-toolbar .x-button.x-button-plain.x-button-pressing,
 .x-toolbar .x-button.x-button-plain.x-button-pressed {
   background: none;
-  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 24, color-stop(0%, rgba(182, 225, 255, 0.7)), color-stop(100%, rgba(182, 225, 255, 0)));
-  background-image: -webkit-radial-gradient(rgba(182, 225, 255, 0.7), rgba(182, 225, 255, 0) 24px);
-  background-image: radial-gradient(rgba(182, 225, 255, 0.7), rgba(182, 225, 255, 0) 24px);
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 24, color-stop(0%, rgba(209, 97, 97, 0.7)), color-stop(100%, rgba(209, 97, 97, 0)));
+  background-image: -webkit-radial-gradient(rgba(209, 97, 97, 0.7), rgba(209, 97, 97, 0) 24px);
+  background-image: radial-gradient(rgba(209, 97, 97, 0.7), rgba(209, 97, 97, 0) 24px);
 }
 /* line 244, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_buttons.scss */
 .x-button.x-button-plain.x-button-pressing .x-button-icon.x-button-mask, .x-button.x-button-plain.x-button-pressed .x-button-icon.x-button-mask,
@@ -7466,9 +7466,9 @@ audio {
   max-width: 95%;
   background-image: none;
   background-color: #cc0000;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ff1a1a), color-stop(3%, #e60000), color-stop(100%, #b30000));
-  background-image: -webkit-linear-gradient(top, #ff1a1a, #e60000 3%, #b30000);
-  background-image: linear-gradient(top, #ff1a1a, #e60000 3%, #b30000);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ff1a1a), color-stop(50%, #e60000), color-stop(51%, #cc0000), color-stop(100%, #b30000));
+  background-image: -webkit-linear-gradient(top, #ff1a1a, #e60000 50%, #cc0000 51%, #b30000);
+  background-image: linear-gradient(top, #ff1a1a, #e60000 50%, #cc0000 51%, #b30000);
   display: inline-block;
 }
 
@@ -7582,37 +7582,37 @@ audio {
 
 /* line 32, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-action, .x-toolbar .x-button.x-button-action, .x-button.x-button-action-round, .x-toolbar .x-button.x-button-action-round, .x-button.x-button-action-small, .x-toolbar .x-button.x-button-action-small {
-  border: 1px solid #002f50;
-  border-top-color: #003e6a;
-  color: white;
+  border: 1px solid black;
+  border-top-color: black;
+  color: #f9ebeb;
 }
 /* line 37, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-action.x-button-back:before, .x-button.x-button-action.x-button-forward:before, .x-toolbar .x-button.x-button-action.x-button-back:before, .x-toolbar .x-button.x-button-action.x-button-forward:before, .x-button.x-button-action-round.x-button-back:before, .x-button.x-button-action-round.x-button-forward:before, .x-toolbar .x-button.x-button-action-round.x-button-back:before, .x-toolbar .x-button.x-button-action-round.x-button-forward:before, .x-button.x-button-action-small.x-button-back:before, .x-button.x-button-action-small.x-button-forward:before, .x-toolbar .x-button.x-button-action-small.x-button-back:before, .x-toolbar .x-button.x-button-action-small.x-button-forward:before {
-  background: #002f50;
+  background: black;
 }
 /* line 41, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-action, .x-button.x-button-action.x-button-back:after, .x-button.x-button-action.x-button-forward:after, .x-toolbar .x-button.x-button-action, .x-toolbar .x-button.x-button-action.x-button-back:after, .x-toolbar .x-button.x-button-action.x-button-forward:after, .x-button.x-button-action-round, .x-button.x-button-action-round.x-button-back:after, .x-button.x-button-action-round.x-button-forward:after, .x-toolbar .x-button.x-button-action-round, .x-toolbar .x-button.x-button-action-round.x-button-back:after, .x-toolbar .x-button.x-button-action-round.x-button-forward:after, .x-button.x-button-action-small, .x-button.x-button-action-small.x-button-back:after, .x-button.x-button-action-small.x-button-forward:after, .x-toolbar .x-button.x-button-action-small, .x-toolbar .x-button.x-button-action-small.x-button-back:after, .x-toolbar .x-button.x-button-action-small.x-button-forward:after {
   background-image: none;
-  background-color: #006bb6;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0398ff), color-stop(3%, #007ad0), color-stop(100%, #005c9d));
-  background-image: -webkit-linear-gradient(top, #0398ff, #007ad0 3%, #005c9d);
-  background-image: linear-gradient(top, #0398ff, #007ad0 3%, #005c9d);
+  background-color: #280b0b;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #631d1d), color-stop(50%, #3b1111), color-stop(51%, #280b0b), color-stop(100%, #140606));
+  background-image: -webkit-linear-gradient(top, #631d1d, #3b1111 50%, #280b0b 51%, #140606);
+  background-image: linear-gradient(top, #631d1d, #3b1111 50%, #280b0b 51%, #140606);
 }
 /* line 45, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-action .x-button-icon.x-icon-mask, .x-toolbar .x-button.x-button-action .x-button-icon.x-icon-mask, .x-button.x-button-action-round .x-button-icon.x-icon-mask, .x-toolbar .x-button.x-button-action-round .x-button-icon.x-icon-mask, .x-button.x-button-action-small .x-button-icon.x-icon-mask, .x-toolbar .x-button.x-button-action-small .x-button-icon.x-icon-mask {
   background-image: none;
   background-color: white;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #ffffff), color-stop(100%, #e5f5ff));
-  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 3%, #e5f5ff);
-  background-image: linear-gradient(top, #ffffff, #ffffff 3%, #e5f5ff);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #ffffff), color-stop(51%, #ffffff), color-stop(100%, #f9ebeb));
+  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f9ebeb);
+  background-image: linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f9ebeb);
 }
 /* line 50, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-action.x-button-pressing, .x-button.x-button-action.x-button-pressing:after, .x-button.x-button-action.x-button-pressed, .x-button.x-button-action.x-button-pressed:after, .x-button.x-button-action.x-button-active, .x-button.x-button-action.x-button-active:after, .x-toolbar .x-button.x-button-action.x-button-pressing, .x-toolbar .x-button.x-button-action.x-button-pressing:after, .x-toolbar .x-button.x-button-action.x-button-pressed, .x-toolbar .x-button.x-button-action.x-button-pressed:after, .x-toolbar .x-button.x-button-action.x-button-active, .x-toolbar .x-button.x-button-action.x-button-active:after, .x-button.x-button-action-round.x-button-pressing, .x-button.x-button-action-round.x-button-pressing:after, .x-button.x-button-action-round.x-button-pressed, .x-button.x-button-action-round.x-button-pressed:after, .x-button.x-button-action-round.x-button-active, .x-button.x-button-action-round.x-button-active:after, .x-toolbar .x-button.x-button-action-round.x-button-pressing, .x-toolbar .x-button.x-button-action-round.x-button-pressing:after, .x-toolbar .x-button.x-button-action-round.x-button-pressed, .x-toolbar .x-button.x-button-action-round.x-button-pressed:after, .x-toolbar .x-button.x-button-action-round.x-button-active, .x-toolbar .x-button.x-button-action-round.x-button-active:after, .x-button.x-button-action-small.x-button-pressing, .x-button.x-button-action-small.x-button-pressing:after, .x-button.x-button-action-small.x-button-pressed, .x-button.x-button-action-small.x-button-pressed:after, .x-button.x-button-action-small.x-button-active, .x-button.x-button-action-small.x-button-active:after, .x-toolbar .x-button.x-button-action-small.x-button-pressing, .x-toolbar .x-button.x-button-action-small.x-button-pressing:after, .x-toolbar .x-button.x-button-action-small.x-button-pressed, .x-toolbar .x-button.x-button-action-small.x-button-pressed:after, .x-toolbar .x-button.x-button-action-small.x-button-active, .x-toolbar .x-button.x-button-action-small.x-button-active:after {
   background-image: none;
-  background-color: #0062a7;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #004474), color-stop(10%, #00538d), color-stop(65%, #0062a7), color-stop(100%, #0064a9));
-  background-image: -webkit-linear-gradient(top, #004474, #00538d 10%, #0062a7 65%, #0064a9);
-  background-image: linear-gradient(top, #004474, #00538d 10%, #0062a7 65%, #0064a9);
+  background-color: #1c0808;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(10%, #080202), color-stop(65%, #1c0808), color-stop(100%, #1e0909));
+  background-image: -webkit-linear-gradient(top, #000000, #080202 10%, #1c0808 65%, #1e0909);
+  background-image: linear-gradient(top, #000000, #080202 10%, #1c0808 65%, #1e0909);
 }
 
 /* line 32, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
@@ -7629,17 +7629,17 @@ audio {
 .x-button.x-button-confirm, .x-button.x-button-confirm.x-button-back:after, .x-button.x-button-confirm.x-button-forward:after, .x-toolbar .x-button.x-button-confirm, .x-toolbar .x-button.x-button-confirm.x-button-back:after, .x-toolbar .x-button.x-button-confirm.x-button-forward:after, .x-button.x-button-confirm-round, .x-button.x-button-confirm-round.x-button-back:after, .x-button.x-button-confirm-round.x-button-forward:after, .x-toolbar .x-button.x-button-confirm-round, .x-toolbar .x-button.x-button-confirm-round.x-button-back:after, .x-toolbar .x-button.x-button-confirm-round.x-button-forward:after, .x-button.x-button-confirm-small, .x-button.x-button-confirm-small.x-button-back:after, .x-button.x-button-confirm-small.x-button-forward:after, .x-toolbar .x-button.x-button-confirm-small, .x-toolbar .x-button.x-button-confirm-small.x-button-back:after, .x-toolbar .x-button.x-button-confirm-small.x-button-forward:after {
   background-image: none;
   background-color: #6c9804;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a2e306), color-stop(3%, #7eb105), color-stop(100%, #5b7f03));
-  background-image: -webkit-linear-gradient(top, #a2e306, #7eb105 3%, #5b7f03);
-  background-image: linear-gradient(top, #a2e306, #7eb105 3%, #5b7f03);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a2e306), color-stop(50%, #7eb105), color-stop(51%, #6c9804), color-stop(100%, #5b7f03));
+  background-image: -webkit-linear-gradient(top, #a2e306, #7eb105 50%, #6c9804 51%, #5b7f03);
+  background-image: linear-gradient(top, #a2e306, #7eb105 50%, #6c9804 51%, #5b7f03);
 }
 /* line 45, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-confirm .x-button-icon.x-icon-mask, .x-toolbar .x-button.x-button-confirm .x-button-icon.x-icon-mask, .x-button.x-button-confirm-round .x-button-icon.x-icon-mask, .x-toolbar .x-button.x-button-confirm-round .x-button-icon.x-icon-mask, .x-button.x-button-confirm-small .x-button-icon.x-icon-mask, .x-toolbar .x-button.x-button-confirm-small .x-button-icon.x-icon-mask {
   background-image: none;
   background-color: white;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #ffffff), color-stop(100%, #f7fee6));
-  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 3%, #f7fee6);
-  background-image: linear-gradient(top, #ffffff, #ffffff 3%, #f7fee6);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #ffffff), color-stop(51%, #ffffff), color-stop(100%, #f7fee6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f7fee6);
+  background-image: linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f7fee6);
 }
 /* line 50, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-confirm.x-button-pressing, .x-button.x-button-confirm.x-button-pressing:after, .x-button.x-button-confirm.x-button-pressed, .x-button.x-button-confirm.x-button-pressed:after, .x-button.x-button-confirm.x-button-active, .x-button.x-button-confirm.x-button-active:after, .x-toolbar .x-button.x-button-confirm.x-button-pressing, .x-toolbar .x-button.x-button-confirm.x-button-pressing:after, .x-toolbar .x-button.x-button-confirm.x-button-pressed, .x-toolbar .x-button.x-button-confirm.x-button-pressed:after, .x-toolbar .x-button.x-button-confirm.x-button-active, .x-toolbar .x-button.x-button-confirm.x-button-active:after, .x-button.x-button-confirm-round.x-button-pressing, .x-button.x-button-confirm-round.x-button-pressing:after, .x-button.x-button-confirm-round.x-button-pressed, .x-button.x-button-confirm-round.x-button-pressed:after, .x-button.x-button-confirm-round.x-button-active, .x-button.x-button-confirm-round.x-button-active:after, .x-toolbar .x-button.x-button-confirm-round.x-button-pressing, .x-toolbar .x-button.x-button-confirm-round.x-button-pressing:after, .x-toolbar .x-button.x-button-confirm-round.x-button-pressed, .x-toolbar .x-button.x-button-confirm-round.x-button-pressed:after, .x-toolbar .x-button.x-button-confirm-round.x-button-active, .x-toolbar .x-button.x-button-confirm-round.x-button-active:after, .x-button.x-button-confirm-small.x-button-pressing, .x-button.x-button-confirm-small.x-button-pressing:after, .x-button.x-button-confirm-small.x-button-pressed, .x-button.x-button-confirm-small.x-button-pressed:after, .x-button.x-button-confirm-small.x-button-active, .x-button.x-button-confirm-small.x-button-active:after, .x-toolbar .x-button.x-button-confirm-small.x-button-pressing, .x-toolbar .x-button.x-button-confirm-small.x-button-pressing:after, .x-toolbar .x-button.x-button-confirm-small.x-button-pressed, .x-toolbar .x-button.x-button-confirm-small.x-button-pressed:after, .x-toolbar .x-button.x-button-confirm-small.x-button-active, .x-toolbar .x-button.x-button-confirm-small.x-button-active:after {
@@ -7664,17 +7664,17 @@ audio {
 .x-button.x-button-decline, .x-button.x-button-decline.x-button-back:after, .x-button.x-button-decline.x-button-forward:after, .x-toolbar .x-button.x-button-decline, .x-toolbar .x-button.x-button-decline.x-button-back:after, .x-toolbar .x-button.x-button-decline.x-button-forward:after, .x-button.x-button-decline-round, .x-button.x-button-decline-round.x-button-back:after, .x-button.x-button-decline-round.x-button-forward:after, .x-toolbar .x-button.x-button-decline-round, .x-toolbar .x-button.x-button-decline-round.x-button-back:after, .x-toolbar .x-button.x-button-decline-round.x-button-forward:after, .x-button.x-button-decline-small, .x-button.x-button-decline-small.x-button-back:after, .x-button.x-button-decline-small.x-button-forward:after, .x-toolbar .x-button.x-button-decline-small, .x-toolbar .x-button.x-button-decline-small.x-button-back:after, .x-toolbar .x-button.x-button-decline-small.x-button-forward:after {
   background-image: none;
   background-color: #c70505;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f91f1f), color-stop(3%, #e00606), color-stop(100%, #ae0404));
-  background-image: -webkit-linear-gradient(top, #f91f1f, #e00606 3%, #ae0404);
-  background-image: linear-gradient(top, #f91f1f, #e00606 3%, #ae0404);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f91f1f), color-stop(50%, #e00606), color-stop(51%, #c70505), color-stop(100%, #ae0404));
+  background-image: -webkit-linear-gradient(top, #f91f1f, #e00606 50%, #c70505 51%, #ae0404);
+  background-image: linear-gradient(top, #f91f1f, #e00606 50%, #c70505 51%, #ae0404);
 }
 /* line 45, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-decline .x-button-icon.x-icon-mask, .x-toolbar .x-button.x-button-decline .x-button-icon.x-icon-mask, .x-button.x-button-decline-round .x-button-icon.x-icon-mask, .x-toolbar .x-button.x-button-decline-round .x-button-icon.x-icon-mask, .x-button.x-button-decline-small .x-button-icon.x-icon-mask, .x-toolbar .x-button.x-button-decline-small .x-button-icon.x-icon-mask {
   background-image: none;
   background-color: white;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #ffffff), color-stop(100%, #fee6e6));
-  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 3%, #fee6e6);
-  background-image: linear-gradient(top, #ffffff, #ffffff 3%, #fee6e6);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #ffffff), color-stop(51%, #ffffff), color-stop(100%, #fee6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #fee6e6);
+  background-image: linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #fee6e6);
 }
 /* line 50, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-button.x-button-decline.x-button-pressing, .x-button.x-button-decline.x-button-pressing:after, .x-button.x-button-decline.x-button-pressed, .x-button.x-button-decline.x-button-pressed:after, .x-button.x-button-decline.x-button-active, .x-button.x-button-decline.x-button-active:after, .x-toolbar .x-button.x-button-decline.x-button-pressing, .x-toolbar .x-button.x-button-decline.x-button-pressing:after, .x-toolbar .x-button.x-button-decline.x-button-pressed, .x-toolbar .x-button.x-button-decline.x-button-pressed:after, .x-toolbar .x-button.x-button-decline.x-button-active, .x-toolbar .x-button.x-button-decline.x-button-active:after, .x-button.x-button-decline-round.x-button-pressing, .x-button.x-button-decline-round.x-button-pressing:after, .x-button.x-button-decline-round.x-button-pressed, .x-button.x-button-decline-round.x-button-pressed:after, .x-button.x-button-decline-round.x-button-active, .x-button.x-button-decline-round.x-button-active:after, .x-toolbar .x-button.x-button-decline-round.x-button-pressing, .x-toolbar .x-button.x-button-decline-round.x-button-pressing:after, .x-toolbar .x-button.x-button-decline-round.x-button-pressed, .x-toolbar .x-button.x-button-decline-round.x-button-pressed:after, .x-toolbar .x-button.x-button-decline-round.x-button-active, .x-toolbar .x-button.x-button-decline-round.x-button-active:after, .x-button.x-button-decline-small.x-button-pressing, .x-button.x-button-decline-small.x-button-pressing:after, .x-button.x-button-decline-small.x-button-pressed, .x-button.x-button-decline-small.x-button-pressed:after, .x-button.x-button-decline-small.x-button-active, .x-button.x-button-decline-small.x-button-active:after, .x-toolbar .x-button.x-button-decline-small.x-button-pressing, .x-toolbar .x-button.x-button-decline-small.x-button-pressing:after, .x-toolbar .x-button.x-button-decline-small.x-button-pressed, .x-toolbar .x-button.x-button-decline-small.x-button-pressed:after, .x-toolbar .x-button.x-button-decline-small.x-button-active, .x-toolbar .x-button.x-button-decline-small.x-button-active:after {
@@ -7688,13 +7688,13 @@ audio {
 /* line 35, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_sheets.scss */
 .x-sheet, .x-sheet-action {
   padding: 0.7em;
-  border-top: 1px solid #092e47;
+  border-top: 1px solid black;
   height: auto;
   background-image: none;
-  background-color: rgba(3, 17, 26, 0.9);
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(11, 60, 94, 0.9)), color-stop(3%, rgba(6, 31, 49, 0.9)), color-stop(100%, rgba(0, 2, 3, 0.9)));
-  background-image: -webkit-linear-gradient(top, rgba(11, 60, 94, 0.9), rgba(6, 31, 49, 0.9) 3%, rgba(0, 2, 3, 0.9));
-  background-image: linear-gradient(top, rgba(11, 60, 94, 0.9), rgba(6, 31, 49, 0.9) 3%, rgba(0, 2, 3, 0.9));
+  background-color: rgba(0, 0, 0, 0.9);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(38, 38, 38, 0.9)), color-stop(50%, rgba(13, 13, 13, 0.9)), color-stop(51%, rgba(0, 0, 0, 0.9)), color-stop(100%, rgba(0, 0, 0, 0.9)));
+  background-image: -webkit-linear-gradient(top, rgba(38, 38, 38, 0.9), rgba(13, 13, 13, 0.9) 50%, rgba(0, 0, 0, 0.9) 51%, rgba(0, 0, 0, 0.9));
+  background-image: linear-gradient(top, rgba(38, 38, 38, 0.9), rgba(13, 13, 13, 0.9) 50%, rgba(0, 0, 0, 0.9) 51%, rgba(0, 0, 0, 0.9));
   -webkit-border-radius: 0;
   border-radius: 0;
 }
@@ -7775,14 +7775,14 @@ audio {
 
 /* line 94, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_picker.scss */
 .x-picker-bar {
-  border-top: 0.12em solid #006bb6;
-  border-bottom: 0.12em solid #006bb6;
+  border-top: 0.12em solid #280b0b;
+  border-bottom: 0.12em solid #280b0b;
   height: 2.5em;
   background-image: none;
-  background-color: rgba(13, 148, 242, 0.3);
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(85, 180, 246, 0.3)), color-stop(3%, rgba(37, 159, 244, 0.3)), color-stop(100%, rgba(11, 133, 218, 0.3)));
-  background-image: -webkit-linear-gradient(top, rgba(85, 180, 246, 0.3), rgba(37, 159, 244, 0.3) 3%, rgba(11, 133, 218, 0.3));
-  background-image: linear-gradient(top, rgba(85, 180, 246, 0.3), rgba(37, 159, 244, 0.3) 3%, rgba(11, 133, 218, 0.3));
+  background-color: rgba(242, 13, 13, 0.3);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(246, 85, 85, 0.3)), color-stop(50%, rgba(244, 37, 37, 0.3)), color-stop(51%, rgba(242, 13, 13, 0.3)), color-stop(100%, rgba(218, 11, 11, 0.3)));
+  background-image: -webkit-linear-gradient(top, rgba(246, 85, 85, 0.3), rgba(244, 37, 37, 0.3) 50%, rgba(242, 13, 13, 0.3) 51%, rgba(218, 11, 11, 0.3));
+  background-image: linear-gradient(top, rgba(246, 85, 85, 0.3), rgba(244, 37, 37, 0.3) 50%, rgba(242, 13, 13, 0.3) 51%, rgba(218, 11, 11, 0.3));
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0.2em 0.2em;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0.2em 0.2em;
 }
@@ -7798,12 +7798,12 @@ audio {
   position: relative;
   z-index: 2;
   background-image: none;
-  background-color: #1295f1;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5ab5f5), color-stop(3%, #2aa0f2), color-stop(100%, #0d87dc));
-  background-image: -webkit-linear-gradient(top, #5ab5f5, #2aa0f2 3%, #0d87dc);
-  background-image: linear-gradient(top, #5ab5f5, #2aa0f2 3%, #0d87dc);
-  border-top: 1px solid #1295f1;
-  border-bottom: 1px solid #095b94;
+  background-color: #463939;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #705c5c), color-stop(50%, #544545), color-stop(51%, #463939), color-stop(100%, #382e2e));
+  background-image: -webkit-linear-gradient(top, #705c5c, #544545 50%, #463939 51%, #382e2e);
+  background-image: linear-gradient(top, #705c5c, #544545 50%, #463939 51%, #382e2e);
+  border-top: 1px solid #463939;
+  border-bottom: 1px solid #0e0b0b;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 0.1em 0.3em;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0.1em 0.3em;
   padding: 0.2em 1.02em;
@@ -7812,7 +7812,7 @@ audio {
 .x-picker-slot-title > div {
   font-weight: bold;
   font-size: 0.8em;
-  color: #113b59;
+  color: black;
   text-shadow: rgba(255, 255, 255, 0.25) 0 0.08em 0;
 }
 
@@ -7988,22 +7988,22 @@ audio {
 /* line 255, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-light {
   background-image: none;
-  background-color: #2583c4;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #56a7df), color-stop(3%, #2b91d7), color-stop(100%, #2175af));
-  background-image: -webkit-linear-gradient(top, #56a7df, #2b91d7 3%, #2175af);
-  background-image: linear-gradient(top, #56a7df, #2b91d7 3%, #2175af);
-  border-top-color: #2175af;
-  border-bottom-color: #195884;
+  background-color: #333333;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #595959), color-stop(50%, #404040), color-stop(51%, #333333), color-stop(100%, #262626));
+  background-image: -webkit-linear-gradient(top, #595959, #404040 50%, #333333 51%, #262626);
+  background-image: linear-gradient(top, #595959, #404040 50%, #333333 51%, #262626);
+  border-top-color: #262626;
+  border-bottom-color: #0d0d0d;
 }
 /* line 260, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-light .x-tab {
-  color: #c1dff4;
+  color: #999999;
   border-bottom: 1px solid transparent;
 }
 /* line 265, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-light .x-tab-active {
   color: white;
-  border-bottom-color: #278bd1;
+  border-bottom-color: #3b3b3b;
 }
 /* line 270, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-light .x-tab-pressed {
@@ -8017,68 +8017,68 @@ audio {
 /* line 279, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-light.x-docked-bottom .x-tab .x-button-icon {
   background-image: none;
-  background-color: #6cb2e3;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #acd4f0), color-stop(3%, #81bde7), color-stop(100%, #56a7df));
-  background-image: -webkit-linear-gradient(top, #acd4f0, #81bde7 3%, #56a7df);
-  background-image: linear-gradient(top, #acd4f0, #81bde7 3%, #56a7df);
+  background-color: #666666;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8c8c8c), color-stop(50%, #737373), color-stop(51%, #666666), color-stop(100%, #595959));
+  background-image: -webkit-linear-gradient(top, #8c8c8c, #737373 50%, #666666 51%, #595959);
+  background-image: linear-gradient(top, #8c8c8c, #737373 50%, #666666 51%, #595959);
 }
 /* line 284, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-light.x-docked-bottom .x-tab-active {
   background-image: none;
-  background-color: #2175af;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #195884), color-stop(10%, #1d6699), color-stop(65%, #2175af), color-stop(100%, #2176b1));
-  background-image: -webkit-linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
-  background-image: linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
-  text-shadow: rgba(255, 255, 255, 0.25) 0 0.08em 0;
-  -webkit-box-shadow: #1d6699 0 0 0.25em inset;
-  box-shadow: #1d6699 0 0 0.25em inset;
+  background-color: #262626;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d0d0d), color-stop(10%, #1a1a1a), color-stop(65%, #262626), color-stop(100%, #282828));
+  background-image: -webkit-linear-gradient(top, #0d0d0d, #1a1a1a 10%, #262626 65%, #282828);
+  background-image: linear-gradient(top, #0d0d0d, #1a1a1a 10%, #262626 65%, #282828);
+  text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+  -webkit-box-shadow: #1a1a1a 0 0 0.25em inset;
+  box-shadow: #1a1a1a 0 0 0.25em inset;
 }
 /* line 292, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-light.x-docked-bottom .x-tab-active .x-button-icon {
   background-image: none;
-  background-color: #1da2ff;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6ac2ff), color-stop(3%, #37adff), color-stop(100%, #0398ff));
-  background-image: -webkit-linear-gradient(top, #6ac2ff, #37adff 3%, #0398ff);
-  background-image: linear-gradient(top, #6ac2ff, #37adff 3%, #0398ff);
+  background-color: #861313;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c91d1d), color-stop(50%, #9c1616), color-stop(51%, #861313), color-stop(100%, #701010));
+  background-image: -webkit-linear-gradient(top, #c91d1d, #9c1616 50%, #861313 51%, #701010);
+  background-image: linear-gradient(top, #c91d1d, #9c1616 50%, #861313 51%, #701010);
 }
 
 /* line 301, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-light.x-docked-top .x-tab-active {
   background-image: none;
-  background-color: #2175af;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #195884), color-stop(10%, #1d6699), color-stop(65%, #2175af), color-stop(100%, #2176b1));
-  background-image: -webkit-linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
-  background-image: linear-gradient(top, #195884, #1d6699 10%, #2175af 65%, #2176b1);
+  background-color: #262626;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d0d0d), color-stop(10%, #1a1a1a), color-stop(65%, #262626), color-stop(100%, #282828));
+  background-image: -webkit-linear-gradient(top, #0d0d0d, #1a1a1a 10%, #262626 65%, #282828);
+  background-image: linear-gradient(top, #0d0d0d, #1a1a1a 10%, #262626 65%, #282828);
   color: white;
 }
 /* line 306, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-light.x-docked-top .x-tab .x-button-icon {
   background-image: none;
-  background-color: #6cb2e3;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #acd4f0), color-stop(3%, #81bde7), color-stop(100%, #56a7df));
-  background-image: -webkit-linear-gradient(top, #acd4f0, #81bde7 3%, #56a7df);
-  background-image: linear-gradient(top, #acd4f0, #81bde7 3%, #56a7df);
+  background-color: #666666;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8c8c8c), color-stop(50%, #737373), color-stop(51%, #666666), color-stop(100%, #595959));
+  background-image: -webkit-linear-gradient(top, #8c8c8c, #737373 50%, #666666 51%, #595959);
+  background-image: linear-gradient(top, #8c8c8c, #737373 50%, #666666 51%, #595959);
 }
 
 /* line 255, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-dark {
   background-image: none;
-  background-color: #0e4b75;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1676b9), color-stop(3%, #11598c), color-stop(100%, #0b3c5e));
-  background-image: -webkit-linear-gradient(top, #1676b9, #11598c 3%, #0b3c5e);
-  background-image: linear-gradient(top, #1676b9, #11598c 3%, #0b3c5e);
-  border-top-color: #0b3c5e;
-  border-bottom-color: #061f31;
+  background-color: black;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(50%, #0d0d0d), color-stop(51%, #000000), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
+  background-image: linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
+  border-top-color: black;
+  border-bottom-color: black;
 }
 /* line 260, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-dark .x-tab {
-  color: #63b4ec;
+  color: #666666;
   border-bottom: 1px solid transparent;
 }
 /* line 265, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-dark .x-tab-active {
-  color: white;
-  border-bottom-color: #105483;
+  color: #e6e6e6;
+  border-bottom-color: #080808;
 }
 /* line 270, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-dark .x-tab-pressed {
@@ -8092,56 +8092,56 @@ audio {
 /* line 279, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-dark.x-docked-bottom .x-tab .x-button-icon {
   background-image: none;
-  background-color: #1985d0;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4ca9e9), color-stop(3%, #1e93e4), color-stop(100%, #1676b9));
-  background-image: -webkit-linear-gradient(top, #4ca9e9, #1e93e4 3%, #1676b9);
-  background-image: linear-gradient(top, #4ca9e9, #1e93e4 3%, #1676b9);
+  background-color: #333333;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #595959), color-stop(50%, #404040), color-stop(51%, #333333), color-stop(100%, #262626));
+  background-image: -webkit-linear-gradient(top, #595959, #404040 50%, #333333 51%, #262626);
+  background-image: linear-gradient(top, #595959, #404040 50%, #333333 51%, #262626);
 }
 /* line 284, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-dark.x-docked-bottom .x-tab-active {
   background-image: none;
-  background-color: #0b3c5e;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #061f31), color-stop(10%, #092e47), color-stop(65%, #0b3c5e), color-stop(100%, #0c3e60));
-  background-image: -webkit-linear-gradient(top, #061f31, #092e47 10%, #0b3c5e 65%, #0c3e60);
-  background-image: linear-gradient(top, #061f31, #092e47 10%, #0b3c5e 65%, #0c3e60);
+  background-color: black;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(10%, #000000), color-stop(65%, #000000), color-stop(100%, #010101));
+  background-image: -webkit-linear-gradient(top, #000000, #000000 10%, #000000 65%, #010101);
+  background-image: linear-gradient(top, #000000, #000000 10%, #000000 65%, #010101);
   text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
-  -webkit-box-shadow: #092e47 0 0 0.25em inset;
-  box-shadow: #092e47 0 0 0.25em inset;
+  -webkit-box-shadow: black 0 0 0.25em inset;
+  box-shadow: black 0 0 0.25em inset;
 }
 /* line 292, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-dark.x-docked-bottom .x-tab-active .x-button-icon {
   background-image: none;
-  background-color: #50b7ff;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #9dd7ff), color-stop(3%, #6ac2ff), color-stop(100%, #37adff));
-  background-image: -webkit-linear-gradient(top, #9dd7ff, #6ac2ff 3%, #37adff);
-  background-image: linear-gradient(top, #9dd7ff, #6ac2ff 3%, #37adff);
+  background-color: #cc0000;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ff1a1a), color-stop(50%, #e60000), color-stop(51%, #cc0000), color-stop(100%, #b30000));
+  background-image: -webkit-linear-gradient(top, #ff1a1a, #e60000 50%, #cc0000 51%, #b30000);
+  background-image: linear-gradient(top, #ff1a1a, #e60000 50%, #cc0000 51%, #b30000);
 }
 
 /* line 301, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-dark.x-docked-top .x-tab-active {
   background-image: none;
-  background-color: #0b3c5e;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #061f31), color-stop(10%, #092e47), color-stop(65%, #0b3c5e), color-stop(100%, #0c3e60));
-  background-image: -webkit-linear-gradient(top, #061f31, #092e47 10%, #0b3c5e 65%, #0c3e60);
-  background-image: linear-gradient(top, #061f31, #092e47 10%, #0b3c5e 65%, #0c3e60);
-  color: white;
+  background-color: black;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(10%, #000000), color-stop(65%, #000000), color-stop(100%, #010101));
+  background-image: -webkit-linear-gradient(top, #000000, #000000 10%, #000000 65%, #010101);
+  background-image: linear-gradient(top, #000000, #000000 10%, #000000 65%, #010101);
+  color: #d9d9d9;
 }
 /* line 306, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-dark.x-docked-top .x-tab .x-button-icon {
   background-image: none;
-  background-color: #1985d0;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4ca9e9), color-stop(3%, #1e93e4), color-stop(100%, #1676b9));
-  background-image: -webkit-linear-gradient(top, #4ca9e9, #1e93e4 3%, #1676b9);
-  background-image: linear-gradient(top, #4ca9e9, #1e93e4 3%, #1676b9);
+  background-color: #333333;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #595959), color-stop(50%, #404040), color-stop(51%, #333333), color-stop(100%, #262626));
+  background-image: -webkit-linear-gradient(top, #595959, #404040 50%, #333333 51%, #262626);
+  background-image: linear-gradient(top, #595959, #404040 50%, #333333 51%, #262626);
 }
 
 /* line 255, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-neutral {
   background-image: none;
   background-color: #e0e0e0;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #ededed), color-stop(100%, #d3d3d3));
-  background-image: -webkit-linear-gradient(top, #ffffff, #ededed 3%, #d3d3d3);
-  background-image: linear-gradient(top, #ffffff, #ededed 3%, #d3d3d3);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #ededed), color-stop(51%, #e0e0e0), color-stop(100%, #d3d3d3));
+  background-image: -webkit-linear-gradient(top, #ffffff, #ededed 50%, #e0e0e0 51%, #d3d3d3);
+  background-image: linear-gradient(top, #ffffff, #ededed 50%, #e0e0e0 51%, #d3d3d3);
   border-top-color: lightgrey;
   border-bottom-color: #bababa;
 }
@@ -8168,9 +8168,9 @@ audio {
 .x-tabbar-neutral.x-docked-bottom .x-tab .x-button-icon {
   background-image: none;
   background-color: #adadad;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d3d3d3), color-stop(3%, #bababa), color-stop(100%, #a0a0a0));
-  background-image: -webkit-linear-gradient(top, #d3d3d3, #bababa 3%, #a0a0a0);
-  background-image: linear-gradient(top, #d3d3d3, #bababa 3%, #a0a0a0);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d3d3d3), color-stop(50%, #bababa), color-stop(51%, #adadad), color-stop(100%, #a0a0a0));
+  background-image: -webkit-linear-gradient(top, #d3d3d3, #bababa 50%, #adadad 51%, #a0a0a0);
+  background-image: linear-gradient(top, #d3d3d3, #bababa 50%, #adadad 51%, #a0a0a0);
 }
 /* line 284, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
 .x-tabbar-neutral.x-docked-bottom .x-tab-active {
@@ -8187,9 +8187,9 @@ audio {
 .x-tabbar-neutral.x-docked-bottom .x-tab-active .x-button-icon {
   background-image: none;
   background-color: #7a7a7a;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a0a0a0), color-stop(3%, #878787), color-stop(100%, #6d6d6d));
-  background-image: -webkit-linear-gradient(top, #a0a0a0, #878787 3%, #6d6d6d);
-  background-image: linear-gradient(top, #a0a0a0, #878787 3%, #6d6d6d);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a0a0a0), color-stop(50%, #878787), color-stop(51%, #7a7a7a), color-stop(100%, #6d6d6d));
+  background-image: -webkit-linear-gradient(top, #a0a0a0, #878787 50%, #7a7a7a 51%, #6d6d6d);
+  background-image: linear-gradient(top, #a0a0a0, #878787 50%, #7a7a7a 51%, #6d6d6d);
 }
 
 /* line 301, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
@@ -8205,9 +8205,9 @@ audio {
 .x-tabbar-neutral.x-docked-top .x-tab .x-button-icon {
   background-image: none;
   background-color: #adadad;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d3d3d3), color-stop(3%, #bababa), color-stop(100%, #a0a0a0));
-  background-image: -webkit-linear-gradient(top, #d3d3d3, #bababa 3%, #a0a0a0);
-  background-image: linear-gradient(top, #d3d3d3, #bababa 3%, #a0a0a0);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d3d3d3), color-stop(50%, #bababa), color-stop(51%, #adadad), color-stop(100%, #a0a0a0));
+  background-image: -webkit-linear-gradient(top, #d3d3d3, #bababa 50%, #adadad 51%, #a0a0a0);
+  background-image: linear-gradient(top, #d3d3d3, #bababa 50%, #adadad 51%, #a0a0a0);
 }
 
 /* line 113, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_tabs.scss */
@@ -8284,15 +8284,15 @@ audio {
 /* line 128, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
 .x-toolbar-dark {
   background-image: none;
-  background-color: #1468a2;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1e93e4), color-stop(3%, #1676b9), color-stop(100%, #11598c));
-  background-image: -webkit-linear-gradient(top, #1e93e4, #1676b9 3%, #11598c);
-  background-image: linear-gradient(top, #1e93e4, #1676b9 3%, #11598c);
+  background-color: #1a1a1a;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #404040), color-stop(50%, #262626), color-stop(51%, #1a1a1a), color-stop(100%, #0d0d0d));
+  background-image: -webkit-linear-gradient(top, #404040, #262626 50%, #1a1a1a 51%, #0d0d0d);
+  background-image: linear-gradient(top, #404040, #262626 50%, #1a1a1a 51%, #0d0d0d);
   border-color: black;
 }
 /* line 132, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
 .x-toolbar-dark .x-title {
-  color: white;
+  color: #f2f2f2;
   text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
 }
 /* line 137, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
@@ -8317,9 +8317,9 @@ audio {
 .x-toolbar-dark .x-field-select .x-component-outer,
 .x-toolbar-dark .x-field-select .x-component-outer:before, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer:before {
-  border: 1px solid #061f31;
-  border-top-color: #092e47;
-  color: white;
+  border: 1px solid black;
+  border-top-color: black;
+  color: #e6e6e6;
 }
 /* line 37, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-toolbar-dark .x-button.x-button-back:before, .x-toolbar-dark .x-button.x-button-forward:before, .x-toolbar .x-toolbar-dark .x-button.x-button-back:before, .x-toolbar .x-toolbar-dark .x-button.x-button-forward:before,
@@ -8331,7 +8331,7 @@ audio {
 .x-toolbar-dark .x-field-select .x-component-outer:before.x-button-forward:before, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer:before.x-button-back:before, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer:before.x-button-forward:before {
-  background: #061f31;
+  background: black;
 }
 /* line 41, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-toolbar-dark .x-button, .x-toolbar-dark .x-button.x-button-back:after, .x-toolbar-dark .x-button.x-button-forward:after, .x-toolbar .x-toolbar-dark .x-button, .x-toolbar .x-toolbar-dark .x-button.x-button-back:after, .x-toolbar .x-toolbar-dark .x-button.x-button-forward:after,
@@ -8348,10 +8348,10 @@ audio {
 .x-toolbar-dark .x-field-select .x-component-outer:before.x-button-back:after, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer:before.x-button-forward:after {
   background-image: none;
-  background-color: #11598c;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1985d0), color-stop(3%, #1468a2), color-stop(100%, #0e4b75));
-  background-image: -webkit-linear-gradient(top, #1985d0, #1468a2 3%, #0e4b75);
-  background-image: linear-gradient(top, #1985d0, #1468a2 3%, #0e4b75);
+  background-color: #0d0d0d;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(50%, #1a1a1a), color-stop(51%, #0d0d0d), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, #333333, #1a1a1a 50%, #0d0d0d 51%, #000000);
+  background-image: linear-gradient(top, #333333, #1a1a1a 50%, #0d0d0d 51%, #000000);
 }
 /* line 45, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-toolbar-dark .x-button .x-button-icon.x-icon-mask, .x-toolbar .x-toolbar-dark .x-button .x-button-icon.x-icon-mask,
@@ -8361,9 +8361,9 @@ audio {
 .x-toolbar-dark .x-field-select .x-component-outer:before .x-button-icon.x-icon-mask {
   background-image: none;
   background-color: white;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #ffffff), color-stop(100%, #e8f4fc));
-  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 3%, #e8f4fc);
-  background-image: linear-gradient(top, #ffffff, #ffffff 3%, #e8f4fc);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #ffffff), color-stop(51%, #ffffff), color-stop(100%, #f2f2f2));
+  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f2f2f2);
+  background-image: linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f2f2f2);
 }
 /* line 50, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-toolbar-dark .x-button.x-button-pressing, .x-toolbar-dark .x-button.x-button-pressing:after, .x-toolbar-dark .x-button.x-button-pressed, .x-toolbar-dark .x-button.x-button-pressed:after, .x-toolbar-dark .x-button.x-button-active, .x-toolbar-dark .x-button.x-button-active:after, .x-toolbar .x-toolbar-dark .x-button.x-button-pressing, .x-toolbar .x-toolbar-dark .x-button.x-button-pressing:after, .x-toolbar .x-toolbar-dark .x-button.x-button-pressed, .x-toolbar .x-toolbar-dark .x-button.x-button-pressed:after, .x-toolbar .x-toolbar-dark .x-button.x-button-active, .x-toolbar .x-toolbar-dark .x-button.x-button-active:after,
@@ -8392,26 +8392,26 @@ audio {
 .x-toolbar-dark .x-field-select .x-component-outer:before.x-button-active, .x-toolbar
 .x-toolbar-dark .x-field-select .x-component-outer:before.x-button-active:after {
   background-image: none;
-  background-color: #0f517e;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0a3351), color-stop(10%, #0c4267), color-stop(65%, #0f517e), color-stop(100%, #0f5280));
-  background-image: -webkit-linear-gradient(top, #0a3351, #0c4267 10%, #0f517e 65%, #0f5280);
-  background-image: linear-gradient(top, #0a3351, #0c4267 10%, #0f517e 65%, #0f5280);
+  background-color: #050505;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(10%, #000000), color-stop(65%, #050505), color-stop(100%, #060606));
+  background-image: -webkit-linear-gradient(top, #000000, #000000 10%, #050505 65%, #060606);
+  background-image: linear-gradient(top, #000000, #000000 10%, #050505 65%, #060606);
 }
 /* line 160, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
 .x-toolbar-dark .x-label,
 .x-toolbar-dark .x-form-label {
   font-weight: bold;
-  color: white;
+  color: #f2f2f2;
   text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
 }
 
 /* line 128, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
 .x-toolbar-light {
   background-image: none;
-  background-color: #1985d0;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4ca9e9), color-stop(3%, #1e93e4), color-stop(100%, #1676b9));
-  background-image: -webkit-linear-gradient(top, #4ca9e9, #1e93e4 3%, #1676b9);
-  background-image: linear-gradient(top, #4ca9e9, #1e93e4 3%, #1676b9);
+  background-color: #333333;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #595959), color-stop(50%, #404040), color-stop(51%, #333333), color-stop(100%, #262626));
+  background-image: -webkit-linear-gradient(top, #595959, #404040 50%, #333333 51%, #262626);
+  background-image: linear-gradient(top, #595959, #404040 50%, #333333 51%, #262626);
   border-color: black;
 }
 /* line 132, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
@@ -8441,8 +8441,8 @@ audio {
 .x-toolbar-light .x-field-select .x-component-outer,
 .x-toolbar-light .x-field-select .x-component-outer:before, .x-toolbar
 .x-toolbar-light .x-field-select .x-component-outer:before {
-  border: 1px solid #0b3c5e;
-  border-top-color: #0e4b75;
+  border: 1px solid black;
+  border-top-color: black;
   color: white;
 }
 /* line 37, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
@@ -8455,7 +8455,7 @@ audio {
 .x-toolbar-light .x-field-select .x-component-outer:before.x-button-forward:before, .x-toolbar
 .x-toolbar-light .x-field-select .x-component-outer:before.x-button-back:before, .x-toolbar
 .x-toolbar-light .x-field-select .x-component-outer:before.x-button-forward:before {
-  background: #0b3c5e;
+  background: black;
 }
 /* line 41, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-toolbar-light .x-button, .x-toolbar-light .x-button.x-button-back:after, .x-toolbar-light .x-button.x-button-forward:after, .x-toolbar .x-toolbar-light .x-button, .x-toolbar .x-toolbar-light .x-button.x-button-back:after, .x-toolbar .x-toolbar-light .x-button.x-button-forward:after,
@@ -8472,10 +8472,10 @@ audio {
 .x-toolbar-light .x-field-select .x-component-outer:before.x-button-back:after, .x-toolbar
 .x-toolbar-light .x-field-select .x-component-outer:before.x-button-forward:after {
   background-image: none;
-  background-color: #1676b9;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #359ee7), color-stop(3%, #1985d0), color-stop(100%, #1468a2));
-  background-image: -webkit-linear-gradient(top, #359ee7, #1985d0 3%, #1468a2);
-  background-image: linear-gradient(top, #359ee7, #1985d0 3%, #1468a2);
+  background-color: #262626;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4d4d4d), color-stop(50%, #333333), color-stop(51%, #262626), color-stop(100%, #1a1a1a));
+  background-image: -webkit-linear-gradient(top, #4d4d4d, #333333 50%, #262626 51%, #1a1a1a);
+  background-image: linear-gradient(top, #4d4d4d, #333333 50%, #262626 51%, #1a1a1a);
 }
 /* line 45, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-toolbar-light .x-button .x-button-icon.x-icon-mask, .x-toolbar .x-toolbar-light .x-button .x-button-icon.x-icon-mask,
@@ -8485,9 +8485,9 @@ audio {
 .x-toolbar-light .x-field-select .x-component-outer:before .x-button-icon.x-icon-mask {
   background-image: none;
   background-color: white;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #ffffff), color-stop(100%, #e8f4fc));
-  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 3%, #e8f4fc);
-  background-image: linear-gradient(top, #ffffff, #ffffff 3%, #e8f4fc);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #ffffff), color-stop(51%, #ffffff), color-stop(100%, #f2f2f2));
+  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f2f2f2);
+  background-image: linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f2f2f2);
 }
 /* line 50, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-toolbar-light .x-button.x-button-pressing, .x-toolbar-light .x-button.x-button-pressing:after, .x-toolbar-light .x-button.x-button-pressed, .x-toolbar-light .x-button.x-button-pressed:after, .x-toolbar-light .x-button.x-button-active, .x-toolbar-light .x-button.x-button-active:after, .x-toolbar .x-toolbar-light .x-button.x-button-pressing, .x-toolbar .x-toolbar-light .x-button.x-button-pressing:after, .x-toolbar .x-toolbar-light .x-button.x-button-pressed, .x-toolbar .x-toolbar-light .x-button.x-button-pressed:after, .x-toolbar .x-toolbar-light .x-button.x-button-active, .x-toolbar .x-toolbar-light .x-button.x-button-active:after,
@@ -8516,10 +8516,10 @@ audio {
 .x-toolbar-light .x-field-select .x-component-outer:before.x-button-active, .x-toolbar
 .x-toolbar-light .x-field-select .x-component-outer:before.x-button-active:after {
   background-image: none;
-  background-color: #156eac;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0f517e), color-stop(10%, #125f95), color-stop(65%, #156eac), color-stop(100%, #156fae));
-  background-image: -webkit-linear-gradient(top, #0f517e, #125f95 10%, #156eac 65%, #156fae);
-  background-image: linear-gradient(top, #0f517e, #125f95 10%, #156eac 65%, #156fae);
+  background-color: #1f1f1f;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #050505), color-stop(10%, #121212), color-stop(65%, #1f1f1f), color-stop(100%, #202020));
+  background-image: -webkit-linear-gradient(top, #050505, #121212 10%, #1f1f1f 65%, #202020);
+  background-image: linear-gradient(top, #050505, #121212 10%, #1f1f1f 65%, #202020);
 }
 /* line 160, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
 .x-toolbar-light .x-label,
@@ -8533,9 +8533,9 @@ audio {
 .x-toolbar-neutral {
   background-image: none;
   background-color: #e0e0e0;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #ededed), color-stop(100%, #d3d3d3));
-  background-image: -webkit-linear-gradient(top, #ffffff, #ededed 3%, #d3d3d3);
-  background-image: linear-gradient(top, #ffffff, #ededed 3%, #d3d3d3);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #ededed), color-stop(51%, #e0e0e0), color-stop(100%, #d3d3d3));
+  background-image: -webkit-linear-gradient(top, #ffffff, #ededed 50%, #e0e0e0 51%, #d3d3d3);
+  background-image: linear-gradient(top, #ffffff, #ededed 50%, #e0e0e0 51%, #d3d3d3);
   border-color: #616161;
 }
 /* line 132, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
@@ -8597,9 +8597,9 @@ audio {
 .x-toolbar-neutral .x-field-select .x-component-outer:before.x-button-forward:after {
   background-image: none;
   background-color: lightgrey;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fafafa), color-stop(3%, #e0e0e0), color-stop(100%, #c7c7c7));
-  background-image: -webkit-linear-gradient(top, #fafafa, #e0e0e0 3%, #c7c7c7);
-  background-image: linear-gradient(top, #fafafa, #e0e0e0 3%, #c7c7c7);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fafafa), color-stop(50%, #e0e0e0), color-stop(51%, #d3d3d3), color-stop(100%, #c7c7c7));
+  background-image: -webkit-linear-gradient(top, #fafafa, #e0e0e0 50%, #d3d3d3 51%, #c7c7c7);
+  background-image: linear-gradient(top, #fafafa, #e0e0e0 50%, #d3d3d3 51%, #c7c7c7);
 }
 /* line 45, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-toolbar-neutral .x-button .x-button-icon.x-icon-mask, .x-toolbar .x-toolbar-neutral .x-button .x-button-icon.x-icon-mask,
@@ -8609,9 +8609,9 @@ audio {
 .x-toolbar-neutral .x-field-select .x-component-outer:before .x-button-icon.x-icon-mask {
   background-image: none;
   background-color: black;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(3%, #0d0d0d), color-stop(100%, #000000));
-  background-image: -webkit-linear-gradient(top, #262626, #0d0d0d 3%, #000000);
-  background-image: linear-gradient(top, #262626, #0d0d0d 3%, #000000);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(50%, #0d0d0d), color-stop(51%, #000000), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
+  background-image: linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
 }
 /* line 50, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-toolbar-neutral .x-button.x-button-pressing, .x-toolbar-neutral .x-button.x-button-pressing:after, .x-toolbar-neutral .x-button.x-button-pressed, .x-toolbar-neutral .x-button.x-button-pressed:after, .x-toolbar-neutral .x-button.x-button-active, .x-toolbar-neutral .x-button.x-button-active:after, .x-toolbar .x-toolbar-neutral .x-button.x-button-pressing, .x-toolbar .x-toolbar-neutral .x-button.x-button-pressing:after, .x-toolbar .x-toolbar-neutral .x-button.x-button-pressed, .x-toolbar .x-toolbar-neutral .x-button.x-button-pressed:after, .x-toolbar .x-toolbar-neutral .x-button.x-button-active, .x-toolbar .x-toolbar-neutral .x-button.x-button-active:after,
@@ -8655,9 +8655,9 @@ audio {
 
 /* line 93, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
 .x-toolbar.x-toolbar-neutral .x-toolbar-inner .x-button.x-button-pressing {
-  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 24, color-stop(0%, rgba(122, 191, 239, 0.7)), color-stop(100%, rgba(122, 191, 239, 0)));
-  background-image: -webkit-radial-gradient(rgba(122, 191, 239, 0.7), rgba(122, 191, 239, 0) 24px);
-  background-image: radial-gradient(rgba(122, 191, 239, 0.7), rgba(122, 191, 239, 0) 24px);
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 24, color-stop(0%, rgba(115, 115, 115, 0.7)), color-stop(100%, rgba(115, 115, 115, 0)));
+  background-image: -webkit-radial-gradient(rgba(115, 115, 115, 0.7), rgba(115, 115, 115, 0) 24px);
+  background-image: radial-gradient(rgba(115, 115, 115, 0.7), rgba(115, 115, 115, 0) 24px);
 }
 /* line 96, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_toolbar.scss */
 .x-toolbar.x-toolbar-neutral .x-toolbar-inner .x-button.x-button-pressing .x-button-icon.x-button-mask {
@@ -8838,7 +8838,7 @@ audio {
 }
 /* line 55, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_indexbar.scss */
 .x-indexbar > div {
-  color: #155988;
+  color: #0d0d0d;
   font-size: 0.6em;
   text-align: center;
   line-height: 1.1em;
@@ -8856,7 +8856,7 @@ audio {
 .x-indexbar-pressed {
   -webkit-border-radius: 0.55em;
   border-radius: 0.55em;
-  background-color: rgba(143, 155, 163, 0.8);
+  background-color: rgba(163, 143, 143, 0.8);
 }
 
 /* line 84, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_list.scss */
@@ -8875,10 +8875,10 @@ audio {
   -webkit-mask: 0 0 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFNkNCM0JGNTZFMjI2ODExQkNGQjkwMzk3MDc3MkZFQiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo3M0MzQUU1QUFDQkQxMURGOEQ2MUVDMjM0MzY2NTBDQSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo3M0MzQUU1OUFDQkQxMURGOEQ2MUVDMjM0MzY2NTBDQSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU3Q0IzQkY1NkUyMjY4MTFCQ0ZCOTAzOTcwNzcyRkVCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU2Q0IzQkY1NkUyMjY4MTFCQ0ZCOTAzOTcwNzcyRkVCIi8+IDwvcmRmOkRlc2NyaXB0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') no-repeat;
   -webkit-mask-size: 1.7em;
   background-image: none;
-  background-color: #006bb6;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0398ff), color-stop(3%, #007ad0), color-stop(100%, #005c9d));
-  background-image: -webkit-linear-gradient(top, #0398ff, #007ad0 3%, #005c9d);
-  background-image: linear-gradient(top, #0398ff, #007ad0 3%, #005c9d);
+  background-color: #2a0909;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #691616), color-stop(50%, #3f0d0d), color-stop(51%, #2a0909), color-stop(100%, #150404));
+  background-image: -webkit-linear-gradient(top, #691616, #3f0d0d 50%, #2a0909 51%, #150404);
+  background-image: linear-gradient(top, #691616, #3f0d0d 50%, #2a0909 51%, #150404);
   width: 1.7em;
   height: 1.7em;
   margin: 0.5em 0.5em 0 0;
@@ -8914,16 +8914,16 @@ audio {
 }
 /* line 132, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_list.scss */
 .x-list .x-list-item.x-item-pressed .x-dock-horizontal {
-  background: #b6e1ff none;
+  background: #d16161 none;
 }
 /* line 137, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_list.scss */
 .x-list .x-list-item.x-item-selected .x-dock-horizontal {
   background-image: none;
-  background-color: #006bb6;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0398ff), color-stop(3%, #007ad0), color-stop(100%, #005c9d));
-  background-image: -webkit-linear-gradient(top, #0398ff, #007ad0 3%, #005c9d);
-  background-image: linear-gradient(top, #0398ff, #007ad0 3%, #005c9d);
-  color: white;
+  background-color: #280b0b;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #631d1d), color-stop(50%, #3b1111), color-stop(51%, #280b0b), color-stop(100%, #140606));
+  background-image: -webkit-linear-gradient(top, #631d1d, #3b1111 50%, #280b0b 51%, #140606);
+  background-image: linear-gradient(top, #631d1d, #3b1111 50%, #280b0b 51%, #140606);
+  color: #f9ebeb;
   text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
 }
 /* line 143, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_list.scss */
@@ -8973,18 +8973,18 @@ audio {
 .x-list-normal .x-list-header-wrap .x-item-header,
 .x-list-normal .x-list-header {
   background-image: none;
-  background-color: #5ab5f5;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a2d6f9), color-stop(3%, #72c0f6), color-stop(100%, #42abf4));
-  background-image: -webkit-linear-gradient(top, #a2d6f9, #72c0f6 3%, #42abf4);
-  background-image: linear-gradient(top, #a2d6f9, #72c0f6 3%, #42abf4);
-  color: #0a6aac;
-  text-shadow: rgba(255, 255, 255, 0.25) 0 0.08em 0;
-  border-top: 1px solid #5ab5f5;
-  border-bottom: 1px solid #0d87dc;
+  background-color: #705c5c;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #988181), color-stop(50%, #7e6767), color-stop(51%, #705c5c), color-stop(100%, #625050));
+  background-image: -webkit-linear-gradient(top, #988181, #7e6767 50%, #705c5c 51%, #625050);
+  background-image: linear-gradient(top, #988181, #7e6767 50%, #705c5c 51%, #625050);
+  color: #baabab;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+  border-top: 1px solid #705c5c;
+  border-bottom: 1px solid #382e2e;
   font-weight: bold;
   font-size: 0.8em;
   padding: 0.2em 1.02em;
-  text-shadow: rgba(255, 255, 255, 0.25) 0 0.08em 0;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
 }
 /* line 211, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_list.scss */
 .x-list-normal .x-list-item .x-dock-horizontal {
@@ -8996,13 +8996,13 @@ audio {
 }
 /* line 223, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_list.scss */
 .x-list-normal .x-list-item.x-item-pressed .x-dock-horizontal {
-  border-top-color: #b6e1ff;
-  background-color: #b6e1ff;
+  border-top-color: #d16161;
+  background-color: #d16161;
 }
 /* line 228, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_list.scss */
 .x-list-normal .x-list-item.x-item-selected .x-dock-horizontal {
-  border-top-color: #006bb6;
-  border-bottom: 1px solid #003e6a;
+  border-top-color: #280b0b;
+  border-bottom: 1px solid black;
 }
 
 /* line 236, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_list.scss */
@@ -9037,10 +9037,10 @@ audio {
   -webkit-mask: 0 0 url('data:image/png;base64,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') no-repeat;
   -webkit-mask-size: 1.5em;
   background-image: none;
-  background-color: #419cdb;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #81bde7), color-stop(3%, #56a7df), color-stop(100%, #2b91d7));
-  background-image: -webkit-linear-gradient(top, #81bde7, #56a7df 3%, #2b91d7);
-  background-image: linear-gradient(top, #81bde7, #56a7df 3%, #2b91d7);
+  background-color: #4d4d4d;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #737373), color-stop(50%, #595959), color-stop(51%, #4d4d4d), color-stop(100%, #404040));
+  background-image: -webkit-linear-gradient(top, #737373, #595959 50%, #4d4d4d 51%, #404040);
+  background-image: linear-gradient(top, #737373, #595959 50%, #4d4d4d 51%, #404040);
   width: 1.5em;
   height: 1.5em;
   margin: 0.5em 0.5em 0 0;
@@ -10149,7 +10149,7 @@ html, body {
 }
 /* line 329, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_form.scss */
 .x-field-checkbox .x-input-el:checked:after {
-  background-color: #006bb6;
+  background-color: #280b0b;
 }
 
 /* line 334, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_form.scss */
@@ -10167,12 +10167,12 @@ html, body {
 }
 /* line 343, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_form.scss */
 .x-field-radio .x-input-el:checked:before {
-  background-color: #006bb6;
+  background-color: #280b0b;
 }
 
 /* line 350, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_form.scss */
 .x-item-disabled.x-field-radio .x-input-el:checked:before {
-  background: #84afcd;
+  background: #948989;
 }
 /* line 354, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_form.scss */
 .x-item-disabled.x-field-radio .x-input-el:after {
@@ -10180,7 +10180,7 @@ html, body {
 }
 /* line 361, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_form.scss */
 .x-item-disabled.x-field-checkbox .x-input-el:checked:after {
-  background: #84afcd;
+  background: #948989;
 }
 
 /* line 370, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_form.scss */
@@ -10238,9 +10238,9 @@ html, body {
 .x-spinner.x-item-disabled .x-spinner-button .x-button-icon.x-icon-mask, .x-toolbar .x-spinner.x-item-disabled .x-spinner-button .x-button-icon.x-icon-mask {
   background-image: none;
   background-color: black;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(3%, #0d0d0d), color-stop(100%, #000000));
-  background-image: -webkit-linear-gradient(top, #262626, #0d0d0d 3%, #000000);
-  background-image: linear-gradient(top, #262626, #0d0d0d 3%, #000000);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(50%, #0d0d0d), color-stop(51%, #000000), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
+  background-image: linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
 }
 /* line 50, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-spinner.x-item-disabled .x-spinner-button.x-button-pressing, .x-spinner.x-item-disabled .x-spinner-button.x-button-pressing:after, .x-spinner.x-item-disabled .x-spinner-button.x-button-pressed, .x-spinner.x-item-disabled .x-spinner-button.x-button-pressed:after, .x-spinner.x-item-disabled .x-spinner-button.x-button-active, .x-spinner.x-item-disabled .x-spinner-button.x-button-active:after, .x-toolbar .x-spinner.x-item-disabled .x-spinner-button.x-button-pressing, .x-toolbar .x-spinner.x-item-disabled .x-spinner-button.x-button-pressing:after, .x-toolbar .x-spinner.x-item-disabled .x-spinner-button.x-button-pressed, .x-toolbar .x-spinner.x-item-disabled .x-spinner-button.x-button-pressed:after, .x-toolbar .x-spinner.x-item-disabled .x-spinner-button.x-button-active, .x-toolbar .x-spinner.x-item-disabled .x-spinner-button.x-button-active:after {
@@ -10284,9 +10284,9 @@ html, body {
 .x-spinner .x-spinner-button .x-button-icon.x-icon-mask, .x-toolbar .x-spinner .x-spinner-button .x-button-icon.x-icon-mask {
   background-image: none;
   background-color: black;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(3%, #0d0d0d), color-stop(100%, #000000));
-  background-image: -webkit-linear-gradient(top, #262626, #0d0d0d 3%, #000000);
-  background-image: linear-gradient(top, #262626, #0d0d0d 3%, #000000);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(50%, #0d0d0d), color-stop(51%, #000000), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
+  background-image: linear-gradient(top, #262626, #0d0d0d 50%, #000000 51%, #000000);
 }
 /* line 50, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/../_mixins.scss */
 .x-spinner .x-spinner-button.x-button-pressing, .x-spinner .x-spinner-button.x-button-pressing:after, .x-spinner .x-spinner-button.x-button-pressed, .x-spinner .x-spinner-button.x-button-pressed:after, .x-spinner .x-spinner-button.x-button-active, .x-spinner .x-spinner-button.x-button-active:after, .x-toolbar .x-spinner .x-spinner-button.x-button-pressing, .x-toolbar .x-spinner .x-spinner-button.x-button-pressing:after, .x-toolbar .x-spinner .x-spinner-button.x-button-pressed, .x-toolbar .x-spinner .x-spinner-button.x-button-pressed:after, .x-toolbar .x-spinner .x-spinner-button.x-button-active, .x-toolbar .x-spinner .x-spinner-button.x-button-active:after {
@@ -10388,9 +10388,9 @@ html, body {
   border-radius: 0.925em;
   background-image: none;
   background-color: #dddddd;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(3%, #eaeaea), color-stop(100%, #d0d0d0));
-  background-image: -webkit-linear-gradient(top, #ffffff, #eaeaea 3%, #d0d0d0);
-  background-image: linear-gradient(top, #ffffff, #eaeaea 3%, #d0d0d0);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #eaeaea), color-stop(51%, #dddddd), color-stop(100%, #d0d0d0));
+  background-image: -webkit-linear-gradient(top, #ffffff, #eaeaea 50%, #dddddd 51%, #d0d0d0);
+  background-image: linear-gradient(top, #ffffff, #eaeaea 50%, #dddddd 51%, #d0d0d0);
   -webkit-background-clip: padding;
   background-clip: padding-box;
 }
@@ -10402,9 +10402,9 @@ html, body {
 .x-thumb.x-dragging:after {
   background-image: none;
   background-color: #d0d0d0;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f7f7f7), color-stop(3%, #dddddd), color-stop(100%, #c4c4c4));
-  background-image: -webkit-linear-gradient(top, #f7f7f7, #dddddd 3%, #c4c4c4);
-  background-image: linear-gradient(top, #f7f7f7, #dddddd 3%, #c4c4c4);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f7f7f7), color-stop(50%, #dddddd), color-stop(51%, #d0d0d0), color-stop(100%, #c4c4c4));
+  background-image: -webkit-linear-gradient(top, #f7f7f7, #dddddd 50%, #d0d0d0 51%, #c4c4c4);
+  background-image: linear-gradient(top, #f7f7f7, #dddddd 50%, #d0d0d0 51%, #c4c4c4);
 }
 
 /* line 81, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_form-sliders.scss */
@@ -10663,7 +10663,7 @@ input[type="search"]::-webkit-search-cancel-button {
   box-shadow: rgba(0, 0, 0, 0.4) 0 0.1em 0.5em;
   -webkit-border-radius: 0.3em;
   border-radius: 0.3em;
-  border: 0.15em solid #1985d0;
+  border: 0.15em solid #333333;
 }
 /* line 17, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_msgbox.scss */
 .x-msgbox .x-docking-vertical {
@@ -10756,17 +10756,17 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /* line 109, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_msgbox.scss */
 .x-msgbox-dark .x-msgbox-text {
-  color: rgba(190, 224, 247, 0.9);
+  color: rgba(204, 204, 204, 0.9);
   text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
 }
 /* line 113, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/resources/themes/stylesheets/sencha-touch/default/widgets/_msgbox.scss */
 .x-msgbox-dark .x-msgbox-input {
   background-image: none;
-  background-color: rgba(190, 224, 247, 0.9);
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(144, 202, 242, 0.9)), color-stop(10%, rgba(167, 213, 244, 0.9)), color-stop(65%, rgba(190, 224, 247, 0.9)), color-stop(100%, rgba(192, 225, 247, 0.9)));
-  background-image: -webkit-linear-gradient(top, rgba(144, 202, 242, 0.9), rgba(167, 213, 244, 0.9) 10%, rgba(190, 224, 247, 0.9) 65%, rgba(192, 225, 247, 0.9));
-  background-image: linear-gradient(top, rgba(144, 202, 242, 0.9), rgba(167, 213, 244, 0.9) 10%, rgba(190, 224, 247, 0.9) 65%, rgba(192, 225, 247, 0.9));
-  border: 0.1em solid rgba(25, 133, 208, 0.9);
+  background-color: rgba(204, 204, 204, 0.9);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(179, 179, 179, 0.9)), color-stop(10%, rgba(191, 191, 191, 0.9)), color-stop(65%, rgba(204, 204, 204, 0.9)), color-stop(100%, rgba(205, 205, 205, 0.9)));
+  background-image: -webkit-linear-gradient(top, rgba(179, 179, 179, 0.9), rgba(191, 191, 191, 0.9) 10%, rgba(204, 204, 204, 0.9) 65%, rgba(205, 205, 205, 0.9));
+  background-image: linear-gradient(top, rgba(179, 179, 179, 0.9), rgba(191, 191, 191, 0.9) 10%, rgba(204, 204, 204, 0.9) 65%, rgba(205, 205, 205, 0.9));
+  border: 0.1em solid rgba(102, 102, 102, 0.9);
 }
 
 /* line 8, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/_tables.sass */
@@ -11074,6 +11074,14 @@ table th[class*="span"],
 }
 
 /* line 13, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
-h2.centered {
+.centered {
   text-align: center;
+}
+
+/* line 17, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.x-docked-top .logo {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAAAnCAYAAADpYmEPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjBEM0Q1QjhBMTE1QTExRTJBQUE5Rjc5QTc1MEM2MzgzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjBEM0Q1QjhCMTE1QTExRTJBQUE5Rjc5QTc1MEM2MzgzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MEQzRDVCODgxMTVBMTFFMkFBQTlGNzlBNzUwQzYzODMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MEQzRDVCODkxMTVBMTFFMkFBQTlGNzlBNzUwQzYzODMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7EHuV2AAARe0lEQVR42uxcfXBUVZZ/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') left top no-repeat;
+  display: inline-block;
+  height: 46px;
+  width: 150px;
 }

@@ -6,8 +6,19 @@ Ext.define('SpringTrader.view.Main', {
         items: [
             {
                 xtype: 'titlebar',
-                title: 'SpringTrader',
-                docked: 'top'
+                docked: 'top',
+                layout: {pack: 'center'},
+                items: [
+                    {
+                        xtype: 'component',
+                        html: '<div class="logo"></div>'
+                    },
+                    {
+                        xtype: 'button',
+                        text: 'Login',
+                        align: 'right'
+                    }
+                ]
             },
             {
                 xtype: 'dashboardPage'

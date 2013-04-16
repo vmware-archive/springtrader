@@ -10,18 +10,7 @@ Ext.define('SpringTrader.view.Dashboard',{
         },
         scrollable: true,
 		title : 'Dashboard',
-		iconCls : 'home',
-        items: [
-            {
-                xtype: 'marketsummary',
-                style: "backgroundColor:#ccc"
-            },
-            {
-                xtype: 'component',
-                html: 'Dashboard Page here',
-                style: "backgroundColor:#aaa"
-            }
-        ]
+		iconCls : 'home'
 	}
 
 });
