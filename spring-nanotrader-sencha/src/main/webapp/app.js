@@ -18,6 +18,11 @@ Ext.Loader.setPath({
     'Ext': 'touch/src',
     'SpringTrader': 'app'
 });
+
+Ext.Loader.setConfig({
+    enabled: true,
+    disableCaching: false
+});
 //</debug>
 
 Ext.application({
