@@ -60,6 +60,9 @@ Ext.application({
 
         // Initialize the main view
         Ext.Viewport.add(Ext.create('SpringTrader.view.Main'));
+
+        // Start interval timers
+        setInterval(function() { Ext.getStore('marketsummary').load()}, 15000);
     },
 
     onUpdated: function() {

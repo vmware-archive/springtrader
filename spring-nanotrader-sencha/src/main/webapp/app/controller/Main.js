@@ -1,18 +1,28 @@
 Ext.define('SpringTrader.controller.Main', {
 	extend: 'Ext.app.Controller',
+
     init: function() {
         this.user = {
             authenticated: function() { return false; }
         };
-        setInterval(function() { Ext.getStore('marketsummary').load()}, 15000);
     },
+
+    launch: function() {
+        this.getNavView().getNavigationBar().hide();
+    },
+
 	config: {
-		views: ['MarketSummary', 'Dashboard', 'Portfolio', 'Trade', 'SignupButton'],
+		views: ['TabPanel', 'MarketSummary', 'Dashboard', 'Portfolio', 'Trade', 'SignupButton', 'SignupForm'],
 		stores: ['MarketSummary'],
         refs: {
+            navView: 'navigationview',
+            titleBar: 'titlebar',
+
             dashboardView: 'dashboardPage',
             portfolioView: 'portfolioPage',
-            tradeView: 'tradePage'
+            tradeView: 'tradePage',
+
+            signupButton: 'signupbutton > button'
         },
         control: {
             dashboardView: {
@@ -23,9 +33,16 @@ Ext.define('SpringTrader.controller.Main', {
             },
             tradeView: {
                 show: 'onTradeShow'
+            },
+            signupButton: {
+                tap: 'onSignupButtonTap'
+            },
+            navView: {
+                pop: 'onPopView'
             }
         }
 	},
+
     onDashboardShow: function() { this.onShow(this.getDashboardView, 'dashboard'); },
     onPortfolioShow: function() { this.onShow(this.getPortfolioView, 'portfolio'); },
     onTradeShow: function() { this.onShow(this.getTradeView, 'trade'); },
@@ -53,5 +70,17 @@ Ext.define('SpringTrader.controller.Main', {
             });
         }
         getView().add(configItems);
+    },
+
+    onSignupButtonTap: function() {
+        this.getTitleBar().hide();
+        this.getNavView().getNavigationBar().show();
+        this.getNavView().push(Ext.create('SpringTrader.view.SignupForm'));
+    },
+
+    onPopView: function(me, poppedView) {
+        this.getNavView().getNavigationBar().hide();
+        this.getTitleBar().show();
+        poppedView.destroy();
     }
 });

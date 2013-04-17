@@ -1,8 +1,7 @@
 Ext.define('SpringTrader.view.Main', {
-    extend: 'Ext.tab.Panel',
+    extend: 'Ext.navigation.View',
     requires: ['Ext.TitleBar'],
     config: {
-        tabBarPosition: 'bottom',
         items: [
             {
                 xtype: 'titlebar',
@@ -20,15 +19,7 @@ Ext.define('SpringTrader.view.Main', {
                     }
                 ]
             },
-            {
-                xtype: 'dashboardPage'
-            },
-            {
-                xtype: 'portfolioPage'
-            },
-            {
-                xtype: 'tradePage'
-            }
+            {xtype: 'maintabpanel'}
         ]
     }
 });
