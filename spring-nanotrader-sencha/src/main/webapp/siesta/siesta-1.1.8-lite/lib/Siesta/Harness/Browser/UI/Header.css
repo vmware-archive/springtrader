@@ -1,0 +1,117 @@
+/*
+
+Siesta 1.1.8
+Copyright(c) 2009-2013 Bryntum AB
+http://bryntum.com/contact
+http://bryntum.com/products/siesta/license
+
+*/
+/*=======================================================================================================================================================================================================================
+    Test suite title
+*/
+
+.tr-title .x-panel-body 
+{
+    background:transparent;
+    color               : black;
+    line-height         : 50px;
+    font-size           : 20px;
+    padding-left        : 10px
+}
+
+.tr-title .x-btn
+{
+    border-radius: 3px;
+    border-color:grey;
+    box-shadow:1px 0px 2px #bbb;
+}
+
+.x-ie .tr-title .x-btn button
+{
+    overflow-x:hidden;
+}
+
+
+.tr-logo {
+    float               : right;
+    width               : 115px;
+    height              : 30px;
+    background-image    : url(../images/logo.png);
+    background-repeat   : no-repeat;
+    background-position : left 5px;
+    cursor              : pointer;
+}
+
+.tr-title
+{
+}
+
+.tr-siesta-logo {
+	background     : url(../images/logo_small2.png) no-repeat 10px center;
+    position        : absolute;
+    left            : 5px !important;
+    top             : 6px !important;
+    width           : 250px;
+    height          : 105px;
+    z-index         : 1000;
+}
+
+.tr-status-indicator {
+    
+    display     : inline-block;
+    float       : left;
+    
+    margin-right        : 10px;
+    
+    /*background-image    : url(../images/to_do_list.png) !important;*/
+    background-repeat   : no-repeat;
+    background-position : left center; 
+}
+
+
+.tr-version-indicator
+{
+    position:absolute;
+    color:DarkOrchid;
+    font-size:10px;
+    left:191px !important;
+    top:26px !important;
+}
+
+
+/*=======================================================================================================================================================================================================================
+    Icons
+*/
+
+.tr-icon-options {
+    background-image: url(../images/gear.png) !important;
+    background-position: -3px 0;
+}
+
+.tr-icon-run-checked {
+    background-image: url(../images/Play.png) !important;
+}
+
+.tr-icon-run-failed {
+    background-image: url(../images/PlayRed.png) !important;
+}
+
+.tr-icon-run-all {
+    background-image: url(../images/PlayAll.png) !important;
+}
+
+.tr-icon-stop {
+    background-image: url(../images/Stop.png) !important;
+}
+
+.icon-stop-on-error {
+    background-image: url(../images/stop_on_error.png) !important;
+}
+
+.tr-icon-expand-all {
+    background-image: url(../images/arrow_out.png) !important;
+}
+
+.tr-icon-collapse-all {
+    background-image: url(../images/arrow_in.png) !important;
+}

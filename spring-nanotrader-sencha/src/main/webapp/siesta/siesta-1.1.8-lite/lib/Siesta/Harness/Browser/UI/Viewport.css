@@ -1,0 +1,138 @@
+/*
+
+Siesta 1.1.8
+Copyright(c) 2009-2013 Bryntum AB
+http://bryntum.com/contact
+http://bryntum.com/products/siesta/license
+
+*/
+/*
+
+Play icons from:
+Author :	Sekkyumu
+HomePage :	http://sekkyumu.deviantart.com/
+License :	Creative Commons Attribution 3.0 License
+
+
+
+*/
+iframe {
+    position    : absolute;
+    
+    left        : -10000px;
+    top         : -10000px;
+    
+    background-color    : white;
+}
+
+iframe.tr-iframe-forced {
+	z-index                    : 100000;
+	
+	border                     : 5px solid;
+	border-color               : #d5e7f0;
+	-moz-border-radius         : 14px;
+	-webkit-border-radius      : 14px;
+	border-radius              : 14px;
+}
+
+iframe.tr-iframe-hidden {
+    left        : -10000px !important;
+    top         : -10000px !important;
+}
+
+
+
+body
+{
+    background: transparent url(../images/bodybg.gif) repeat-x left top !important;
+}
+
+/*=======================================================================================================================================================================================================================
+    Test suite status
+*/
+
+.tr-status-allgreen {
+    background-image    : url(../images/checkmark32.png) !important;
+}
+
+.tr-status-bugs {
+    background-image    : url(../images/bug32.png) !important;
+}
+
+.tr-status-running {
+    background-image    : url(../images/lightning32.png) !important;
+}
+
+.tr-status-allgreen-small {
+    background-image    : url(../images/ok.png) !important;
+}
+
+.tr-status-bugs-small {
+    background-image    : url(../images/bug.png) !important;
+}
+
+.tr-status-running-small {
+    background-image    : url(../images/lightning.png) !important;
+}
+
+.tr-status-neutral-small {
+    background-image    : url(../images/to_do_list_small.png) !important;
+}
+
+
+
+
+/*=======================================================================================================================================================================================================================
+    Vertically aligned content
+*/
+
+.tr-vertical-align-helper-content {
+    display         : -moz-inline-box;
+    display         : inline-block;
+    vertical-align  : middle;
+    zoom            : 1;
+}
+
+
+.tr-vertical-align-helper {
+    display         : -moz-inline-box;
+    display         : inline-block;
+    vertical-align  : middle;
+    height          : 100%;
+    width           : 0px;
+    zoom            : 1;
+}
+
+.tr-rounded-box {
+    background              : #FFFFFF;
+    color                   : black;
+    font-size               : larger;
+    
+    border                  : 3px solid #d5e7f0;
+    
+    padding                 : 30px;
+    
+    -moz-border-radius      : 24px;
+    -webkit-border-radius   : 24px;
+    border-radius           : 24px;
+}
+
+.launching
+{
+    background: url(../images/clock_48.png) no-repeat 5px center !important;
+    padding-left:60px;
+}
+
+.tr-main-area-centered {
+    text-align         : center;
+}
+
+/* Ext 4.0.7+ defines this as white*/
+.x-grid-row .x-grid-cell {
+    background-color: transparent;
+}
+
+.x-splitter, body
+{
+    background-color:#DFE8F6;
+}

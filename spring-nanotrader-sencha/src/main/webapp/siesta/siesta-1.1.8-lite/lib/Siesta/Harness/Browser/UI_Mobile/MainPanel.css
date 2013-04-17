@@ -1,0 +1,123 @@
+/*
+
+Siesta 1.1.8
+Copyright(c) 2009-2013 Bryntum AB
+http://bryntum.com/contact
+http://bryntum.com/products/siesta/license
+
+*/
+/*
+
+Play icons from:
+Author :	Sekkyumu
+HomePage :	http://sekkyumu.deviantart.com/
+License :	Creative Commons Attribution 3.0 License
+
+
+
+*/
+iframe {
+    position    : absolute;
+    width:100% !important;
+    height:100% !important;
+    left        : -10000px;
+    top         : -10000px;
+    
+    background-color    : white;
+}
+
+iframe.active {
+    left        : 0px;
+    top         : 0px;
+    z-index     : 0;
+}
+
+.mainarea-panel, .tr-testgrid, .x-layout-card-item
+{
+    background:transparent !important;
+}
+
+/*=======================================================================================================================================================================================================================
+    Test suite status
+*/
+
+.tr-status-allgreen {
+    background-image    : url(../images/checkmark32.png) !important;
+}
+
+.tr-status-bugs {
+    background-image    : url(../images/bug32.png) !important;
+}
+
+.tr-status-running {
+    background-image    : url(../images/lightning32.png) !important;
+}
+
+.tr-status-allgreen-small {
+    background-image    : url(../images/ok.png) !important;
+}
+
+.tr-status-bugs-small {
+    background-image    : url(../images/bug.png) !important;
+}
+
+.tr-status-running-small {
+    background-image    : url(../images/lightning.png) !important;
+}
+
+.tr-status-neutral-small {
+    background-image    : url(../images/to_do_list_small.png) !important;
+}
+
+.tr-icon-run-failed .x-button-label {
+    background: transparent url(../images/PlayRed.png) no-repeat 0 -8px;
+    height:16px;
+}
+
+.tr-icon-run-all .x-button-label{
+    background: transparent url(../images/PlayAll.png) no-repeat 0 -8px;
+    height:16px;
+}
+
+.tr-icon-stop .x-button-label{
+    background: transparent url(../images/Stop.png) no-repeat 0 -8px;
+    height:16px;
+}
+
+/*=======================================================================================================================================================================================================================
+    Vertically aligned content
+*/
+
+.launching
+{
+    background: url(../images/clock_48.png) no-repeat 5px center !important;
+    padding-left:60px;
+}
+
+#splashLoader {
+    background: url(../images/logo_small2.png) no-repeat center 25%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+#loading {
+    color: #9EB2CD;
+    font-size: 120%;
+    position: absolute;
+    width: 170px;
+    left: 50%;
+    margin: 55% 0 0 -59px;
+}
+
+#loading .x-loading-spinner {
+    font-size: 160%;
+    margin: -27px 0 0 -45px;
+}
+
+.suite-bar .x-title
+{
+    opacity:0.5;
+}

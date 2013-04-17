@@ -1,0 +1,60 @@
+/*
+
+Siesta 1.1.8
+Copyright(c) 2009-2013 Bryntum AB
+http://bryntum.com/contact
+http://bryntum.com/products/siesta/license
+
+*/
+/*=======================================================================================================================================================================================================================
+    Panel with test iframe
+*/
+
+
+.tr-container {
+    visibility     : visible !important;
+}
+
+.tr-container .x-panel-collapsed {
+    display        : block !important;
+    
+    visibility     : hidden !important;
+    
+    z-index        : -1 !important;
+}
+
+
+td.tr-td-vertical-align {
+	vertical-align     : middle;
+}
+
+/*=======================================================================================================================================================================================================================
+    Toolbar icons
+*/
+
+
+.view-source
+{
+    background : url(../images/text_align_left.png) no-repeat left center;
+}
+
+.test-source-ct .syntaxhighlighter
+{
+    overflow:hidden !important;
+}
+
+
+.show-dom
+{
+    background : url(../images/monitor.png) no-repeat left center;
+}
+
+.show-simulated-actions
+{
+    background : url(../images/lightning.png) no-repeat left center;
+}
+
+.rerun
+{
+    background : url(../images/arrow_rotate_anticlockwise.png) no-repeat left center;
+}

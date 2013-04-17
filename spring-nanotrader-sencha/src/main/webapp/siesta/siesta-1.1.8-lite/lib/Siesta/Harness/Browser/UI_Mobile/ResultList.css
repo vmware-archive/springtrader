@@ -1,0 +1,64 @@
+/*
+
+Siesta 1.1.8
+Copyright(c) 2009-2013 Bryntum AB
+http://bryntum.com/contact
+http://bryntum.com/products/siesta/license
+
+*/
+/*=======================================================================================================================================================================================================================
+    Assertion row - result cell
+*/
+
+
+.result-list .x-list-item-label
+{
+    min-height:0 !important;
+    padding:0 !important;
+}
+
+.result-list .tr-assertion-row,
+.result-list .tr-diagnostic-row
+{
+    padding: 0.65em 0.8em;
+}
+
+
+
+.result-list .tr-row-failed-assertion {
+    background : #ff8186 url(../images/bug.png) no-repeat 10px center;
+    padding-left : 35px;
+}
+
+.result-list .tr-row-passed-assertion {
+    background : transparent url(../images/ok.png) no-repeat 10px center;
+    padding-left : 35px;
+}
+
+.result-list .tr-row-passed-wait-assertion
+{
+    background : transparent url(../images/clock_check.png) no-repeat 10px center;
+    padding-left : 35px;
+}
+
+.result-list .tr-diagnostic-row
+{
+    background-color        : #d5e7f0;
+    border : 1px solid lightblue;
+}
+
+.tr-summary-row
+{
+    padding: 0.65em 0.8em;
+    background-color: #115788;
+    color:#fff;
+}
+
+.tr-summary-failure {
+    background-color        : #FF8186 !important;
+}
+
+.siesta-initializing
+{
+    color:#777;    
+}

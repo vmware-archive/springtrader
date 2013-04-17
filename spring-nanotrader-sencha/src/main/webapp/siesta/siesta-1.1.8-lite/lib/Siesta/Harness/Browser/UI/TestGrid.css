@@ -1,0 +1,110 @@
+/*
+
+Siesta 1.1.8
+Copyright(c) 2009-2013 Bryntum AB
+http://bryntum.com/contact
+http://bryntum.com/products/siesta/license
+
+*/
+/*=======================================================================================================================================================================================================================
+    Row in tests grid - result cell
+*/
+
+.tr-testgrid .x-grid-dirty-cell 
+{
+    background-image:none;
+}
+
+.tr-testgrid .x-grid-cell-inner {
+    height          : 20px !important;
+}
+
+.x-ie .tr-testgrid .x-grid-cell-inner {
+    white-space     : nowrap !important;
+}
+
+
+.tr-test-status {
+    background-position: 3px center;
+    background-repeat: no-repeat;
+}
+
+.tr-test-status .x-tree-icon {
+    background-position     : left center;
+    background-repeat       : no-repeat;
+}
+
+.tr-test-status-empty .x-tree-icon {
+    background-image : url(../images/document_16.png) !important;
+}
+
+.tr-test-status-failed .x-tree-icon {
+    background-image : url(../images/bug.png) !important;
+}
+
+.tr-test-status-thrown .x-tree-icon {
+    background-image : url(../images/flag-red.png) !important;
+}
+
+.tr-test-status-working .x-tree-icon {
+    background-image : url(../images/hourglass.png) !important;
+}
+
+.tr-test-status-passed .x-tree-icon {
+    background-image : url(../images/ok.png) !important;
+}
+
+.tr-test-status-missing .x-tree-icon {
+    background-image : url(../images/cross.png) !important;
+}
+
+.tr-test-status-running .x-tree-icon {
+    background-image : url(../images/lightning.png) !important;
+}
+
+.tr-folder-green .x-tree-icon {
+    background-image : url(../images/folder_green.png) !important;
+}
+
+.tr-folder-yellow .x-tree-icon {
+    background-image : url(../images/folder_yellow.png) !important;
+}
+
+.tr-folder-red .x-tree-icon {
+    background-image : url(../images/folder_red.png) !important;
+}
+
+.tr-folder-working .x-tree-icon {
+    background-image : url(../images/hourglass.png) !important;
+}
+
+
+.tr-test-todo-pass
+{
+    color: green;    
+    font-weight:bold;
+}
+
+.tr-test-todo-fail
+{
+    color: #666;    
+}
+
+.tr-testgrid .x-toolbar
+{
+    padding:3px 0 3px;
+}
+
+
+.sch-tree-filtered .x-tree-expander {
+    visibility     : hidden;
+}
+
+
+.tr-filter-trigger-leaf {
+	background-image        : url("../images/trigger-leafs.gif");
+}
+
+.tr-filter-trigger-group {
+    background-image        : url("../images/trigger-groups.gif");  
+}

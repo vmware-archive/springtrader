@@ -1,0 +1,272 @@
+/*
+
+Siesta 1.1.8
+Copyright(c) 2009-2013 Bryntum AB
+http://bryntum.com/contact
+http://bryntum.com/products/siesta/license
+
+*/
+/*=======================================================================================================================================================================================================================
+    Diagnostic row
+*/
+
+.tr-diagnostic-row,
+.tr-summary-row {
+    background-color        : #d5e7f0 !important;
+    line-height : 25px;
+    padding-left : 10px;
+}
+
+.tr-summary-failure {
+    background-color        : #FF8186 !important;
+}
+
+.tr-summary-failure span{
+    font-weight : bold;
+}
+
+.tr-diagnostic-row td,
+.tr-simulation-row td
+{
+    background-image:none !important;
+}
+
+.tr-diagnostic-row td
+{
+    border-width:0 0 !important;
+}
+
+.assertion-index,
+.assertion-status
+{
+    width:25px;
+    height:18px;
+    position:absolute;
+}
+
+.assertion-status
+{
+    left:25px;
+}
+
+.assertion-text
+{
+    left:55px;
+    position:relative;
+}
+
+.assertion-text,
+.assertion-index,
+.assertion-status
+{
+    display:block;
+    line-height:17px;
+}
+
+
+.tr-diagnostic-row .assertion-index,
+.tr-diagnostic-row .assertion-status,
+.tr-summary-row .assertion-index,
+.tr-summary-row .assertion-status
+{
+    display:none;
+}
+
+.tr-diagnostic-row .assertion-text,
+.tr-summary-row .assertion-text
+{
+    left:0;
+}
+
+
+.tr-diagnostic-row span.assertion-text
+{
+    font-weight:bold;
+}
+
+.assertiongrid-initializing
+{
+    color:#777;
+    margin:5px;
+    font-size:10px;
+    text-align:left;
+}
+
+.tr-diagnostic-row .tr-warning span.assertion-text {
+	color      : red;
+}
+
+/*=======================================================================================================================================================================================================================
+    Annotation
+*/
+
+.tr-assert-row-annontation {
+	font-family        : "Courier New", monospace, serif;
+	font-size          : 1em;
+	
+	padding-top        : 10px;
+}
+
+
+/*=======================================================================================================================================================================================================================
+    Assertion row - result cell
+*/
+
+.tr-row-failed-assertion {
+	background-color       : #ff8186;
+}
+
+.tr-row-failed-assertion.x-grid-row-over, .tr-row-failed-assertion.x-grid-row-over .x-grid-cell {
+	background-color       : #f7a2a6;
+	background-image       : none;
+}
+
+.tr-row-failed-assertion .x-grid-cell, .tr-row-failed-assertion.x-grid-row-alt .x-grid-cell, .tr-row-failed-assertion.x-grid-row-alt .x-grid-rowwrap-div {
+    background-color       : transparent;
+}
+
+.assertion-status 
+{
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.tr-assert-row-ok-cell .assertion-status{
+    background-image : url(../images/ok.png) !important;
+}
+
+.tr-assert-row-ok-todo-cell .assertion-status{
+    background-image : url(../images/ok-todo.png) !important;
+}
+
+.tr-assert-row-bug-cell .assertion-status{
+    background-image : url(../images/bug.png) !important;
+}
+
+.tr-assert-row-waiting-cell .assertion-status{
+    background-image : url(../images/spinner.gif) !important;
+}
+
+.tr-assert-row-waiting-ok-cell .assertion-status{
+    background-image : url(../images/clock_check.png) !important;
+}
+
+.tr-assert-row-waiting-ok-cell .assertion-text{
+    color:navy;
+}
+
+.tr-assert-row-waiting-cell .assertion-text{
+    color:#666;
+}
+
+
+
+.tr-assert-row-bug-todo-cell .assertion-status{
+    background-image : url(../images/bug-todo.png) !important;
+}
+
+/*=======================================================================================================================================================================================================================
+    Simulated Events
+*/
+
+.tr-simulation-row td
+{
+    background:#F5F9C9;
+}
+
+.tr-simulation-row
+{
+    background:#F5F9C9;
+}
+
+.hide-simulated .tr-simulation-row td .x-grid-cell-inner
+{
+    height:0;
+    overflow:hidden;
+    padding:0;
+}
+
+.hide-simulated .tr-simulation-row td
+{
+    border-width:0 !important;
+}
+
+.tr-simulation-row 
+{
+    line-height : 20px;
+    padding-left : 5px;
+    color:#666;
+}
+
+.simulated
+{
+    padding-left:25px;
+    height:16px;
+}
+
+.simulated-event-name
+{
+    font-weight : bold;
+}
+
+
+.simulated-click 
+{
+    background : url(../images/mouse_click.png) no-repeat left center;
+}
+
+.simulated-dblclick 
+{
+    background : url(../images/mouse_doubleclick.png) no-repeat left center;
+}
+
+.simulated-contextmenu
+{
+    background : url(../images/mouse_context.png) no-repeat left center;
+}
+
+.simulated-mousemove 
+{
+    background : url(../images/mouse_move.png) no-repeat left center;
+}
+
+.simulated-mouseover,
+.simulated-mouseenter
+{
+    background : url(../images/mouse_over.png) no-repeat left center;
+}
+
+.simulated-mouseout,
+.simulated-mouseleave
+{
+    background : url(../images/mouse_out.png) no-repeat left center;
+}
+
+.simulated-mousedown 
+{
+    background : url(../images/mouse_down.png) no-repeat left center;
+}
+
+.simulated-mouseup
+{
+    background : url(../images/mouse_up.png) no-repeat left center;
+}
+
+.simulated-keydown,
+.simulated-keypress,
+.simulated-keyup
+{
+    background : url(../images/key_up.png) no-repeat left center;
+}
+
+.simulated-touchstart,
+.simulated-touchmove
+{
+    background: url(../images/cursor-hand-press.png) no-repeat left center;
+}
+
+.simulated-touchend
+{
+    background: url(../images/cursor-hand.png) no-repeat left center;
+}
+
