@@ -1,7 +1,7 @@
 Ext.define('SpringTrader.controller.User', {
    extend: 'Ext.app.Controller',
     config: {
-        //models: ['User'],
+        models: ['User'],
         refs: {
             signupSubmitBtn: 'signupPage #signupSubmitBtn',
             signupPage: 'signupPage'
@@ -16,11 +16,13 @@ Ext.define('SpringTrader.controller.User', {
     onSignupSubmit: function() {
         var form = this.getSignupPage();
 
-        var user = Ext.create('SpringTrader.model.User', {accounts: [{openbalance: form.getValues().openbalance}]});
+        var user = Ext.create('SpringTrader.model.User');
 
         this.getSignupPage().updateRecord(user);
 
-        this.validateUser(user, form);
+        if (this.validateUser(user, form)) {
+            user.save();
+        }
     },
 
     validateUser: function(user, form) {

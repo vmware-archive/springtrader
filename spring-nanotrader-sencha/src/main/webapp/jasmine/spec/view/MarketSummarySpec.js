@@ -1,14 +1,14 @@
 Ext.require('SpringTrader.view.MarketSummary');
 
 describe('SpringTrader.view.MarketSummary', function() {
-    var marketSummaryView;
-
-    var marketSummaryStore = Ext.create('SpringTrader.store.MarketSummary', {
-        proxy: undefined,
-        data: [ marketSummaryJSON ]
-    });
+    var marketSummaryView, marketSummaryStore;
 
     beforeEach(function() {
+        marketSummaryStore = Ext.create('SpringTrader.store.MarketSummary', {
+            proxy: undefined,
+            data: [ marketSummaryJSON ]
+        });
+
         marketSummaryView = Ext.create('SpringTrader.view.MarketSummary', {
             store: marketSummaryStore,
             renderTo: 'jasmine_content'
