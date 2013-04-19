@@ -14,9 +14,10 @@ Harness.start(
         preload: [],
         performSetup: false,
         items: [
-            'test/010_sanity.t.js',
-            'test/110_signup_form_cancel.t.js',
-            'test/100_signup_form.t.js'
+            'test/sanity.t.js',
+            'test/signup_form_cancel.t.js',
+            'test/signup_form.t.js',
+            'test/signup_form_invalid.t.js',
         ]
     }
 );

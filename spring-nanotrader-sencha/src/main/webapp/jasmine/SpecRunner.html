@@ -1,5 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-  "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
   <title>Jasmine Spec Runner</title>
@@ -24,7 +23,7 @@
 	    name: 'SpringTrader',
 
 	    launch: function() {
-			jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
+            jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
             jasmine.getEnv().addReporter(new jasmine.ConsoleReporter());
 			jasmine.getEnv().execute();
 	    }
@@ -33,6 +32,7 @@
 
   <!-- include spec files here... -->
   <script type="text/javascript" src="spec/SpecHelper.js"></script>
+  <script type="text/javascript" src="spec/model/UserSpec.js"></script>
   <script type="text/javascript" src="spec/view/MarketSummarySpec.js"></script>
   <script type="text/javascript" src="spec/store/MarketSummarySpec.js"></script>
 
