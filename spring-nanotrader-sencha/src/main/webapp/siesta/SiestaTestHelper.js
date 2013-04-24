@@ -10,7 +10,6 @@ Class('SpringTrader.SiestaTestHelper', {
             this.cq1('field[name=userid]').setValue(user.userid);
             this.cq1('field[name=openbalance]').setValue(user.balance);
             this.cq1('field[name=address]').setValue(user.address);
-            this.cq1('field[name=creditcard]').setValue(user.creditcard);
         },
 
         user: function(options) {
