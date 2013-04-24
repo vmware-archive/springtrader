@@ -81,7 +81,7 @@ describe('SpringTrader.model.User', function () {
             request = mostRecentAjaxRequest();
             expect(request.url).toEqual('/spring-nanotrader-services/api/accountProfile');
             expect(request.method).toEqual('POST');
-            expect(request.params).toEqual(Ext.JSON.encode(userJSON));
+            expect(Ext.JSON.decode(request.params)).toEqual(userJSON);
         })
     })
 });

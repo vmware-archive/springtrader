@@ -4,7 +4,8 @@ Ext.define('SpringTrader.controller.User', {
         models: ['User'],
         refs: {
             signupSubmitBtn: 'signupPage #signupSubmitBtn',
-            signupPage: 'signupPage'
+            signupPage: 'signupPage',
+            navView: 'navigationview'
         },
         control: {
             signupSubmitBtn: {
@@ -15,13 +16,13 @@ Ext.define('SpringTrader.controller.User', {
     },
     onSignupSubmit: function() {
         var form = this.getSignupPage();
-
         var user = Ext.create('SpringTrader.model.User');
+        user.getProxy().addListener('exception', this.onException );
 
         this.getSignupPage().updateRecord(user);
 
         if (this.validateUser(user, form)) {
-            user.save();
+            user.save(this.onSaveCallback, this);
         }
     },
 
@@ -43,5 +44,21 @@ Ext.define('SpringTrader.controller.User', {
 
         return true;
 
+    },
+
+    onSaveCallback: function(model, operation) {
+        if (operation.wasSuccessful()) {
+            this.getNavView().pop();
+            this.authenticate(model);
+        }
+    },
+
+    authenticate: function(model) {
+//        SpringTrader.user = model;
+    },
+
+    onException: function(me, response) {
+        var errorString = Ext.JSON.decode(response.responseText).detail;
+        Ext.Msg.alert("Whoops", errorString);
     }
 });

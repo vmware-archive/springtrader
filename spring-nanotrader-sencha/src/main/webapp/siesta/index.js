@@ -2,6 +2,7 @@ var Harness = Siesta.Harness.Browser.SenchaTouch;
 
 Harness.configure({
     title: 'Spring Trader Sencha Touch',
+    testClass: SpringTrader.SiestaTestHelper,
     autoRun: true
 });
 
@@ -18,6 +19,7 @@ Harness.start(
             'test/signup_form_cancel.t.js',
             'test/signup_form.t.js',
             'test/signup_form_invalid.t.js',
+            'test/signup_duplicate_userid.t.js',
         ]
     }
 );

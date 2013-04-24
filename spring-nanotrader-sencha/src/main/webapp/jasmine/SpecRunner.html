@@ -19,6 +19,11 @@
 	    'SpringTrader': '../app'
 	});
 
+    Ext.Loader.setConfig({
+        enabled: true,
+        disableCaching: false
+    });
+
 	Ext.application({
 	    name: 'SpringTrader',
 
@@ -32,7 +37,9 @@
 
   <!-- include spec files here... -->
   <script type="text/javascript" src="spec/SpecHelper.js"></script>
+  <script type="text/javascript" src="spec/Fixtures.js"></script>
   <script type="text/javascript" src="spec/model/UserSpec.js"></script>
+  <script type="text/javascript" src="spec/controller/UserSpec.js"></script>
   <script type="text/javascript" src="spec/view/MarketSummarySpec.js"></script>
   <script type="text/javascript" src="spec/store/MarketSummarySpec.js"></script>
 
