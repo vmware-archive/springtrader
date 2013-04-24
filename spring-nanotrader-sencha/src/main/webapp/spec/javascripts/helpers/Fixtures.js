@@ -102,7 +102,7 @@ beforeEach(function () {
 });
 
 var userFormJSON;
-beforeEach(function() {
+beforeEach(function () {
     userFormJSON = {
         "fullname": "test",
         "email": "test@test.com",
@@ -112,5 +112,14 @@ beforeEach(function() {
         "openbalance": 1,
         "creditcard": 1234,
         "address": "san francisco"
+    };
+});
+
+var loginOkResponseJSON;
+beforeEach(function () {
+    loginOkResponseJSON = {
+        "authToken": "b637a94d-9ccf-40e4-8a6a-a6447098f8d3",
+        "profileid": 9,
+        "accountid": 9
     };
 });

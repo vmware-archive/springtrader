@@ -54,7 +54,16 @@ Ext.define('SpringTrader.controller.User', {
     },
 
     authenticate: function(model) {
-//        SpringTrader.user = model;
+        SpringTrader.user = model;
+        Ext.Ajax.request({
+            url: '/spring-nanotrader-services/api/login',
+            method: 'POST',
+            disableCaching: false,
+            params: {
+                username: model.get('userid'),
+                password: model.get('passwd')
+            }
+        })
     },
 
     onException: function(me, response) {

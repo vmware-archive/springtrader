@@ -1,9 +1,11 @@
 describe('SpringTrader.store.MarketSummary', function () {
     var store, request;
     beforeEach(function() {
+        jasmine.Ajax.useMock();
         store = Ext.create('SpringTrader.store.MarketSummary');
         request = mostRecentAjaxRequest();
     });
+
     it("calls out to the proper url", function () {
         expect(request.url).toEqual('/spring-nanotrader-services/api/marketSummary');
     });

@@ -16,5 +16,4 @@ config/lobot.yml
 metadata/
 .sass-cache/
 Gemfile.lock
-Gemfile
 Guardfile

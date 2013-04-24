@@ -10,6 +10,7 @@ Class('SpringTrader.SiestaTestHelper', {
             this.cq1('field[name=userid]').setValue(user.userid);
             this.cq1('field[name=openbalance]').setValue(user.balance);
             this.cq1('field[name=address]').setValue(user.address);
+            this.cq1('field[name=creditcard]').setValue(user.creditcard);
         },
 
         user: function(options) {
@@ -23,7 +24,8 @@ Class('SpringTrader.SiestaTestHelper', {
                 password: 'password',
                 userid: userid,
                 balance: 1000000000,
-                address: 'San Francisco'
+                address: 'San Francisco',
+                creditcard: 1234123412341234
             }, options);
         },
 

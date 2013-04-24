@@ -25,10 +25,10 @@ describe('SpringTrader.model.User', function () {
 
     describe('validations', function() {
         it('requires all fields', function () {
-            function eraseUserid(model) { model.set('userid', null) }
+            function eraseAttributes(model) { model.set('userid', null); model.set('creditcard', null); }
             var user = Ext.create('SpringTrader.model.User');
             // New models have 'userid' set automagically; setting it to null to make it invalid for test
-            eraseUserid(user);
+            eraseAttributes(user);
             var errors = user.validate();
 
             expect(errors.isValid()).toBeFalsy();
@@ -75,6 +75,8 @@ describe('SpringTrader.model.User', function () {
 
     describe('backend proxy', function() {
         it('posts to the back end', function() {
+            jasmine.Ajax.useMock();
+            clearAjaxRequests();
             var user = Ext.create('SpringTrader.model.User', userJSON);
             expect(mostRecentAjaxRequest()).toBeNull();
             user.save();
