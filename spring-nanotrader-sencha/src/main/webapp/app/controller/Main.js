@@ -1,12 +1,6 @@
 Ext.define('SpringTrader.controller.Main', {
 	extend: 'Ext.app.Controller',
 
-    init: function() {
-        this.user = {
-            authenticated: function() { return false; }
-        };
-    },
-
     launch: function() {
         this.getNavView().getNavigationBar().hide();
     },
@@ -57,7 +51,7 @@ Ext.define('SpringTrader.controller.Main', {
             }
         ];
 
-        if (this.user.authenticated()) {
+        if (SpringTrader.user.authenticated()) {
             configItems.push(
                 {
                     xtype: 'component',

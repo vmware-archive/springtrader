@@ -58,6 +58,8 @@ Ext.application({
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 
+        SpringTrader.user = Ext.create('SpringTrader.model.User');
+
         // Initialize the main view
         Ext.Viewport.add(Ext.create('SpringTrader.view.Main'));
 

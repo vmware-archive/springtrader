@@ -37,5 +37,8 @@ Ext.define('SpringTrader.model.User', {
             url: '/spring-nanotrader-services/api/accountProfile',
             noCache: false
         }
+    },
+    authenticated: function() {
+        return false;
     }
 });

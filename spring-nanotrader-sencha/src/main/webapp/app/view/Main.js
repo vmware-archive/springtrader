@@ -19,7 +19,18 @@ Ext.define('SpringTrader.view.Main', {
                     }
                 ]
             },
-            {xtype: 'maintabpanel'}
+            {
+                xtype: 'maintabpanel',
+                listeners: {
+                    show: function() {
+                        if (SpringTrader.user.authenticated()) {
+                            this.getTabBar().show();
+                        } else {
+                            this.getTabBar().hide();
+                        }
+                    }
+                }
+            }
         ]
     }
 });
