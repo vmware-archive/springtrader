@@ -25,7 +25,6 @@ Ext.define('SpringTrader.model.User', {
 
             { type: 'presence', field: 'userid'},
             { type: 'presence', field: 'accounts', message: 'opening balance must be present' },
-            { type: 'presence', field: 'creditcard'},
             { type: 'presence', field: 'address'},
 
             { type: 'email', field: 'email'},

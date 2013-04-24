@@ -34,6 +34,7 @@ describe('SpringTrader.model.User', function () {
             expect(errors.isValid()).toBeFalsy();
 
             Ext.Array.each(user.getFields().keys, function(field)  {
+                if (field == 'creditcard') { return; }
                 if (user.fields.get(field).getPersist()) {
                     if (!errors.getByField(field)[0]) {
                         console.log(field + ' should be defined');
