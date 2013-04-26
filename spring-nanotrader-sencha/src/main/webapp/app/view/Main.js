@@ -18,6 +18,13 @@ Ext.define('SpringTrader.view.Main', {
                         text: 'Login',
                         align: 'right',
                         itemId: 'loginButton'
+                    },
+                    {
+                        xtype: 'button',
+                        text: 'Logout',
+                        align: 'right',
+                        itemId: 'logoutButton',
+                        hidden: true
                     }
                 ]
             }

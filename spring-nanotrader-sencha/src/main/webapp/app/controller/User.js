@@ -10,6 +10,7 @@ Ext.define('SpringTrader.controller.User', {
             modalSheet: 'modalsheet',
             loggedOutView: 'loggedoutview',
             loginButton: '#loginButton',
+            logoutButton: 'mainview #logoutButton',
             signupCancelButton: 'signupform #cancelButton',
             loginCancelButton: 'loginform #cancelButton',
             loginSubmitButton: 'loginform #submitButton'
@@ -26,6 +27,9 @@ Ext.define('SpringTrader.controller.User', {
             },
             loginSubmitButton: {
                 tap: 'onLoginSubmit'
+            },
+            logoutButton: {
+                tap: 'onLogout'
             }
         }
 
@@ -47,12 +51,16 @@ Ext.define('SpringTrader.controller.User', {
         var loggedOutView = this.getLoggedOutView();
         var modalSheet = this.getModalSheet();
         var loginButton = this.getLoginButton();
+        var logoutButton = this.getLogoutButton();
 
-        SpringTrader.model.User.authenticate(user, function(response) {
+        SpringTrader.user = user;
+
+        SpringTrader.model.User.authenticate(SpringTrader.user, function(response) {
             modalSheet.hide({ type: 'slide', direction: 'down' });
             loggedOutView.destroy();
             mainView.add({xtype: 'maintabpanel'});
             loginButton.hide();
+            logoutButton.show();
             setTimeout(function() {
                 modalSheet.destroy()
             }, 2000);
@@ -63,6 +71,12 @@ Ext.define('SpringTrader.controller.User', {
         var user = Ext.create('SpringTrader.model.User');
         this.getLoginPage().updateRecord(user);
         this.authenticate(user);
+    },
+
+    onLogout: function() {
+        SpringTrader.user.logout(function() {
+            window.location.reload();
+        });
     },
 
     onCancel: function() {

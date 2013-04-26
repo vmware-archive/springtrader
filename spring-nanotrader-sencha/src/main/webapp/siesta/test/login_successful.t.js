@@ -26,8 +26,13 @@ StartTest(function(t) {
             next();
         },
 
+        { action: 'tap', target: '>> mainview #logoutButton' },
+
+        { waitFor: 'componentVisible', args: '#loginButton'},
+        { waitFor: 'componentVisible', args: 'signupbutton'},
+
         function(next) {
-            t.pass('User can login');
+            t.pass('User can login and logout');
         }
     )
 });

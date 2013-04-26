@@ -111,11 +111,6 @@ describe('SpringTrader.model.User', function () {
             clearAjaxRequests();
         });
 
-        it('assigns model to SpringTrader.user', function () {
-            SpringTrader.model.User.authenticate(model);
-            expect(SpringTrader.user).toBe(model);
-        });
-
         it('POSTs to /api/login', function () {
             SpringTrader.model.User.authenticate(model);
             var request = mostRecentAjaxRequest();
@@ -125,17 +120,17 @@ describe('SpringTrader.model.User', function () {
             expect(Ext.JSON.decode(request.params)).toEqual({username: userJSON.userid, password: userJSON.passwd});
         });
 
-        it('on success updates SpringTrader.user with response data', function() {
+        it('on success updates user model with response data', function() {
             SpringTrader.model.User.authenticate(model);
             var request = mostRecentAjaxRequest();
             request.response({
                 status: 201,
                 responseText: Ext.JSON.encode(loginOkResponseJSON)
             });
-            expect(SpringTrader.user.get('authToken')).toEqual(loginOkResponseJSON.authToken);
-            expect(SpringTrader.user.get('profileid')).toEqual(loginOkResponseJSON.profileid);
-            expect(SpringTrader.user.get('accountid')).toEqual(loginOkResponseJSON.accountid);
-            expect(SpringTrader.user.authenticated()).toBeTruthy();
+            expect(model.get('authToken')).toEqual(loginOkResponseJSON.authToken);
+            expect(model.get('profileid')).toEqual(loginOkResponseJSON.profileid);
+            expect(model.get('accountid')).toEqual(loginOkResponseJSON.accountid);
+            expect(model.authenticated()).toBeTruthy();
         });
 
         it('applies the success callback when provided', function() {
@@ -166,6 +161,50 @@ describe('SpringTrader.model.User', function () {
             expect(failureCallback.mostRecentCall.args[0].status).toEqual(401);
         });
 
-    })
+    });
+
+    describe("#logout", function() {
+        var user;
+        beforeEach(function() {
+            jasmine.Ajax.useMock();
+            clearAjaxRequests();
+            user = Ext.create('SpringTrader.model.User', loginOkResponseJSON);
+            expect(user.authenticated()).toBeTruthy();
+        });
+
+        it("Clears out local authentication data", function() {
+            user.logout();
+
+            var request = mostRecentAjaxRequest();
+            request.response({status: 200});
+
+            expect(user.authenticated()).toBeFalsy();
+            expect(user.get('authToken')).toBeNull();
+            expect(user.get('profileid')).toBeNull();
+            expect(user.get('accountid')).toBeNull();
+        });
+
+        it("sends the logout request to backend", function() {
+            expect(mostRecentAjaxRequest()).toBeNull();
+
+            user.logout();
+
+            var request = mostRecentAjaxRequest();
+            expect(request.url).toEqual('/spring-nanotrader-services/api/logout');
+            expect(request.method).toEqual('GET');
+            expect(request.requestHeaders['API_TOKEN']).toEqual(user.get('authToken'));
+        });
+
+        it('calls the success callback', function() {
+            var successCallback = jasmine.createSpy();
+
+            user.logout(successCallback);
+
+            var request = mostRecentAjaxRequest();
+            request.response({status: 200});
+
+            expect(successCallback).toHaveBeenCalled();
+        })
+    });
 
 });
