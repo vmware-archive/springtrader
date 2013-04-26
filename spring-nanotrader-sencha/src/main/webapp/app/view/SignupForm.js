@@ -8,11 +8,11 @@ Ext.define('SpringTrader.view.SignupForm', {
         items: [
             { xtype: 'fieldset',
                 items: [
-                    { xtype: 'textfield', name: 'fullname', placeHolder: 'Name' },
+                    { xtype: 'textfield', name: 'fullname', placeHolder: 'Name', autoCorrect: false },
                     { xtype: 'emailfield', name: 'email', placeHolder: 'Email address' },
                     { xtype: 'passwordfield', name: 'passwd', placeHolder: 'Password'},
                     { xtype: 'passwordfield', name: 'passwdconfirm', placeHolder: 'Confirm password'},
-                    { xtype: 'textfield', name: 'userid', placeHolder: 'Username'},
+                    { xtype: 'textfield', name: 'userid', placeHolder: 'Username', autoCapitalize: false, autoCorrect: false},
                     { xtype: 'numberfield', name: 'openbalance', placeHolder: 'Opening balance', minValue: 100000, stepValue: 1000},
                     { xtype: 'textfield', name: 'address', placeHolder: 'Address' },
                     { xtype: 'numberfield', name: 'creditcard', placeHolder: 'CC# 1234 1234 1234 1234', disabled: true},

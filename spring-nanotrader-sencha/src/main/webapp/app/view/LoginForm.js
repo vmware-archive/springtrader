@@ -8,7 +8,7 @@ Ext.define('SpringTrader.view.LoginForm', {
         items: [
             { xtype: 'fieldset',
                 items: [
-                    { xtype: 'textfield', name: 'userid', placeHolder: 'Username'},
+                    { xtype: 'textfield', name: 'userid', placeHolder: 'Username', autoCapitalize: false, autoCorrect: false},
                     { xtype: 'passwordfield', name: 'passwd', placeHolder: 'Password'},
                     { xtype: 'container',
                         layout: { type: 'hbox', align: 'center', pack: 'center' },
