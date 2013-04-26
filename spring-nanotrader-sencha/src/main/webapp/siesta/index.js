@@ -15,7 +15,6 @@ Harness.start(
         preload: [],
         performSetup: false,
         items: [
-            'test/sanity.t.js',
             'test/signup_form_cancel.t.js',
             'test/signup_form.t.js',
             'test/signup_form_invalid.t.js',

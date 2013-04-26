@@ -2,27 +2,27 @@ StartTest(function(t) {
     var user = t.user();
 
     t.chain(
-        { waitFor: 'componentVisible', args: '#signupButton' },
-        { action: 'tap', target: '>> #signupButton' },
-        { waitFor: 'componentVisible', args: 'signupPage'},
+        { waitFor: 'componentVisible', args: '#showSignupFormButton' },
+        { action: 'tap', target: '>> #showSignupFormButton' },
+        { waitFor: 'componentVisible', args: 'signupform'},
 
         function(next) {
             t.signup(user);
             next();
         },
 
-        { action: 'tap', target: '>> #signupSubmitBtn' },
+        { action: 'tap', target: '>> #signupSubmitButton' },
 
-        { waitFor: 'componentVisible', args: '#signupButton' },
-        { action: 'tap', target: '>> #signupButton' },
-        { waitFor: 'componentVisible', args: 'signupPage'},
+        { waitFor: 'componentVisible', args: '#showSignupFormButton' },
+        { action: 'tap', target: '>> #showSignupFormButton' },
+        { waitFor: 'componentVisible', args: 'signupform'},
 
         function(next) {
             t.signup(user);
             next();
         },
 
-        { action: 'tap', target: '>> #signupSubmitBtn' },
+        { action: 'tap', target: '>> #signupSubmitButton' },
         { waitFor: 'componentVisible', args: 'sheet[baseCls=x-msgbox]'},
 
         function(next) {

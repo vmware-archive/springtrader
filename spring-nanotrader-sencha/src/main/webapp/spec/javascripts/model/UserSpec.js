@@ -85,6 +85,87 @@ describe('SpringTrader.model.User', function () {
             expect(request.url).toEqual('/spring-nanotrader-services/api/accountProfile');
             expect(request.method).toEqual('POST');
             expect(Ext.JSON.decode(request.params)).toEqual(userJSON);
-        })
+        });
+    });
+
+    describe('#authenticated', function() {
+        it('returns true when there is an auth token present', function() {
+            var user = Ext.create('SpringTrader.model.User', {authToken: 'token'});
+            expect(user.authenticated()).toBeTruthy();
+        });
+        it('return false when the auth token is blank', function() {
+            var user = Ext.create('SpringTrader.model.User', {authToken: null});
+            expect(user.authenticated()).toBeFalsy();
+        });
+        it('by default, a new user model is not authenticated', function() {
+            var user = Ext.create('SpringTrader.model.User');
+            expect(user.authenticated()).toBeFalsy();
+        });
+    });
+
+    describe('.authenticate', function () {
+        var model;
+        beforeEach(function () {
+            model = Ext.create('SpringTrader.model.User', userFormJSON);
+            jasmine.Ajax.useMock();
+            clearAjaxRequests();
+        });
+
+        it('assigns model to SpringTrader.user', function () {
+            SpringTrader.model.User.authenticate(model);
+            expect(SpringTrader.user).toBe(model);
+        });
+
+        it('POSTs to /api/login', function () {
+            SpringTrader.model.User.authenticate(model);
+            var request = mostRecentAjaxRequest();
+            expect(request.url).toEqual('/spring-nanotrader-services/api/login');
+            expect(request.method).toEqual('POST');
+            expect(request.requestHeaders['Content-Type']).toEqual('application/json');
+            expect(Ext.JSON.decode(request.params)).toEqual({username: userJSON.userid, password: userJSON.passwd});
+        });
+
+        it('on success updates SpringTrader.user with response data', function() {
+            SpringTrader.model.User.authenticate(model);
+            var request = mostRecentAjaxRequest();
+            request.response({
+                status: 201,
+                responseText: Ext.JSON.encode(loginOkResponseJSON)
+            });
+            expect(SpringTrader.user.get('authToken')).toEqual(loginOkResponseJSON.authToken);
+            expect(SpringTrader.user.get('profileid')).toEqual(loginOkResponseJSON.profileid);
+            expect(SpringTrader.user.get('accountid')).toEqual(loginOkResponseJSON.accountid);
+            expect(SpringTrader.user.authenticated()).toBeTruthy();
+        });
+
+        it('applies the success callback when provided', function() {
+            var successCallback = jasmine.createSpy();
+            var failureCallback = jasmine.createSpy();
+
+            SpringTrader.model.User.authenticate(model, successCallback, failureCallback);
+
+            var request = mostRecentAjaxRequest();
+            request.response({
+                status: 201,
+                responseText: Ext.JSON.encode(loginOkResponseJSON)
+            });
+
+            expect(successCallback.mostRecentCall.args[0].status).toEqual(201);
+            expect(failureCallback).not.toHaveBeenCalled();
+        });
+
+        it('applies the failure callback when provided', function() {
+            var successCallback = jasmine.createSpy();
+            var failureCallback = jasmine.createSpy();
+
+            SpringTrader.model.User.authenticate(model, successCallback, failureCallback);
+
+            var request = mostRecentAjaxRequest();
+            request.response({ status: 401 });
+            expect(successCallback).not.toHaveBeenCalled();
+            expect(failureCallback.mostRecentCall.args[0].status).toEqual(401);
+        });
+
     })
+
 });

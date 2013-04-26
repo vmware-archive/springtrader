@@ -2,21 +2,29 @@ Ext.define('SpringTrader.controller.Main', {
 	extend: 'Ext.app.Controller',
 
     launch: function() {
-        this.getNavView().getNavigationBar().hide();
+        if (SpringTrader.user.authenticated()) {
+
+        } else {
+            this.showLoggedOutView();
+        }
     },
 
 	config: {
-		views: ['TabPanel', 'MarketSummary', 'Dashboard', 'Portfolio', 'Trade', 'SignupButton', 'SignupForm'],
+		views: ['TabPanel', 'MarketSummary', 'Dashboard', 'Portfolio', 'Trade', 'SignupButton', 'SignupForm', 'LoggedOut'],
 		stores: ['MarketSummary'],
         refs: {
-            navView: 'navigationview',
             titleBar: 'titlebar',
+
+            mainView: 'mainview',
+
+            mainTabPanel: 'maintabpanel',
+            loggedOutView: 'loggedoutview',
 
             dashboardView: 'dashboardPage',
             portfolioView: 'portfolioPage',
             tradeView: 'tradePage',
 
-            signupButton: 'signupbutton > button'
+            showSignupFormButton: 'loggedoutview #showSignupFormButton'
         },
         control: {
             dashboardView: {
@@ -28,7 +36,7 @@ Ext.define('SpringTrader.controller.Main', {
             tradeView: {
                 show: 'onTradeShow'
             },
-            signupButton: {
+            showSignupFormButton: {
                 tap: 'onSignupButtonTap'
             },
             navView: {
@@ -51,30 +59,30 @@ Ext.define('SpringTrader.controller.Main', {
             }
         ];
 
-        if (SpringTrader.user.authenticated()) {
-            configItems.push(
-                {
-                    xtype: 'component',
-                    html: viewText,
-                    style: "backgroundColor:#aaa"
-                });
-        } else {
-            configItems.push({
-                xtype: 'signupbutton'
+        configItems.push(
+            {
+                xtype: 'component',
+                html: viewText,
+                style: "backgroundColor:#aaa"
             });
-        }
+
         getView().add(configItems);
     },
 
-    onSignupButtonTap: function() {
-        this.getTitleBar().hide();
-        this.getNavView().getNavigationBar().show();
-        this.getNavView().push(Ext.create('SpringTrader.view.SignupForm'));
+    showLoggedOutView: function() {
+        var oldView = this.getMainTabPanel();
+        if (oldView) { oldView.destroy(); }
+        this.getMainView().add([
+          { xtype: 'loggedoutview'}
+      ])
     },
 
-    onPopView: function(me, poppedView) {
-        this.getNavView().getNavigationBar().hide();
-        this.getTitleBar().show();
-        poppedView.destroy();
+    onSignupButtonTap: function() {
+        console.log('tap');
+        var signupSheet = Ext.create('SpringTrader.view.ModalSheet', {
+            items: [{xtype: 'signupform'}]
+        });
+        this.getMainView().add(signupSheet);
+        signupSheet.show();
     }
 });

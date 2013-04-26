@@ -4,6 +4,7 @@ Ext.define('SpringTrader.view.TabPanel', {
     config: {
         header: false,
         tabBarPosition: 'bottom',
+        height: '100%',
         items: [
             {
                 xtype: 'dashboardPage'

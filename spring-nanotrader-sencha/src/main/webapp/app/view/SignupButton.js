@@ -9,7 +9,7 @@ Ext.define('SpringTrader.view.SignupButton', {
         },
         items: [
             {xtype: 'component', cls: 'centered', html: "Don't have a SpringTrader account?<br/>Create one now.", styleHtmlContent: true},
-            {xtype: 'button', text: "Sign up!", ui: 'confirm', itemId: 'signupButton'}
+            {xtype: 'button', text: "Sign up!", ui: 'confirm', itemId: 'showSignupFormButton'}
         ]
     }
 });

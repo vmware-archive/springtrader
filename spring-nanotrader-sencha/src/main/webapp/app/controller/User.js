@@ -3,13 +3,20 @@ Ext.define('SpringTrader.controller.User', {
     config: {
         models: ['User'],
         refs: {
-            signupSubmitBtn: 'signupPage #signupSubmitBtn',
-            signupPage: 'signupPage',
-            navView: 'navigationview'
+            signupSubmitButton: 'signupform #signupSubmitButton',
+            signupPage: 'signupform',
+            mainView: 'mainview',
+            modalSheet: 'modalsheet',
+            loggedOutView: 'loggedoutview',
+            loginButton: '#loginButton',
+            cancelButton: 'signupform #signupCancelButton'
         },
         control: {
-            signupSubmitBtn: {
+            signupSubmitButton: {
                 tap: 'onSignupSubmit'
+            },
+            cancelButton: {
+                tap: 'onSignupCancel'
             }
         }
 
@@ -24,6 +31,14 @@ Ext.define('SpringTrader.controller.User', {
         if (this.validateUser(user, form)) {
             user.save(this.onSaveCallback, this);
         }
+    },
+
+    onSignupCancel: function() {
+        var modalSheet = this.getModalSheet();
+        modalSheet.hide();
+        setTimeout(function() {
+            modalSheet.destroy()
+        }, 2000);
     },
 
     validateUser: function(user, form) {
@@ -48,22 +63,20 @@ Ext.define('SpringTrader.controller.User', {
 
     onSaveCallback: function(model, operation) {
         if (operation.wasSuccessful()) {
-            this.getNavView().pop();
-            this.authenticate(model);
+            var mainView = this.getMainView();
+            var loggedOutView = this.getLoggedOutView();
+            var modalSheet = this.getModalSheet();
+            var loginButton = this.getLoginButton();
+            SpringTrader.model.User.authenticate(model, function(response) {
+                modalSheet.hide({ type: 'slide', direction: 'down' });
+                loggedOutView.destroy();
+                mainView.add({xtype: 'maintabpanel'});
+                loginButton.hide();
+                setTimeout(function() {
+                    modalSheet.destroy()
+                }, 2000);
+            });
         }
-    },
-
-    authenticate: function(model) {
-        SpringTrader.user = model;
-        Ext.Ajax.request({
-            url: '/spring-nanotrader-services/api/login',
-            method: 'POST',
-            disableCaching: false,
-            params: {
-                username: model.get('userid'),
-                password: model.get('passwd')
-            }
-        })
     },
 
     onException: function(me, response) {

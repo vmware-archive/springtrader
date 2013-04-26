@@ -1,5 +1,6 @@
 Ext.define('SpringTrader.view.Main', {
-    extend: 'Ext.navigation.View',
+    extend: 'Ext.Container',
+    xtype: 'mainview',
     requires: ['Ext.TitleBar'],
     config: {
         items: [
@@ -15,21 +16,10 @@ Ext.define('SpringTrader.view.Main', {
                     {
                         xtype: 'button',
                         text: 'Login',
-                        align: 'right'
+                        align: 'right',
+                        itemId: 'loginButton'
                     }
                 ]
-            },
-            {
-                xtype: 'maintabpanel',
-                listeners: {
-                    show: function() {
-                        if (SpringTrader.user.authenticated()) {
-                            this.getTabBar().show();
-                        } else {
-                            this.getTabBar().hide();
-                        }
-                    }
-                }
             }
         ]
     }
