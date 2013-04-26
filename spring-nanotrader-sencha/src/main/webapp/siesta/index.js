@@ -20,6 +20,7 @@ Harness.start(
             'test/signup_form_invalid.t.js',
             'test/signup_duplicate_userid.t.js',
             'test/login_successful.t.js',
+            'test/login_failure.t.js',
         ]
     }
 );

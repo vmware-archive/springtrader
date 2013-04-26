@@ -40,18 +40,24 @@ Ext.define('SpringTrader.controller.User', {
     },
 
     authenticate: function(user) {
-        var modalSheet = this.getModalSheet();
-        var me = this;
-
-        SpringTrader.user = user;
-
-        SpringTrader.model.User.authenticate(SpringTrader.user, function(response) {
+        function successCallback(response) {
             modalSheet.hide({ type: 'slide', direction: 'down' });
             me.getApplication().fireEvent('authenticated');
             setTimeout(function() {
                 modalSheet.destroy()
             }, 2000);
-        });
+        };
+
+        function failureCallback(response) {
+            Ext.Msg.alert("Failure", "The user name or password is incorrect.");
+        };
+
+        var modalSheet = this.getModalSheet();
+        var me = this;
+
+        SpringTrader.user = user;
+
+        SpringTrader.model.User.authenticate(SpringTrader.user, successCallback, failureCallback);
     },
 
     onLoginSubmit: function() {
