@@ -31,6 +31,12 @@ Class('SpringTrader.SiestaTestHelper', {
         userId: function() {
             window.userId = window.userId || 0
             return new Date().getTime();
+        },
+
+        login: function(user) {
+            this.cq1('field[name=userid]').setValue(user.userid);
+            this.cq1('field[name=passwd]').setValue(user.passwd);
         }
+
     }
 });

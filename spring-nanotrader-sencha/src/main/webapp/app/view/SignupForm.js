@@ -19,7 +19,7 @@ Ext.define('SpringTrader.view.SignupForm', {
                     { xtype: 'container',
                         layout: { type: 'hbox', align: 'center', pack: 'center' },
                         items: [
-                            { xtype: 'button', ui: 'cancel', text: 'Cancel', itemId: 'signupCancelButton' },
+                            { xtype: 'button', ui: 'cancel', text: 'Cancel', itemId: 'cancelButton' },
                             { xtype: 'button', ui: 'confirm', text: 'Sign up', itemId: 'signupSubmitButton' }
                         ]
                     }

@@ -10,7 +10,8 @@ Ext.define('SpringTrader.controller.Main', {
     },
 
 	config: {
-		views: ['TabPanel', 'MarketSummary', 'Dashboard', 'Portfolio', 'Trade', 'SignupButton', 'SignupForm', 'LoggedOut'],
+		views: ['TabPanel', 'MarketSummary', 'SignupButton', 'SignupForm', 'LoggedOut', 'LoginForm',
+            'Dashboard', 'Portfolio', 'Trade' ],
 		stores: ['MarketSummary'],
         refs: {
             titleBar: 'titlebar',
@@ -24,7 +25,9 @@ Ext.define('SpringTrader.controller.Main', {
             portfolioView: 'portfolioPage',
             tradeView: 'tradePage',
 
-            showSignupFormButton: 'loggedoutview #showSignupFormButton'
+            showSignupFormButton: 'loggedoutview #showSignupFormButton',
+
+            loginButton: 'mainview #loginButton'
         },
         control: {
             dashboardView: {
@@ -39,8 +42,8 @@ Ext.define('SpringTrader.controller.Main', {
             showSignupFormButton: {
                 tap: 'onSignupButtonTap'
             },
-            navView: {
-                pop: 'onPopView'
+            loginButton: {
+                tap: 'onLoginButtonTap'
             }
         }
 	},
@@ -78,11 +81,18 @@ Ext.define('SpringTrader.controller.Main', {
     },
 
     onSignupButtonTap: function() {
-        console.log('tap');
         var signupSheet = Ext.create('SpringTrader.view.ModalSheet', {
             items: [{xtype: 'signupform'}]
         });
         this.getMainView().add(signupSheet);
         signupSheet.show();
+    },
+
+    onLoginButtonTap: function() {
+        var loginSheet = Ext.create('SpringTrader.view.ModalSheet', {
+            items: [{xtype: 'loginform'}]
+        });
+        this.getMainView().add(loginSheet);
+        loginSheet.show();
     }
 });

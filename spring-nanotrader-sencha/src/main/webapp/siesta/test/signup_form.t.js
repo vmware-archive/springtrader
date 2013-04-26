@@ -14,13 +14,13 @@ StartTest(function(t) {
 
         { action: 'tap', target: '>> #signupSubmitButton' },
 
+        { waitFor: 'componentVisible', args: 'maintabpanel > tabbar'},
+
         function(next) {
             t.is(t.cq1('signupbutton'), undefined, 'The sign up form should not be present');
             t.is(t.cq1('#loginButton').getHidden(), true, 'The login button should not be present');
             next();
         },
-
-        { waitFor: 'componentVisible', args: 'maintabpanel > tabbar'},
 
         function(next) {
             t.pass('User can sign up');

@@ -5,18 +5,27 @@ Ext.define('SpringTrader.controller.User', {
         refs: {
             signupSubmitButton: 'signupform #signupSubmitButton',
             signupPage: 'signupform',
+            loginPage: 'loginform',
             mainView: 'mainview',
             modalSheet: 'modalsheet',
             loggedOutView: 'loggedoutview',
             loginButton: '#loginButton',
-            cancelButton: 'signupform #signupCancelButton'
+            signupCancelButton: 'signupform #cancelButton',
+            loginCancelButton: 'loginform #cancelButton',
+            loginSubmitButton: 'loginform #submitButton'
         },
         control: {
             signupSubmitButton: {
                 tap: 'onSignupSubmit'
             },
-            cancelButton: {
-                tap: 'onSignupCancel'
+            signupCancelButton: {
+                tap: 'onCancel'
+            },
+            loginCancelButton: {
+                tap: 'onCancel'
+            },
+            loginSubmitButton: {
+                tap: 'onLoginSubmit'
             }
         }
 
@@ -33,7 +42,30 @@ Ext.define('SpringTrader.controller.User', {
         }
     },
 
-    onSignupCancel: function() {
+    authenticate: function(user) {
+        var mainView = this.getMainView();
+        var loggedOutView = this.getLoggedOutView();
+        var modalSheet = this.getModalSheet();
+        var loginButton = this.getLoginButton();
+
+        SpringTrader.model.User.authenticate(user, function(response) {
+            modalSheet.hide({ type: 'slide', direction: 'down' });
+            loggedOutView.destroy();
+            mainView.add({xtype: 'maintabpanel'});
+            loginButton.hide();
+            setTimeout(function() {
+                modalSheet.destroy()
+            }, 2000);
+        });
+    },
+
+    onLoginSubmit: function() {
+        var user = Ext.create('SpringTrader.model.User');
+        this.getLoginPage().updateRecord(user);
+        this.authenticate(user);
+    },
+
+    onCancel: function() {
         var modalSheet = this.getModalSheet();
         modalSheet.hide();
         setTimeout(function() {
@@ -63,19 +95,7 @@ Ext.define('SpringTrader.controller.User', {
 
     onSaveCallback: function(model, operation) {
         if (operation.wasSuccessful()) {
-            var mainView = this.getMainView();
-            var loggedOutView = this.getLoggedOutView();
-            var modalSheet = this.getModalSheet();
-            var loginButton = this.getLoginButton();
-            SpringTrader.model.User.authenticate(model, function(response) {
-                modalSheet.hide({ type: 'slide', direction: 'down' });
-                loggedOutView.destroy();
-                mainView.add({xtype: 'maintabpanel'});
-                loginButton.hide();
-                setTimeout(function() {
-                    modalSheet.destroy()
-                }, 2000);
-            });
+            this.authenticate(model);
         }
     },
 
