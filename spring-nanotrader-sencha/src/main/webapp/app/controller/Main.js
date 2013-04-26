@@ -51,7 +51,8 @@ Ext.define('SpringTrader.controller.Main', {
         ])
     },
 
-    onSignupButtonTap: function () {
+    onSignupButtonTap: function (what, event) {
+        event.stopEvent();
         var signupSheet = Ext.create('SpringTrader.view.ModalSheet', {
             items: [
                 {xtype: 'signupform'}
@@ -61,7 +62,8 @@ Ext.define('SpringTrader.controller.Main', {
         signupSheet.show();
     },
 
-    onLoginButtonTap: function () {
+    onLoginButtonTap: function (what, event) {
+        event.stopEvent();
         var loginSheet = Ext.create('SpringTrader.view.ModalSheet', {
             items: [
                 {xtype: 'loginform'}
