@@ -1,7 +1,9 @@
 Ext.define('SpringTrader.controller.Main', {
-	extend: 'Ext.app.Controller',
+    extend: 'Ext.app.Controller',
 
-    launch: function() {
+    launch: function () {
+        this.getApplication().on('authenticated', this.showLoggedInView, this);
+
         if (SpringTrader.user.authenticated()) {
 
         } else {
@@ -9,10 +11,10 @@ Ext.define('SpringTrader.controller.Main', {
         }
     },
 
-	config: {
-		views: ['TabPanel', 'MarketSummary', 'SignupButton', 'SignupForm', 'LoggedOut', 'LoginForm',
-            'Dashboard', 'Portfolio', 'Trade' ],
-		stores: ['MarketSummary'],
+    config: {
+        views: ['MarketSummary', 'SignupButton', 'SignupForm', 'LoggedOut', 'LoginForm',
+            'TabPanel', 'Dashboard', 'Portfolio', 'Trade'],
+        stores: ['MarketSummary'],
         refs: {
             titleBar: 'titlebar',
 
@@ -21,78 +23,65 @@ Ext.define('SpringTrader.controller.Main', {
             mainTabPanel: 'maintabpanel',
             loggedOutView: 'loggedoutview',
 
-            dashboardView: 'dashboardPage',
-            portfolioView: 'portfolioPage',
-            tradeView: 'tradePage',
-
             showSignupFormButton: 'loggedoutview #showSignupFormButton',
 
-            loginButton: 'mainview #loginButton'
+            loginButton: 'mainview #loginButton',
+            logoutButton: 'mainview #logoutButton'
         },
         control: {
-            dashboardView: {
-                show: 'onDashboardShow'
-            },
-            portfolioView: {
-                show: 'onPortfolioShow'
-            },
-            tradeView: {
-                show: 'onTradeShow'
-            },
             showSignupFormButton: {
                 tap: 'onSignupButtonTap'
             },
             loginButton: {
                 tap: 'onLoginButtonTap'
+            },
+            logoutButton: {
+                tap: 'onLogoutButtonTap'
             }
         }
-	},
-
-    onDashboardShow: function() { this.onShow(this.getDashboardView, 'dashboard'); },
-    onPortfolioShow: function() { this.onShow(this.getPortfolioView, 'portfolio'); },
-    onTradeShow: function() { this.onShow(this.getTradeView, 'trade'); },
-
-    onShow: function(getView, viewText) {
-        getView().removeAll();
-
-        var configItems = [
-            {
-                xtype: 'marketsummary',
-                style: "backgroundColor:#ccc"
-            }
-        ];
-
-        configItems.push(
-            {
-                xtype: 'component',
-                html: viewText,
-                style: "backgroundColor:#aaa"
-            });
-
-        getView().add(configItems);
     },
 
-    showLoggedOutView: function() {
+    showLoggedOutView: function () {
         var oldView = this.getMainTabPanel();
-        if (oldView) { oldView.destroy(); }
+        if (oldView) {
+            oldView.destroy();
+        }
         this.getMainView().add([
-          { xtype: 'loggedoutview'}
-      ])
+            { xtype: 'loggedoutview'}
+        ])
     },
 
-    onSignupButtonTap: function() {
+    onSignupButtonTap: function () {
         var signupSheet = Ext.create('SpringTrader.view.ModalSheet', {
-            items: [{xtype: 'signupform'}]
+            items: [
+                {xtype: 'signupform'}
+            ]
         });
         this.getMainView().add(signupSheet);
         signupSheet.show();
     },
 
-    onLoginButtonTap: function() {
+    onLoginButtonTap: function () {
         var loginSheet = Ext.create('SpringTrader.view.ModalSheet', {
-            items: [{xtype: 'loginform'}]
+            items: [
+                {xtype: 'loginform'}
+            ]
         });
         this.getMainView().add(loginSheet);
         loginSheet.show();
+    },
+
+    onLogoutButtonTap: function () {
+        SpringTrader.user.logout(function () {
+            window.location.reload();
+        });
+    },
+
+    showLoggedInView: function () {
+        this.getLoggedOutView().destroy();
+        this.getMainView().add({xtype: 'maintabpanel'});
+        this.getLoginButton().hide();
+        this.getLogoutButton().show();
     }
+
 });

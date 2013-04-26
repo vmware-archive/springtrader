@@ -6,11 +6,7 @@ Ext.define('SpringTrader.controller.User', {
             signupSubmitButton: 'signupform #signupSubmitButton',
             signupPage: 'signupform',
             loginPage: 'loginform',
-            mainView: 'mainview',
             modalSheet: 'modalsheet',
-            loggedOutView: 'loggedoutview',
-            loginButton: '#loginButton',
-            logoutButton: 'mainview #logoutButton',
             signupCancelButton: 'signupform #cancelButton',
             loginCancelButton: 'loginform #cancelButton',
             loginSubmitButton: 'loginform #submitButton'
@@ -27,9 +23,6 @@ Ext.define('SpringTrader.controller.User', {
             },
             loginSubmitButton: {
                 tap: 'onLoginSubmit'
-            },
-            logoutButton: {
-                tap: 'onLogout'
             }
         }
 
@@ -47,20 +40,14 @@ Ext.define('SpringTrader.controller.User', {
     },
 
     authenticate: function(user) {
-        var mainView = this.getMainView();
-        var loggedOutView = this.getLoggedOutView();
         var modalSheet = this.getModalSheet();
-        var loginButton = this.getLoginButton();
-        var logoutButton = this.getLogoutButton();
+        var me = this;
 
         SpringTrader.user = user;
 
         SpringTrader.model.User.authenticate(SpringTrader.user, function(response) {
             modalSheet.hide({ type: 'slide', direction: 'down' });
-            loggedOutView.destroy();
-            mainView.add({xtype: 'maintabpanel'});
-            loginButton.hide();
-            logoutButton.show();
+            me.getApplication().fireEvent('authenticated');
             setTimeout(function() {
                 modalSheet.destroy()
             }, 2000);
@@ -71,12 +58,6 @@ Ext.define('SpringTrader.controller.User', {
         var user = Ext.create('SpringTrader.model.User');
         this.getLoginPage().updateRecord(user);
         this.authenticate(user);
-    },
-
-    onLogout: function() {
-        SpringTrader.user.logout(function() {
-            window.location.reload();
-        });
     },
 
     onCancel: function() {
@@ -104,7 +85,6 @@ Ext.define('SpringTrader.controller.User', {
         }
 
         return true;
-
     },
 
     onSaveCallback: function(model, operation) {
