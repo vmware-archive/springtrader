@@ -10,15 +10,15 @@ Ext.define('SpringTrader.view.LoginForm', {
                 items: [
                     { xtype: 'textfield', name: 'userid', placeHolder: 'Username', autoCapitalize: false, autoCorrect: false},
                     { xtype: 'passwordfield', name: 'passwd', placeHolder: 'Password'},
-                    { xtype: 'container',
-                        layout: { type: 'hbox', align: 'center', pack: 'center' },
-                        items: [
-                            { xtype: 'button', ui: 'cancel', text: 'Cancel', itemId: 'cancelButton' },
-                            { xtype: 'button', ui: 'confirm', text: 'Login', itemId: 'submitButton' }
-                        ]
-                    }
                 ]
             },
+            { xtype: 'container',
+                layout: { type: 'hbox', align: 'center', pack: 'center' },
+                items: [
+                    { xtype: 'button', ui: 'cancel', text: 'Cancel', itemId: 'cancelButton', margin: '0 10 0 10' },
+                    { xtype: 'button', ui: 'confirm', text: 'Login', itemId: 'submitButton', margin: '0 10 0 10' }
+                ]
+            }
         ]
     }
 });

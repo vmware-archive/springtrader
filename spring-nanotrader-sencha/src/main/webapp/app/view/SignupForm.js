@@ -16,15 +16,15 @@ Ext.define('SpringTrader.view.SignupForm', {
                     { xtype: 'numberfield', name: 'openbalance', placeHolder: 'Opening balance', minValue: 100000, stepValue: 1000},
                     { xtype: 'textfield', name: 'address', placeHolder: 'Address' },
                     { xtype: 'numberfield', name: 'creditcard', placeHolder: 'CC# 1234 1234 1234 1234', disabled: true},
-                    { xtype: 'container',
-                        layout: { type: 'hbox', align: 'center', pack: 'center' },
-                        items: [
-                            { xtype: 'button', ui: 'cancel', text: 'Cancel', itemId: 'cancelButton' },
-                            { xtype: 'button', ui: 'confirm', text: 'Sign up', itemId: 'signupSubmitButton' }
-                        ]
-                    }
                 ]
             },
+            { xtype: 'container',
+                layout: { type: 'hbox', align: 'center', pack: 'center' },
+                items: [
+                    { xtype: 'button', ui: 'cancel', text: 'Cancel', itemId: 'cancelButton', margin: '0 10 0 10' },
+                    { xtype: 'button', ui: 'confirm', text: 'Sign up', itemId: 'signupSubmitButton', margin: '0 10 0 10' }
+                ]
+            }
         ]
     }
 });
