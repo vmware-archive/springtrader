@@ -10,9 +10,7 @@ describe('SpringTrader.model.User', function () {
         expect(user.get('email')).toEqual('test@test.com');
         expect(user.get('passwd')).toEqual('testing');
         expect(user.get('userid')).toEqual('test1');
-        expect(user.get('accounts')).toEqual([
-            {"openbalance": "1000000"}
-        ]);
+        expect(user.get('openbalance')).toEqual(1000000.00);
         expect(user.get('creditcard')).toEqual('1234123412341234');
         expect(user.get('address')).toEqual('san francisco');
     });
@@ -52,24 +50,20 @@ describe('SpringTrader.model.User', function () {
             expect(errors.getByField('email')[0].getMessage()).toEqual('is not a valid email address');
         });
 
-        describe('Account balance validation', function () {
+        describe('Opening balance validation', function () {
             Ext.Array.each([10, "10", 10.0, "10.0"], function (value) {
                 it('is valid with ' + value, function () {
-                    userJSON.accounts = [
-                        {"openbalance": value}
-                    ];
+                    userJSON.openbalance = value;
                     var user = Ext.create('SpringTrader.model.User', userJSON);
                     expect(user.isValid()).toBeTruthy();
                 });
             });
 
             it('is invalid with non-numerics', function () {
-                userJSON.accounts = [
-                    {"openbalance": "invalid"}
-                ];
+                userJSON.openbalance = "invalid";
                 var user = Ext.create('SpringTrader.model.User', userJSON);
                 var errors = user.validate();
-                expect(errors.getByField('accounts')[0].getMessage()).toEqual('opening balance must be numeric');
+                expect(errors.getByField('openbalance')[0].getMessage()).toEqual('must be numeric');
             });
         });
     });
@@ -84,7 +78,7 @@ describe('SpringTrader.model.User', function () {
             request = mostRecentAjaxRequest();
             expect(request.url).toEqual('/spring-nanotrader-services/api/accountProfile');
             expect(request.method).toEqual('POST');
-            expect(Ext.JSON.decode(request.params)).toEqual(userJSON);
+            expect(Ext.JSON.decode(request.params)).toEqual(userPostJSON);
         });
     });
 

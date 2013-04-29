@@ -93,6 +93,20 @@ beforeEach(function () {
         "email": "test@test.com",
         "passwd": "testing",
         "userid": "test1",
+        "openbalance": 1000000.00,
+        "creditcard": "1234123412341234",
+        "address": "san francisco"
+    };
+});
+
+// Only used as expectation during POST(create)
+var userPostJSON;
+beforeEach(function() {
+    userPostJSON = {
+        "fullname": "test",
+        "email": "test@test.com",
+        "passwd": "testing",
+        "userid": "test1",
         "accounts": [
             {"openbalance": "1000000"}
         ],
