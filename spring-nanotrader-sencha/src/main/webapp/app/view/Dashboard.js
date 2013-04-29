@@ -1,6 +1,7 @@
 Ext.define('SpringTrader.view.Dashboard', {
     extend: 'Ext.Container',
     xtype: 'dashboardPage',
+    requires: ['SpringTrader.view.UserStats'],
     config: {
         layout: {
             type: 'vbox',
@@ -11,15 +12,8 @@ Ext.define('SpringTrader.view.Dashboard', {
         title: 'Dashboard',
         iconCls: 'home',
         items: [
-            {
-                xtype: 'marketsummary',
-                style: "backgroundColor:#ccc"
-            },
-            {
-                xtype: 'component',
-                html: 'Dashboard here',
-                style: "backgroundColor:#aaa"
-            }
+            { xtype: 'marketsummary' },
+            { xtype: 'userstats' }
         ]
     }
 });

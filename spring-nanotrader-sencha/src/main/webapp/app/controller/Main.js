@@ -84,6 +84,7 @@ Ext.define('SpringTrader.controller.Main', {
         this.getMainView().add({xtype: 'maintabpanel'});
         this.getLoginButton().hide();
         this.getLogoutButton().show();
+        // this.getApplication().fireEvent('refresh');
     }
 
 });

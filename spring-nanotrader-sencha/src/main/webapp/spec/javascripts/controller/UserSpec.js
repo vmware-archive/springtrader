@@ -1,10 +1,9 @@
 Ext.require('Ext.MessageBox');
 
 describe('SpringTrader.controller.User', function () {
-    var controller, model, view;
+    var controller, model;
     beforeEach(function () {
-        view = Ext.create('Ext.navigation.View');
-        controller = Ext.create('SpringTrader.controller.User', { application: SpringTrader.app, views: [view] });
+        controller = Ext.create('SpringTrader.controller.User', { application: SpringTrader.app });
         model = Ext.create('SpringTrader.model.User', userFormJSON);
     });
 
@@ -20,11 +19,3 @@ describe('SpringTrader.controller.User', function () {
         expect(SpringTrader.model.User.authenticate.mostRecentCall.args[0]).toEqual(model);
     });
 });
-/*
- * UserController#authenticate
- * -- ajax posts to back end
- * -- on success, updates SpringTrader.user with authToken, profileid, accountid
- * -- on failure, post an error alert with {details: ""}(?)
- */
-
-/* User#authenticated returns authToken !== undefined */

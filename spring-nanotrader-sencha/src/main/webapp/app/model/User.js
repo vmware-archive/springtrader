@@ -18,10 +18,26 @@ Ext.define('SpringTrader.model.User', {
             { name: 'creditcard', type: 'string', default: '1234123412341234' },
             { name: 'address', type: 'string' },
 
-            // Returned from backend
+            // Returned from backend through login
             { name: 'authToken', type: 'string', persist: false},
             { name: 'profileid', type: 'int', persist: false},
-            { name: 'accountid', type: 'int', persist: false}
+            { name: 'accountid', type: 'int', persist: false},
+
+            // Returned from backend through api/account/{accountid}
+            { name: 'balance', type: 'int', persist: false },
+            { name: 'creationdate', type: 'string', persist: false },
+            { name: 'lastlogin', type: 'string', persist: false },
+            { name: 'openbalance', type: 'int', persist: false },
+            { name: 'logincount', type: 'int', persist: false },
+//
+
+            // properties from api/account/{accountid}/portfolioSummary
+//            { name: 'gain', type: 'int', persist: false },
+//            { name: 'totalMarketValue', type: 'int', persist: false },
+//            { name: 'totalBasis', type: 'int', persist: false },
+//            { name: 'numberOfHoldings', type: 'int', persist: false },
+
+
         ],
         validations: [
             { type: 'presence', field: 'fullname'},
@@ -45,14 +61,14 @@ Ext.define('SpringTrader.model.User', {
     statics: {
         authenticate: function(user, success, failure) {
             Ext.Ajax.request({
-                url: '/spring-nanotrader-services/api/login',
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                disableCaching: false,
-                jsonData: {
-                    username: user.get('userid'),
-                    password: user.get('passwd')
-                },
+                    url: '/spring-nanotrader-services/api/login',
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    disableCaching: false,
+                    jsonData: {
+                        username: user.get('userid'),
+                        password: user.get('passwd')
+                    },
                 success: function(response) {
                     var jsonData = Ext.JSON.decode(response.responseText);
                     user.set('authToken', jsonData.authToken);
@@ -67,9 +83,9 @@ Ext.define('SpringTrader.model.User', {
                         failure(response);
                     }
                 }
-
             });
-        }
+        },
+
     },
 
     authenticated: function() {
@@ -92,8 +108,28 @@ Ext.define('SpringTrader.model.User', {
             failure: function(response){
                 console.log('logout failure', response);
             }
-
         });
+    },
 
+    loadAccountData: function(success) {
+        var me = this;
+        Ext.Ajax.request({
+            url: '/spring-nanotrader-services/api/account/'+ this.get('accountid'),
+            method: 'GET',
+            headers: {'Content-Type': 'application/json', 'API_TOKEN': this.get('authToken')},
+            disableCaching: false,
+            success: function(response) {
+                var jsonData = Ext.JSON.decode(response.responseText);
+                me.set('creationdate', jsonData.creationdate);
+                me.set('lastlogin', jsonData.lastlogin);
+                me.set('logincount', jsonData.logincount);
+                me.set('balance', jsonData.balance);
+                me.set('openbalance', jsonData.openbalance);
+                if (success) {
+                    success(response);
+                }
+            }
+        });
     }
+
 });

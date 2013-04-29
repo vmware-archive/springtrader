@@ -123,3 +123,15 @@ beforeEach(function () {
         "accountid": 9
     };
 });
+
+var accountJSON;
+beforeEach(function () {
+    accountJSON = {
+        "creationdate": "2013-04-29",
+        "openbalance": 1000000.00,
+        "logoutcount": 2,
+        "balance": 939827.43,
+        "lastlogin": "2013-04-29",
+        "logincount": 10,
+        "accountid": 9}
+});

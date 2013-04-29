@@ -163,6 +163,55 @@ describe('SpringTrader.model.User', function () {
 
     });
 
+    describe("loads user statistics", function() {
+        var user;
+        beforeEach(function() {
+            jasmine.Ajax.useMock();
+            clearAjaxRequests();
+            user = Ext.create('SpringTrader.model.User', loginOkResponseJSON);
+            expect(user.authenticated()).toBeTruthy();
+        });
+
+        it("it sends the request for user statistics", function() {
+            user.loadAccountData();
+            var request = mostRecentAjaxRequest();
+
+            expect(request.url).toEqual('/spring-nanotrader-services/api/account/'+user.get('accountid'));
+            expect(request.method).toEqual('GET');
+            expect(request.requestHeaders['Content-Type']).toEqual('application/json');
+            expect(request.requestHeaders['API_TOKEN']).toEqual(user.get('authToken'));
+        });
+
+        it("populates the user model with the response data", function() {
+            user.loadAccountData();
+            var request = mostRecentAjaxRequest();
+
+            request.response({
+                status: 200,
+                responseText: Ext.JSON.encode(accountJSON)
+            });
+
+            expect(user.get('creationdate')).toEqual(accountJSON.creationdate);
+            expect(user.get('lastlogin')).toEqual(accountJSON.lastlogin);
+            expect(user.get('logincount')).toEqual(accountJSON.logincount);
+            expect(user.get('balance')).toEqual(accountJSON.balance);
+            expect(user.get('openbalance')).toEqual(accountJSON.openbalance);
+        });
+
+        it("fires the success callback, when provided", function() {
+            var successCallback = jasmine.createSpy();
+            user.loadAccountData(successCallback);
+            var request = mostRecentAjaxRequest();
+
+            request.response({
+                status: 200,
+                responseText: Ext.JSON.encode(accountJSON)
+            });
+
+            expect(successCallback.mostRecentCall.args[0].status).toEqual(200);
+        })
+    });
+
     describe("#logout", function() {
         var user;
         beforeEach(function() {
