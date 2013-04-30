@@ -149,3 +149,14 @@ beforeEach(function () {
         "logincount": 10,
         "accountid": 9}
 });
+
+var portfolioSummaryJSON;
+
+beforeEach(function() {
+   portfolioSummaryJSON = {
+       "numberOfHoldings":5,
+       "totalBasis":63865.73,
+       "totalMarketValue":66960.94,
+       "gain":3095.21
+   }
+});

@@ -11,13 +11,13 @@ Ext.define('SpringTrader.controller.UserStats', {
             }
         }
     },
+    launch: function () {
+        this.getApplication().on('refresh', this.refreshUserStats, this);
+    },
     refreshUserStats: function (what) {
         if (what == 'userstats') {
             this.getUserStats().updateView(SpringTrader.user);
         }
-    },
-    launch: function () {
-        this.getApplication().on('refresh', this.refreshUserStats, this);
     },
     onInitializeUserStats: function () {
         var me = this;

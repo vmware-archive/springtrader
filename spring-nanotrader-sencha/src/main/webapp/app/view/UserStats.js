@@ -11,10 +11,10 @@ Ext.define('SpringTrader.view.UserStats', {
                 '<div class="table-outer">' +
                 '<table class="table table-condensed">' +
                 '<tbody>' +
-                '<tr><td>Account ID</td><td>{accountid}</td></tr>' +
-                '<tr><td>Creation Date</td><td>{creationdate}</td></tr>' +
-                '<tr><td>Last Login</td><td>{lastlogin}</td></tr>' +
-                '<tr><td>Login count</td><td>{logincount}</td></tr>' +
+                '<tr><th>Account ID</th>   <td>{accountid}</td></tr>' +
+                '<tr><th>Creation Date</th><td>{creationdate}</td></tr>' +
+                '<tr><th>Last Login</th>   <td>{lastlogin}</td></tr>' +
+                '<tr><th>Login count</th>  <td>{logincount}</td></tr>' +
                 '</tbody>' +
                 '</table>' +
                 '</div>' +

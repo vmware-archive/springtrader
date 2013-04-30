@@ -59,6 +59,11 @@ Ext.define('SpringTrader.model.User', {
         }
     },
 
+    init: function() {
+        this.accountSummary = Ext.create('SpringTrader.model.AccountSummary');
+        this.accountSummary.user = this;
+    },
+
     statics: {
         authenticate: function (user, success, failure) {
             Ext.Ajax.request({
@@ -72,9 +77,7 @@ Ext.define('SpringTrader.model.User', {
                 },
                 success: function (response) {
                     var jsonData = Ext.JSON.decode(response.responseText);
-                    user.set('authToken', jsonData.authToken);
-                    user.set('profileid', jsonData.profileid);
-                    user.set('accountid', jsonData.accountid);
+                    user.updateAuthData(jsonData);
                     if (success) {
                         success(response);
                     }
@@ -100,9 +103,7 @@ Ext.define('SpringTrader.model.User', {
             headers: {'Content-Type': 'application/json', 'API_TOKEN': this.get('authToken')},
             disableCaching: false,
             success: function (response) {
-                me.set('authToken', null);
-                me.set('profileid', null);
-                me.set('accountid', null);
+                me.updateAuthData({});
                 if (success) {
                     success();
                 }
@@ -122,15 +123,27 @@ Ext.define('SpringTrader.model.User', {
             disableCaching: false,
             success: function (response) {
                 var jsonData = Ext.JSON.decode(response.responseText);
-                me.set('creationdate', jsonData.creationdate);
-                me.set('lastlogin', jsonData.lastlogin);
-                me.set('logincount', jsonData.logincount);
-                me.set('balance', jsonData.balance);
-                me.set('openbalance', jsonData.openbalance);
+                me.updateAccountData(jsonData);
                 if (success) {
                     success(response);
                 }
             }
         });
+    },
+
+    updateAuthData: function (data) {
+        this.set({
+            'authToken': data.authToken,
+            'profileid': data.profileid,
+            'accountid': data.accountid
+        });
+    },
+
+    updateAccountData: function(data) {
+        this.set('creationdate', data.creationdate);
+        this.set('lastlogin', data.lastlogin);
+        this.set('logincount', data.logincount);
+        this.set('balance', data.balance);
+        this.set('openbalance', data.openbalance);
     }
 });

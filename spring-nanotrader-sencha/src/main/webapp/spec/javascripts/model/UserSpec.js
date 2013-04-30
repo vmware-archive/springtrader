@@ -68,7 +68,7 @@ describe('SpringTrader.model.User', function () {
         });
     });
 
-    describe('backend proxy', function() {
+    describe('#save creates a new user on the backend', function() {
         it('posts to the back end', function() {
             jasmine.Ajax.useMock();
             clearAjaxRequests();
@@ -157,7 +157,51 @@ describe('SpringTrader.model.User', function () {
 
     });
 
-    describe("loads user statistics", function() {
+    describe("#logout", function() {
+        var user;
+        beforeEach(function() {
+            jasmine.Ajax.useMock();
+            clearAjaxRequests();
+            user = Ext.create('SpringTrader.model.User', loginOkResponseJSON);
+            expect(user.authenticated()).toBeTruthy();
+        });
+
+        it("Clears out local authentication data", function() {
+            user.logout();
+
+            var request = mostRecentAjaxRequest();
+            request.response({status: 200});
+
+            expect(user.authenticated()).toBeFalsy();
+            expect(user.get('authToken')).toBeNull();
+            expect(user.get('profileid')).toBeNull();
+            expect(user.get('accountid')).toBeNull();
+        });
+
+        it("sends the logout request to backend", function() {
+            expect(mostRecentAjaxRequest()).toBeNull();
+
+            user.logout();
+
+            var request = mostRecentAjaxRequest();
+            expect(request.url).toEqual('/spring-nanotrader-services/api/logout');
+            expect(request.method).toEqual('GET');
+            expect(request.requestHeaders['API_TOKEN']).toEqual(user.get('authToken'));
+        });
+
+        it('calls the success callback', function() {
+            var successCallback = jasmine.createSpy();
+
+            user.logout(successCallback);
+
+            var request = mostRecentAjaxRequest();
+            request.response({status: 200});
+
+            expect(successCallback).toHaveBeenCalled();
+        })
+    });
+
+    describe("#loadAccountData loads user statistics", function() {
         var user;
         beforeEach(function() {
             jasmine.Ajax.useMock();
@@ -206,48 +250,10 @@ describe('SpringTrader.model.User', function () {
         })
     });
 
-    describe("#logout", function() {
-        var user;
-        beforeEach(function() {
-            jasmine.Ajax.useMock();
-            clearAjaxRequests();
-            user = Ext.create('SpringTrader.model.User', loginOkResponseJSON);
-            expect(user.authenticated()).toBeTruthy();
+    describe("accountSummary", function() {
+        it("has one", function() {
+            var user = Ext.create('SpringTrader.model.User');
+            expect(user.accountSummary.$className).toEqual('SpringTrader.model.AccountSummary');
         });
-
-        it("Clears out local authentication data", function() {
-            user.logout();
-
-            var request = mostRecentAjaxRequest();
-            request.response({status: 200});
-
-            expect(user.authenticated()).toBeFalsy();
-            expect(user.get('authToken')).toBeNull();
-            expect(user.get('profileid')).toBeNull();
-            expect(user.get('accountid')).toBeNull();
-        });
-
-        it("sends the logout request to backend", function() {
-            expect(mostRecentAjaxRequest()).toBeNull();
-
-            user.logout();
-
-            var request = mostRecentAjaxRequest();
-            expect(request.url).toEqual('/spring-nanotrader-services/api/logout');
-            expect(request.method).toEqual('GET');
-            expect(request.requestHeaders['API_TOKEN']).toEqual(user.get('authToken'));
-        });
-
-        it('calls the success callback', function() {
-            var successCallback = jasmine.createSpy();
-
-            user.logout(successCallback);
-
-            var request = mostRecentAjaxRequest();
-            request.response({status: 200});
-
-            expect(successCallback).toHaveBeenCalled();
-        })
     });
-
 });

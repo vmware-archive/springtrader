@@ -11,7 +11,7 @@
 #   - dist/**/*.js
 #
 src_files:
-    - touch/sencha-touch-debug.js
+    - touch/sencha-touch-all-debug.js
     - spec/app.js
     - app/**/*.js
 

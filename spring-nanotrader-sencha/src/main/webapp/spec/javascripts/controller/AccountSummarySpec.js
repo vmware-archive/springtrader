@@ -1,0 +1,14 @@
+describe('SpringTrader.controller.AccountSummary', function () {
+    var controller;
+    beforeEach(function () {
+        controller = Ext.create('SpringTrader.controller.AccountSummary', { application: SpringTrader.app });
+        SpringTrader.user = Ext.create('SpringTrader.model.User', loginOkResponseJSON);
+    });
+
+    it("refreshes when the event fires", function() {
+        spyOn(controller, 'refreshAccountSummary');
+        controller.launch();
+        controller.getApplication().fireEvent('refresh', 'accountsummary');
+        expect(controller.refreshAccountSummary.mostRecentCall.args[0]).toEqual('accountsummary');
+    });
+});
