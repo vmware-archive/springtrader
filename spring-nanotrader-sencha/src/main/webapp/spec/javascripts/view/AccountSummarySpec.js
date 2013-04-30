@@ -8,17 +8,17 @@ describe('SpringTrader.view.AccountSummary', function() {
         view = Ext.create('SpringTrader.view.AccountSummary', {
             renderTo: 'jasmine_content',
             data: {
-                currentbalance: 'cb',
-                openbalance: 'ob',
-                cashbalance: '$b',
-                totalholdings: 'th',
-                netgain: 'ng'
+                currentbalance: 6,
+                openbalance: 2,
+                cashbalance: 1,
+                totalholdings: 3,
+                netgain: 4
             }
         });
     });
 
     it("renders the view", function() {
-        expect(Ext.DomQuery.select('td').map(function(el){return el.textContent}).join(', ')).toEqual('$cb, $ob, $$b, $th, $ng');
+        expect(Ext.DomQuery.select('td').map(function(el){return el.textContent}).join(', ')).toEqual('$6.00, $2.00, $1.00, $3.00, $4.00');
     });
 
     it("#updateView updates the view", function() {
@@ -27,6 +27,6 @@ describe('SpringTrader.view.AccountSummary', function() {
 
         view.updateView(model);
 
-        expect(Ext.DomQuery.select('td').map(function(el){return el.textContent}).join(', ')).toEqual('$4, $1, $1, $3, $2');
+        expect(Ext.DomQuery.select('td').map(function(el){return el.textContent}).join(', ')).toEqual('$4.00, $1.00, $1.00, $3.00, $2.00');
     });
 });
