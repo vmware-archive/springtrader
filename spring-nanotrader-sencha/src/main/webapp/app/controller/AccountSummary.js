@@ -2,6 +2,7 @@ Ext.define('SpringTrader.controller.AccountSummary', {
     extend: 'Ext.app.Controller',
     config: {
         views: ['AccountSummary'],
+        stores: ['AssetDistribution'],
         refs: {
             accountSummary: 'accountsummary'
         },
@@ -17,6 +18,7 @@ Ext.define('SpringTrader.controller.AccountSummary', {
     refreshAccountSummary: function(what) {
         if (what == 'accountsummary' || what == 'userstats') {
             this.getAccountSummary().updateView(SpringTrader.user.accountSummary);
+            Ext.getStore('assetdistribution').setData(SpringTrader.user.accountSummary.assetDistributionSeries());
         }
     },
     onInitializeAccountSummary: function() {

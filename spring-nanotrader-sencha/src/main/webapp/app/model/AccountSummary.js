@@ -39,5 +39,12 @@ Ext.define('SpringTrader.model.AccountSummary', {
                 }
             }
         });
+    },
+
+    assetDistributionSeries: function() {
+            return [
+                { name: "Portfolio", value: this.totalHoldings()},
+                { name: "Cash Balance", value: this.balance()}
+            ];
     }
 });

@@ -6,10 +6,6 @@ describe('SpringTrader.model.AccountSummary', function () {
         model = user.accountSummary;
     });
 
-    describe('#currentBalance', function () {
-
-    });
-
     describe('#openBalance', function () {
         it("is the user model's opening balance", function () {
             user.set('openbalance', 1);
@@ -17,8 +13,17 @@ describe('SpringTrader.model.AccountSummary', function () {
         });
     });
 
+    describe("#assetDistributionSeries", function () {
+        it("asset distribution series", function () {
+            expect(model.assetDistributionSeries()).toEqual([
+                {name: 'Portfolio', value: model.totalHoldings()},
+                {name: 'Cash Balance', value: model.balance()}
+            ]);
+        });
+    });
+
     describe('#refreshData', function () {
-        beforeEach(function() {
+        beforeEach(function () {
             jasmine.Ajax.useMock();
             clearAjaxRequests();
         })
@@ -26,7 +31,7 @@ describe('SpringTrader.model.AccountSummary', function () {
             model.refreshData();
             var request = mostRecentAjaxRequest();
 
-            expect(request.url).toEqual('/spring-nanotrader-services/api/account/'+ user.get('accountid') +'/portfolioSummary');
+            expect(request.url).toEqual('/spring-nanotrader-services/api/account/' + user.get('accountid') + '/portfolioSummary');
             expect(request.method).toEqual('GET');
             expect(request.requestHeaders['Content-Type']).toEqual('application/json');
             expect(request.requestHeaders['API_TOKEN']).toEqual(user.get('authToken'));
@@ -45,6 +50,5 @@ describe('SpringTrader.model.AccountSummary', function () {
             expect(model.currentBalance()).toEqual(portfolioSummaryJSON.totalMarketValue + accountJSON.balance);
             expect(model.balance()).toEqual(accountJSON.balance);
         });
-
     });
 });

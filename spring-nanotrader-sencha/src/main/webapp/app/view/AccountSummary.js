@@ -23,7 +23,7 @@ Ext.define('SpringTrader.view.AccountSummary', {
                 '</div>' +
                 '</div>',
             {
-                currency: function(v) { return '$' + v.toLocaleString(); }
+                currency: function(v) { return '$' + v.toFixed(2).replace(/(\d)(?=(\d{3})+\b)/g,'$1,'); }
             }
         )
     },
