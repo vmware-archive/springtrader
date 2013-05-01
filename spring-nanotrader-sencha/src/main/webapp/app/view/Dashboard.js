@@ -33,8 +33,7 @@ Ext.define('SpringTrader.view.Dashboard', {
                     },
                     { xtype: 'dailytopsummary' }
                 ]
-            },
-            { xtype: 'userstats' }
+            }
         ]
     }
 });

@@ -26,5 +26,8 @@ Ext.define('SpringTrader.controller.AccountSummary', {
         SpringTrader.user.accountSummary.refreshData(function () {
             me.getApplication().fireEvent('refresh', 'accountsummary');
         });
+        SpringTrader.user.loadAccountData(function () {
+            me.getApplication().fireEvent('refresh', 'userstats');
+        });
     }
 });
