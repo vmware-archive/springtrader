@@ -31,14 +31,7 @@ Ext.define('SpringTrader.model.User', {
                 }
                 return value;
             }
-            },
-
-            // properties from api/account/{accountid}/portfolioSummary
-//            { name: 'gain', type: 'int', persist: false },
-//            { name: 'totalMarketValue', type: 'int', persist: false },
-//            { name: 'totalBasis', type: 'int', persist: false },
-//            { name: 'numberOfHoldings', type: 'int', persist: false },
-
+            }
         ],
         validations: [
             { type: 'presence', field: 'fullname'},
