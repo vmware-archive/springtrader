@@ -34,7 +34,7 @@ Ext.application({
 
 	views: ['Main'],
 
-	controllers: ['Main', 'User', 'UserStats', 'AccountSummary', 'DailyTopSummary'],
+	controllers: ['Main', 'User', 'UserStats', 'AccountSummary', 'DailyTopSummary', 'MarketSummary'],
 
     icon: {
         '57': 'resources/icons/Icon.png',
@@ -62,9 +62,6 @@ Ext.application({
 
         // Initialize the main view
         Ext.Viewport.add(Ext.create('SpringTrader.view.Main'));
-
-        // Start interval timers
-        setInterval(function() { Ext.getStore('marketsummary').load()}, 15000);
     },
 
     onUpdated: function() {
