@@ -256,4 +256,11 @@ describe('SpringTrader.model.User', function () {
             expect(user.accountSummary.$className).toEqual('SpringTrader.model.AccountSummary');
         });
     });
+
+    describe('holdingSummary', function() {
+        it('has one', function() {
+            var user = Ext.create('SpringTrader.model.User');
+            expect(user.holdingSummary.$className).toEqual('SpringTrader.model.HoldingSummary');
+        });
+    })
 });

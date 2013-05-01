@@ -4,7 +4,8 @@ Ext.define('SpringTrader.view.Dashboard', {
     requires: [
         'SpringTrader.view.AccountSummary',
         'SpringTrader.view.UserStats',
-        'SpringTrader.view.AssetDistribution'
+        'SpringTrader.view.AssetDistribution',
+        'SpringTrader.view.DailyTopSummary'
     ],
     config: {
         layout: {
@@ -25,7 +26,12 @@ Ext.define('SpringTrader.view.Dashboard', {
                         xtype: 'component',
                         html: '<div class="title"><h3>Asset Distribution</h3></div>'
                     },
-                    { xtype: 'assetdistribution' }
+                    { xtype: 'assetdistribution' },
+                    {
+                        xtype: 'component',
+                        html: '<div class="title"><h3>Daily Top Summary</h3></div>'
+                    },
+                    { xtype: 'dailytopsummary' }
                 ]
             },
             { xtype: 'userstats' }

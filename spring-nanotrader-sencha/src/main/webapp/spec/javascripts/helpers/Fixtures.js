@@ -160,3 +160,14 @@ beforeEach(function() {
        "gain":3095.21
    }
 });
+
+var holdingSummaryJSON;
+beforeEach(function() {
+    holdingSummaryJSON = {
+        "holdingsTotalGains":3838.25,
+        "holdingRollups":[
+            {"symbol":"NWSA","percent":77.22,"gain":2963.99},
+            {"symbol":"MSFT","percent":15.12,"gain":580.26},
+            {"symbol":"MYL","percent":7.660,"gain":294.00}
+        ]}
+})

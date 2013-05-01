@@ -62,6 +62,9 @@ Ext.define('SpringTrader.model.User', {
     init: function() {
         this.accountSummary = Ext.create('SpringTrader.model.AccountSummary');
         this.accountSummary.user = this;
+
+        this.holdingSummary = Ext.create('SpringTrader.model.HoldingSummary');
+        this.holdingSummary.user = this;
     },
 
     statics: {

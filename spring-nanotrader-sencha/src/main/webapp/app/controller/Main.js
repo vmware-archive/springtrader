@@ -14,7 +14,7 @@ Ext.define('SpringTrader.controller.Main', {
     config: {
         views: ['MarketSummary', 'SignupButton', 'SignupForm', 'LoggedOut', 'LoginForm',
             'TabPanel', 'Dashboard', 'Portfolio', 'Trade'],
-        stores: ['MarketSummary', 'AssetDistribution'],
+        stores: [ 'MarketSummary' ],
         refs: {
             titleBar: 'titlebar',
 
