@@ -5,10 +5,10 @@ describe('SpringTrader.controller.UserStats', function () {
         SpringTrader.user = Ext.create('SpringTrader.model.User', loginOkResponseJSON);
     });
 
-    it ("refreshes the view when an event fires", function () {
-        spyOn(controller, 'refreshUserStats');
+    it("refreshes when the event fires", function () {
+        spyOn(controller, '_refresh');
         controller.launch();
         controller.getApplication().fireEvent('refresh', 'userstats');
-        expect(controller.refreshUserStats.mostRecentCall.args[0]).toEqual('userstats');
+        expect(controller._refresh.mostRecentCall.args[0]).toEqual('userstats');
     });
 });

@@ -4,24 +4,24 @@ Ext.define('SpringTrader.controller.AccountSummary', {
         views: ['AccountSummary'],
         stores: ['AssetDistribution'],
         refs: {
-            accountSummary: 'accountsummary'
+            view: 'accountsummary'
         },
         control: {
-            accountSummary: {
-                initialize: 'onInitializeAccountSummary'
+            view: {
+                initialize: 'onInitialize'
             }
         }
     },
     launch: function() {
-        this.getApplication().on('refresh', this.refreshAccountSummary, this);
+        this.getApplication().on('refresh', this._refresh, this);
     },
-    refreshAccountSummary: function(what) {
+    _refresh: function(what) {
         if (what == 'accountsummary' || what == 'userstats') {
-            this.getAccountSummary().updateView(SpringTrader.user.accountSummary);
+            this.getView().updateView(SpringTrader.user.accountSummary);
             Ext.getStore('assetdistribution').setData(SpringTrader.user.accountSummary.assetDistributionSeries());
         }
     },
-    onInitializeAccountSummary: function() {
+    onInitialize: function() {
        var me = this;
         SpringTrader.user.accountSummary.refreshData(function () {
             me.getApplication().fireEvent('refresh', 'accountsummary');

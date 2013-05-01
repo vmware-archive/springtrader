@@ -6,9 +6,9 @@ describe('SpringTrader.controller.DailyTopSummary', function () {
     });
 
     it("refreshes when the event fires", function() {
-        spyOn(controller, 'refreshDailyTopSummary');
+        spyOn(controller, '_refresh');
         controller.launch();
         controller.getApplication().fireEvent('refresh', 'dailytopsummary');
-        expect(controller.refreshDailyTopSummary.mostRecentCall.args[0]).toEqual('dailytopsummary');
+        expect(controller._refresh.mostRecentCall.args[0]).toEqual('dailytopsummary');
     });
 });

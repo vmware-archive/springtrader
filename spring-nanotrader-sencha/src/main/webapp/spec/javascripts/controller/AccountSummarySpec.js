@@ -6,9 +6,9 @@ describe('SpringTrader.controller.AccountSummary', function () {
     });
 
     it("refreshes when the event fires", function() {
-        spyOn(controller, 'refreshAccountSummary');
+        spyOn(controller, '_refresh');
         controller.launch();
         controller.getApplication().fireEvent('refresh', 'accountsummary');
-        expect(controller.refreshAccountSummary.mostRecentCall.args[0]).toEqual('accountsummary');
+        expect(controller._refresh.mostRecentCall.args[0]).toEqual('accountsummary');
     });
 });

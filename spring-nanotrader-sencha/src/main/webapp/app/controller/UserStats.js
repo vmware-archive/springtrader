@@ -3,23 +3,23 @@ Ext.define('SpringTrader.controller.UserStats', {
     config: {
         views: ['UserStats'],
         refs: {
-            userStats: 'userstats'
+            view: 'userstats'
         },
         control: {
-            userStats: {
-                initialize: 'onInitializeUserStats'
+            view: {
+                initialize: 'onInitialize'
             }
         }
     },
     launch: function () {
-        this.getApplication().on('refresh', this.refreshUserStats, this);
+        this.getApplication().on('refresh', this._refresh, this);
     },
-    refreshUserStats: function (what) {
+    _refresh: function (what) {
         if (what == 'userstats') {
-            this.getUserStats().updateView(SpringTrader.user);
+            this.getView().updateView(SpringTrader.user);
         }
     },
-    onInitializeUserStats: function () {
+    onInitialize: function () {
         var me = this;
         SpringTrader.user.loadAccountData(function () {
             me.getApplication().fireEvent('refresh', 'userstats');

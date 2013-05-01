@@ -4,23 +4,23 @@ Ext.define('SpringTrader.controller.DailyTopSummary', {
         views: ['DailyTopSummary'],
         stores: ['HoldingSummary'],
         refs: {
-            dailyTopSummary: 'dailytopsummary'
+            view: 'dailytopsummary'
         },
         control: {
-            dailyTopSummary: {
-                initialize: 'onInitializeDailyTopSummary'
+            view: {
+                initialize: 'onInitialize'
             }
         }
     },
     launch: function() {
-        this.getApplication().on('refresh', this.refreshDailyTopSummary, this);
+        this.getApplication().on('refresh', this._refresh, this);
     },
-    refreshDailyTopSummary: function(what) {
+    _refresh: function(what) {
         if (what == 'holdingsummary') {
             Ext.getStore('holdingsummary').setData(SpringTrader.user.holdingSummary.holdingRollups());
         }
     },
-    onInitializeDailyTopSummary: function() {
+    onInitialize: function() {
        var me = this;
         SpringTrader.user.holdingSummary.refreshData(function () {
             me.getApplication().fireEvent('refresh', 'holdingsummary');
