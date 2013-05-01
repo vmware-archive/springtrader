@@ -1,0 +1,3 @@
+[submodule "spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap"]
+	path = spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap
+	url = https://github.com/jlong/sass-twitter-bootstrap.git
