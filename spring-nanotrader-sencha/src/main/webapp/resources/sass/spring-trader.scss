@@ -6,12 +6,14 @@
   text-align: right;
 }
 
-.table td.centered {
+.table td.centered, .table th.centered {
   text-align: center;
 }
 
 .centered {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .x-docked-top .logo {
@@ -23,4 +25,18 @@
 
 .well.show-well .x-html {
   padding: 0;
+}
+
+.width-half {
+  width: 50%;
+}
+
+// From spring-nanotrader-web/.../style.css
+.icon-custom.icon-gains{
+  background-position: -21px -21px;
+  margin:3px 7px 0 0;
+}
+.icon-custom.icon-lost{
+  background-position: -3px -41px;
+  margin:3px 7px 0 0;
 }

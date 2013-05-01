@@ -10769,370 +10769,6 @@ input[type="search"]::-webkit-search-cancel-button {
   border: 0.1em solid rgba(102, 102, 102, 0.9);
 }
 
-/* line 9, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-table {
-  max-width: 100%;
-  background-color: transparent;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* line 19, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table {
-  width: 100%;
-  margin-bottom: 20px;
-}
-/* line 24, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table th,
-.table td {
-  padding: 8px;
-  line-height: 20px;
-  text-align: left;
-  vertical-align: top;
-  border-top: 1px solid #dddddd;
-}
-/* line 31, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table th {
-  font-weight: bold;
-}
-/* line 35, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table thead th {
-  vertical-align: bottom;
-}
-/* line 44, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table caption + thead tr:first-child th,
-.table caption + thead tr:first-child td,
-.table colgroup + thead tr:first-child th,
-.table colgroup + thead tr:first-child td,
-.table thead:first-child tr:first-child th,
-.table thead:first-child tr:first-child td {
-  border-top: 0;
-}
-/* line 48, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table tbody + tbody {
-  border-top: 2px solid #dddddd;
-}
-
-/* line 60, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-condensed th,
-.table-condensed td {
-  padding: 4px 5px;
-}
-
-/* line 69, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-bordered {
-  border: 1px solid #dddddd;
-  border-collapse: separate;
-  *border-collapse: collapse;
-  border-left: 0;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-}
-/* line 76, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-bordered th,
-.table-bordered td {
-  border-left: 1px solid #dddddd;
-}
-/* line 88, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-bordered caption + thead tr:first-child th,
-.table-bordered caption + tbody tr:first-child th,
-.table-bordered caption + tbody tr:first-child td,
-.table-bordered colgroup + thead tr:first-child th,
-.table-bordered colgroup + tbody tr:first-child th,
-.table-bordered colgroup + tbody tr:first-child td,
-.table-bordered thead:first-child tr:first-child th,
-.table-bordered tbody:first-child tr:first-child th,
-.table-bordered tbody:first-child tr:first-child td {
-  border-top: 0;
-}
-/* line 93, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-bordered thead:first-child tr:first-child th:first-child,
-.table-bordered tbody:first-child tr:first-child td:first-child {
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-border-radius-topleft: 4px;
-}
-/* line 99, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-bordered thead:first-child tr:first-child th:last-child,
-.table-bordered tbody:first-child tr:first-child td:last-child {
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-  -moz-border-radius-topright: 4px;
-}
-/* line 107, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-bordered thead:last-child tr:last-child th:first-child,
-.table-bordered tbody:last-child tr:last-child td:first-child,
-.table-bordered tfoot:last-child tr:last-child td:first-child {
-  -webkit-border-radius: 0 0 0 4px;
-  -moz-border-radius: 0 0 0 4px;
-  border-radius: 0 0 0 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  -moz-border-radius-bottomleft: 4px;
-}
-/* line 115, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-bordered thead:last-child tr:last-child th:last-child,
-.table-bordered tbody:last-child tr:last-child td:last-child,
-.table-bordered tfoot:last-child tr:last-child td:last-child {
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  -moz-border-radius-bottomright: 4px;
-}
-/* line 125, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-bordered caption + thead tr:first-child th:first-child,
-.table-bordered caption + tbody tr:first-child td:first-child,
-.table-bordered colgroup + thead tr:first-child th:first-child,
-.table-bordered colgroup + tbody tr:first-child td:first-child {
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-border-radius-topleft: 4px;
-}
-/* line 133, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-bordered caption + thead tr:first-child th:last-child,
-.table-bordered caption + tbody tr:first-child td:last-child,
-.table-bordered colgroup + thead tr:first-child th:last-child,
-.table-bordered colgroup + tbody tr:first-child td:last-child {
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-  -moz-border-radius-topleft: 4px;
-}
-
-/* line 149, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-striped tbody tr:nth-child(odd) td,
-.table-striped tbody tr:nth-child(odd) th {
-  background-color: #f9f9f9;
-}
-
-/* line 162, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-hover tbody tr:hover td,
-.table-hover tbody tr:hover th {
-  background-color: whitesmoke;
-}
-
-/* line 174, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-table [class*=span],
-.row-fluid table [class*=span] {
-  display: table-cell;
-  float: none;
-  margin-left: 0;
-}
-
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span1 {
-  float: none;
-  width: 44px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span2 {
-  float: none;
-  width: 124px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span3 {
-  float: none;
-  width: 204px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span4 {
-  float: none;
-  width: 284px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span5 {
-  float: none;
-  width: 364px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span6 {
-  float: none;
-  width: 444px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span7 {
-  float: none;
-  width: 524px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span8 {
-  float: none;
-  width: 604px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span9 {
-  float: none;
-  width: 684px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span10 {
-  float: none;
-  width: 764px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span11 {
-  float: none;
-  width: 844px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span12 {
-  float: none;
-  width: 924px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span13 {
-  float: none;
-  width: 1004px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span14 {
-  float: none;
-  width: 1084px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span15 {
-  float: none;
-  width: 1164px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span16 {
-  float: none;
-  width: 1244px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span17 {
-  float: none;
-  width: 1324px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span18 {
-  float: none;
-  width: 1404px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span19 {
-  float: none;
-  width: 1484px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span20 {
-  float: none;
-  width: 1564px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span21 {
-  float: none;
-  width: 1644px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span22 {
-  float: none;
-  width: 1724px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span23 {
-  float: none;
-  width: 1804px;
-  margin-left: 0;
-}
-/* line 183, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table .span24 {
-  float: none;
-  width: 1884px;
-  margin-left: 0;
-}
-
-/* line 194, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table tbody tr.success td {
-  background-color: #dff0d8;
-}
-/* line 197, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table tbody tr.error td {
-  background-color: #f2dede;
-}
-/* line 200, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table tbody tr.warning td {
-  background-color: #fcf8e3;
-}
-/* line 203, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table tbody tr.info td {
-  background-color: #d9edf7;
-}
-
-/* line 211, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-hover tbody tr.success:hover td {
-  background-color: #d0e9c6;
-}
-/* line 214, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-hover tbody tr.error:hover td {
-  background-color: #ebcccc;
-}
-/* line 217, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-hover tbody tr.warning:hover td {
-  background-color: #faf2cc;
-}
-/* line 220, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_tables.scss */
-.table-hover tbody tr.info:hover td {
-  background-color: #c4e3f3;
-}
-
-/* line 7, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_wells.scss */
-.well {
-  min-height: 20px;
-  padding: 19px;
-  margin-bottom: 20px;
-  background-color: whitesmoke;
-  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-}
-/* line 15, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_wells.scss */
-.well blockquote {
-  border-color: #ddd;
-  border-color: rgba(0, 0, 0, 0.15);
-}
-
-/* line 22, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_wells.scss */
-.well-large {
-  padding: 24px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-}
-
-/* line 26, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/bootstrap/lib/_wells.scss */
-.well-small {
-  padding: 9px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-
 /* line 1, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .market-summary .table {
   margin-bottom: 0;
@@ -11144,16 +10780,18 @@ table [class*=span],
 }
 
 /* line 9, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
-.table td.centered {
+.table td.centered, .table th.centered {
   text-align: center;
 }
 
 /* line 13, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .centered {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* line 17, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 19, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .x-docked-top .logo {
   background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAAAnCAYAAADpYmEPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjBEM0Q1QjhBMTE1QTExRTJBQUE5Rjc5QTc1MEM2MzgzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjBEM0Q1QjhCMTE1QTExRTJBQUE5Rjc5QTc1MEM2MzgzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MEQzRDVCODgxMTVBMTFFMkFBQTlGNzlBNzUwQzYzODMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MEQzRDVCODkxMTVBMTFFMkFBQTlGNzlBNzUwQzYzODMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7EHuV2AAARe0lEQVR42uxcfXBUVZZ/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') left top no-repeat;
   display: inline-block;
@@ -11161,7 +10799,24 @@ table [class*=span],
   width: 150px;
 }
 
-/* line 24, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 26, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .well.show-well .x-html {
   padding: 0;
+}
+
+/* line 30, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.width-half {
+  width: 50%;
+}
+
+/* line 35, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.icon-custom.icon-gains {
+  background-position: -21px -21px;
+  margin: 3px 7px 0 0;
+}
+
+/* line 39, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.icon-custom.icon-lost {
+  background-position: -3px -41px;
+  margin: 3px 7px 0 0;
 }

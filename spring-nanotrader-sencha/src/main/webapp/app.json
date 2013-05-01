@@ -68,6 +68,9 @@
      */
     "css": [
         {
+            "path": "resources/css/bootstrap.css",
+        },
+        {
             "path": "/spring-nanotrader-web/css/style.css",
             "remote": true,
             "update": "full"
