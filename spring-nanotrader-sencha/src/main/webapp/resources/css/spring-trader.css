@@ -25,3 +25,8 @@
   height: 46px;
   width: 150px;
 }
+
+/* line 24, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.well.show-well .x-html {
+  padding: 0;
+}

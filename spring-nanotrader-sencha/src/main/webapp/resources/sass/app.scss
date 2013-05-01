@@ -22,8 +22,9 @@ $button-height: '2.0em';
 
 // Your custom code goes here...
 
-@import 'bootstrap/variables';
-@import 'bootstrap/mixins';
-@import 'bootstrap/tables';
+@import 'bootstrap/lib/variables';
+@import 'bootstrap/lib/mixins';
+@import 'bootstrap/lib/tables';
+@import 'bootstrap/lib/wells';
 
 @import 'spring-trader';

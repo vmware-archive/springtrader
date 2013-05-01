@@ -5,6 +5,7 @@ Ext.define('SpringTrader.view.MarketSummary', {
         scrollable: false,
         styleHtmlContent: true,
         height: 276,
+        cls: 'well show-well',
         itemTpl: [
             '<div class="market-summary">',
             '            <table class="table table-condensed">',

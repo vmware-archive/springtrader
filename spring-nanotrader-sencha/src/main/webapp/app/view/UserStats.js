@@ -5,8 +5,8 @@ Ext.define('SpringTrader.view.UserStats', {
         scrollable: false,
         styleHtmlContent: true,
         height: '100%',
+        cls: 'well show-well',
         tpl: [
-            '<div class="well show-well">' +
                 '<div class="title"><h3>User Statistics</h3></div>' +
                 '<div class="table-outer">' +
                 '<table class="table table-condensed">' +
@@ -17,7 +17,6 @@ Ext.define('SpringTrader.view.UserStats', {
                 '<tr><th>Login count</th>  <td>{logincount}</td></tr>' +
                 '</tbody>' +
                 '</table>' +
-                '</div>' +
                 '</div>'
         ]
     },

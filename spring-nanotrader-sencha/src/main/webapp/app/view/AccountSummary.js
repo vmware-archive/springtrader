@@ -6,8 +6,9 @@ Ext.define('SpringTrader.view.AccountSummary', {
         scrollable: false,
         styleHtmlContent: true,
         height: '100%',
+        bodyPadding: 0,
+        cls: 'well show-well',
         tpl: Ext.create('Ext.XTemplate',
-            '<div class="well show-well">' +
                 '<div class="title"><h3>Account Summary</h3></div>' +
                 '<div class="table-outer">' +
                 '<table class="table table-condensed">' +
@@ -20,7 +21,6 @@ Ext.define('SpringTrader.view.AccountSummary', {
                 '<th>Current Gain/Loss</th><td>{netgain:this.currency}</td></tr>' +
                 '</tbody>' +
                 '</table>' +
-                '</div>' +
                 '</div>',
             {
                 currency: function(v) { return '$' + v.toFixed(2).replace(/(\d)(?=(\d{3})+\b)/g,'$1,'); }
