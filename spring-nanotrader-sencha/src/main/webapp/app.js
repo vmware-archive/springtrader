@@ -59,6 +59,15 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         SpringTrader.user = Ext.create('SpringTrader.model.User');
+        SpringTrader.appStore = Ext.create('SpringTrader.LocalStore');
+
+        if (SpringTrader.appStore.find('authToken')) {
+            SpringTrader.user.set({
+                authToken: SpringTrader.appStore.find('authToken'),
+                profileid: SpringTrader.appStore.find('profileid'),
+                accountid: SpringTrader.appStore.find('accountid')
+            });
+        }
 
         // Initialize the main view
         Ext.Viewport.add(Ext.create('SpringTrader.view.Main'));

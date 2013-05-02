@@ -29,7 +29,6 @@ Class('SpringTrader.SiestaTestHelper', {
         },
 
         userId: function() {
-            window.userId = window.userId || 0
             return new Date().getTime();
         },
 

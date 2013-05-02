@@ -3,9 +3,9 @@ Ext.define('SpringTrader.controller.Main', {
 
     launch: function () {
         this.getApplication().on('authenticated', this.showLoggedInView, this);
-
+        this.getApplication().on('authenticated', this.updateLocalStorage, this);
         if (SpringTrader.user.authenticated()) {
-
+            this.showLoggedInView();
         } else {
             this.showLoggedOutView();
         }
@@ -40,16 +40,6 @@ Ext.define('SpringTrader.controller.Main', {
         }
     },
 
-    showLoggedOutView: function () {
-        var oldView = this.getMainTabPanel();
-        if (oldView) {
-            oldView.destroy();
-        }
-        this.getMainView().add([
-            { xtype: 'loggedoutview'}
-        ])
-    },
-
     onSignupButtonTap: function (what, event) {
         event.stopEvent();
         var signupSheet = Ext.create('SpringTrader.view.ModalSheet', {
@@ -73,17 +63,38 @@ Ext.define('SpringTrader.controller.Main', {
     },
 
     onLogoutButtonTap: function () {
+        var me = this;
         SpringTrader.user.logout(function () {
-            window.location.reload();
+            me.clearLocalStorage();
+            me.showLoggedOutView();
         });
     },
 
     showLoggedInView: function () {
-        this.getLoggedOutView().destroy();
+        this.getLoggedOutView() && this.getLoggedOutView().destroy();
         this.getMainView().add({xtype: 'maintabpanel'});
         this.getLoginButton().hide();
         this.getLogoutButton().show();
-        // this.getApplication().fireEvent('refresh');
+    },
+
+    showLoggedOutView: function () {
+        this.getMainTabPanel() && this.getMainTabPanel().destroy();
+        this.getLogoutButton().hide();
+        this.getLoginButton().show();
+        this.getMainView().add({ xtype: 'loggedoutview'});
+    },
+
+    updateLocalStorage: function () {
+        SpringTrader.appStore.
+            add('authToken', SpringTrader.user.get('authToken')).
+            add('accountid', SpringTrader.user.get('accountid')).
+            add('profileid', SpringTrader.user.get('profileid'));
+    },
+
+    clearLocalStorage: function () {
+        SpringTrader.appStore.remove('authToken', SpringTrader.user.get('authToken'));
+        SpringTrader.appStore.remove('accountid', SpringTrader.user.get('accountid'));
+        SpringTrader.appStore.remove('profileid', SpringTrader.user.get('profileid'));
     }
 
 });

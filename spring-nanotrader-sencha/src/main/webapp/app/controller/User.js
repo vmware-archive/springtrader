@@ -42,10 +42,11 @@ Ext.define('SpringTrader.controller.User', {
     authenticate: function(user) {
         function successCallback(response) {
             modalSheet.hide({ type: 'slide', direction: 'down' });
-            me.getApplication().fireEvent('authenticated');
             setTimeout(function() {
                 modalSheet.destroy()
             }, 2000);
+
+            me.getApplication().fireEvent('authenticated');
         };
 
         function failureCallback(response) {
