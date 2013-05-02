@@ -6,7 +6,9 @@ Ext.define('SpringTrader.view.AssetDistribution',{
         series: [{
             type: 'pie',
             xField: 'value',
-            labelField: 'name'
+            showInLegend: true,
+            labelField: 'name',
+            donut: 30
         }]
     }
 

@@ -6,7 +6,9 @@ Ext.define('SpringTrader.view.DailyTopSummary',{
         series: [{
             type: 'pie',
             xField: 'percent',
-            labelField: 'symbol'
+            showInLegend: true,
+            labelField: 'symbol',
+            donut: 30
         }]
     }
 
