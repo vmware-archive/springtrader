@@ -92,9 +92,9 @@ Ext.define('SpringTrader.controller.Main', {
     },
 
     clearLocalStorage: function () {
-        SpringTrader.appStore.remove('authToken', SpringTrader.user.get('authToken'));
-        SpringTrader.appStore.remove('accountid', SpringTrader.user.get('accountid'));
-        SpringTrader.appStore.remove('profileid', SpringTrader.user.get('profileid'));
+        SpringTrader.appStore.remove('authToken');
+        SpringTrader.appStore.remove('accountid');
+        SpringTrader.appStore.remove('profileid');
     }
 
 });

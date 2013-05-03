@@ -93,25 +93,26 @@ Ext.define('SpringTrader.model.User', {
 
     logout: function (callback) {
         var me = this;
-        Ext.Ajax.request({
-            url: '/spring-nanotrader-services/api/logout',
-            method: 'GET',
-            headers: {'Content-Type': 'application/json', 'API_TOKEN': this.get('authToken')},
-            disableCaching: false,
-            success: function (response) {
-                me.updateAuthData({});
-                if (callback) {
-                    callback();
+        if (me.authenticated()) {
+            Ext.Ajax.request({
+                url: '/spring-nanotrader-services/api/logout',
+                method: 'GET',
+                headers: {'Content-Type': 'application/json', 'API_TOKEN': this.get('authToken')},
+                disableCaching: false,
+                success: function (response) {
+                    if (callback) {
+                        callback();
+                    }
+                },
+                failure: function (response) {
+                    console.log('logout failure', response);
+                    if (callback) {
+                        callback();
+                    }
                 }
-            },
-            failure: function (response) {
-                console.log('logout failure', response);
-                me.updateAuthData({});
-                if (callback) {
-                    callback();
-                }
-            }
-        });
+            });
+        }
+        me.updateAuthData({});
     },
 
     loadAccountData: function (success) {
