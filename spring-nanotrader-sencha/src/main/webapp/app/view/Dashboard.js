@@ -28,6 +28,16 @@ Ext.define('SpringTrader.view.Dashboard', {
                     },
                     { xtype: 'dailytopsummary' }
                 ]
+            },
+            { xtype: 'container',
+                cls: 'well show-well',
+                items: [
+                    {
+                        xtype: 'component',
+                        html: '<div class="title"><h3>Asset Distribution</h3></div>'
+                    },
+                    { xtype: 'assetdistribution' }
+                ]
             }
         ]
     }
