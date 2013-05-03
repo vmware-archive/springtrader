@@ -14,6 +14,7 @@ Harness.start(
         hostPageUrl: '/spring-nanotrader-sencha/index.html',
         preload: [],
         performSetup: false,
+        waitForAppReady: true,
         items: [
             'test/signup_form_cancel.t.js',
             'test/signup_form.t.js',

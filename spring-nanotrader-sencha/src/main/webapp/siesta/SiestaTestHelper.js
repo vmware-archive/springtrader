@@ -1,6 +1,21 @@
 Class('SpringTrader.SiestaTestHelper', {
     isa: Siesta.Test.SenchaTouch,
 
+    override: {
+        isReady: function() {
+            var result = this.SUPERARG(arguments);
+            if(!result.ready) return result;
+
+            if (SpringTrader.user) {SpringTrader.user.set('authToken', null)};
+            if (SpringTrader.appStore) {
+                SpringTrader.appStore.remove('authToken');
+                SpringTrader.appStore.remove('accountid');
+                SpringTrader.appStore.remove('profileid');
+            }
+
+            return { ready: true }
+        }
+    },
     methods: {
         signup: function(user) {
             this.cq1('field[name=fullname]').setValue(user.fullname);
