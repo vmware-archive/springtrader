@@ -5,7 +5,7 @@ Ext.define('SpringTrader.view.Dashboard', {
         'SpringTrader.view.AccountSummary',
         'SpringTrader.view.UserStats',
         'SpringTrader.view.AssetDistribution',
-        'SpringTrader.view.DailyTopSummary'
+        'SpringTrader.view.DailyTopGains'
     ],
     config: {
         layout: {
@@ -26,7 +26,7 @@ Ext.define('SpringTrader.view.Dashboard', {
                         xtype: 'component',
                         html: '<div class="title"><h3>Daily Top Gains</h3></div>'
                     },
-                    { xtype: 'dailytopsummary' }
+                    { xtype: 'dailytopgains' }
                 ]
             },
             { xtype: 'container',

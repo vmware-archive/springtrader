@@ -1,10 +1,10 @@
-Ext.define('SpringTrader.controller.DailyTopSummary', {
+Ext.define('SpringTrader.controller.DailyTopGains', {
     extend: 'Ext.app.Controller',
     config: {
-        views: ['DailyTopSummary'],
+        views: ['DailyTopGains'],
         stores: ['HoldingSummary'],
         refs: {
-            view: 'dailytopsummary'
+            view: 'dailytopgains'
         },
         control: {
             view: {

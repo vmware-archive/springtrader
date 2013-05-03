@@ -1,6 +1,6 @@
-Ext.define('SpringTrader.view.DailyTopSummary',{
+Ext.define('SpringTrader.view.DailyTopGains',{
     extend: 'SpringTrader.view.PieChart',
-    xtype: 'dailytopsummary',
+    xtype: 'dailytopgains',
     config: {
         store: 'holdingsummary',
         series: [{
