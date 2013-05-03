@@ -1,10 +1,11 @@
 Ext.define('SpringTrader.controller.DailyTopGains', {
     extend: 'Ext.app.Controller',
     config: {
-        views: ['DailyTopGains'],
+        views: ['DailyTopGains', 'NoData'],
         stores: ['HoldingSummary'],
         refs: {
-            view: 'dailytopgains'
+            view: 'dailytopgains',
+            noData: 'nodata'
         },
         control: {
             view: {
@@ -18,6 +19,10 @@ Ext.define('SpringTrader.controller.DailyTopGains', {
     _refresh: function(what) {
         if (what == 'holdingsummary') {
             Ext.getStore('holdingsummary').setData(SpringTrader.user.holdingSummary.holdingRollups());
+            if (SpringTrader.user.accountSummary.get('numberOfHoldings') == 0 ) {
+                this.getView().hide();
+                this.getNoData().show();
+            }
         }
     },
     onInitialize: function() {

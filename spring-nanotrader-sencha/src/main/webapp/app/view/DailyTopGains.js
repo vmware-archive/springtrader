@@ -10,6 +10,10 @@ Ext.define('SpringTrader.view.DailyTopGains',{
             labelField: 'symbol',
             donut: 30
         }]
+    },
+    hide: function() {
+        this.callParent(arguments);
+        this.getLegend().hide();
     }
 
 });
