@@ -24,7 +24,7 @@ Ext.define('SpringTrader.view.Dashboard', {
                 items: [
                     {
                         xtype: 'component',
-                        html: '<div class="title"><h3>Daily Top Summary</h3></div>'
+                        html: '<div class="title"><h3>Daily Top Gains</h3></div>'
                     },
                     { xtype: 'dailytopsummary' }
                 ]
