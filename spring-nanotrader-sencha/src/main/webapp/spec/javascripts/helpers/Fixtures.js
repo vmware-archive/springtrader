@@ -124,7 +124,6 @@ beforeEach(function () {
         "passwdconfirm": "testing",
         "userid": "test1",
         "openbalance": 1,
-        "creditcard": 1234,
         "address": "san francisco"
     };
 });

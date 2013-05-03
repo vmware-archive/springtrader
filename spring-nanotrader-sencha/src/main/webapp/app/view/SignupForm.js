@@ -14,8 +14,7 @@ Ext.define('SpringTrader.view.SignupForm', {
                     { xtype: 'passwordfield', name: 'passwdconfirm', placeHolder: 'Confirm password'},
                     { xtype: 'textfield', name: 'userid', placeHolder: 'Username', autoCapitalize: false, autoCorrect: false},
                     { xtype: 'numberfield', name: 'openbalance', placeHolder: 'Opening balance', minValue: 100000, stepValue: 1000},
-                    { xtype: 'textfield', name: 'address', placeHolder: 'Address' },
-                    { xtype: 'numberfield', name: 'creditcard', placeHolder: 'CC# 1234 1234 1234 1234', disabled: true},
+                    { xtype: 'textfield', name: 'address', placeHolder: 'Address' }
                 ]
             },
             { xtype: 'container',

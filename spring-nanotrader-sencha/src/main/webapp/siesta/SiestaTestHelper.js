@@ -38,8 +38,7 @@ Class('SpringTrader.SiestaTestHelper', {
                 password: 'password',
                 userid: userid,
                 balance: 1000000000,
-                address: 'San Francisco',
-                creditcard: 1234123412341234
+                address: 'San Francisco'
             }, options);
         },
 

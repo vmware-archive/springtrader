@@ -18,7 +18,6 @@ describe('SpringTrader.model.User', function () {
     it('receives form data', function() {
         var userForm = Ext.create('SpringTrader.model.User', userFormJSON);
         expect(userForm.get('accounts')).toEqual([{"openbalance": "1"}]);
-        expect(userForm.get('creditcard')).toEqual('1234');
     });
 
     describe('validations', function() {
