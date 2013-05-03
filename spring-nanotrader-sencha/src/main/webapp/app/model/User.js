@@ -91,7 +91,7 @@ Ext.define('SpringTrader.model.User', {
         return !!this.get('authToken');
     },
 
-    logout: function (success) {
+    logout: function (callback) {
         var me = this;
         Ext.Ajax.request({
             url: '/spring-nanotrader-services/api/logout',
@@ -100,12 +100,16 @@ Ext.define('SpringTrader.model.User', {
             disableCaching: false,
             success: function (response) {
                 me.updateAuthData({});
-                if (success) {
-                    success();
+                if (callback) {
+                    callback();
                 }
             },
             failure: function (response) {
                 console.log('logout failure', response);
+                me.updateAuthData({});
+                if (callback) {
+                    callback();
+                }
             }
         });
     },
