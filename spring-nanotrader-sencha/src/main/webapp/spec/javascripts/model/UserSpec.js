@@ -181,12 +181,13 @@ describe('SpringTrader.model.User', function () {
         it("sends the logout request to backend", function() {
             expect(mostRecentAjaxRequest()).toBeNull();
 
+            var authToken = user.get('authToken');
             user.logout();
 
             var request = mostRecentAjaxRequest();
             expect(request.url).toEqual('/spring-nanotrader-services/api/logout');
             expect(request.method).toEqual('GET');
-            expect(request.requestHeaders['API_TOKEN']).toEqual(user.get('authToken'));
+            expect(request.requestHeaders['API_TOKEN']).toEqual(authToken);
         });
 
         it('calls the success callback', function() {
