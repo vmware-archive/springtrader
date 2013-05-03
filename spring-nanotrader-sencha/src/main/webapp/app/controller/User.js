@@ -9,7 +9,8 @@ Ext.define('SpringTrader.controller.User', {
             modalSheet: 'modalsheet',
             signupCancelButton: 'signupform #cancelButton',
             loginCancelButton: 'loginform #cancelButton',
-            loginSubmitButton: 'loginform #submitButton'
+            loginSubmitButton: 'loginform #submitButton',
+            loginButton: 'mainview #loginButton'
         },
         control: {
             signupSubmitButton: {
@@ -70,6 +71,7 @@ Ext.define('SpringTrader.controller.User', {
     onCancel: function() {
         var modalSheet = this.getModalSheet();
         modalSheet.hide();
+        this.getLoginButton().show();
         setTimeout(function() {
             modalSheet.destroy()
         }, 2000);

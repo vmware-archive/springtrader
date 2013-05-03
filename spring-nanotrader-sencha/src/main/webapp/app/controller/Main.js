@@ -48,6 +48,7 @@ Ext.define('SpringTrader.controller.Main', {
             ]
         });
         this.getMainView().add(signupSheet);
+        this.getLoginButton().hide();
         signupSheet.show();
     },
 
@@ -59,6 +60,7 @@ Ext.define('SpringTrader.controller.Main', {
             ]
         });
         this.getMainView().add(loginSheet);
+        this.getLoginButton().hide();
         loginSheet.show();
     },
 
