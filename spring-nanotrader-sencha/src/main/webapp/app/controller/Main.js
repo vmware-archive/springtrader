@@ -4,11 +4,8 @@ Ext.define('SpringTrader.controller.Main', {
     launch: function () {
         this.getApplication().on('authenticated', this.showLoggedInView, this);
         this.getApplication().on('authenticated', this.updateLocalStorage, this);
-        if (SpringTrader.user.authenticated()) {
-            this.showLoggedInView();
-        } else {
-            this.showLoggedOutView();
-        }
+        this.getMainView().getNavigationBar().hide();
+        this.switchViews();
     },
 
     config: {
@@ -25,7 +22,7 @@ Ext.define('SpringTrader.controller.Main', {
             showSignupFormButton: 'loggedoutview #showSignupFormButton',
 
             loginButton: 'mainview #loginButton',
-            logoutButton: 'mainview #logoutButton'
+            settingsButton: 'mainview #settingsButton'
         },
         control: {
             showSignupFormButton: {
@@ -34,9 +31,20 @@ Ext.define('SpringTrader.controller.Main', {
             loginButton: {
                 tap: 'onLoginButtonTap'
             },
-            logoutButton: {
-                tap: 'onLogoutButtonTap'
+            settingsButton: {
+                tap: 'onSettingsButtonTap'
+            },
+            mainView: {
+                pop: 'onPopView'
             }
+        }
+    },
+
+    switchViews: function () {
+        if (SpringTrader.user.authenticated()) {
+            this.showLoggedInView();
+        } else {
+            this.showLoggedOutView();
         }
     },
 
@@ -64,26 +72,40 @@ Ext.define('SpringTrader.controller.Main', {
         loginSheet.show();
     },
 
-    onLogoutButtonTap: function () {
-        var me = this;
-        SpringTrader.user.logout(function () {
-            me.clearLocalStorage();
-            me.showLoggedOutView();
-        });
+    onSettingsButtonTap: function () {
+        this.getTitleBar().hide();
+        this.getMainView().getNavigationBar().show();
+        var settingsView = Ext.create('SpringTrader.view.Settings');
+        this.getMainView().push(settingsView);
     },
 
+    onPopView: function (me, poppedView) {
+        this.getMainView().getNavigationBar().hide();
+        this.getTitleBar().show();
+        poppedView.destroy();
+        this.switchViews();
+    },
+
+
     showLoggedInView: function () {
-        this.getLoggedOutView() && this.getLoggedOutView().destroy();
-        this.getMainView().add({xtype: 'maintabpanel'});
-        this.getLoginButton().hide();
-        this.getLogoutButton().show();
+        if (SpringTrader.currentView != 'authenticated') {
+            this.getLoggedOutView() && this.getLoggedOutView().destroy();
+            this.getMainView().add({xtype: 'maintabpanel'});
+            this.getLoginButton().hide();
+            this.getSettingsButton().show();
+            SpringTrader.currentView = 'authenticated';
+        }
+
     },
 
     showLoggedOutView: function () {
-        this.getMainTabPanel() && this.getMainTabPanel().destroy();
-        this.getLogoutButton().hide();
-        this.getLoginButton().show();
-        this.getMainView().add({ xtype: 'loggedoutview'});
+        if (SpringTrader.currentView != 'unauthenticated') {
+            this.getMainTabPanel() && this.getMainTabPanel().destroy();
+            this.getSettingsButton().hide();
+            this.getLoginButton().show();
+            this.getMainView().add({ xtype: 'loggedoutview'});
+            SpringTrader.currentView = 'unauthenticated';
+        }
     },
 
     updateLocalStorage: function () {
@@ -91,12 +113,5 @@ Ext.define('SpringTrader.controller.Main', {
             add('authToken', SpringTrader.user.get('authToken')).
             add('accountid', SpringTrader.user.get('accountid')).
             add('profileid', SpringTrader.user.get('profileid'));
-    },
-
-    clearLocalStorage: function () {
-        SpringTrader.appStore.remove('authToken');
-        SpringTrader.appStore.remove('accountid');
-        SpringTrader.appStore.remove('profileid');
     }
-
 });

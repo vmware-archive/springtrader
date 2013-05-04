@@ -34,7 +34,7 @@ Ext.application({
 
 	views: ['Main'],
 
-	controllers: ['Main', 'User', 'AccountSummary', 'DailyTopGains', 'MarketSummary'],
+	controllers: ['Main', 'User', 'AccountSummary', 'DailyTopGains', 'MarketSummary', 'Settings'],
 
     icon: {
         '57': 'resources/icons/Icon.png',

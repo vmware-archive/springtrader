@@ -1,6 +1,5 @@
 $base-color: #333;
 $base-gradient: glossy;
-$button-height: '2.0em';
 
 @import 'sencha-touch/default/all';
 
@@ -24,3 +23,4 @@ $button-height: '2.0em';
 // Your custom code goes here...
 
 @import 'spring-trader';
+@include pictos-iconmask('settings6');

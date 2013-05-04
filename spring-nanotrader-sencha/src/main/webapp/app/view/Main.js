@@ -1,5 +1,5 @@
 Ext.define('SpringTrader.view.Main', {
-    extend: 'Ext.Container',
+    extend: 'Ext.NavigationView',
     xtype: 'mainview',
     requires: ['Ext.TitleBar'],
     config: {
@@ -21,9 +21,10 @@ Ext.define('SpringTrader.view.Main', {
                     },
                     {
                         xtype: 'button',
-                        text: 'Logout',
                         align: 'right',
-                        itemId: 'logoutButton',
+                        itemId: 'settingsButton',
+                        iconCls: 'settings6',
+                        iconMask: true,
                         hidden: true
                     }
                 ]
