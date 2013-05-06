@@ -20,6 +20,13 @@ describe('SpringTrader.model.AccountSummary', function () {
                 {name: 'Cash Balance', value: model.balance()}
             ]);
         });
+        it("skips zero values", function() {
+            user.accountSummary.set('totalMarketValue', 0);
+            expect(model.assetDistributionSeries()).toEqual([
+                {name: 'Cash Balance', value: model.balance()}
+            ]);
+
+        })
     });
 
     describe('#refreshData', function () {

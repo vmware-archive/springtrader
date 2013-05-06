@@ -45,6 +45,6 @@ Ext.define('SpringTrader.model.AccountSummary', {
             return [
                 { name: "Portfolio", value: this.totalHoldings()},
                 { name: "Cash Balance", value: this.balance()}
-            ];
+            ].filter(function(elt) { return elt.value != 0; });
     }
 });
