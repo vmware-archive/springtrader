@@ -13,12 +13,12 @@ Ext.define('SpringTrader.view.AccountSummary', {
                 '<div class="table-outer">' +
                 '<table class="table table-condensed">' +
                 '<tbody>' +
-                '<tr><th>Current Balance</th><td>{currentbalance:this.currency}</td></tr>' +
-                '<tr><th>Opening Balance</th><td>{openbalance:this.currency}</td></tr>' +
-                '<tr><th>Cash Balance</th><td>{cashbalance:this.currency}</td></tr>' +
-                '<tr><th>Total of Holdings</th><td>{totalholdings:this.currency}</td></tr>' +
-                '<tr class={[ values.netgain >= 0 ? "green" : "red" ]}>' +
-                '<th>Current Gain/Loss</th><td>{netgain:this.currency}</td></tr>' +
+                '<tr><th>Current Balance</th><td class="right">{currentbalance:this.currency}</td></tr>' +
+                '<tr><th>Opening Balance</th><td class="right">{openbalance:this.currency}</td></tr>' +
+                '<tr><th>Cash Balance</th><td class="right">{cashbalance:this.currency}</td></tr>' +
+                '<tr><th>Total of Holdings</th><td class="right">{totalholdings:this.currency}</td></tr>' +
+                '<tr class="{[ values.netgain >= 0 ? "green-color" : "red-color" ]}">' +
+                '<th>Current Gain/Loss</th><td class="right">{netgain:this.currency}</td></tr>' +
                 '</tbody>' +
                 '</table>' +
                 '</div>',
