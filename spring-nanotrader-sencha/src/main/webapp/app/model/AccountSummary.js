@@ -18,6 +18,8 @@ Ext.define('SpringTrader.model.AccountSummary', {
     cashBalance: function() { return this.balance(); },
     totalHoldings: function() { return this.get('totalMarketValue') },
     netGain: function() { return this.get('gain') },
+    numberOfHoldings: function() { return this.get('numberOfHoldings')},
+    totalBasis: function() { return this.get('totalBasis')},
 
     refreshData: function(success) {
         var me = this;

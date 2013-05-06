@@ -169,4 +169,4 @@ beforeEach(function() {
             {"symbol":"MSFT","percent":15.12,"gain":580.26},
             {"symbol":"MYL","percent":7.660,"gain":294.00}
         ]}
-})
+});

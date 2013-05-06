@@ -18,11 +18,19 @@ Ext.define('SpringTrader.view.Portfolio', {
         items: [
             {
                 xtype: 'segmentedbutton',
+                itemId: 'portfolioswitch',
                 margin: '10 0 10 0',
                 items: [
-                    { text: 'Summary', pressed: true },
-                    { text: 'Holdings' }
+                    { text: 'Summary', pressed: true, data: {ref: 'summary'} },
+                    { text: 'Holdings', data: {ref: 'holdings'}}
                 ]
+            },
+            {
+                xtype: 'portfoliosummary'
+            },
+            {
+                xtype: 'portfolioholdings',
+                hidden: true
             }
         ]
     }

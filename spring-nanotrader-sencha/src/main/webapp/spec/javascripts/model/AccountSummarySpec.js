@@ -25,8 +25,7 @@ describe('SpringTrader.model.AccountSummary', function () {
             expect(model.assetDistributionSeries()).toEqual([
                 {name: 'Cash Balance', value: model.balance()}
             ]);
-
-        })
+        });
     });
 
     describe('#refreshData', function () {
@@ -56,6 +55,8 @@ describe('SpringTrader.model.AccountSummary', function () {
             expect(model.totalHoldings()).toEqual(portfolioSummaryJSON.totalMarketValue);
             expect(model.currentBalance()).toEqual(portfolioSummaryJSON.totalMarketValue + accountJSON.balance);
             expect(model.balance()).toEqual(accountJSON.balance);
+            expect(model.numberOfHoldings()).toEqual(portfolioSummaryJSON.numberOfHoldings);
+            expect(model.totalBasis()).toEqual(portfolioSummaryJSON.totalBasis);
         });
     });
 });
