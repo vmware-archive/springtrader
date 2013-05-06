@@ -1,10 +1,11 @@
 Ext.define('SpringTrader.controller.Portfolio', {
    extend: 'Ext.app.Controller',
     config: {
-        views: ['PortfolioSummary', 'PortfolioHoldings', 'Portfolio'],
+        views: ['PortfolioSummary', 'PortfolioSummaryTable', 'PortfolioHoldings', 'Portfolio'],
         refs: {
             portfolioSwitch: 'portfolioPage #portfolioswitch',
             portfolioSummary: 'portfoliosummary',
+            portfolioSummaryTable: 'portfoliosummarytable',
             portfolioHoldings: 'portfolioholdings'
         },
         control: {
@@ -18,7 +19,7 @@ Ext.define('SpringTrader.controller.Portfolio', {
     },
     _refresh: function(what) {
         if (what == 'accountsummary') {
-            this.getPortfolioSummary().updateView(SpringTrader.user.accountSummary);
+            this.getPortfolioSummaryTable().updateView(SpringTrader.user.accountSummary);
         }
     },
     onInitialize: function() {
