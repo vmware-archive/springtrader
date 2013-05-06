@@ -18,10 +18,13 @@
 
 .x-docked-top .logo {
   background: inline-image('icons/logo.png') left top no-repeat;
+  margin-top: 2px;
+  margin-left: 4px;
   display: inline-block;
   height: 46px;
   width: 150px;
 }
+
 
 .well.show-well .x-html {
   padding: 0;
@@ -43,4 +46,8 @@
 
 .x-list-disclosure {
   -webkit-mask-image: theme_image('default', "pictos/" + 'code3' + ".png") !important;
+}
+
+.x-chart-watermark {
+  display: none !important;
 }
