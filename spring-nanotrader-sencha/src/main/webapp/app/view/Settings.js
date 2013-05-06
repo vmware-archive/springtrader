@@ -5,6 +5,19 @@ Ext.define('SpringTrader.view.Settings', {
         title: 'Settings',
         items: [
             {
+                xtype: 'list',
+                margin: '20 0 0 0',
+                height: '8em',
+                itemTpl: '{text}',
+                onItemDisclosure: true,
+                disableSelection: true,
+                data: [
+                    { text: 'Profile' },
+                    { text: 'Help' },
+                    { text: 'User Statistics' }
+                ]
+            },
+            {
                 xtype: 'button',
                 ui: 'action',
                 text: 'Logout',
