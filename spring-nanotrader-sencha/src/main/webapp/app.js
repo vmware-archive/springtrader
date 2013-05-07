@@ -32,6 +32,53 @@ Ext.application({
         'Ext.MessageBox', 'SpringTrader.LocalStore'
     ],
 
+    models:[
+        'AccountSummary',
+        'HoldingSummary',
+        'User'
+    ],
+
+    views: [
+        'AccountSummary',
+        'AssetDistribution',
+        'DailyTopGains',
+        'Dashboard',
+        'LoggedOut',
+        'LoginForm',
+        'Main',
+        'MarketSummary',
+        'ModalSheet',
+        'NoData',
+        'PieChart',
+        'Portfolio',
+        'PortfolioHoldings',
+        'PortfolioSummary',
+        'PortfolioSummaryTable',
+        'Settings',
+        'SignupButton',
+        'SignupForm',
+        'TabPanel',
+        'Trade',
+        'UserStats'
+    ],
+
+    stores: [
+        'AssetDistribution',
+        'HoldingSummary',
+        'MarketSummary'
+    ],
+
+    controllers: [
+        'AccountSummary',
+        'DailyTopGains',
+        'Main',
+        'MarketSummary',
+        'Portfolio',
+        'Settings',
+        'User',
+        'UserStats'
+    ],
+
 	views: ['Main'],
 
 	controllers: ['Main', 'User', 'AccountSummary', 'DailyTopGains', 'MarketSummary', 'Settings', 'Portfolio'],

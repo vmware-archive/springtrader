@@ -23,10 +23,10 @@
       "parameters": {
         "appName": "springtrader",
         "frameworkPath": "touch",
-        "appModels": "",
-        "appControllers": "",
-        "appStores": "",
-        "appViews": "Main"
+        "appModels": "AccountSummary,HoldingSummary,User",
+        "appControllers": "AccountSummary,DailyTopGains,Main,MarketSummary,Portfolio,Settings,User,UserStats",
+        "appStores": "AssetDistribution,HoldingSummary,MarketSummary",
+        "appViews": "AccountSummary,AssetDistribution,DailyTopGains,Dashboard,LoggedOut,LoginForm,Main,MarketSummary,ModalSheet,NoData,PieChart,Portfolio,PortfolioHoldings,PortfolioSummary,PortfolioSummaryTable,Settings,SignupButton,SignupForm,TabPanel,Trade,UserStats"
       }
     },
     "app.json": {
