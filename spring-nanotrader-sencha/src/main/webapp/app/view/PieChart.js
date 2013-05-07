@@ -1,5 +1,6 @@
 Ext.define('SpringTrader.view.PieChart',{
     extend: 'Ext.chart.PolarChart',
+    requires: ['Ext.chart.series.Pie', 'Ext.chart.interactions.Rotate'],
     config: {
         animate: true,
         innerPadding: 20,

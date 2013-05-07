@@ -16,5 +16,5 @@ Ext.define('SpringTrader.LocalStore', {
 
     find: function(key) {
         return this.store[key];
-    },
+    }
 });

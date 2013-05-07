@@ -1,5 +1,6 @@
 Ext.define('SpringTrader.controller.User', {
    extend: 'Ext.app.Controller',
+    requires: ['SpringTrader.view.ModalSheet'],
     config: {
         models: ['User'],
         refs: {

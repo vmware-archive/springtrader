@@ -43,7 +43,7 @@ Ext.define('SpringTrader.model.User', {
             { type: 'presence', field: 'address'},
 
             { type: 'email', field: 'email'},
-            { type: 'numeric', field: 'openbalance', message: 'must be numeric'},
+            { type: 'numeric', field: 'openbalance', message: 'must be numeric'}
         ],
         proxy: {
             type: 'ajax',

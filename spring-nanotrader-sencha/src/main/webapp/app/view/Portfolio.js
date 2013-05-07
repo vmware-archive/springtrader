@@ -1,6 +1,7 @@
 Ext.define('SpringTrader.view.Portfolio', {
     extend: 'Ext.Container',
     xtype: 'portfolioPage',
+    requires: ['Ext.SegmentedButton'],
     config: {
         layout: {
             type: 'vbox',

@@ -1,6 +1,7 @@
 Ext.define('SpringTrader.view.Settings', {
     extend: 'Ext.Panel',
     xtype: 'settings',
+    requires: ['Ext.dataview.List'],
     config: {
         title: 'Settings',
         items: [

@@ -1,7 +1,7 @@
 Ext.define('SpringTrader.view.LoginForm', {
     extend: 'Ext.form.Panel',
     xtype: 'loginform',
-    requires: ['Ext.field.Email', 'Ext.field.Password'],
+    requires: ['Ext.field.Email', 'Ext.field.Password', 'Ext.form.FieldSet'],
     config: {
         title: 'Login',
         height: '100%',
@@ -9,7 +9,7 @@ Ext.define('SpringTrader.view.LoginForm', {
             { xtype: 'fieldset',
                 items: [
                     { xtype: 'textfield', name: 'userid', placeHolder: 'Username', autoCapitalize: false, autoCorrect: false},
-                    { xtype: 'passwordfield', name: 'passwd', placeHolder: 'Password'},
+                    { xtype: 'passwordfield', name: 'passwd', placeHolder: 'Password'}
                 ]
             },
             { xtype: 'container',

@@ -1,7 +1,7 @@
 Ext.define('SpringTrader.view.SignupForm', {
     extend: 'Ext.form.Panel',
     xtype: 'signupform',
-    requires: ['Ext.field.Email', 'Ext.field.Password', 'Ext.field.Number'],
+    requires: ['Ext.field.Email', 'Ext.field.Password', 'Ext.field.Number', 'Ext.form.FieldSet'],
     config: {
         title: 'Sign up',
         height: '100%',
