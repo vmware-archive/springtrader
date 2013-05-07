@@ -23,7 +23,7 @@ Ext.define('SpringTrader.view.Main', {
                         xtype: 'button',
                         align: 'right',
                         itemId: 'settingsButton',
-                        iconCls: 'settings6',
+                        iconCls: 'settings',
                         iconMask: true,
                         hidden: true
                     }

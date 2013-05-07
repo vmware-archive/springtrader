@@ -3,6 +3,7 @@ Ext.define('SpringTrader.controller.DailyTopGains', {
     config: {
         views: ['DailyTopGains', 'NoData'],
         stores: ['HoldingSummary'],
+        model: ['HoldingSummary'],
         refs: {
             view: 'dailytopgains',
             noData: 'nodata'

@@ -1,3 +1,10 @@
+beforeEach(function() {
+    SpringTrader.app = Ext.create('Ext.app.Application');
+});
+afterEach(function() {
+    SpringTrader.app.destroy();
+});
+
 var marketSummaryJSON;
 beforeEach(function () {
     marketSummaryJSON = {

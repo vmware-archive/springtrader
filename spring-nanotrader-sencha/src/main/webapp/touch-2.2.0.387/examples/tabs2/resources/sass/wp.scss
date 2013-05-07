@@ -1,0 +1,31 @@
+@import "base";
+
+/**
+ * Custom CSS for the tabs2 example
+ */
+
+/*styling for each card*/
+.card1,
+.card2,
+.card3,
+.card4,
+.card5 {
+    color: #fff;
+}
+
+.card1 {
+    background-color: #910091;
+}
+.card2 {
+    color: #585858;
+    background-color: #fff;
+}
+.card3 {
+    background-color: #FF0097;
+}
+.card4 {
+    background-color: #1BA1E2;
+}
+.card5 {
+    background-color: #F09609;
+}

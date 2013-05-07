@@ -1,0 +1,101 @@
+//$dark-theme: false;
+//$base-color: #2672EC;
+
+@import 'sencha-touch/bb10';
+@import 'sencha-touch/bb10/all';
+
+@include icon('retweet');
+
+.ks-basic .x-dataview {
+    background: #eee;
+
+    .x-dataview-item {
+        padding: 1em;
+        text-align: center;
+        color: #000;
+
+        img {
+            margin: 1em;
+        }
+
+        &:nth-child(odd) {
+            color: white;
+            background: black;
+        }
+        &:nth-child(even) {
+            color: black;
+            background: white;
+        }
+    }
+}
+
+#mainNestedList {
+    border-right: 1px solid #2C2C2C;
+}
+
+.demo-list {
+    background: #eee;
+}
+
+.card > .x-inner,
+.card > .x-scroll-view > .x-scroll-container .x-inner,
+.card > .x-dock > .x-dock-body .x-inner {
+    padding: 10px;
+}
+
+.demo-weather {
+    text-align: center;
+}
+.day {
+    display: inline-block;
+    background-color: #f9f9f9;
+    color: rgba(0, 0, 0, .6);
+    text-shadow: #fff 0 1px 0;
+    width: 8em;
+    text-align: center;
+    @include border-radius(15px);
+    @include st-box-shadow(inset 0 0 4px #888);
+    padding: 1em;
+    margin: .5em;
+
+    .x-android & {
+        @include box-shadow(none);
+    }
+}
+.date {
+    font-size: .8em;
+}
+.icon img {
+    @include border-radius(10px);
+    margin: .6em;
+    width: 3.5em;
+}
+.temp {
+    margin-top: .2em;
+    display: block;
+    font-size: 2.2em;
+    line-height: .5em;
+}
+.temp_low {
+    display: inline;
+    font-size: .5em;
+    color: rgba(30, 30, 30, .5);
+}
+
+// Blog posts
+
+.blog-post h3 {
+    margin-bottom: .5em;
+
+    a {
+        color: #000;
+        font-weight: bold;
+        text-decoration: none;
+        line-height: 1.3em;
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+.x-video-ghost {
+    background-color: white
+}

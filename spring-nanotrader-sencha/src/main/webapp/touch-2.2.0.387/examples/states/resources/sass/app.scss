@@ -1,0 +1,16 @@
+@import 'sencha-touch/base';
+@import 'sencha-touch/base/all';
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
+
+.x-legend {
+  .x-legend-inner {
+    .x-legend-container {
+      @include border-radius(5px);
+      .x-legend-item {
+        font-size: 11px;
+        line-height: 12px;
+      }
+    }
+  }
+}

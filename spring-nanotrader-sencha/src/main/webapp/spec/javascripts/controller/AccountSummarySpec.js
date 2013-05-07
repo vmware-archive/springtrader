@@ -5,6 +5,10 @@ describe('SpringTrader.controller.AccountSummary', function () {
         SpringTrader.user = Ext.create('SpringTrader.model.User', loginOkResponseJSON);
     });
 
+    it("exists", function() {
+       expect(controller.$className).toEqual('SpringTrader.controller.AccountSummary');
+    });
+
     it("refreshes when the event fires", function() {
         spyOn(controller, '_refresh');
         controller.launch();

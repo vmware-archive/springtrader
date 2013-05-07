@@ -1,0 +1,58 @@
+{
+    "name": "Picker",
+    "js": [
+        {
+            "path": "../../sencha-touch-all-debug.js"
+        },
+        {
+            "path": "app.js",
+            "update": "delta"
+        }
+    ],
+    "css": [
+        {
+            "path": "../../resources/css/sencha-touch.css",
+            "platform": ["chrome", "safari", "ios", "android", "firefox"],
+            "update": "delta"
+        },
+        {
+            "path": "../../resources/css/wp.css",
+            "platform": ["ie10"],
+            "theme": "Windows",
+            "update": "delta"
+        },
+        {
+            "path": "../../resources/css/bb10.css",
+            "platform": ["blackberry"],
+            "theme": "Blackberry",
+            "update": "delta"
+        }
+    ],
+    "appCache": {
+        "cache": [
+            "index.html"
+        ],
+        "network": [
+            "*"
+        ],
+        "fallback": []
+    },
+    "extras": [
+        "resources/icons",
+        "resources/loading"
+    ],
+    "archivePath": "archive",
+    "buildPaths": {
+        "testing": "../../deploy/testing/picker",
+        "production": "../../deploy/production/picker",
+        "package": "../../deploy/package/picker",
+        "native": "../../deploy/native/picker"
+    },
+    "buildOptions": {
+        "product": "touch",
+        "minVersion": 3,
+        "debug": false,
+        "logger": "no"
+    },
+    "id": "3a867610-670a-11e1-a90e-4318029d18bb"
+}

@@ -1,0 +1,37 @@
+@import "base";
+
+/**
+ * Custom CSS for the tabs2 example
+ */
+
+/*styling for each card*/
+.card1,
+.card2,
+.card3,
+.card4,
+.card5 {
+    color: rgba(0,0,0,.2);
+    text-shadow: rgba(255,255,255,.2) 0 1px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.card1 {
+    background-color: #ccc;
+}
+.card2 {
+    background-color: #5E99CC;
+}
+.card3 {
+    background-color: #759E60;
+}
+.card4 {
+    background-color: #9C744F;
+}
+.card5 {
+    background-color: #926D9C;
+}

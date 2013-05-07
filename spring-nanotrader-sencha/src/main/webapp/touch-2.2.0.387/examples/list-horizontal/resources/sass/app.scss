@@ -1,0 +1,21 @@
+.x-layout-card-item {
+    background: #000;
+}
+
+.x-dataview {
+    background: #eee;
+
+    .x-dataview-item {
+        padding: 37px 0;
+        text-align: center;
+        color: #000;
+
+        img {
+            margin: 0 50px 10px;
+        }
+
+        &:nth-child(even) {
+            background: #fff;
+        }
+    }
+}

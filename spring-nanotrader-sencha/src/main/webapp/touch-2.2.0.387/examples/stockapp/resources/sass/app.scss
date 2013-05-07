@@ -1,0 +1,10 @@
+$base-color: rgb(241,241,241);
+$include-default-icons: true;
+
+@import 'sencha-touch/base';
+@import 'sencha-touch/base/all';
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
+
+// Your custom code goes here...
+@include icon('calendar');

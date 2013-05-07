@@ -15,7 +15,7 @@
 
 //<debug>
 Ext.Loader.setPath({
-    'Ext': 'touch/src',
+    'Ext': 'touch-2.2.0.387/src',
     'SpringTrader': 'app'
 });
 
@@ -29,7 +29,7 @@ Ext.application({
     name: 'SpringTrader',
 
     requires: [
-        'Ext.MessageBox'
+        'Ext.MessageBox', 'SpringTrader.LocalStore'
     ],
 
 	views: ['Main'],

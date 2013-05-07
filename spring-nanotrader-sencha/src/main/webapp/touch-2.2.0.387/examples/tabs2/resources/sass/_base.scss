@@ -1,0 +1,32 @@
+body {
+    background-color: #333;
+}
+
+p {
+    font-size: 24px;
+    line-height: 30px;
+}
+
+/*styling for each card*/
+.card1,
+.card2,
+.card3,
+.card4,
+.card5 {
+    padding: 30px;
+    font-size: 72px;
+}
+
+/*device specific styling*/
+.x-phone .card1,
+.x-phone .card2,
+.x-phone .card3,
+.x-phone .card4,
+.x-phone .card5 {
+    font-size: 36px;
+}
+
+.x-phone p {
+    font-size: 16px;
+    line-height: 18px;
+}

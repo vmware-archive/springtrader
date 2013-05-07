@@ -3,6 +3,7 @@ Ext.define('SpringTrader.controller.AccountSummary', {
     config: {
         views: ['AccountSummary'],
         stores: ['AssetDistribution'],
+        models: ['AccountSummary'],
         refs: {
             view: 'accountsummary'
         },

@@ -6,7 +6,3 @@ Ext.Loader.setConfig({
 Ext.Loader.setPath({
     'SpringTrader': 'app'
 });
-
-Ext.application({
-    name: 'SpringTrader'
-});

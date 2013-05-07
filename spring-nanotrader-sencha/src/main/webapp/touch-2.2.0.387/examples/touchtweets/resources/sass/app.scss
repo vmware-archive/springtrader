@@ -1,0 +1,205 @@
+/**
+ * This is a custom SCSS stylesheet for the Twitter application. First we include the Sencha Touch SCSS, without including
+ * the parts we don't need (e.g. tabs, pickers, carousel etc). After that we simply define our application's CSS using
+ * normal CSS or SCSS syntax.
+ *
+ * To compile this stylesheet, we just open up a terminal window, cd to twitter/resources/scss (the location of this file)
+ * and run this command:
+ *
+ *     compass compile
+ *
+ * This builds an optimized application.css file, placing it in the twitter/resources/css directory.
+ *
+ * Note - to run the compass command you must have the Ruby language installed (if you're on OS X you already have it,
+ * if you're on windows it's easy to install - see http://rubyforge.org/frs/?group_id=167). Once you have ruby, open
+ * up a terminal window and type in:
+ *
+ *     gem install haml compass compass-colors
+ *
+ * After this you can run 'compass compile' as above to compile the stylesheet.
+ */
+
+//custom colors used in this file.
+$twitter-blue: #54738d;
+$gray: #d4d6e1;
+
+//sencha touch variables we need to override
+$list-pressed-color: lighten($gray, 5%);
+$list-active-color: $gray;
+$list-active-gradient: matte;
+
+@import 'sencha-touch/base';
+@import 'sencha-touch/base/all';
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
+
+//create a custom toolbar ui using the twitter blue color we defined above
+@include sencha-toolbar-ui('searchbar', $twitter-blue);
+
+//search container
+.searchcontainer {
+    border-right: 1px solid darken($twitter-blue, 20);
+}
+
+//searchbar
+
+.x-toolbar-searchbar {
+    padding: .2em;
+    border-color: darken($twitter-blue, 20) !important;
+
+    &.big {
+        padding: .5em;
+    }
+
+    .x-field {
+        width: auto;
+        min-height: 0;
+        padding: 0 .1em 0 .2em;
+        @include border-radius(.5em);
+
+        input {
+            margin: .2em;
+            width: 80%;
+        }
+    }
+
+    .x-title {
+        line-height: 1em;
+        font-size: .7em;
+        color: #eeeff0;
+        text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+        text-align: center;
+        font-weight: bold;
+        margin: 0 0 .5em 0;
+
+        .x-innerhtml {
+            width: 100%;
+        }
+    }
+}
+
+//search list
+.x-list-searchlist {
+    .x-data-item {
+        text-shadow: 0 1px 0 rgba(255,255,255,.9);
+        color: darken($twitter-blue, 30);
+        padding: 0.5em 0.8em;
+        height: 2.8em;
+        border-top-color: darken(#F2F3F6, 10) !important;
+
+        &.x-item-selected {
+            text-shadow: 0 1px 0 rgba(255,255,255,.6);
+            color: darken($twitter-blue, 30);
+            border-top: 1px solid darken($gray, 30);
+            border-bottom: 1px solid darken($gray, 10);
+            @include background-gradient($list-active-color, $list-active-gradient);
+        }
+
+        .search {
+            overflow: visible;
+        }
+
+        .search {
+            line-height: 1em;
+        }
+    }
+
+    .x-button {
+        min-height: 1.4em;
+        text-shadow: 0 -1px 0 rgba(0,0,0,.4);
+    }
+}
+
+.searchcontainer .x-list-inner,
+.searchcontainer .x-list-inner .x-inner {
+    width: 100%
+}
+
+.searchcontainer .x-data-item .x-innerhtml {
+    padding: 3px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//tweetlist
+.x-list-timeline {
+    .x-dataview-emptytext {
+        padding: 3em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .x-list-item {
+        border-top: 1px solid #dedede;
+        &.x-list-footer-wrap {
+            border-bottom: 1px solid #dedede;
+        }
+    }
+    
+    .x-list-item .x-innerhtml {
+        padding: 0 !important;
+    }
+
+    .tweet {
+        padding: .5em .5em .5em 65px;
+        background: #fff;
+        position: relative;
+
+        .avatar {
+            position: absolute;
+            left: .5em;
+            top: .5em;
+            margin-right: .5em;
+            border: 1px solid $gray;
+            @include border-radius(.4em);
+            @include st-box-shadow(inset 0 2px 2px rgba(0,0,0,.3));
+        }
+
+        .username {
+            font-weight: bold;
+            margin-bottom: .2em;
+        }
+
+        .text {
+            color: #444;
+            line-height: 1.5em;
+            overflow: visible;
+
+            .link {
+                color: $twitter-blue;
+                text-decoration: underline;
+            }
+
+            .username {
+                color: #000;
+            }
+
+            .hashtag {
+                cursor: pointer;
+                padding: 0.07em 0.3em;
+                @include border-radius(0.4em);
+                background: rgba(200,200,200,.3);
+            }
+        }
+
+        .username,
+        .text {
+            font-size: .9em;
+        }
+
+        &.popular {
+            @include background-gradient(lighten($twitter-blue, 45), recessed);
+
+            .hashtag {
+                background: rgba(255,255,255,.4);
+            }
+
+            .retweets {
+                color: rgba(0,0,0,0.4);
+                font-size: .7em;
+                margin-top: .5em;
+            }
+        }
+    }
+}

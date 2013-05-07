@@ -1,0 +1,154 @@
+$dark-theme: false;
+$base-color: #2672EC;
+
+@import 'sencha-touch/windows';
+@import 'sencha-touch/windows/all';
+
+@include icon('retweet');
+
+.x-html pre {
+    margin: 0;
+}
+
+.card > .x-body .x-innerhtml,
+.card > .x-inner > .x-innerhtml,
+.card > .x-dock-vertical > .x-dock-body .x-innerhtml {
+   padding: 10px;
+}
+
+.ks-basic .x-dataview {
+    background: #eee;
+
+    .x-dataview-item {
+        padding: 1em;
+        text-align: center;
+        color: #000;
+
+        img {
+            margin: 1em;
+        }
+
+        &:nth-child(odd) {
+            color: white;
+            background: black;
+        }
+        &:nth-child(even) {
+            color: black;
+            background: white;
+        }
+    }
+}
+
+#launchscreen {
+    padding: 0 20px;
+
+    h2 {
+        clear: both;
+
+        span {
+            font-size: 24px;
+            color: rgba(255,255,255,.6);
+        }
+    }
+
+    .feature {
+        @if ($dark-theme) {
+            background: #222;
+        } @else {
+            background: #eee;
+        }
+
+        padding: 20px;
+        width: 47%;
+        margin: 10px 20px 20px 0;
+        min-height: 150px;
+        float: left;
+
+        &.main {
+            float: normal;
+            width: auto;
+            min-height: auto;
+        }
+
+        img {
+            display: none;
+        }
+
+        h3 {
+            font-family: "Segoe UI Light", "HelveticaNeue-Light", Helvetica;
+            font-size: 24px;
+            line-height: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-family: "Segoe UI Semilight", "HelveticaNeue-Light", Helvetica;;
+            font-size: 15px;
+        }
+    }
+
+    footer {
+        clear: both;
+        font-family: "Segoe UI Semilight", "HelveticaNeue-Light", Helvetica;;
+        font-size: 15px;
+    }
+}
+
+a:link {
+    color: rgba(38,114,236, 1);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgba(38,114,236, .8);
+}
+
+a:active {
+    color: rgba(38,114,236, .6);
+}
+
+// Weather demo
+
+.demo-weather {
+   text-align: center;
+}
+
+.day {
+   display: inline-block;
+   background-color: #f9f9f9;
+   color: rgba(0, 0, 0, .6);
+   text-shadow: #fff 0 1px 0;
+   width: 8em;
+   text-align: center;
+   padding: 1em;
+   margin: .5em;
+}
+
+.date {
+   font-size: .8em;
+}
+
+.icon img {
+   @include border-radius(10px);
+   margin: 1em .6em;
+   width: 3.5em;
+}
+.temp {
+   margin-top: .2em;
+   display: block;
+   font-size: 2.2em;
+   line-height: .5em;
+}
+.temp_low {
+   display: inline;
+   font-size: .5em;
+   color: rgba(30, 30, 30, .5);
+}
+
+// NestedLoading/YQL demo
+
+.user,
+.blog-post {
+  color: #ccc;
+}
+

@@ -1,6 +1,6 @@
 Ext.define('SpringTrader.model.User', {
     extend: 'Ext.data.Model',
-    requires: ['SpringTrader.validation.Numeric'],
+    requires: ['SpringTrader.validation.Numeric', 'SpringTrader.model.HoldingSummary'],
     config: {
         idProperty: 'userid',
         fields: [

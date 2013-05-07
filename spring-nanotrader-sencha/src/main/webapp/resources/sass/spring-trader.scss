@@ -44,8 +44,8 @@
   margin:3px 7px 0 0;
 }
 
-.x-list-disclosure {
-  -webkit-mask-image: theme_image('default', "pictos/" + 'code3' + ".png") !important;
+.x-list, .x-list-disclosure:before {
+  content: '9' !important;
 }
 
 .x-chart-watermark {

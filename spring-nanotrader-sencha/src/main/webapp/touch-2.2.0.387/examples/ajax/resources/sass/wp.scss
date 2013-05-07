@@ -1,0 +1,15 @@
+@import "base";
+
+@import "compass";
+
+.day {
+    background-color: #00ABDC;
+}
+
+.icon img {
+    @include border-radius(100px);
+}
+
+.temp_low {
+    color: rgba(255, 255, 255, .5);
+}

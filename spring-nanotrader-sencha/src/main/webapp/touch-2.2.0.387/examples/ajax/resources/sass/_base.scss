@@ -1,0 +1,33 @@
+.x-content .x-body .x-innerhtml {
+    padding: 1em;
+    text-align: center;
+}
+
+.x-phone .day {
+    font-size: 87%;
+}
+
+/*weather information*/
+.day {
+    display: inline-block;
+    width: 8em;
+    padding: 1em;
+    margin: .5em;
+}
+.date {
+    font-size: .8em;
+}
+.icon img {
+    margin: .6em;
+    width: 3.5em;
+}
+.temp {
+    margin-top: .2em;
+    display: block;
+    font-size: 2.2em;
+    line-height: .5em;
+}
+.temp_low {
+    display: inline;
+    font-size: .5em;
+}
