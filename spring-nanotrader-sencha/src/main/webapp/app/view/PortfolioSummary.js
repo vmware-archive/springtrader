@@ -4,7 +4,7 @@ Ext.define('SpringTrader.view.PortfolioSummary', {
     config: {
         width: '100%',
         items: [
-            {xtype: 'portfoliosummarytable'},
+            { xtype: 'portfoliosummarytable' },
             { xtype: 'container',
                 cls: 'well show-well',
                 items: [

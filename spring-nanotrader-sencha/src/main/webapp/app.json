@@ -80,6 +80,10 @@
             "path": "resources/css/app.css",
             "update": "full"
         },
+        {
+        "path": "resources/css/spring-trader.css",
+        "update": "full"
+        }
     ],
 
     /**

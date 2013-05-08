@@ -25,7 +25,6 @@
   width: 150px;
 }
 
-
 .well.show-well .x-html {
   padding: 0;
 }
@@ -35,19 +34,45 @@
 }
 
 // From spring-nanotrader-web/.../style.css
-.icon-custom.icon-gains{
+.icon-custom.icon-gains {
   background-position: -21px -21px;
-  margin:3px 7px 0 0;
-}
-.icon-custom.icon-lost{
-  background-position: -3px -41px;
-  margin:3px 7px 0 0;
+  margin: 3px 7px 0 0;
 }
 
-.x-list, .x-list-disclosure:before {
-  content: '9' !important;
+.icon-custom.icon-lost {
+  background-position: -3px -41px;
+  margin: 3px 7px 0 0;
+}
+
+.x-list-disclosure:before {
+  content: '4' !important;
+  font-size: 18px !important;
+  line-height: 36px !important;
 }
 
 .x-chart-watermark {
   display: none !important;
+}
+
+.holding-list-header .x-html {
+  padding: 0;
+  padding-left: 6px;
+  .table td {
+    border: none;
+  }
+}
+
+.x-html .holding-list table {
+  margin-bottom: 0;
+  & td, th, caption {
+    padding: 0;
+  }
+  & td.right {
+    text-align: right;
+  }
+}
+
+.holding-list > .x-innerhtml {
+  padding-right: 48px !important;
+  font-size: 1.2em;
 }

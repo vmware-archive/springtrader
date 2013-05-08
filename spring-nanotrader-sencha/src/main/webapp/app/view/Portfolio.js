@@ -3,12 +3,6 @@ Ext.define('SpringTrader.view.Portfolio', {
     xtype: 'portfolioPage',
     requires: ['Ext.SegmentedButton'],
     config: {
-        layout: {
-            type: 'vbox',
-            align: 'stretch',
-            pack: 'start'
-        },
-        scrollable: true,
         title: 'Portfolio',
         iconCls: 'user',
         layout: {
@@ -16,6 +10,7 @@ Ext.define('SpringTrader.view.Portfolio', {
             pack: 'start',
             align: 'center'
         },
+        scrollable: true,
         items: [
             {
                 xtype: 'segmentedbutton',
