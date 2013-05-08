@@ -8,8 +8,9 @@ Ext.define('SpringTrader.view.Settings', {
             {
                 xtype: 'list',
                 margin: '20 0 0 0',
-                height: '8em',
+                height: 3 * 47 + 1,         // Ext.List#itemHeight = 47 (touch/src/dataview/List.js:261)
                 itemTpl: '{text}',
+                scrollable: false,
                 onItemDisclosure: true,
                 disableSelection: true,
                 data: [
