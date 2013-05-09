@@ -5,7 +5,7 @@ Ext.define('SpringTrader.view.PortfolioHoldings', {
     config: {
         width: '100%',
         padding: 0,
-        height: '500px',
+        height: '400px',
         styleHtmlContent: true,
 //        scrollable: DO NOT INCLUDE THIS ATTRIBUTE, EVER.
         items: [
@@ -21,4 +21,6 @@ Ext.define('SpringTrader.view.PortfolioHoldings', {
             }
         ]
     }
+
+    // TODO?: Calculate fixed height of the view when we receive a resize event
 });
