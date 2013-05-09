@@ -92,3 +92,8 @@
   padding-right: 48px !important;
   font-size: 1.2em;
 }
+
+/* line 80, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.x-list-emptytext {
+  font-size: 2.0em;
+}

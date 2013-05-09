@@ -11,6 +11,7 @@ Ext.define('SpringTrader.view.HoldingsList', {
         disableSelection: true,
         itemCls: 'holding-list',
         styleHtmlContent: true,
+        emptyText: '<div class="alert">No holdings</div>',
         itemTpl: '<table><tr><td width="15%">{symbol}</td><td width="25%" class="right">{price}</td><td width="35%" class="right">{value}</td><td width="25%" class="right {[ values.isgain ? "green-color" : "red-color" ]}">{netgain}</td></tr></table>',
         plugins: [{
             xclass: 'Ext.plugin.ListPaging',
