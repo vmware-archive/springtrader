@@ -91,6 +91,14 @@ Ext.define('SpringTrader.model.User', {
         return !!this.get('authToken');
     },
 
+    accountId: function() {
+      return this.get('accountid');
+    },
+
+    authToken: function() {
+        return this.get('authToken');
+    },
+
     logout: function (callback) {
         var me = this;
         if (me.authenticated()) {

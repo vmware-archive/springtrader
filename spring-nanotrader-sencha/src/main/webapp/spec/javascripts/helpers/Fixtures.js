@@ -177,3 +177,109 @@ beforeEach(function() {
             {"symbol":"MYL","percent":7.660,"gain":294.00}
         ]}
 });
+
+var holdingListJSON;
+beforeEach(function() {
+   holdingListJSON = {
+       "page": 0,
+       "pageSize": 5,
+       "totalRecords": 5,
+       "results": [
+           {
+               "holdingid": 74,
+               "purchaseprice": 78.79,
+               "quantity": 113,
+               "purchasedate": "2013-05-03",
+               "accountAccountid": 9,
+               "quote": {
+                   "quoteid": 65,
+                   "low": 64.79,
+                   "open1": 76.79,
+                   "volume": 223.00,
+                   "price": 104.19,
+                   "high": 89.82,
+                   "companyname": "Microsoft Corporation",
+                   "symbol": "MSFT",
+                   "change1": 27.40,
+                   "version": 0
+               }
+           },
+           {
+               "holdingid": 75,
+               "purchaseprice": 69.96,
+               "quantity": 128,
+               "purchasedate": "2013-05-03",
+               "accountAccountid": 9,
+               "quote": {
+                   "quoteid": 66,
+                   "low": 67.96,
+                   "open1": 67.96,
+                   "volume": 128.00,
+                   "price": 72.06,
+                   "high": 74.96,
+                   "companyname": "Mylan Inc.",
+                   "symbol": "MYL",
+                   "change1": 4.10,
+                   "version": 0
+               }
+           },
+           {
+               "holdingid": 76,
+               "purchaseprice": 107.75,
+               "quantity": 126,
+               "purchasedate": "2013-05-03",
+               "accountAccountid": 9,
+               "quote": {
+                   "quoteid": 67,
+                   "low": 107.75,
+                   "open1": 126.75,
+                   "volume": 126.00,
+                   "price": 107.75,
+                   "high": 114.75,
+                   "companyname": "NetApp, Inc.",
+                   "symbol": "NTAP",
+                   "change1": -19.00,
+                   "version": 0
+               }
+           },
+           {
+               "holdingid": 77,
+               "purchaseprice": 84.11,
+               "quantity": 108,
+               "purchasedate": "2013-05-03",
+               "accountAccountid": 9,
+               "quote": {
+                   "quoteid": 68,
+                   "low": 78.11,
+                   "open1": 86.11,
+                   "volume": 108.00,
+                   "price": 86.63,
+                   "high": 84.11,
+                   "companyname": "Netflix, Inc.",
+                   "symbol": "NFLX",
+                   "change1": 0.52,
+                   "version": 0
+               }
+           },
+           {
+               "holdingid": 78,
+               "purchaseprice": 187.36,
+               "quantity": 130,
+               "purchasedate": "2013-05-03",
+               "accountAccountid": 9,
+               "quote": {
+                   "quoteid": 69,
+                   "low": 183.36,
+                   "open1": 185.36,
+                   "volume": 130.00,
+                   "price": 219.21,
+                   "high": 194.36,
+                   "companyname": "News Corporation",
+                   "symbol": "NWSA",
+                   "change1": 33.85,
+                   "version": 0
+               }
+           }
+       ]
+   };
+});

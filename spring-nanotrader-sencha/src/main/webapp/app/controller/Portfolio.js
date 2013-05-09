@@ -38,11 +38,23 @@ Ext.define('SpringTrader.controller.Portfolio', {
             }
         }
 
-        var views = {
-            summary: this.getPortfolioSummary(),
-            holdings: this.getPortfolioHoldings()
+        function refreshStore(storeid) {
+            if (storeid) {
+                Ext.StoreManager.lookup(storeid).load();
+            }
         }
 
+        var views = {
+                summary: this.getPortfolioSummary(),
+                holdings: this.getPortfolioHoldings()
+            },
+            stores = {
+                summary: null,
+                holdings: 'holdinglist'
+            }
+
         showHide(views[button.getData().ref], isPressed);
+
+        refreshStore(stores[button.getData().ref]);
     }
 });

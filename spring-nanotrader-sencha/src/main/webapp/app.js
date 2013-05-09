@@ -35,7 +35,8 @@ Ext.application({
     models:[
         'AccountSummary',
         'HoldingSummary',
-        'User'
+        'User',
+        'Holding'
     ],
 
     views: [
@@ -65,7 +66,8 @@ Ext.application({
     stores: [
         'AssetDistribution',
         'HoldingSummary',
-        'MarketSummary'
+        'MarketSummary',
+        'HoldingList'
     ],
 
     controllers: [
