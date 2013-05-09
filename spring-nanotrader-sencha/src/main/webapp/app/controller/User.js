@@ -43,6 +43,10 @@ Ext.define('SpringTrader.controller.User', {
 
     authenticate: function(user) {
         function successCallback(response) {
+            Ext.Viewport.setMasked({
+                xtype: 'loadmask',
+                message: 'Loading...'
+            });
             modalSheet.hide({ type: 'slide', direction: 'down' });
             setTimeout(function() {
                 modalSheet.destroy()

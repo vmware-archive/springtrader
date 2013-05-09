@@ -57,8 +57,9 @@
 .holding-list-header .x-html {
   padding: 0;
   padding-left: 6px;
-  .table td {
+  .table th {
     border: none;
+    font-size: 0.8em;
   }
 }
 
@@ -67,7 +68,7 @@
   & td, th, caption {
     padding: 0;
   }
-  & td.right {
+  & td.right, th.right {
     text-align: right;
   }
 }

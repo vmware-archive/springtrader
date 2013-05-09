@@ -14,6 +14,10 @@ Ext.define('SpringTrader.controller.Settings', {
     },
 
     onLogoutButtonTap: function () {
+        Ext.Viewport.setMasked({
+            xtype: 'loadmask',
+            message: 'Loading...'
+        });
         var me = this;
         SpringTrader.user.logout(function () {
             me.clearLocalStorage();

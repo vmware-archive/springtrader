@@ -36,6 +36,5 @@ Ext.define('SpringTrader.view.AccountSummary', {
             netgain: accountSummary.netGain()
         });
         this.show();
-
     }
 });

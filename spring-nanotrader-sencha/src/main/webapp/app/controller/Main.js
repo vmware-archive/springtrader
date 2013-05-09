@@ -2,7 +2,6 @@ Ext.define('SpringTrader.controller.Main', {
     extend: 'Ext.app.Controller',
 
     launch: function () {
-        this.getApplication().on('authenticated', this.showLoggedInView, this);
         this.getApplication().on('authenticated', this.updateLocalStorage, this);
         this.getMainView().getNavigationBar().hide();
         this.switchViews();
@@ -46,6 +45,8 @@ Ext.define('SpringTrader.controller.Main', {
         } else {
             this.showLoggedOutView();
         }
+
+        Ext.Viewport.unmask();
     },
 
     onSignupButtonTap: function (what, event) {
@@ -84,18 +85,18 @@ Ext.define('SpringTrader.controller.Main', {
         this.getTitleBar().show();
         poppedView.destroy();
         this.switchViews();
+        Ext.Viewport.unmask();
     },
 
 
     showLoggedInView: function () {
         if (SpringTrader.currentView != 'authenticated') {
+            SpringTrader.currentView = 'authenticated';
             this.getLoggedOutView() && this.getLoggedOutView().destroy();
             this.getMainView().add({xtype: 'maintabpanel'});
             this.getLoginButton().hide();
             this.getSettingsButton().show();
-            SpringTrader.currentView = 'authenticated';
         }
-
     },
 
     showLoggedOutView: function () {

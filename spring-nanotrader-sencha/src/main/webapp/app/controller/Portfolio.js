@@ -1,7 +1,7 @@
 Ext.define('SpringTrader.controller.Portfolio', {
     extend: 'Ext.app.Controller',
     config: {
-        views: ['PortfolioSummary', 'PortfolioSummaryTable', 'PortfolioHoldings', 'Portfolio'],
+        views: ['Portfolio', 'PortfolioSummary', 'PortfolioSummaryTable', 'PortfolioHoldings'],
         refs: {
             portfolioSwitch: 'portfolioPage #portfolioswitch',
             portfolioSummary: 'portfoliosummary',
