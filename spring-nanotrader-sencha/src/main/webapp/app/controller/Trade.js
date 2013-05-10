@@ -1,14 +1,20 @@
 Ext.define('SpringTrader.controller.Trade', {
     extend: 'Ext.app.Controller',
+    requires: ['Ext.MessageBox'],
     config: {
         views: ['Trade', 'BuyShares', 'SellShares', 'Quote', 'QuoteSearch', 'BuyForm'],
         refs: {
             tradeSwitch: 'tradePage #tradeswitch',
             buyShares: 'buyshares',
-            sellShares: 'sellshares'
+            sellShares: 'sellshares',
+            quoteSearch: 'quotesearch',
+            quoteTable: 'quote',
+            buyForm: 'buyform'
         },
         control: {
-            tradeSwitch: { toggle: 'onToggle' }
+            tradeSwitch: { toggle: 'onToggle' },
+            quoteSearch: { action: 'onSearch' }
+
         }
     },
     onToggle: function(segmentedButton, button, isPressed) {
@@ -30,5 +36,32 @@ Ext.define('SpringTrader.controller.Trade', {
             sell: this.getSellShares()
         };
         showHide(button.getData().ref, isPressed);
+    },
+
+    onSearch: function(field, event) {
+        var me = this;
+        event.stopEvent();
+        if (field.getValue()) {
+            var url = '/spring-nanotrader-services/api/quote/' + field.getValue();
+            Ext.Ajax.request({
+                url: url,
+                method: 'GET',
+                headers: {'Content-Type': 'application/json', 'API_TOKEN': SpringTrader.user.get('authToken')},
+                disableCaching: false,
+                success: function (response) {
+                    var jsonData = Ext.JSON.decode(response.responseText);
+                    me.getQuoteTable().setData(jsonData);
+                    me.getQuoteTable().show();
+                    me.getBuyForm().show();
+                },
+                failure: function (response) {
+                    me.getQuoteTable().hide();
+                    me.getBuyForm().hide();
+                    Ext.Msg.alert('Not Found', 'No stock symbol "'+ field.getValue() +'"');
+                }
+            });
+        } else {
+            return;
+        }
     }
 });

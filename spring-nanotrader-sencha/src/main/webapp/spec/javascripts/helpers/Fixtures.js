@@ -1,5 +1,5 @@
 beforeEach(function() {
-    SpringTrader.app = Ext.create('Ext.app.Application');
+    SpringTrader.app = Ext.create('Ext.app.Application', {name: 'SpringTrader'});
 });
 afterEach(function() {
     SpringTrader.app.destroy();
@@ -282,4 +282,20 @@ beforeEach(function() {
            }
        ]
    };
+});
+
+var quoteJSON;
+beforeEach(function(){
+    quoteJSON = {
+        "quoteid":9,
+        "low":105.07,
+        "open1":130.65,
+        "volume":376.00,
+        "price":100.87,
+        "high":128.14,
+        "companyname":"VMware Inc.",
+        "symbol":"VMW",
+        "change1":-29.78,
+        "version":0
+    };
 });

@@ -8,11 +8,8 @@ Ext.define('SpringTrader.view.BuyShares', {
         layout: {type: 'vbox', pack: 'start', align: 'center'},
         items: [
             { xtype: 'quotesearch' },
-            {
-                xtype: 'quote',
-                data: {symbol: 'AAPL', price: 751.98}
-            },
-            { xtype: 'buyform' }
+            { xtype: 'quote', hidden: true },
+            { xtype: 'buyform', hidden: true }
 
         ]
 
