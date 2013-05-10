@@ -15,7 +15,7 @@
 
 //<debug>
 Ext.Loader.setPath({
-    'Ext': 'touch-2.2.0.387/src',
+    'Ext': 'touch/2.2.0.387/src',
     'SpringTrader': 'app'
 });
 
