@@ -98,3 +98,8 @@
 .x-list-emptytext {
   font-size: 2.0em;
 }
+
+/* line 85, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.quote .x-html {
+  padding: 0;
+}

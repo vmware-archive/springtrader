@@ -15,7 +15,7 @@ Ext.define('SpringTrader.controller.UserStats', {
         this.getApplication().on('refresh', this._refresh, this);
     },
     _refresh: function (what) {
-        if (what == 'userstats') {
+        if (what == 'userstats' && this.getView()) {
             this.getView().updateView(SpringTrader.user);
         }
     },

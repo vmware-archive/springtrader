@@ -76,14 +76,13 @@ Ext.application({
         'Main',
         'MarketSummary',
         'Portfolio',
+        'Trade',
         'Settings',
         'User',
         'UserStats'
     ],
 
 	views: ['Main'],
-
-	controllers: ['Main', 'User', 'AccountSummary', 'DailyTopGains', 'MarketSummary', 'Settings', 'Portfolio'],
 
     icon: {
         '57': 'resources/icons/Icon.png',

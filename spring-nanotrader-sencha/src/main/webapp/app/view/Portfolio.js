@@ -5,12 +5,12 @@ Ext.define('SpringTrader.view.Portfolio', {
     config: {
         title: 'Portfolio',
         iconCls: 'user',
+        scrollable: true,
         layout: {
             type: 'vbox',
             pack: 'start',
             align: 'center'
         },
-        scrollable: true,
         items: [
             {
                 xtype: 'segmentedbutton',

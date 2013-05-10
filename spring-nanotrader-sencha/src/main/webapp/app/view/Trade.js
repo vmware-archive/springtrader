@@ -1,25 +1,31 @@
 Ext.define('SpringTrader.view.Trade', {
-	extend: 'Ext.Container',
-	xtype: 'tradePage',
-	config: {
+    extend: 'Ext.Container',
+    xtype: 'tradePage',
+    requires: ['Ext.SegmentedButton'],
+    config: {
+        title: 'Trade',
+        iconCls: 'compose',
         layout: {
             type: 'vbox',
-            align: 'stretch',
-            pack: 'start'
+            pack: 'start',
+            align: 'center'
         },
-        scrollable: true,
-        title : 'Trade',
-        iconCls : 'compose',
         items: [
             {
-                xtype: 'marketsummary',
-                style: "backgroundColor:#ccc"
+                xtype: 'segmentedbutton',
+                itemId: 'tradeswitch',
+                margin: '10 0 10 0',
+                items: [
+                    { text: 'Buy Shares', pressed: true, data: { ref: 'buy' } },
+                    { text: 'Sell Shares', pressed: false, data: { ref: 'sell'} }
+                ]
             },
+            { xtype: 'buyshares'},
             {
-                xtype: 'component',
-                html: 'Trade Page here',
-                style: "backgroundColor:#aaa"
+                xtype: 'sellshares',
+                hidden: true
             }
+
         ]
-	}
+    }
 });
