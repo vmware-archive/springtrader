@@ -8,15 +8,18 @@ Ext.define('SpringTrader.controller.Trade', {
             buyShares: 'buyshares',
             sellShares: 'sellshares',
             quoteSearch: 'quotesearch',
+            searchField: 'input[name=symbol]',
             quoteTable: 'quote',
             buyForm: 'buyform'
         },
         control: {
             tradeSwitch: { toggle: 'onToggle' },
-            quoteSearch: { action: 'onSearch' }
+            quoteSearch: { action: 'onSearch' },
+            searchField: { blur: 'onBlur' }
 
         }
     },
+
     onToggle: function(segmentedButton, button, isPressed) {
         function showHide(ref, isPressed) {
             var view = views[ref];
@@ -36,6 +39,10 @@ Ext.define('SpringTrader.controller.Trade', {
             sell: this.getSellShares()
         };
         showHide(button.getData().ref, isPressed);
+    },
+
+    onBlur: function(event) {
+        this.onSearch(this.getSearchField(), event);
     },
 
     onSearch: function(field, event) {
