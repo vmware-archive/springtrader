@@ -10,4 +10,4 @@ Ext.define('SpringTrader.view.ModalSheet', {
         modal: true,
         bodyPadding: 0
     }
-})
+});

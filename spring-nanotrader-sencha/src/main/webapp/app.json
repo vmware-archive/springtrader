@@ -40,7 +40,7 @@
      */
     "js": [
         {
-            "path": "touch-2.2.0.387/sencha-touch-debug.js",
+            "path": "touch-2.2.0.387/sencha-touch-all-debug.js",
             "x-bootstrap": true,
             "update": "full"
         },
@@ -113,6 +113,7 @@
      */
     "resources": [
         "resources/images",
+        "resources/img",
         "resources/icons",
         "resources/startup"
     ],

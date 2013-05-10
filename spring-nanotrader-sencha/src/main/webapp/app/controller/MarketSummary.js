@@ -8,4 +8,4 @@ Ext.define('SpringTrader.controller.MarketSummary', {
         // Start interval timers
         setInterval(function() { Ext.getStore('marketsummary').load()}, 15000);
     }
-})
+});

@@ -30,4 +30,4 @@ Ext.define('SpringTrader.controller.Settings', {
         SpringTrader.appStore.remove('accountid');
         SpringTrader.appStore.remove('profileid');
     }
-})
+});
