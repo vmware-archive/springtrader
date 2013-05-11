@@ -56,4 +56,32 @@ describe('SpringTrader.controller.Trade', function() {
         });
     })
 
+    describe("Buy orders", function() {
+        it("calls the back-end to place an order", function() {
+            controller.newOrder = function() {
+                var buyForm = {hide: jasmine.createSpy()};
+                buyForm.reset = function() { return buyForm; }
+
+                return {
+                    accountid: SpringTrader.user.accountId(),
+                    buyForm: buyForm,
+                    searchForm: {reset: jasmine.createSpy()},
+                    quoteTable: {hide: jasmine.createSpy()},
+                    symbol: 'VMW',
+                    quantity: 1000
+                }
+            }
+
+            var button = {}, event = {stopEvent: jasmine.createSpy()};
+            controller.onBuy(button, event);
+            var request = mostRecentAjaxRequest();
+
+            expect(request.url).toEqual('/spring-nanotrader-services/api/account/'+ loginOkResponseJSON.accountid +'/order/asynch');
+            expect(request.method).toEqual('POST');
+            expect(request.requestHeaders['Content-Type']).toEqual('application/json');
+            expect(request.requestHeaders['API_TOKEN']).toEqual(loginOkResponseJSON.authToken);
+
+        });
+    });
+
 });

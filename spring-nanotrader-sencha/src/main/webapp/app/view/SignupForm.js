@@ -1,7 +1,7 @@
 Ext.define('SpringTrader.view.SignupForm', {
     extend: 'Ext.form.Panel',
     xtype: 'signupform',
-    requires: ['Ext.field.Email', 'Ext.field.Password', 'Ext.field.Number', 'Ext.form.FieldSet'],
+    requires: ['Ext.field.Email', 'Ext.field.Password', 'SpringTrader.field.Number', 'Ext.form.FieldSet'],
     config: {
         title: 'Sign up',
         height: '100%',
@@ -13,7 +13,7 @@ Ext.define('SpringTrader.view.SignupForm', {
                     { xtype: 'passwordfield', name: 'passwd', placeHolder: 'Password'},
                     { xtype: 'passwordfield', name: 'passwdconfirm', placeHolder: 'Confirm password'},
                     { xtype: 'textfield', name: 'userid', placeHolder: 'Username', autoCapitalize: false, autoCorrect: false},
-                    { xtype: 'numberfield', name: 'openbalance', placeHolder: 'Opening balance', minValue: 100000, stepValue: 1000},
+                    { xtype: 'stnumberfield', name: 'openbalance', placeHolder: 'Opening balance', minValue: 100000, stepValue: 1000},
                     { xtype: 'textfield', name: 'address', placeHolder: 'Address' }
                 ]
             },
