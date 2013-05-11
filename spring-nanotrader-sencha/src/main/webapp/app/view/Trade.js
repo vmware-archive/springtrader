@@ -4,6 +4,8 @@ Ext.define('SpringTrader.view.Trade', {
     requires: ['Ext.SegmentedButton'],
     config: {
         title: 'Trade',
+        height: '100%',
+        scrollable: true,
         iconCls: 'compose',
         layout: {
             type: 'vbox',
@@ -21,11 +23,7 @@ Ext.define('SpringTrader.view.Trade', {
                 ]
             },
             { xtype: 'buyshares'},
-            {
-                xtype: 'sellshares',
-                hidden: true
-            }
-
+            { xtype: 'sellshares', hidden: true }
         ]
     }
 });

@@ -3,8 +3,9 @@ Ext.define('SpringTrader.view.BuyForm', {
     xtype: 'buyform',
     requires: ['SpringTrader.field.Number', 'Ext.form.FieldSet'],
     config: {
-        height: '100%',
+        height: '6.5em',
         width: '100%',
+        scrollable: false,
         items: [
             { xtype: 'fieldset',
                 items: [
