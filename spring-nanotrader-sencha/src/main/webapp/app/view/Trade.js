@@ -23,7 +23,7 @@ Ext.define('SpringTrader.view.Trade', {
                 ]
             },
             { xtype: 'buyshares'},
-            { xtype: 'sellshares', hidden: true }
+            { xtype: 'portfolioholdings', hidden: true }
         ]
     }
 });

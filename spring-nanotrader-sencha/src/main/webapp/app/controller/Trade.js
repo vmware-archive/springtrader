@@ -3,11 +3,11 @@ Ext.define('SpringTrader.controller.Trade', {
     requires: ['Ext.MessageBox'],
     mixins: ['SpringTrader.mixin.SegmentedButtonSupport'],
     config: {
-        views: ['Trade', 'BuyShares', 'SellShares', 'Quote', 'QuoteSearch', 'BuyForm'],
+        views: ['Trade', 'BuyShares', 'PortfolioHoldings', 'Quote', 'QuoteSearch', 'BuyForm'],
         refs: {
             tradeSwitch: 'tradePage #tradeswitch',
             buyShares: 'buyshares',
-            sellShares: 'sellshares',
+            portfolioHoldings: 'tradePage portfolioholdings',
             quoteSearch: 'quotesearch',
             searchField: 'input[name=symbol]',
             quoteTable: 'quote',
@@ -28,7 +28,7 @@ Ext.define('SpringTrader.controller.Trade', {
     onToggle: function(segmentedButton, button, isPressed) {
         var views = {
             buy: this.getBuyShares(),
-            sell: this.getSellShares()
+            sell: this.getPortfolioHoldings()
         }, stores = {
             buy: null,
             sell: 'holdinglist'

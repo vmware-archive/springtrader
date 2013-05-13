@@ -7,7 +7,7 @@ Ext.define('SpringTrader.controller.Portfolio', {
             portfolioSwitch: 'portfolioPage #portfolioswitch',
             portfolioSummary: 'portfoliosummary',
             portfolioSummaryTable: 'portfoliosummarytable',
-            portfolioHoldings: 'portfolioholdings'
+            portfolioHoldings: 'portfolioPage portfolioholdings'
         },
         control: {
             portfolioSwitch: {
