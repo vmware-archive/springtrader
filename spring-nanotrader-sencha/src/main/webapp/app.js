@@ -20,7 +20,7 @@ Ext.Loader.setPath({
 });
 
 Ext.Loader.setConfig({
-    enabled: true,
+    enabled: true
 //    disableCaching: false
 });
 //</debug>
@@ -79,7 +79,8 @@ Ext.application({
         'Trade',
         'Settings',
         'User',
-        'UserStats'
+        'UserStats',
+        'Holdings'
     ],
 
 	views: ['Main'],

@@ -1,7 +1,22 @@
 Ext.define('SpringTrader.model.Holding', {
     extend: 'Ext.data.Model',
     config: {
-        fields: ['purchaseprice', 'quantity', 'quote']
+        fields: ['purchasedate','purchaseprice', 'quantity', 'quote']
+    },
+    detail: function() {
+        return {
+            purchasedate: this.purchaseDate(),
+            symbol: this.symbol(),
+            quantity: this.quantity(),
+            purchaseprice: this.purchasePrice(),
+            currentprice: this.price(),
+            purchasebasis: this.basisValue(),
+            marketvalue: this.value(),
+            netgain: this.netgain()
+        }
+    },
+    purchaseDate: function() {
+      return this.get('purchasedate');
     },
     symbol: function() {
         return this.get('quote').symbol;
@@ -15,8 +30,11 @@ Ext.define('SpringTrader.model.Holding', {
     value: function() {
         return this.price() * this.quantity();
     },
+    purchasePrice: function () {
+        return this.get('purchaseprice');
+    },
     basisValue: function() {
-        return this.get('purchaseprice') * this.quantity();
+        return this.purchasePrice() * this.quantity();
     },
     netgain: function() {
         return this.value() - this.basisValue();

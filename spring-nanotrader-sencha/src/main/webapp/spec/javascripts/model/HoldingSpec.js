@@ -33,4 +33,29 @@ describe('SpringTrader.model.Holding', function() {
         model.setData(data);
         expect(model.netgain()).toEqual(model.value() - model.basisValue());
     });
+
+    it("#purchaseDate", function() {
+        model.setData(data);
+        expect(model.purchaseDate()).toEqual(data.purchasedate);
+    });
+
+    it("#purchasePrice", function() {
+        model.setData(data);
+        expect(model.purchasePrice()).toEqual(data.purchaseprice);
+    });
+
+    it("#detail", function() {
+        model.setData(data);
+        expect(model.detail()).toEqual({
+                purchasedate: data.purchasedate,
+                symbol: data.quote.symbol,
+                quantity: data.quantity,
+                purchaseprice: data.purchaseprice,
+                currentprice: data.quote.price,
+                purchasebasis: model.basisValue(),
+                marketvalue: model.value(),
+                netgain: model.netgain()
+            }
+        )
+    });
 });
