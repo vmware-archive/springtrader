@@ -1,5 +1,6 @@
 Ext.define('SpringTrader.controller.Portfolio', {
     extend: 'Ext.app.Controller',
+    mixins: ['SpringTrader.mixin.SegmentedButtonSupport'],
     config: {
         views: ['Portfolio', 'PortfolioSummary', 'PortfolioSummaryTable', 'PortfolioHoldings'],
         refs: {
@@ -26,37 +27,15 @@ Ext.define('SpringTrader.controller.Portfolio', {
     },
 
     onToggle: function (segmentedButton, button, isPressed) {
-        function showHide(ref, isPressed) {
-            var view = views[ref];
-
-            if (view === undefined) {
-                return;
-            }
-            if (isPressed) {
-                view.show();
-            } else {
-                view.hide();
-            }
-        }
-
-        function refreshStore(ref, isPressed) {
-            var storeid = {
-                summary: null,
-                holdings: 'holdinglist'
-            }[ref];
-            if (storeid && isPressed) {
-                var store = Ext.StoreManager.lookup(storeid)
-                store.currentPage = 0;
-                store.load();
-            }
-        }
-
            var views = {
                summary: this.getPortfolioSummary(),
                holdings: this.getPortfolioHoldings()
+           }, stores = {
+               summary: null,
+               holdings: 'holdinglist'
            };
 
-        showHide(button.getData().ref, isPressed);
-        refreshStore(button.getData().ref, isPressed);
+        this.showHide(button.getData().ref, isPressed, views);
+        this.refreshStore(button.getData().ref, isPressed, stores);
     }
 });

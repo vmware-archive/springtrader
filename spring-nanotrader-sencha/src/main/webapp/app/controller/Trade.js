@@ -1,6 +1,7 @@
 Ext.define('SpringTrader.controller.Trade', {
     extend: 'Ext.app.Controller',
     requires: ['Ext.MessageBox'],
+    mixins: ['SpringTrader.mixin.SegmentedButtonSupport'],
     config: {
         views: ['Trade', 'BuyShares', 'SellShares', 'Quote', 'QuoteSearch', 'BuyForm'],
         refs: {
@@ -25,24 +26,16 @@ Ext.define('SpringTrader.controller.Trade', {
     },
 
     onToggle: function(segmentedButton, button, isPressed) {
-        function showHide(ref, isPressed) {
-            var view = views[ref];
-
-            if (view === undefined) {
-                return;
-            }
-            if (isPressed) {
-                view.show();
-            } else {
-                view.hide();
-            }
-        }
-
         var views = {
             buy: this.getBuyShares(),
             sell: this.getSellShares()
+        }, stores = {
+            buy: null,
+            sell: 'holdinglist'
         };
-        showHide(button.getData().ref, isPressed);
+
+        this.showHide(button.getData().ref, isPressed, views);
+        this.refreshStore(button.getData().ref, isPressed, stores);
     },
 
     onBlur: function(event) {
