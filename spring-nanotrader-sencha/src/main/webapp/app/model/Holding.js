@@ -51,7 +51,6 @@ Ext.define('SpringTrader.model.Holding', {
                 holdingid: this.getId(),
                 ordertype: "sell"
             },
-            disableCaching: false,
             success: function (response) {
                 if(successCallback) {
                     successCallback(response);
@@ -64,5 +63,33 @@ Ext.define('SpringTrader.model.Holding', {
                 }
             }
         });
+    },
+    statics: {
+        buy: function(order, successCallback, failureCallback) {
+            Ext.Ajax.request({
+                url: '/spring-nanotrader-services/api/account/'+ order.accountid +'/order/asynch',
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'API_TOKEN': SpringTrader.user.get('authToken')},
+                disableCaching: false,
+                jsonData: {
+                    accountid: order.accountid,
+                    ordertype: "buy",
+                    quantity: order.quantity,
+                    quote: {
+                        symbol: order.symbol
+                    }
+                },
+                success: function (response) {
+                    if (successCallback) {
+                        successCallback(response);
+                    }
+                },
+                failure: function (response) {
+                    if (failureCallback) {
+                        failureCallback(response);
+                    }
+                }
+            });
+        }
     }
 });

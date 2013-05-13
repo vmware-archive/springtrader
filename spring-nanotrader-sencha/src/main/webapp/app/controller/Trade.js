@@ -72,29 +72,13 @@ Ext.define('SpringTrader.controller.Trade', {
     onBuy: function(button, event){
         event.stopEvent();
         var order = this.newOrder();
-        Ext.Ajax.request({
-            url: '/spring-nanotrader-services/api/account/'+ order.accountid +'/order/asynch',
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'API_TOKEN': SpringTrader.user.get('authToken')},
-            disableCaching: false,
-            jsonData: {
-                accountid: order.accountid,
-                ordertype: "buy",
-                quantity: order.quantity,
-                quote: {
-                    symbol: order.symbol
-                }
-            },
-            disableCaching: false,
-            success: function (response) {
-                Ext.Msg.alert('Buy Order', order.quantity + ' shares of "'+ order.symbol +'" ordered');
-                order.searchForm.reset();
-                order.buyForm.reset().hide();
-                order.quoteTable.hide();
-            },
-            failure: function (response) {
-                Ext.Msg.alert('Fail!', 'Trade failed for "'+ order.symbol +'"');
-            }
+        SpringTrader.model.Holding.buy(order, function (response) {
+            Ext.Msg.alert('Buy Order', order.quantity + ' shares of "'+ order.symbol +'" ordered');
+            order.searchForm.reset();
+            order.buyForm.reset().hide();
+            order.quoteTable.hide();
+        }, function (response) {
+            Ext.Msg.alert('Fail!', 'Trade failed for "'+ order.symbol +'"');
         });
     },
     
