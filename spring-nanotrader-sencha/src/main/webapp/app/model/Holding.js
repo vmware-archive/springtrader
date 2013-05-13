@@ -1,6 +1,7 @@
 Ext.define('SpringTrader.model.Holding', {
     extend: 'Ext.data.Model',
     config: {
+        idProperty: 'holdingid',
         fields: ['purchasedate','purchaseprice', 'quantity', 'quote']
     },
     detail: function() {
@@ -38,5 +39,30 @@ Ext.define('SpringTrader.model.Holding', {
     },
     netgain: function() {
         return this.value() - this.basisValue();
+    },
+    sell: function(successCallback, failureCallback) {
+        var me = this;
+        Ext.Ajax.request({
+            url: '/spring-nanotrader-services/api/account/'+ SpringTrader.user.accountId() +'/order/asynch',
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'API_TOKEN': SpringTrader.user.get('authToken')},
+            disableCaching: false,
+            jsonData: {
+                holdingid: this.getId(),
+                ordertype: "sell"
+            },
+            disableCaching: false,
+            success: function (response) {
+                if(successCallback) {
+                    successCallback(response);
+                }
+                me.destroy();
+            },
+            failure: function (response) {
+                if(failureCallback) {
+                    failureCallback(response);
+                }
+            }
+        });
     }
 });
