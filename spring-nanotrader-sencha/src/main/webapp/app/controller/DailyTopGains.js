@@ -7,11 +7,6 @@ Ext.define('SpringTrader.controller.DailyTopGains', {
         refs: {
             view: 'dailytopgains',
             noData: 'nodata'
-        },
-        control: {
-            view: {
-                initialize: 'onInitialize'
-            }
         }
     },
     launch: function() {
@@ -25,11 +20,5 @@ Ext.define('SpringTrader.controller.DailyTopGains', {
                 this.getNoData().show();
             }
         }
-    },
-    onInitialize: function() {
-       var me = this;
-        SpringTrader.user.holdingSummary.refreshData(function () {
-            me.getApplication().fireEvent('refresh', 'holdingsummary');
-        });
     }
 });

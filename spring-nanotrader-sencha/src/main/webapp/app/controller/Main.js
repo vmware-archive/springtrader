@@ -21,7 +21,10 @@ Ext.define('SpringTrader.controller.Main', {
             showSignupFormButton: 'loggedoutview #showSignupFormButton',
 
             loginButton: 'mainview #loginButton',
-            settingsButton: 'mainview #settingsButton'
+            settingsButton: 'mainview #settingsButton',
+
+            dashboardPage: 'dashboardPage',
+            portfolioPage: 'portfolioPage'
         },
         control: {
             showSignupFormButton: {
@@ -35,6 +38,12 @@ Ext.define('SpringTrader.controller.Main', {
             },
             mainView: {
                 pop: 'onPopView'
+            },
+            dashboardPage: {
+                activate: 'onDashboardActive'
+            },
+            portfolioPage: {
+                activate: 'onPortfolioActive'
             }
         }
     },
@@ -114,5 +123,25 @@ Ext.define('SpringTrader.controller.Main', {
             add('authToken', SpringTrader.user.get('authToken')).
             add('accountid', SpringTrader.user.get('accountid')).
             add('profileid', SpringTrader.user.get('profileid'));
+    },
+
+    onDashboardActive: function() {
+        var me = this;
+        SpringTrader.user.accountSummary.refreshData(function () {
+            me.getApplication().fireEvent('refresh', 'accountsummary');
+        });
+        SpringTrader.user.loadAccountData(function () {
+            me.getApplication().fireEvent('refresh', 'userstats');
+        });
+        SpringTrader.user.holdingSummary.refreshData(function () {
+            me.getApplication().fireEvent('refresh', 'holdingsummary');
+        });
+    },
+
+    onPortfolioActive: function() {
+        var me = this;
+        SpringTrader.user.accountSummary.refreshData(function () {
+            me.getApplication().fireEvent('refresh', 'accountsummary');
+        });
     }
 });

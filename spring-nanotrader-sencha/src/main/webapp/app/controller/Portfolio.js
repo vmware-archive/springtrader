@@ -14,20 +14,17 @@ Ext.define('SpringTrader.controller.Portfolio', {
             }
         }
     },
+
     launch: function () {
         this.getApplication().on('refresh', this._refresh, this);
     },
+
     _refresh: function (what) {
         if (what == 'accountsummary') {
             this.getPortfolioSummaryTable().updateView(SpringTrader.user.accountSummary);
         }
     },
-    onInitialize: function () {
-        var me = this;
-        SpringTrader.user.accountSummary.refreshData(function () {
-            me.getApplication().fireEvent('refresh', 'accountsummary');
-        });
-    },
+
     onToggle: function (segmentedButton, button, isPressed) {
         function showHide(ref, isPressed) {
             var view = views[ref];
