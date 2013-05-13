@@ -26,7 +26,7 @@ Ext.define('SpringTrader.field.Number', {
 
         if (
             !(code >= 48 && code <= 57) &&
-            !(code >= 97 && code <= 105) &&
+            !(code >= 96 && code <= 105) &&
               code !== 46 &&
               code !== 8
             ) {
