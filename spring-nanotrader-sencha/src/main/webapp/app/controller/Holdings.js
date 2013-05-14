@@ -6,7 +6,8 @@ Ext.define('SpringTrader.controller.Holdings', {
             mainView: 'mainview',
             titleBar: 'titlebar',
             holdingsList: 'holdingslist',
-            sellButton: 'holdingdetail #submitButton'
+            sellButton: 'holdingdetail #submitButton',
+            confirmation: 'holdingdetail #confirmation'
         },
         control: {
             holdingsList: {
@@ -36,21 +37,24 @@ Ext.define('SpringTrader.controller.Holdings', {
         event.stopEvent();
         var me = this;
         var mainView = this.getMainView();
+        var sellButton = this.getSellButton();
+        var confirmation = this.getConfirmation();
         var actionSheet = Ext.create('Ext.ActionSheet', {
             items: [
                 {
-                    text: 'Sell',
-                    ui  : 'confirm',
+                    text: 'Sell Holding',
+                    ui  : 'decline',
                     handler: function() {
                         actionSheet.hide();
                         me.holding.sell(function() {
-                            mainView.pop();
+                            sellButton.hide();
+                            confirmation.show();
                         });
                     }
                 },
                 {
                     text: 'Cancel',
-                    ui  : 'decline',
+                    ui  : 'cancel',
                     handler: function() {
                         actionSheet.hide();
                     }

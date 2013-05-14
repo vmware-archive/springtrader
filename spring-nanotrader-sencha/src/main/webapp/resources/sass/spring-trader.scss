@@ -25,10 +25,6 @@
   width: 150px;
 }
 
-.well.show-well .x-html {
-  padding: 0;
-}
-
 .width-half {
   width: 50%;
 }
@@ -55,7 +51,6 @@
 }
 
 .holding-list-header .x-html {
-  padding: 0;
   padding-left: 6px;
   .table th {
     border: none;
@@ -82,6 +77,6 @@
   font-size: 2.0em;
 }
 
-.quote .x-html {
+.holding-list-header .x-html, .well.show-well .x-html, .quote .x-html, .sell-confirmation .x-html {
   padding: 0;
 }

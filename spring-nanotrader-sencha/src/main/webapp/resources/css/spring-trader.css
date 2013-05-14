@@ -31,75 +31,69 @@
 }
 
 /* line 28, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
-.well.show-well .x-html {
-  padding: 0;
-}
-
-/* line 32, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .width-half {
   width: 50%;
 }
 
-/* line 37, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 33, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .icon-custom.icon-gains {
   background-position: -21px -21px;
   margin: 3px 7px 0 0;
 }
 
-/* line 42, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 38, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .icon-custom.icon-lost {
   background-position: -3px -41px;
   margin: 3px 7px 0 0;
 }
 
-/* line 47, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 43, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .x-list-disclosure:before {
   content: '4' !important;
   font-size: 18px !important;
   line-height: 36px !important;
 }
 
-/* line 53, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 49, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .x-chart-watermark {
   display: none !important;
 }
 
-/* line 57, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 53, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .holding-list-header .x-html {
-  padding: 0;
   padding-left: 6px;
 }
-/* line 60, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 55, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .holding-list-header .x-html .table th {
   border: none;
   font-size: 0.8em;
 }
 
-/* line 66, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 61, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .x-html .holding-list table {
   margin-bottom: 0;
 }
-/* line 68, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 63, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .x-html .holding-list table td, .x-html .holding-list table th, .x-html .holding-list table caption {
   padding: 0;
 }
-/* line 71, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 66, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .x-html .holding-list table td.right, .x-html .holding-list table th.right {
   text-align: right;
 }
 
-/* line 76, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 71, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .holding-list > .x-innerhtml {
   padding-right: 48px !important;
   font-size: 1.2em;
 }
 
-/* line 81, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+/* line 76, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
 .x-list-emptytext {
   font-size: 2.0em;
 }
 
-/* line 85, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
-.quote .x-html {
+/* line 80, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/resources/sass/spring-trader.scss */
+.holding-list-header .x-html, .well.show-well .x-html, .quote .x-html, .sell-confirmation .x-html {
   padding: 0;
 }
