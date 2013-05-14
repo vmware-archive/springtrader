@@ -3,6 +3,7 @@ Ext.define('SpringTrader.view.HoldingDetail', {
     xtype: 'holdingdetail',
     config: {
         title: 'Detail',
+        scrollable: true,
         layout: {type: 'vbox', pack: 'start', align: 'center'},
         items: [
             { xtype: 'holdingdetailtable' },
