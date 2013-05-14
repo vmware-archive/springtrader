@@ -20,7 +20,7 @@ Ext.Loader.setPath({
 });
 
 Ext.Loader.setConfig({
-    enabled: true
+    enabled: true,
 //    disableCaching: false
 });
 //</debug>
@@ -29,7 +29,7 @@ Ext.application({
     name: 'SpringTrader',
 
     viewport: {
-        autoMaximize: true,
+//        autoMaximize: (Ext.os.deviceType == 'Phone')
     },
 
     requires: [
@@ -40,7 +40,8 @@ Ext.application({
         'AccountSummary',
         'HoldingSummary',
         'User',
-        'Holding'
+        'Holding',
+        'Quote'
     ],
 
     views: [
@@ -71,7 +72,8 @@ Ext.application({
         'AssetDistribution',
         'HoldingSummary',
         'MarketSummary',
-        'HoldingList'
+        'HoldingList',
+        'Quotes'
     ],
 
     controllers: [
@@ -120,6 +122,7 @@ Ext.application({
                 profileid: SpringTrader.appStore.find('profileid'),
                 accountid: SpringTrader.appStore.find('accountid')
             });
+            Ext.StoreMgr.lookup('quotes').load();
         }
 
         // Initialize the main view

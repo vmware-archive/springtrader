@@ -9,19 +9,21 @@ Ext.define('SpringTrader.controller.Trade', {
             buyShares: 'buyshares',
             portfolioHoldings: 'tradePage portfolioholdings',
             quoteSearch: 'quotesearch',
+            quoteSearchForm: 'quotesearch formpanel',
             searchField: 'input[name=symbol]',
             quoteTable: 'quote',
             buyForm: 'buyform',
             buyButton: 'buyform #submitButton',
-            quantityField: 'input[name=quantity]'
+            quantityField: 'input[name=quantity]',
+            symbolList: 'symbollist'
         },
         control: {
             tradeSwitch: { toggle: 'onToggle' },
             quoteSearch: { action: 'onSearch' },
-            searchField: { blur: 'onBlur' },
+            searchField: { keyup: 'onSearchKeyUp', clearicontap: 'onSearchClear' },
             buyButton: { tap: 'onBuy'},
-            quantityField: { keyup: 'onQuantityKeyUp'}
-
+            quantityField: { keyup: 'onQuantityKeyUp'},
+            symbolList: { itemtap: 'onSymbolSelect'}
         }
     },
 
@@ -38,13 +40,40 @@ Ext.define('SpringTrader.controller.Trade', {
         this.refreshStore(button.getData().ref, isPressed, stores);
     },
 
-    onBlur: function(event) {
-        this.onSearch(this.getSearchField(), event);
+    onSearchClear: function() {
+        var quotes = Ext.StoreMgr.lookup('quotes');
+        quotes.clearFilter(true);
+
+        this.getSymbolList().hide();
+        this.getQuoteSearch().setHeight(this.getQuoteSearch().originalHeight);
+
+        this.getQuoteTable().hide();
+        this.getBuyForm().hide();
+    },
+
+    onSearchKeyUp: function() {
+        var quotes = Ext.StoreMgr.lookup('quotes');
+        quotes.clearFilter(true);
+
+        if (this.getSearchField().getValue().length > 0) {
+            quotes.filter('symbol', this.getSearchField().getValue());
+            this.getSymbolList().show();
+            this.getQuoteSearch().originalHeight = this.getQuoteSearch().getHeight();
+            this.getQuoteSearch().setHeight('100%');
+        }
+    },
+
+    onSymbolSelect: function(view, index, target, record, event) {
+        event.stopEvent();
+        var symbol = record.get('symbol');
+        this.getSearchField().blur().setValue(symbol);
+        this.onSearch(this.getSearchField(), null);
+        this.getSymbolList().deselectAll();
     },
 
     onSearch: function(field, event) {
         var me = this;
-        event.stopEvent();
+        event && event.stopEvent();
         var searchValue = field.getValue();
         if (searchValue) {
             Ext.Ajax.request({
@@ -53,6 +82,9 @@ Ext.define('SpringTrader.controller.Trade', {
                 headers: {'Content-Type': 'application/json', 'API_TOKEN': SpringTrader.user.get('authToken')},
                 disableCaching: false,
                 success: function (response) {
+                    me.getSymbolList().hide();
+                    me.getQuoteSearch().setHeight(me.getQuoteSearch().originalHeight);
+
                     var jsonData = Ext.JSON.decode(response.responseText);
                     me.getQuoteTable().setData(jsonData);
                     me.getQuoteTable().show();
@@ -86,7 +118,7 @@ Ext.define('SpringTrader.controller.Trade', {
         return {
             accountid: SpringTrader.user.accountId(),
             buyForm: this.getBuyForm(),
-            searchForm: this.getQuoteSearch(),
+            searchForm: this.getQuoteSearchForm(),
             quoteTable: this.getQuoteTable(),
             symbol: this.getSearchField().getValue(),
             quantity: parseInt(this.getQuantityField().getValue())

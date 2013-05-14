@@ -3,6 +3,7 @@ Ext.define('SpringTrader.controller.Main', {
 
     launch: function () {
         this.getApplication().on('authenticated', this.updateLocalStorage, this);
+        this.getApplication().on('authenticated', this.loadQuotes, this);
         this.getMainView().getNavigationBar().hide();
         this.switchViews();
     },
@@ -123,6 +124,10 @@ Ext.define('SpringTrader.controller.Main', {
             add('authToken', SpringTrader.user.get('authToken')).
             add('accountid', SpringTrader.user.get('accountid')).
             add('profileid', SpringTrader.user.get('profileid'));
+    },
+
+    loadQuotes: function() {
+        Ext.StoreMgr.lookup('quotes').load();
     },
 
     onDashboardActive: function() {

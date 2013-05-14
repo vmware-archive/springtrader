@@ -6193,14 +6193,18 @@ body.x-desktop {
   font-size: 0.8em;
   padding: 0.2em 1.02em;
 }
-/* line 97, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/2.2.0.387/resources/themes/stylesheets/sencha-touch/default/src/dataview/_List.scss */
+/* line 80, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/2.2.0.387/resources/themes/stylesheets/sencha-touch/default/src/dataview/_List.scss */
 .x-list-normal .x-list-item.x-list-item-tpl,
 .x-list-normal .x-list-item .x-dock-horizontal {
-  border-top: 1px solid #dedede;
+  border-top: 1px solid transparent;
 }
-/* line 103, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/2.2.0.387/resources/themes/stylesheets/sencha-touch/default/src/dataview/_List.scss */
-.x-list-normal .x-list-item.x-list-item-tpl.x-list-footer-wrap, .x-list-normal .x-list-item.x-list-footer-wrap .x-dock-horizontal {
-  border-bottom: 1px solid #dedede;
+/* line 85, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/2.2.0.387/resources/themes/stylesheets/sencha-touch/default/src/dataview/_List.scss */
+.x-list-normal .x-list-item.x-list-item-tpl:nth-child(even), .x-list-normal .x-list-item:nth-child(even) .x-dock-horizontal {
+  background-color: #eaeaea;
+}
+/* line 90, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/2.2.0.387/resources/themes/stylesheets/sencha-touch/default/src/dataview/_List.scss */
+.x-list-normal .x-list-item.x-list-item-tpl.x-list-footer-wrap:nth-child(odd), .x-list-normal .x-list-item.x-list-footer-wrap:nth-child(odd) .x-dock-horizontal {
+  border-bottom: 1px solid #eaeaea;
 }
 /* line 112, /Users/pivotal/workspace/springtrader/spring-nanotrader-sencha/src/main/webapp/touch/2.2.0.387/resources/themes/stylesheets/sencha-touch/default/src/dataview/_List.scss */
 .x-list-normal .x-list-item.x-item-pressed.x-list-item-tpl, .x-list-normal .x-list-item.x-item-pressed .x-dock-horizontal {
