@@ -11,7 +11,18 @@ Ext.define('SpringTrader.view.QuoteSearch', {
             {
                 xtype: 'fieldset',
                 items: [
-                    { xtype: 'textfield', name: 'symbol', placeHolder: 'Enter symbol to get a quote', autoCapitalize: false, autoCorrect: false}
+                    {
+                        xtype: 'textfield',
+                        name: 'symbol',
+                        placeHolder: 'Enter symbol to get a quote',
+                        autoCapitalize: false,
+                        autoCorrect: false,
+                        listeners: {
+                            keyup: function(field) {
+                                field.setValue(field.getValue().toUpperCase());
+                            }
+                        }
+                    }
                 ]
             }
         ]
