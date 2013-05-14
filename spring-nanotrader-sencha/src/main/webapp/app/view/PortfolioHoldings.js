@@ -13,7 +13,7 @@ Ext.define('SpringTrader.view.PortfolioHoldings', {
                 xtype: 'component',
                 cls: 'holding-list holding-list-header',
                 styleHtmlContent: true,
-                html: "<table class='table'><tr><th width='15%'>Symbol</th><th width='25%' class='right'>Price</th><th width='35%' class='right'>Value</th><th width='25%' class='right'>&plusmn;</th></tr></table>"
+                html: "<table class='table'><tr><th width='15%'>Symbol</th><th width='20%' class='right'>Price</th><th width='35%' class='right'>Value</th><th width='30%' class='right'>&plusmn;</th></tr></table>"
             },
             {
                 xtype: 'holdingslist',

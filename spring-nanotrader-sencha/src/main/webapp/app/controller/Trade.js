@@ -22,9 +22,13 @@ Ext.define('SpringTrader.controller.Trade', {
             quoteSearch: { action: 'onSearch' },
             searchField: { keyup: 'onSearchKeyUp', clearicontap: 'onSearchClear' },
             buyButton: { tap: 'onBuy'},
-            quantityField: { keyup: 'onQuantityKeyUp'},
+            quantityField: { keyup: 'onQuantityKeyUp', clearicontap: 'onQuantityClear' },
             symbolList: { itemtap: 'onSymbolSelect'}
         }
+    },
+
+    launch: function() {
+        this.originalHeight = '3.5em';
     },
 
     onToggle: function(segmentedButton, button, isPressed) {
@@ -44,11 +48,8 @@ Ext.define('SpringTrader.controller.Trade', {
         var quotes = Ext.StoreMgr.lookup('quotes');
         quotes.clearFilter(true);
 
-        this.getSymbolList().hide();
-        this.getQuoteSearch().setHeight(this.getQuoteSearch().originalHeight);
-
-        this.getQuoteTable().hide();
-        this.getBuyForm().hide();
+        this.hideSymbolList();
+        this.hidePurchaseOrder();
     },
 
     onSearchKeyUp: function() {
@@ -57,9 +58,7 @@ Ext.define('SpringTrader.controller.Trade', {
 
         if (this.getSearchField().getValue().length > 0) {
             quotes.filter('symbol', this.getSearchField().getValue());
-            this.getSymbolList().show();
-            this.getQuoteSearch().originalHeight = this.getQuoteSearch().getHeight();
-            this.getQuoteSearch().setHeight('100%');
+            this.showSymbolList();
         }
     },
 
@@ -68,7 +67,6 @@ Ext.define('SpringTrader.controller.Trade', {
         var symbol = record.get('symbol');
         this.getSearchField().blur().setValue(symbol);
         this.onSearch(this.getSearchField(), null);
-        this.getSymbolList().deselectAll();
     },
 
     onSearch: function(field, event) {
@@ -82,17 +80,13 @@ Ext.define('SpringTrader.controller.Trade', {
                 headers: {'Content-Type': 'application/json', 'API_TOKEN': SpringTrader.user.get('authToken')},
                 disableCaching: false,
                 success: function (response) {
-                    me.getSymbolList().hide();
-                    me.getQuoteSearch().setHeight(me.getQuoteSearch().originalHeight);
+                    me.hideSymbolList();
 
                     var jsonData = Ext.JSON.decode(response.responseText);
-                    me.getQuoteTable().setData(jsonData);
-                    me.getQuoteTable().show();
-                    me.getBuyForm().show();
+                    me.showPurchaseOrder(jsonData);
                 },
                 failure: function (response) {
-                    me.getQuoteTable().hide();
-                    me.getBuyForm().hide();
+                    me.hidePurchaseOrder();
                     Ext.Msg.alert('Not Found', 'No stock symbol "'+ searchValue +'"');
                 }
             });
@@ -104,11 +98,10 @@ Ext.define('SpringTrader.controller.Trade', {
     onBuy: function(button, event){
         event.stopEvent();
         var order = this.newOrder();
+        var me = this;
         SpringTrader.model.Holding.buy(order, function (response) {
             Ext.Msg.alert('Buy Order', order.quantity + ' shares of "'+ order.symbol +'" ordered');
-            order.searchForm.reset();
-            order.buyForm.reset().hide();
-            order.quoteTable.hide();
+            me.resetBuy();
         }, function (response) {
             Ext.Msg.alert('Fail!', 'Trade failed for "'+ order.symbol +'"');
         });
@@ -117,9 +110,6 @@ Ext.define('SpringTrader.controller.Trade', {
     newOrder: function() {
         return {
             accountid: SpringTrader.user.accountId(),
-            buyForm: this.getBuyForm(),
-            searchForm: this.getQuoteSearchForm(),
-            quoteTable: this.getQuoteTable(),
             symbol: this.getSearchField().getValue(),
             quantity: parseInt(this.getQuantityField().getValue())
         }
@@ -131,5 +121,38 @@ Ext.define('SpringTrader.controller.Trade', {
         } else {
             this.getBuyButton().disable();
         }
+    },
+
+    onQuantityClear: function() {
+        this.getBuyButton().disable();
+    },
+
+    hideSymbolList: function() {
+        this.getSymbolList().hide().deselectAll();
+        this.getQuoteSearch().setHeight(this.originalHeight);
+    },
+
+    showSymbolList: function() {
+        this.getSymbolList().show();
+        this.getQuoteSearch().setHeight('100%');
+    },
+
+    hidePurchaseOrder: function() {
+        this.getBuyForm().hide().reset();
+        this.onQuantityClear();
+        this.getQuoteTable().hide();
+    },
+
+
+    showPurchaseOrder: function(jsonData) {
+        this.getQuoteTable().setData(jsonData);
+        this.getQuoteTable().show();
+        this.getBuyForm().show();
+    },
+
+    resetBuy: function() {
+        this.getQuoteSearchForm().reset();
+        this.onSearchClear();
+        this.hidePurchaseOrder();
     }
 });
