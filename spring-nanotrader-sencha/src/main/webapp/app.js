@@ -28,6 +28,10 @@ Ext.Loader.setConfig({
 Ext.application({
     name: 'SpringTrader',
 
+    viewport: {
+        autoMaximize: true,
+    },
+
     requires: [
         'Ext.MessageBox', 'SpringTrader.LocalStore'
     ],
