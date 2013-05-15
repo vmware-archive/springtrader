@@ -5,7 +5,13 @@ Ext.define('SpringTrader.controller.MarketSummary', {
         stores: ['MarketSummary']
     },
     launch: function() {
-        // Start interval timers
-        setInterval(function() { Ext.getStore('marketsummary').load()}, 15000);
+        this.startPollingMarketSummary();
+    },
+    startPollingMarketSummary: function() {
+        this.marketSummaryPoller = setInterval(function() { Ext.getStore('marketsummary').load()}, 15000);
+    },
+    stopPollingMarketSummary: function() {
+        window.clearInterval(this.marketSummaryPoller);
+        this.marketSummaryPoller = undefined;
     }
 });
