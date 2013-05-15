@@ -183,7 +183,7 @@ beforeEach(function() {
    holdingListJSON = {
        "page": 0,
        "pageSize": 5,
-       "totalRecords": 5,
+       "totalRecords": 15,
        "results": [
            {
                "holdingid": 74,
@@ -298,4 +298,135 @@ beforeEach(function(){
         "change1":-29.78,
         "version":0
     };
+});
+
+var ordersJSON;
+beforeEach(function(){
+   ordersJSON = {
+       "page": 0,
+       "pageSize": 5,
+       "totalRecords": 45,
+       "results": [
+           {
+               "orderid": 32833,
+               "accountid": 9,
+               "holdingid": null,
+               "orderfee": 10.50,
+               "completiondate": "2013-05-14",
+               "ordertype": "sell",
+               "orderstatus": "completed",
+               "price": 107.75,
+               "quantity": 126.00,
+               "opendate": "2013-05-14",
+               "quote": {
+                   "quoteid": 67,
+                   "low": 107.75,
+                   "open1": 126.75,
+                   "volume": 252.00,
+                   "price": 109.91,
+                   "high": 114.75,
+                   "companyname": "NetApp, Inc.",
+                   "symbol": "NTAP",
+                   "change1": -16.84,
+                   "version": 0
+               }
+           },
+           {
+               "orderid": 32832,
+               "accountid": 9,
+               "holdingid": 32803,
+               "orderfee": 10.50,
+               "completiondate": "2013-05-14",
+               "ordertype": "buy",
+               "orderstatus": "completed",
+               "price": 62.10,
+               "quantity": 4.00,
+               "opendate": "2013-05-14",
+               "quote": {
+                   "quoteid": 47,
+                   "low": 33.63,
+                   "open1": 49.63,
+                   "volume": 139.00,
+                   "price": 54.03,
+                   "high": 62.10,
+                   "companyname": "Green Mountain Coffee Roasters, Inc.",
+                   "symbol": "GMCR",
+                   "change1": 4.40,
+                   "version": 0
+               }
+           },
+           {
+               "orderid": 32831,
+               "accountid": 9,
+               "holdingid": 32802,
+               "orderfee": 10.50,
+               "completiondate": "2013-05-14",
+               "ordertype": "buy",
+               "orderstatus": "completed",
+               "price": 25.21,
+               "quantity": 1.00,
+               "opendate": "2013-05-14",
+               "quote": {
+                   "quoteid": 94,
+                   "low": 18.56,
+                   "open1": 35.56,
+                   "volume": 231.00,
+                   "price": 23.45,
+                   "high": 28.56,
+                   "companyname": "Virgin Media Inc.",
+                   "symbol": "VMED",
+                   "change1": -12.11,
+                   "version": 0
+               }
+           },
+           {
+               "orderid": 32830,
+               "accountid": 9,
+               "holdingid": 32801,
+               "orderfee": 10.50,
+               "completiondate": "2013-05-14",
+               "ordertype": "buy",
+               "orderstatus": "completed",
+               "price": 124.12,
+               "quantity": 1.00,
+               "opendate": "2013-05-14",
+               "quote": {
+                   "quoteid": 2,
+                   "low": 114.86,
+                   "open1": 130.22,
+                   "volume": 531.00,
+                   "price": 137.77,
+                   "high": 153.23,
+                   "companyname": "Adobe Systems Incorporated",
+                   "symbol": "ADBE",
+                   "change1": 7.55,
+                   "version": 0
+               }
+           },
+           {
+               "orderid": 32829,
+               "accountid": 9,
+               "holdingid": 32800,
+               "orderfee": 10.50,
+               "completiondate": "2013-05-14",
+               "ordertype": "buy",
+               "orderstatus": "completed",
+               "price": 66.31,
+               "quantity": 1.00,
+               "opendate": "2013-05-14",
+               "quote": {
+                   "quoteid": 9,
+                   "low": 66.31,
+                   "open1": 130.65,
+                   "volume": 892.00,
+                   "price": 68.30,
+                   "high": 128.14,
+                   "companyname": "Apple Inc.",
+                   "symbol": "AAPL",
+                   "change1": -62.35,
+                   "version": 0
+               }
+           }
+       ]
+   }
 });

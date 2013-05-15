@@ -25,7 +25,8 @@ Ext.define('SpringTrader.controller.Main', {
             settingsButton: 'mainview #settingsButton',
 
             dashboardPage: 'dashboardPage',
-            portfolioPage: 'portfolioPage'
+            portfolioPage: 'portfolioPage',
+            transactionsPage: 'transactionsPage'
         },
         control: {
             showSignupFormButton: {
@@ -45,6 +46,9 @@ Ext.define('SpringTrader.controller.Main', {
             },
             portfolioPage: {
                 activate: 'onPortfolioActive'
+            },
+            transactionsPage: {
+                activate: 'onTransactionsActive'
             }
         }
     },
@@ -148,5 +152,9 @@ Ext.define('SpringTrader.controller.Main', {
         SpringTrader.user.accountSummary.refreshData(function () {
             me.getApplication().fireEvent('refresh', 'accountsummary');
         });
+    },
+
+    onTransactionsActive: function() {
+        Ext.StoreMgr.lookup('orders').load();
     }
 });

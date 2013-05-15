@@ -16,7 +16,8 @@ Ext.define('SpringTrader.view.TabPanel', {
                 xtype: 'tradePage'
             },
             {
-                xtype: 'transactionsPage'
+                xtype: 'transactionsPage',
+                store: 'orders'
             }
         ]
     }

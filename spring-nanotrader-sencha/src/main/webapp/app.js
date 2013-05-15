@@ -41,7 +41,8 @@ Ext.application({
         'HoldingSummary',
         'User',
         'Holding',
-        'Quote'
+        'Quote',
+        'Order'
     ],
 
     views: [
@@ -73,7 +74,8 @@ Ext.application({
         'HoldingSummary',
         'MarketSummary',
         'HoldingList',
-        'Quotes'
+        'Quotes',
+        'Orders'
     ],
 
     controllers: [

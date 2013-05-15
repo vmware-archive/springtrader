@@ -86,19 +86,23 @@
 .x-html .holding-list table td.right, .x-html .holding-list table th.right {
   text-align: right;
 }
+/* line 73, ../sass/spring-trader.scss */
+.x-html .holding-list table td.center, .x-html .holding-list table th.center {
+  text-align: center;
+}
 
-/* line 75, ../sass/spring-trader.scss */
+/* line 78, ../sass/spring-trader.scss */
 .holding-list > .x-innerhtml {
   padding-right: 48px !important;
   font-size: 1.2em;
 }
 
-/* line 80, ../sass/spring-trader.scss */
+/* line 83, ../sass/spring-trader.scss */
 .x-list-emptytext {
   font-size: 2.0em;
 }
 
-/* line 84, ../sass/spring-trader.scss */
+/* line 87, ../sass/spring-trader.scss */
 .holding-list-header .x-html, .well.show-well .x-html, .quote .x-html, .sell-confirmation .x-html {
   padding: 0;
 }
