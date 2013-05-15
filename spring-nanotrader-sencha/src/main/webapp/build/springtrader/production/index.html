@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html manifest="cache.appcache" lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringTrader</title>
+    <style type="text/css">
+         /**
+         * Example of an initial loading indicator.
+         * It is recommended to keep this as minimal as possible to provide instant feedback
+         * while other resources are still being loaded for the first time
+         */
+        html, body {
+            height: 100%;
+            background-color: #1985D0
+        }
+
+        #appLoadingIndicator {
+            position: absolute;
+            top: 50%;
+            margin-top: -15px;
+            text-align: center;
+            width: 100%;
+            height: 30px;
+            -webkit-animation-name: appLoadingIndicator;
+            -webkit-animation-duration: 0.5s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: linear;
+        }
+
+        #appLoadingIndicator > * {
+            background-color: #FFFFFF;
+            display: inline-block;
+            height: 30px;
+            -webkit-border-radius: 15px;
+            margin: 0 5px;
+            width: 30px;
+            opacity: 0.8;
+        }
+
+        @-webkit-keyframes appLoadingIndicator{
+            0% {
+                opacity: 0.8
+            }
+            50% {
+                opacity: 0
+            }
+            100% {
+                opacity: 0.8
+            }
+        }
+    </style>
+    <!-- The line below must be kept intact for Sencha Command to build your application -->
+     <script type="text/javascript">(function(l){function s(b){function d(a,b){var c=a.length,d,e;for(d=0;d<c;d++){e=a[d];var h=a,j=d,f=void 0;"string"==typeof e&&(e={path:e});e.shared?(e.version=e.shared,f=e.shared+e.path):(B.href=e.path,f=B.href);e.uri=f;e.key=i+"-"+f;g[f]=e;h[j]=e;e.type=b;e.index=d;e.collection=a;e.ready=!1;e.evaluated=!1}return a}var c;"string"==typeof b?(c=b,b=C(c)):c=JSON.stringify(b);var i=b.id,j=i+"-"+D+p,g={};this.key=j;this.css=d(b.css,"css");this.js=d(b.js,"js");window.Ext||(window.Ext={});n.microloaded=
+!0;var f=window.Ext.filterPlatform=function(a){function b(a){var c=/Mobile(\/|\s)/.test(a);return/(iPhone|iPod)/.test(a)||!/(Silk)/.test(a)&&/(Android)/.test(a)&&(/(Android 2)/.test(a)||c)||/(BlackBerry|BB)/.test(a)&&c||/(Windows Phone)/.test(a)}function d(a){return!b(a)&&(/iPad/.test(a)||/Android/.test(a)||/(RIM Tablet OS)/.test(a)||/MSIE 10/.test(a)&&/; Touch/.test(a))}var c=false,e=navigator.userAgent,h,g,a=[].concat(a);h=window.location.search.substr(1).split("&");g={};var f;for(f=0;f<h.length;f++){var i=
+h[f].split("=");g[i[0]]=i[1]}if(h=g.platform)return a.indexOf(h)!=-1;h=0;for(g=a.length;h<g;h++){switch(a[h]){case "phone":c=b(e);break;case "tablet":c=d(e);break;case "desktop":c=!b(e)&&!d(e);break;case "ios":c=/(iPad|iPhone|iPod)/.test(e);break;case "android":c=/(Android|Silk)/.test(e);break;case "blackberry":c=/(BlackBerry|BB)/.test(e);break;case "safari":c=/Safari/.test(e)&&!/(BlackBerry|BB)/.test(e);break;case "chrome":c=/Chrome/.test(e);break;case "ie10":c=/MSIE 10/.test(e)}if(c)return true}return false};
+this.css=this.css.filter(function(a){var b=a.platform;if(b){if(f(b)){n.theme={name:a.theme||"Default"};return true}a.filtered=true;return false}return true});this.js=this.js.filter(function(a){var b=a.platform;if(b&&!f(b)){a.filtered=true;return false}return true});this.assets=this.css.concat(this.js);this.getAsset=function(a){return g[a]};this.store=function(){t(j,c)}}function x(b,d){var c=document.createElement("meta");c.setAttribute("name",b);c.setAttribute("content",d);u.appendChild(c)}function q(b,
+d,c){var i=new XMLHttpRequest,c=c||E,b=b+(-1==b.indexOf("?")?"?":"&")+Date.now();try{i.open("GET",b,!0),i.onreadystatechange=function(){if(4==i.readyState){var b=i.status,f=i.responseText;200<=b&&300>b||304==b||0==b&&0<f.length?d(f):c()}},i.send(null)}catch(j){c()}}function L(b,d){var c=m.createElement("iframe");v.push({iframe:c,callback:d});c.src=b+".html";c.style.cssText="width:0;height:0;border:0;position:absolute;z-index:-999;visibility:hidden";m.body.appendChild(c)}function F(b,d,c){var i=!!b.shared;
+if(b.remote)d("");else{if(!i)var j=d,g=b.version,f,d=function(a){f=a.substring(0,g.length+4);f!=="/*"+g+"*/"?confirm("Requested: '"+b.uri+"' with checksum: "+g+" but received: "+f.substring(2,g.length)+"instead. Attempt to refresh the application?")&&M():j(a)};(i?L:q)(b.uri,d,c)}}function G(b){var d=b.data,b=b.source.window,c,i,j,g;c=0;for(i=v.length;c<i;c++)if(j=v[c],g=j.iframe,g.contentWindow===b){j.callback(d);m.body.removeChild(g);v.splice(c,1);break}}function H(b){"undefined"!=typeof console&&
+(console.error||console.log).call(console,b)}function t(b,d){try{o.setItem(b,d)}catch(c){if(o&&c.code==c.QUOTA_EXCEEDED_ERR&&r){var i=r.assets.map(function(a){return a.key}),j=0,g=o.length,f=!1,a;for(i.push(r.key);j<=g-1;)a=o.key(j),-1==i.indexOf(a)?(o.removeItem(a),f=!0,g--):j++;f&&t(b,d)}}}function w(b){try{return o.getItem(b)}catch(d){return null}}function M(){I||(I=!0,q(p,function(b){(new s(b)).store();l.location.reload()}))}function y(b){function d(a,b){var d=a.collection,f=a.index,e=d.length,
+h;a.ready=!0;a.content=b;for(h=f-1;0<=h;h--)if(a=d[h],!a.filtered&&(!a.ready||!a.evaluated))return;for(h=f;h<e;h++)if(a=d[h],a.ready)a.evaluated||c(a);else break}function c(a){a.evaluated=!0;if("js"==a.type)try{eval(a.content)}catch(b){H("Error evaluating "+a.uri+" with message: "+b)}else{var c=m.createElement("style"),d;c.type="text/css";c.textContent=a.content;"id"in a&&(c.id=a.id);"disabled"in a&&(c.disabled=a.disabled);d=document.createElement("base");d.href=a.path.replace(/\/[^\/]*$/,"/");u.appendChild(d);
+u.appendChild(c);u.removeChild(d)}delete a.content;0==--g&&i()}function i(){function a(){g&&c()}function c(){var a=n.onUpdated||E;if("onSetup"in n)n.onSetup(a);else a()}function d(){f.store();h.forEach(function(a){t(a.key,a.content)});c()}function i(a,b){a.content=b;0==--l&&(k.status==k.IDLE?d():j=d)}function e(){J("online",e,!1);q(p,function(c){r=f=new s(c);var d;f.assets.forEach(function(a){d=b.getAsset(a.uri);(!d||a.version!==d.version)&&h.push(a)});l=h.length;0==l?k.status==k.IDLE?a():j=a:h.forEach(function(a){function c(){F(a,
+function(b){i(a,b)})}var d=b.getAsset(a.uri),e=a.path,f=a.update;!d||!f||null===w(a.key)||"delta"!=f?c():q("deltas/"+e+"/"+d.version+".json",function(b){try{var c=a,d;var e=w(a.key),f=C(b),b=[],g,h,j;if(0===f.length)d=e;else{h=0;for(j=f.length;h<j;h++)g=f[h],"number"===typeof g?b.push(e.substring(g,g+f[++h])):b.push(g);d=b.join("")}i(c,d)}catch(k){H("Malformed delta content received for "+a.uri)}},c)})})}var h=[],g=!1,j=function(){},m=function(){k.swapCache();g=!0;j()},l;J("message",G,!1);if(k.status==
+k.UPDATEREADY)m();else if(k.status==k.CHECKING||k.status==k.DOWNLOADING)k.onupdateready=m,k.onnoupdate=k.onobsolete=function(){j()};!1!==navigator.onLine?e():z("online",e,!1)}var j=b.assets,g=j.length,f;r=b;z("message",G,!1);0==g?i():j.forEach(function(a){var b=w(a.key);null===b?F(a,function(b){a.remote||t(a.key,b);d(a,b)},function(){d(a,"")}):d(a,b)})}function K(b){if(navigator.userAgent.match(/IEMobile\/10\.0/)){var d=document.createElement("style");d.appendChild(document.createTextNode("@media screen and (orientation: portrait) {@-ms-viewport {width: 320px !important;}}@media screen and (orientation: landscape) {@-ms-viewport {width: 560px !important;}}"));
+document.getElementsByTagName("head")[0].appendChild(d)}d=/MSIE 10/.test(navigator.userAgent)?/complete|loaded/:/interactive|complete|loaded/;null!==m.readyState.match(d)?y(b):z("DOMContentLoaded",function(){navigator.standalone?setTimeout(function(){setTimeout(function(){y(b)},1)},1):setTimeout(function(){y(b)},1)},!1)}var E=function(){},v=[],m=l.document,u=m.head,z=l.addEventListener,J=l.removeEventListener,C=JSON.parse,B=m.createElement("a"),A=m.location,D=A.origin+A.pathname+A.search,p="app.json",
+I=!1,r,k,o;try{o=l.localStorage,k=l.applicationCache}catch(N){}if("undefined"===typeof n)var n=l.Ext={};n.blink=function(b){var d=w(b.id+"-"+D+p);x("viewport","width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no");x("apple-mobile-web-app-capable","yes");x("apple-touch-fullscreen","yes");d?(b=new s(d),K(b)):q(p,function(c){b=new s(c);b.store();K(b)})}})(this);;Ext.blink({"id":"1afa167c-cb2b-4e15-a601-ff42b8f201bc"})</script><link rel="stylesheet" type="text/css" href="/spring-nanotrader-web/css/style.css" />
+
+</head>
+<body>
+    <div id="appLoadingIndicator">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
