@@ -4,11 +4,11 @@ Ext.define('SpringTrader.view.TransactionDetail', {
     config: {
         width: '100%',
         padding: 20,
-        title: 'Transaction Detail',
+        title: 'Transaction',
         scrollable: false,
-        cls: 'well',
+        cls: 'well detail-table',
         tpl: Ext.create('Ext.XTemplate',
-            '<table class="table table-condensed table-striped">' +
+            '<table class="table table-striped">' +
                 '<tbody>' +
                 '<tr><th>Creation Date</th><td class="right">{creationdate}</td></tr>' +
                 '<tr><th>Symbol</th><td class="right">{symbol}</td></tr>' +
@@ -16,7 +16,7 @@ Ext.define('SpringTrader.view.TransactionDetail', {
                 '<tr><th>Completion Date</th><td class="right">{completiondate}</td></tr>' +
                 '<tr><th>Transaction</th><td class="right">{type}</td></tr>' +
                 '<tr><th>Order ID</th><td class="right">{orderid}</td></tr>' +
-                '<tr><th>Order Status</th><td class="right">{status}</td></tr>' +
+                '<tr><th>Order Status</th><td class="right {[ values.status == "completed" ? "green-color" : "red-color" ]}">{[ Ext.String.capitalize(values.status) ]}</td></tr>' +
                 '<tr><th>Transaction Fee</th><td class="right">{transactionfee:this.currency}</td></tr>' +
                 '</tbody>' +
                 '</table>',

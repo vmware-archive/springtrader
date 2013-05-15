@@ -9,7 +9,7 @@ Ext.define('SpringTrader.view.HoldingsList', {
         scrollable: true,
         onItemDisclosure: true,
         disableSelection: true,
-        itemCls: 'holding-list',
+        itemCls: 'disclosable-list',
         styleHtmlContent: true,
         deferEmptyText: true,
         emptyText: '<div class="alert">No holdings</div>',

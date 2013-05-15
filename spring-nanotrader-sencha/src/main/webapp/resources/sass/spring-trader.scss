@@ -54,15 +54,7 @@
   display: none !important;
 }
 
-.holding-list-header .x-html {
-  padding-left: 6px;
-  .table th {
-    border: none;
-    font-size: 0.8em;
-  }
-}
-
-.x-html .holding-list table {
+.x-html .disclosable-list table {
   margin-bottom: 0;
   & td, th, caption {
     padding: 0;
@@ -75,15 +67,19 @@
   }
 }
 
-.holding-list > .x-innerhtml {
+.detail-table .table {
+  font-size: 14px;
+}
+
+.disclosable-list > .x-innerhtml {
   padding-right: 48px !important;
-  font-size: 1.2em;
+  font-size: 12px;
 }
 
 .x-list-emptytext {
   font-size: 2.0em;
 }
 
-.holding-list-header .x-html, .well.show-well .x-html, .quote .x-html, .sell-confirmation .x-html {
+.well.show-well .x-html, .quote .x-html, .sell-confirmation .x-html {
   padding: 0;
 }

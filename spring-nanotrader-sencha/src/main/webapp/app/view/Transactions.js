@@ -10,11 +10,11 @@ Ext.define('SpringTrader.view.Transactions', {
         scrollable: true,
         onItemDisclosure: true,
         disableSelection: true,
-        itemCls: 'holding-list',
+        itemCls: 'disclosable-list',
         styleHtmlContent: true,
         deferEmptyText: true,
         emptyText: '<div class="alert">No orders</div>',
-        itemTpl: '<table><tr><td width="15%">{symbol}</td><td width="25%" class="right">{quantity}</td><td width="30%" class="center">{type}</td><td width="30%">{status}</td></tr></table>',
+        itemTpl: '<table><tr><td width="15%">{symbol}</td><td width="25%" class="right">{quantity}</td><td width="30%" class="center">{[ Ext.String.capitalize(values.type) ]}</td><td width="30%" class="{[ values.status == "completed" ? "green-color" : "red-color" ]}">{[ Ext.String.capitalize(values.status) ]}</td></tr></table>',
         plugins: [{
             xclass: 'Ext.plugin.ListPaging',
             autoPaging: true

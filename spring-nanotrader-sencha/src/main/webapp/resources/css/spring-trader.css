@@ -65,44 +65,39 @@
 }
 
 /* line 57, ../sass/spring-trader.scss */
-.holding-list-header .x-html {
-  padding-left: 6px;
-}
-/* line 59, ../sass/spring-trader.scss */
-.holding-list-header .x-html .table th {
-  border: none;
-  font-size: 0.8em;
-}
-
-/* line 65, ../sass/spring-trader.scss */
-.x-html .holding-list table {
+.x-html .disclosable-list table {
   margin-bottom: 0;
 }
-/* line 67, ../sass/spring-trader.scss */
-.x-html .holding-list table td, .x-html .holding-list table th, .x-html .holding-list table caption {
+/* line 59, ../sass/spring-trader.scss */
+.x-html .disclosable-list table td, .x-html .disclosable-list table th, .x-html .disclosable-list table caption {
   padding: 0;
 }
-/* line 70, ../sass/spring-trader.scss */
-.x-html .holding-list table td.right, .x-html .holding-list table th.right {
+/* line 62, ../sass/spring-trader.scss */
+.x-html .disclosable-list table td.right, .x-html .disclosable-list table th.right {
   text-align: right;
 }
-/* line 73, ../sass/spring-trader.scss */
-.x-html .holding-list table td.center, .x-html .holding-list table th.center {
+/* line 65, ../sass/spring-trader.scss */
+.x-html .disclosable-list table td.center, .x-html .disclosable-list table th.center {
   text-align: center;
 }
 
-/* line 78, ../sass/spring-trader.scss */
-.holding-list > .x-innerhtml {
-  padding-right: 48px !important;
-  font-size: 1.2em;
+/* line 70, ../sass/spring-trader.scss */
+.detail-table .table {
+  font-size: 14px;
 }
 
-/* line 83, ../sass/spring-trader.scss */
+/* line 74, ../sass/spring-trader.scss */
+.disclosable-list > .x-innerhtml {
+  padding-right: 48px !important;
+  font-size: 12px;
+}
+
+/* line 79, ../sass/spring-trader.scss */
 .x-list-emptytext {
   font-size: 2.0em;
 }
 
-/* line 87, ../sass/spring-trader.scss */
-.holding-list-header .x-html, .well.show-well .x-html, .quote .x-html, .sell-confirmation .x-html {
+/* line 83, ../sass/spring-trader.scss */
+.well.show-well .x-html, .quote .x-html, .sell-confirmation .x-html {
   padding: 0;
 }

@@ -4,9 +4,11 @@ Ext.define('SpringTrader.view.HoldingDetailTable', {
     config: {
         width: '100%',
         padding: 20,
+        title: 'Holding',
         scrollable: false,
+        cls: 'well detail-table',
         tpl: Ext.create('Ext.XTemplate',
-            '<table class="table table-condensed table-striped">' +
+            '<table class="table table-striped">' +
                 '<tbody>' +
                 '<tr><th>Purchase Date</th><td class="right">{purchasedate}</td></tr>' +
                 '<tr><th>Symbol</th><td class="right">{symbol}</td></tr>' +
@@ -23,4 +25,4 @@ Ext.define('SpringTrader.view.HoldingDetailTable', {
             }
         )
     }
-})
+});

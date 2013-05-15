@@ -19,4 +19,4 @@ Ext.define('SpringTrader.view.HoldingDetail', {
             }
         ]
     }
-})
+});
