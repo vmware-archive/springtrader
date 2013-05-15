@@ -10,7 +10,7 @@ Ext.define('SpringTrader.controller.Main', {
 
     config: {
         views: ['SignupButton', 'SignupForm', 'LoggedOut', 'LoginForm',
-            'TabPanel', 'Dashboard', 'Portfolio', 'Trade', 'Settings'],
+            'TabPanel', 'Dashboard', 'Portfolio', 'Trade', 'Settings', 'Transactions'],
         refs: {
             titleBar: 'titlebar',
 
