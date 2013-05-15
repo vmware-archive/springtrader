@@ -88,7 +88,8 @@ Ext.application({
         'Settings',
         'User',
         'UserStats',
-        'Holdings'
+        'Holdings',
+        'Transactions'
     ],
 
 	views: ['Main'],

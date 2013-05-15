@@ -3,7 +3,6 @@ Ext.define('SpringTrader.store.HoldingList', {
     config: {
         model: 'SpringTrader.model.Holding',
         storeId: 'holdinglist',
-        fields: [ "symbol", "price", "value", "netgain" ],
         pageSize: 5,
         proxy: {
             type: 'ajax',

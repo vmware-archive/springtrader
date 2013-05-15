@@ -2,7 +2,7 @@ Ext.define('SpringTrader.model.Order', {
     extend: 'Ext.data.Model',
     config: {
         idProperty: 'orderid',
-        fields: [ "quote", "quantity", "ordertype", "orderstatus" ]
+        fields: [ "quote", "quantity", "ordertype", "orderstatus", "opendate", "completiondate", "orderfee" ]
     },
 
     symbol: function(){
@@ -19,5 +19,18 @@ Ext.define('SpringTrader.model.Order', {
 
     status: function() {
         return this.get('orderstatus');
+    },
+
+    detail: function() {
+        return {
+            creationdate: this.get('opendate'),
+            symbol: this.symbol(),
+            quantity: this.quantity(),
+            completiondate: this.get('completiondate'),
+            type: this.type(),
+            orderid: this.getId(),
+            status: this.status(),
+            transactionfee: this.get('orderfee')
+        }
     }
 });

@@ -3,7 +3,6 @@ Ext.define('SpringTrader.store.Orders', {
     config: {
         model: 'SpringTrader.model.Order',
         storeId: 'orders',
-        fields: [ "quote", "quantity", "ordertype", "orderstatus" ],
         pageSize: 5,
         proxy: {
             type: 'ajax',
