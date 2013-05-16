@@ -27,11 +27,11 @@ Ext.define('SpringTrader.controller.Trade', {
         }
     },
 
-    launch: function() {
+    launch: function () {
         this.originalHeight = '3.5em';
     },
 
-    onToggle: function(segmentedButton, button, isPressed) {
+    onToggle: function (segmentedButton, button, isPressed) {
         var views = {
             buy: this.getBuyShares(),
             sell: this.getPortfolioHoldings()
@@ -44,7 +44,7 @@ Ext.define('SpringTrader.controller.Trade', {
         this.refreshStore(button.getData().ref, isPressed, stores);
     },
 
-    onSearchClear: function() {
+    onSearchClear: function () {
         var quotes = Ext.StoreMgr.lookup('quotes');
         quotes.clearFilter(true);
 
@@ -52,7 +52,7 @@ Ext.define('SpringTrader.controller.Trade', {
         this.hidePurchaseOrder();
     },
 
-    onSearchKeyUp: function() {
+    onSearchKeyUp: function () {
         var quotes = Ext.StoreMgr.lookup('quotes');
         quotes.clearFilter(true);
 
@@ -62,14 +62,14 @@ Ext.define('SpringTrader.controller.Trade', {
         }
     },
 
-    onSymbolSelect: function(view, index, target, record, event) {
+    onSymbolSelect: function (view, index, target, record, event) {
         event.stopEvent();
         var symbol = record.get('symbol');
         this.getSearchField().blur().setValue(symbol);
         this.onSearch(this.getSearchField(), null);
     },
 
-    onSearch: function(field, event) {
+    onSearch: function (field, event) {
         var me = this;
         event && event.stopEvent();
         var searchValue = field.getValue();
@@ -87,7 +87,7 @@ Ext.define('SpringTrader.controller.Trade', {
                 },
                 failure: function (response) {
                     me.hidePurchaseOrder();
-                    Ext.Msg.alert('Not Found', 'No stock symbol "'+ searchValue +'"');
+                    Ext.Msg.alert('Not Found', 'No stock symbol "' + searchValue + '"');
                 }
             });
         } else {
@@ -95,19 +95,29 @@ Ext.define('SpringTrader.controller.Trade', {
         }
     },
 
-    onBuy: function(button, event){
+    onBuy: function (button, event) {
         event.stopEvent();
         var order = this.newOrder();
-        var me = this;
-        SpringTrader.model.Holding.buy(order, function (response) {
-            Ext.Msg.alert('Buy Order', order.quantity + ' shares of "'+ order.symbol +'" ordered');
-            me.resetBuy();
-        }, function (response) {
-            Ext.Msg.alert('Fail!', 'Trade failed for "'+ order.symbol +'"');
-        });
+        if (this.validateOrder(order)) {
+            var me = this;
+            SpringTrader.model.Holding.buy(order, function (response) {
+                Ext.Msg.alert('Buy Order', order.quantity + ' shares of "' + order.symbol + '" ordered');
+                me.resetBuy();
+            }, function (response) {
+                Ext.Msg.alert('Fail!', 'Trade failed for "' + order.symbol + '"');
+            });
+        }
     },
-    
-    newOrder: function() {
+
+    validateOrder: function (order) {
+        if (order.quantity == 0) {
+            Ext.Msg.alert('Dude!', 'You gotta buy sumntin!');
+            return false;
+        }
+        return true;
+    },
+
+    newOrder: function () {
         return {
             accountid: SpringTrader.user.accountId(),
             symbol: this.getSearchField().getValue(),
@@ -115,7 +125,7 @@ Ext.define('SpringTrader.controller.Trade', {
         }
     },
 
-    onQuantityKeyUp: function() {
+    onQuantityKeyUp: function () {
         if (this.getQuantityField().getValue().length > 0) {
             this.getBuyButton().enable();
         } else {
@@ -123,34 +133,34 @@ Ext.define('SpringTrader.controller.Trade', {
         }
     },
 
-    onQuantityClear: function() {
+    onQuantityClear: function () {
         this.getBuyButton().disable();
     },
 
-    hideSymbolList: function() {
+    hideSymbolList: function () {
         this.getSymbolList().hide().deselectAll();
         this.getQuoteSearch().setHeight(this.originalHeight);
     },
 
-    showSymbolList: function() {
+    showSymbolList: function () {
         this.getSymbolList().show();
         this.getQuoteSearch().setHeight('100%');
     },
 
-    hidePurchaseOrder: function() {
+    hidePurchaseOrder: function () {
         this.getBuyForm().hide().reset();
         this.onQuantityClear();
         this.getQuoteTable().hide();
     },
 
 
-    showPurchaseOrder: function(jsonData) {
+    showPurchaseOrder: function (jsonData) {
         this.getQuoteTable().setData(jsonData);
         this.getQuoteTable().show();
         this.getBuyForm().show();
     },
 
-    resetBuy: function() {
+    resetBuy: function () {
         this.getQuoteSearchForm().reset();
         this.onSearchClear();
         this.hidePurchaseOrder();
