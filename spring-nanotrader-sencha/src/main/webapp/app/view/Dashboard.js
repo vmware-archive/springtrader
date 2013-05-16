@@ -3,7 +3,6 @@ Ext.define('SpringTrader.view.Dashboard', {
     xtype: 'dashboardPage',
     requires: [
         'SpringTrader.view.AccountSummary',
-        'SpringTrader.view.UserStats',
         'SpringTrader.view.AssetDistribution',
         'SpringTrader.view.DailyTopGains'
     ],

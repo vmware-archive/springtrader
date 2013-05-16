@@ -18,6 +18,7 @@ Ext.define('SpringTrader.controller.Transactions', {
         var transaction = list.getStore().getAt(index);
 
         var detailView = Ext.create('SpringTrader.view.TransactionDetail');
+        detailView.pushedFromMain = true;
 
         detailView.setData(transaction.detail());
 

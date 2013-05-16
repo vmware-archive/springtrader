@@ -59,6 +59,18 @@ Ext.define('SpringTrader.controller.Settings', {
                 pushView(me, view);
                 Ext.Viewport.unmask();
             });
+        } else if (record.get('action') == 'viewUserStats') {
+            Ext.Viewport.setMasked({
+                xtype: 'loadmask',
+                message: 'Loading...'
+            });
+
+            SpringTrader.user.loadAccountData(function() {
+                var view = Ext.create('SpringTrader.view.UserStats');
+                view.updateView(SpringTrader.user);
+                pushView(me, view);
+                Ext.Viewport.unmask();
+            });
         }
     }
 });

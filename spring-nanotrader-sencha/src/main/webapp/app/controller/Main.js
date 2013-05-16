@@ -91,12 +91,15 @@ Ext.define('SpringTrader.controller.Main', {
         this.getTitleBar().hide();
         this.getMainView().getNavigationBar().show();
         var settingsView = Ext.create('SpringTrader.view.Settings');
+        settingsView.pushedFromMain = true;
         this.getMainView().push(settingsView);
     },
 
     onPopView: function (me, poppedView) {
-        this.getMainView().getNavigationBar().hide();
-        this.getTitleBar().show();
+        if (poppedView.pushedFromMain) {
+            this.getMainView().getNavigationBar().hide();
+            this.getTitleBar().show();
+        }
         poppedView.destroy();
         this.switchViews();
         Ext.Viewport.unmask();

@@ -16,7 +16,7 @@ Ext.define('SpringTrader.view.Settings', {
                 data: [
                     { text: 'Profile', action: 'viewProfile' },
                     { text: 'Help', action: 'viewHelp' },
-                    { text: 'User Statistics', action: 'viewUserStatistics' }
+                    { text: 'User Statistics', action: 'viewUserStats' }
                 ]
             },
             {

@@ -23,6 +23,7 @@ Ext.define('SpringTrader.controller.Holdings', {
         this.holding = list.getStore().getAt(index);
 
         var detailView = Ext.create('SpringTrader.view.HoldingDetail');
+        detailView.pushedFromMain = true;
         var detailTable = detailView.getComponent(0);
 
         detailView.setTitle(this.holding.symbol());

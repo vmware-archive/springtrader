@@ -5,11 +5,10 @@ Ext.define('SpringTrader.view.UserStats', {
         scrollable: false,
         styleHtmlContent: true,
         height: '100%',
-        cls: 'well show-well',
+        title: 'User Statistics',
+        cls: 'well detail-table',
         tpl: [
-                '<div class="title"><h3>User Statistics</h3></div>' +
-                '<div class="table-outer">' +
-                '<table class="table table-condensed">' +
+                '<table class="table table-striped">' +
                 '<tbody>' +
                 '<tr><th>Account ID</th>   <td>{accountid}</td></tr>' +
                 '<tr><th>Creation Date</th><td>{creationdate}</td></tr>' +
