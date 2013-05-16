@@ -130,11 +130,11 @@ Ext.define('SpringTrader.controller.Main', {
             add('profileid', SpringTrader.user.get('profileid'));
     },
 
-    loadQuotes: function() {
+    loadQuotes: function () {
         Ext.StoreMgr.lookup('quotes').load();
     },
 
-    onDashboardActive: function() {
+    onDashboardActive: function () {
         var me = this;
         SpringTrader.user.accountSummary.refreshData(function () {
             me.getApplication().fireEvent('refresh', 'accountsummary');
@@ -147,14 +147,23 @@ Ext.define('SpringTrader.controller.Main', {
         });
     },
 
-    onPortfolioActive: function() {
+    onPortfolioActive: function () {
         var me = this;
         SpringTrader.user.accountSummary.refreshData(function () {
             me.getApplication().fireEvent('refresh', 'accountsummary');
         });
     },
 
-    onTransactionsActive: function() {
-        Ext.StoreMgr.lookup('orders').load();
+    onTransactionsActive: function () {
+        Ext.Viewport.setMasked({
+            xtype: 'loadmask',
+            message: 'Loading...'
+        });
+
+        var store = Ext.StoreManager.lookup('orders');
+        store.currentPage = 0;
+        store.load(function () {
+            Ext.Viewport.unmask();
+        });
     }
 });

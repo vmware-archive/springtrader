@@ -1,7 +1,7 @@
 Ext.define('SpringTrader.view.Transactions', {
     extend: 'Ext.List',
     xtype: 'transactionsPage',
-    requires: ['Ext.plugin.ListPaging'],
+    requires: ['Ext.plugin.ListPaging', 'Ext.plugin.PullRefresh'],
     config: {
         iconCls: 'list',
         title: 'Transactions',
@@ -18,6 +18,8 @@ Ext.define('SpringTrader.view.Transactions', {
         plugins: [{
             xclass: 'Ext.plugin.ListPaging',
             autoPaging: true
+        },{
+            xclass: 'Ext.plugin.PullRefresh'
         }]
     },
     prepareData: function (data, index, order) {
