@@ -1,17 +1,16 @@
-Ext.define('SpringTrader.view.SignupForm', {
+Ext.define('SpringTrader.view.UserForm', {
     extend: 'Ext.form.Panel',
-    xtype: 'signupform',
+    xtype: 'userform',
     requires: ['SpringTrader.view.UserFields'],
     config: {
-        title: 'Sign up',
+        title: 'Profile',
         height: '100%',
         items: [
             { xtype: 'userfields' },
             { xtype: 'container',
                 layout: { type: 'hbox', align: 'center', pack: 'center' },
                 items: [
-                    { xtype: 'button', ui: 'cancel', text: 'Cancel', itemId: 'cancelButton', margin: '0 10 0 10' },
-                    { xtype: 'button', ui: 'confirm', text: 'Sign up', itemId: 'signupSubmitButton', margin: '0 10 0 10' }
+                    { xtype: 'button', ui: 'confirm', text: 'Change', itemId: 'submitButton', margin: '0 10 0 10' }
                 ]
             }
         ]

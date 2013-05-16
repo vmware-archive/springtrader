@@ -2,7 +2,7 @@ Ext.define('SpringTrader.model.User', {
     extend: 'Ext.data.Model',
     requires: ['SpringTrader.validation.Numeric', 'SpringTrader.model.HoldingSummary'],
     config: {
-        idProperty: 'userid',
+        idProperty: 'profileid',
         fields: [
             { name: 'fullname', type: 'string' },
             { name: 'email', type: 'string' },
@@ -13,8 +13,8 @@ Ext.define('SpringTrader.model.User', {
 
             // Returned from backend through login
             { name: 'authToken', type: 'string', persist: false},
-            { name: 'profileid', type: 'int', persist: false},
-            { name: 'accountid', type: 'int', persist: false},
+            { name: 'profileid', type: 'auto', persist: false },
+            { name: 'accountid', type: 'auto', persist: false },
 
             // Returned from backend through api/account/{accountid}
             { name: 'balance', type: 'float', persist: false },
@@ -46,8 +46,9 @@ Ext.define('SpringTrader.model.User', {
             { type: 'numeric', field: 'openbalance', message: 'must be numeric'}
         ],
         proxy: {
-            type: 'ajax',
+            type: 'rest',
             url: '/spring-nanotrader-services/api/accountProfile',
+            headers: {'Content-Type': 'application/json' },
             noCache: false
         }
     },
@@ -88,7 +89,7 @@ Ext.define('SpringTrader.model.User', {
     },
 
     authenticated: function () {
-        return !!this.get('authToken');
+        return !!this.authToken();
     },
 
     accountId: function() {
@@ -99,13 +100,17 @@ Ext.define('SpringTrader.model.User', {
         return this.get('authToken');
     },
 
+    profileId: function () {
+        return this.get('profileid');
+    },
+
     logout: function (callback) {
         var me = this;
         if (me.authenticated()) {
             Ext.Ajax.request({
                 url: '/spring-nanotrader-services/api/logout',
                 method: 'GET',
-                headers: {'Content-Type': 'application/json', 'API_TOKEN': this.get('authToken')},
+                headers: {'Content-Type': 'application/json', 'API_TOKEN': this.authToken()},
                 disableCaching: false,
                 success: function (response) {
                     if (callback) {
@@ -123,12 +128,23 @@ Ext.define('SpringTrader.model.User', {
         me.updateAuthData({});
     },
 
+    loadProfileData: function (successFn) {
+        var me = this;
+        me.getProxy().getHeaders().API_TOKEN = SpringTrader.user.authToken();
+        SpringTrader.model.User.load(SpringTrader.user.getId(), {
+            success: function(record, operation) {
+                me.updateProfileData(record.raw);
+                if (successFn) { successFn(); }
+            }
+        });
+    },
+
     loadAccountData: function (success) {
         var me = this;
         Ext.Ajax.request({
-            url: '/spring-nanotrader-services/api/account/' + this.get('accountid'),
+            url: '/spring-nanotrader-services/api/account/' + this.accountId(),
             method: 'GET',
-            headers: {'Content-Type': 'application/json', 'API_TOKEN': this.get('authToken')},
+            headers: {'Content-Type': 'application/json', 'API_TOKEN': this.authToken()},
             disableCaching: false,
             success: function (response) {
                 var jsonData = Ext.JSON.decode(response.responseText);
@@ -142,17 +158,32 @@ Ext.define('SpringTrader.model.User', {
 
     updateAuthData: function (data) {
         this.set({
-            'authToken': data.authToken,
-            'profileid': data.profileid,
-            'accountid': data.accountid
+            authToken: data.authToken,
+            profileid: parseInt(data.profileid),
+            accountid: parseInt(data.accountid)
         });
     },
 
     updateAccountData: function(data) {
-        this.set('creationdate', data.creationdate);
-        this.set('lastlogin', data.lastlogin);
-        this.set('logincount', data.logincount);
-        this.set('balance', data.balance);
-        this.set('openbalance', data.openbalance);
+        this.set({
+            creationdate: data.creationdate,
+            lastlogin: data.lastlogin,
+            logincount: data.logincount,
+            balance: data.balance,
+            openbalance: data.openbalance            
+        });
+    },
+
+    updateProfileData: function(data) {
+        this.set({
+            address: data.address,
+            creditcard: data.creditcard,
+            email: data.email,
+            fullname: data.fullname,
+            userid: data.userid,
+            passwd: data.passwd
+        });
+        // Make user model phantom to let the proxy set PUT request type
+        this.phantom = false;
     }
 });

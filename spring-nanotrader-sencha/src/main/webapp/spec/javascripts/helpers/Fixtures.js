@@ -430,3 +430,28 @@ beforeEach(function(){
        ]
    }
 });
+
+var accountProfileJSON;
+beforeEach(function() {
+    accountProfileJSON = {
+        "profileid": 33,
+        "address": "new yak",
+        "passwd": "z",
+        "userid": "z",
+        "email": "z@y.z",
+        "creditcard": "1234123412341234",
+        "fullname": "z",
+        "accounts": [
+            {
+                "balance": 1.00,
+                "lastlogin": "2013-05-16",
+                "logincount": 1,
+                "openbalance": 1.00,
+                "logoutcount": 0,
+                "creationdate": "2013-05-16",
+                "accountid": 33,
+                "version": 1
+            }
+        ]
+    };
+});

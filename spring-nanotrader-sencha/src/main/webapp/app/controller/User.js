@@ -5,10 +5,16 @@ Ext.define('SpringTrader.controller.User', {
         models: ['User'],
         refs: {
             signupSubmitButton: 'signupform #signupSubmitButton',
+            profileSubmitButton: 'userform #submitButton',
+
+            userForm: 'userform',
             signupPage: 'signupform',
             loginPage: 'loginform',
+
             modalSheet: 'modalsheet',
+
             signupCancelButton: 'signupform #cancelButton',
+
             loginCancelButton: 'loginform #cancelButton',
             loginSubmitButton: 'loginform #submitButton',
             loginButton: 'mainview #loginButton'
@@ -17,6 +23,10 @@ Ext.define('SpringTrader.controller.User', {
             signupSubmitButton: {
                 tap: 'onSignupSubmit'
             },
+            profileSubmitButton: {
+                tap: 'onProfileSubmit'
+            },
+
             signupCancelButton: {
                 tap: 'onCancel'
             },
@@ -32,12 +42,27 @@ Ext.define('SpringTrader.controller.User', {
     onSignupSubmit: function() {
         var form = this.getSignupPage();
         var user = Ext.create('SpringTrader.model.User');
+
         user.getProxy().addListener('exception', this.onException );
 
-        this.getSignupPage().updateRecord(user);
+        form.updateRecord(user);
 
         if (this.validateUser(user, form)) {
             user.save(this.onSaveCallback, this);
+        }
+    },
+
+    onProfileSubmit: function() {
+        var form = this.getUserForm();
+        var user = SpringTrader.user;
+
+        user.getProxy().addListener('exception', this.onException );
+        form.updateRecord(user);
+
+        if (this.validateUser(user, form)) {
+            user.save(function() {
+                Ext.Msg.alert('Success', 'Profile updated.')
+            });
         }
     },
 

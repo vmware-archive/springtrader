@@ -4,11 +4,16 @@ Ext.define('SpringTrader.controller.Settings', {
         view: ['Settings'],
         refs: {
             mainView: 'mainview',
-            logoutButton: 'settings #logoutButton'
+            titleBar: 'titlebar',
+            logoutButton: 'settings #logoutButton',
+            settingsList: 'settings list'
         },
         control: {
             logoutButton: {
                 tap: 'onLogoutButtonTap'
+            },
+            settingsList: {
+                disclose: 'onDisclose'
             }
         }
     },
@@ -29,5 +34,31 @@ Ext.define('SpringTrader.controller.Settings', {
         SpringTrader.appStore.remove('authToken');
         SpringTrader.appStore.remove('accountid');
         SpringTrader.appStore.remove('profileid');
+    },
+
+    onDisclose: function(list, record, target, index, event) {
+        var me = this;
+
+        function pushView(controller, view) {
+            controller.getTitleBar().hide();
+            controller.getMainView().getNavigationBar().show();
+            controller.getMainView().push(view);
+        };
+
+        if (record.get('action') == 'viewProfile') {
+            Ext.Viewport.setMasked({
+                xtype: 'loadmask',
+                message: 'Loading...'
+            });
+
+            SpringTrader.user.loadProfileData(function() {
+                var view = Ext.create('SpringTrader.view.UserForm');
+                Ext.ComponentQuery.query('input[name=userid]')[0].setDisabled(true);
+                Ext.ComponentQuery.query('input[name=openbalance]')[0].setDisabled(true);
+                view.setRecord(SpringTrader.user);
+                pushView(me, view);
+                Ext.Viewport.unmask();
+            });
+        }
     }
 });

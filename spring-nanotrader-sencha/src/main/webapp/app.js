@@ -122,8 +122,8 @@ Ext.application({
         if (SpringTrader.appStore.find('authToken')) {
             SpringTrader.user.set({
                 authToken: SpringTrader.appStore.find('authToken'),
-                profileid: SpringTrader.appStore.find('profileid'),
-                accountid: SpringTrader.appStore.find('accountid')
+                profileid: parseInt(SpringTrader.appStore.find('profileid')),
+                accountid: parseInt(SpringTrader.appStore.find('accountid'))
             });
             Ext.StoreMgr.lookup('quotes').load();
         }

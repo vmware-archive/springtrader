@@ -31,7 +31,7 @@ describe('SpringTrader.model.User', function () {
             expect(errors.isValid()).toBeFalsy();
 
             Ext.Array.each(user.getFields().keys, function(field)  {
-                if (field == 'creditcard') { return; }
+                if (field == 'creditcard' || field == 'profileid') { return; }
                 if (user.fields.get(field).getPersist()) {
                     if (!errors.getByField(field)[0]) {
                         console.log(field + ' should be defined');
@@ -172,9 +172,9 @@ describe('SpringTrader.model.User', function () {
             request.response({status: 200});
 
             expect(user.authenticated()).toBeFalsy();
-            expect(user.get('authToken')).toBeNull();
-            expect(user.get('profileid')).toBeNull();
-            expect(user.get('accountid')).toBeNull();
+            expect(user.authToken()).toBeNull();
+            expect(user.profileId()).toBeNaN();
+            expect(user.accountId()).toBeNaN();
         });
 
         it("sends the logout request to backend", function() {
@@ -248,6 +248,56 @@ describe('SpringTrader.model.User', function () {
 
             expect(successCallback.mostRecentCall.args[0].status).toEqual(200);
         })
+    });
+
+    describe("#loadProfile data", function() {
+        var user;
+        beforeEach(function() {
+            jasmine.Ajax.useMock();
+            clearAjaxRequests();
+            user = Ext.create('SpringTrader.model.User', loginOkResponseJSON);
+            expect(user.authenticated()).toBeTruthy();
+        });
+
+        it('sends the account profile request', function() {
+            user.loadProfileData();
+            var request = mostRecentAjaxRequest();
+
+            expect(request.url).toEqual('/spring-nanotrader-services/api/accountProfile/' + user.profileId());
+            expect(request.method).toEqual('GET');
+            expect(request.requestHeaders['Content-Type']).toEqual('application/json');
+            expect(request.requestHeaders['API_TOKEN']).toEqual(user.get('authToken'));
+        });
+
+        it('populates the user model with the response data', function() {
+            user.loadProfileData();
+            var request = mostRecentAjaxRequest();
+
+            request.response({
+                status: 200,
+                responseText: Ext.JSON.encode(accountProfileJSON)
+            });
+
+            expect(user.get('address')).toEqual(accountProfileJSON.address);
+            expect(user.get('creditcard')).toEqual(accountProfileJSON.creditcard);
+            expect(user.get('email')).toEqual(accountProfileJSON.email);
+            expect(user.get('fullname')).toEqual(accountProfileJSON.fullname);
+            expect(user.get('userid')).toEqual(accountProfileJSON.userid);
+            expect(user.phantom).toBeFalsy();
+        });
+
+        it('calls the success callback, when provided', function() {
+            var successCallback = jasmine.createSpy();
+            user.loadProfileData(successCallback);
+            var request = mostRecentAjaxRequest();
+
+            request.response({
+                status: 200,
+                responseText: Ext.JSON.encode(accountProfileJSON)
+            });
+
+            expect(successCallback).toHaveBeenCalled();
+        });
     });
 
     describe("accountSummary", function() {

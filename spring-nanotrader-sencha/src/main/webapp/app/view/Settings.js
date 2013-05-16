@@ -14,9 +14,9 @@ Ext.define('SpringTrader.view.Settings', {
                 onItemDisclosure: true,
                 disableSelection: true,
                 data: [
-                    { text: 'Profile' },
-                    { text: 'Help' },
-                    { text: 'User Statistics' }
+                    { text: 'Profile', action: 'viewProfile' },
+                    { text: 'Help', action: 'viewHelp' },
+                    { text: 'User Statistics', action: 'viewUserStatistics' }
                 ]
             },
             {
