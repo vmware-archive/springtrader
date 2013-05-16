@@ -62,6 +62,8 @@ Ext.define('SpringTrader.controller.User', {
         if (this.validateUser(user, form)) {
             user.save(function() {
                 Ext.Msg.alert('Success', 'Profile updated.')
+            }, function() {
+                Ext.Msg.alert('Failure', 'Something terrible happened, check the browser console?')
             });
         }
     },

@@ -247,7 +247,7 @@ describe('SpringTrader.model.User', function () {
             });
 
             expect(successCallback.mostRecentCall.args[0].status).toEqual(200);
-        })
+        });
     });
 
     describe("#loadProfile data", function() {
@@ -297,6 +297,18 @@ describe('SpringTrader.model.User', function () {
             });
 
             expect(successCallback).toHaveBeenCalled();
+        });
+
+        it('calls the failure callback, when provided', function() {
+            var failureCallback = jasmine.createSpy();
+            user.loadProfileData(null, failureCallback);
+            var request = mostRecentAjaxRequest();
+
+            request.response({
+                status: 400
+            });
+
+            expect(failureCallback).toHaveBeenCalled();
         });
     });
 
