@@ -104,12 +104,12 @@ Ext.application({
     isIconPrecomposed: false,
 
     startupImage: {
-        '320x460': 'resources/startup/light/320x460.png',
-        '640x920': 'resources/startup/light/640x920.png',
-        '768x1004': 'resources/startup/light/768x1004.png',
-        '748x1024': 'resources/startup/light/748x1024.png',
-        '1536x2008': 'resources/startup/light/1536x2008.png',
-        '1496x2048': 'resources/startup/light/1496x2048.png'
+        '320x460': 'resources/startup/dark/320x460.png',
+        '640x920': 'resources/startup/dark/640x920.png',
+        '768x1004': 'resources/startup/dark/768x1004.png',
+        '748x1024': 'resources/startup/dark/748x1024.png',
+        '1536x2008': 'resources/startup/dark/1536x2008.png',
+        '1496x2048': 'resources/startup/dark/1496x2048.png'
     },
 
     launch: function() {
