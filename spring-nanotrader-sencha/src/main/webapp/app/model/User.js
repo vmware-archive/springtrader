@@ -130,8 +130,8 @@ Ext.define('SpringTrader.model.User', {
 
     loadProfileData: function (successFn, failureFn) {
         var me = this;
-        me.getProxy().getHeaders().API_TOKEN = SpringTrader.user.authToken();
-        SpringTrader.model.User.load(SpringTrader.user.getId(), {
+        me.getProxy().getHeaders().API_TOKEN = this.authToken();
+        SpringTrader.model.User.load(this.getId(), {
             success: function(record) {
                 me.updateProfileData(record.raw);
                 if (successFn) { successFn(); }
