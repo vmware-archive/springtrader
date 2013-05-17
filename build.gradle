@@ -295,15 +295,22 @@ project('spring-nanotrader-web') {
 
 
 project('spring-nanotrader-sencha') {
-        apply plugin: 'war'
         description = 'Spring Nanotrader Sencha'
         task tar(type: Tar) {
-          from 'src/main/webapp'
+          from 'src/main/webapp/build/springtrader/production'
           compression = Compression.GZIP
           destinationDir = file("build/libs")
         }
         artifacts {
             archives tar
+        }
+        task war(type: War) {
+          from 'src/main/webapp/build/springtrader/production'
+          compression = Compression.GZIP
+          destinationDir = file("build/libs")
+        }
+        artifacts {
+            archives war
         }
         task release(dependsOn: assemble) << {
             copy {
