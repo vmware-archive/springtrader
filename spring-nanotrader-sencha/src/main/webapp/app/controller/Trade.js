@@ -1,4 +1,4 @@
-Ext.define('SpringTrader.controller.Trade', {
+ Ext.define('SpringTrader.controller.Trade', {
     extend: 'Ext.app.Controller',
     requires: ['Ext.MessageBox'],
     mixins: ['SpringTrader.mixin.SegmentedButtonSupport'],
@@ -111,7 +111,7 @@ Ext.define('SpringTrader.controller.Trade', {
 
     validateOrder: function (order) {
         if (order.quantity == 0) {
-            Ext.Msg.alert('Dude!', 'You gotta buy sumntin!');
+            Ext.Msg.alert('Hey there!', 'A valid number of shares is required.');
             return false;
         }
         return true;
