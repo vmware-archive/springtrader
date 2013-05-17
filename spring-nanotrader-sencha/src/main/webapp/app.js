@@ -106,6 +106,7 @@ Ext.application({
     startupImage: {
         '320x460': 'resources/startup/dark/320x460.png',
         '640x920': 'resources/startup/dark/640x920.png',
+        '640x1096': 'resources/startup/dark/640x1136.png',
         '768x1004': 'resources/startup/dark/768x1004.png',
         '748x1024': 'resources/startup/dark/748x1024.png',
         '1536x2008': 'resources/startup/dark/1536x2008.png',
