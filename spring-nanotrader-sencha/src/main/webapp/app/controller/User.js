@@ -119,7 +119,8 @@ Ext.define('SpringTrader.controller.User', {
 
         if (!errors.isValid()) {
             errors.each(function(error) {
-                errorString += error.getField() + " " +error.getMessage() + "<br/>";
+                var formField = Ext.ComponentQuery.query('input[name=' + error.getField() + ']')[0]
+                errorString += formField.getPlaceHolder() + " " +error.getMessage() + ".<br/>";
             });
             Ext.Msg.alert("Sorry", errorString);
             return false;
