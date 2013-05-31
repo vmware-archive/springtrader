@@ -32,7 +32,7 @@ nano.strings = {
     assetDistribution : 'Asset Distribution',
     help : 'Help',
     logout : 'Logout',
-    copyright : 'Copyright &copy; 2013 Pivotal, Inc. All rights reserved.',
+    copyright : 'Copyright &copy; 2013 GoPivotal, Inc. All rights reserved.',
     contactUs : 'Contact us',
     daysGains : "day's gains",
     daysLosses : "day's losses",
