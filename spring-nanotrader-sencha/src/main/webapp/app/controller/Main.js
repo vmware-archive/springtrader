@@ -10,7 +10,7 @@ Ext.define('SpringTrader.controller.Main', {
 
     config: {
         views: ['SignupButton', 'SignupForm', 'LoggedOut', 'LoginForm',
-            'TabPanel', 'Dashboard', 'Portfolio', 'Trade', 'Settings', 'Transactions'],
+            'TabPanel', 'Settings'],
         refs: {
             titleBar: 'titlebar',
 
@@ -22,11 +22,7 @@ Ext.define('SpringTrader.controller.Main', {
             showSignupFormButton: 'loggedoutview #showSignupFormButton',
 
             loginButton: 'mainview #loginButton',
-            settingsButton: 'mainview #settingsButton',
-
-            dashboardPage: 'dashboardPage',
-            portfolioPage: 'portfolioPage',
-            transactionsPage: 'transactionsPage'
+            settingsButton: 'mainview #settingsButton'
         },
         control: {
             showSignupFormButton: {
@@ -40,15 +36,6 @@ Ext.define('SpringTrader.controller.Main', {
             },
             mainView: {
                 pop: 'onPopView'
-            },
-            dashboardPage: {
-                activate: 'onDashboardActive'
-            },
-            portfolioPage: {
-                activate: 'onPortfolioActive'
-            },
-            transactionsPage: {
-                activate: 'onTransactionsActive'
             }
         }
     },
@@ -135,38 +122,5 @@ Ext.define('SpringTrader.controller.Main', {
 
     loadQuotes: function () {
         Ext.StoreMgr.lookup('quotes').load();
-    },
-
-    onDashboardActive: function () {
-        var me = this;
-        SpringTrader.user.accountSummary.refreshData(function () {
-            me.getApplication().fireEvent('refresh', 'accountsummary');
-        });
-        SpringTrader.user.loadAccountData(function () {
-            me.getApplication().fireEvent('refresh', 'userstats');
-        });
-        SpringTrader.user.holdingSummary.refreshData(function () {
-            me.getApplication().fireEvent('refresh', 'holdingsummary');
-        });
-    },
-
-    onPortfolioActive: function () {
-        var me = this;
-        SpringTrader.user.accountSummary.refreshData(function () {
-            me.getApplication().fireEvent('refresh', 'accountsummary');
-        });
-    },
-
-    onTransactionsActive: function () {
-        Ext.Viewport.setMasked({
-            xtype: 'loadmask',
-            message: 'Loading...'
-        });
-
-        var store = Ext.StoreManager.lookup('orders');
-        store.currentPage = 0;
-        store.load(function () {
-            Ext.Viewport.unmask();
-        });
     }
 });

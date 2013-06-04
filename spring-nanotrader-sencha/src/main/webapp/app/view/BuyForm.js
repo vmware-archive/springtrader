@@ -12,6 +12,7 @@ Ext.define('SpringTrader.view.BuyForm', {
                     {
                         xtype: 'stnumberfield',
                         name: 'quantity',
+                        id: 'quantityField',
                         label: 'Quantity'
                     }
                 ]

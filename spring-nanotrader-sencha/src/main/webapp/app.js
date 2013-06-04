@@ -82,6 +82,7 @@ Ext.application({
         'AccountSummary',
         'DailyTopGains',
         'Main',
+        'Dashboard',
         'MarketSummary',
         'Portfolio',
         'Trade',

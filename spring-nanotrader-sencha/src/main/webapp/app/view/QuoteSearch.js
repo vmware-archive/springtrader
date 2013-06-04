@@ -18,6 +18,7 @@ Ext.define('SpringTrader.view.QuoteSearch', {
                             {
                                 xtype: 'textfield',
                                 name: 'symbol',
+                                id: 'quoteSymbol',
                                 placeHolder: 'Enter symbol to get a quote',
                                 autoCapitalize: false,
                                 autoCorrect: false,

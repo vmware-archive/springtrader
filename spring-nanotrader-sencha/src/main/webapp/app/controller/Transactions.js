@@ -3,27 +3,42 @@ Ext.define('SpringTrader.controller.Transactions', {
     config: {
         views: ['TransactionDetail', 'Transactions'],
         refs: {
-            transactions: 'transactionsPage',
+            transactionsPage: 'transactionsPage',
             transactionDetail: 'transactiondetail',
             mainView: 'mainview',
             titleBar: 'titlebar'
         },
         control: {
-            transactions: {
+            transactionsPage: {
+                activate: 'onTransactionsActive',
                 disclose: 'onDisclose'
             }
         }
     },
-    onDisclose: function(list, record, target, index, event) {
-        var transaction = list.getStore().getAt(index);
+    
+    onTransactionsActive: function () {
+        Ext.Viewport.setMasked({
+            xtype: 'loadmask',
+            message: 'Loading...'
+        });
 
-        var detailView = Ext.create('SpringTrader.view.TransactionDetail');
+        var store = Ext.StoreManager.lookup('orders');
+        store.currentPage = 0;
+        store.load(function () {
+            Ext.Viewport.unmask();
+        });
+    },
+    
+    onDisclose: function(list, record, target, index, event) {
+        var transaction = list.getStore().getAt(index), 
+			detailView = Ext.create('SpringTrader.view.TransactionDetail'),
+			mainView = this.getMainView();
         detailView.pushedFromMain = true;
 
         detailView.setData(transaction.detail());
 
         this.getTitleBar().hide();
-        this.getMainView().getNavigationBar().show();
-        this.getMainView().push(detailView);
+        mainView.getNavigationBar().show();
+        mainView.push(detailView);
     }
 });

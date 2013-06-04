@@ -4,12 +4,16 @@ Ext.define('SpringTrader.controller.Portfolio', {
     config: {
         views: ['Portfolio', 'PortfolioSummary', 'PortfolioSummaryTable', 'PortfolioHoldings'],
         refs: {
+            portfolioPage: 'portfolioPage',
             portfolioSwitch: 'portfolioPage #portfolioswitch',
             portfolioSummary: 'portfoliosummary',
             portfolioSummaryTable: 'portfoliosummarytable',
             portfolioHoldings: 'portfolioPage portfolioholdings'
         },
         control: {
+            portfolioPage: {
+                activate: 'onPortfolioActive'
+            },
             portfolioSwitch: {
                 toggle: 'onToggle'
             }
@@ -24,6 +28,13 @@ Ext.define('SpringTrader.controller.Portfolio', {
         if (what == 'accountsummary') {
             this.getPortfolioSummaryTable().updateView(SpringTrader.user.accountSummary);
         }
+    },
+    
+    onPortfolioActive: function () {
+        var me = this;
+        SpringTrader.user.accountSummary.refreshData(function () {
+            me.getApplication().fireEvent('refresh', 'accountsummary');
+        });
     },
 
     onToggle: function (segmentedButton, button, isPressed) {

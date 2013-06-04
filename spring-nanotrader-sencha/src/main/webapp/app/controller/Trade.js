@@ -10,19 +10,19 @@
             portfolioHoldings: 'tradePage portfolioholdings',
             quoteSearch: 'quotesearch',
             quoteSearchForm: 'quotesearch formpanel',
-            searchField: 'input[name=symbol]',
+            searchField: 'quotesearch #quoteSymbol',
             quoteTable: 'quote',
             buyForm: 'buyform',
             buyButton: 'buyform #submitButton',
-            quantityField: 'input[name=quantity]',
+            quantityField: 'buyform #quantityField',
             symbolList: 'symbollist'
         },
         control: {
             tradeSwitch: { toggle: 'onToggle' },
             quoteSearch: { action: 'onSearch' },
-            searchField: { keyup: 'onSearchKeyUp', clearicontap: 'onSearchClear' },
+            'quotesearch #quoteSymbol' : { keyup: 'onSearchKeyUp', clearicontap: 'onSearchClear' },
             buyButton: { tap: 'onBuy'},
-            quantityField: { keyup: 'onQuantityKeyUp', clearicontap: 'onQuantityClear' },
+            'buyform #quantityField': { keyup: 'onQuantityKeyUp', clearicontap: 'onQuantityClear' },
             symbolList: { itemtap: 'onSymbolSelect'}
         }
     },
