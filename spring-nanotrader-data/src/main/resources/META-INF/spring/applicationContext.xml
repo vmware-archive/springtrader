@@ -7,13 +7,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
-		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/jee https://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/jdbc https://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- This will automatically locate any and all property files you have 
 		within your classpath, provided they fall under the META-INF/spring directory. 
 		The located property files are parsed and their values can then be used within 
@@ -141,7 +141,7 @@
 
 			<!-- Default isolation level for SQLfire is NONE. Default isolation level 
 				for vPostgres is TRANSACTION_READ_COMMITTED Constant value documentation: 
-				http://docs.oracle.com/javase/6/docs/api/constant-values.html Override the 
+				https://docs.oracle.com/javase/6/docs/api/constant-values.html Override the 
 				default isolation level to ensure consistent unit test behavior across data 
 				stores. Examples: NONE = 0 TRANSACTION_READ_UNCOMMITTED = 1 TRANSACTION_READ_COMMITTED 
 				= 2 -->
