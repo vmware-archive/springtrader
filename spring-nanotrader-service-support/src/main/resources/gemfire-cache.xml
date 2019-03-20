@@ -1,4 +1,4 @@
-<?xml version="1.0"?><!DOCTYPE cache PUBLIC "-//GemStone Systems, Inc.//GemFire Declarative Caching 5.7//EN" "http://www.gemstone.com/dtd/cache5_7.dtd">
+<?xml version="1.0"?><!DOCTYPE cache PUBLIC "-//GemStone Systems, Inc.//GemFire Declarative Caching 5.7//EN" "https://www.gemstone.com/dtd/cache5_7.dtd">
 <cache lock-lease="120" lock-timeout="60" search-timeout="300">
 	<region name="authorizationCache">
 		<region-attributes scope="global"
