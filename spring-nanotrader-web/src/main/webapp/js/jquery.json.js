@@ -3,10 +3,10 @@
 * version: 2.1 (2009-08-14)
 *
 * This document is licensed as free software under the terms of the
-* MIT License: http://www.opensource.org/licenses/mit-license.php
+* MIT License: https://www.opensource.org/licenses/mit-license.php
 *
 * Brantley Harris wrote this plugin. It is based somewhat on the JSON.org 
-* website's http://www.json.org/json2.js, which proclaims:
+* website's https://www.json.org/json2.js, which proclaims:
 * "NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.", a sentiment that
 * I uphold.
 *

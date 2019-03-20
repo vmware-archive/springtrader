@@ -261,7 +261,7 @@ that the following conditions are met:
    trademark of MetaStuff, Ltd.
  
 5. Due credit should be given to the DOM4J Project - 
-   http://www.dom4j.org
+   https://www.dom4j.org
  
 THIS SOFTWARE IS PROVIDED BY METASTUFF, LTD. AND CONTRIBUTORS
 ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT
@@ -326,19 +326,19 @@ If you are feeling kind and generous, consider supporting the project by making 
 >>> jquery-1.8
 
 jQuery JavaScript Library v1.8.0
-http://jquery.com/
+https://jquery.com/
 
 Includes Sizzle.js
-http://sizzlejs.com/
+https://sizzlejs.com/
 
 Copyright 2012 jQuery Foundation and other contributors
 Released under the MIT license
-http://jquery.org/license
+https://jquery.org/license
 
 Date: Thu Aug 09 2012 16:24:48 GMT-0400 (Eastern Daylight Time)
 
 Copyright 2012 jQuery Foundation and other contributors
-http://jquery.com/
+https://jquery.com/
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -529,7 +529,7 @@ Underscore is freely distributable under the MIT license.
 Portions of Underscore are inspired or borrowed from Prototype,
 Oliver Steele's Functional, and John Resig's Micro-Templating.
 For all details and documentation:
-http://documentcloud.github.com/underscore
+https://documentcloud.github.com/underscore
 
 
 --------------- SECTION 2: Apache License, V2.0 ----------
@@ -586,7 +586,7 @@ Apache Commons BeanUtils
 Copyright 2000-2010 The Apache Software Foundation
 
 This product includes software developed by
-The Apache Software Foundation (http://www.apache.org/).
+The Apache Software Foundation (https://www.apache.org/).
 
 
 >>> commons-collections-3.1
@@ -612,13 +612,13 @@ Apache Commons DBCP
 Copyright 2001-2010 The Apache Software Foundation
 
 This product includes software developed by
-The Apache Software Foundation (http://www.apache.org/).
+The Apache Software Foundation (https://www.apache.org/).
 
 
 >>> commons-io-1.2
 
 This product includes software developed by
-The Apache Software Foundation (http://www.apache.org/).
+The Apache Software Foundation (https://www.apache.org/).
 
 
 >>> commons-lang-2.5
@@ -631,7 +631,7 @@ Copyright 2003-2007 The Apache Software Foundation
 
 This product includes software developed by
 
-The Apache Software Foundation (http://www.apache.org/).
+The Apache Software Foundation (https://www.apache.org/).
 
 
 >>> commons-lang3-3.1
@@ -658,7 +658,7 @@ Apache Commons Logging
 Copyright 2003-2007 The Apache Software Foundation
 
 This product includes software developed by
-The Apache Software Foundation (http://www.apache.org/).
+The Apache Software Foundation (https://www.apache.org/).
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -679,7 +679,7 @@ Apache Commons Pool
 Copyright 1999-2009 The Apache Software Foundation
 
 This product includes software developed by
-The Apache Software Foundation (http://www.apache.org/).
+The Apache Software Foundation (https://www.apache.org/).
 
 
 >>> groovy-1.8.5
@@ -720,7 +720,7 @@ the documentation and/or other materials provided with the distribution.
 must include the following acknowledgment:
 
 "This product includes software developed by the Indiana University
-Extreme! Lab (http://www.extreme.indiana.edu/)."
+Extreme! Lab (https://www.extreme.indiana.edu/)."
 
 Alternately, this acknowledgment may appear in the software itself,
 if and wherever such third-party acknowledgments normally appear.
@@ -728,7 +728,7 @@ if and wherever such third-party acknowledgments normally appear.
 4. The names "Indiana Univeristy" and "Indiana Univeristy Extreme! Lab"
 must not be used to endorse or promote products derived from this
 software without prior written permission. For written permission,
-please contact http://www.extreme.indiana.edu/.
+please contact https://www.extreme.indiana.edu/.
 
 5. Products derived from this software may not use "Indiana Univeristy"
 name nor may "Indiana Univeristy" appear in their name, without prior
@@ -750,7 +750,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 > BSD
 
 Javolution - Java(TM) Solution for Real-Time and Embedded Systems
-Copyright (c) 2006, Javolution (http://javolution.org)
+Copyright (c) 2006, Javolution (https://javolution.org)
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -1116,7 +1116,7 @@ Copyright (c) 1999-2001 Xerox Corporation,
 
 All rights reserved. 
 
-This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution and is available at http://www.eclipse.org/legal/epl-v10.html
+This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution and is available at https://www.eclipse.org/legal/epl-v10.html
 
 
 >>> aspectjweaver-1.6.12
@@ -1127,7 +1127,7 @@ All rights reserved.
 This program and the accompanying materials are made available
 under the terms of the Eclipse Public License v1.0
 which accompanies this distribution and is available at
-http://www.eclipse.org/legal/epl-v10.html
+https://www.eclipse.org/legal/epl-v10.html
 
 Contributors:
 PARC     initial implementation
@@ -1140,7 +1140,7 @@ Adrian Colyer, Andy Clement, overhaul for generics, Abraham Nevado
 
 Copyright 2004-2011 H2 Group. Multiple-Licensed under the H2 License,
 Version 1.0, and under the Eclipse Public License, Version 1.0
-(http://h2database.com/html/license.html).
+(https://h2database.com/html/license.html).
 Initial Developer: H2 Group
 
 
@@ -1151,9 +1151,9 @@ Copyright (c) 2008, 2009 Sun Microsystems. All rights reserved.
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License v1.0 and Eclipse Distribution License v. 1.0
 which accompanies this distribution.
-The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+The Eclipse Public License is available at https://www.eclipse.org/legal/epl-v10.html
 and the Eclipse Distribution License is available at
-http://www.eclipse.org/org/documents/edl-v10.php.
+https://www.eclipse.org/org/documents/edl-v10.php.
 
 
 --------------- SECTION 5: GNU Lesser General Public License, V2.1 ----------
@@ -2449,7 +2449,7 @@ EXHIBIT A -Mozilla Public License.
    Version 1.1 (the "License"); you may not use this file except in
    compliance with the License. You may obtain a copy of the License at
 
-   http://www.mozilla.org/MPL/
+   https://www.mozilla.org/MPL/
 
    Software distributed under the License is distributed on an "AS IS"
    basis, WITHOUT WARRANTY OF
@@ -3051,7 +3051,7 @@ to a jury trial in any resulting litigation.
 		   GNU LESSER GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
- Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
@@ -3459,7 +3459,7 @@ available (as would be noted above), you may obtain a copy of
 the source code corresponding to the binaries for such open
 source components and modifications thereto, if any, (the
 "Source Files"), by downloading the Source Files from VMware's website at
-http://www.vmware.com/download/open_source.html, or by sending a request, with
+https://www.vmware.com/download/open_source.html, or by sending a request, with
 your name and address to: VMware, Inc., 3401 Hillview Avenue,
 Palo Alto, CA 94304,United States of America. All such
 requests should clearly specify: OPEN SOURCE FILES REQUEST,
