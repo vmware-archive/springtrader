@@ -30,7 +30,7 @@ allprojects {
 		maven { url  'http://maven.springframework.org/release' }
 		maven { url  'http://repo.springsource.org/libs-milestone' }
 		maven { url  'http://spring-roo-repository.springsource.org/release' }
-		mavenCentral()
+		maven { url 'https://repo.maven.apache.org/maven2/' }
 		maven { url 'http://maven.springframework.org/snapshot' }
 	}
 }
@@ -198,7 +198,7 @@ project('tools') {
 	apply plugin: 'groovy'
 
 	repositories {
-	    mavenCentral()
+	    maven { url 'https://repo.maven.apache.org/maven2/' }
 	}
 
 	configurations {
