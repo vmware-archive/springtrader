@@ -1,3 +1,6 @@
+springtrader is no longer actively maintained by VMware, Inc.
+=============================================================
+
 SpringTrader getting started guide is available under github wiki
 ==============================================================
 
