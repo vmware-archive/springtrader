@@ -368,7 +368,7 @@ nano.utils.printCurrency = function(amount, decimalDigits)
  * Prints a Date Javascript Objet into a nicer format
  * @author Carlos Soto <carlos.soto>
  * @param Object Date: Javascript Date object to print
- * @param format: Date format: http://code.google.com/p/datejs/wiki/FormatSpecifiers
+ * @param format: Date format: https://code.google.com/p/datejs/wiki/FormatSpecifiers
  * @return Object
  */
 nano.utils.printDate = function(date, format) {

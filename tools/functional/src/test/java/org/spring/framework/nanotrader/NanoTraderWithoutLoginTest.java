@@ -19,7 +19,7 @@ public class NanoTraderWithoutLoginTest {
 
   @BeforeClass
   public static void oneTimeSetUp() {
-    context_uri = "http://10.150.82.211:8080/daytrader/app";
+    context_uri = "https://10.150.82.211:8080/daytrader/app";
     HttpUnitOptions.setScriptingEnabled(false);
   }
 

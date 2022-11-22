@@ -1,7 +1,7 @@
 /**
  * QUnit v1.6.0pre - A JavaScript Unit Testing Framework
  *
- * http://docs.jquery.com/QUnit
+ * https://docs.jquery.com/QUnit
  *
  * Copyright (c) 2012 John Resig, Jörn Zaefferer
  * Dual licensed under the MIT (MIT-LICENSE.txt)
@@ -1353,13 +1353,13 @@ QUnit.equiv = (function() {
 
 /**
  * jsDump Copyright (c) 2008 Ariel Flesler - aflesler(at)gmail(dot)com |
- * http://flesler.blogspot.com Licensed under BSD
- * (http://www.opensource.org/licenses/bsd-license.php) Date: 5/15/2008
+ * https://flesler.blogspot.com Licensed under BSD
+ * (https://www.opensource.org/licenses/bsd-license.php) Date: 5/15/2008
  *
  * @projectDescription Advanced and extensible data dumping for Javascript.
  * @version 1.0.0
  * @author Ariel Flesler
- * @link {http://flesler.blogspot.com/2008/05/jsdump-pretty-dump-of-any-javascript.html}
+ * @link {https://flesler.blogspot.com/2008/05/jsdump-pretty-dump-of-any-javascript.html}
  */
 QUnit.jsDump = (function() {
 	function quote( str ) {
@@ -1604,13 +1604,13 @@ function inArray( elem, array ) {
 
 /*
  * Javascript Diff Algorithm
- *  By John Resig (http://ejohn.org/)
+ *  By John Resig (https://johnresig.com/)
  *  Modified by Chu Alan "sprite"
  *
  * Released under the MIT license.
  *
  * More Info:
- *  http://ejohn.org/projects/javascript-diff-algorithm/
+ *  https://johnresig.com/projects/javascript-diff-algorithm/
  *
  * Usage: QUnit.diff(expected, actual)
  *

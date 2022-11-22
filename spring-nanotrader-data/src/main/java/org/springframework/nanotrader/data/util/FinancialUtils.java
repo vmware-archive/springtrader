@@ -26,7 +26,7 @@ import org.springframework.nanotrader.data.domain.Holding;
 /**
  * @author Brian Dussault
  * Code was borrowed from original Day Trader application
- * http://svn.apache.org/repos/asf/geronimo/daytrader/trunk/javaee6/modules/web/src/main/java/org/apache/geronimo/daytrader/javaee6/core/direct/FinancialUtils.java
+ * https://svn.apache.org/repos/asf/geronimo/daytrader/trunk/javaee6/modules/web/src/main/java/org/apache/geronimo/daytrader/javaee6/core/direct/FinancialUtils.java
  */
 
 public class FinancialUtils {

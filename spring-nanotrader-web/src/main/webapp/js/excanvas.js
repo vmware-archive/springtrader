@@ -1,4 +1,4 @@
-// Memory Leaks patch from http://explorercanvas.googlecode.com/svn/trunk/ 
+// Memory Leaks patch from https://explorercanvas.googlecode.com/svn/trunk/ 
 //  svn : r73
 // ------------------------------------------------------------------
 // Copyright 2006 Google Inc.
@@ -28,7 +28,7 @@
 // * Canvas width/height should is using content-box by default. IE in
 //   Quirks mode will draw the canvas using border-box. Either change your
 //   doctype to HTML5
-//   (http://www.whatwg.org/specs/web-apps/current-work/#the-doctype)
+//   (https://www.whatwg.org/specs/web-apps/current-work/#the-doctype)
 //   or use Box Sizing Behavior from WebFX
 //   (http://webfx.eae.net/dhtml/boxsizing/boxsizing.html)
 // * Non uniform scaling does not correctly scale strokes.
@@ -176,7 +176,7 @@ if (!document.createElement('canvas').getContext) {
       return el;
     },
 
-    // Memory Leaks patch : see http://code.google.com/p/explorercanvas/issues/detail?id=82
+    // Memory Leaks patch : see https://code.google.com/p/explorercanvas/issues/detail?id=82
     uninitElement: function(el){
       if (el.getContext) {
         var ctx = el.getContext();
@@ -682,7 +682,7 @@ if (!document.createElement('canvas').getContext) {
 
   contextPrototype.quadraticCurveTo = function(aCPx, aCPy, aX, aY) {
     // the following is lifted almost directly from
-    // http://developer.mozilla.org/en/docs/Canvas_tutorial:Drawing_shapes
+    // https://developer.mozilla.org/en/docs/Canvas_tutorial:Drawing_shapes
 
     var cp = getCoords(this, aCPx, aCPy);
     var p = getCoords(this, aX, aY);

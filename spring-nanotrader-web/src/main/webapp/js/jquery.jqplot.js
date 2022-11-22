@@ -27,8 +27,8 @@
  * 
  *     version 2007.04.27
  *     author Ash Searle
- *     http://hexmen.com/blog/2007/03/printf-sprintf/
- *     http://hexmen.com/js/sprintf.js
+ *     https://hexmen.com/blog/2007/03/printf-sprintf/
+ *     https://hexmen.com/js/sprintf.js
  *     The author (Ash Searle) has placed this code in the public domain:
  *     "This code is unrestricted: you are free to use it however you like."
  * 
@@ -315,7 +315,7 @@
     
     // canvas related tests taken from modernizer:
     // Copyright (c) 2009 - 2010 Faruk Ates.
-    // http://www.modernizr.com
+    // https://www.modernizr.com
     
     $.jqplot.support_canvas = function() {
         if (typeof $.jqplot.support_canvas.result == 'undefined') {
@@ -4980,15 +4980,15 @@
     // This implementation is derived from the one posted
     // by krypin on the jqplot-users mailing list:
     //
-    // http://groups.google.com/group/jqplot-users/browse_thread/thread/748be6a445723cea?pli=1
+    // https://groups.google.com/group/jqplot-users/browse_thread/thread/748be6a445723cea?pli=1
     //
     // with a blog post:
     //
-    // http://blog.statscollector.com/a-plugin-renderer-for-jqplot-to-draw-a-hermite-spline/
+    // https://www.hugedomains.com/domain_profile.cfm?d=statscollector&e=com
     //
     // and download of the original plugin:
     //
-    // http://blog.statscollector.com/wp-content/uploads/2010/02/jqplot.hermiteSplineRenderer.js
+    // https://www.hugedomains.com/domain_profile.cfm?d=statscollector&e=com
     //////////
 
     // called with scope of series
@@ -8863,8 +8863,8 @@
      * <pre>
      * Ken Snyder (ken d snyder at gmail dot com)
      * 2008-09-10
-     * version 2.0.2 (http://kendsnyder.com/sandbox/date/)     
-     * Creative Commons Attribution License 3.0 (http://creativecommons.org/licenses/by/3.0/)
+     * version 2.0.2 (https://kendsnyder.com/sandbox/date/)     
+     * Creative Commons Attribution License 3.0 (https://creativecommons.org/licenses/by/3.0/)
      * </pre>
      * 
      * @class
@@ -10309,7 +10309,7 @@
      *     precision or length of the output based on arguments instead of fixed
      *     numbers.
      *
-     *     See http://perldoc.perl.org/functions/sprintf.html for more information.
+     *     See https://perldoc.perl.org/functions/sprintf.html for more information.
      *
      *     Implemented:
      *     - zero and space-padding
@@ -10331,8 +10331,8 @@
      *     @author Ash Searle 
      * 
      * You can see the original work and comments on his blog:
-     * http://hexmen.com/blog/2007/03/printf-sprintf/
-     * http://hexmen.com/js/sprintf.js
+     * https://hexmen.com/blog/2007/03/printf-sprintf/
+     * https://hexmen.com/js/sprintf.js
      */
      
      /**

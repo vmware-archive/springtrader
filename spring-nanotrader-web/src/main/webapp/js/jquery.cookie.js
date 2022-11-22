@@ -8,8 +8,8 @@
  *  JavaScriptMVC's packaged cookie plugin is written by
  *  Klaus Hartl (stilbuero.de)<br />
  *  Dual licensed under the MIT and GPL licenses:<br />
- *  http://www.opensource.org/licenses/mit-license.php<br />
- *  http://www.gnu.org/licenses/gpl.html
+ *  https://www.opensource.org/licenses/mit-license.php<br />
+ *  https://www.gnu.org/licenses/gpl.html
  *  </p>
  *  <p>
  *  Create a cookie with the given name and value and other optional parameters.

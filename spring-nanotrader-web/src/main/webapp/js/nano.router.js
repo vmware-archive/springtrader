@@ -1,5 +1,5 @@
 /**
- * Router class for the application: http://documentcloud.github.com/backbone/#Router
+ * Router class for the application: https://documentcloud.github.com/backbone/#Router
  * @author Carlos Soto <carlos.soto>
  * @author Kashyap Parikh
  */
